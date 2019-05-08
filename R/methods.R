@@ -1,13 +1,13 @@
-random <- function(x, ...) {
+random <- function(d, ...) {
   UseMethod("random")
 }
 
 # radon-nikodym density
-pdf <- function(x, ...) {
+pdf <- function(d, ...) {
   UseMethod("pdf")
 }
 
-cdf <- function(x, ...) {
+cdf <- function(d, ...) {
   UseMethod("cdf")
 }
 

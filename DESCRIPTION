@@ -13,3 +13,6 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/alexpghayes/distributions
 BugReports: https://github.com/alexpghayes/distributions/issues
+Imports: 
+    glue
+RoxygenNote: 6.1.1

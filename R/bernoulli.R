@@ -1,0 +1,100 @@
+#' Create a bernoulli distribution
+#'
+#' @param p The success probability for the distribution. `p` can be any
+#'   value in `[0, 1]`, and defaults to `0.5`.
+#'
+#' @return A `bernoulli` object.
+#' @export
+#'
+#' @family discrete distributions
+#'
+#' @examples
+#'
+#' b <- bernoulli(0.7)
+#' b
+#'
+#' random(b, 10)
+#' pdf(b, 1)
+#' cdf(b, 0)
+#' quantile(b, 0.7)
+#'
+#' # TODO: looks like I don't quite have quantiles right since the
+#' # inverses don't hold like I'd want
+#'
+#' cdf(b, quantile(b, 0.7))
+#' quantile(b, cdf(b, 0.7))
+#'
+bernoulli <- function(p = 0.5) {
+
+  # TODO: check that 0 <= p <= 1
+
+  d <- list(p = p)
+  class(d) <- "bernoulli"
+  d
+}
+
+print.bernoulli <- function(d) {
+  cat(glue("Bernoulli distribution (p = {d$p})"))
+}
+
+#' Draw a random sample from a bernoulli distribution
+#'
+#' @inherit bernoulli examples
+#'
+#' @param d A `bernoulli` object created by a call to [bernoulli()].
+#' @param n The number of samples to draw. Defaults to `1L`.
+#'
+#' @return An integer vector of zeros and ones of length `n`.
+#' @export
+#'
+random.bernoulli <- function(d, n = 1L) {
+  rbinom(n = n, size = 1, prob = d$p)
+}
+
+#' Evaluate the probability mass function of a bernoulli distribution
+#'
+#' @inherit bernoulli examples
+#' @inheritParams random.bernoulli
+#'
+#' @param x A vector of elements whose probabilities you would like to
+#'   determine given the distribution `d`.
+#'
+#' @return A vector of probabilities, one for each element of `x`.
+#' @export
+#'
+pdf.bernoulli <- function(d, x) {
+  # TODO: call as.integer()? on doubles
+  # TODO: out of support: return zero, return zero and warn, or stop?
+  if (x == 0) 1 - d$p else d$p
+}
+
+#' Evaluate the cumulative distribution function of a bernoulli distribution
+#'
+#' @inherit bernoulli examples
+#' @inheritParams random.bernoulli
+#'
+#' @param x A vector of elements whose cumulative probabilities you would
+#'   like to determine given the distribution `d`.
+#'
+#' @return A vector of probabilities, one for each element of `x`.
+#' @export
+#'
+cdf.bernoulli <- function(d, x) {
+  pbinom(q = x, size = 1, prob = d$p)
+}
+
+#' Determine quantiles of a bernoulli distribution
+#'
+#' `quantile()` is the inverse of `cdf()`.
+#'
+#' @inherit bernoulli examples
+#' @inheritParams random.bernoulli
+#'
+#' @param p A vector of probabilites.
+#'
+#' @return A vector of quantiles, one for each element of `p`.
+#' @export
+#'
+quantile.bernoulli <- function(d, p) {
+  qbinom(p = p, size = 1, prob = d$p)
+}
