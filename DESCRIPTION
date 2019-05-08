@@ -16,3 +16,5 @@ BugReports: https://github.com/alexpghayes/distributions/issues
 Imports: 
     glue
 RoxygenNote: 6.1.1
+Suggests: 
+    testthat

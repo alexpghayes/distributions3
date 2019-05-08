@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 # distributions
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
 <!-- badges: end -->
 
 `distributions` is inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), which takes a generic function approach to probability distributions.
