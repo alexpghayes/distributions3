@@ -7,16 +7,16 @@
 \method{cdf}{binomial}(d, x, ...)
 }
 \arguments{
-\item{d}{A `binomial` object created by a call to [binomial()].}
+\item{d}{A \code{binomial} object created by a call to \code{\link[=binomial]{binomial()}}.}
 
 \item{x}{A vector of elements whose cumulative probabilities you would
-like to determine given the distribution `d`.}
+like to determine given the distribution \code{d}.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of `x`.
+A vector of probabilities, one for each element of \code{x}.
 }
 \description{
 Evaluate the cumulative distribution function of a binomial distribution

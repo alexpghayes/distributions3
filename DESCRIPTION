@@ -7,15 +7,21 @@ Authors@R:
            role = c("aut", "cre"),
            email = "alexpghayes@gmail.com",
            comment = c(ORCID = "0000-0002-4985-5160"))
-Description: What the package does (one paragraph).
+Description: Tools to create and manipulate probability
+    distributions using S3.  Generics random(), pdf(), cdf() and
+    quantile() provide replacements for base R's r/d/p/q style functions.
+    Functions and arguments have been named carefully to minimize
+    confusion for students in intro stats courses. The documentation for
+    each distribution contains detailed mathematical notes.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
 URL: https://github.com/alexpghayes/distributions
 BugReports: https://github.com/alexpghayes/distributions/issues
 Imports: 
-    glue,
-    ellipsis
-RoxygenNote: 6.1.1
+    ellipsis,
+    glue
 Suggests: 
     testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1

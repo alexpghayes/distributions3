@@ -7,15 +7,15 @@
 \method{random}{bernoulli}(d, n = 1L, ...)
 }
 \arguments{
-\item{d}{A `bernoulli` object created by a call to [bernoulli()].}
+\item{d}{A \code{bernoulli} object created by a call to \code{\link[=bernoulli]{bernoulli()}}.}
 
-\item{n}{The number of samples to draw. Defaults to `1L`.}
+\item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector of zeros and ones of length `n`.
+An integer vector of zeros and ones of length \code{n}.
 }
 \description{
 Draw a random sample from a bernoulli distribution

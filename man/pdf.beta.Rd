@@ -7,16 +7,16 @@
 \method{pdf}{beta}(d, x, ...)
 }
 \arguments{
-\item{d}{A `beta` object created by a call to [beta()].}
+\item{d}{A \code{beta} object created by a call to \code{\link[=beta]{beta()}}.}
 
 \item{x}{A vector of elements whose probabilities you would like to
-determine given the distribution `d`.}
+determine given the distribution \code{d}.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of `x`.
+A vector of probabilities, one for each element of \code{x}.
 }
 \description{
 Evaluate the probability mass function of a beta distribution

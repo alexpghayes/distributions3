@@ -31,6 +31,7 @@ binomial <- function(size, p) {
   d
 }
 
+#' @export
 print.binomial <- function(d) {
   cat(glue("Binomial distribution (size = {d$size}, p = {d$p})"))
 }

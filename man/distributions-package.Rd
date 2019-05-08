@@ -6,7 +6,12 @@
 \alias{distributions-package}
 \title{distributions: Probability Distributions as S3 Objects}
 \description{
-What the package does (one paragraph).
+Tools to create and manipulate probability
+    distributions using S3.  Generics random(), pdf(), cdf() and
+    quantile() provide replacements for base R's r/d/p/q style functions.
+    Functions and arguments have been named carefully to minimize
+    confusion for students in intro stats courses. The documentation for
+    each distribution contains detailed mathematical notes.
 }
 \seealso{
 Useful links:

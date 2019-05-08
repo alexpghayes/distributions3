@@ -30,6 +30,7 @@ beta <- function(alpha = 1, beta = 1) {
   d
 }
 
+#' @export
 print.beta <- function(d) {
   cat(glue("Beta distribution (alpha = {d$alpha}, beta = {d$beta})"))
 }

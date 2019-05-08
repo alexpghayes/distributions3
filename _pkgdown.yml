@@ -6,3 +6,23 @@ development:
 template:
   params:
     bootswatch: paper
+
+reference:
+  - title: Generics
+    desc: ~
+    contents:
+      - "random"
+      - "pdf"
+      - "cdf"
+      - "quantile"
+  - title: Distributions
+    desc: ~
+    contents:
+    - "bernoulli"
+    - "beta"
+    - "cauchy"
+    - "chi_square"
+    - "exponential"
+    - "gamma"
+    - "normal"
+    - "poisson"

@@ -7,16 +7,16 @@
 \method{random}{binomial}(d, n = 1L, ...)
 }
 \arguments{
-\item{d}{A `binomial` object created by a call to [binomial()].}
+\item{d}{A \code{binomial} object created by a call to \code{\link[=binomial]{binomial()}}.}
 
-\item{n}{The number of samples to draw. Defaults to `1L`.}
+\item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector containing values between `0` and `d$size`
-  of length `n`.
+An integer vector containing values between \code{0} and \code{d$size}
+of length \code{n}.
 }
 \description{
 Draw a random sample from a binomial distribution

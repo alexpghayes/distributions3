@@ -8,15 +8,15 @@ binomial(size, p)
 }
 \arguments{
 \item{size}{The number of trials. Must be an integer greater than or equal
-to one. When `size = 1L`, the binomial distribution reduces to the
-bernoulli distribution. Oftened called `n` in textbooks.}
+to one. When \code{size = 1L}, the binomial distribution reduces to the
+bernoulli distribution. Oftened called \code{n} in textbooks.}
 
-\item{p}{The success probability for a given trial. `p` can be any
-value in `[0, 1]`, and defaults to `0.5`.
-greater than zero. Defaults to `1`.}
+\item{p}{The success probability for a given trial. \code{p} can be any
+value in \code{[0, 1]}, and defaults to \code{0.5}.
+greater than zero. Defaults to \code{1}.}
 }
 \value{
-A `binomial` object.
+A \code{binomial} object.
 }
 \description{
 Create a binomial distribution

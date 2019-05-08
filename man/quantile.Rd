@@ -8,7 +8,7 @@ quantile(d, p, ...)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by
-a call to [bernoulli()], [beta()], or [binomial()].}
+a call to \code{\link[=bernoulli]{bernoulli()}}, \code{\link[=beta]{beta()}}, or \code{\link[=binomial]{binomial()}}.}
 
 \item{p}{A vector of probabilites.}
 
@@ -16,10 +16,10 @@ a call to [bernoulli()], [beta()], or [binomial()].}
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of `p`.
+A vector of quantiles, one for each element of \code{p}.
 }
 \description{
-TODO: Note that this current masks the [stats::quantile()] generic
+TODO: Note that this current masks the \code{\link[stats:quantile]{stats::quantile()}} generic
 to allow for consistent argument names and warnings when arguments
-disappear into `...`.
+disappear into \code{...}.
 }

@@ -7,7 +7,7 @@
 \method{quantile}{binomial}(d, p, ...)
 }
 \arguments{
-\item{d}{A `binomial` object created by a call to [binomial()].}
+\item{d}{A \code{binomial} object created by a call to \code{\link[=binomial]{binomial()}}.}
 
 \item{p}{A vector of probabilites.}
 
@@ -15,10 +15,10 @@
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of `p`.
+A vector of quantiles, one for each element of \code{p}.
 }
 \description{
-`quantile()` is the inverse of `cdf()`.
+\code{quantile()} is the inverse of \code{cdf()}.
 }
 \examples{
 

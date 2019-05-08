@@ -1,5 +1,10 @@
 #' Create a bernoulli distribution
 #'
+#' Bernoulli distributions are used to represent events like coin flips
+#' when there is single trial that is either successful or unsuccessful.
+#' The bernoulli distribution is a special case of the [binomial()]
+#' distribution with `n = 1`.
+#'
 #' @param p The success probability for the distribution. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
@@ -7,6 +12,34 @@
 #' @export
 #'
 #' @family discrete distributions
+#'
+#' @details
+#'
+#'   We recommend reading this documentation on
+#'   <https://alexpghayes.github.io/distributions>, where the
+#'   math will render nicely.
+#'
+#'   In the following, let \eqn{X} be a Bernoulli random variable with parameter
+#'   `p` = \eqn{p}. Some textbooks also define \eqn{q = 1 - p}, or use
+#'   \eqn{\pi} instead of \eqn{p}.
+#'
+#'   **Support**: \eqn{0, 1}
+#'
+#'   **Mean**: \eqn{p}
+#'
+#'   **Variance**: \eqn{p \cdot (1 - p) = p \cdot q}
+#'
+#'   **Probability mass function (p.m.f)**:
+#'
+#'   \deqn{P(X = x) = p^x (1 - p)^{1-x} = p^x q^{1-x}}
+#'
+#'   **Cumulative distribution function (c.d.f)**:
+#'
+#'   TODO ugh formatting
+#'
+#'   **Moment generating function (m.g.f)**:
+#'
+#'   \deqn{\mathbb{E}(e^{tX}) = (1 - p) + p e^t}
 #'
 #' @examples
 #'
@@ -33,6 +66,7 @@ bernoulli <- function(p = 0.5) {
   d
 }
 
+#' @export
 print.bernoulli <- function(d) {
   cat(glue("Bernoulli distribution (p = {d$p})"))
 }

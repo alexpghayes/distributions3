@@ -7,15 +7,15 @@
 \method{random}{beta}(d, n = 1L, ...)
 }
 \arguments{
-\item{d}{A `beta` object created by a call to [beta()].}
+\item{d}{A \code{beta} object created by a call to \code{\link[=beta]{beta()}}.}
 
-\item{n}{The number of samples to draw. Defaults to `1L`.}
+\item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A numeric vector containing values in `[0, 1]` of length `n`.
+A numeric vector containing values in \code{[0, 1]} of length \code{n}.
 }
 \description{
 Draw a random sample from a beta distribution

@@ -7,14 +7,14 @@
 beta(alpha = 1, beta = 1)
 }
 \arguments{
-\item{alpha}{The alpha parameter. `alpha` can be any value strictly
-greater than zero. Defaults to `1`.}
+\item{alpha}{The alpha parameter. \code{alpha} can be any value strictly
+greater than zero. Defaults to \code{1}.}
 
-\item{beta}{The beta parameter. `beta` can be any value strictly
-greater than zero. Defaults to `1`.}
+\item{beta}{The beta parameter. \code{beta} can be any value strictly
+greater than zero. Defaults to \code{1}.}
 }
 \value{
-A `beta` object.
+A \code{beta} object.
 }
 \description{
 Create a beta distribution
@@ -32,5 +32,11 @@ quantile(b, 0.7)
 cdf(b, quantile(b, 0.7))
 quantile(b, cdf(b, 0.7))
 
+}
+\seealso{
+Other continuous distributions: \code{\link{cauchy}},
+  \code{\link{chi_square}}, \code{\link{exponential}},
+  \code{\link{fisher_f}}, \code{\link{gamma}},
+  \code{\link{normal}}, \code{\link{poisson}}
 }
 \concept{continuous distributions}

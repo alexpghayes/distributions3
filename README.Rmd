@@ -9,9 +9,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  message = FALSE,
+  warning = FALSE
 )
 ```
+
 # distributions
 
 <!-- badges: start -->
@@ -58,25 +61,24 @@ quantile(b, 0.5)
 The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and `r` functions for the following families:
 
 - [x] `beta`
-- [ ] `binom`
-- [ ] `cauchy`
-- [ ] `chisq`
-- [ ] `exp`
-- [ ] `f`
-- [ ] `gamma`
+- [x] `binom`
+- [x] `cauchy`
+- [x] `chisq`
+- [x] `exp`
+- [x] `f`
+- [x] `gamma`
+- [x] `norm`
+- [x] `pois`
+- [ ] `t`
+- [ ] `multinomial`
+- [ ] `unif`
 - [ ] `geom`
 - [ ] `hyper`
 - [ ] `logis`
 - [ ] `lnorm`
 - [ ] `nbinom`
-- [ ] `norm`
-- [ ] `pois`
-- [ ] `t`
-- [ ] `unif`
 - [ ] `weibull`
 - [ ] `tukey`
-- [ ] `signrank`
-- [ ] `wilcox`
 
 After that the goal will probably to support more generics like those in the `Distributions.jl`, with the hope that the community will contribute additional distributions.
 
