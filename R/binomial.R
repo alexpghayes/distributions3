@@ -20,15 +20,12 @@
 #' random(b, 10)
 #' pdf(b, 2L)
 #' cdf(b, 4L)
-#' quantile(b, 7)
+#' quantile(b, 0.7)
 #'
-#' cdf(b, quantile(b, 7))
+#' cdf(b, quantile(b, 0.7))
 #' quantile(b, cdf(b, 7))
 #'
 binomial <- function(size, p) {
-
-  stopifnot(is.integer(size))
-
   d <- list(size = size, p = p)
   class(d) <- "binomial"
   d
@@ -44,12 +41,14 @@ print.binomial <- function(d) {
 #'
 #' @param d A `binomial` object created by a call to [binomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return An integer vector containing values between `0` and `d$size`
 #'   of length `n`.
 #' @export
 #'
-random.binomial <- function(d, n = 1L) {
+random.binomial <- function(d, n = 1L, ...) {
   rbinom(n = n, size = d$size, prob = d$p)
 }
 
@@ -60,11 +59,13 @@ random.binomial <- function(d, n = 1L) {
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.binomial <- function(d, x) {
+pdf.binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p)
 }
 
@@ -75,12 +76,14 @@ pdf.binomial <- function(d, x) {
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.beta <- function(d, x) {
-  pbinom(x = x, size = d$size, prob = d$p)
+cdf.binomial <- function(d, x, ...) {
+  pbinom(q = x, size = d$size, prob = d$p)
 }
 
 #' Determine quantiles of a binomial distribution
@@ -91,14 +94,16 @@ cdf.beta <- function(d, x) {
 #' @inheritParams random.binomial
 #'
 #' @param p A vector of probabilites.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.binomial <- function(d, p) {
+quantile.binomial <- function(d, p, ...) {
 
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
 
-  qbinom(x = x, size = d$size, prob = d$p)
+  qbinom(p = p, size = d$size, prob = d$p)
 }

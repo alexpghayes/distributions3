@@ -1,1 +1,8 @@
 destination: docs
+
+development:
+  mode: auto
+
+template:
+  params:
+    bootswatch: paper

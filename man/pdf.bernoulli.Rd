@@ -4,13 +4,16 @@
 \alias{pdf.bernoulli}
 \title{Evaluate the probability mass function of a bernoulli distribution}
 \usage{
-\method{pdf}{bernoulli}(d, x)
+\method{pdf}{bernoulli}(d, x, ...)
 }
 \arguments{
 \item{d}{A `bernoulli` object created by a call to [bernoulli()].}
 
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution `d`.}
+
+\item{...}{Unused. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
 A vector of probabilities, one for each element of `x`.

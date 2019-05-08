@@ -4,12 +4,15 @@
 \alias{quantile.beta}
 \title{Determine quantiles of a beta distribution}
 \usage{
-\method{quantile}{beta}(d, p)
+\method{quantile}{beta}(d, p, ...)
 }
 \arguments{
 \item{d}{A `beta` object created by a call to [beta()].}
 
 \item{p}{A vector of probabilites.}
+
+\item{...}{Unused. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of `p`.

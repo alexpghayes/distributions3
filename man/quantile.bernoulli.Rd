@@ -4,12 +4,15 @@
 \alias{quantile.bernoulli}
 \title{Determine quantiles of a bernoulli distribution}
 \usage{
-\method{quantile}{bernoulli}(d, p)
+\method{quantile}{bernoulli}(d, p, ...)
 }
 \arguments{
 \item{d}{A `bernoulli` object created by a call to [bernoulli()].}
 
 \item{p}{A vector of probabilites.}
+
+\item{...}{Unused. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of `p`.

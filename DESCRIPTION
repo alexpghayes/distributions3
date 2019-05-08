@@ -14,7 +14,8 @@ LazyData: true
 URL: https://github.com/alexpghayes/distributions
 BugReports: https://github.com/alexpghayes/distributions/issues
 Imports: 
-    glue
+    glue,
+    ellipsis
 RoxygenNote: 6.1.1
 Suggests: 
     testthat

@@ -4,13 +4,16 @@
 \alias{pdf.beta}
 \title{Evaluate the probability mass function of a beta distribution}
 \usage{
-\method{pdf}{beta}(d, x)
+\method{pdf}{beta}(d, x, ...)
 }
 \arguments{
 \item{d}{A `beta` object created by a call to [beta()].}
 
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution `d`.}
+
+\item{...}{Unused. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
 A vector of probabilities, one for each element of `x`.

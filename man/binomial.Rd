@@ -29,9 +29,9 @@ b
 random(b, 10)
 pdf(b, 2L)
 cdf(b, 4L)
-quantile(b, 7)
+quantile(b, 0.7)
 
-cdf(b, quantile(b, 7))
+cdf(b, quantile(b, 0.7))
 quantile(b, cdf(b, 7))
 
 }

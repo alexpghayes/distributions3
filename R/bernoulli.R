@@ -43,11 +43,13 @@ print.bernoulli <- function(d) {
 #'
 #' @param d A `bernoulli` object created by a call to [bernoulli()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return An integer vector of zeros and ones of length `n`.
 #' @export
 #'
-random.bernoulli <- function(d, n = 1L) {
+random.bernoulli <- function(d, n = 1L, ...) {
   rbinom(n = n, size = 1, prob = d$p)
 }
 
@@ -58,11 +60,13 @@ random.bernoulli <- function(d, n = 1L) {
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.bernoulli <- function(d, x) {
+pdf.bernoulli <- function(d, x, ...) {
   # TODO: call as.integer()? on doubles
   # TODO: out of support: return zero, return zero and warn, or stop?
   if (x == 0) 1 - d$p else d$p
@@ -75,11 +79,13 @@ pdf.bernoulli <- function(d, x) {
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.bernoulli <- function(d, x) {
+cdf.bernoulli <- function(d, x, ...) {
   pbinom(q = x, size = 1, prob = d$p)
 }
 
@@ -91,10 +97,12 @@ cdf.bernoulli <- function(d, x) {
 #' @inheritParams random.bernoulli
 #'
 #' @param p A vector of probabilites.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.bernoulli <- function(d, p) {
+quantile.bernoulli <- function(d, p, ...) {
   qbinom(p = p, size = 1, prob = d$p)
 }
