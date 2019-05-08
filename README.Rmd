@@ -1,0 +1,69 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# distributions
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`distributions` is inspired by the eponynmous Julia package [Distributions.jl](https://github.com/JuliaStats/Distributions.jl), which takes a generic function approach to probability distributions.
+
+The key idea of `distributions` is to replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects. The main generics are:
+
+- `random()`: Draw samples from a distribution.
+- `pdf()`: Evaluate the probability density of mass at a point `x`.
+- `cdf()`: Evaluate the cumulative probability up to a point `x`.
+- `quantile()`: Determine the quantile at `p`. Inverse of `cdf()`.
+
+## Installation
+
+`distributions` is not yet on CRAN. You can install the development version with:
+
+``` r
+install.packages("devtools")
+devtools::install_github("alexpghayes/distributions")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r intro}
+library(distributions)
+
+b <- bernoulli(0.1)
+
+random(b, 10)
+pdf(b, 1)
+cdf(b, 0)
+quantile(b, 0.5)
+```
+
+What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+
+```{r cars}
+summary(cars)
+```
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+
+You can also embed plots, for example:
+
+```{r pressure, echo = FALSE}
+plot(pressure)
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+
+# Related work
