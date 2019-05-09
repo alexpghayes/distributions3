@@ -1,0 +1,171 @@
+---
+title: "Z Tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{z-tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+In this vignette, we work through an example Z-test, and point out a number
+of points where you might get stuck along the way.
+
+## Two-sided Z-tests
+
+Let's suppose that a student is interesting in estimating how many memes
+their professors know and love. So they go to class, and every time a
+professor uses a new meme, they write it down. After a year of classes,
+the student has recorded the following meme counts, where each count
+corresponds to a single class they took:
+
+\[
+  3, 7, 11, 0, 7, 0, 4, 5, 6, 2
+\]
+
+The student talks to some other students who've done similar studies
+and determines that $\sigma = 2$ is a reasonable value for the
+standard deviation of this distribution.
+
+Before we can do a Z-test, we need to make check if we can reasonably
+treat the mean of this sample as normally distributed. This happens is
+the case of either of following hold:
+
+1. The data comes from a normal distribution.
+2. We have lots of data. How much? Many textbooks use 30 data points
+  as a rule of thumb.
+
+Since we have a small sample, we let's check if the data comes from
+a normal distribution using a normal quantile-quantile plot.
+
+```{r}
+# read in the data
+x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
+
+# make the qqplot
+qqnorm(x)
+qqline(x)
+```
+
+Since the data lies close the line $y = x$, and has no notable
+systematic deviations from line, it's safe to treat the sample as
+coming from a normal distribution. We can proceed with our hypothesis
+test.
+
+Let's test the null hypothesis that, on average, professors know 3 memes.
+That is
+
+\[
+  H_0: \mu = 3 \qquad H_A: \mu \neq 3
+\]
+
+First we need to calculate our Z-statistic. Let's use do this with R.
+Remember that the Z-statistic is defined as
+
+\[
+  Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}}
+\]
+
+In R this looks like:
+
+```{r}
+n <- length(x)
+
+# calculate the z-statistic
+z_stat <- (mean(x) - 3) / (2 / sqrt(n))
+z_stat
+```
+
+To calculate a two-sided p-value, we need to find
+
+\begin{align}
+  P(|Z| \ge |2.37|)
+  &= P(Z \ge 2.37) + P(Z \le -2.37) \\
+  &= 1 - P(Z \le 2.37) + P(Z \le -2.37) \\
+  &= 1 - \Phi(2.37) + \Phi(-2.37)
+\end{align}
+
+To do this we need to c.d.f. of a standard normal
+
+```{r}
+library(distributions)
+
+Z <- normal(0, 1)  # make a standard normal r.v.
+1 - cdf(Z, 2.37) + cdf(Z, -2.37)
+```
+
+Note that we saved `z_stat` above so we could have also done
+
+```{r}
+1 - cdf(Z, z_stat) + cdf(Z, -z_stat)
+```
+
+which is slightly more accurate since there is no rounding error.
+
+So our p-value is about 0.0177. You should verify this with a Z-table.
+Note that you should get the *same* value from `cdf(Z, 2.37)` and looking
+up `2.37` on a Z-table.
+
+You may also have seen a different formula for the p-value of a two-sided
+Z-test, which makes use of the fact that the normal distribution is
+symmetric:
+
+\begin{align}
+  P(|Z| \ge |2.37|)
+  &= 2 \cdot P(Z \le -|2.37|)
+  &= 2 \cdot \Phi(-2.37)
+\end{align}
+
+Using this formula we get the same result:
+
+```{r}
+2 * cdf(Z, -2.37)
+```
+
+## One-sided Z-tests
+
+Finally, sometimes we are interest in one sided Z-tests. For the test
+
+\begin{align}
+  H_0: \mu \le 3 \qquad H_A: \mu > 3
+\end{align}
+
+the p-value is given by
+
+\[
+  P(Z > 2.37)
+\]
+
+which we calculate with
+
+```{r}
+Z <- normal(0, 1)
+1 - cdf(Z, 2.37)
+```
+
+For the test
+
+\[
+  H_0: \mu \ge 3 \qquad H_A: \mu < 3
+\]
+
+the p-value is given by
+
+\[
+  P(Z < 2.37)
+\]
+
+which we calculate with
+
+```{r}
+Z <- normal(0, 1)
+cdf(Z, 2.37)
+```

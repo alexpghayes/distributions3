@@ -80,6 +80,8 @@ mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
 
 ### generating random samples and plugging in ks.test()
 
+set.seed(27)
+
 # generate a random sample
 normal_sample <- random(normal(3, 7), 26)
 
@@ -90,60 +92,11 @@ ks.test(normal_sample, pnorm, mean = 3, sd = 7)
 ks.test(normal_sample, pgamma, shape = 8, rate = 3)
 
 
-### visualizing the cdf and quantiles
+###
 
 # note that the cdf() and quantile() functions are inverses
 cdf(n, quantile(n, 0.7))
 quantile(n, cdf(n, 7))
-
-library(ggplot2)
-
-grid <- seq(-4, 4, length.out = 300)
-density <- pdf(Z, grid)
-lower_trunc <- ifelse(grid <= 1.96, density, 0)
-upper_trunc <- ifelse(grid >= 1.96, density, 0)
-
-ggplot(data = NULL) +
-  geom_area(aes(grid, lower_trunc, alpha = 0.2), fill = "steelblue") +
-  geom_line(aes(grid, density), size = 1, color = "grey") +
-  geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
-  geom_text(
-    aes(x = 3, y = 0.3, label = "z[0.95] == 1.96"),
-    parse = TRUE,
-    size = 4
-  ) +
-  labs(
-    title = "Lower tail quantile of a standard normal",
-    subtitle = "Integral of shaded region is 0.95",
-    y = "Density",
-    x = "Support"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-ggplot(data = NULL) +
-  geom_area(aes(grid, upper_trunc, alpha = 0.2), fill = "steelblue") +
-  geom_line(aes(grid, density), size = 1, color = "grey") +
-  geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
-  geom_text(
-    aes(x = 3, y = 0.3, label = "z[0.05] == 1.96"),
-    parse = TRUE,
-    size = 4
-  ) +
-  labs(
-    title = "Upper tail quantile of a standard normal",
-    subtitle = "Integral of shaded region is 0.05",
-    y = "Density",
-    x = "Support"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-
-# TODO: ggplot example illustrating that you always get the lower
-# tail probability
-
-# how to calculate z_\\alpha, what that looks like
 
 }
 \seealso{

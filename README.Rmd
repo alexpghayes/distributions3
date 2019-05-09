@@ -21,24 +21,26 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
 <!-- badges: end -->
 
-`distributions` is inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), which takes a generic function approach to probability distributions.
+`distributions`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions.
 
-The key idea of `distributions` is to replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects. The main generics are:
+`distributions` has two goals:
+
+1. Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects
+
+2. Be extremely well documented and friendly toward students in intro stat classes.
+
+The main generics are:
 
 - `random()`: Draw samples from a distribution.
 - `pdf()`: Evaluate the probability density of mass at a point `x`.
 - `cdf()`: Evaluate the cumulative probability up to a point `x`.
 - `quantile()`: Determine the quantile at `p`. Inverse of `cdf()`.
 
-Another central goal of `distributions` is to use more intuitive and explicit names, to make it easier for students in intro stats classes to manipulate probabilities.
+## Quick links for students
 
-One consequence of this goal is that you can find extensive documentation that might normally belong in a vignette the documentation of functions themselves. For example:
-
-```{r}
-?normal
-```
-
-This documentation provides information on the normal distribution, and includes worked examples of how to perform Z-tests and calculate confidence intervals. We've been carefully to make sure that the math renders in a readable manner both in RStudio's Help pane, and also on the `pkgdown` website.
+- `vignette("intro-to-hypothesis-testing")`
+- `vignette("one-sample-z-test")`
+- `vignette("one-sample-z-confidence-interval")`
 
 ## Installation
 
@@ -64,7 +66,7 @@ cdf(b, 0)
 quantile(b, 0.5)
 ```
 
-Note that `quantile()` always returns lower tail probabilities.
+Note that `quantile()` **always** returns lower tail probabilities. If you aren't sure what this means, please read the last several paragraphs of `vignette("one-sample-z-confidence-interval")` and have a gander at the plot.
 
 ## Development roadmap
 
@@ -72,12 +74,12 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 
 - [x] `beta` - documented
 - [x] `binom` - documented
-- [x] `cauchy`
+- [x] `cauchy` - documented
 - [x] `chisq`
 - [x] `exp`
 - [x] `f`
 - [x] `gamma`
-- [x] `norm`
+- [x] `norm` - documented
 - [x] `pois` - documented
 - [ ] `t`
 - [ ] `multinomial`
@@ -89,6 +91,36 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 - [ ] `nbinom`
 - [ ] `weibull`
 - [ ] `tukey`
+
+Documentation -- add an explicit section on transformations and relations to
+other random variables?
+
+We also want to write detailed vignettes describing the most common use cases for each of these distributions. Realistically, this means we need to document how to perform the statistical tests most common in intro stats classes.
+
+This documentation should live in vignette that explicitly write down both math and code in a cookbook style mashup. These cookbooks should also provide code and guidance for basic assumption checking. See `vignette("one-sample-z-test")` for an example. The vignette wishlist is currently as follows:
+
+- [ ] sign tests using the binomial distribution
+- [ ] Z test for population proportion
+  - add to existing Z-test vignette
+- [ ] power of one/two sample Z test
+- [ ] power of one/two sample T test (Welch's)
+  - also via `power.t.test()`
+- [ ] one-way ANOVA using the F distribution
+  - also show `aov()` and `anova(lm())` options
+  - power of anova with `power.anova.test()`
+- [ ] one sample T test
+  - also show `t.test()`
+- [ ] two sample equal variance T-test
+  - also via `t.test()`
+- [ ] two sample Welch's T-test
+  - also `t.test()`
+- [ ] paired Z, T and sign tests
+- [ ] chi square test for equal variance
+- [ ] asymptotic likelihood ratio using the chi squared distribution (?)
+- [ ] asymptotic wald tests using the chi squared distribution (?)
+- [ ] asymptotic rao score tests using the chi squared distribution (?)
+
+
 
 After that the goal will probably to support more generics like those in the `Distributions.jl`, with the hope that the community will contribute additional distributions.
 
