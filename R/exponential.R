@@ -28,7 +28,7 @@ exponential <- function(rate = 1) {
 }
 
 #' @export
-print.exponential <- function(d) {
+print.exponential <- function(d, ...) {
   cat(glue("Exponential distribution (rate = {d$rate})"))
 }
 

@@ -30,7 +30,7 @@ fisher_f <- function(df1, df2, lambda = 0) {
 }
 
 #' @export
-print.fisher_f <- function(d) {
+print.fisher_f <- function(d, ...) {
   cat(glue("Fisher's F distribution (rate = {d$rate})"))
 }
 

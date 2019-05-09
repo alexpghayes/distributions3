@@ -18,13 +18,13 @@ Poisson distributions are frequently used to model counts.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the
-math will render nicely.
+\url{https://alexpghayes.github.io/distributions}, where the math
+will render with additional detail.
 
 In the following, let \eqn{X} be a Poisson random variable with parameter
 \code{lamdba} = \eqn{\lambda}.
 
-\strong{Support}: \eqn{0, 1, 2, 3, ...}
+\strong{Support}: \eqn{\{0, 1, 2, 3, ...\}}{{0, 1, 2, 3, ...}}
 
 \strong{Mean}: \eqn{\lambda}
 
@@ -32,15 +32,29 @@ In the following, let \eqn{X} be a Poisson random variable with parameter
 
 \strong{Probability mass function (p.m.f)}:
 
-\deqn{P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}}
+\deqn{
+    P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+  }{
+    P(X = k) = \lambda^k e^(-\lambda) / k!
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-\deqn{P(X \le k) = e^{-\lambda} \sum_{i = 0}^{\lfloor k \rfloor} \frac{\lambda^i}{i!}}
+\deqn{
+    P(X \le k) = e^{-\lambda}
+    \sum_{i = 0}^{\lfloor k \rfloor} \frac{\lambda^i}{i!}
+  }{
+    P(X \le k) = e^(-\lambda)
+    \sum_{i = 0}^k \lambda^i / i!
+  }
 
 \strong{Moment generating function (m.g.f)}:
 
-\deqn{\mathbb{E}(e^{tX}) = e^{\lambda (e^t - 1)}}
+\deqn{
+    \mathbb{E}(e^{tX}) = e^{\lambda (e^t - 1)}
+  }{
+    E(e^(tX)) = e^(\lambda (e^t - 1))
+  }
 }
 \examples{
 

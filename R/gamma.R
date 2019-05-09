@@ -34,7 +34,7 @@ gamma <- function(shape, rate = 1) {
 }
 
 #' @export
-print.gamma <- function(d) {
+print.gamma <- function(d, ...) {
   cat(glue("Gamma distribution (shape = {d$shape}, rate = {d$rate})"))
 }
 

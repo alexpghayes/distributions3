@@ -1,5 +1,11 @@
 #' Create a binomial distribution
 #'
+#' Bernoulli distributions are used to represent situations can that can
+#' thought of as `size` (often called \eqn{n} in textbooks) independent
+#' coin flips, where each coin flip has probability `p` of success. The
+#' [bernoulli()] distribution is a special case of binomial distribution
+#' when `n = 1`.
+#'
 #' @param size The number of trials. Must be an integer greater than or equal
 #'   to one. When `size = 1L`, the binomial distribution reduces to the
 #'   bernoulli distribution. Oftened called `n` in textbooks.
@@ -11,6 +17,52 @@
 #' @export
 #'
 #' @family discrete distributions
+#'
+#' @details
+#'
+#'   The binomial distribution comes up when you are interested in the portion
+#'   of people who do a thing. The binomial distribution
+#'   also comes up in the sign test, sometimes called the binomial test
+#'   (see [stats::binom.test()]), where you may need the binomial C.D.F. to
+#'   compute p-values.
+#'
+#'   We recommend reading this documentation on
+#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   will render with additional detail.
+#'
+#'   In the following, let \eqn{X} be a Binomial random variable with parameter
+#'   `size` = \eqn{n} and `p` = \eqn{p}. Some textbooks define \eqn{q = 1 - p},
+#'   or called \eqn{\pi} instead of \eqn{p}.
+#'
+#'   **Support**: \eqn{\{0, 1, 2, ..., n\}}{{0, 1, 2, ..., n}}
+#'
+#'   **Mean**: \eqn{np}
+#'
+#'   **Variance**: \eqn{np \cdot (1 - p) = np \cdot q}{np (1 - p)}
+#'
+#'   **Probability mass function (p.m.f)**:
+#'
+#'   \deqn{
+#'     P(X = k) = \binom{n}{k} p^k (1 - p)^{n-k}
+#'   }{
+#'     P(X = k) = choose(n, k) p^k (1 - p)^(n - k)
+#'   }
+#'
+#'   **Cumulative distribution function (c.d.f)**:
+#'
+#'   \deqn{
+#'     P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} \binom{n}{i} p^i (1 - p)^{n-i}
+#'   }{
+#'     P(X \le k) = \sum_{i=0}^k choose(n, i) p^i (1 - p)^(n-i)
+#'   }
+#'
+#'   **Moment generating function (m.g.f)**:
+#'
+#'   \deqn{
+#'     \mathbb{E}(e^{tX}) = (1 - p + p e^t)^n
+#'   }{
+#'     E(e^(tX)) = (1 - p + p e^t)^n
+#'   }
 #'
 #' @examples
 #'
@@ -32,7 +84,7 @@ binomial <- function(size, p) {
 }
 
 #' @export
-print.binomial <- function(d) {
+print.binomial <- function(d, ...) {
   cat(glue("Binomial distribution (size = {d$size}, p = {d$p})"))
 }
 

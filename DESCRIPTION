@@ -20,7 +20,8 @@ Imports:
     ellipsis,
     glue
 Suggests: 
-    testthat
+    testthat,
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

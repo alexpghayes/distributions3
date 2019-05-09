@@ -18,7 +18,9 @@ catch mispellings or other possible errors.}
 A numeric vector of length \code{n}.
 }
 \description{
-Draw a random sample from a normal distribution
+Please see the documentation of \code{\link[=normal]{normal()}} for some properties
+of the normal distribution, as well as extensive examples
+showing to how calculate p-values and confidence intervals.
 }
 \examples{
 
@@ -30,7 +32,123 @@ pdf(n, 2)
 cdf(n, 4)
 quantile(n, 0.7)
 
+### example: calculating p-values for two-sided Z-test
+
+# here the null hypothesis is H_0: mu = 3
+# and we assume sigma = 2
+
+# exactly the same as: Z <- normal(0, 1)
+Z <- normal()
+
+# data to test
+x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
+nx <- length(x)
+
+# calculate the z-statistic
+z_stat <- (mean(x) - 3) / (2 / sqrt(nx))
+z_stat
+
+# calculate the two-sided p-value
+1 - cdf(Z, abs(z_stat)) + cdf(Z, -abs(z_stat))
+
+# exactly equivalent to the above
+2 * cdf(Z, -abs(z_stat))
+
+# p-value for one-sided test
+# H_0: mu <= 3   vs   H_A: mu > 3
+1 - cdf(Z, z_stat)
+
+# p-value for one-sided test
+# H_0: mu >= 3   vs   H_A: mu < 3
+cdf(Z, z_stat)
+
+### example: calculating a 88 percent Z CI for a mean
+
+# same `x` as before, still assume `sigma = 2`
+
+# lower-bound
+mean(x) - quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
+
+# upper-bound
+mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
+
+# equivalent to
+mean(x) + c(-1, 1) * quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
+
+# also equivalent to
+mean(x) + quantile(Z, 0.12 / 2) * 2 / sqrt(nx)
+mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
+
+### generating random samples and plugging in ks.test()
+
+# generate a random sample
+normal_sample <- random(normal(3, 7), 26)
+
+# test if sample is normal(3, 7)
+ks.test(normal_sample, pnorm, mean = 3, sd = 7)
+
+# test if sample is gamma(8, 3) using base R pgamma()
+ks.test(normal_sample, pgamma, shape = 8, rate = 3)
+
+
+### visualizing the cdf and quantiles
+
+# note that the cdf() and quantile() functions are inverses
 cdf(n, quantile(n, 0.7))
 quantile(n, cdf(n, 7))
 
+library(ggplot2)
+
+grid <- seq(-4, 4, length.out = 300)
+density <- pdf(Z, grid)
+lower_trunc <- ifelse(grid <= 1.96, density, 0)
+upper_trunc <- ifelse(grid >= 1.96, density, 0)
+
+ggplot(data = NULL) +
+  geom_area(aes(grid, lower_trunc, alpha = 0.2), fill = "steelblue") +
+  geom_line(aes(grid, density), size = 1, color = "grey") +
+  geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
+  geom_text(
+    aes(x = 3, y = 0.3, label = "z[0.95] == 1.96"),
+    parse = TRUE,
+    size = 4
+  ) +
+  labs(
+    title = "Lower tail quantile of a standard normal",
+    subtitle = "Integral of shaded region is 0.95",
+    y = "Density",
+    x = "Support"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+ggplot(data = NULL) +
+  geom_area(aes(grid, upper_trunc, alpha = 0.2), fill = "steelblue") +
+  geom_line(aes(grid, density), size = 1, color = "grey") +
+  geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
+  geom_text(
+    aes(x = 3, y = 0.3, label = "z[0.05] == 1.96"),
+    parse = TRUE,
+    size = 4
+  ) +
+  labs(
+    title = "Upper tail quantile of a standard normal",
+    subtitle = "Integral of shaded region is 0.05",
+    y = "Density",
+    x = "Support"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+# TODO: ggplot example illustrating that you always get the lower
+# tail probability
+
+# how to calculate z_\\alpha, what that looks like
+
 }
+\seealso{
+Other normal distribution: \code{\link{cdf.normal}},
+  \code{\link{pdf.normal}}, \code{\link{quantile.normal}}
+}
+\concept{normal distribution}

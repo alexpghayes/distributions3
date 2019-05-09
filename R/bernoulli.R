@@ -16,30 +16,47 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the
-#'   math will render nicely.
+#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Bernoulli random variable with parameter
 #'   `p` = \eqn{p}. Some textbooks also define \eqn{q = 1 - p}, or use
 #'   \eqn{\pi} instead of \eqn{p}.
 #'
-#'   **Support**: \eqn{0, 1}
+#'   **Support**: \eqn{\{0, 1\}}{{0, 1}}
 #'
 #'   **Mean**: \eqn{p}
 #'
-#'   **Variance**: \eqn{p \cdot (1 - p) = p \cdot q}
+#'   **Variance**: \eqn{p \cdot (1 - p) = p \cdot q}{p (1 - p)}
 #'
 #'   **Probability mass function (p.m.f)**:
 #'
-#'   \deqn{P(X = x) = p^x (1 - p)^{1-x} = p^x q^{1-x}}
+#'   \deqn{
+#'     P(X = x) = p^x (1 - p)^{1-x} = p^x q^{1-x}
+#'   }{
+#'     P(X = x) = p^x (1 - p)^(1-x)
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO ugh formatting
+#'   \deqn{
+#'     P(X \le x) =
+#'     \begin{cases}
+#'       0 & x < 0 \\
+#'       1 - p & 0 \leq x < 1 \\
+#'       1 & x \geq 1
+#'     \end{cases}
+#'   }{
+#'     P(X \le x) = (1 - p) 1_{[0, 1)}(x) + 1_{1}(x)
+#'   }
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   \deqn{\mathbb{E}(e^{tX}) = (1 - p) + p e^t}
+#'   \deqn{
+#'     \mathbb{E}(e^{tX}) = (1 - p) + p e^t
+#'   }{
+#'     E(e^(tX)) = (1 - p) + p e^t
+#'   }
 #'
 #' @examples
 #'
@@ -67,7 +84,7 @@ bernoulli <- function(p = 0.5) {
 }
 
 #' @export
-print.bernoulli <- function(d) {
+print.bernoulli <- function(d, ...) {
   cat(glue("Bernoulli distribution (p = {d$p})"))
 }
 

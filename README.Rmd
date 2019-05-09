@@ -32,6 +32,14 @@ The key idea of `distributions` is to replace the `rnorm()`, `pnorm()`, etc, fam
 
 Another central goal of `distributions` is to use more intuitive and explicit names, to make it easier for students in intro stats classes to manipulate probabilities.
 
+One consequence of this goal is that you can find extensive documentation that might normally belong in a vignette the documentation of functions themselves. For example:
+
+```{r}
+?normal
+```
+
+This documentation provides information on the normal distribution, and includes worked examples of how to perform Z-tests and calculate confidence intervals. We've been carefully to make sure that the math renders in a readable manner both in RStudio's Help pane, and also on the `pkgdown` website.
+
 ## Installation
 
 `distributions` is not yet on CRAN. You can install the development version with:
@@ -56,19 +64,21 @@ cdf(b, 0)
 quantile(b, 0.5)
 ```
 
+Note that `quantile()` always returns lower tail probabilities.
+
 ## Development roadmap
 
 The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and `r` functions for the following families:
 
-- [x] `beta`
-- [x] `binom`
+- [x] `beta` - documented
+- [x] `binom` - documented
 - [x] `cauchy`
 - [x] `chisq`
 - [x] `exp`
 - [x] `f`
 - [x] `gamma`
 - [x] `norm`
-- [x] `pois`
+- [x] `pois` - documented
 - [ ] `t`
 - [ ] `multinomial`
 - [ ] `unif`
@@ -86,12 +96,14 @@ Candidates for the next set of generics:
 
 - `log_pdf()`
 - `log_cdf()`
+- `plot_pdf()`
+- `plot_cdf()`
 
 ## Contributing
 
 The best way to get started is to look at `R/beta.R` and `tests/testthat/test-beta.R`, copy them, and modify them for whatever new distribution you'd like to add.
 
-Please note that the 'distributions' project is released with a
+Please note that `distributions` is released with a
 [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
 
@@ -101,10 +113,3 @@ For a comprehensive overview of the many packages providing various distribution
 
 - [`distr`](http://distr.r-forge.r-project.org/) is quite similar to `distributions`, but uses S4 objects
 - [`fitdistrplus`](https://cran.r-project.org/web/packages/fitdistrplus/index.html) provides extensive functionality for fitting various distributions but does not treat distributions themselves as objects
-
-
-## Conventions
-
-This section of the README is mostly a note to myself.
-
-- `quantile()` always uses lower tail probabilities.

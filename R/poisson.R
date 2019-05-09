@@ -13,13 +13,13 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the
-#'   math will render nicely.
+#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Poisson random variable with parameter
 #'   `lamdba` = \eqn{\lambda}.
 #'
-#'   **Support**: \eqn{0, 1, 2, 3, ...}
+#'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}{{0, 1, 2, 3, ...}}
 #'
 #'   **Mean**: \eqn{\lambda}
 #'
@@ -27,15 +27,29 @@
 #'
 #'   **Probability mass function (p.m.f)**:
 #'
-#'   \deqn{P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}}
+#'   \deqn{
+#'     P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+#'   }{
+#'     P(X = k) = \lambda^k e^(-\lambda) / k!
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   \deqn{P(X \le k) = e^{-\lambda} \sum_{i = 0}^{\lfloor k \rfloor} \frac{\lambda^i}{i!}}
+#'   \deqn{
+#'     P(X \le k) = e^{-\lambda}
+#'     \sum_{i = 0}^{\lfloor k \rfloor} \frac{\lambda^i}{i!}
+#'   }{
+#'     P(X \le k) = e^(-\lambda)
+#'     \sum_{i = 0}^k \lambda^i / i!
+#'   }
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   \deqn{\mathbb{E}(e^{tX}) = e^{\lambda (e^t - 1)}}
+#'   \deqn{
+#'     \mathbb{E}(e^{tX}) = e^{\lambda (e^t - 1)}
+#'   }{
+#'     E(e^(tX)) = e^(\lambda (e^t - 1))
+#'   }
 #'
 #' @examples
 #'
@@ -57,7 +71,7 @@ poisson <- function(lambda) {
 }
 
 #' @export
-print.poisson <- function(d) {
+print.poisson <- function(d, ...) {
   cat(glue("Poisson distribution (lambda = {d$lambda})"))
 }
 

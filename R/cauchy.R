@@ -34,7 +34,7 @@ cauchy <- function(location = 0, scale = 1) {
 }
 
 #' @export
-print.cauchy <- function(d) {
+print.cauchy <- function(d, ...) {
   cat(glue("Cauchy distribution (location = {d$location}, scale = {d$scale})"))
 }
 
