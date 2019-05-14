@@ -162,6 +162,9 @@ quantile.binomial <- function(d, p, ...) {
 
 #' Fit a binomial distribution to data
 #'
+#' The fit distribution will inherit the same `size` parameter as
+#' the `binomial` object passed.
+#'
 #' @param d a `binomial` object
 #' @param x a vector of zeroes and ones to fit the binomial distribution to
 #'
@@ -171,6 +174,6 @@ fit.binomial <- function(d, x) {
   x <- as.integer(x)
   valid_x <- all(x %in% c(0L, 1L))
   if(!valid_x) stop("`x` contains elements other than 0 or 1")
-  binomial(p = mean(x))
+  binomial(d$size, p = mean(x))
 }
 
