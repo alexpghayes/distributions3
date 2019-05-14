@@ -76,7 +76,7 @@
 #' cdf(b, quantile(b, 0.7))
 #' quantile(b, cdf(b, 7))
 #'
-binomial <- function(size, p) {
+binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- "binomial"
   d
