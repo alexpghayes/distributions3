@@ -75,7 +75,7 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 - [x] `gamma`
 - [x] `norm` - documented
 - [x] `pois` - documented
-- [x] `t`
+- [x] `t` - CHAOTIC AND WRONG DOCUMENTATION WARNING
 - [ ] `multinomial`
 - [ ] `unif`
 - [ ] `geom`
@@ -96,7 +96,7 @@ This documentation should live in vignettes that explicitly write down both math
 - [ ] Update the one sample z-test for a proportion vignette to include rejection regions and power calculations
   - Include note about rejection region not being inverted CI due to different standard errors
 - [ ] Update the one sample t-test vignette to include rejection regions and power calculations
-- [ ] Signs test (binomial tests) using the binomial distribution
+- [x] Signs test (binomial tests) using the binomial distribution
 - [ ] One sample z confidence interval for a proportion
 - [ ] Chi squared tests for counts
   - Would be really great to get help with this one

@@ -48,7 +48,7 @@ library(distributions)
 b <- bernoulli(0.1)
 
 random(b, 10)
-#>  [1] 1 0 0 0 0 0 0 0 0 0
+#>  [1] 0 0 0 0 0 0 0 0 1 0
 pdf(b, 1)
 #> [1] 0.1
 cdf(b, 0)
@@ -76,7 +76,7 @@ The initial goal of `distributions` is to replace the base R `d`, `p`,
   - [x] `gamma`
   - [x] `norm` - documented
   - [x] `pois` - documented
-  - [x] `t`
+  - [x] `t` - CHAOTIC AND WRONG DOCUMENTATION WARNING
   - [ ] `multinomial`
   - [ ] `unif`
   - [ ] `geom`
@@ -108,7 +108,7 @@ currently as follows:
         different standard errors
   - [ ] Update the one sample t-test vignette to include rejection
     regions and power calculations
-  - [ ] Signs test (binomial tests) using the binomial distribution
+  - [x] Signs test (binomial tests) using the binomial distribution
   - [ ] One sample z confidence interval for a proportion
   - [ ] Chi squared tests for counts
       - Would be really great to get help with this one
