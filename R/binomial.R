@@ -159,3 +159,18 @@ quantile.binomial <- function(d, p, ...) {
 
   qbinom(p = p, size = d$size, prob = d$p)
 }
+
+#' Fit a binomial distribution to data
+#'
+#' @param d a `binomial` object
+#' @param x a vector of zeroes and ones to fit the binomial distribution to
+#'
+#' @return a `binomial` object
+#' @export
+fit.binomial <- function(d, x) {
+  x <- as.integer(x)
+  valid_x <- all(x %in% c(0L, 1L))
+  if(!valid_x) stop("`x` contains elements other than 0 or 1")
+  binomial(p = mean(x))
+}
+
