@@ -24,9 +24,11 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    patchwork
+    patchwork (>= 0.0.1)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Remotes:  
+    thomasp85/patchwork
