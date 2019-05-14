@@ -22,7 +22,9 @@ The normal distribution also comes up frequently when calculating confidence int
   3, 7, 11, 0, 7, 0, 4, 5, 6, 2
 \]
 
-Again we will assume that $\sigma = 2$. Recall that a confidence interval for the mean based off the normal distribution is valid when:
+Again we will assume that $\sigma = 2$. If you would like to see how to calculate a confidence interval for the mean of a single sample when you don't know the population standard deviation $\sigma$, see `vignette("one-sample-t-confidence-interval")`.
+
+Recall that a confidence interval for the mean based off the normal distribution is valid when:
 
 1. The data comes from a normal distribution.
 2. We have lots of data. How much? Many textbooks use 30 data points
@@ -84,7 +86,7 @@ There's one last thing we need to address. You may not have seen either of the f
   \bar x + z_{\alpha / 2} \cdot \frac{\sigma}{\sqrt{n}} \right)
 \]
 
-If this is you, you have my condolences, and your instructor probably hates you. Ask that they use more standard notation.
+If this is you, you have my condolences, and your instructor probably hates you. Ask that they use lower quantile notation rather than upper quantile notation.
 
 This looks almost like the second approach, except using $z_{\alpha / 2}$ instead of $z_{1 - \alpha / 2}$. What this comes down to is whether or not $z_{\alpha / 2}$ represents a *lower quantile* or an *upper quantile*. For a lower quantile, you look at the p.d.f. and start integrating from negative infinity, stop when the integral equals $\alpha$, and that take value to be the quantile. This is the only sane way to do things, although it requires being slightly more verbose so it can be inconvenient at times. Thus the upper quantile, in which case you do the same integration but start from positive infinity.
 

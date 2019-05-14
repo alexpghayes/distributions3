@@ -39,6 +39,7 @@ quantile(g, cdf(g, 7))
 Other continuous distributions: \code{\link{beta}},
   \code{\link{cauchy}}, \code{\link{chi_square}},
   \code{\link{exponential}}, \code{\link{fisher_f}},
-  \code{\link{normal}}, \code{\link{poisson}}
+  \code{\link{normal}}, \code{\link{poisson}},
+  \code{\link{students_t}}
 }
 \concept{continuous distributions}

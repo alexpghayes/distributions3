@@ -64,25 +64,31 @@ and now we ask how probable is this statistic *given that we have assumed that n
 The idea is that if this number is very small, then our null distribution can't be correct: we shouldn't observe highly unlikely statistics. This means that hypothesis testing is a form of *falsification testing*.
 
 ```{r}
+library(ggplot2)
+library(distributions)
+
 z_score <- 1.6
 
-tibble(x = seq(-4, 4, 0.005),
-       density = dnorm(x),
-       reject = if_else(abs(x) >= z_score, density, 0)) %>% 
-  ggplot(aes(x = x, y = density)) +
-  geom_ribbon(
-    mapping = aes(x, ymin = 0, ymax = reject, fill = "red"),
-    alpha = 0.5) +
-  geom_line(size = 1) +
-  geom_vline(xintercept = z_score, color = "red") +
+grid <- seq(-4, 4, length.out = 300)
+density <- pdf(normal(), grid)
+reject <- ifelse(abs(grid) >= z_score, density, 0)
+
+ggplot(data = NULL) +
+  geom_area(aes(grid, reject, alpha = 0.2), fill = "steelblue") +
+  geom_line(aes(grid, density), size = 1, color = "grey") +
+  geom_vline(xintercept = z_score, size = 1, color = "darkgrey") +
   geom_text(
-    aes(x = z_score, y = 0.27, label="\nobserved z-score"),
-    angle = 90,
-    color = "red") +
-  labs(title = "Area of sampling distribution corresponding to p-value",
-       subtitle = "Sampling distribution of Z under the null distribution") +
-  theme(legend.position = "none") +
-  theme_minimal()
+    aes(x = z_score, y = 0.25, label="\nobserved z-score = 1.6"),
+    angle = 90
+  ) +
+  labs(
+    title = "Area of sampling distribution corresponding to p-value",
+    subtitle = "Sampling distribution of Z under the null distribution",
+    y = "Density",
+    x = "Support"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
 ```
 
 For the example above, we are interested in the probability of observing a more extreme test statistic given the null distribution, which in this case is:

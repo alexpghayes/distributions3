@@ -1,8 +1,8 @@
 ---
-title: "Z Tests"
+title: "One sample Z-tests"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{z-tests}
+  %\VignetteIndexEntry{one-sample-z-tests}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 In this vignette, we work through an example Z-test, and point out a number
 of points where you might get stuck along the way.
 
-## Two-sided Z-tests
+## Problem setup
 
 Let's suppose that a student is interesting in estimating how many memes
 their professors know and love. So they go to class, and every time a
@@ -34,6 +34,8 @@ corresponds to a single class they took:
 The student talks to some other students who've done similar studies
 and determines that $\sigma = 2$ is a reasonable value for the
 standard deviation of this distribution.
+
+## Assumption checking
 
 Before we can do a Z-test, we need to make check if we can reasonably
 treat the mean of this sample as normally distributed. This happens is
@@ -60,6 +62,8 @@ systematic deviations from line, it's safe to treat the sample as
 coming from a normal distribution. We can proceed with our hypothesis
 test.
 
+## Null hypothesis and test statistic
+
 Let's test the null hypothesis that, on average, professors know 3 memes.
 That is
 
@@ -71,8 +75,10 @@ First we need to calculate our Z-statistic. Let's use do this with R.
 Remember that the Z-statistic is defined as
 
 \[
-  Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}}
+  Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} \sim \mathrm{Normal}(0, 1)
 \]
+
+## Calculating p-values
 
 In R this looks like:
 
@@ -105,7 +111,7 @@ Z <- normal(0, 1)  # make a standard normal r.v.
 Note that we saved `z_stat` above so we could have also done
 
 ```{r}
-1 - cdf(Z, z_stat) + cdf(Z, -z_stat)
+1 - cdf(Z, abs(z_stat)) + cdf(Z, -abs(z_stat))
 ```
 
 which is slightly more accurate since there is no rounding error.
@@ -129,8 +135,6 @@ Using this formula we get the same result:
 ```{r}
 2 * cdf(Z, -2.37)
 ```
-
-## One-sided Z-tests
 
 Finally, sometimes we are interest in one sided Z-tests. For the test
 
