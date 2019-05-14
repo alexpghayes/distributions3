@@ -255,7 +255,7 @@ quantile.normal <- function(d, p, ...) {
 #' Fit a normal distribution to data
 #'
 #' @param d A `normal` object created by a call to [normal()].
-#' @param x A vector to fit the normal distribution to
+#' @param x A vector to fit the normal distribution to.
 #'
 #' @family normal distribution
 #'

@@ -160,8 +160,8 @@ quantile.bernoulli <- function(d, p, ...) {
 
 #' Fit a bernoulli distribution to data
 #'
-#' @param d a `bernoulli` object
-#' @param x a vector of zeroes and ones to fit the bernoulli distribution to
+#' @param d A `bernoulli` object.
+#' @param x A vector of zeroes and ones to fit the bernoulli distribution to.
 #'
 #' @return a `bernoulli` object
 #' @export

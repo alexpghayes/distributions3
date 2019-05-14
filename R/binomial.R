@@ -165,8 +165,8 @@ quantile.binomial <- function(d, p, ...) {
 #' The fit distribution will inherit the same `size` parameter as
 #' the `binomial` object passed.
 #'
-#' @param d a `binomial` object
-#' @param x a vector of zeroes and ones to fit the binomial distribution to
+#' @param d A `binomial` object.
+#' @param x A vector of zeroes and ones to fit the binomial distribution to.
 #'
 #' @return a `binomial` object
 #' @export
