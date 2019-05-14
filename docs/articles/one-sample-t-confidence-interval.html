@@ -164,7 +164,7 @@
 <p>If you are truly unfortunate, your instructor may use <span class="math inline">\(t_{n-1, \alpha / 2}\)</span> to mean lower tail quantiles at times and upper tail quantiles at other times. If this is the case, only god can help you.</p>
 <div id="using-the-t-test-function" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-the-t-test-function" class="anchor"></a>Using the <code><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test()</a></code> function</h2>
+<a href="#using-the-t-test-function" class="anchor"></a>Using the t.test() function</h2>
 <p>If you want to verify that your calculation is correct, R has a function <code><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test()</a></code> that performs T-tests and calculates T confidence intervals for means.</p>
 <p>To get a confidence interval for a single sample, we pass <code><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test()</a></code> a vector of data, and tell it the confidence coefficient (recall ours was 0.88) via the <code>conf.level</code> argument. <code>conf.level</code> defaults to 0.95, which means if we don’t specify a confidence interval we get a 95 percent confidence interval.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test</a></span>(x, <span class="dt">conf.level =</span> <span class="fl">0.88</span>)</a>
@@ -202,7 +202,7 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#using-the-t-test-function">Using the <code><a href="https://www-rdocumentation-org/packages/stats/topics/t-test">t.test()</a></code> function</a></li>
+<li><a href="#using-the-t-test-function">Using the t.test() function</a></li>
       </ul>
 </div>
       </div>

@@ -7,24 +7,6 @@ template:
   params:
     bootswatch: paper
 
-articles:
-  - title: All vignettes
-    desc: ~
-    contents:
-      - '`intro-to-hypothesis-testing`'
-  - title: One sample tests
-    desc: ~
-    contents:
-      - '`one-sample-t-confidence-interval`'
-      - '`one-sample-t-test`'
-      - '`one-sample-z-confidence-interval`'
-      - '`one-sample-z-test-for-proportion`'
-      - '`one-sample-z-test`'
-  - title: Two sample tests
-    desc: ~
-    contents:
-      - '`two-sample-z-test`'
-
 reference:
   - title: Generics
     desc: ~
@@ -45,3 +27,15 @@ reference:
     - "gamma"
     - "normal"
     - "poisson"
+
+articles:
+- title: All vignettes
+  desc: ~
+  contents:
+  - '`intro-to-hypothesis-testing`'
+  - '`one-sample-z-test`'
+  - '`one-sample-z-test-for-proportion`'
+  - '`one-sample-t-test`'
+  - '`one-sample-z-confidence-interval`'
+  - '`one-sample-t-confidence-interval`'
+  - '`two-sample-z-test`'
