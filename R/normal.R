@@ -251,3 +251,16 @@ cdf.normal <- function(d, x, ...) {
 quantile.normal <- function(d, p, ...) {
   qnorm(p = p, mean = d$mu, sd = d$sigma)
 }
+
+#' Fit a normal distribution to data
+#'
+#' @param d A `normal` object created by a call to [normal()].
+#' @param x A vector to fit the normal distribution to
+#'
+#' @family normal distribution
+#'
+#' @return A `normal` object.
+#' @export
+fit.normal <- function(d, x) {
+  normal(mu = mean(x), sigma = sd(x))
+}
