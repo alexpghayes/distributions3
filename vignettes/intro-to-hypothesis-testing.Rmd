@@ -1,8 +1,8 @@
 ---
-title: "Introduction to hypothesis testing"
+title: "Intro to hypothesis testing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{intro-to-hypothesis-testing}
+  %\VignetteIndexEntry{Intro to hypothesis testing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

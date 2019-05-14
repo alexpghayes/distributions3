@@ -1,0 +1,61 @@
+---
+title: "Paired tests"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Paired tests}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+This vignette will make most sense if you are familiar with one sample and two sample tests. If these are new to you, have a look at `vignette("one-sample-z-test")` and `vignette("two-sample-z-test")`.
+
+## Problem setup
+
+Suppose we're interested in people's happiness before and after discovering the #rstats Twitter community. We survey them get before and after happiness scores, using a happiness survey that goes from 0 to 100.
+
+The data looks like this
+
+```{r}
+set.seed(27)
+
+before <- round(rnorm(10, 50, 20))
+after <- round(before + 5 + rnorm(10, 0, 10))
+
+knitr::kable(data.frame(person = 1:10, before, after))
+```
+
+## Working with the differences
+
+Crucially, since the before measurement and the after measurement are on the *same person*, we can subtract the before measurement from the after measurement and do a one sample test on these differences.
+
+```{r}
+before <- c(88, 73, 35, 21, 28, 56, 50, 73, 93, 55)
+after <- c(80, 78, 56, 28, 26, 50, 39, 67, 98, 63) 
+
+diff <- after - before
+diff
+```
+
+
+
+## Paired tests versus two sample tests
+
+why pair - power
+pair if you can
+memorize and analogize
+
+## Paired Z-test
+
+## Paired T-test
+
+## Paired sign-test
+

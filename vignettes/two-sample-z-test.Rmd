@@ -2,7 +2,7 @@
 title: "Two sample Z-tests"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{one-sample-z-tests}
+  %\VignetteIndexEntry{Two sample Z-tests}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -2,9 +2,12 @@
 % Please edit documentation in R/methods.R
 \name{pdf}
 \alias{pdf}
+\alias{pmf}
 \title{Evaluate the probability density of a probability distribution}
 \usage{
 pdf(d, x, ...)
+
+pmf(d, x, ...)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by
@@ -20,5 +23,6 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-For discrete distributions, the probabilty mass function.
+For discrete distributions, the probabilty mass function. \code{pmf()}
+is an alias.
 }

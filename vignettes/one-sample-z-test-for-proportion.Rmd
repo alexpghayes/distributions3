@@ -2,7 +2,7 @@
 title: "One sample Z-tests for a proportion"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{one-sample-z-test-for-proportion}
+  %\VignetteIndexEntry{One sample Z-tests for a proportion}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

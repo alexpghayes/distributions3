@@ -19,7 +19,8 @@ random <- function(d, n = 1L, ...) {
 
 #' Evaluate the probability density of a probability distribution
 #'
-#' For discrete distributions, the probabilty mass function.
+#' For discrete distributions, the probabilty mass function. `pmf()`
+#' is an alias.
 #'
 #' @inheritParams random
 #'
@@ -32,6 +33,12 @@ random <- function(d, n = 1L, ...) {
 pdf <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("pdf")
+}
+
+#' @rdname pdf
+#' @export
+pmf <- function(d, x, ...) {
+  pdf(d, x, ...)
 }
 
 #' Evaluate the probability density of a probability distribution

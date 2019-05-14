@@ -2,7 +2,7 @@
 title: "Z confidence interval for a mean"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{z-confidence-interval}
+  %\VignetteIndexEntry{Z confidence interval for a mean}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

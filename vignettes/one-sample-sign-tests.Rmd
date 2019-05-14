@@ -2,7 +2,7 @@
 title: "One sample sign tests"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{one-sample-sign-tests}
+  %\VignetteIndexEntry{One sample sign tests}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
