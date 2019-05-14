@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
   warning = FALSE,
   echo = FALSE
 )
-
-library(tidyverse)
 ```
 
 Hypothesis testing is all about answering the question: for a parameter $\theta$, is a parameter value of $\theta_0$ consistent with the data in our observed sample?  

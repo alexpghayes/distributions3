@@ -155,8 +155,8 @@ normal <- function(mu = 0, sigma = 1) {
 }
 
 #' @export
-print.normal <- function(d, ...) {
-  cat(glue("normal distribution (mu = {d$mu}, sigma = {d$sigma})"))
+print.normal <- function(x, ...) {
+  cat(glue("normal distribution (mu = {x$mu}, sigma = {x$sigma})"))
 }
 
 #' Draw a random sample from a normal distribution

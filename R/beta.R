@@ -31,8 +31,8 @@ beta <- function(alpha = 1, beta = 1) {
 }
 
 #' @export
-print.beta <- function(d, ...) {
-  cat(glue("Beta distribution (alpha = {d$alpha}, beta = {d$beta})"))
+print.beta <- function(x, ...) {
+  cat(glue("Beta distribution (alpha = {x$alpha}, beta = {x$beta})"))
 }
 
 #' Draw a random sample from a beta distribution

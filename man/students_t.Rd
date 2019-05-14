@@ -13,16 +13,7 @@ students_t(df)
 A \code{students_t} object.
 }
 \description{
-Marginalizing a chi-square variance to get a T.
-The students_t distribution is ubiquituous in statistics, partially because
-of the central limit theorem, which states that sums of i.i.d. random
-variables eventually become students_t. Linear transformations of students_t
-random variables result in new random variables that are also students_t. If
-you are taking an intro stats course, you'll likely use the students_t
-distribution for Z-tests and in simple linear regression. Under
-regularity conditions, maximum likelihood estimators are
-asymptotically students_t. The students_t distribution is also called the
-gaussian distribution.
+TODO
 }
 \details{
 We recommend reading this documentation on
@@ -57,80 +48,7 @@ TODO
 }
 \examples{
 
-n <- students_t(5)
-n
-
-random(n, 10)
-pdf(n, 2)
-cdf(n, 4)
-quantile(n, 0.7)
-
-### example: calculating p-values for two-sided Z-test
-
-# here the null hypothesis is H_0: mu = 3
-# and we assume sigma = 2
-
-# exactly the same as: Z <- students_t(0, 1)
-Z <- students_t()
-
-# data to test
-x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
-nx <- length(x)
-
-# calculate the z-statistic
-z_stat <- (mean(x) - 3) / (2 / sqrt(nx))
-z_stat
-
-# calculate the two-sided p-value
-1 - cdf(Z, abs(z_stat)) + cdf(Z, -abs(z_stat))
-
-# exactly equivalent to the above
-2 * cdf(Z, -abs(z_stat))
-
-# p-value for one-sided test
-# H_0: mu <= 3   vs   H_A: mu > 3
-1 - cdf(Z, z_stat)
-
-# p-value for one-sided test
-# H_0: mu >= 3   vs   H_A: mu < 3
-cdf(Z, z_stat)
-
-### example: calculating a 88 percent Z CI for a mean
-
-# same `x` as before, still assume `sigma = 2`
-
-# lower-bound
-mean(x) - quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
-
-# upper-bound
-mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
-
-# equivalent to
-mean(x) + c(-1, 1) * quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
-
-# also equivalent to
-mean(x) + quantile(Z, 0.12 / 2) * 2 / sqrt(nx)
-mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
-
-### generating random samples and plugging in ks.test()
-
-set.seed(27)
-
-# generate a random sample
-students_t_sample <- random(students_t(3, 7), 26)
-
-# test if sample is students_t(3, 7)
-ks.test(students_t_sample, pnorm, mean = 3, sd = 7)
-
-# test if sample is gamma(8, 3) using base R pgamma()
-ks.test(students_t_sample, pgamma, shape = 8, rate = 3)
-
-
-###
-
-# note that the cdf() and quantile() functions are inverses
-cdf(n, quantile(n, 0.7))
-quantile(n, cdf(n, 7))
+# TODO
 
 }
 \seealso{

@@ -84,8 +84,8 @@ bernoulli <- function(p = 0.5) {
 }
 
 #' @export
-print.bernoulli <- function(d, ...) {
-  cat(glue("Bernoulli distribution (p = {d$p})"))
+print.bernoulli <- function(x, ...) {
+  cat(glue("Bernoulli distribution (p = {x$p})"))
 }
 
 #' Draw a random sample from a bernoulli distribution

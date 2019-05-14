@@ -71,8 +71,8 @@ cauchy <- function(location = 0, scale = 1) {
 }
 
 #' @export
-print.cauchy <- function(d, ...) {
-  cat(glue("Cauchy distribution (location = {d$location}, scale = {d$scale})"))
+print.cauchy <- function(x, ...) {
+  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"))
 }
 
 #' Draw a random sample from a cauchy distribution
