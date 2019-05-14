@@ -172,8 +172,10 @@ quantile.binomial <- function(d, p, ...) {
 #' @export
 fit.binomial <- function(d, x) {
   x <- as.integer(x)
-  valid_x <- all(x %in% c(0L, 1L))
-  if(!valid_x) stop("`x` contains elements other than 0 or 1")
-  binomial(d$size, p = mean(x))
+  valid_x <- all(x >= 0 & x <= d$size)
+  if(!valid_x) {
+    stop("`x` must be between zero and the size parameter of the binomial distribution")
+  }
+  binomial(d$size, p = mean(x) / d$size)
 }
 
