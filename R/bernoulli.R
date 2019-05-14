@@ -157,3 +157,17 @@ cdf.bernoulli <- function(d, x, ...) {
 quantile.bernoulli <- function(d, p, ...) {
   qbinom(p = p, size = 1, prob = d$p)
 }
+
+#' Fit a bernoulli distribution to data
+#'
+#' @param d a `bernoulli` object
+#' @param x a vector of zeroes and ones to fit the bernoulli distribution to
+#'
+#' @return a `bernoulli` object
+#' @export
+fit.bernoulli <- function(d, x) {
+  x <- as.integer(x)
+  valid_x <- all(x %in% c(0L, 1L))
+  if(!valid_x) stop("`x` contains elements other than 0 or 1")
+  bernoulli(p = mean(x))
+}
