@@ -104,7 +104,7 @@ fit_mle <- function(d, x, ...) {
 #'
 #' @return a named list of sufficient statistics
 
-fit_mle_suff_stat <- function(d, x, ...) {
+suff_stat <- function(d, x, ...) {
   ellipsis::check_dots_used()
-  UseMethod("fit_mle_suff_stat")
+  UseMethod("suff_stat")
 }
