@@ -86,7 +86,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-hypothesis-testing.html">Introduction to hypothesis testing</a>
+      <a href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
+    </li>
+    <li>
+      <a href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
     </li>
     <li>
       <a href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
@@ -104,7 +107,10 @@
       <a href="../articles/one-sample-z-test.html">One sample Z-tests</a>
     </li>
     <li>
-      <a href="../articles/sign-test.html">One sample sign tests</a>
+      <a href="../articles/paired-tests.html">Paired tests</a>
+    </li>
+    <li>
+      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
     </li>
     <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
@@ -172,8 +178,8 @@ to <code>1</code>.</p></td>
     <pre class="examples"><div class='input'>
 <span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='fu'>exponential</span>(<span class='fl'>5</span>)
 <span class='no'>e</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>e</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.10055862 0.25626083 0.17632904 0.00305352 0.07252609 0.06626465
-#&gt;  [7] 0.27373231 0.43072378 0.14403464 0.04650105</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>e</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>e</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.196698340 0.430723781 0.144034638 0.046501051 0.053883599 0.047562819
+#&gt;  [7] 0.191714668 0.001769392 0.027880501 0.358950522</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>e</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div><div class='input'>
 </div></pre>
   </div>

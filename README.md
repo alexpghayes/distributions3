@@ -48,7 +48,7 @@ library(distributions)
 b <- bernoulli(0.1)
 
 random(b, 10)
-#>  [1] 0 0 0 0 0 0 0 0 1 0
+#>  [1] 0 0 0 0 0 0 0 0 0 0
 pdf(b, 1)
 #> [1] 0.1
 cdf(b, 0)
@@ -76,14 +76,14 @@ The initial goal of `distributions` is to replace the base R `d`, `p`,
   - [x] `gamma`
   - [x] `norm` - documented
   - [x] `pois` - documented
-  - [x] `t` - CHAOTIC AND WRONG DOCUMENTATION WARNING
+  - [x] `t`
   - [ ] `multinomial`
   - [ ] `unif`
-  - [ ] `geom`
+  - [x] `geom`
   - [ ] `hyper`
   - [ ] `logis`
-  - [ ] `lnorm`
-  - [ ] `nbinom`
+  - [x] `lnorm`
+  - [x] `nbinom`
   - [ ] `weibull`
   - [ ] `tukey`
 

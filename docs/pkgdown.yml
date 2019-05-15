@@ -3,11 +3,13 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   intro-to-hypothesis-testing: intro-to-hypothesis-testing.html
+  one-sample-sign-tests: one-sample-sign-tests.html
   one-sample-t-confidence-interval: one-sample-t-confidence-interval.html
   one-sample-t-test: one-sample-t-test.html
   one-sample-z-confidence-interval: one-sample-z-confidence-interval.html
   one-sample-z-test-for-proportion: one-sample-z-test-for-proportion.html
   one-sample-z-test: one-sample-z-test.html
-  sign-test: sign-test.html
+  paired-tests: paired-tests.html
+  two-sample-t-test-equal-var: two-sample-t-test-equal-var.html
   two-sample-z-test: two-sample-z-test.html
 

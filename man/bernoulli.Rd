@@ -81,6 +81,8 @@ quantile(b, cdf(b, 0.7))
 
 }
 \seealso{
-Other discrete distributions: \code{\link{binomial}}
+Other discrete distributions: \code{\link{binomial}},
+  \code{\link{geometric}}, \code{\link{log_normal}},
+  \code{\link{negative_binomial}}
 }
 \concept{discrete distributions}

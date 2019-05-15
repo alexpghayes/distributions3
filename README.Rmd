@@ -81,7 +81,7 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 - [x] `geom`
 - [ ] `hyper`
 - [ ] `logis`
-- [ ] `lnorm`
+- [x] `lnorm`
 - [x] `nbinom`
 - [ ] `weibull`
 - [ ] `tukey`

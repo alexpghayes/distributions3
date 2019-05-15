@@ -12,8 +12,7 @@ to one. When \code{size = 1L}, the binomial distribution reduces to the
 bernoulli distribution. Oftened called \code{n} in textbooks.}
 
 \item{p}{The success probability for a given trial. \code{p} can be any
-value in \code{[0, 1]}, and defaults to \code{0.5}.
-greater than zero. Defaults to \code{1}.}
+value in \code{[0, 1]}, and defaults to \code{0.5}.}
 }
 \value{
 A \code{binomial} object.
@@ -85,6 +84,8 @@ quantile(b, cdf(b, 7))
 
 }
 \seealso{
-Other discrete distributions: \code{\link{bernoulli}}
+Other discrete distributions: \code{\link{bernoulli}},
+  \code{\link{geometric}}, \code{\link{log_normal}},
+  \code{\link{negative_binomial}}
 }
 \concept{discrete distributions}

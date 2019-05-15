@@ -32,16 +32,7 @@
 
 <meta property="og:title" content="Create a Student's T distribution — students_t" />
 
-<meta property="og:description" content="Marginalizing a chi-square variance to get a T.
-The students_t distribution is ubiquituous in statistics, partially because
-of the central limit theorem, which states that sums of i.i.d. random
-variables eventually become students_t. Linear transformations of students_t
-random variables result in new random variables that are also students_t. If
-you are taking an intro stats course, you'll likely use the students_t
-distribution for Z-tests and in simple linear regression. Under
-regularity conditions, maximum likelihood estimators are
-asymptotically students_t. The students_t distribution is also called the
-gaussian distribution." />
+<meta property="og:description" content="TODO" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,7 +86,10 @@ gaussian distribution." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-hypothesis-testing.html">Introduction to hypothesis testing</a>
+      <a href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
+    </li>
+    <li>
+      <a href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
     </li>
     <li>
       <a href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
@@ -113,7 +107,10 @@ gaussian distribution." />
       <a href="../articles/one-sample-z-test.html">One sample Z-tests</a>
     </li>
     <li>
-      <a href="../articles/sign-test.html">One sample sign tests</a>
+      <a href="../articles/paired-tests.html">Paired tests</a>
+    </li>
+    <li>
+      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
     </li>
     <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
@@ -148,16 +145,7 @@ gaussian distribution." />
 
     <div class="ref-description">
     
-    <p>Marginalizing a chi-square variance to get a T.
-The students_t distribution is ubiquituous in statistics, partially because
-of the central limit theorem, which states that sums of i.i.d. random
-variables eventually become students_t. Linear transformations of students_t
-random variables result in new random variables that are also students_t. If
-you are taking an intro stats course, you'll likely use the students_t
-distribution for Z-tests and in simple linear regression. Under
-regularity conditions, maximum likelihood estimators are
-asymptotically students_t. The students_t distribution is also called the
-gaussian distribution.</p>
+    <p>TODO</p>
     
     </div>
 
@@ -208,61 +196,8 @@ zero.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'>students_t</span>(<span class='fl'>5</span>)
-<span class='no'>n</span></div><div class='output co'>#&gt; Student's T distribution (df = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>n</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  1.5178747 -0.7318633 -0.1253060  0.9499732  0.4908891  0.8087661
-#&gt;  [7]  1.8376534  0.5375044 -0.9335317 -1.6069983</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>n</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.06509031</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9948383</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.5594296</div><div class='input'>
-<span class='co'>### example: calculating p-values for two-sided Z-test</span>
+# TODO
 
-<span class='co'># here the null hypothesis is H_0: mu = 3</span>
-<span class='co'># and we assume sigma = 2</span>
-
-<span class='co'># exactly the same as: Z &lt;- students_t(0, 1)</span>
-<span class='no'>Z</span> <span class='kw'>&lt;-</span> <span class='fu'>students_t</span>()</div><div class='output co'>#&gt; <span class='error'>Error in students_t(): argument "df" is missing, with no default</span></div><div class='input'>
-<span class='co'># data to test</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>7</span>, <span class='fl'>11</span>, <span class='fl'>0</span>, <span class='fl'>7</span>, <span class='fl'>0</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>2</span>)
-<span class='no'>nx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>x</span>)
-
-<span class='co'># calculate the z-statistic</span>
-<span class='no'>z_stat</span> <span class='kw'>&lt;-</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) - <span class='fl'>3</span>) / (<span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>))
-<span class='no'>z_stat</span></div><div class='output co'>#&gt; [1] 2.371708</div><div class='input'>
-<span class='co'># calculate the two-sided p-value</span>
-<span class='fl'>1</span> - <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Z</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>z_stat</span>)) + <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Z</span>, -<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>z_stat</span>))</div><div class='output co'>#&gt; <span class='error'>Error in cdf(Z, abs(z_stat)): object 'Z' not found</span></div><div class='input'>
-<span class='co'># exactly equivalent to the above</span>
-<span class='fl'>2</span> * <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Z</span>, -<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>z_stat</span>))</div><div class='output co'>#&gt; <span class='error'>Error in cdf(Z, -abs(z_stat)): object 'Z' not found</span></div><div class='input'>
-<span class='co'># p-value for one-sided test</span>
-<span class='co'># H_0: mu &lt;= 3   vs   H_A: mu &gt; 3</span>
-<span class='fl'>1</span> - <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Z</span>, <span class='no'>z_stat</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cdf(Z, z_stat): object 'Z' not found</span></div><div class='input'>
-<span class='co'># p-value for one-sided test</span>
-<span class='co'># H_0: mu &gt;= 3   vs   H_A: mu &lt; 3</span>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Z</span>, <span class='no'>z_stat</span>)</div><div class='output co'>#&gt; <span class='error'>Error in cdf(Z, z_stat): object 'Z' not found</span></div><div class='input'>
-<span class='co'>### example: calculating a 88 percent Z CI for a mean</span>
-
-<span class='co'># same `x` as before, still assume `sigma = 2`</span>
-
-<span class='co'># lower-bound</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) - <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Z</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; <span class='error'>Error in quantile(Z, 1 - 0.12/2): object 'Z' not found</span></div><div class='input'>
-<span class='co'># upper-bound</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Z</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; <span class='error'>Error in quantile(Z, 1 - 0.12/2): object 'Z' not found</span></div><div class='input'>
-<span class='co'># equivalent to</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>) * <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Z</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; <span class='error'>Error in quantile(Z, 1 - 0.12/2): object 'Z' not found</span></div><div class='input'>
-<span class='co'># also equivalent to</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Z</span>, <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; <span class='error'>Error in quantile(Z, 0.12/2): object 'Z' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Z</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fl'>2</span> / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; <span class='error'>Error in quantile(Z, 1 - 0.12/2): object 'Z' not found</span></div><div class='input'>
-<span class='co'>### generating random samples and plugging in ks.test()</span>
-
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
-
-<span class='co'># generate a random sample</span>
-<span class='no'>students_t_sample</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random.html'>random</a></span>(<span class='fu'>students_t</span>(<span class='fl'>3</span>, <span class='fl'>7</span>), <span class='fl'>26</span>)</div><div class='output co'>#&gt; <span class='error'>Error in students_t(3, 7): unused argument (7)</span></div><div class='input'>
-<span class='co'># test if sample is students_t(3, 7)</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>students_t_sample</span>, <span class='no'>pnorm</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ks.test(students_t_sample, pnorm, mean = 3, sd = 7): object 'students_t_sample' not found</span></div><div class='input'>
-<span class='co'># test if sample is gamma(8, 3) using base R pgamma()</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>students_t_sample</span>, <span class='no'>pgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in ks.test(students_t_sample, pgamma, shape = 8, rate = 3): object 'students_t_sample' not found</span></div><div class='input'>
-
-<span class='co'>###</span>
-
-<span class='co'># note that the cdf() and quantile() functions are inverses</span>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -89,7 +89,10 @@ chi square." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-hypothesis-testing.html">Introduction to hypothesis testing</a>
+      <a href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
+    </li>
+    <li>
+      <a href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
     </li>
     <li>
       <a href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
@@ -107,7 +110,10 @@ chi square." />
       <a href="../articles/one-sample-z-test.html">One sample Z-tests</a>
     </li>
     <li>
-      <a href="../articles/sign-test.html">One sample sign tests</a>
+      <a href="../articles/paired-tests.html">Paired tests</a>
+    </li>
+    <li>
+      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
     </li>
     <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
@@ -182,8 +188,8 @@ to <code>1</code>.</p></td>
     <pre class="examples"><div class='input'>
 <span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>gamma</span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
 <span class='no'>g</span></div><div class='output co'>#&gt; Gamma distribution (shape = 5, rate = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>g</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4.7025182 5.3487563 2.9690257 1.8703393 3.8218923 1.5005986 2.1963381
-#&gt;  [8] 1.5388068 0.8620576 2.0044435</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>g</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.3907336</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9003676</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 2.945181</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>g</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1.8703393 3.8218923 1.5005986 2.1963381 1.5388068 0.8620576 2.0044435
+#&gt;  [8] 3.9947395 2.2486031 1.3703606</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>g</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.3907336</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9003676</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 2.945181</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>

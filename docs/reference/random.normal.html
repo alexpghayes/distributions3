@@ -88,7 +88,10 @@ showing to how calculate p-values and confidence intervals." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-hypothesis-testing.html">Introduction to hypothesis testing</a>
+      <a href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
+    </li>
+    <li>
+      <a href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
     </li>
     <li>
       <a href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
@@ -106,7 +109,10 @@ showing to how calculate p-values and confidence intervals." />
       <a href="../articles/one-sample-z-test.html">One sample Z-tests</a>
     </li>
     <li>
-      <a href="../articles/sign-test.html">One sample sign tests</a>
+      <a href="../articles/paired-tests.html">Paired tests</a>
+    </li>
+    <li>
+      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
     </li>
     <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
@@ -182,8 +188,8 @@ catch mispellings or other possible errors.</p></td>
     <pre class="examples"><div class='input'>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='normal.html'>normal</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
 <span class='no'>n</span></div><div class='output co'>#&gt; normal distribution (mu = 5, sigma = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>n</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4.997366 3.705289 6.141341 4.426760 7.441544 6.601643 4.002187 5.883946
-#&gt;  [9] 8.267753 4.737248</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>n</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0647588</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.3085375</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.048801</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>n</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 6.568265 5.874248 6.856577 7.297446 4.833780 4.321512 8.597459 5.423187
+#&gt;  [9] 3.261347 4.438195</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>n</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0647588</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.3085375</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.048801</div><div class='input'>
 <span class='co'>### example: calculating p-values for two-sided Z-test</span>
 
 <span class='co'># here the null hypothesis is H_0: mu = 3</span>
