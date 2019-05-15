@@ -261,6 +261,17 @@ quantile.normal <- function(d, p, ...) {
 #'
 #' @return A `normal` object.
 #' @export
-fit_mle.normal <- function(d, x) {
-  normal(mu = mean(x), sigma = sd(x))
+fit_mle.normal <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  normal(ss$mu, ss$sigma)
+}
+
+
+#' Compute the sufficient statistics for a normal distribution from data
+#'
+#' @inheritParams normal
+#' @export
+suff_stat.normal <- function(d, x, ...) {
+  if(!is.numeric(x)) stop("`x` must be a numeric vector")
+  list(mu = mean(x), sigma = sd(x), n = length(x))
 }
