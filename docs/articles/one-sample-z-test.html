@@ -53,7 +53,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/intro-to-hypothesis-testing.html">Introduction to hypothesis testing</a>
+      <a href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
+    </li>
+    <li>
+      <a href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
     </li>
     <li>
       <a href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
@@ -71,7 +74,10 @@
       <a href="../articles/one-sample-z-test.html">One sample Z-tests</a>
     </li>
     <li>
-      <a href="../articles/sign-test.html">One sample sign tests</a>
+      <a href="../articles/paired-tests.html">Paired tests</a>
+    </li>
+    <li>
+      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
     </li>
     <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
@@ -210,6 +216,66 @@
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>)</a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; [1] 0.991106</span></a></code></pre></div>
 </div>
+<div id="rejection-regions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rejection-regions" class="anchor"></a>Rejection regions</h2>
+<p><strong>Preface</strong>: I am strongly opposed to make a dichotomous “reject/fail to reject” decision for hypothesis tests. If you do a hypothesis test, you should report the p-value, period. Picking an arbitrary <span class="math inline">\(\alpha\)</span> level rejection threshold and treating it as a gold standard is ridiculous, as evidenced by 60 years of statistical literature laden with warnings about hypothesis testing. That said, sometimes it can be useful to think about when you reject a hypothesis test.</p>
+<p>We can think about three different rejection regions for a Z-test:</p>
+<ol style="list-style-type: decimal">
+<li>The rejection region in terms of the p-value</li>
+<li>The rejection region in terms of the test statistic</li>
+<li>The rejection region in terms of the sample mean</li>
+</ol>
+<p>For a given <span class="math inline">\(\alpha\)</span> level threshold, all of these rejection regions are equivalent. We’ll start by thinking about the rejection of a two-sided test. That is</p>
+<p><span class="math display">\[\begin{align}
+H_0 : \mu = \mu_0 \qquad H_A : \mu \neq \mu_0
+\end{align}\]</span></p>
+<p>We then calculate a test statistic <span class="math inline">\(Z_\text{obs}\)</span>, and a p-value <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|)\)</span> and reject when <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha\)</span>. This defines our first rejection region. Using our observation from before, this is exactly equivalent to rejecting when</p>
+<p><span class="math display">\[\begin{align}
+P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha 
+&amp; \Longleftrightarrow 2 \cdot P(Z &lt; -|Z_\text{obs}|) &lt; \alpha \\
+&amp; \Longleftrightarrow P(Z &lt; -|Z_\text{obs}|) &lt; \alpha / 2
+\end{align}\]</span></p>
+<p>and this last statement is exactly the same as when <span class="math inline">\(Z_\text{obs} &lt; z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2} &lt; Z_\text{obs}\)</span>. This is our second region region, in terms of the test statistic. Finally, recall that</p>
+<p><span class="math display">\[
+  Z_\text{obs} = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}}
+\]</span></p>
+<p>So we take the conditions and rearrange to in terms of <span class="math inline">\(\bar x\)</span></p>
+<p><span class="math display">\[\begin{align}
+\frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &gt; z_{1 - \alpha / 2}
+&amp; \Longleftrightarrow \bar x &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}
+\end{align}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\begin{align}
+\frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &lt; z_{\alpha / 2}
+&amp; \Longleftrightarrow \bar x &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}
+\end{align}\]</span></p>
+<p>You can also think about this in terms of <span class="math inline">\(\mu_0\)</span>. We will reject the test when <span class="math inline">\(\mu_0\)</span> is not in</p>
+<p><span class="math display">\[\begin{align}
+\left( \bar x + z_{\alpha / 2} \frac{\sigma}{\sqrt n},
+  \bar x + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right)
+\end{align}\]</span></p>
+<p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains all the values of <span class="math inline">\(\mu_0\)</span> that we cannot reject at the <span class="math inline">\(\alpha\)</span> level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either <span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
+</div>
+<div id="power" class="section level2">
+<h2 class="hasAnchor">
+<a href="#power" class="anchor"></a>Power</h2>
+<p>TODO</p>
+<div id="formulas-for-power" class="section level3">
+<h3 class="hasAnchor">
+<a href="#formulas-for-power" class="anchor"></a>Formulas for power</h3>
+<p>TODO: power formula in terms of test statistics</p>
+<p>To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a (two-sided) one sample Z-test, you need</p>
+<p><span class="math display">\[
+  n \approx \left(
+    {
+      \sigma \cdot (z_{\alpha / 2} + z_\beta) \over
+      \mu_0 - \mu_A
+    }
+  \right)^2
+\]</span></p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -221,6 +287,8 @@
       <li><a href="#assumption-checking">Assumption checking</a></li>
       <li><a href="#null-hypothesis-and-test-statistic">Null hypothesis and test statistic</a></li>
       <li><a href="#calculating-p-values">Calculating p-values</a></li>
+      <li><a href="#rejection-regions">Rejection regions</a></li>
+      <li><a href="#power">Power</a></li>
       </ul>
 </div>
       </div>
