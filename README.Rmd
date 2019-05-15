@@ -75,14 +75,14 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 - [x] `gamma`
 - [x] `norm` - documented
 - [x] `pois` - documented
-- [x] `t` - CHAOTIC AND WRONG DOCUMENTATION WARNING
+- [x] `t`
 - [ ] `multinomial`
 - [ ] `unif`
-- [ ] `geom`
+- [x] `geom`
 - [ ] `hyper`
 - [ ] `logis`
 - [ ] `lnorm`
-- [ ] `nbinom`
+- [x] `nbinom`
 - [ ] `weibull`
 - [ ] `tukey`
 
