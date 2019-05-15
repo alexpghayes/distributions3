@@ -261,6 +261,6 @@ quantile.normal <- function(d, p, ...) {
 #'
 #' @return A `normal` object.
 #' @export
-fit.normal <- function(d, x) {
+fit_mle.normal <- function(d, x) {
   normal(mu = mean(x), sigma = sd(x))
 }

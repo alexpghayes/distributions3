@@ -88,7 +88,23 @@ quantile <- function(d, p, ...) {
 #'
 #' @return an object the same class as \code{d} with updated parameters
 #' @export
+
 fit <- function(d, x, ...) {
+  fit_mle(d, x, ...)
+}
+
+fit_mle <- function(d, x, ...) {
+ ellipsis::check_dots_used()
+  UseMethod("fit_mle")
+}
+
+#' Compute the sufficient statistics of a distribution from data
+#'
+#' @inheritParams fit
+#'
+#' @return a named list of sufficient statistics
+
+fit_mle_suff_stat <- function(d, x, ...) {
   ellipsis::check_dots_used()
-  UseMethod("fit")
+  UseMethod("fit_mle_suff_stat")
 }

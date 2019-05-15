@@ -165,7 +165,7 @@ quantile.bernoulli <- function(d, p, ...) {
 #'
 #' @return a `bernoulli` object
 #' @export
-fit.bernoulli <- function(d, x) {
+fit_mle.bernoulli <- function(d, x) {
   valid_x <- all(x %in% c(0L, 1L))
   if(!valid_x) stop("`x` contains elements other than 0 or 1")
   bernoulli(p = mean(x))

@@ -170,7 +170,7 @@ quantile.binomial <- function(d, p, ...) {
 #'
 #' @return a `binomial` object
 #' @export
-fit.binomial <- function(d, x) {
+fit_mle.binomial <- function(d, x) {
   valid_x <- all(x >= 0 & x <= d$size)
   if(!valid_x) {
     stop("`x` must be between zero and the size parameter of the binomial distribution")
