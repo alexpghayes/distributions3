@@ -15,3 +15,12 @@ test_that("fit.binomial works correctly", {
   # raises error when data has counts greater than binomial's size
   expect_error(fit(binomial(1), 2))
 })
+
+test_that("suff_stat.binomial works correctly", {
+
+  ss_1 <- list(successes = 1, experiments = 2, trials = 1)
+  expect_equal(suff_stat(binomial(1), c(0,1)), ss_1)
+
+  ss_2 <- list(successes = 9, experiments = 3, trials = 5)
+  expect_equal(suff_stat(binomial(5), c(3,3,3)), ss_2)
+})
