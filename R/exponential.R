@@ -103,3 +103,27 @@ quantile.exponential <- function(d, p, ...) {
 
   qexp(p = p, rate = d$rate)
 }
+
+#' Fit an exponential distribution to data
+#'
+#' @param d An `exponential` object created by a call to [exponential()].
+#' @param x A vector to fit the normal distribution to.
+#'
+#' @family exponential distribution
+#'
+#' @return An `exponential` object.
+#' @export
+fit_mle.exponential <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  exponential(ss$sum / ss$samples)
+}
+
+
+#' Compute the sufficient statistics of an exponential distribution from data
+#'
+#' @inheritParams exponential
+#' @export
+suff_stat.exponential <- function(d, x, ...) {
+  if(any(x < 0)) stop("`x` must only contain positive real numbers")
+  list(sum = sum(x), samples = length(x))
+}
