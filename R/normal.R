@@ -273,5 +273,5 @@ fit_mle.normal <- function(d, x, ...) {
 #' @export
 suff_stat.normal <- function(d, x, ...) {
   if(!is.numeric(x)) stop("`x` must be a numeric vector")
-  list(mu = mean(x), sigma = sd(x), n = length(x))
+  list(mu = mean(x), sigma = sd(x), samples = length(x))
 }

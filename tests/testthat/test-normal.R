@@ -2,7 +2,7 @@ context("test-normal")
 
 test_that("suff_stat.normal works correctly", {
 
-  ss <- list(mu = 0, sigma = 0, n = 2)
+  ss <- list(mu = 0, sigma = 0, samples = 2)
   expect_equal(suff_stat(normal(), c(0,0)), ss)
 
   expect_error(suff_stat(normal(), "abc"))
