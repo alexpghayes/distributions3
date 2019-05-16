@@ -175,7 +175,7 @@ fit_mle.bernoulli <- function(d, x, ...) {
 #' @inherit beroulli
 #' @export
 suff_stat.bernoulli <- function(d, x, ...) {
-  valid_x <- all(x %in% c(0L, 1L))
-  if(!valid_x) stop("`x` contains elements other than 0 or 1")
+  valid_x <- (x %in% c(0L, 1L))
+  if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }

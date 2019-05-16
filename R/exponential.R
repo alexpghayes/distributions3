@@ -107,7 +107,7 @@ quantile.exponential <- function(d, p, ...) {
 #' Fit an exponential distribution to data
 #'
 #' @param d An `exponential` object created by a call to [exponential()].
-#' @param x A vector to fit the normal distribution to.
+#' @param x A vector to fit the distribution to.
 #'
 #' @family exponential distribution
 #'
@@ -124,6 +124,7 @@ fit_mle.exponential <- function(d, x, ...) {
 #' @inheritParams exponential
 #' @export
 suff_stat.exponential <- function(d, x, ...) {
-  if(any(x < 0)) stop("`x` must only contain positive real numbers")
+  valid_x <- (x > 0)
+  if(any(!valid_x)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), samples = length(x))
 }

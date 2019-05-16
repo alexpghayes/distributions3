@@ -180,9 +180,9 @@ fit_mle.binomial <- function(d, x, ...) {
 #' @inherit binomial
 #' @export
 suff_stat.binomial <- function(d, x, ...) {
-  valid_x <- all(x >= 0 & x <= d$size)
-  if(!valid_x) {
-    stop("`x` must be between zero and the size parameter of the binomial distribution")
+  valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)
+  if(any(!valid_x)) {
+    stop("`x` must be an integer between zero and the size parameter of the binomial distribution")
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)
 }

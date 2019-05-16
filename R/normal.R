@@ -255,7 +255,7 @@ quantile.normal <- function(d, p, ...) {
 #' Fit a normal distribution to data
 #'
 #' @param d A `normal` object created by a call to [normal()].
-#' @param x A vector to fit the normal distribution to.
+#' @param x A vector to fit the distribution to.
 #'
 #' @family normal distribution
 #'
@@ -272,6 +272,7 @@ fit_mle.normal <- function(d, x, ...) {
 #' @inheritParams normal
 #' @export
 suff_stat.normal <- function(d, x, ...) {
-  if(!is.numeric(x)) stop("`x` must be a numeric vector")
+  valid_x <- is.numeric(x)
+  if(!valid_x) stop("`x` must be a numeric vector")
   list(mu = mean(x), sigma = sd(x), samples = length(x))
 }
