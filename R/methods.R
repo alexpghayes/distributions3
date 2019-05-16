@@ -76,15 +76,27 @@ quantile <- function(d, p, ...) {
   UseMethod("quantile")
 }
 
-
-#' Fit a distribution to data
-#'
-#' Approximates an empirical distribution with a theoretical one
+#' Compute the likelihood of a probability distribution given data
 #'
 #' @param d A probability distribution object such as those created by
 #'   a call to [bernoulli()], [beta()], or [binomial()].
 #' @param x A vector of data to estimate the parameters of the
 #'   distribution with
+#'
+#' @return the likelihood
+#'
+#' @export
+likelihood <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("likelihood")
+}
+
+
+#' Fit a distribution to data
+#'
+#' Approximates an empirical distribution with a theoretical one
+#'
+#' @inheritParams likelihood
 #'
 #' @return an object the same class as \code{d} with updated parameters
 #' @export
