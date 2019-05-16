@@ -142,3 +142,29 @@ cdf.poisson <- function(d, x, ...) {
 quantile.poisson <- function(d, p, ...) {
   qpois(p = p, lambda = d$lambda)
 }
+
+#' Fit an poisson distribution to data
+#'
+#' @param d An `poisson` object created by a call to [poisson()].
+#' @param x A vector to fit the distribution to.
+#'
+#' @family poisson distribution
+#'
+#' @return An `poisson` object.
+#' @export
+fit_mle.poisson <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  poisson(ss$sum / ss$samples)
+}
+
+
+#' Compute the sufficient statistics of an poisson distribution from data
+#'
+#' @inheritParams poisson
+#' @export
+suff_stat.poisson <- function(d, x, ...) {
+  valid_x <- (x >= 0) & (x %% 1 == 0)
+  if(any(!valid_x)) stop("`x` must only contain positive integers")
+  list(sum = sum(x), samples = length(x))
+}
+
