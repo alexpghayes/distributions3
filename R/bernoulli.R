@@ -161,7 +161,7 @@ quantile.bernoulli <- function(d, p, ...) {
 #' Fit a bernoulli distribution to data
 #'
 #' @param d A `bernoulli` object.
-#' @param x A vector of zeroes and ones to fit the bernoulli distribution to.
+#' @param x A vector of zeroes and ones
 #'
 #' @return a `bernoulli` object
 #' @export
@@ -173,9 +173,37 @@ fit_mle.bernoulli <- function(d, x, ...) {
 #' Compute the sufficient statistics for a bernoulli distribution from data
 #'
 #' @inherit beroulli
+#'
 #' @export
 suff_stat.bernoulli <- function(d, x, ...) {
   valid_x <- (x %in% c(0L, 1L))
   if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
+
+#' Compute the likelihood of a bernoulli distribution given data
+#'
+#' @inheritParams fit_mle.bernoulli
+#'
+#' @return the likelihood
+#' @export
+
+likelihood.bernoulli <- function(d, x, ...) {
+  prod(dbinom(x = x, size = 1, prob = d$p))
+}
+
+#' Compute the log-likelihood of a bernoulli distribution given data
+#'
+#' @inheritParams fit_mle.bernoulli
+#'
+#' @return the log-likelihood
+#' @export
+log_likelihood.bernoulli <- function(d, x, ...) {
+  sum(dbinom(x = x, size = 1, prob = d$p, log = TRUE))
+}
+
+
+
+
+
+

@@ -15,3 +15,17 @@ test_that("suff_stats.bernoulli works correctly", {
 
   expect_error(suff_stat(bernoulli(), -1))
 })
+
+
+test_that("likelihood.bernoulli and log_likelihood.bernoulli work correctly", {
+
+  b <- bernoulli(0.1)
+  x <- c(1, 1, 0)
+
+  expect_equal(likelihood(b, 1), 0.1)
+  expect_equal(likelihood(b, x), 0.009)
+
+  expect_equal(log_likelihood(b, 1), log(0.1))
+  expect_equal(log_likelihood(b, x), log(0.009))
+
+})
