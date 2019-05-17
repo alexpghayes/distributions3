@@ -24,3 +24,16 @@ test_that("suff_stat.binomial works correctly", {
   ss_2 <- list(successes = 9, experiments = 3, trials = 5)
   expect_equal(suff_stat(binomial(5), c(3,3,3)), ss_2)
 })
+
+test_that("likelihood.binomial and log_likelihood.binomial work correctly", {
+
+  b <- binomial(size = 10, p = 0.1)
+  x <- c(1, 1, 0)
+
+  expect_equal(likelihood(b, 1), dbinom(1, 10, 0.1))
+  expect_equal(likelihood(b, x), prod(dbinom(x, 10, 0.1)))
+
+  expect_equal(log_likelihood(b, 1), dbinom(1, 10, 0.1, log = TRUE))
+  expect_equal(log_likelihood(b, x), sum(dbinom(x, 10, 0.1, log = TRUE)))
+
+})

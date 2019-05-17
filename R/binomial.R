@@ -186,3 +186,24 @@ suff_stat.binomial <- function(d, x, ...) {
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)
 }
+
+#' Compute the likelihood of a binomial distribution given data
+#'
+#' @inheritParams fit_mle.binomial
+#'
+#' @return the likelihood
+#' @export
+
+likelihood.binomial <- function(d, x, ...) {
+  prod(dbinom(x = x, size = d$size, prob = d$p))
+}
+
+#' Compute the log-likelihood of a binomial distribution given data
+#'
+#' @inheritParams fit_mle.binomial
+#'
+#' @return the log-likelihood
+#' @export
+log_likelihood.binomial <- function(d, x, ...) {
+  sum(dbinom(x = x, size = d$size, prob = d$p, log = TRUE))
+}
