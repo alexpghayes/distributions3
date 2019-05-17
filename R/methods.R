@@ -91,6 +91,18 @@ likelihood <- function(d, x, ...) {
   UseMethod("likelihood")
 }
 
+#' Compute the log-likelihood of a probability distribution given data
+#'
+#' @inheritParams likelihood
+#'
+#' @return the log-likelihood
+#'
+#' @export
+log_likelihood <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("log_likelihood")
+}
+
 
 #' Fit a distribution to data
 #'
