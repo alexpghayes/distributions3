@@ -70,6 +70,7 @@
 #'
 #' random(b, 10)
 #' pdf(b, 2L)
+#' log_pdf(b, 2L)
 #' cdf(b, 4L)
 #' quantile(b, 0.7)
 #'
@@ -119,6 +120,13 @@ random.binomial <- function(d, n = 1L, ...) {
 #'
 pdf.binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p)
+}
+
+#' @rdname pdf.binomial
+#' @export
+#'
+log_pdf.binomial <- function(d, x, ...) {
+  dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a binomial distribution

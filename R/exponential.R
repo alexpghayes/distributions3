@@ -15,6 +15,7 @@
 #'
 #' random(e, 10)
 #' pdf(e, 2)
+#' log_pdf(e, 2)
 #' cdf(e, 4)
 #' quantile(e, 0.7)
 #'
@@ -63,6 +64,13 @@ random.exponential <- function(d, n = 1L, ...) {
 #'
 pdf.exponential <- function(d, x, ...) {
   dexp(x = x, rate = d$rate)
+}
+
+#' @rdname pdf.exponential
+#' @export
+#'
+log_pdf.exponential <- function(d, x, ...) {
+  dexp(x = x, rate = d$rate, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a exponential distribution

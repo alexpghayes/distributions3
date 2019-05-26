@@ -58,6 +58,7 @@
 #'
 #' random(p, 10)
 #' pdf(p, 2)
+#' log_pdf(p, 2)
 #' cdf(p, 4)
 #' quantile(p, 0.7)
 #'
@@ -106,6 +107,13 @@ random.poisson <- function(d, n = 1L, ...) {
 #'
 pdf.poisson <- function(d, x, ...) {
   dpois(x = x, lambda = d$lambda)
+}
+
+#' @rdname pdf.poisson
+#' @export
+#'
+log_pdf.poisson <- function(d, x, ...) {
+  dpois(x = x, lambda = d$lambda, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a poisson distribution

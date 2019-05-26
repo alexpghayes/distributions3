@@ -65,6 +65,7 @@
 #'
 #' random(b, 10)
 #' pdf(b, 1)
+#' log_pdf(b, 1)
 #' cdf(b, 0)
 #' quantile(b, 0.7)
 #'
@@ -118,9 +119,14 @@ random.bernoulli <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.bernoulli <- function(d, x, ...) {
-  # TODO: call as.integer()? on doubles
-  # TODO: out of support: return zero, return zero and warn, or stop?
-  if (x == 0) 1 - d$p else d$p
+  dbinom(x = x, size = 1, prob = d$p)
+}
+
+#' @rdname pdf.bernoulli
+#' @export
+#'
+log_pdf.bernoulli <- function(d, x, ...) {
+  dbinom(x = x, size = 1, prob = d$p, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a bernoulli distribution
@@ -172,7 +178,7 @@ fit_mle.bernoulli <- function(d, x, ...) {
 
 #' Compute the sufficient statistics for a bernoulli distribution from data
 #'
-#' @inherit beroulli
+#' @inheritParams beroulli
 #'
 #' @export
 suff_stat.bernoulli <- function(d, x, ...) {
@@ -180,29 +186,6 @@ suff_stat.bernoulli <- function(d, x, ...) {
   if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
-
-#' Compute the likelihood of a bernoulli distribution given data
-#'
-#' @inheritParams fit_mle.bernoulli
-#'
-#' @return the likelihood
-#' @export
-
-likelihood.bernoulli <- function(d, x, ...) {
-  prod(dbinom(x = x, size = 1, prob = d$p))
-}
-
-#' Compute the log-likelihood of a bernoulli distribution given data
-#'
-#' @inheritParams fit_mle.bernoulli
-#'
-#' @return the log-likelihood
-#' @export
-log_likelihood.bernoulli <- function(d, x, ...) {
-  sum(dbinom(x = x, size = 1, prob = d$p, log = TRUE))
-}
-
-
 
 
 

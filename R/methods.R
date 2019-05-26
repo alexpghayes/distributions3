@@ -37,6 +37,13 @@ pdf <- function(d, x, ...) {
 
 #' @rdname pdf
 #' @export
+log_pdf <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("log_pdf")
+}
+
+#' @rdname pdf
+#' @export
 pmf <- function(d, x, ...) {
   pdf(d, x, ...)
 }
@@ -87,8 +94,7 @@ quantile <- function(d, p, ...) {
 #'
 #' @export
 likelihood <- function(d, x, ...) {
-  ellipsis::check_dots_used()
-  UseMethod("likelihood")
+  exp(log_likelihood(d, x, ...))
 }
 
 #' Compute the log-likelihood of a probability distribution given data
@@ -99,8 +105,7 @@ likelihood <- function(d, x, ...) {
 #'
 #' @export
 log_likelihood <- function(d, x, ...) {
-  ellipsis::check_dots_used()
-  UseMethod("log_likelihood")
+  sum(log_pdf(d, x, ...))
 }
 
 
@@ -118,7 +123,7 @@ fit <- function(d, x, ...) {
 }
 
 fit_mle <- function(d, x, ...) {
- ellipsis::check_dots_used()
+  ellipsis::check_dots_used()
   UseMethod("fit_mle")
 }
 
