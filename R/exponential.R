@@ -115,7 +115,7 @@ quantile.exponential <- function(d, p, ...) {
 #' Fit an exponential distribution to data
 #'
 #' @param d An `exponential` object created by a call to [exponential()].
-#' @param x A vector to fit the distribution to.
+#' @param x A vector of data.
 #'
 #' @family exponential distribution
 #'
@@ -129,7 +129,14 @@ fit_mle.exponential <- function(d, x, ...) {
 
 #' Compute the sufficient statistics of an exponential distribution from data
 #'
-#' @inheritParams exponential
+#' @inheritParams fit_mle.exponential
+#'
+#' @return A named list of the sufficient statistics of exponential distribution
+#'   \describe{
+#'     \item{\code{sum}}{The sum of the data}
+#'     \item{\code{samples}}{The number of samples in the data}
+#'   }
+#'
 #' @export
 suff_stat.exponential <- function(d, x, ...) {
   valid_x <- (x > 0)

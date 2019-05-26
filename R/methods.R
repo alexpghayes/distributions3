@@ -107,7 +107,6 @@ log_likelihood <- function(d, x, ...) {
   sum(log_pdf(d, x, ...))
 }
 
-
 #' Fit a distribution to data
 #'
 #' Approximates an empirical distribution with a theoretical one

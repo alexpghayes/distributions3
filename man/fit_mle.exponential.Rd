@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{An \code{exponential} object created by a call to \code{\link[=exponential]{exponential()}}.}
 
-\item{x}{A vector to fit the distribution to.}
+\item{x}{A vector of data.}
 }
 \value{
 An \code{exponential} object.

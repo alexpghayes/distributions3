@@ -174,7 +174,7 @@ quantile.binomial <- function(d, p, ...) {
 #' the `binomial` object passed.
 #'
 #' @param d A `binomial` object.
-#' @param x A vector of zeroes and ones to fit the binomial distribution to.
+#' @param x A vector of zeroes and ones.
 #'
 #' @return a `binomial` object
 #' @export
@@ -185,7 +185,15 @@ fit_mle.binomial <- function(d, x, ...) {
 
 #' Compute the sufficient statistics for the binomial distribution from data
 #'
-#' @inherit binomial
+#' @inheritParams fit_mle.binomial
+#'
+#' @return A named list of the sufficient statistics of the binomial distribution
+#'   \describe{
+#'     \item{\code{successes}}{The total number of successful trials}
+#'     \item{\code{experiments}}{The number of experiments run}
+#'     \item{\code{trials}}{The number of trials run per experiment}
+#'   }
+#'
 #' @export
 suff_stat.binomial <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)

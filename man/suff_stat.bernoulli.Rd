@@ -6,79 +6,18 @@
 \usage{
 \method{suff_stat}{bernoulli}(d, x, ...)
 }
+\arguments{
+\item{d}{A \code{bernoulli} object.}
+
+\item{x}{A vector of zeroes and ones.}
+}
 \value{
-A \code{bernoulli} object.
+A named list of the sufficient statistics of the bernoulli distribution
+\describe{
+\item{\code{successes}}{The number of successful trials (\code{x == 1})}
+\item{\code{failures}}{The number of failed trials (\code{x == 0})}
+}
 }
 \description{
-Bernoulli distributions are used to represent events like coin flips
-when there is single trial that is either successful or unsuccessful.
-The bernoulli distribution is a special case of the \code{\link[=binomial]{binomial()}}
-distribution with \code{n = 1}.
-}
-\details{
-We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
-will render with additional detail.
-
-In the following, let \eqn{X} be a Bernoulli random variable with parameter
-\code{p} = \eqn{p}. Some textbooks also define \eqn{q = 1 - p}, or use
-\eqn{\pi} instead of \eqn{p}.
-
-\strong{Support}: \eqn{\{0, 1\}}{{0, 1}}
-
-\strong{Mean}: \eqn{p}
-
-\strong{Variance}: \eqn{p \cdot (1 - p) = p \cdot q}{p (1 - p)}
-
-\strong{Probability mass function (p.m.f)}:
-
-\deqn{
-    P(X = x) = p^x (1 - p)^{1-x} = p^x q^{1-x}
-  }{
-    P(X = x) = p^x (1 - p)^(1-x)
-  }
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-\deqn{
-    P(X \le x) =
-    \begin{cases}
-      0 & x < 0 \\
-      1 - p & 0 \leq x < 1 \\
-      1 & x \geq 1
-    \end{cases}
-  }{
-    P(X \le x) = (1 - p) 1_{[0, 1)}(x) + 1_{1}(x)
-  }
-
-\strong{Moment generating function (m.g.f)}:
-
-\deqn{
-    \mathbb{E}(e^{tX}) = (1 - p) + p e^t
-  }{
-    E(e^(tX)) = (1 - p) + p e^t
-  }
-}
-\examples{
-
-b <- bernoulli(0.7)
-b
-
-random(b, 10)
-pdf(b, 1)
-log_pdf(b, 1)
-cdf(b, 0)
-quantile(b, 0.7)
-
-# TODO: looks like I don't quite have quantiles right since the
-# inverses don't hold like I'd want
-
-cdf(b, quantile(b, 0.7))
-quantile(b, cdf(b, 0.7))
-
-}
-\seealso{
-Other discrete distributions: \code{\link{binomial}},
-  \code{\link{geometric}}, \code{\link{log_normal}},
-  \code{\link{negative_binomial}}
+Compute the sufficient statistics for a bernoulli distribution from data
 }

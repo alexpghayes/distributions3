@@ -6,78 +6,19 @@
 \usage{
 \method{suff_stat}{binomial}(d, x, ...)
 }
+\arguments{
+\item{d}{A \code{binomial} object.}
+
+\item{x}{A vector of zeroes and ones.}
+}
 \value{
-A \code{binomial} object.
+A named list of the sufficient statistics of the binomial distribution
+\describe{
+\item{\code{successes}}{The total number of successful trials}
+\item{\code{experiments}}{The number of experiments run}
+\item{\code{trials}}{The number of trials run per experiment}
+}
 }
 \description{
-Bernoulli distributions are used to represent situations can that can
-thought of as \code{size} (often called \eqn{n} in textbooks) independent
-coin flips, where each coin flip has probability \code{p} of success. The
-\code{\link[=bernoulli]{bernoulli()}} distribution is a special case of binomial distribution
-when \code{n = 1}.
-}
-\details{
-The binomial distribution comes up when you are interested in the portion
-of people who do a thing. The binomial distribution
-also comes up in the sign test, sometimes called the binomial test
-(see \code{\link[stats:binom.test]{stats::binom.test()}}), where you may need the binomial C.D.F. to
-compute p-values.
-
-We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
-will render with additional detail.
-
-In the following, let \eqn{X} be a Binomial random variable with parameter
-\code{size} = \eqn{n} and \code{p} = \eqn{p}. Some textbooks define \eqn{q = 1 - p},
-or called \eqn{\pi} instead of \eqn{p}.
-
-\strong{Support}: \eqn{\{0, 1, 2, ..., n\}}{{0, 1, 2, ..., n}}
-
-\strong{Mean}: \eqn{np}
-
-\strong{Variance}: \eqn{np \cdot (1 - p) = np \cdot q}{np (1 - p)}
-
-\strong{Probability mass function (p.m.f)}:
-
-\deqn{
-    P(X = k) = \binom{n}{k} p^k (1 - p)^{n-k}
-  }{
-    P(X = k) = choose(n, k) p^k (1 - p)^(n - k)
-  }
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-\deqn{
-    P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} \binom{n}{i} p^i (1 - p)^{n-i}
-  }{
-    P(X \le k) = \sum_{i=0}^k choose(n, i) p^i (1 - p)^(n-i)
-  }
-
-\strong{Moment generating function (m.g.f)}:
-
-\deqn{
-    \mathbb{E}(e^{tX}) = (1 - p + p e^t)^n
-  }{
-    E(e^(tX)) = (1 - p + p e^t)^n
-  }
-}
-\examples{
-
-b <- binomial(10, 0.2)
-b
-
-random(b, 10)
-pdf(b, 2L)
-log_pdf(b, 2L)
-cdf(b, 4L)
-quantile(b, 0.7)
-
-cdf(b, quantile(b, 0.7))
-quantile(b, cdf(b, 7))
-
-}
-\seealso{
-Other discrete distributions: \code{\link{bernoulli}},
-  \code{\link{geometric}}, \code{\link{log_normal}},
-  \code{\link{negative_binomial}}
+Compute the sufficient statistics for the binomial distribution from data
 }

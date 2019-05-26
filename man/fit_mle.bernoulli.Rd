@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{A \code{bernoulli} object.}
 
-\item{x}{A vector of zeroes and ones}
+\item{x}{A vector of zeroes and ones.}
 }
 \value{
 a \code{bernoulli} object

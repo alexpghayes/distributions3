@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{A \code{binomial} object.}
 
-\item{x}{A vector of zeroes and ones to fit the binomial distribution to.}
+\item{x}{A vector of zeroes and ones.}
 }
 \value{
 a \code{binomial} object

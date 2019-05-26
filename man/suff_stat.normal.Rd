@@ -6,6 +6,19 @@
 \usage{
 \method{suff_stat}{normal}(d, x, ...)
 }
+\arguments{
+\item{d}{A \code{normal} object created by a call to \code{\link[=normal]{normal()}}.}
+
+\item{x}{A vector of data.}
+}
+\value{
+A named list of the sufficient statistics of the normal distribution
+\describe{
+\item{\code{mu}}{The sample mean of the data}
+\item{\code{sigma}}{The sample standard deviation of the data}
+\item{\code{samples}}{The number of samples in the data}
+}
+}
 \description{
 Compute the sufficient statistics for a normal distribution from data
 }

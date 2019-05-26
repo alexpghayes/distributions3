@@ -6,6 +6,18 @@
 \usage{
 \method{suff_stat}{exponential}(d, x, ...)
 }
+\arguments{
+\item{d}{An \code{exponential} object created by a call to \code{\link[=exponential]{exponential()}}.}
+
+\item{x}{A vector of data.}
+}
+\value{
+A named list of the sufficient statistics of exponential distribution
+\describe{
+\item{\code{sum}}{The sum of the data}
+\item{\code{samples}}{The number of samples in the data}
+}
+}
 \description{
 Compute the sufficient statistics of an exponential distribution from data
 }

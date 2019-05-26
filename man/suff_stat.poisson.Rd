@@ -6,6 +6,18 @@
 \usage{
 \method{suff_stat}{poisson}(d, x, ...)
 }
+\arguments{
+\item{d}{An \code{poisson} object created by a call to \code{\link[=poisson]{poisson()}}.}
+
+\item{x}{A vector of data.}
+}
+\value{
+A named list of the sufficient statistics of the poisson distribution
+\describe{
+\item{\code{sum}}{The sum of the data}
+\item{\code{samples}}{The number of samples in the data}
+}
+}
 \description{
 Compute the sufficient statistics of an poisson distribution from data
 }

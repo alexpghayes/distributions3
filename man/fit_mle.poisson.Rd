@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{An \code{poisson} object created by a call to \code{\link[=poisson]{poisson()}}.}
 
-\item{x}{A vector to fit the distribution to.}
+\item{x}{A vector of data.}
 }
 \value{
 An \code{poisson} object.

@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{A \code{normal} object created by a call to \code{\link[=normal]{normal()}}.}
 
-\item{x}{A vector to fit the distribution to.}
+\item{x}{A vector of data.}
 }
 \value{
 A \code{normal} object.

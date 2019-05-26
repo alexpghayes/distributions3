@@ -154,7 +154,7 @@ quantile.poisson <- function(d, p, ...) {
 #' Fit an poisson distribution to data
 #'
 #' @param d An `poisson` object created by a call to [poisson()].
-#' @param x A vector to fit the distribution to.
+#' @param x A vector of data.
 #'
 #' @family poisson distribution
 #'
@@ -168,7 +168,14 @@ fit_mle.poisson <- function(d, x, ...) {
 
 #' Compute the sufficient statistics of an poisson distribution from data
 #'
-#' @inheritParams poisson
+#' @inheritParams fit_mle.poisson
+#'
+#' @return A named list of the sufficient statistics of the poisson distribution
+#'   \describe{
+#'     \item{\code{sum}}{The sum of the data}
+#'     \item{\code{samples}}{The number of samples in the data}
+#'   }
+#'
 #' @export
 suff_stat.poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
