@@ -118,14 +118,6 @@ quantile.gamma <- function(d, p, ...) {
   qgamma(p = p, shape = d$shape, rate = d$rate)
 }
 
-#' Compute the likelihood of a distribution given data
-#'
-#' @export
-likelihood.gamma <- function(d, x, ...) {
-
-}
-
-
 #' Fit a gamma distribution to data
 #'
 #' @param d A `gamma` object created by a call to [gamma()].
