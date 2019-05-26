@@ -2,10 +2,13 @@
 % Please edit documentation in R/methods.R
 \name{pdf}
 \alias{pdf}
+\alias{log_pdf}
 \alias{pmf}
 \title{Evaluate the probability density of a probability distribution}
 \usage{
 pdf(d, x, ...)
+
+log_pdf(d, x, ...)
 
 pmf(d, x, ...)
 }

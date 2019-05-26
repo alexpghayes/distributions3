@@ -27,6 +27,7 @@ c
 
 random(c, 10)
 pdf(c, 2)
+log_pdf(c, 2)
 cdf(c, 2)
 quantile(c, 0.7)
 

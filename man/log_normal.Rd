@@ -52,6 +52,7 @@ ln
 
 random(ln, 10)
 pdf(ln, 2)
+log_pdf(ln, 2)
 cdf(ln, 4)
 quantile(ln, 0.7)
 

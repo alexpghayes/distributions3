@@ -87,8 +87,7 @@ quantile <- function(d, p, ...) {
 #'
 #' @param d A probability distribution object such as those created by
 #'   a call to [bernoulli()], [beta()], or [binomial()].
-#' @param x A vector of data to estimate the parameters of the
-#'   distribution with
+#' @param x A vector of data to compute the likelihood.
 #'
 #' @return the likelihood
 #'

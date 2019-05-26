@@ -178,7 +178,7 @@ fit_mle.bernoulli <- function(d, x, ...) {
 
 #' Compute the sufficient statistics for a bernoulli distribution from data
 #'
-#' @inheritParams beroulli
+#' @inherit bernoulli
 #'
 #' @export
 suff_stat.bernoulli <- function(d, x, ...) {

@@ -2,9 +2,12 @@
 % Please edit documentation in R/beta.R
 \name{pdf.beta}
 \alias{pdf.beta}
+\alias{log_pdf.beta}
 \title{Evaluate the probability mass function of a beta distribution}
 \usage{
 \method{pdf}{beta}(d, x, ...)
+
+\method{log_pdf}{beta}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{beta} object created by a call to \code{\link[=beta]{beta()}}.}
@@ -28,6 +31,7 @@ b
 
 random(b, 10)
 pdf(b, 0.7)
+log_pdf(b, 0.7)
 cdf(b, 0.7)
 quantile(b, 0.7)
 

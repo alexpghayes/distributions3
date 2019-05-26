@@ -2,9 +2,12 @@
 % Please edit documentation in R/students_t.R
 \name{pdf.students_t}
 \alias{pdf.students_t}
+\alias{log_pdf.students_t}
 \title{Evaluate the probability mass function of a students_t distribution}
 \usage{
 \method{pdf}{students_t}(d, x, ...)
+
+\method{log_pdf}{students_t}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{students_t} object created by a call to \code{\link[=students_t]{students_t()}}.}

@@ -84,6 +84,7 @@ n
 
 random(n, 10)
 pdf(n, 2)
+log_pdf(n, 2)
 cdf(n, 4)
 quantile(n, 0.7)
 
