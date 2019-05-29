@@ -4,7 +4,7 @@
 \alias{binomial}
 \title{Create a binomial distribution}
 \usage{
-binomial(size, p)
+binomial(size, p = 0.5)
 }
 \arguments{
 \item{size}{The number of trials. Must be an integer greater than or equal
@@ -76,6 +76,7 @@ b
 
 random(b, 10)
 pdf(b, 2L)
+log_pdf(b, 2L)
 cdf(b, 4L)
 quantile(b, 0.7)
 

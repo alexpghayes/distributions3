@@ -2,9 +2,12 @@
 % Please edit documentation in R/chi_square.R
 \name{pdf.chi_square}
 \alias{pdf.chi_square}
+\alias{log_pdf.chi_square}
 \title{Evaluate the probability mass function of a chi square distribution}
 \usage{
 \method{pdf}{chi_square}(d, x, ...)
+
+\method{log_pdf}{chi_square}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{chi_square} object created by a call to \code{\link[=chi_square]{chi_square()}}.}
@@ -28,6 +31,7 @@ c
 
 random(c, 10)
 pdf(c, 2)
+log_pdf(c, 2)
 cdf(c, 4)
 quantile(c, 0.7)
 

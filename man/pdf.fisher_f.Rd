@@ -2,9 +2,12 @@
 % Please edit documentation in R/fisher_f.R
 \name{pdf.fisher_f}
 \alias{pdf.fisher_f}
+\alias{log_pdf.fisher_f}
 \title{Evaluate the probability mass function of an F distribution}
 \usage{
 \method{pdf}{fisher_f}(d, x, ...)
+
+\method{log_pdf}{fisher_f}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{fisher_f} object created by a call to \code{\link[=fisher_f]{fisher_f()}}.}
@@ -28,6 +31,7 @@ f
 
 random(f, 10)
 pdf(f, 2)
+log_pdf(f, 2)
 cdf(f, 4)
 quantile(f, 0.7)
 

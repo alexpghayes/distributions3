@@ -58,6 +58,7 @@
 #'
 #' random(c, 10)
 #' pdf(c, 2)
+#' log_pdf(c, 2)
 #' cdf(c, 2)
 #' quantile(c, 0.7)
 #'
@@ -106,6 +107,13 @@ random.cauchy <- function(d, n = 1L, ...) {
 #'
 pdf.cauchy <- function(d, x, ...) {
   dcauchy(x = x, location = d$location, scale = d$scale)
+}
+
+#' @rdname pdf.cauchy
+#' @export
+#'
+log_pdf.cauchy <- function(d, x, ...) {
+  dcauchy(x = x, location = d$location, scale = d$scale, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a cauchy distribution

@@ -18,6 +18,7 @@
 #'
 #' random(b, 10)
 #' pdf(b, 0.7)
+#' log_pdf(b, 0.7)
 #' cdf(b, 0.7)
 #' quantile(b, 0.7)
 #'
@@ -66,6 +67,13 @@ random.beta <- function(d, n = 1L, ...) {
 #'
 pdf.beta <- function(d, x, ...) {
   dbeta(x = x, shape1 = d$alpha, shape2 = d$beta)
+}
+
+#' @rdname pdf.beta
+#' @export
+#'
+log_pdf.beta <- function(d, x, ...) {
+  dbeta(x = x, shape1 = d$alpha, shape2 = d$beta, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a beta distribution

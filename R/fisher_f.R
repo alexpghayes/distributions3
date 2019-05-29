@@ -17,6 +17,7 @@
 #'
 #' random(f, 10)
 #' pdf(f, 2)
+#' log_pdf(f, 2)
 #' cdf(f, 4)
 #' quantile(f, 0.7)
 #'
@@ -65,6 +66,13 @@ random.fisher_f <- function(d, n = 1L, ...) {
 #'
 pdf.fisher_f <- function(d, x, ...) {
   df(x = x, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+}
+
+#' @rdname pdf.fisher_f
+#' @export
+#'
+log_pdf.fisher_f <- function(d, x, ...) {
+  df(x = x, df1 = d$df1, df2 = d$df2, ncp = d$lambda, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of an F distribution

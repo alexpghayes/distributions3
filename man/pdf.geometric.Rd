@@ -2,9 +2,12 @@
 % Please edit documentation in R/geometric.R
 \name{pdf.geometric}
 \alias{pdf.geometric}
+\alias{log_pdf.geometric}
 \title{Evaluate the probability mass function of a geometric distribution}
 \usage{
 \method{pdf}{geometric}(d, x, ...)
+
+\method{log_pdf}{geometric}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{geometric} object created by a call to \code{\link[=geometric]{geometric()}}.}
@@ -30,6 +33,7 @@ g
 
 random(g, 10)
 pdf(g, 2)
+log_pdf(g, 2)
 cdf(g, 4)
 quantile(g, 0.7)
 

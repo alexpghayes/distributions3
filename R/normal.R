@@ -78,6 +78,7 @@
 #'
 #' random(n, 10)
 #' pdf(n, 2)
+#' log_pdf(n, 2)
 #' cdf(n, 4)
 #' quantile(n, 0.7)
 #'
@@ -205,6 +206,13 @@ pdf.normal <- function(d, x, ...) {
   dnorm(x = x, mean = d$mu, sd = d$sigma)
 }
 
+#' @rdname pdf.normal
+#' @export
+#'
+log_pdf.normal <- function(d, x, ...) {
+  dnorm(x = x, mean = d$mu, sd = d$sigma, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a normal distribution
 #'
 #' @inherit normal examples
@@ -250,4 +258,36 @@ cdf.normal <- function(d, x, ...) {
 #'
 quantile.normal <- function(d, p, ...) {
   qnorm(p = p, mean = d$mu, sd = d$sigma)
+}
+
+#' Fit a normal distribution to data
+#'
+#' @param d A `normal` object created by a call to [normal()].
+#' @param x A vector of data.
+#'
+#' @family normal distribution
+#'
+#' @return A `normal` object.
+#' @export
+fit_mle.normal <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  normal(ss$mu, ss$sigma)
+}
+
+
+#' Compute the sufficient statistics for a normal distribution from data
+#'
+#' @inheritParams fit_mle.normal
+#'
+#' @return A named list of the sufficient statistics of the normal distribution
+#'   \describe{
+#'     \item{\code{mu}}{The sample mean of the data}
+#'     \item{\code{sigma}}{The sample standard deviation of the data}
+#'     \item{\code{samples}}{The number of samples in the data}
+#'   }
+#' @export
+suff_stat.normal <- function(d, x, ...) {
+  valid_x <- is.numeric(x)
+  if(!valid_x) stop("`x` must be a numeric vector")
+  list(mu = mean(x), sigma = sd(x), samples = length(x))
 }

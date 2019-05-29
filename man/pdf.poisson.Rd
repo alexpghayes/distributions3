@@ -2,9 +2,12 @@
 % Please edit documentation in R/poisson.R
 \name{pdf.poisson}
 \alias{pdf.poisson}
+\alias{log_pdf.poisson}
 \title{Evaluate the probability mass function of a poisson distribution}
 \usage{
 \method{pdf}{poisson}(d, x, ...)
+
+\method{log_pdf}{poisson}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{poisson} object created by a call to \code{\link[=poisson]{poisson()}}.}
@@ -28,6 +31,7 @@ p
 
 random(p, 10)
 pdf(p, 2)
+log_pdf(p, 2)
 cdf(p, 4)
 quantile(p, 0.7)
 

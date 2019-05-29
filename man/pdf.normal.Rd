@@ -2,9 +2,12 @@
 % Please edit documentation in R/normal.R
 \name{pdf.normal}
 \alias{pdf.normal}
+\alias{log_pdf.normal}
 \title{Evaluate the probability mass function of a normal distribution}
 \usage{
 \method{pdf}{normal}(d, x, ...)
+
+\method{log_pdf}{normal}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{normal} object created by a call to \code{\link[=normal]{normal()}}.}
@@ -30,6 +33,7 @@ n
 
 random(n, 10)
 pdf(n, 2)
+log_pdf(n, 2)
 cdf(n, 4)
 quantile(n, 0.7)
 
@@ -103,6 +107,7 @@ quantile(n, cdf(n, 7))
 }
 \seealso{
 Other normal distribution: \code{\link{cdf.normal}},
+  \code{\link{fit_mle.normal}},
   \code{\link{quantile.normal}},
   \code{\link{random.normal}}
 }

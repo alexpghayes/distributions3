@@ -2,9 +2,12 @@
 % Please edit documentation in R/exponential.R
 \name{pdf.exponential}
 \alias{pdf.exponential}
+\alias{log_pdf.exponential}
 \title{Evaluate the probability mass function of a exponential distribution}
 \usage{
 \method{pdf}{exponential}(d, x, ...)
+
+\method{log_pdf}{exponential}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{exponential} object created by a call to \code{\link[=exponential]{exponential()}}.}
@@ -28,6 +31,7 @@ e
 
 random(e, 10)
 pdf(e, 2)
+log_pdf(e, 2)
 cdf(e, 4)
 quantile(e, 0.7)
 

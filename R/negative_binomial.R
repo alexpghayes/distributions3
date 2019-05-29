@@ -49,6 +49,7 @@
 #'
 #' random(nb, 10)
 #' pdf(nb, 2)
+#' log_pdf(nb, 2)
 #' cdf(nb, 4)
 #' quantile(nb, 0.7)
 #'
@@ -99,6 +100,13 @@ random.negative_binomial <- function(d, n = 1L, ...) {
 #'
 pdf.negative_binomial <- function(d, x, ...) {
   dnbinom(x = x, size = d$size, prob = d$p)
+}
+
+#' @rdname pdf.negative_binomial
+#' @export
+#'
+log_pdf.negative_binomial <- function(d, x, ...) {
+  dnbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a negative binomial distribution

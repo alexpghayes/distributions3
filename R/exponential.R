@@ -15,6 +15,7 @@
 #'
 #' random(e, 10)
 #' pdf(e, 2)
+#' log_pdf(e, 2)
 #' cdf(e, 4)
 #' quantile(e, 0.7)
 #'
@@ -65,6 +66,13 @@ pdf.exponential <- function(d, x, ...) {
   dexp(x = x, rate = d$rate)
 }
 
+#' @rdname pdf.exponential
+#' @export
+#'
+log_pdf.exponential <- function(d, x, ...) {
+  dexp(x = x, rate = d$rate, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a exponential distribution
 #'
 #' @inherit exponential examples
@@ -102,4 +110,36 @@ quantile.exponential <- function(d, p, ...) {
   # how quantiles are calculated
 
   qexp(p = p, rate = d$rate)
+}
+
+#' Fit an exponential distribution to data
+#'
+#' @param d An `exponential` object created by a call to [exponential()].
+#' @param x A vector of data.
+#'
+#' @family exponential distribution
+#'
+#' @return An `exponential` object.
+#' @export
+fit_mle.exponential <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  exponential(ss$sum / ss$samples)
+}
+
+
+#' Compute the sufficient statistics of an exponential distribution from data
+#'
+#' @inheritParams fit_mle.exponential
+#'
+#' @return A named list of the sufficient statistics of exponential distribution
+#'   \describe{
+#'     \item{\code{sum}}{The sum of the data}
+#'     \item{\code{samples}}{The number of samples in the data}
+#'   }
+#'
+#' @export
+suff_stat.exponential <- function(d, x, ...) {
+  valid_x <- (x > 0)
+  if(any(!valid_x)) stop("`x` must only contain positive real numbers")
+  list(sum = sum(x), samples = length(x))
 }

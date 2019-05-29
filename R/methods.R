@@ -37,6 +37,13 @@ pdf <- function(d, x, ...) {
 
 #' @rdname pdf
 #' @export
+log_pdf <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("log_pdf")
+}
+
+#' @rdname pdf
+#' @export
 pmf <- function(d, x, ...) {
   pdf(d, x, ...)
 }
@@ -74,4 +81,57 @@ cdf <- function(d, x, ...) {
 quantile <- function(d, p, ...) {
   ellipsis::check_dots_used()
   UseMethod("quantile")
+}
+
+#' Compute the likelihood of a probability distribution given data
+#'
+#' @param d A probability distribution object such as those created by
+#'   a call to [bernoulli()], [beta()], or [binomial()].
+#' @param x A vector of data to compute the likelihood.
+#'
+#' @return the likelihood
+#'
+#' @export
+likelihood <- function(d, x, ...) {
+  exp(log_likelihood(d, x, ...))
+}
+
+#' Compute the log-likelihood of a probability distribution given data
+#'
+#' @inheritParams likelihood
+#'
+#' @return the log-likelihood
+#'
+#' @export
+log_likelihood <- function(d, x, ...) {
+  sum(log_pdf(d, x, ...))
+}
+
+#' Fit a distribution to data
+#'
+#' Approximates an empirical distribution with a theoretical one
+#'
+#' @inheritParams likelihood
+#'
+#' @return an object the same class as \code{d} with updated parameters
+#' @export
+
+fit <- function(d, x, ...) {
+  fit_mle(d, x, ...)
+}
+
+fit_mle <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("fit_mle")
+}
+
+#' Compute the sufficient statistics of a distribution from data
+#'
+#' @inheritParams fit
+#'
+#' @return a named list of sufficient statistics
+
+suff_stat <- function(d, x, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("suff_stat")
 }
