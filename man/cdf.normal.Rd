@@ -28,6 +28,7 @@ n
 
 random(n, 10)
 pdf(n, 2)
+log_pdf(n, 2)
 cdf(n, 4)
 quantile(n, 0.7)
 
@@ -100,8 +101,8 @@ quantile(n, cdf(n, 7))
 
 }
 \seealso{
-Other normal distribution: \code{\link{pdf.normal}},
-  \code{\link{quantile.normal}},
+Other normal distribution: \code{\link{fit_mle.normal}},
+  \code{\link{pdf.normal}}, \code{\link{quantile.normal}},
   \code{\link{random.normal}}
 }
 \concept{normal distribution}

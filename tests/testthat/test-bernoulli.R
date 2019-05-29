@@ -1,5 +1,31 @@
 context("test-bernoulli")
 
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("fit.bernoulli works correctly", {
+
+  expect_equal(fit(bernoulli(), c(0,1)), bernoulli(0.5))
+
+})
+
+test_that("suff_stats.bernoulli works correctly", {
+
+  ss <- list(successes = 3, failures = 2)
+  expect_equal(suff_stat(bernoulli(), c(1,1,1,0,0)), ss)
+
+  expect_error(suff_stat(bernoulli(), 2))
+
+  expect_error(suff_stat(bernoulli(), -1))
+})
+
+
+test_that("likelihood.bernoulli and log_likelihood.bernoulli work correctly", {
+
+  b <- bernoulli(0.1)
+  x <- c(1, 1, 0)
+
+  expect_equal(likelihood(b, 1), 0.1)
+  expect_equal(likelihood(b, x), 0.009)
+
+  expect_equal(log_likelihood(b, 1), log(0.1))
+  expect_equal(log_likelihood(b, x), log(0.009))
+
 })

@@ -2,9 +2,12 @@
 % Please edit documentation in R/negative_binomial.R
 \name{pdf.negative_binomial}
 \alias{pdf.negative_binomial}
+\alias{log_pdf.negative_binomial}
 \title{Evaluate the probability mass function of a negative_binomial distribution}
 \usage{
 \method{pdf}{negative_binomial}(d, x, ...)
+
+\method{log_pdf}{negative_binomial}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{negative_binomial} object created by a call to
@@ -29,6 +32,7 @@ nb
 
 random(nb, 10)
 pdf(nb, 2)
+log_pdf(nb, 2)
 cdf(nb, 4)
 quantile(nb, 0.7)
 

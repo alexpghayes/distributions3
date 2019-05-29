@@ -102,6 +102,13 @@ pdf.students_t <- function(d, x, ...) {
   dt(x = x, df = d$df)
 }
 
+#' @rdname pdf.students_t
+#' @export
+#'
+log_pdf.students_t <- function(d, x, ...) {
+  dt(x = x, df = d$df, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a students_t distribution
 #'
 #' @inherit students_t examples

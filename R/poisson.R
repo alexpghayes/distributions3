@@ -58,6 +58,7 @@
 #'
 #' random(p, 10)
 #' pdf(p, 2)
+#' log_pdf(p, 2)
 #' cdf(p, 4)
 #' quantile(p, 0.7)
 #'
@@ -108,6 +109,13 @@ pdf.poisson <- function(d, x, ...) {
   dpois(x = x, lambda = d$lambda)
 }
 
+#' @rdname pdf.poisson
+#' @export
+#'
+log_pdf.poisson <- function(d, x, ...) {
+  dpois(x = x, lambda = d$lambda, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a poisson distribution
 #'
 #' @inherit poisson examples
@@ -142,3 +150,36 @@ cdf.poisson <- function(d, x, ...) {
 quantile.poisson <- function(d, p, ...) {
   qpois(p = p, lambda = d$lambda)
 }
+
+#' Fit an poisson distribution to data
+#'
+#' @param d An `poisson` object created by a call to [poisson()].
+#' @param x A vector of data.
+#'
+#' @family poisson distribution
+#'
+#' @return An `poisson` object.
+#' @export
+fit_mle.poisson <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  poisson(ss$sum / ss$samples)
+}
+
+
+#' Compute the sufficient statistics of an poisson distribution from data
+#'
+#' @inheritParams fit_mle.poisson
+#'
+#' @return A named list of the sufficient statistics of the poisson distribution
+#'   \describe{
+#'     \item{\code{sum}}{The sum of the data}
+#'     \item{\code{samples}}{The number of samples in the data}
+#'   }
+#'
+#' @export
+suff_stat.poisson <- function(d, x, ...) {
+  valid_x <- (x >= 0) & (x %% 1 == 0)
+  if(any(!valid_x)) stop("`x` must only contain positive integers")
+  list(sum = sum(x), samples = length(x))
+}
+

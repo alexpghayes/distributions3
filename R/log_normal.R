@@ -44,6 +44,7 @@
 #'
 #' random(ln, 10)
 #' pdf(ln, 2)
+#' log_pdf(ln, 2)
 #' cdf(ln, 4)
 #' quantile(ln, 0.7)
 #'
@@ -97,6 +98,13 @@ random.log_normal <- function(d, n = 1L, ...) {
 #'
 pdf.log_normal <- function(d, x, ...) {
   dlnorm(x = x, meanlog = d$log_mu, sdlog = d$log_sigma)
+}
+
+#' @rdname pdf.log_normal
+#' @export
+#'
+log_pdf.log_normal <- function(d, x, ...) {
+  dlnorm(x = x, meanlog = d$log_mu, sdlog = d$log_sigma, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a log_normal distribution

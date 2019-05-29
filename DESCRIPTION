@@ -1,12 +1,16 @@
 Package: distributions
 Title: Probability Distributions as S3 Objects
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Alex",
            family = "Hayes",
            role = c("aut", "cre"),
            email = "alexpghayes@gmail.com",
-           comment = c(ORCID = "0000-0002-4985-5160"))
+           comment = c(ORCID = "0000-0002-4985-5160")),
+    person(given = "Daniel",
+           family = "Jordan",
+           role = "ctb",
+           email = "dandermotj@gmail.com"))
 Description: Tools to create and manipulate probability
     distributions using S3.  Generics random(), pdf(), cdf() and
     quantile() provide replacements for base R's r/d/p/q style functions.

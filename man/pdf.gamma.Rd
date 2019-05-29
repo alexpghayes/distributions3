@@ -2,9 +2,12 @@
 % Please edit documentation in R/gamma.R
 \name{pdf.gamma}
 \alias{pdf.gamma}
+\alias{log_pdf.gamma}
 \title{Evaluate the probability mass function of a gamma distribution}
 \usage{
 \method{pdf}{gamma}(d, x, ...)
+
+\method{log_pdf}{gamma}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{gamma} object created by a call to \code{\link[=gamma]{gamma()}}.}
@@ -28,6 +31,7 @@ g
 
 random(g, 10)
 pdf(g, 2)
+log_pdf(g, 2)
 cdf(g, 4)
 quantile(g, 0.7)
 

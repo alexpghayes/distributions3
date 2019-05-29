@@ -2,9 +2,12 @@
 % Please edit documentation in R/binomial.R
 \name{pdf.binomial}
 \alias{pdf.binomial}
+\alias{log_pdf.binomial}
 \title{Evaluate the probability mass function of a binomial distribution}
 \usage{
 \method{pdf}{binomial}(d, x, ...)
+
+\method{log_pdf}{binomial}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{binomial} object created by a call to \code{\link[=binomial]{binomial()}}.}
@@ -28,6 +31,7 @@ b
 
 random(b, 10)
 pdf(b, 2L)
+log_pdf(b, 2L)
 cdf(b, 4L)
 quantile(b, 0.7)
 

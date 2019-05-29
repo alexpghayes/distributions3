@@ -71,6 +71,7 @@
 #'
 #' random(c, 10)
 #' pdf(c, 2)
+#' log_pdf(c, 2)
 #' cdf(c, 4)
 #' quantile(c, 0.7)
 #'
@@ -119,6 +120,13 @@ random.chi_square <- function(d, n = 1L, ...) {
 #'
 pdf.chi_square <- function(d, x, ...) {
   dchisq(x = x, df = d$df)
+}
+
+#' @rdname pdf.chi_square
+#' @export
+#'
+log_pdf.chi_square <- function(d, x, ...) {
+  dchisq(x = x, df = d$df, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a chi square distribution

@@ -65,6 +65,7 @@
 #'
 #' random(b, 10)
 #' pdf(b, 1)
+#' log_pdf(b, 1)
 #' cdf(b, 0)
 #' quantile(b, 0.7)
 #'
@@ -118,9 +119,14 @@ random.bernoulli <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.bernoulli <- function(d, x, ...) {
-  # TODO: call as.integer()? on doubles
-  # TODO: out of support: return zero, return zero and warn, or stop?
-  if (x == 0) 1 - d$p else d$p
+  dbinom(x = x, size = 1, prob = d$p)
+}
+
+#' @rdname pdf.bernoulli
+#' @export
+#'
+log_pdf.bernoulli <- function(d, x, ...) {
+  dbinom(x = x, size = 1, prob = d$p, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a bernoulli distribution
@@ -157,3 +163,36 @@ cdf.bernoulli <- function(d, x, ...) {
 quantile.bernoulli <- function(d, p, ...) {
   qbinom(p = p, size = 1, prob = d$p)
 }
+
+#' Fit a bernoulli distribution to data
+#'
+#' @param d A `bernoulli` object.
+#' @param x A vector of zeroes and ones.
+#'
+#' @return a `bernoulli` object
+#' @export
+fit_mle.bernoulli <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  bernoulli(p = ss$successes / (ss$successes + ss$failures))
+}
+
+#' Compute the sufficient statistics for a bernoulli distribution from data
+#'
+#' @inheritParams fit_mle.bernoulli
+#'
+#' @return A named list of the sufficient statistics of the bernoulli distribution
+#'   \describe{
+#'     \item{\code{successes}}{The number of successful trials (\code{x == 1})}
+#'     \item{\code{failures}}{The number of failed trials (\code{x == 0})}
+#'   }
+#'
+#' @export
+suff_stat.bernoulli <- function(d, x, ...) {
+  valid_x <- (x %in% c(0L, 1L))
+  if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
+  list(successes = sum(x == 1), failures = sum(x == 0))
+}
+
+
+
+

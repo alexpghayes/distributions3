@@ -2,9 +2,12 @@
 % Please edit documentation in R/log_normal.R
 \name{pdf.log_normal}
 \alias{pdf.log_normal}
+\alias{log_pdf.log_normal}
 \title{Evaluate the probability mass function of a log_normal distribution}
 \usage{
 \method{pdf}{log_normal}(d, x, ...)
+
+\method{log_pdf}{log_normal}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{log_normal} object created by a call to \code{\link[=log_normal]{log_normal()}}.}
@@ -30,6 +33,7 @@ ln
 
 random(ln, 10)
 pdf(ln, 2)
+log_pdf(ln, 2)
 cdf(ln, 4)
 quantile(ln, 0.7)
 

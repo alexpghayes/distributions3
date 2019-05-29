@@ -51,6 +51,7 @@
 #'
 #' random(g, 10)
 #' pdf(g, 2)
+#' log_pdf(g, 2)
 #' cdf(g, 4)
 #' quantile(g, 0.7)
 #'
@@ -108,6 +109,13 @@ random.geometric <- function(d, n = 1L, ...) {
 #'
 pdf.geometric <- function(d, x, ...) {
   dgeom(x = x, prob = d$p)
+}
+
+#' @rdname pdf.geometric
+#' @export
+#'
+log_pdf.geometric <- function(d, x, ...) {
+  dgeom(x = x, prob = d$p, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a geometric distribution

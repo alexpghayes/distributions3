@@ -21,6 +21,7 @@
 #'
 #' random(g, 10)
 #' pdf(g, 2)
+#' log_pdf(g, 2)
 #' cdf(g, 4)
 #' quantile(g, 0.7)
 #'
@@ -71,6 +72,13 @@ pdf.gamma <- function(d, x, ...) {
   dgamma(x = x, shape = d$shape, rate = d$rate)
 }
 
+#' @rdname pdf.gamma
+#' @export
+#'
+log_pdf.gamma <- function(d, x, ...) {
+  dgamma(x = x, shape = d$shape, rate = d$rate, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a gamma distribution
 #'
 #' @inherit gamma examples
@@ -108,4 +116,25 @@ quantile.gamma <- function(d, p, ...) {
   # how quantiles are calculated
 
   qgamma(p = p, shape = d$shape, rate = d$rate)
+}
+
+#' Fit a gamma distribution to data
+#'
+#' @param d A `gamma` object created by a call to [gamma()].
+#' @param x A vector to fit the gamma distribution to.
+#'
+#' @return a `gamma` object
+#' @export
+fit_mle.gamma <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  gamma()
+}
+
+#' Compute the sufficient statistics for a bernoulli distribution from data
+#'
+#' @inherit gamma
+#' @export
+suff_stat.gamma <- function(d, x, ...) {
+  if(any(x < 0)) stop("`x` must only contain positive real numbers")
+  list(sum = sum(x), log_sum = sum(log(x)), samples = length(x))
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/cauchy.R
 \name{pdf.cauchy}
 \alias{pdf.cauchy}
+\alias{log_pdf.cauchy}
 \title{Evaluate the probability mass function of a cauchy distribution}
 \usage{
 \method{pdf}{cauchy}(d, x, ...)
+
+\method{log_pdf}{cauchy}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{cauchy} object created by a call to \code{\link[=cauchy]{cauchy()}}.}
@@ -28,6 +31,7 @@ c
 
 random(c, 10)
 pdf(c, 2)
+log_pdf(c, 2)
 cdf(c, 2)
 quantile(c, 0.7)
 

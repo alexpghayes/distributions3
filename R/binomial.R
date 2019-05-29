@@ -70,13 +70,14 @@
 #'
 #' random(b, 10)
 #' pdf(b, 2L)
+#' log_pdf(b, 2L)
 #' cdf(b, 4L)
 #' quantile(b, 0.7)
 #'
 #' cdf(b, quantile(b, 0.7))
 #' quantile(b, cdf(b, 7))
 #'
-binomial <- function(size, p) {
+binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- "binomial"
   d
@@ -121,6 +122,13 @@ pdf.binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p)
 }
 
+#' @rdname pdf.binomial
+#' @export
+#'
+log_pdf.binomial <- function(d, x, ...) {
+  dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
+}
+
 #' Evaluate the cumulative distribution function of a binomial distribution
 #'
 #' @inherit binomial examples
@@ -158,4 +166,39 @@ quantile.binomial <- function(d, p, ...) {
   # how quantiles are calculated
 
   qbinom(p = p, size = d$size, prob = d$p)
+}
+
+#' Fit a binomial distribution to data
+#'
+#' The fit distribution will inherit the same `size` parameter as
+#' the `binomial` object passed.
+#'
+#' @param d A `binomial` object.
+#' @param x A vector of zeroes and ones.
+#'
+#' @return a `binomial` object
+#' @export
+fit_mle.binomial <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  binomial(ss$trials, ss$successes / (ss$experiments * ss$trials))
+}
+
+#' Compute the sufficient statistics for the binomial distribution from data
+#'
+#' @inheritParams fit_mle.binomial
+#'
+#' @return A named list of the sufficient statistics of the binomial distribution
+#'   \describe{
+#'     \item{\code{successes}}{The total number of successful trials}
+#'     \item{\code{experiments}}{The number of experiments run}
+#'     \item{\code{trials}}{The number of trials run per experiment}
+#'   }
+#'
+#' @export
+suff_stat.binomial <- function(d, x, ...) {
+  valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)
+  if(any(!valid_x)) {
+    stop("`x` must be an integer between zero and the size parameter of the binomial distribution")
+  }
+  list(successes = sum(x), experiments = length(x), trials = d$size)
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/bernoulli.R
 \name{pdf.bernoulli}
 \alias{pdf.bernoulli}
+\alias{log_pdf.bernoulli}
 \title{Evaluate the probability mass function of a bernoulli distribution}
 \usage{
 \method{pdf}{bernoulli}(d, x, ...)
+
+\method{log_pdf}{bernoulli}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{bernoulli} object created by a call to \code{\link[=bernoulli]{bernoulli()}}.}
@@ -28,6 +31,7 @@ b
 
 random(b, 10)
 pdf(b, 1)
+log_pdf(b, 1)
 cdf(b, 0)
 quantile(b, 0.7)
 
