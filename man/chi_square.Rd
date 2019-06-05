@@ -89,6 +89,6 @@ Other continuous distributions: \code{\link{beta}},
   \code{\link{cauchy}}, \code{\link{exponential}},
   \code{\link{fisher_f}}, \code{\link{gamma}},
   \code{\link{normal}}, \code{\link{poisson}},
-  \code{\link{students_t}}
+  \code{\link{students_t}}, \code{\link{uniform}}
 }
 \concept{continuous distributions}
