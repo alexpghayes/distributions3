@@ -67,7 +67,7 @@
 #'
 cauchy <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
-  class(d) <- "cauchy"
+  class(d) <- c("cauchy", "distribution")
   d
 }
 

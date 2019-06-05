@@ -24,7 +24,7 @@
 #'
 exponential <- function(rate = 1) {
   d <- list(rate = rate)
-  class(d) <- "exponential"
+  class(d) <- c("exponential", "distribution")
   d
 }
 

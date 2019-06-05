@@ -80,7 +80,7 @@
 #'
 chi_square <- function(df) {
   d <- list(df = df)
-  class(d) <- "chi_square"
+  class(d) <- c("chi_square", "distribution")
   d
 }
 
