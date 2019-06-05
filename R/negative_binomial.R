@@ -55,7 +55,7 @@
 #'
 negative_binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
-  class(d) <- "negative_binomial"
+  class(d) <- c("negative_binomial", "distribution")
   d
 }
 

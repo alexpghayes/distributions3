@@ -47,7 +47,7 @@
 #'
 students_t <- function(df) {
   d <- list(df = df)
-  class(d) <- "students_t"
+  class(d) <- c("students_t", "distribution")
   d
 }
 

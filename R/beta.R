@@ -27,7 +27,7 @@
 #'
 beta <- function(alpha = 1, beta = 1) {
   d <- list(alpha = alpha, beta = beta)
-  class(d) <- "beta"
+  class(d) <- c("beta", "distribution")
   d
 }
 
