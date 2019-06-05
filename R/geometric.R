@@ -24,25 +24,33 @@
 #'   In the following, let \eqn{X} be a geometric random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   TODO: multiple parameterizations BLEH
+#'   TODO: multiple parameterizations BLEH (ignore it?)
 #'
-#'   **Support**: TODO
+#'   **Support**: 0 < p < 1, \eqn{x = 0, 1, \dots}
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\frac{1-p}{p}}
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\frac{1-p}{p^2}}
 #'
-#'   **Probability density function (p.d.f)**:
+#'   **Probability mass function (p.m.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     P(X = x) = p(1-p)^x,
+#'    }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     P(X \le x) = 1 - (1-p)^{x+1}
+#'   }
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     \mathbb{E}(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
+#'   }{
+#'     E(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
+#'   }
 #'
 #' @examples
 #'
