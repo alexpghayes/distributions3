@@ -26,7 +26,7 @@
 #'
 fisher_f <- function(df1, df2, lambda = 0) {
   d <- list(df1 = df1, df2 = df2, lambda = lambda)
-  class(d) <- "fisher_f"
+  class(d) <- c("fisher_f", "distribution")
   d
 }
 

@@ -30,7 +30,7 @@
 #'
 gamma <- function(shape, rate = 1) {
   d <- list(shape = shape, rate = rate)
-  class(d) <- "gamma"
+  class(d) <- c("gamma", "distribution")
   d
 }
 

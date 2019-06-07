@@ -80,7 +80,7 @@ bernoulli <- function(p = 0.5) {
   # TODO: check that 0 <= p <= 1
 
   d <- list(p = p)
-  class(d) <- "bernoulli"
+  class(d) <- c("bernoulli", "distribution")
   d
 }
 

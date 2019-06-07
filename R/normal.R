@@ -151,7 +151,7 @@
 #'
 normal <- function(mu = 0, sigma = 1) {
   d <- list(mu = mu, sigma = sigma)
-  class(d) <- "normal"
+  class(d) <- c("normal", "distribution")
   d
 }
 

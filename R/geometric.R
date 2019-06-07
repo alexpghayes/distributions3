@@ -57,7 +57,7 @@
 #'
 geometric <- function(p = 0.5) {
   d <- list(p = p)
-  class(d) <- "geometric"
+  class(d) <- c("geometric", "distribution")
   d
 }
 
