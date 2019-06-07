@@ -13,5 +13,5 @@
 #' is_distribution(n)
 
 is_distribution <- function(x) {
-  "distribution" %in% class(x)
+  inherits(x, "distribution")
 }
