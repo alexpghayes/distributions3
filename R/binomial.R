@@ -79,7 +79,7 @@
 #'
 binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
-  class(d) <- "binomial"
+  class(d) <- c("binomial", "distribution")
   d
 }
 

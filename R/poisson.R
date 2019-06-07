@@ -67,7 +67,7 @@
 #'
 poisson <- function(lambda) {
   d <- list(lambda = lambda)
-  class(d) <- "poisson"
+  class(d) <- c("poisson", "distribution")
   d
 }
 

@@ -50,7 +50,7 @@
 #'
 log_normal <- function(log_mu = 0, log_sigma = 1) {
   d <- list(log_mu = log_mu, log_sigma = log_sigma)
-  class(d) <- "log_normal"
+  class(d) <- c("log_normal", "distribution")
   d
 }
 
