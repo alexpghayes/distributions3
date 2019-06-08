@@ -8,7 +8,7 @@
 #' @return A `poisson` object.
 #' @export
 #'
-#' @family continuous distributions
+#' @family discrete distributions
 #'
 #' @details
 #'
