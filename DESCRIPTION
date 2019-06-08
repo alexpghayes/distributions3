@@ -10,7 +10,11 @@ Authors@R: c(
     person(given = "Daniel",
            family = "Jordan",
            role = "ctb",
-           email = "dandermotj@gmail.com"))
+           email = "dandermotj@gmail.com"),
+    person(given = "Bruna",
+           family = "Wundervald",
+           role = "ctb",
+           email = "brunadaviesw@gmail.com"))
 Description: Tools to create and manipulate probability
     distributions using S3.  Generics random(), pdf(), cdf() and
     quantile() provide replacements for base R's r/d/p/q style functions.
