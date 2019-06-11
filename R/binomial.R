@@ -1,28 +1,28 @@
-#' Create a binomial distribution
+#' Create a Binomial distribution
 #'
 #' Bernoulli distributions are used to represent situations can that can
 #' thought of as `size` (often called \eqn{n} in textbooks) independent
 #' coin flips, where each coin flip has probability `p` of success. The
-#' [bernoulli()] distribution is a special case of binomial distribution
+#' [bernoulli()] distribution is a special case of Binomial distribution
 #' when `n = 1`.
 #'
 #' @param size The number of trials. Must be an integer greater than or equal
-#'   to one. When `size = 1L`, the binomial distribution reduces to the
+#'   to one. When `size = 1L`, the Binomial distribution reduces to the
 #'   bernoulli distribution. Oftened called `n` in textbooks.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
-#' @return A `binomial` object.
+#' @return A `Binomial` object.
 #' @export
 #'
 #' @family discrete distributions
 #'
 #' @details
 #'
-#'   The binomial distribution comes up when you are interested in the portion
-#'   of people who do a thing. The binomial distribution
-#'   also comes up in the sign test, sometimes called the binomial test
-#'   (see [stats::binom.test()]), where you may need the binomial C.D.F. to
+#'   The Binomial distribution comes up when you are interested in the portion
+#'   of people who do a thing. The Binomial distribution
+#'   also comes up in the sign test, sometimes called the Binomial test
+#'   (see [stats::binom.test()]), where you may need the Binomial C.D.F. to
 #'   compute p-values.
 #'
 #'   We recommend reading this documentation on
@@ -58,41 +58,43 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     \mathbb{E}(e^{tX}) = (1 - p + p e^t)^n
+#'     E(e^{tX}) = (1 - p + p e^t)^n
 #'   }{
 #'     E(e^(tX)) = (1 - p + p e^t)^n
 #'   }
 #'
 #' @examples
 #'
-#' b <- binomial(10, 0.2)
-#' b
+#' X <- Binomial(10, 0.2)
+#' X
 #'
-#' random(b, 10)
-#' pdf(b, 2L)
-#' log_pdf(b, 2L)
-#' cdf(b, 4L)
-#' quantile(b, 0.7)
+#' random(X, 10)
 #'
-#' cdf(b, quantile(b, 0.7))
-#' quantile(b, cdf(b, 7))
+#' pdf(X, 2L)
+#' log_pdf(X, 2L)
 #'
-binomial <- function(size, p = 0.5) {
+#' cdf(X, 4L)
+#' quantile(X, 0.7)
+#'
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 7))
+#'
+Binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
-  class(d) <- c("binomial", "distribution")
+  class(d) <- c("Binomial", "distribution")
   d
 }
 
 #' @export
-print.binomial <- function(x, ...) {
+print.Binomial <- function(x, ...) {
   cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"))
 }
 
-#' Draw a random sample from a binomial distribution
+#' Draw a random sample from a Binomial distribution
 #'
-#' @inherit binomial examples
+#' @inherit Binomial examples
 #'
-#' @param d A `binomial` object created by a call to [binomial()].
+#' @param d A `Binomial` object created by a call to [Binomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -101,14 +103,14 @@ print.binomial <- function(x, ...) {
 #'   of length `n`.
 #' @export
 #'
-random.binomial <- function(d, n = 1L, ...) {
+random.Binomial <- function(d, n = 1L, ...) {
   rbinom(n = n, size = d$size, prob = d$p)
 }
 
-#' Evaluate the probability mass function of a binomial distribution
+#' Evaluate the probability mass function of a Binomial distribution
 #'
-#' @inherit binomial examples
-#' @inheritParams random.binomial
+#' @inherit Binomial examples
+#' @inheritParams random.Binomial
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
@@ -118,21 +120,21 @@ random.binomial <- function(d, n = 1L, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.binomial <- function(d, x, ...) {
+pdf.Binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p)
 }
 
-#' @rdname pdf.binomial
+#' @rdname pdf.Binomial
 #' @export
 #'
-log_pdf.binomial <- function(d, x, ...) {
+log_pdf.Binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a binomial distribution
+#' Evaluate the cumulative distribution function of a Binomial distribution
 #'
-#' @inherit binomial examples
-#' @inheritParams random.binomial
+#' @inherit Binomial examples
+#' @inheritParams random.Binomial
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
@@ -142,16 +144,16 @@ log_pdf.binomial <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.binomial <- function(d, x, ...) {
+cdf.Binomial <- function(d, x, ...) {
   pbinom(q = x, size = d$size, prob = d$p)
 }
 
-#' Determine quantiles of a binomial distribution
+#' Determine quantiles of a Binomial distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
-#' @inherit binomial examples
-#' @inheritParams random.binomial
+#' @inherit Binomial examples
+#' @inheritParams random.Binomial
 #'
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -160,7 +162,7 @@ cdf.binomial <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.binomial <- function(d, p, ...) {
+quantile.Binomial <- function(d, p, ...) {
 
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
@@ -168,37 +170,37 @@ quantile.binomial <- function(d, p, ...) {
   qbinom(p = p, size = d$size, prob = d$p)
 }
 
-#' Fit a binomial distribution to data
+#' Fit a Binomial distribution to data
 #'
 #' The fit distribution will inherit the same `size` parameter as
-#' the `binomial` object passed.
+#' the `Binomial` object passed.
 #'
-#' @param d A `binomial` object.
+#' @param d A `Binomial` object.
 #' @param x A vector of zeroes and ones.
 #'
-#' @return a `binomial` object
+#' @return a `Binomial` object
 #' @export
-fit_mle.binomial <- function(d, x, ...) {
+fit_mle.Binomial <- function(d, x, ...) {
   ss <- suff_stat(d, x, ...)
-  binomial(ss$trials, ss$successes / (ss$experiments * ss$trials))
+  Binomial(ss$trials, ss$successes / (ss$experiments * ss$trials))
 }
 
-#' Compute the sufficient statistics for the binomial distribution from data
+#' Compute the sufficient statistics for the Binomial distribution from data
 #'
-#' @inheritParams fit_mle.binomial
+#' @inheritParams fit_mle.Binomial
 #'
-#' @return A named list of the sufficient statistics of the binomial distribution
-#'   \describe{
-#'     \item{\code{successes}}{The total number of successful trials}
-#'     \item{\code{experiments}}{The number of experiments run}
-#'     \item{\code{trials}}{The number of trials run per experiment}
-#'   }
+#' @return A named list of the sufficient statistics of the Binomial
+#'   distribution:
+#'
+#'   - `successes`: The total number of successful trials.
+#'   - `experiments`: The number of experiments run.
+#'   - `trials`: The number of trials run per experiment.
 #'
 #' @export
-suff_stat.binomial <- function(d, x, ...) {
+suff_stat.Binomial <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)
   if(any(!valid_x)) {
-    stop("`x` must be an integer between zero and the size parameter of the binomial distribution")
+    stop("`x` must be an integer between zero and the size parameter of the Binomial distribution")
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)
 }

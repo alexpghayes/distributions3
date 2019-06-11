@@ -1,14 +1,14 @@
-#' Create a bernoulli distribution
+#' Create a Bernoulli distribution
 #'
 #' Bernoulli distributions are used to represent events like coin flips
 #' when there is single trial that is either successful or unsuccessful.
-#' The bernoulli distribution is a special case of the [binomial()]
+#' The Bernoulli distribution is a special case of the [Binomial()]
 #' distribution with `n = 1`.
 #'
 #' @param p The success probability for the distribution. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
-#' @return A `bernoulli` object.
+#' @return A `Bernoulli` object.
 #' @export
 #'
 #' @family discrete distributions
@@ -53,47 +53,46 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     \mathbb{E}(e^{tX}) = (1 - p) + p e^t
+#'     E(e^{tX}) = (1 - p) + p e^t
 #'   }{
 #'     E(e^(tX)) = (1 - p) + p e^t
 #'   }
 #'
 #' @examples
 #'
-#' b <- bernoulli(0.7)
-#' b
+#' X <- Bernoulli(0.7)
+#' X
 #'
-#' random(b, 10)
-#' pdf(b, 1)
-#' log_pdf(b, 1)
-#' cdf(b, 0)
-#' quantile(b, 0.7)
+#' random(X, 10)
+#' pdf(X, 1)
+#' log_pdf(X, 1)
+#' cdf(X, 0)
+#' quantile(X, 0.7)
 #'
-#' # TODO: looks like I don't quite have quantiles right since the
-#' # inverses don't hold like I'd want
+#' # TODO: make sure these are inverses of each other
 #'
-#' cdf(b, quantile(b, 0.7))
-#' quantile(b, cdf(b, 0.7))
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 0.7))
 #'
-bernoulli <- function(p = 0.5) {
+Bernoulli <- function(p = 0.5) {
 
   # TODO: check that 0 <= p <= 1
 
   d <- list(p = p)
-  class(d) <- c("bernoulli", "distribution")
+  class(d) <- c("Bernoulli", "distribution")
   d
 }
 
 #' @export
-print.bernoulli <- function(x, ...) {
+print.Bernoulli <- function(x, ...) {
   cat(glue("Bernoulli distribution (p = {x$p})"))
 }
 
-#' Draw a random sample from a bernoulli distribution
+#' Draw a random sample from a Bernoulli distribution
 #'
-#' @inherit bernoulli examples
+#' @inherit Bernoulli examples
 #'
-#' @param d A `bernoulli` object created by a call to [bernoulli()].
+#' @param d A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -101,14 +100,14 @@ print.bernoulli <- function(x, ...) {
 #' @return An integer vector of zeros and ones of length `n`.
 #' @export
 #'
-random.bernoulli <- function(d, n = 1L, ...) {
+random.Bernoulli <- function(d, n = 1L, ...) {
   rbinom(n = n, size = 1, prob = d$p)
 }
 
-#' Evaluate the probability mass function of a bernoulli distribution
+#' Evaluate the probability mass function of a Bernoulli distribution
 #'
-#' @inherit bernoulli examples
-#' @inheritParams random.bernoulli
+#' @inherit Bernoulli examples
+#' @inheritParams random.Bernoulli
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
@@ -118,21 +117,21 @@ random.bernoulli <- function(d, n = 1L, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.bernoulli <- function(d, x, ...) {
+pdf.Bernoulli <- function(d, x, ...) {
   dbinom(x = x, size = 1, prob = d$p)
 }
 
-#' @rdname pdf.bernoulli
+#' @rdname pdf.Bernoulli
 #' @export
 #'
-log_pdf.bernoulli <- function(d, x, ...) {
+log_pdf.Bernoulli <- function(d, x, ...) {
   dbinom(x = x, size = 1, prob = d$p, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a bernoulli distribution
+#' Evaluate the cumulative distribution function of a Bernoulli distribution
 #'
-#' @inherit bernoulli examples
-#' @inheritParams random.bernoulli
+#' @inherit Bernoulli examples
+#' @inheritParams random.Bernoulli
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
@@ -142,16 +141,16 @@ log_pdf.bernoulli <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.bernoulli <- function(d, x, ...) {
+cdf.Bernoulli <- function(d, x, ...) {
   pbinom(q = x, size = 1, prob = d$p)
 }
 
-#' Determine quantiles of a bernoulli distribution
+#' Determine quantiles of a Bernoulli distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
-#' @inherit bernoulli examples
-#' @inheritParams random.bernoulli
+#' @inherit Bernoulli examples
+#' @inheritParams random.Bernoulli
 #'
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -160,34 +159,34 @@ cdf.bernoulli <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.bernoulli <- function(d, p, ...) {
+quantile.Bernoulli <- function(d, p, ...) {
   qbinom(p = p, size = 1, prob = d$p)
 }
 
-#' Fit a bernoulli distribution to data
+#' Fit a Bernoulli distribution to data
 #'
-#' @param d A `bernoulli` object.
+#' @param d A `Bernoulli` object.
 #' @param x A vector of zeroes and ones.
 #'
-#' @return a `bernoulli` object
+#' @return a `Bernoulli` object
 #' @export
-fit_mle.bernoulli <- function(d, x, ...) {
+fit_mle.Bernoulli <- function(d, x, ...) {
   ss <- suff_stat(d, x, ...)
-  bernoulli(p = ss$successes / (ss$successes + ss$failures))
+  Bernoulli(p = ss$successes / (ss$successes + ss$failures))
 }
 
-#' Compute the sufficient statistics for a bernoulli distribution from data
+#' Compute the sufficient statistics for a Bernoulli distribution from data
 #'
-#' @inheritParams fit_mle.bernoulli
+#' @inheritParams fit_mle.Bernoulli
 #'
-#' @return A named list of the sufficient statistics of the bernoulli distribution
+#' @return A named list of the sufficient statistics of the Bernoulli distribution
 #'   \describe{
 #'     \item{\code{successes}}{The number of successful trials (\code{x == 1})}
 #'     \item{\code{failures}}{The number of failed trials (\code{x == 0})}
 #'   }
 #'
 #' @export
-suff_stat.bernoulli <- function(d, x, ...) {
+suff_stat.Bernoulli <- function(d, x, ...) {
   valid_x <- (x %in% c(0L, 1L))
   if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))

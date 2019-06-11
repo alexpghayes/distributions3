@@ -12,8 +12,55 @@ A \code{gamma} object.
 \description{
 Several important distributions are special cases of the gamma
 distribution. When the shape parameter is \code{1}, the gamma is an
-gamma. When the (scale?) parametre is \code{2} the gamma is a
-chi square.
+exponential distribution with parameter \eqn{1/\beta}. When the
+\eqn{shape = n/2} and \eqn{rate = 1/2}, the gamma is a equivalent to
+a chi squared distribution with n degrees of freedom. Moreover, if
+we have \eqn{X_1 \sim Gamma(\alpha_1, \beta)} and
+\eqn{X_2 \sim Gamma(\alpha_2, \beta)}, a function of these two variables
+of the form \eqn{\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)}.
+This last property frequently appears in another distributions, and it
+has extensively been used in multivariate methods. More about the gamma
+distribution will be added soon.
+}
+\details{
+We recommend reading this documentation on
+\url{https://alexpghayes.github.io/distributions}, where the math
+will render with additional detail.
+
+In the following, let \eqn{X} be a Gamma random variable
+with parameters
+\code{shape} = \eqn{\alpha} and
+\code{rate} = \eqn{\beta}.
+
+\strong{Support}: \eqn{x \in (0, \infty)}
+
+\strong{Mean}: \eqn{\frac{\alpha}{\beta}}
+
+\strong{Variance}: \eqn{\frac{\alpha}{\beta^2}}
+
+\strong{Probability density function (p.m.f)}:
+
+\deqn{
+    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+  }{
+    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+  }
+
+\strong{Cumulative distribution function (c.d.f)}:
+
+\deqn{
+    f(x) = \frac{\gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+  }{
+    f(x) = \frac{\gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+  }
+
+\strong{Moment generating function (m.g.f)}:
+
+\deqn{
+    \mathbb{E}(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+  }{
+    E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+  }
 }
 \examples{
 
@@ -31,9 +78,9 @@ quantile(g, cdf(g, 7))
 
 }
 \seealso{
-Other continuous distributions: \code{\link{beta}},
-  \code{\link{cauchy}}, \code{\link{chi_square}},
+Other continuous distributions: \code{\link{Beta}},
+  \code{\link{Cauchy}}, \code{\link{chi_square}},
   \code{\link{exponential}}, \code{\link{fisher_f}},
-  \code{\link{normal}}, \code{\link{poisson}},
-  \code{\link{students_t}}, \code{\link{uniform}}
+  \code{\link{normal}}, \code{\link{students_t}},
+  \code{\link{uniform}}
 }

@@ -72,10 +72,8 @@ quantile(p, cdf(p, 7))
 
 }
 \seealso{
-Other continuous distributions: \code{\link{beta}},
-  \code{\link{cauchy}}, \code{\link{chi_square}},
-  \code{\link{exponential}}, \code{\link{fisher_f}},
-  \code{\link{gamma}}, \code{\link{normal}},
-  \code{\link{students_t}}, \code{\link{uniform}}
+Other discrete distributions: \code{\link{Bernoulli}},
+  \code{\link{Binomial}}, \code{\link{geometric}},
+  \code{\link{log_normal}}, \code{\link{negative_binomial}}
 }
-\concept{continuous distributions}
+\concept{discrete distributions}

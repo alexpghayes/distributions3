@@ -52,10 +52,10 @@ TODO
 
 }
 \seealso{
-Other continuous distributions: \code{\link{beta}},
-  \code{\link{cauchy}}, \code{\link{chi_square}},
+Other continuous distributions: \code{\link{Beta}},
+  \code{\link{Cauchy}}, \code{\link{chi_square}},
   \code{\link{exponential}}, \code{\link{fisher_f}},
   \code{\link{gamma}}, \code{\link{normal}},
-  \code{\link{poisson}}, \code{\link{uniform}}
+  \code{\link{uniform}}
 }
 \concept{continuous distributions}

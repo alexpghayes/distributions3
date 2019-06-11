@@ -58,8 +58,8 @@ quantile(ln, 0.7)
 
 }
 \seealso{
-Other discrete distributions: \code{\link{bernoulli}},
-  \code{\link{binomial}}, \code{\link{geometric}},
-  \code{\link{negative_binomial}}
+Other discrete distributions: \code{\link{Bernoulli}},
+  \code{\link{Binomial}}, \code{\link{geometric}},
+  \code{\link{negative_binomial}}, \code{\link{poisson}}
 }
 \concept{discrete distributions}
