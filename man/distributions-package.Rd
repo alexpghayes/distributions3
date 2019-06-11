@@ -27,6 +27,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Daniel Jordan \email{dandermotj@gmail.com} [contributor]
+  \item Bruna Wundervald \email{brunadaviesw@gmail.com} [contributor]
 }
 
 }

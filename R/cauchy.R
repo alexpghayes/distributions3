@@ -1,7 +1,7 @@
-#' Create a cauchy distribution
+#' Create a Cauchy distribution
 #'
-#' Note that the cauchy distribution is the student's t distribution
-#' with one degree of freedom. The cauchy distribution does not have
+#' Note that the Cauchy distribution is the student's t distribution
+#' with one degree of freedom. The Cauchy distribution does not have
 #' a well defined mean or variance. Cauchy distributions often appear
 #' as priors in Bayesian contexts due to their heavy tails.
 #'
@@ -10,7 +10,7 @@
 #' @param scale The scale parameter. Must be greater than zero (?). Defaults
 #'   to `1`.
 #'
-#' @return A `cauchy` object.
+#' @return A `Cauchy` object.
 #' @export
 #'
 #' @family continuous distributions
@@ -53,34 +53,36 @@
 #'
 #' @examples
 #'
-#' c <- cauchy(10, 0.2)
-#' c
+#' X <- Cauchy(10, 0.2)
+#' X
 #'
-#' random(c, 10)
-#' pdf(c, 2)
-#' log_pdf(c, 2)
-#' cdf(c, 2)
-#' quantile(c, 0.7)
+#' random(X, 10)
 #'
-#' cdf(c, quantile(c, 0.7))
-#' quantile(c, cdf(c, 7))
+#' pdf(X, 2)
+#' log_pdf(X, 2)
 #'
-cauchy <- function(location = 0, scale = 1) {
+#' cdf(X, 2)
+#' quantile(X, 0.7)
+#'
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 7))
+#'
+Cauchy <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
-  class(d) <- c("cauchy", "distribution")
+  class(d) <- c("Cauchy", "distribution")
   d
 }
 
 #' @export
-print.cauchy <- function(x, ...) {
+print.Cauchy <- function(x, ...) {
   cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"))
 }
 
-#' Draw a random sample from a cauchy distribution
+#' Draw a random sample from a Cauchy distribution
 #'
-#' @inherit cauchy examples
+#' @inherit Cauchy examples
 #'
-#' @param d A `cauchy` object created by a call to [cauchy()].
+#' @param d A `Cauchy` object created by a call to [Cauchy()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -88,14 +90,14 @@ print.cauchy <- function(x, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.cauchy <- function(d, n = 1L, ...) {
+random.Cauchy <- function(d, n = 1L, ...) {
   rcauchy(n = n, location = d$location, scale = d$scale)
 }
 
-#' Evaluate the probability mass function of a cauchy distribution
+#' Evaluate the probability mass function of a Cauchy distribution
 #'
-#' @inherit cauchy examples
-#' @inheritParams random.cauchy
+#' @inherit Cauchy examples
+#' @inheritParams random.Cauchy
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
@@ -105,21 +107,21 @@ random.cauchy <- function(d, n = 1L, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.cauchy <- function(d, x, ...) {
+pdf.Cauchy <- function(d, x, ...) {
   dcauchy(x = x, location = d$location, scale = d$scale)
 }
 
-#' @rdname pdf.cauchy
+#' @rdname pdf.Cauchy
 #' @export
 #'
-log_pdf.cauchy <- function(d, x, ...) {
+log_pdf.Cauchy <- function(d, x, ...) {
   dcauchy(x = x, location = d$location, scale = d$scale, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a cauchy distribution
+#' Evaluate the cumulative distribution function of a Cauchy distribution
 #'
-#' @inherit cauchy examples
-#' @inheritParams random.cauchy
+#' @inherit Cauchy examples
+#' @inheritParams random.Cauchy
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
@@ -129,16 +131,16 @@ log_pdf.cauchy <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.cauchy <- function(d, x, ...) {
+cdf.Cauchy <- function(d, x, ...) {
   pcauchy(q = x, location = d$location, scale = d$scale)
 }
 
-#' Determine quantiles of a cauchy distribution
+#' Determine quantiles of a Cauchy distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
-#' @inherit cauchy examples
-#' @inheritParams random.cauchy
+#' @inherit Cauchy examples
+#' @inheritParams random.Cauchy
 #'
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -147,6 +149,6 @@ cdf.cauchy <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.cauchy <- function(d, p, ...) {
+quantile.Cauchy <- function(d, p, ...) {
   qcauchy(p = p, location = d$location, scale = d$scale)
 }

@@ -85,10 +85,10 @@ quantile(c, cdf(c, 7))
 
 }
 \seealso{
-Other continuous distributions: \code{\link{beta}},
-  \code{\link{cauchy}}, \code{\link{exponential}},
+Other continuous distributions: \code{\link{Beta}},
+  \code{\link{Cauchy}}, \code{\link{exponential}},
   \code{\link{fisher_f}}, \code{\link{gamma}},
-  \code{\link{normal}}, \code{\link{poisson}},
-  \code{\link{students_t}}, \code{\link{uniform}}
+  \code{\link{normal}}, \code{\link{students_t}},
+  \code{\link{uniform}}
 }
 \concept{continuous distributions}

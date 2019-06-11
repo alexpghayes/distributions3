@@ -61,8 +61,8 @@ quantile(nb, 0.7)
 
 }
 \seealso{
-Other discrete distributions: \code{\link{bernoulli}},
-  \code{\link{binomial}}, \code{\link{geometric}},
-  \code{\link{log_normal}}
+Other discrete distributions: \code{\link{Bernoulli}},
+  \code{\link{Binomial}}, \code{\link{geometric}},
+  \code{\link{log_normal}}, \code{\link{poisson}}
 }
 \concept{discrete distributions}
