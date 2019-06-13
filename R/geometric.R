@@ -1,16 +1,16 @@
-#' Create a geometric distribution
+#' Create a Geometric distribution
 #'
-#' The geometric distribution can be thought of as a generalization
-#' of the [bernoulli()] distribution where ask: "if I keep flipping a
+#' The Geometric distribution can be thought of as a generalization
+#' of the [Bernoulli()] distribution where we ask: "if I keep flipping a
 #' coin with probability `p` of heads, what is the probability I need
-#' \eqn{k} flips before I get my first heads?" The geometric
-#' distribution is a special case of negative binomial distribution
+#' \eqn{k} flips before I get my first heads?" The Geometric
+#' distribution is a special case of Negative Binomial distribution
 #' with parameters TODO.
 #'
 #' @param p The success probability for the distribution. `p` can be
 #'   any value in [0, 1], and defaults to `0.5`.
 #'
-#' @return A `geometric` object.
+#' @return A `Geometric` object.
 #' @export
 #'
 #' @family discrete distributions
@@ -21,7 +21,7 @@
 #'   <https://alexpghayes.github.io/distributions>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a geometric random variable with
+#'   In the following, let \eqn{X} be a Geometric random variable with
 #'   success probability `p` = \eqn{p}.
 #'
 #'   TODO: multiple parameterizations BLEH (ignore it?)
@@ -54,7 +54,7 @@
 #'
 #' @examples
 #'
-#' g <- geometric(0.3)
+#' g <- Geometric(0.3)
 #' g
 #'
 #' random(g, 10)
@@ -63,92 +63,92 @@
 #' cdf(g, 4)
 #' quantile(g, 0.7)
 #'
-geometric <- function(p = 0.5) {
+Geometric <- function(p = 0.5) {
   d <- list(p = p)
-  class(d) <- c("geometric", "distribution")
+  class(d) <- c("Geometric", "distribution")
   d
 }
 
 #' @export
-print.geometric <- function(x, ...) {
+print.Geometric <- function(x, ...) {
   cat(glue("Geometric distribution (p = {x$p})"))
 }
 
-#' Draw a random sample from a geometric distribution
+#' Draw a random sample from a Geometric distribution
 #'
-#' Please see the documentation of [geometric()] for some properties
-#' of the geometric distribution, as well as extensive examples
+#' Please see the documentation of [Geometric()] for some properties
+#' of the Geometric distribution, as well as extensive examples
 #' showing to how calculate p-values and confidence intervals.
 #'
-#' @inherit geometric examples
+#' @inherit Geometric examples
 #'
-#' @param d A `geometric` object created by a call to [geometric()].
+#' @param d A `Geometric` object created by a call to [Geometric()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @family geometric distribution
+#' @family Geometric distribution
 #'
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.geometric <- function(d, n = 1L, ...) {
+random.Geometric <- function(d, n = 1L, ...) {
   rgeom(n = n, prob = d$p)
 }
 
-#' Evaluate the probability mass function of a geometric distribution
+#' Evaluate the probability mass function of a Geometric distribution
 #'
-#' Please see the documentation of [geometric()] for some properties
-#' of the geometric distribution, as well as extensive examples
+#' Please see the documentation of [Geometric()] for some properties
+#' of the Geometric distribution, as well as extensive examples
 #' showing to how calculate p-values and confidence intervals.
 #'
-#' @inherit geometric examples
-#' @inheritParams random.geometric
+#' @inherit Geometric examples
+#' @inheritParams random.Geometric
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @family geometric distribution
+#' @family Geometric distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.geometric <- function(d, x, ...) {
+pdf.Geometric <- function(d, x, ...) {
   dgeom(x = x, prob = d$p)
 }
 
-#' @rdname pdf.geometric
+#' @rdname pdf.Geometric
 #' @export
 #'
-log_pdf.geometric <- function(d, x, ...) {
+log_pdf.Geometric <- function(d, x, ...) {
   dgeom(x = x, prob = d$p, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a geometric distribution
+#' Evaluate the cumulative distribution function of a Geometric distribution
 #'
-#' @inherit geometric examples
-#' @inheritParams random.geometric
+#' @inherit Geometric examples
+#' @inheritParams random.Geometric
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @family geometric distribution
+#' @family Geometric distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.geometric <- function(d, x, ...) {
+cdf.Geometric <- function(d, x, ...) {
   pgeom(q = x, prob = d$p)
 }
 
-#' Determine quantiles of a geometric distribution
+#' Determine quantiles of a Geometric distribution
 #'
-#' @inherit geometric examples
-#' @inheritParams random.geometric
+#' @inherit Geometric examples
+#' @inheritParams random.Geometric
 #'
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -157,8 +157,8 @@ cdf.geometric <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-#' @family geometric distribution
+#' @family Geometric distribution
 #'
-quantile.geometric <- function(d, p, ...) {
+quantile.Geometric <- function(d, p, ...) {
   qgeom(p = p, prob = d$p)
 }
