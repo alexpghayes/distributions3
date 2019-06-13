@@ -1,25 +1,25 @@
 context("test-bernoulli")
 
-test_that("fit.bernoulli works correctly", {
+test_that("fit.Bernoulli works correctly", {
 
-  expect_equal(fit(bernoulli(), c(0,1)), bernoulli(0.5))
+  expect_equal(fit(Bernoulli(), c(0,1)), Bernoulli(0.5))
 
 })
 
-test_that("suff_stats.bernoulli works correctly", {
+test_that("suff_stats.Bernoulli works correctly", {
 
   ss <- list(successes = 3, failures = 2)
-  expect_equal(suff_stat(bernoulli(), c(1,1,1,0,0)), ss)
+  expect_equal(suff_stat(Bernoulli(), c(1,1,1,0,0)), ss)
 
-  expect_error(suff_stat(bernoulli(), 2))
+  expect_error(suff_stat(Bernoulli(), 2))
 
-  expect_error(suff_stat(bernoulli(), -1))
+  expect_error(suff_stat(Bernoulli(), -1))
 })
 
 
-test_that("likelihood.bernoulli and log_likelihood.bernoulli work correctly", {
+test_that("likelihood.Bernoulli and log_likelihood.Bernoulli work correctly", {
 
-  b <- bernoulli(0.1)
+  b <- Bernoulli(0.1)
   x <- c(1, 1, 0)
 
   expect_equal(likelihood(b, 1), 0.1)
