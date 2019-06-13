@@ -162,3 +162,37 @@ cdf.Geometric <- function(d, x, ...) {
 quantile.Geometric <- function(d, p, ...) {
   qgeom(p = p, prob = d$p)
 }
+
+#' Fit a Geometric distribution to data
+#'
+#' @param d A `Geometric` object.
+#' @param x A vector of zeroes and ones.
+#'
+#' @return a `Geometric` object
+#' @export
+#'
+fit_mle.Geometric <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  Geometric(1 / (ss$trials / ss$experiments + 1))
+}
+
+#' Compute the sufficient statistics for the Geometric distribution from data
+#'
+#' @inheritParams fit_mle.Geometric
+#'
+#' @return A named list of the sufficient statistics of the Geometric
+#'   distribution:
+#'
+#'   - `trials`: The total number of trials ran until the first success.
+#'   - `experiments`: The number of experiments run.
+#'
+#' @export
+#'
+suff_stat.Geometric <- function(d, x, ...) {
+  valid_x <- (x >= 0) & (x %% 1 == 0)
+  if(any(!valid_x)) {
+    stop("`x` must be a vector of positive discrete numbers")
+  }
+  list(trials = sum(x), experiments = length(x))
+}
+
