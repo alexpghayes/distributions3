@@ -112,3 +112,37 @@ cdf.Uniform <- function(d, x, ...) {
 quantile.Uniform <- function(d, p, ...) {
   qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
 }
+
+#' Fit a Uniform distribution to data
+#'
+#' @param d A `Uniform` object created by a call to [Uniform()].
+#' @param x A vector of data.
+#'
+#' @family Uniform distribution
+#'
+#' @return A `Uniform` object.
+#' @export
+#'
+fit_mle.Uniform <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  Uniform(ss$min, ss$max)
+}
+
+
+#' Compute the sufficient statistics for a Uniform distribution from data
+#'
+#' @inheritParams fit_mle.Uniform
+#'
+#' @return A named list of the sufficient statistics of the normal distribution
+#'
+#'   - `min`: The minimum of the data.
+#'   - `max`: The maximum of the data.
+#'   - `samples`: The number of samples in the data.
+#'
+#' @export
+#'
+suff_stat.Uniform <- function(d, x, ...) {
+  valid_x <- is.numeric(x)
+  if(!valid_x) stop("`x` must be a numeric vector")
+  list(min = min(x), max = max(x), samples = length(x))
+}
