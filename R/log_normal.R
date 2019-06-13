@@ -143,3 +143,37 @@ cdf.log_normal <- function(d, x, ...) {
 quantile.log_normal <- function(d, p, ...) {
   qlnorm(p = p, meanlog = d$log_mu, sdlog = d$log_sigma)
 }
+
+#' Fit a Log-normal distribution to data
+#'
+#' @param d A `log_normal` object created by a call to [log_normal()].
+#' @param x A vector of data.
+#'
+#' @family log_normal distribution
+#'
+#' @return A `log_normal` object.
+#' @export
+#'
+fit_mle.log_normal <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  log_normal(ss$mu, ss$sigma)
+}
+
+#' Compute the sufficient statistics for a Log-normal distribution from data
+#'
+#' @inheritParams fit_mle.log_normal
+#'
+#' @return A named list of the sufficient statistics of the normal distribution:
+#'
+#'   - `mu`: The sample mean of the log of the data.
+#'   - `sigma`: The sample standard deviation of the log of the data.
+#'   - `samples`: The number of samples in the data.
+#'
+#' @export
+#'
+suff_stat.log_normal <- function(d, x, ...) {
+  valid_x <- x > 0
+  if(any(!valid_x)) stop("`x` must be a vector of positive real numbers")
+  log_x <- log(x)
+  list(mu = mean(log_x), sigma = sd(log_x), samples = length(x))
+}
