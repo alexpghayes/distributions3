@@ -175,10 +175,14 @@ quantile.gamma <- function(d, p, ...) {
 #' @export
 fit_mle.gamma <- function(d, x, ...) {
   ss <- suff_stat(d, x, ...)
-  gamma()
+  stop("`fit_mle` is not implemented for the Gamma distribution yet")
 }
 
 #' Compute the sufficient statistics for a bernoulli distribution from data
+#'
+#'   - `sum`: The sum of the data.
+#'   - `log_sum`: The log of the sum of the data.
+#'   - `samples`: The number of samples in the data.
 #'
 #' @inherit gamma
 #' @export
