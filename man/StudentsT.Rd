@@ -23,7 +23,7 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a StudentsT random variable with mean
 \code{mu} = \eqn{\mu} and standard deviation \code{sigma} = \eqn{\sigma}.
 
-\strong{Support}: \eqn{\mathbb{R}}{R}, the set of all real numbers
+\strong{Support}: \eqn{R}, the set of all real numbers
 
 \strong{Mean}: Undefined unless \eqn{\nu \ge 2}, in which case the mean is
 zero.

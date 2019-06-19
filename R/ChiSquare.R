@@ -26,7 +26,7 @@
 #'   In the following, let \eqn{X} be a \eqn{\chi^2} random variable with
 #'   `df` = \eqn{k}.
 #'
-#'   **Support**: \eqn{\mathbb{R}^+}{R^+}, the set of positive real numbers
+#'   **Support**: \eqn{R^+}, the set of positive real numbers
 #'
 #'   **Mean**: \eqn{k}
 #'

@@ -52,7 +52,7 @@ TODO: multiple parameterizations BLEH (ignore it?)
 \strong{Moment generating function (m.g.f)}:
 
 \deqn{
-    \mathbb{E}(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
+    E(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
   }{
     E(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
   }

@@ -24,7 +24,7 @@
 #'   In the following, let \eqn{X} be a Cauchy variable with mean
 #'   `location =` \eqn{x_0} and `scale` = \eqn{\gamma}.
 #'
-#'   **Support**: \eqn{\mathbb{R}}{R}, the set of all real numbers
+#'   **Support**: \eqn{R}, the set of all real numbers
 #'
 #'   **Mean**: Undefined.
 #'
