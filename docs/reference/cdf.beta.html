@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluate the cumulative distribution function of a beta distribution — cdf.beta • distributions</title>
+<title>Evaluate the cumulative distribution function of a Beta distribution — cdf.Beta • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Evaluate the cumulative distribution function of a beta distribution — cdf.beta" />
+<meta property="og:title" content="Evaluate the cumulative distribution function of a Beta distribution — cdf.Beta" />
 
-<meta property="og:description" content="Evaluate the cumulative distribution function of a beta distribution" />
+<meta property="og:description" content="Evaluate the cumulative distribution function of a Beta distribution" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,18 +135,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Evaluate the cumulative distribution function of a beta distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/beta.R'><code>R/beta.R</code></a></small>
-    <div class="hidden name"><code>cdf.beta.Rd</code></div>
+    <h1>Evaluate the cumulative distribution function of a Beta distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Beta.R'><code>R/Beta.R</code></a></small>
+    <div class="hidden name"><code>cdf.Beta.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Evaluate the cumulative distribution function of a beta distribution</p>
+    <p>Evaluate the cumulative distribution function of a Beta distribution</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for beta</span>
+    <pre class="usage"><span class='co'># S3 method for Beta</span>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>d</span>, <span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +154,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>beta</code> object created by a call to <code><a href='beta.html'>beta()</a></code>.</p></td>
+      <td><p>A <code>Beta</code> object created by a call to <code><a href='Beta.html'>Beta()</a></code>.</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -178,11 +175,13 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='beta.html'>beta</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
-<span class='no'>b</span></div><div class='output co'>#&gt; Beta distribution (alpha = 1, beta = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>b</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.02681848 0.29483077 0.38245427 0.43881643 0.45246349 0.07695745
-#&gt;  [7] 0.30897160 0.58557588 0.35128272 0.42783692</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.6</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.91</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.4522774</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Beta.html'>Beta</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Beta distribution (alpha = 1, beta = 2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.02681848 0.29483077 0.38245427 0.43881643 0.45246349 0.07695745
+#&gt;  [7] 0.30897160 0.58557588 0.35128272 0.42783692</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.6</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] -0.5108256</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.91</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.4522774</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

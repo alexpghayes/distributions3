@@ -77,9 +77,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -174,21 +171,21 @@
 <p>To do this we need to c.d.f. of a <span class="math inline">\(t_9\)</span> distribution.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(distributions)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3">t_<span class="dv">9</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/students_t.html">students_t</a></span>(<span class="dt">df =</span> <span class="dv">9</span>)  <span class="co"># make a t_9 distribution</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="fl">1.38</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="fl">-1.38</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">T_<span class="dv">9</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/StudentsT.html">StudentsT</a></span>(<span class="dt">df =</span> <span class="dv">9</span>)  <span class="co"># make a T_9 distribution</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">1.38</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">-1.38</span>)</a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; [1] 0.2008985</span></a></code></pre></div>
 <p>Note that we saved <code>t_stat</code> above so we could have also done</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(t_stat)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(t_stat))</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(t_stat)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">abs</a></span>(t_stat))</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; [1] 0.2012211</span></a></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
-<p>So our p-value is about 0.20. You should verify this with a T-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(t_9, 1.38)</a></code> and looking up <code>1.38</code> on a T-table.</p>
+<p>So our p-value is about 0.20. You should verify this with a T-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(T_9, 1.38)</a></code> and looking up <code>1.38</code> on a T-table.</p>
 <p>You may also have seen a different formula for the p-value of a two-sided T-test, which makes use of the fact that the T distribution is symmetric:</p>
 <p><span class="math display">\[\begin{align}
   P(|t_9| \ge |1.38|)
   &amp;= 2 \cdot P(t_9 \le -|1.38|)
 \end{align}\]</span></p>
 <p>Using this formula we get the same result:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="fl">-1.38</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">-1.38</span>)</a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; [1] 0.2008985</span></a></code></pre></div>
 <p>Finally, sometimes we are interest in one sided T-tests. For the test</p>
 <p><span class="math display">\[\begin{align}
@@ -199,9 +196,8 @@
   P(t_9 &gt; 1.38)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">t_<span class="dv">9</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/students_t.html">students_t</a></span>(<span class="dt">df =</span> <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="fl">1.38</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; [1] 0.1004493</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">1.38</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; [1] 0.1004493</span></a></code></pre></div>
 <p>For the test</p>
 <p><span class="math display">\[
   H_0: \mu \ge 3 \qquad H_A: \mu &lt; 3
@@ -211,9 +207,8 @@
   P(t_9 &lt; 1.38)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">t_<span class="dv">9</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/students_t.html">students_t</a></span>(<span class="dt">df =</span> <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(t_<span class="dv">9</span>, <span class="fl">1.38</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; [1] 0.8995507</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">1.38</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; [1] 0.8995507</span></a></code></pre></div>
 </div>
 <div id="using-the-t-test-function" class="section level2">
 <h2 class="hasAnchor">

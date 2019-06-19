@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a cauchy distribution — cauchy • distributions</title>
+<title>Create a Cauchy distribution — Cauchy • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Create a cauchy distribution — cauchy" />
+<meta property="og:title" content="Create a Cauchy distribution — Cauchy" />
 
-<meta property="og:description" content="Note that the cauchy distribution is the student's t distribution
-with one degree of freedom. The cauchy distribution does not have
+<meta property="og:description" content="Note that the Cauchy distribution is the student's t distribution
+with one degree of freedom. The Cauchy distribution does not have
 a well defined mean or variance. Cauchy distributions often appear
 as priors in Bayesian contexts due to their heavy tails." />
 <meta name="twitter:card" content="summary" />
@@ -113,9 +113,6 @@ as priors in Bayesian contexts due to their heavy tails." />
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -141,21 +138,21 @@ as priors in Bayesian contexts due to their heavy tails." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a cauchy distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/cauchy.R'><code>R/cauchy.R</code></a></small>
-    <div class="hidden name"><code>cauchy.Rd</code></div>
+    <h1>Create a Cauchy distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Cauchy.R'><code>R/Cauchy.R</code></a></small>
+    <div class="hidden name"><code>Cauchy.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Note that the cauchy distribution is the student's t distribution
-with one degree of freedom. The cauchy distribution does not have
+    <p>Note that the Cauchy distribution is the student's t distribution
+with one degree of freedom. The Cauchy distribution does not have
 a well defined mean or variance. Cauchy distributions often appear
 as priors in Bayesian contexts due to their heavy tails.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>cauchy</span>(<span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>Cauchy</span>(<span class='kw'>location</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,7 +171,7 @@ to <code>1</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>cauchy</code> object.</p>
+    <p>A <code>Cauchy</code> object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -200,20 +197,22 @@ will render with additional detail and much greater clarity.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other continuous distributions: <code><a href='beta.html'>beta</a></code>,
-  <code><a href='chi_square.html'>chi_square</a></code>, <code><a href='exponential.html'>exponential</a></code>,
-  <code><a href='fisher_f.html'>fisher_f</a></code>, <code><a href='gamma.html'>gamma</a></code>,
-  <code><a href='normal.html'>normal</a></code>, <code><a href='poisson.html'>poisson</a></code>,
-  <code><a href='students_t.html'>students_t</a></code></p></div>
+    <div class='dont-index'><p>Other continuous distributions: <code><a href='Beta.html'>Beta</a></code>,
+  <code><a href='ChiSquare.html'>ChiSquare</a></code>, <code><a href='Exponential.html'>Exponential</a></code>,
+  <code><a href='FisherF.html'>FisherF</a></code>, <code><a href='Gamma.html'>Gamma</a></code>,
+  <code><a href='Normal.html'>Normal</a></code>, <code><a href='StudentsT.html'>StudentsT</a></code>,
+  <code><a href='Uniform.html'>Uniform</a></code>, <code><a href='random.Normal.html'>random.Normal</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>c</span> <span class='kw'>&lt;-</span> <span class='fu'>cauchy</span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
-<span class='no'>c</span></div><div class='output co'>#&gt; Cauchy distribution (location = 10, scale = 0.2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>c</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  9.823313  9.994163  9.981425 10.551078 11.632063 10.304975 10.122280
-#&gt;  [8]  7.990309 20.003718  9.833813</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>c</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0009940971</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.00795609</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 10.14531</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Cauchy</span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Cauchy distribution (location = 10, scale = 0.2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  9.823313  9.994163  9.981425 10.551078 11.632063 10.304975 10.122280
+#&gt;  [8]  7.990309 20.003718  9.833813</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0009940971</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -6.913676</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.00795609</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 10.14531</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

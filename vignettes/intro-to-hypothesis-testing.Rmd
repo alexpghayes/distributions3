@@ -68,7 +68,7 @@ library(distributions)
 z_score <- 1.6
 
 grid <- seq(-4, 4, length.out = 300)
-density <- pdf(normal(), grid)
+density <- pdf(Normal(), grid)
 reject <- ifelse(abs(grid) >= z_score, density, 0)
 
 ggplot(data = NULL) +

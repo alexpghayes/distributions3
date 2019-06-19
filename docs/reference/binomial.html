@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a binomial distribution — binomial • distributions</title>
+<title>Create a Binomial distribution — Binomial • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,12 @@
 
 
 
-<meta property="og:title" content="Create a binomial distribution — binomial" />
+<meta property="og:title" content="Create a Binomial distribution — Binomial" />
 
 <meta property="og:description" content="Bernoulli distributions are used to represent situations can that can
 thought of as size (often called \(n\) in textbooks) independent
 coin flips, where each coin flip has probability p of success. The
-bernoulli() distribution is a special case of binomial distribution
+bernoulli() distribution is a special case of Binomial distribution
 when n = 1." />
 <meta name="twitter:card" content="summary" />
 
@@ -114,9 +114,6 @@ when n = 1." />
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -142,9 +139,9 @@ when n = 1." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a binomial distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/binomial.R'><code>R/binomial.R</code></a></small>
-    <div class="hidden name"><code>binomial.Rd</code></div>
+    <h1>Create a Binomial distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Binomial.R'><code>R/Binomial.R</code></a></small>
+    <div class="hidden name"><code>Binomial.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -152,12 +149,12 @@ when n = 1." />
     <p>Bernoulli distributions are used to represent situations can that can
 thought of as <code>size</code> (often called \(n\) in textbooks) independent
 coin flips, where each coin flip has probability <code>p</code> of success. The
-<code><a href='bernoulli.html'>bernoulli()</a></code> distribution is a special case of binomial distribution
+<code>bernoulli()</code> distribution is a special case of Binomial distribution
 when <code>n = 1</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>binomial</span>(<span class='no'>size</span>, <span class='no'>p</span>)</pre>
+    <pre class="usage"><span class='fu'>Binomial</span>(<span class='no'>size</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,27 +162,26 @@ when <code>n = 1</code>.</p>
     <tr>
       <th>size</th>
       <td><p>The number of trials. Must be an integer greater than or equal
-to one. When <code>size = 1L</code>, the binomial distribution reduces to the
+to one. When <code>size = 1L</code>, the Binomial distribution reduces to the
 bernoulli distribution. Oftened called <code>n</code> in textbooks.</p></td>
     </tr>
     <tr>
       <th>p</th>
       <td><p>The success probability for a given trial. <code>p</code> can be any
-value in <code>[0, 1]</code>, and defaults to <code>0.5</code>.
-greater than zero. Defaults to <code>1</code>.</p></td>
+value in <code>[0, 1]</code>, and defaults to <code>0.5</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>binomial</code> object.</p>
+    <p>A <code>Binomial</code> object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The binomial distribution comes up when you are interested in the portion
-of people who do a thing. The binomial distribution
-also comes up in the sign test, sometimes called the binomial test
-(see <code><a href='https://www.rdocumentation.org/packages/stats/topics/binom.test'>stats::binom.test()</a></code>), where you may need the binomial C.D.F. to
+    <p>The Binomial distribution comes up when you are interested in the portion
+of people who do a thing. The Binomial distribution
+also comes up in the sign test, sometimes called the Binomial test
+(see <code><a href='https://www.rdocumentation.org/packages/stats/topics/binom.test'>stats::binom.test()</a></code>), where you may need the Binomial C.D.F. to
 compute p-values.</p>
 <p>We recommend reading this documentation on
 <a href='https://alexpghayes.github.io/distributions'>https://alexpghayes.github.io/distributions</a>, where the math
@@ -206,20 +202,24 @@ or called \(\pi\) instead of \(p\).</p>
   $$</p>
 <p><strong>Moment generating function (m.g.f)</strong>:</p>
 <p>$$
-    \mathbb{E}(e^{tX}) = (1 - p + p e^t)^n
+    E(e^{tX}) = (1 - p + p e^t)^n
   $$</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other discrete distributions: <code><a href='bernoulli.html'>bernoulli</a></code></p></div>
+    <div class='dont-index'><p>Other discrete distributions: <code><a href='Bernoulli.html'>Bernoulli</a></code>,
+  <code><a href='Geometric.html'>Geometric</a></code>, <code><a href='LogNormal.html'>LogNormal</a></code>,
+  <code><a href='NegativeBinomial.html'>NegativeBinomial</a></code>, <code><a href='Poisson.html'>Poisson</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>binomial</span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
-<span class='no'>b</span></div><div class='output co'>#&gt; Binomial distribution (size = 10, p = 0.2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>b</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 3 4 1 1 3 2 2 2 0 3</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>b</span>, <span class='fl'>2L</span>)</div><div class='output co'>#&gt; [1] 0.3019899</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>4L</span>)</div><div class='output co'>#&gt; [1] 0.9672065</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.8791261</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Binomial</span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Binomial distribution (size = 10, p = 0.2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 3 4 1 1 3 2 2 2 0 3</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2L</span>)</div><div class='output co'>#&gt; [1] 0.3019899</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2L</span>)</div><div class='output co'>#&gt; [1] -1.197362</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4L</span>)</div><div class='output co'>#&gt; [1] 0.9672065</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.8791261</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -77,9 +77,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -148,12 +145,12 @@
 <a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt;  [1]       2      39    8478    9395   10780   18320   21564   36562</span></a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt;  [9]   40298   50000  176602 2268583 3404930</span></a></code></pre></div>
 <p>We can verify this with R as well:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">B &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">&gt;</span><span class="st"> </span><span class="dv">50000</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">B</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">b &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">&gt;</span><span class="st"> </span><span class="dv">50000</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">b</a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; [1] 3</span></a>
 <a class="sourceLine" id="cb3-4" title="4"></a>
-<a class="sourceLine" id="cb3-5" title="5">N &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">!=</span><span class="st"> </span><span class="dv">50000</span>)</a>
-<a class="sourceLine" id="cb3-6" title="6">N</a>
+<a class="sourceLine" id="cb3-5" title="5">n &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">!=</span><span class="st"> </span><span class="dv">50000</span>)</a>
+<a class="sourceLine" id="cb3-6" title="6">n</a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; [1] 12</span></a></code></pre></div>
 </div>
 <div id="calculating-p-values" class="section level2">
@@ -167,8 +164,8 @@
 <p>To do this we need to c.d.f. of a binomial random variable:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(distributions)</a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3">B_<span class="dv">12</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/binomial.html">binomial</a></span>(<span class="dv">12</span>, <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(<span class="kw"><a href="../reference/cdf.html">cdf</a></span>(B_<span class="dv">12</span>, B), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(B_<span class="dv">12</span>, B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb4-3" title="3">X &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Binomial.html">Binomial</a></span>(n, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(<span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; [1] 0.1459961</span></a></code></pre></div>
 <p>In practice computing the c.d.f. of binomial random variables is rather tedious and there aren’t great shortcuts for small samples. If you got a question like this on an exam, you’d want to use the binomial p.m.f. repeatedly, like this:</p>
 <p><span class="math display">\[\begin{align}
@@ -188,7 +185,7 @@ P(B \le 3)
   P(B &gt; 3) = 1 - P(B \le 2)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(B_<span class="dv">12</span>, B <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; [1] 0.9807129</span></a></code></pre></div>
 <p>For the test</p>
 <p><span class="math display">\[
@@ -199,7 +196,7 @@ P(B \le 3)
   P(B &lt; 3)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(B_<span class="dv">12</span>, B)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b)</a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; [1] 0.07299805</span></a></code></pre></div>
 </div>
 <div id="using-the-binom-test-function" class="section level2">

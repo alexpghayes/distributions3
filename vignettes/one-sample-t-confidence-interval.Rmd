@@ -58,20 +58,20 @@ library(distributions)
 x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
 n <- length(x)
 
-# make t_9 random variable
-t_9 <- students_t(df = 9)
+# make T_9 random variable
+T_9 <- StudentsT(df = 9)
 
 # first approach
-mean(x) + quantile(t_9, 0.12 / 2) * sd(x) / sqrt(n)
-mean(x) + quantile(t_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
+mean(x) + quantile(T_9, 0.12 / 2) * sd(x) / sqrt(n)
+mean(x) + quantile(T_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
 ```
 
 So our confidence interval using the first set of equations is (2.63, 6.37). Now we use the second set of equations:
 
 ```{r}
 # second approach
-mean(x) - quantile(t_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
-mean(x) + quantile(t_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
+mean(x) - quantile(T_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
+mean(x) + quantile(T_9, 1 - 0.12 / 2) * sd(x) / sqrt(n)
 ```
 
 We get the same thing! Just like we expected.
@@ -94,22 +94,22 @@ library(ggplot2)
 library(patchwork)
 
 grid <- seq(-4, 4, length.out = 300)
-density <- pdf(t_9, grid)
-lower_trunc <- ifelse(grid <= 1.96, density, 0)
-upper_trunc <- ifelse(grid >= 1.96, density, 0)
+density <- pdf(T_9, grid)
+lower_trunc <- ifelse(grid <= 1.83, density, 0)
+upper_trunc <- ifelse(grid >= 1.83, density, 0)
 
 lower_quantile_plot <- ggplot(data = NULL) +
   geom_area(aes(grid, lower_trunc, alpha = 0.2), fill = "steelblue") +
   geom_line(aes(grid, density), size = 1, color = "grey") +
   geom_vline(xintercept = 1.83, size = 1, color = "darkgrey") +
   geom_text(
-    aes(x = 3.2, y = 0.3, label = "t[n-1, 0.95] == 1.83"),
+    aes(x = 3.2, y = 0.3, label = "t[0.975] == 1.83"),
     parse = TRUE,
     size = 4
   ) +
   labs(
-    title = "Lower tail quantile of a T distribution (df = 9)",
-    subtitle = "Integral of shaded region is 0.95",
+    title = "Lower tail quantile of a T (df = 9)",
+    subtitle = "Integral of shaded region is 0.975",
     y = "Density",
     x = "Support"
   ) +
@@ -121,13 +121,13 @@ upper_quantile_plot <- ggplot(data = NULL) +
   geom_line(aes(grid, density), size = 1, color = "grey") +
   geom_vline(xintercept = 1.83, size = 1, color = "darkgrey") +
   geom_text(
-    aes(x = 3.2, y = 0.3, label = "t[n-1, 0.05] == 1.83"),
+    aes(x = 3.2, y = 0.3, label = "t[0.025] == 1.83"),
     parse = TRUE,
     size = 4
   ) +
   labs(
-    title = "Upper tail quantile of a T distribution (df = 9)",
-    subtitle = "Integral of shaded region is 0.05",
+    title = "Upper tail quantile of a T (df = 9)",
+    subtitle = "Integral of shaded region is 0.025",
     y = "Density",
     x = "Support"
   ) +

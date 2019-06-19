@@ -103,20 +103,20 @@ To do this we need to c.d.f. of a $t_9$ distribution.
 ```{r}
 library(distributions)
 
-t_9 <- students_t(df = 9)  # make a t_9 distribution
-1 - cdf(t_9, 1.38) + cdf(t_9, -1.38)
+T_9 <- StudentsT(df = 9)  # make a T_9 distribution
+1 - cdf(T_9, 1.38) + cdf(T_9, -1.38)
 ```
 
 Note that we saved `t_stat` above so we could have also done
 
 ```{r}
-1 - cdf(t_9, abs(t_stat)) + cdf(t_9, -abs(t_stat))
+1 - cdf(T_9, abs(t_stat)) + cdf(T_9, -abs(t_stat))
 ```
 
 which is slightly more accurate since there is no rounding error.
 
 So our p-value is about 0.20. You should verify this with a T-table.
-Note that you should get the *same* value from `cdf(t_9, 1.38)` and looking
+Note that you should get the *same* value from `cdf(T_9, 1.38)` and looking
 up `1.38` on a T-table.
 
 You may also have seen a different formula for the p-value of a two-sided
@@ -131,7 +131,7 @@ symmetric:
 Using this formula we get the same result:
 
 ```{r}
-2 * cdf(t_9, -1.38)
+2 * cdf(T_9, -1.38)
 ```
 
 Finally, sometimes we are interest in one sided T-tests. For the test
@@ -149,8 +149,7 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-t_9 <- students_t(df = 9)
-1 - cdf(t_9, 1.38)
+1 - cdf(T_9, 1.38)
 ```
 
 For the test
@@ -168,8 +167,7 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-t_9 <- students_t(df = 9)
-cdf(t_9, 1.38)
+cdf(T_9, 1.38)
 ```
 
 ## Using the t.test() function

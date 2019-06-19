@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Draw a random sample from a normal distribution — random.normal • distributions</title>
+<title>Draw a random sample from a Normal distribution — random.Normal • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="Draw a random sample from a normal distribution — random.normal" />
+<meta property="og:title" content="Draw a random sample from a Normal distribution — random.Normal" />
 
-<meta property="og:description" content="Please see the documentation of normal() for some properties
-of the normal distribution, as well as extensive examples
+<meta property="og:description" content="Please see the documentation of Normal() for some properties
+of the Normal distribution, as well as extensive examples
 showing to how calculate p-values and confidence intervals." />
 <meta name="twitter:card" content="summary" />
 
@@ -112,9 +112,6 @@ showing to how calculate p-values and confidence intervals." />
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -140,20 +137,20 @@ showing to how calculate p-values and confidence intervals." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Draw a random sample from a normal distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/normal.R'><code>R/normal.R</code></a></small>
-    <div class="hidden name"><code>random.normal.Rd</code></div>
+    <h1>Draw a random sample from a Normal distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Normal.R'><code>R/Normal.R</code></a></small>
+    <div class="hidden name"><code>random.Normal.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Please see the documentation of <code><a href='normal.html'>normal()</a></code> for some properties
-of the normal distribution, as well as extensive examples
+    <p>Please see the documentation of <code><a href='Normal.html'>Normal()</a></code> for some properties
+of the Normal distribution, as well as extensive examples
 showing to how calculate p-values and confidence intervals.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for normal</span>
+    <pre class="usage"><span class='co'># S3 method for Normal</span>
 <span class='fu'><a href='random.html'>random</a></span>(<span class='no'>d</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -161,7 +158,7 @@ showing to how calculate p-values and confidence intervals.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>normal</code> object created by a call to <code><a href='normal.html'>normal()</a></code>.</p></td>
+      <td><p>A <code>Normal</code> object created by a call to <code><a href='Normal.html'>Normal()</a></code>.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -180,23 +177,28 @@ catch mispellings or other possible errors.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other normal distribution: <code><a href='cdf.normal.html'>cdf.normal</a></code>,
-  <code><a href='pdf.normal.html'>pdf.normal</a></code>, <code><a href='quantile.normal.html'>quantile.normal</a></code></p></div>
+    <div class='dont-index'><p>Other continuous distributions: <code><a href='Beta.html'>Beta</a></code>,
+  <code><a href='Cauchy.html'>Cauchy</a></code>, <code><a href='ChiSquare.html'>ChiSquare</a></code>,
+  <code><a href='Exponential.html'>Exponential</a></code>, <code><a href='FisherF.html'>FisherF</a></code>,
+  <code><a href='Gamma.html'>Gamma</a></code>, <code><a href='Normal.html'>Normal</a></code>,
+  <code><a href='StudentsT.html'>StudentsT</a></code>, <code><a href='Uniform.html'>Uniform</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='normal.html'>normal</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
-<span class='no'>n</span></div><div class='output co'>#&gt; normal distribution (mu = 5, sigma = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>n</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 6.568265 5.874248 6.856577 7.297446 4.833780 4.321512 8.597459 5.423187
-#&gt;  [9] 3.261347 4.438195</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>n</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0647588</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.3085375</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.048801</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Normal.html'>Normal</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Normal distribution (mu = 5, sigma = 2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  4.84061466  5.23449266  6.13316569  6.60002082  4.03876819  5.42646620
+#&gt;  [7]  8.51215088  7.09012259 -0.07884506  3.83356455</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0647588</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -2.737086</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.3085375</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.048801</div><div class='input'>
 <span class='co'>### example: calculating p-values for two-sided Z-test</span>
 
 <span class='co'># here the null hypothesis is H_0: mu = 3</span>
 <span class='co'># and we assume sigma = 2</span>
 
-<span class='co'># exactly the same as: Z &lt;- normal(0, 1)</span>
-<span class='no'>Z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='normal.html'>normal</a></span>()
+<span class='co'># exactly the same as: Z &lt;- Normal(0, 1)</span>
+<span class='no'>Z</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Normal.html'>Normal</a></span>()
 
 <span class='co'># data to test</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>7</span>, <span class='fl'>11</span>, <span class='fl'>0</span>, <span class='fl'>7</span>, <span class='fl'>0</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>2</span>)
@@ -232,29 +234,28 @@ catch mispellings or other possible errors.</p></td>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
 
 <span class='co'># generate a random sample</span>
-<span class='no'>normal_sample</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random.html'>random</a></span>(<span class='fu'><a href='normal.html'>normal</a></span>(<span class='fl'>3</span>, <span class='fl'>7</span>), <span class='fl'>26</span>)
+<span class='no'>Normal_sample</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='random.html'>random</a></span>(<span class='fu'><a href='Normal.html'>Normal</a></span>(<span class='fl'>3</span>, <span class='fl'>7</span>), <span class='fl'>26</span>)
 
-<span class='co'># test if sample is normal(3, 7)</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>normal_sample</span>, <span class='no'>pnorm</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='output co'>#&gt; 
+<span class='co'># test if sample is Normal(3, 7)</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>Normal_sample</span>, <span class='no'>pnorm</span>, <span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fl'>7</span>)</div><div class='output co'>#&gt; 
 #&gt; 	One-sample Kolmogorov-Smirnov test
 #&gt; 
-#&gt; data:  normal_sample
+#&gt; data:  Normal_sample
 #&gt; D = 0.20352, p-value = 0.2019
 #&gt; alternative hypothesis: two-sided
 #&gt; </div><div class='input'>
 <span class='co'># test if sample is gamma(8, 3) using base R pgamma()</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>normal_sample</span>, <span class='no'>pgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; 
+<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/ks.test'>ks.test</a></span>(<span class='no'>Normal_sample</span>, <span class='no'>pgamma</span>, <span class='kw'>shape</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; 
 #&gt; 	One-sample Kolmogorov-Smirnov test
 #&gt; 
-#&gt; data:  normal_sample
+#&gt; data:  Normal_sample
 #&gt; D = 0.46154, p-value = 1.37e-05
 #&gt; alternative hypothesis: two-sided
 #&gt; </div><div class='input'>
-
 <span class='co'>###</span>
 
 <span class='co'># note that the cdf() and quantile() functions are inverses</span>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>n</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>n</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

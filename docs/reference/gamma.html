@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a gamma distribution — gamma • distributions</title>
+<title>Create a Gamma distribution — Gamma • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,19 @@
 
 
 
-<meta property="og:title" content="Create a gamma distribution — gamma" />
+<meta property="og:title" content="Create a Gamma distribution — Gamma" />
 
-<meta property="og:description" content="Several important distributions are special cases of the gamma
-distribution. When the shape parameter is 1, the gamma is an
-gamma. When the (scale?) parametre is 2 the gamma is a
-chi square." />
+<meta property="og:description" content="Several important distributions are special cases of the Gamma
+distribution. When the shape parameter is 1, the Gamma is an
+exponential distribution with parameter \(1/\beta\). When the
+\(shape = n/2\) and \(rate = 1/2\), the Gamma is a equivalent to
+a chi squared distribution with n degrees of freedom. Moreover, if
+we have \(X_1 \sim Gamma(\alpha_1, \beta)\) and
+\(X_2 \sim Gamma(\alpha_2, \beta)\), a function of these two variables
+of the form \(\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)\).
+This last property frequently appears in another distributions, and it
+has extensively been used in multivariate methods. More about the Gamma
+distribution will be added soon." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,9 +120,6 @@ chi square." />
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -141,21 +145,28 @@ chi square." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a gamma distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/gamma.R'><code>R/gamma.R</code></a></small>
-    <div class="hidden name"><code>gamma.Rd</code></div>
+    <h1>Create a Gamma distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Gamma.R'><code>R/Gamma.R</code></a></small>
+    <div class="hidden name"><code>Gamma.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Several important distributions are special cases of the gamma
-distribution. When the shape parameter is <code>1</code>, the gamma is an
-gamma. When the (scale?) parametre is <code>2</code> the gamma is a
-chi square.</p>
+    <p>Several important distributions are special cases of the Gamma
+distribution. When the shape parameter is <code>1</code>, the Gamma is an
+exponential distribution with parameter \(1/\beta\). When the
+\(shape = n/2\) and \(rate = 1/2\), the Gamma is a equivalent to
+a chi squared distribution with n degrees of freedom. Moreover, if
+we have \(X_1 \sim Gamma(\alpha_1, \beta)\) and
+\(X_2 \sim Gamma(\alpha_2, \beta)\), a function of these two variables
+of the form \(\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)\).
+This last property frequently appears in another distributions, and it
+has extensively been used in multivariate methods. More about the Gamma
+distribution will be added soon.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gamma</span>(<span class='no'>shape</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>Gamma</span>(<span class='no'>shape</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,24 +184,50 @@ to <code>1</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>gamma</code> object.</p>
+    <p>A <code>Gamma</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>We recommend reading this documentation on
+<a href='https://alexpghayes.github.io/distributions'>https://alexpghayes.github.io/distributions</a>, where the math
+will render with additional detail.</p>
+<p>In the following, let \(X\) be a Gamma random variable
+with parameters
+<code>shape</code> = \(\alpha\) and
+<code>rate</code> = \(\beta\).</p>
+<p><strong>Support</strong>: \(x \in (0, \infty)\)</p>
+<p><strong>Mean</strong>: \(\frac{\alpha}{\beta}\)</p>
+<p><strong>Variance</strong>: \(\frac{\alpha}{\beta^2}\)</p>
+<p><strong>Probability density function (p.m.f)</strong>:</p>
+<p>$$
+    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+  $$</p>
+<p><strong>Cumulative distribution function (c.d.f)</strong>:</p>
+<p>$$
+    f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+  $$</p>
+<p><strong>Moment generating function (m.g.f)</strong>:</p>
+<p>$$
+    \mathbb{E}(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t &lt; \beta
+  $$</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other continuous distributions: <code><a href='beta.html'>beta</a></code>,
-  <code><a href='cauchy.html'>cauchy</a></code>, <code><a href='chi_square.html'>chi_square</a></code>,
-  <code><a href='exponential.html'>exponential</a></code>, <code><a href='fisher_f.html'>fisher_f</a></code>,
-  <code><a href='normal.html'>normal</a></code>, <code><a href='poisson.html'>poisson</a></code>,
-  <code><a href='students_t.html'>students_t</a></code></p></div>
+    <div class='dont-index'><p>Other continuous distributions: <code><a href='Beta.html'>Beta</a></code>,
+  <code><a href='Cauchy.html'>Cauchy</a></code>, <code><a href='ChiSquare.html'>ChiSquare</a></code>,
+  <code><a href='Exponential.html'>Exponential</a></code>, <code><a href='FisherF.html'>FisherF</a></code>,
+  <code><a href='Normal.html'>Normal</a></code>, <code><a href='StudentsT.html'>StudentsT</a></code>,
+  <code><a href='Uniform.html'>Uniform</a></code>, <code><a href='random.Normal.html'>random.Normal</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='fu'>gamma</span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
-<span class='no'>g</span></div><div class='output co'>#&gt; Gamma distribution (shape = 5, rate = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>g</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1.8703393 3.8218923 1.5005986 2.1963381 1.5388068 0.8620576 2.0044435
-#&gt;  [8] 3.9947395 2.2486031 1.3703606</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>g</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.3907336</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9003676</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 2.945181</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>g</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>g</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Gamma</span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Gamma distribution (shape = 5, rate = 2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='error'>Error in rGamma(n = n, shape = d$shape, rate = d$rate): could not find function "rGamma"</span></div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in dGamma(x = x, shape = d$shape, rate = d$rate): could not find function "dGamma"</span></div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in dGamma(x = x, shape = d$shape, rate = d$rate, log = TRUE): could not find function "dGamma"</span></div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='error'>Error in pGamma(q = x, shape = d$shape, rate = d$rate): could not find function "pGamma"</span></div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; <span class='error'>Error in qGamma(p = p, shape = d$shape, rate = d$rate): could not find function "qGamma"</span></div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; <span class='error'>Error in pGamma(q = x, shape = d$shape, rate = d$rate): could not find function "pGamma"</span></div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; <span class='error'>Error in qGamma(p = p, shape = d$shape, rate = d$rate): could not find function "qGamma"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -199,6 +236,8 @@ to <code>1</code>.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

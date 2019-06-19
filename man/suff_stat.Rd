@@ -6,12 +6,6 @@
 \usage{
 suff_stat(d, x, ...)
 }
-\arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=bernoulli]{bernoulli()}}, \code{\link[=beta]{beta()}}, or \code{\link[=binomial]{binomial()}}.}
-
-\item{x}{A vector of data to compute the likelihood.}
-}
 \value{
 a named list of sufficient statistics
 }

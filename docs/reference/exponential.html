@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a exponential distribution — exponential • distributions</title>
+<title>Create a Exponential distribution — Exponential • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a exponential distribution — exponential" />
+<meta property="og:title" content="Create a Exponential distribution — Exponential" />
 
-<meta property="og:description" content="Create a exponential distribution" />
+<meta property="og:description" content="Create a Exponential distribution" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,18 +135,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a exponential distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/exponential.R'><code>R/exponential.R</code></a></small>
-    <div class="hidden name"><code>exponential.Rd</code></div>
+    <h1>Create a Exponential distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Exponential.R'><code>R/Exponential.R</code></a></small>
+    <div class="hidden name"><code>Exponential.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a exponential distribution</p>
+    <p>Create a Exponential distribution</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>exponential</span>(<span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>Exponential</span>(<span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,24 +160,26 @@ to <code>1</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>exponential</code> object.</p>
+    <p>A <code>Exponential</code> object.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other continuous distributions: <code><a href='beta.html'>beta</a></code>,
-  <code><a href='cauchy.html'>cauchy</a></code>, <code><a href='chi_square.html'>chi_square</a></code>,
-  <code><a href='fisher_f.html'>fisher_f</a></code>, <code><a href='gamma.html'>gamma</a></code>,
-  <code><a href='normal.html'>normal</a></code>, <code><a href='poisson.html'>poisson</a></code>,
-  <code><a href='students_t.html'>students_t</a></code></p></div>
+    <div class='dont-index'><p>Other continuous distributions: <code><a href='Beta.html'>Beta</a></code>,
+  <code><a href='Cauchy.html'>Cauchy</a></code>, <code><a href='ChiSquare.html'>ChiSquare</a></code>,
+  <code><a href='FisherF.html'>FisherF</a></code>, <code><a href='Gamma.html'>Gamma</a></code>,
+  <code><a href='Normal.html'>Normal</a></code>, <code><a href='StudentsT.html'>StudentsT</a></code>,
+  <code><a href='Uniform.html'>Uniform</a></code>, <code><a href='random.Normal.html'>random.Normal</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='fu'>exponential</span>(<span class='fl'>5</span>)
-<span class='no'>e</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>e</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.196698340 0.430723781 0.144034638 0.046501051 0.053883599 0.047562819
-#&gt;  [7] 0.191714668 0.001769392 0.027880501 0.358950522</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>e</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Exponential</span>(<span class='fl'>5</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.11166809 0.05248617 0.10803308 0.09179388 0.93752887 0.01794568
+#&gt;  [7] 0.09541290 0.06978063 0.04307933 0.25666629</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -8.390562</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine quantiles of a exponential distribution — quantile.exponential • distributions</title>
+<title>Determine quantiles of a Exponential distribution — quantile.Exponential • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Determine quantiles of a exponential distribution — quantile.exponential" />
+<meta property="og:title" content="Determine quantiles of a Exponential distribution — quantile.Exponential" />
 
 <meta property="og:description" content="quantile() is the inverse of cdf()." />
 <meta name="twitter:card" content="summary" />
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,9 +135,9 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine quantiles of a exponential distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/exponential.R'><code>R/exponential.R</code></a></small>
-    <div class="hidden name"><code>quantile.exponential.Rd</code></div>
+    <h1>Determine quantiles of a Exponential distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Exponential.R'><code>R/Exponential.R</code></a></small>
+    <div class="hidden name"><code>quantile.Exponential.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -149,7 +146,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for exponential</span>
+    <pre class="usage"><span class='co'># S3 method for Exponential</span>
 <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>d</span>, <span class='no'>p</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +154,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>exponential</code> object created by a call to <code><a href='exponential.html'>exponential()</a></code>.</p></td>
+      <td><p>A <code>Exponential</code> object created by a call to <code><a href='Exponential.html'>Exponential()</a></code>.</p></td>
     </tr>
     <tr>
       <th>p</th>
@@ -177,11 +174,13 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>e</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='exponential.html'>exponential</a></span>(<span class='fl'>5</span>)
-<span class='no'>e</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>e</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.09438964 0.04907841 0.06244542 0.03026687 0.12104439 0.09464804
-#&gt;  [7] 0.19380425 0.28271061 0.56804236 0.26331995</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>e</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>e</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>e</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Exponential.html'>Exponential</a></span>(<span class='fl'>5</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.37937610 0.19380425 0.28271061 0.56804236 0.26331995 0.16611397
+#&gt;  [7] 0.12041905 0.06924187 0.27446603 0.14559025</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -8.390562</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

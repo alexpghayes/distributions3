@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine quantiles of a bernoulli distribution — quantile.bernoulli • distributions</title>
+<title>Determine quantiles of a Bernoulli distribution — quantile.Bernoulli • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Determine quantiles of a bernoulli distribution — quantile.bernoulli" />
+<meta property="og:title" content="Determine quantiles of a Bernoulli distribution — quantile.Bernoulli" />
 
 <meta property="og:description" content="quantile() is the inverse of cdf()." />
 <meta name="twitter:card" content="summary" />
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,9 +135,9 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine quantiles of a bernoulli distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/bernoulli.R'><code>R/bernoulli.R</code></a></small>
-    <div class="hidden name"><code>quantile.bernoulli.Rd</code></div>
+    <h1>Determine quantiles of a Bernoulli distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Bernoulli.R'><code>R/Bernoulli.R</code></a></small>
+    <div class="hidden name"><code>quantile.Bernoulli.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -149,7 +146,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for bernoulli</span>
+    <pre class="usage"><span class='co'># S3 method for Bernoulli</span>
 <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>d</span>, <span class='no'>p</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +154,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>bernoulli</code> object created by a call to <code><a href='bernoulli.html'>bernoulli()</a></code>.</p></td>
+      <td><p>A <code>Bernoulli</code> object created by a call to <code><a href='Bernoulli.html'>Bernoulli()</a></code>.</p></td>
     </tr>
     <tr>
       <th>p</th>
@@ -177,13 +174,12 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bernoulli.html'>bernoulli</a></span>(<span class='fl'>0.7</span>)
-<span class='no'>b</span></div><div class='output co'>#&gt; Bernoulli distribution (p = 0.7)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>b</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0 1 0 1 1 1 0 0 1 1</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>b</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 0.3</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
-<span class='co'># TODO: looks like I don't quite have quantiles right since the</span>
-<span class='co'># inverses don't hold like I'd want</span>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Bernoulli.html'>Bernoulli</a></span>(<span class='fl'>0.7</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Bernoulli distribution (p = 0.7)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1 1 0 1 0 1 1 1 1 0</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] -0.3566749</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 0.3</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='co'># TODO: make sure these are inverses of each other</span>
 
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

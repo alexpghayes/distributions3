@@ -139,7 +139,7 @@ To do this we need to c.d.f. of a standard normal
 ```{r}
 library(distributions)
 
-Z <- normal(0, 1)  # make a standard normal r.v.
+Z <- Normal(0, 1)  # make a standard normal r.v.
 1 - cdf(Z, 0.376) + cdf(Z, -0.376)
 ```
 
@@ -186,7 +186,6 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-Z <- normal(0, 1)
 1 - cdf(Z, -0.376)
 ```
 
@@ -205,6 +204,5 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-Z <- normal(0, 1)
 cdf(Z, -0.376)
 ```
