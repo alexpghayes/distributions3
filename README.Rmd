@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
+[![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
 <!-- badges: end -->
 
 `distributions`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions.

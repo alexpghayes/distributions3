@@ -7,6 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
+[![Codecov test
+coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
 <!-- badges: end -->
 
 `distributions`, inspired by the [eponynmous Julia
@@ -45,15 +47,16 @@ The basic usage of `distributions` looks like:
 ``` r
 library(distributions)
 
-b <- bernoulli(0.1)
+X <- Bernoulli(0.1)
 
-random(b, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
-pdf(b, 1)
+random(X, 10)
+#>  [1] 0 0 0 0 0 0 0 0 1 0
+pdf(X, 1)
 #> [1] 0.1
-cdf(b, 0)
+
+cdf(X, 0)
 #> [1] 0.9
-quantile(b, 0.5)
+quantile(X, 0.5)
 #> [1] 0
 ```
 
@@ -145,7 +148,6 @@ additional distributions.
 
 Candidates for the next set of generics:
 
-  - `log_pdf()`
   - `log_cdf()`
   - `plot_pdf()`
   - `plot_cdf()`
