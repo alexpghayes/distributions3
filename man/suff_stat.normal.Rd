@@ -10,13 +10,16 @@
 \item{d}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
-A named list of the sufficient statistics of the Normal distribution
-\describe{
-\item{\code{mu}}{The sample mean of the data}
-\item{\code{sigma}}{The sample standard deviation of the data}
-\item{\code{samples}}{The number of samples in the data}
+A named list of the sufficient statistics of the normal
+distribution:
+\itemize{
+\item \code{mu}: The sample mean of the data.
+\item \code{sigma}: The sample standard deviation of the data.
+\item \code{samples}: The number of samples in the data.
 }
 }
 \description{

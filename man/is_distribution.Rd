@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{is_distribution}
 \alias{is_distribution}
-\title{Is object a distribution?}
+\title{Is an object a distribution?}
 \usage{
 is_distribution(x)
 }
@@ -10,11 +10,13 @@ is_distribution(x)
 \item{x}{An object to test.}
 }
 \description{
-\code{is_distribution} tests if \code{x} is an distribution.
-It simply checks that the object has a \code{"distribution"}
-subclass.
+\code{is_distribution} tests if \code{x} inherits from \code{"distribution"}.
 }
 \examples{
-n <- normal()
-is_distribution(n)
+
+Z <- Normal()
+
+is_distribution(Z)
+is_distribution(1L)
+
 }

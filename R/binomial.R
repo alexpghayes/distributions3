@@ -3,7 +3,7 @@
 #' Bernoulli distributions are used to represent situations can that can
 #' thought of as `size` (often called \eqn{n} in textbooks) independent
 #' coin flips, where each coin flip has probability `p` of success. The
-#' [bernoulli()] distribution is a special case of Binomial distribution
+#' [Bernoulli()] distribution is a special case of Binomial distribution
 #' when `n = 1`.
 #'
 #' @param size The number of trials. Must be an integer greater than or equal
@@ -177,6 +177,7 @@ quantile.Binomial <- function(d, p, ...) {
 #'
 #' @param d A `Binomial` object.
 #' @param x A vector of zeroes and ones.
+#' @param ... Unused.
 #'
 #' @return a `Binomial` object
 #' @export

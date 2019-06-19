@@ -2,7 +2,7 @@
 % Please edit documentation in R/LogNormal.R
 \name{fit_mle.LogNormal}
 \alias{fit_mle.LogNormal}
-\title{Fit a Log-normal distribution to data}
+\title{Fit a Log Normal distribution to data}
 \usage{
 \method{fit_mle}{LogNormal}(d, x, ...)
 }
@@ -10,12 +10,14 @@
 \item{d}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
 A \code{LogNormal} object.
 }
 \description{
-Fit a Log-normal distribution to data
+Fit a Log Normal distribution to data
 }
 \seealso{
 Other LogNormal distribution: \code{\link{cdf.LogNormal}},

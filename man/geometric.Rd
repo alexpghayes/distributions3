@@ -8,7 +8,7 @@ Geometric(p = 0.5)
 }
 \arguments{
 \item{p}{The success probability for the distribution. \code{p} can be
-any value in \link{0, 1}, and defaults to \code{0.5}.}
+any value in \code{[0, 1]}, and defaults to \code{0.5}.}
 }
 \value{
 A \code{Geometric} object.

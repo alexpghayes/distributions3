@@ -167,6 +167,7 @@ quantile.Bernoulli <- function(d, p, ...) {
 #'
 #' @param d A `Bernoulli` object.
 #' @param x A vector of zeroes and ones.
+#' @param ... Unused.
 #'
 #' @return a `Bernoulli` object
 #' @export
@@ -179,11 +180,11 @@ fit_mle.Bernoulli <- function(d, x, ...) {
 #'
 #' @inheritParams fit_mle.Bernoulli
 #'
-#' @return A named list of the sufficient statistics of the Bernoulli distribution
-#'   \describe{
-#'     \item{\code{successes}}{The number of successful trials (\code{x == 1})}
-#'     \item{\code{failures}}{The number of failed trials (\code{x == 0})}
-#'   }
+#' @return A named list of the sufficient statistics of the Bernoulli
+#'   distribution:
+#'
+#'   - `successes`: The number of successful trials (`sum(x == 1)`)
+#'   - `failures`: The number of failed trials (`sum(x == 0)`).
 #'
 #' @export
 suff_stat.Bernoulli <- function(d, x, ...) {

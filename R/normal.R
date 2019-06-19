@@ -265,6 +265,7 @@ quantile.Normal <- function(d, p, ...) {
 #'
 #' @param d A `Normal` object created by a call to [Normal()].
 #' @param x A vector of data.
+#' @param ... Unused.
 #'
 #' @family Normal distribution
 #'
@@ -280,12 +281,13 @@ fit_mle.Normal <- function(d, x, ...) {
 #'
 #' @inheritParams fit_mle.Normal
 #'
-#' @return A named list of the sufficient statistics of the Normal distribution
-#'   \describe{
-#'     \item{\code{mu}}{The sample mean of the data}
-#'     \item{\code{sigma}}{The sample standard deviation of the data}
-#'     \item{\code{samples}}{The number of samples in the data}
-#'   }
+#' @return A named list of the sufficient statistics of the normal
+#'   distribution:
+#'
+#'   - `mu`: The sample mean of the data.
+#'   - `sigma`: The sample standard deviation of the data.
+#'   - `samples`: The number of samples in the data.
+#'
 #' @export
 suff_stat.Normal <- function(d, x, ...) {
   valid_x <- is.numeric(x)

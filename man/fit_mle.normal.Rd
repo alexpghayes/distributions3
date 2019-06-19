@@ -10,6 +10,8 @@
 \item{d}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
 A \code{Normal} object.

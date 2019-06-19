@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fit a Binomial distribution to data — fit_mle.Binomial • distributions</title>
+<title>Fit a distribution to data — fit_mle • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="Fit a Binomial distribution to data — fit_mle.Binomial" />
+<meta property="og:title" content="Fit a distribution to data — fit_mle" />
 
-<meta property="og:description" content="The fit distribution will inherit the same size parameter as
-the Binomial object passed." />
+<meta property="og:description" content="Approximates an empirical distribution with a theoretical one" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,37 +135,36 @@ the Binomial object passed." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fit a Binomial distribution to data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Binomial.R'><code>R/Binomial.R</code></a></small>
-    <div class="hidden name"><code>fit_mle.Binomial.Rd</code></div>
+    <h1>Fit a distribution to data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/methods.R'><code>R/methods.R</code></a></small>
+    <div class="hidden name"><code>fit_mle.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The fit distribution will inherit the same <code>size</code> parameter as
-the <code>Binomial</code> object passed.</p>
+    <p>Approximates an empirical distribution with a theoretical one</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for Binomial</span>
-<span class='fu'><a href='fit_mle.html'>fit_mle</a></span>(<span class='no'>d</span>, <span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>fit_mle</span>(<span class='no'>d</span>, <span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>Binomial</code> object.</p></td>
+      <td><p>A probability distribution object such as those created by
+a call to <code>bernoulli()</code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/Special'>beta()</a></code>, or <code><a href='https://www.rdocumentation.org/packages/stats/topics/family'>binomial()</a></code>.</p></td>
     </tr>
     <tr>
       <th>x</th>
-      <td><p>A vector of zeroes and ones.</p></td>
+      <td><p>A vector of data to compute the likelihood.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>Binomial</code> object</p>
+    <p>an object the same class as <code>d</code> with updated parameters</p>
     
 
   </div>

@@ -10,12 +10,15 @@
 \item{d}{An \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
-A named list of the sufficient statistics of the Poisson distribution
-\describe{
-\item{\code{sum}}{The sum of the data}
-\item{\code{samples}}{The number of samples in the data}
+A named list of the sufficient statistics of the Poisson
+distribution:
+\itemize{
+\item \code{sum}: The sum of the data.
+\item \code{samples}: The number of samples in the data.
 }
 }
 \description{

@@ -10,12 +10,15 @@
 \item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
-A named list of the sufficient statistics of Exponential distribution
-\describe{
-\item{\code{sum}}{The sum of the data}
-\item{\code{samples}}{The number of samples in the data}
+A named list of the sufficient statistics of the exponential
+distribution:
+\itemize{
+\item \code{sum}: The sum of the observations.
+\item \code{samples}: The number of observations.
 }
 }
 \description{

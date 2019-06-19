@@ -10,6 +10,8 @@
 \item{d}{A \code{Bernoulli} object.}
 
 \item{x}{A vector of zeroes and ones.}
+
+\item{...}{Unused.}
 }
 \value{
 a \code{Bernoulli} object

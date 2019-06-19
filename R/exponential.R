@@ -118,6 +118,7 @@ quantile.Exponential <- function(d, p, ...) {
 #'
 #' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param x A vector of data.
+#' @param ... Unused.
 #'
 #' @family Exponential distribution
 #'
@@ -133,11 +134,11 @@ fit_mle.Exponential <- function(d, x, ...) {
 #'
 #' @inheritParams fit_mle.Exponential
 #'
-#' @return A named list of the sufficient statistics of Exponential distribution
-#'   \describe{
-#'     \item{\code{sum}}{The sum of the data}
-#'     \item{\code{samples}}{The number of samples in the data}
-#'   }
+#' @return A named list of the sufficient statistics of the exponential
+#'   distribution:
+#'
+#'   - `sum`: The sum of the observations.
+#'   - `samples`: The number of observations.
 #'
 #' @export
 suff_stat.Exponential <- function(d, x, ...) {
