@@ -8,9 +8,12 @@ fit_mle(d, x, ...)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by
-a call to \code{\link[=bernoulli]{bernoulli()}}, \code{\link[=beta]{beta()}}, or \code{\link[=binomial]{binomial()}}.}
+a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
 \item{x}{A vector of data to compute the likelihood.}
+
+\item{...}{Unused. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
 an object the same class as \code{d} with updated parameters

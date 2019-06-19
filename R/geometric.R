@@ -8,7 +8,7 @@
 #' with parameters TODO.
 #'
 #' @param p The success probability for the distribution. `p` can be
-#'   any value in [0, 1], and defaults to `0.5`.
+#'   any value in `[0, 1]`, and defaults to `0.5`.
 #'
 #' @return A `Geometric` object.
 #' @export
@@ -169,6 +169,7 @@ quantile.Geometric <- function(d, p, ...) {
 #'
 #' @param d A `Geometric` object.
 #' @param x A vector of zeroes and ones.
+#' @param ... Unused.
 #'
 #' @return a `Geometric` object
 #' @export

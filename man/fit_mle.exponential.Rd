@@ -10,6 +10,8 @@
 \item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
 An \code{Exponential} object.

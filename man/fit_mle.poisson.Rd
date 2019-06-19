@@ -10,6 +10,8 @@
 \item{d}{An \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
 An \code{Poisson} object.

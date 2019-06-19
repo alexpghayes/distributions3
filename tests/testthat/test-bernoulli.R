@@ -1,15 +1,16 @@
 context("test-bernoulli")
 
-test_that("fit.Bernoulli works correctly", {
+test_that("fit_mle.Bernoulli works correctly", {
 
-  expect_equal(fit(Bernoulli(), c(0,1)), Bernoulli(0.5))
+  expect_equal(fit_mle(Bernoulli(), c(0, 1)), Bernoulli(0.5))
 
 })
 
 test_that("suff_stats.Bernoulli works correctly", {
 
   ss <- list(successes = 3, failures = 2)
-  expect_equal(suff_stat(Bernoulli(), c(1,1,1,0,0)), ss)
+
+  expect_equal(suff_stat(Bernoulli(), c(1, 1, 1, 0, 0)), ss)
 
   expect_error(suff_stat(Bernoulli(), 2))
 

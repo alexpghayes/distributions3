@@ -10,6 +10,8 @@
 \item{d}{A \code{Geometric} object.}
 
 \item{x}{A vector of zeroes and ones.}
+
+\item{...}{Unused.}
 }
 \value{
 A named list of the sufficient statistics of the Geometric

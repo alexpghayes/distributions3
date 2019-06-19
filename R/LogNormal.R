@@ -146,10 +146,11 @@ quantile.LogNormal <- function(d, p, ...) {
   qlnorm(p = p, meanlog = d$log_mu, sdlog = d$log_sigma)
 }
 
-#' Fit a Log-normal distribution to data
+#' Fit a Log Normal distribution to data
 #'
 #' @param d A `LogNormal` object created by a call to [LogNormal()].
 #' @param x A vector of data.
+#' @param ... Unused.
 #'
 #' @family LogNormal distribution
 #'

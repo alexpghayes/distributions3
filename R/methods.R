@@ -86,8 +86,10 @@ quantile <- function(d, p, ...) {
 #' Compute the likelihood of a probability distribution given data
 #'
 #' @param d A probability distribution object such as those created by
-#'   a call to [bernoulli()], [beta()], or [binomial()].
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of data to compute the likelihood.
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
 #'
 #' @return the likelihood
 #'
@@ -122,7 +124,7 @@ fit_mle <- function(d, x, ...) {
 
 #' Compute the sufficient statistics of a distribution from data
 #'
-#' @inheritParams fit
+#' @inheritParams fit_mle
 #'
 #' @return a named list of sufficient statistics
 suff_stat <- function(d, x, ...) {

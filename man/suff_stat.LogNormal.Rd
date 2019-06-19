@@ -10,6 +10,8 @@
 \item{d}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{x}{A vector of data.}
+
+\item{...}{Unused.}
 }
 \value{
 A named list of the sufficient statistics of the normal distribution:

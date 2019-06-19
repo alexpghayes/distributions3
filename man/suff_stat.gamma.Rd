@@ -6,8 +6,15 @@
 \usage{
 \method{suff_stat}{Gamma}(d, x, ...)
 }
+\arguments{
+\item{d}{A \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}
+
+\item{x}{A vector to fit the Gamma distribution to.}
+
+\item{...}{Unused.}
+}
 \value{
-A \code{Gamma} object.
+a \code{Gamma} object
 }
 \description{
 \itemize{
@@ -17,68 +24,4 @@ A \code{Gamma} object.
 \item \code{samples}: The number of samples in the data.
 }
 }
-}
-\details{
-We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
-will render with additional detail.
-
-In the following, let \eqn{X} be a Gamma random variable
-with parameters
-\code{shape} = \eqn{\alpha} and
-\code{rate} = \eqn{\beta}.
-
-\strong{Support}: \eqn{x \in (0, \infty)}
-
-\strong{Mean}: \eqn{\frac{\alpha}{\beta}}
-
-\strong{Variance}: \eqn{\frac{\alpha}{\beta^2}}
-
-\strong{Probability density function (p.m.f)}:
-
-\deqn{
-    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
-  }{
-    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
-  }
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-\deqn{
-    f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
-  }{
-    f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
-  }
-
-\strong{Moment generating function (m.g.f)}:
-
-\deqn{
-    \mathbb{E}(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
-  }{
-    E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
-  }
-}
-\examples{
-
-X <- Gamma(5, 2)
-X
-
-random(X, 10)
-
-pdf(X, 2)
-log_pdf(X, 2)
-
-cdf(X, 4)
-quantile(X, 0.7)
-
-cdf(X, quantile(X, 0.7))
-quantile(X, cdf(X, 7))
-
-}
-\seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
-  \code{\link{Uniform}}, \code{\link{random.Normal}}
 }

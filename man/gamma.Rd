@@ -63,7 +63,7 @@ with parameters
 \strong{Moment generating function (m.g.f)}:
 
 \deqn{
-    \mathbb{E}(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+    E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
   }{
     E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
   }

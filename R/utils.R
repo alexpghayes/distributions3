@@ -1,17 +1,18 @@
-#' Is object a distribution?
+#' Is an object a distribution?
 #'
-#' `is_distribution` tests if `x` is an distribution.
-#' It simply checks that the object has a `"distribution"`
-#' subclass.
+#' `is_distribution` tests if `x` inherits from `"distribution"`.
 #'
 #' @param x An object to test.
 #'
 #' @export
 #'
 #' @examples
-#' n <- normal()
-#' is_distribution(n)
-
+#'
+#' Z <- Normal()
+#'
+#' is_distribution(Z)
+#' is_distribution(1L)
+#'
 is_distribution <- function(x) {
   inherits(x, "distribution")
 }

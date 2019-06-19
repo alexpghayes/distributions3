@@ -10,12 +10,15 @@
 \item{d}{A \code{Bernoulli} object.}
 
 \item{x}{A vector of zeroes and ones.}
+
+\item{...}{Unused.}
 }
 \value{
-A named list of the sufficient statistics of the Bernoulli distribution
-\describe{
-\item{\code{successes}}{The number of successful trials (\code{x == 1})}
-\item{\code{failures}}{The number of failed trials (\code{x == 0})}
+A named list of the sufficient statistics of the Bernoulli
+distribution:
+\itemize{
+\item \code{successes}: The number of successful trials (\code{sum(x == 1)})
+\item \code{failures}: The number of failed trials (\code{sum(x == 0)}).
 }
 }
 \description{

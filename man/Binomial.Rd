@@ -21,7 +21,7 @@ A \code{Binomial} object.
 Bernoulli distributions are used to represent situations can that can
 thought of as \code{size} (often called \eqn{n} in textbooks) independent
 coin flips, where each coin flip has probability \code{p} of success. The
-\code{\link[=bernoulli]{bernoulli()}} distribution is a special case of Binomial distribution
+\code{\link[=Bernoulli]{Bernoulli()}} distribution is a special case of Binomial distribution
 when \code{n = 1}.
 }
 \details{

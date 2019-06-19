@@ -57,7 +57,7 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     \mathbb{E}(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+#'     E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
 #'   }{
 #'     E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
 #'   }
@@ -102,7 +102,7 @@ print.Gamma <- function(x, ...) {
 #' @export
 #'
 random.Gamma <- function(d, n = 1L, ...) {
-  rGamma(n = n, shape = d$shape, rate = d$rate)
+  rgamma(n = n, shape = d$shape, rate = d$rate)
 }
 
 #' Evaluate the probability mass function of a Gamma distribution
@@ -119,14 +119,14 @@ random.Gamma <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Gamma <- function(d, x, ...) {
-  dGamma(x = x, shape = d$shape, rate = d$rate)
+  dgamma(x = x, shape = d$shape, rate = d$rate)
 }
 
 #' @rdname pdf.Gamma
 #' @export
 #'
 log_pdf.Gamma <- function(d, x, ...) {
-  dGamma(x = x, shape = d$shape, rate = d$rate, log = TRUE)
+  dgamma(x = x, shape = d$shape, rate = d$rate, log = TRUE)
 }
 
 #' Evaluate the cumulative distribution function of a Gamma distribution
@@ -143,7 +143,7 @@ log_pdf.Gamma <- function(d, x, ...) {
 #' @export
 #'
 cdf.Gamma <- function(d, x, ...) {
-  pGamma(q = x, shape = d$shape, rate = d$rate)
+  pgamma(q = x, shape = d$shape, rate = d$rate)
 }
 
 #' Determine quantiles of a Gamma distribution
@@ -165,13 +165,14 @@ quantile.Gamma <- function(d, p, ...) {
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
 
-  qGamma(p = p, shape = d$shape, rate = d$rate)
+  qgamma(p = p, shape = d$shape, rate = d$rate)
 }
 
 #' Fit a Gamma distribution to data
 #'
 #' @param d A `Gamma` object created by a call to [Gamma()].
 #' @param x A vector to fit the Gamma distribution to.
+#' @param ... Unused.
 #'
 #' @return a `Gamma` object
 #' @export
@@ -186,7 +187,7 @@ fit_mle.Gamma <- function(d, x, ...) {
 #'   - `log_sum`: The log of the sum of the data.
 #'   - `samples`: The number of samples in the data.
 #'
-#' @inherit Gamma
+#' @inherit fit_mle.Gamma
 #' @export
 suff_stat.Gamma <- function(d, x, ...) {
   if(any(x < 0)) stop("`x` must only contain positive real numbers")
