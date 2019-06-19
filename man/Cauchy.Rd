@@ -30,7 +30,7 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a Cauchy variable with mean
 \code{location =} \eqn{x_0} and \code{scale} = \eqn{\gamma}.
 
-\strong{Support}: \eqn{\mathbb{R}}{R}, the set of all real numbers
+\strong{Support}: \eqn{R}, the set of all real numbers
 
 \strong{Mean}: Undefined.
 

@@ -33,7 +33,7 @@
 #'   In the following, let \eqn{X} be a Normal random variable with mean
 #'   `mu` = \eqn{\mu} and standard deviation `sigma` = \eqn{\sigma}.
 #'
-#'   **Support**: \eqn{\mathbb{R}}{R}, the set of all real numbers
+#'   **Support**: \eqn{R}, the set of all real numbers
 #'
 #'   **Mean**: \eqn{\mu}
 #'

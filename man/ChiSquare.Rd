@@ -31,7 +31,7 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a \eqn{\chi^2} random variable with
 \code{df} = \eqn{k}.
 
-\strong{Support}: \eqn{\mathbb{R}^+}{R^+}, the set of positive real numbers
+\strong{Support}: \eqn{R^+}, the set of positive real numbers
 
 \strong{Mean}: \eqn{k}
 
