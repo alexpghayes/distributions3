@@ -52,12 +52,13 @@ The basic usage of `distributions` looks like:
 ```{r intro}
 library(distributions)
 
-b <- bernoulli(0.1)
+X <- Bernoulli(0.1)
 
-random(b, 10)
-pdf(b, 1)
-cdf(b, 0)
-quantile(b, 0.5)
+random(X, 10)
+pdf(X, 1)
+
+cdf(X, 0)
+quantile(X, 0.5)
 ```
 
 Note that `quantile()` **always** returns lower tail probabilities. If you aren't sure what this means, please read the last several paragraphs of `vignette("one-sample-z-confidence-interval")` and have a gander at the plot.
@@ -131,7 +132,6 @@ After that the goal will probably to support more generics like those in the `Di
 
 Candidates for the next set of generics:
 
-- `log_pdf()`
 - `log_cdf()`
 - `plot_pdf()`
 - `plot_cdf()`

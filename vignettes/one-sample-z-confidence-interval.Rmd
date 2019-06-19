@@ -62,7 +62,7 @@ x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
 n <- length(x)
 
 # make a standard normal r.v.
-Z <- normal(0, 1)
+Z <- Normal(0, 1)
 
 # first approach
 mean(x) + quantile(Z, 0.12 / 2) * 2 / sqrt(n)
@@ -106,13 +106,13 @@ lower_quantile_plot <- ggplot(data = NULL) +
   geom_line(aes(grid, density), size = 1, color = "grey") +
   geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
   geom_text(
-    aes(x = 3.2, y = 0.3, label = "z[0.95] == 1.96"),
+    aes(x = 3.27, y = 0.3, label = "z[0.975] == 1.96"),
     parse = TRUE,
     size = 4
   ) +
   labs(
     title = "Lower tail quantile of a standard normal",
-    subtitle = "Integral of shaded region is 0.95",
+    subtitle = "Integral of shaded region is 0.975",
     y = "Density",
     x = "Support"
   ) +
@@ -124,13 +124,13 @@ upper_quantile_plot <- ggplot(data = NULL) +
   geom_line(aes(grid, density), size = 1, color = "grey") +
   geom_vline(xintercept = 1.96, size = 1, color = "darkgrey") +
   geom_text(
-    aes(x = 3.2, y = 0.3, label = "z[0.05] == 1.96"),
+    aes(x = 3.27, y = 0.3, label = "z[0.025] == 1.96"),
     parse = TRUE,
     size = 4
   ) +
   labs(
     title = "Upper tail quantile of a standard normal",
-    subtitle = "Integral of shaded region is 0.05",
+    subtitle = "Integral of shaded region is 0.025",
     y = "Density",
     x = "Support"
   ) +

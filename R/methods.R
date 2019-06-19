@@ -5,7 +5,7 @@
 #' Draw a random sample from a probability distribution
 #'
 #' @param d A probability distribution object such as those created by
-#'   a call to [bernoulli()], [beta()], or [binomial()].
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param n The number of samples to draw. Should be a positive
 #'   integer. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -115,11 +115,6 @@ log_likelihood <- function(d, x, ...) {
 #'
 #' @return an object the same class as \code{d} with updated parameters
 #' @export
-
-fit <- function(d, x, ...) {
-  fit_mle(d, x, ...)
-}
-
 fit_mle <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("fit_mle")
@@ -130,7 +125,6 @@ fit_mle <- function(d, x, ...) {
 #' @inheritParams fit
 #'
 #' @return a named list of sufficient statistics
-
 suff_stat <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("suff_stat")

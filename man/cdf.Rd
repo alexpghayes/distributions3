@@ -8,7 +8,7 @@ cdf(d, x, ...)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by
-a call to \code{\link[=bernoulli]{bernoulli()}}, \code{\link[=beta]{beta()}}, or \code{\link[=binomial]{binomial()}}.}
+a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}

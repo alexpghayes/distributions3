@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a beta distribution — beta • distributions</title>
+<title>Create a Beta distribution — Beta • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a beta distribution — beta" />
+<meta property="og:title" content="Create a Beta distribution — Beta" />
 
-<meta property="og:description" content="Create a beta distribution" />
+<meta property="og:description" content="Create a Beta distribution" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,18 +135,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a beta distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/beta.R'><code>R/beta.R</code></a></small>
-    <div class="hidden name"><code>beta.Rd</code></div>
+    <h1>Create a Beta distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Beta.R'><code>R/Beta.R</code></a></small>
+    <div class="hidden name"><code>Beta.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a beta distribution</p>
+    <p>Create a Beta distribution</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>beta</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>Beta</span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,20 +169,22 @@ greater than zero. Defaults to <code>1</code>.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other continuous distributions: <code><a href='cauchy.html'>cauchy</a></code>,
-  <code><a href='chi_square.html'>chi_square</a></code>, <code><a href='exponential.html'>exponential</a></code>,
-  <code><a href='fisher_f.html'>fisher_f</a></code>, <code><a href='gamma.html'>gamma</a></code>,
-  <code><a href='normal.html'>normal</a></code>, <code><a href='poisson.html'>poisson</a></code>,
-  <code><a href='students_t.html'>students_t</a></code></p></div>
+    <div class='dont-index'><p>Other continuous distributions: <code><a href='Cauchy.html'>Cauchy</a></code>,
+  <code><a href='ChiSquare.html'>ChiSquare</a></code>, <code><a href='Exponential.html'>Exponential</a></code>,
+  <code><a href='FisherF.html'>FisherF</a></code>, <code><a href='Gamma.html'>Gamma</a></code>,
+  <code><a href='Normal.html'>Normal</a></code>, <code><a href='StudentsT.html'>StudentsT</a></code>,
+  <code><a href='Uniform.html'>Uniform</a></code>, <code><a href='random.Normal.html'>random.Normal</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>b</span> <span class='kw'>&lt;-</span> <span class='fu'>beta</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
-<span class='no'>b</span></div><div class='output co'>#&gt; Beta distribution (alpha = 1, beta = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>b</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.066893895 0.426199620 0.424970206 0.440194505 0.550517053 0.152525449
-#&gt;  [7] 0.009825769 0.179367754 0.537478964 0.352242598</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.6</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.91</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.4522774</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>b</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>b</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Beta</span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Beta distribution (alpha = 1, beta = 2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.066893895 0.426199620 0.424970206 0.440194505 0.550517053 0.152525449
+#&gt;  [7] 0.009825769 0.179367754 0.537478964 0.352242598</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.6</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] -0.5108256</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.91</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.4522774</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -54,14 +54,16 @@
 #'
 #' @examples
 #'
-#' g <- Geometric(0.3)
-#' g
+#' X <- Geometric(0.3)
+#' X
 #'
-#' random(g, 10)
-#' pdf(g, 2)
-#' log_pdf(g, 2)
-#' cdf(g, 4)
-#' quantile(g, 0.7)
+#' random(X, 10)
+#'
+#' pdf(X, 2)
+#' log_pdf(X, 2)
+#'
+#' cdf(X, 4)
+#' quantile(X, 0.7)
 #'
 Geometric <- function(p = 0.5) {
   d <- list(p = p)

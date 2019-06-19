@@ -1,9 +1,10 @@
-#' Create a continuous Uniform distribution
+#' Create a continuous uniform distribution
 #'
+#' TODO: A categorical distribution that can be used for discrete uniforms.
 #'
 #' @param a The a parameter. `a` can be any value in the set of real
 #'   numbers. Defaults to `0`.
-#' @param b The b parameter. `b` can be any value in the set of real
+#' @param b The a parameter. `b` can be any value in the set of real
 #'   numbers. It should be strictly bigger than `a`, but if is not, the
 #'   order of the parameters is inverted. Defaults to `1`.
 #'
@@ -14,28 +15,30 @@
 #'
 #' @examples
 #'
-#' b <- Uniform(1, 2)
-#' b
+#' X <- Uniform(1, 2)
+#' X
 #'
-#' random(b, 10)
-#' pdf(b, 0.7)
-#' log_pdf(b, 0.7)
-#' cdf(b, 0.7)
-#' quantile(b, 0.7)
+#' random(X, 10)
 #'
-#' cdf(b, quantile(b, 0.7))
-#' quantile(b, cdf(b, 0.7))
+#' pdf(X, 0.7)
+#' log_pdf(X, 0.7)
+#'
+#' cdf(X, 0.7)
+#' quantile(X, 0.7)
+#'
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 0.7))
 #'
 Uniform <- function(a = 0, b = 1) {
   d <- list(a = a, b = b)
-  class(d) <- c("Uniform", "distribution")
+  class(d) <- "Uniform"
   d
 }
 
 #' @export
 print.Uniform <- function(x, ...) {
   if(x$a >  x$b) names(x) <- c("b", "a")
-  cat(glue("Continuous uniform distribution (a = {x$a}, b = {x$b})"))
+  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"))
 }
 
 #' Draw a random sample from a continuous Uniform distribution
@@ -80,7 +83,7 @@ log_pdf.Uniform <- function(d, x, ...) {
 
 #' Evaluate the cumulative distribution function of a continuous Uniform distribution
 #'
-#' @inherit uniform examples
+#' @inherit Uniform examples
 #' @inheritParams random.Uniform
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
@@ -95,7 +98,7 @@ cdf.Uniform <- function(d, x, ...) {
   punif(q = x, min = min(d$a, d$b), max = max(d$a, d$b))
 }
 
-#' Determine quantiles of a continuous Uniform distribution
+#' Determine quantiles of a continuous Uniform  distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
@@ -111,38 +114,4 @@ cdf.Uniform <- function(d, x, ...) {
 #'
 quantile.Uniform <- function(d, p, ...) {
   qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
-}
-
-#' Fit a Uniform distribution to data
-#'
-#' @param d A `Uniform` object created by a call to [Uniform()].
-#' @param x A vector of data.
-#'
-#' @family Uniform distribution
-#'
-#' @return A `Uniform` object.
-#' @export
-#'
-fit_mle.Uniform <- function(d, x, ...) {
-  ss <- suff_stat(d, x, ...)
-  Uniform(ss$min, ss$max)
-}
-
-
-#' Compute the sufficient statistics for a Uniform distribution from data
-#'
-#' @inheritParams fit_mle.Uniform
-#'
-#' @return A named list of the sufficient statistics of the normal distribution
-#'
-#'   - `min`: The minimum of the data.
-#'   - `max`: The maximum of the data.
-#'   - `samples`: The number of samples in the data.
-#'
-#' @export
-#'
-suff_stat.Uniform <- function(d, x, ...) {
-  valid_x <- is.numeric(x)
-  if(!valid_x) stop("`x` must be a numeric vector")
-  list(min = min(x), max = max(x), samples = length(x))
 }

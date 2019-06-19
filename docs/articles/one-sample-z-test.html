@@ -77,9 +77,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -174,7 +171,7 @@
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(distributions)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3">Z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/normal.html">normal</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># make a standard normal r.v.</span></a>
+<a class="sourceLine" id="cb3-3" title="3">Z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Normal.html">Normal</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># make a standard normal r.v.</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">-2.37</span>)</a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; [1] 0.01778809</span></a></code></pre></div>
 <p>Note that we saved <code>z_stat</code> above so we could have also done</p>
@@ -200,9 +197,8 @@
   P(Z &gt; 2.37)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">Z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/normal.html">normal</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; [1] 0.008894043</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; [1] 0.008894043</span></a></code></pre></div>
 <p>For the test</p>
 <p><span class="math display">\[
   H_0: \mu \ge 3 \qquad H_A: \mu &lt; 3
@@ -212,9 +208,8 @@
   P(Z &lt; 2.37)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">Z &lt;-<span class="st"> </span><span class="kw"><a href="../reference/normal.html">normal</a></span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt; [1] 0.991106</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">2.37</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; [1] 0.991106</span></a></code></pre></div>
 </div>
 <div id="rejection-regions" class="section level2">
 <h2 class="hasAnchor">

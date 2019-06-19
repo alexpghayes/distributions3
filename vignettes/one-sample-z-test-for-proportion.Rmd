@@ -22,7 +22,7 @@ Let's suppose that a student is interesting in estimating what percent of profes
 
 We can imagine that the data is a bunch of zeros and ones, where the $i^{th}$ data point, $x_i$ is one if professor $i$ watches Game of Thrones, and zero otherwise. So the full dataset might look something like:
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = FALSE}
 set.seed(27)
 
 x <- rep(0, 62)
@@ -100,7 +100,7 @@ To do this we need to c.d.f. of a standard normal
 ```{r}
 library(distributions)
 
-Z <- normal(0, 1)  # make a standard normal r.v.
+Z <- Normal(0, 1)  # make a standard normal r.v.
 1 - cdf(Z, 1.46) + cdf(Z, -1.46)
 ```
 
@@ -149,7 +149,6 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-Z <- normal(0, 1)
 1 - cdf(Z, 1.46)
 ```
 
@@ -168,6 +167,5 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-Z <- normal(0, 1)
 cdf(Z, 1.46)
 ```

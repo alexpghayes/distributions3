@@ -63,11 +63,11 @@ sort(incomes)
 We can verify this with R as well:
 
 ```{r}
-B <- sum(incomes > 50000)
-B
+b <- sum(incomes > 50000)
+b
 
-N <- sum(incomes != 50000)
-N
+n <- sum(incomes != 50000)
+n
 ```
 
 ## Calculating p-values
@@ -84,8 +84,8 @@ To do this we need to c.d.f. of a binomial random variable:
 ```{r}
 library(distributions)
 
-B_12 <- binomial(12, 0.5)
-2 * min(cdf(B_12, B), 1 - cdf(B_12, B - 1))
+X <- Binomial(n, 0.5)
+2 * min(cdf(X, b), 1 - cdf(X, b - 1))
 ```
 
 In practice computing the c.d.f. of binomial random variables is rather tedious and there aren't great shortcuts for small samples. If you got a question like this on an exam, you'd want to use the binomial p.m.f. repeatedly, like this:
@@ -114,7 +114,7 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-1 - cdf(B_12, B - 1)
+1 - cdf(X, b - 1)
 ```
 
 For the test
@@ -132,7 +132,7 @@ the p-value is given by
 which we calculate with
 
 ```{r}
-cdf(B_12, B)
+cdf(X, b)
 ```
 
 ## Using the binom.test() function

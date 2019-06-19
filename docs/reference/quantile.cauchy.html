@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine quantiles of a cauchy distribution — quantile.cauchy • distributions</title>
+<title>Determine quantiles of a Cauchy distribution — quantile.Cauchy • distributions</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Determine quantiles of a cauchy distribution — quantile.cauchy" />
+<meta property="og:title" content="Determine quantiles of a Cauchy distribution — quantile.Cauchy" />
 
 <meta property="og:description" content="quantile() is the inverse of cdf()." />
 <meta name="twitter:card" content="summary" />
@@ -110,9 +110,6 @@
       <a href="../articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="../articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -138,9 +135,9 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine quantiles of a cauchy distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/cauchy.R'><code>R/cauchy.R</code></a></small>
-    <div class="hidden name"><code>quantile.cauchy.Rd</code></div>
+    <h1>Determine quantiles of a Cauchy distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Cauchy.R'><code>R/Cauchy.R</code></a></small>
+    <div class="hidden name"><code>quantile.Cauchy.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -149,7 +146,7 @@
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cauchy</span>
+    <pre class="usage"><span class='co'># S3 method for Cauchy</span>
 <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>d</span>, <span class='no'>p</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,7 +154,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>cauchy</code> object created by a call to <code><a href='cauchy.html'>cauchy()</a></code>.</p></td>
+      <td><p>A <code>Cauchy</code> object created by a call to <code><a href='Cauchy.html'>Cauchy()</a></code>.</p></td>
     </tr>
     <tr>
       <th>p</th>
@@ -177,11 +174,13 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>c</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cauchy.html'>cauchy</a></span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
-<span class='no'>c</span></div><div class='output co'>#&gt; Cauchy distribution (location = 10, scale = 0.2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>c</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  9.672364  9.431616 10.599764  9.872956  9.997587  9.840284 10.188236
-#&gt;  [8]  9.964259 10.043649 10.017959</div><div class='input'><span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>c</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0009940971</div><div class='input'><span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.00795609</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 10.14531</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>c</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>c</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Cauchy.html'>Cauchy</a></span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Cauchy distribution (location = 10, scale = 0.2)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 10.043649 10.017959  9.571465  9.561403 11.150850  9.795890 10.202167
+#&gt;  [8] 10.041860  9.746238  9.859080</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0009940971</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -6.913676</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.00795609</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 10.14531</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

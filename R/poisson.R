@@ -1,11 +1,11 @@
-#' Create a poisson distribution
+#' Create a Poisson distribution
 #'
 #' Poisson distributions are frequently used to model counts.
 #'
 #' @param lambda The shape parameter, which is also the mean and the
 #'   variance of the distribution. Can be any positive number.
 #'
-#' @return A `poisson` object.
+#' @return A `Poisson` object.
 #' @export
 #'
 #' @family discrete distributions
@@ -53,34 +53,36 @@
 #'
 #' @examples
 #'
-#' p <- poisson(2)
-#' p
+#' X <- Poisson(2)
+#' X
 #'
-#' random(p, 10)
-#' pdf(p, 2)
-#' log_pdf(p, 2)
-#' cdf(p, 4)
-#' quantile(p, 0.7)
+#' random(X, 10)
 #'
-#' cdf(p, quantile(p, 0.7))
-#' quantile(p, cdf(p, 7))
+#' pdf(X, 2)
+#' log_pdf(X, 2)
 #'
-poisson <- function(lambda) {
+#' cdf(X, 4)
+#' quantile(X, 0.7)
+#'
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 7))
+#'
+Poisson <- function(lambda) {
   d <- list(lambda = lambda)
-  class(d) <- c("poisson", "distribution")
+  class(d) <- c("Poisson", "distribution")
   d
 }
 
 #' @export
-print.poisson <- function(x, ...) {
+print.Poisson <- function(x, ...) {
   cat(glue("Poisson distribution (lambda = {x$lambda})"))
 }
 
-#' Draw a random sample from a poisson distribution
+#' Draw a random sample from a Poisson distribution
 #'
-#' @inherit poisson examples
+#' @inherit Poisson examples
 #'
-#' @param d A `poisson` object created by a call to [poisson()].
+#' @param d A `Poisson` object created by a call to [Poisson()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -88,14 +90,14 @@ print.poisson <- function(x, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.poisson <- function(d, n = 1L, ...) {
+random.Poisson <- function(d, n = 1L, ...) {
   rpois(n = n, lambda = d$lambda)
 }
 
-#' Evaluate the probability mass function of a poisson distribution
+#' Evaluate the probability mass function of a Poisson distribution
 #'
-#' @inherit poisson examples
-#' @inheritParams random.poisson
+#' @inherit Poisson examples
+#' @inheritParams random.Poisson
 #'
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
@@ -105,21 +107,21 @@ random.poisson <- function(d, n = 1L, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.poisson <- function(d, x, ...) {
+pdf.Poisson <- function(d, x, ...) {
   dpois(x = x, lambda = d$lambda)
 }
 
-#' @rdname pdf.poisson
+#' @rdname pdf.Poisson
 #' @export
 #'
-log_pdf.poisson <- function(d, x, ...) {
+log_pdf.Poisson <- function(d, x, ...) {
   dpois(x = x, lambda = d$lambda, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a poisson distribution
+#' Evaluate the cumulative distribution function of a Poisson distribution
 #'
-#' @inherit poisson examples
-#' @inheritParams random.poisson
+#' @inherit Poisson examples
+#' @inheritParams random.Poisson
 #'
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
@@ -129,16 +131,16 @@ log_pdf.poisson <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.poisson <- function(d, x, ...) {
+cdf.Poisson <- function(d, x, ...) {
   ppois(q = x, lambda = d$lambda)
 }
 
-#' Determine quantiles of a poisson distribution
+#' Determine quantiles of a Poisson distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
-#' @inherit poisson examples
-#' @inheritParams random.poisson
+#' @inherit Poisson examples
+#' @inheritParams random.Poisson
 #'
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -147,37 +149,37 @@ cdf.poisson <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.poisson <- function(d, p, ...) {
+quantile.Poisson <- function(d, p, ...) {
   qpois(p = p, lambda = d$lambda)
 }
 
-#' Fit an poisson distribution to data
+#' Fit an Poisson distribution to data
 #'
-#' @param d An `poisson` object created by a call to [poisson()].
+#' @param d An `Poisson` object created by a call to [Poisson()].
 #' @param x A vector of data.
 #'
-#' @family poisson distribution
+#' @family Poisson distribution
 #'
-#' @return An `poisson` object.
+#' @return An `Poisson` object.
 #' @export
-fit_mle.poisson <- function(d, x, ...) {
+fit_mle.Poisson <- function(d, x, ...) {
   ss <- suff_stat(d, x, ...)
-  poisson(ss$sum / ss$samples)
+  Poisson(ss$sum / ss$samples)
 }
 
 
-#' Compute the sufficient statistics of an poisson distribution from data
+#' Compute the sufficient statistics of an Poisson distribution from data
 #'
-#' @inheritParams fit_mle.poisson
+#' @inheritParams fit_mle.Poisson
 #'
-#' @return A named list of the sufficient statistics of the poisson distribution
+#' @return A named list of the sufficient statistics of the Poisson distribution
 #'   \describe{
 #'     \item{\code{sum}}{The sum of the data}
 #'     \item{\code{samples}}{The number of samples in the data}
 #'   }
 #'
 #' @export
-suff_stat.poisson <- function(d, x, ...) {
+suff_stat.Poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
   if(any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))

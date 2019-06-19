@@ -82,9 +82,6 @@
       <a href="articles/paired-tests.html">Paired tests</a>
     </li>
     <li>
-      <a href="articles/two-sample-t-test-equal-var.html">Two sample T-test (equal variance)</a>
-    </li>
-    <li>
       <a href="articles/two-sample-z-test.html">Two sample Z-tests</a>
     </li>
   </ul>
@@ -148,16 +145,17 @@
 <p>The basic usage of <code>distributions</code> looks like:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(distributions)</a>
 <a class="sourceLine" id="cb2-2" title="2"></a>
-<a class="sourceLine" id="cb2-3" title="3">b &lt;-<span class="st"> </span><span class="kw"><a href="reference/bernoulli.html">bernoulli</a></span>(<span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3">X &lt;-<span class="st"> </span><span class="kw"><a href="reference/Bernoulli.html">Bernoulli</a></span>(<span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb2-4" title="4"></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="kw"><a href="reference/random.html">random</a></span>(b, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;  [1] 0 1 0 0 1 1 0 0 0 0</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="reference/pdf.html">pdf</a></span>(b, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw"><a href="reference/random.html">random</a></span>(X, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt;  [1] 0 1 0 0 0 0 0 0 0 0</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="reference/pdf.html">pdf</a></span>(X, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; [1] 0.1</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="kw"><a href="reference/cdf.html">cdf</a></span>(b, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; [1] 0.9</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="kw"><a href="reference/quantile.html">quantile</a></span>(b, <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; [1] 0</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="kw"><a href="reference/cdf.html">cdf</a></span>(X, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; [1] 0.9</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="kw"><a href="reference/quantile.html">quantile</a></span>(X, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; [1] 0</span></a></code></pre></div>
 <p>Note that <code><a href="reference/quantile.html">quantile()</a></code> <strong>always</strong> returns lower tail probabilities. If you aren’t sure what this means, please read the last several paragraphs of <code><a href="articles/one-sample-z-confidence-interval.html">vignette("one-sample-z-confidence-interval")</a></code> and have a gander at the plot.</p>
 </div>
 <div id="development-roadmap" class="section level2">
@@ -303,7 +301,6 @@ Rao score test</li>
 <p>After that the goal will probably to support more generics like those in the <code>Distributions.jl</code>, with the hope that the community will contribute additional distributions.</p>
 <p>Candidates for the next set of generics:</p>
 <ul>
-<li><code>log_pdf()</code></li>
 <li><code>log_cdf()</code></li>
 <li><code>plot_pdf()</code></li>
 <li><code>plot_cdf()</code></li>
@@ -352,6 +349,7 @@ Rao score test</li>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Alex Hayes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
