@@ -15,8 +15,8 @@
 #'   <https://alexpghayes.github.io/distributions>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a StudentsT random variable with mean
-#'   `mu` = \eqn{\mu} and standard deviation `sigma` = \eqn{\sigma}.
+#'   In the following, let \eqn{X} be a StudentsT random variable with
+#'   `df` = \eqn{\nu}.
 #'
 #'   **Support**: \eqn{R}, the set of all real numbers
 #'
@@ -29,7 +29,7 @@
 #'     \frac{\nu}{\nu - 2}
 #'   }
 #'
-#'   Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \n \le 2}.
+#'   Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \nu \le 2}.
 #'
 #'   **Probability density function (p.d.f)**:
 #'
