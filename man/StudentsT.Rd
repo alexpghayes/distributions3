@@ -20,8 +20,8 @@ We recommend reading this documentation on
 \url{https://alexpghayes.github.io/distributions}, where the math
 will render with additional detail and much greater clarity.
 
-In the following, let \eqn{X} be a StudentsT random variable with mean
-\code{mu} = \eqn{\mu} and standard deviation \code{sigma} = \eqn{\sigma}.
+In the following, let \eqn{X} be a StudentsT random variable with
+\code{df} = \eqn{\nu}.
 
 \strong{Support}: \eqn{R}, the set of all real numbers
 
@@ -34,7 +34,7 @@ zero.
     \frac{\nu}{\nu - 2}
   }
 
-Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \n \le 2}.
+Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \nu \le 2}.
 
 \strong{Probability density function (p.d.f)}:
 
