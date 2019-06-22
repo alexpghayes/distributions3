@@ -6,7 +6,8 @@ cache: packages
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 
 before_install:
-  - tlmgr install amsmath
+  - tlmgr install amsfonts
+
 
 deploy:
   provider: script
