@@ -174,8 +174,6 @@ print.Normal <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @family continuous distributions
-#'
 #' @return A numeric vector of length `n`.
 #' @export
 #'

@@ -102,11 +102,3 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
 
 }
-\seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Uniform}}
-}
-\concept{continuous distributions}
