@@ -56,6 +56,6 @@ Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
   \code{\link{Exponential}}, \code{\link{FisherF}},
   \code{\link{Gamma}}, \code{\link{Normal}},
-  \code{\link{Uniform}}, \code{\link{random.Normal}}
+  \code{\link{Uniform}}
 }
 \concept{continuous distributions}
