@@ -9,7 +9,7 @@ Binomial(size, p = 0.5)
 \arguments{
 \item{size}{The number of trials. Must be an integer greater than or equal
 to one. When \code{size = 1L}, the Binomial distribution reduces to the
-bernoulli distribution. Oftened called \code{n} in textbooks.}
+bernoulli distribution. Often called \code{n} in textbooks.}
 
 \item{p}{The success probability for a given trial. \code{p} can be any
 value in \code{[0, 1]}, and defaults to \code{0.5}.}
@@ -88,7 +88,8 @@ quantile(X, cdf(X, 7))
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Geometric}}, \code{\link{LogNormal}},
+  \code{\link{Geometric}}, \code{\link{HyperGeometric}},
+  \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }
 \concept{discrete distributions}

@@ -6,7 +6,7 @@
 #' @return A `LogNormal` object.
 #' @export
 #'
-#' @family discrete distributions
+#' @family continuous distributions
 #'
 #' @details
 #'
@@ -104,7 +104,6 @@ pdf.LogNormal <- function(d, x, ...) {
 
 #' @rdname pdf.LogNormal
 #' @export
-#'
 log_pdf.LogNormal <- function(d, x, ...) {
   dlnorm(x = x, meanlog = d$log_mu, sdlog = d$log_sigma, log = TRUE)
 }

@@ -76,6 +76,7 @@ quantile(X, cdf(X, 7))
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
   \code{\link{Binomial}}, \code{\link{Geometric}},
-  \code{\link{LogNormal}}, \code{\link{NegativeBinomial}}
+  \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
+  \code{\link{NegativeBinomial}}
 }
 \concept{discrete distributions}
