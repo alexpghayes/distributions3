@@ -42,7 +42,7 @@
 #'   **Probability mass function (p.m.f)**:
 #'
 #'   \deqn{
-#'     P(X = k) = \binom{n}{k} p^k (1 - p)^{n-k}
+#'     P(X = k) = {n \choose k} p^k (1 - p)^{n-k}
 #'   }{
 #'     P(X = k) = choose(n, k) p^k (1 - p)^(n - k)
 #'   }
@@ -50,7 +50,7 @@
 #'   **Cumulative distribution function (c.d.f)**:
 #'
 #'   \deqn{
-#'     P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} \binom{n}{i} p^i (1 - p)^{n-i}
+#'     P(X \le k) = \sum_{i=0}^{\lfloor k \rfloor} {n \choose i} p^i (1 - p)^{n-i}
 #'   }{
 #'     P(X \le k) = \sum_{i=0}^k choose(n, i) p^i (1 - p)^(n-i)
 #'   }

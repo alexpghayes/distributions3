@@ -46,7 +46,7 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     \mathbb E(e^{tX}) = e^{\lambda (e^t - 1)}
+#'     E(e^{tX}) = e^{\lambda (e^t - 1)}
 #'   }{
 #'     E(e^(tX)) = e^(\lambda (e^t - 1))
 #'   }

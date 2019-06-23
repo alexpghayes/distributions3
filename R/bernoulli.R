@@ -41,11 +41,13 @@
 #'
 #'   \deqn{
 #'     P(X \le x) =
-#'     \begin{cases}
-#'       0 & x < 0 \\
-#'       1 - p & 0 \leq x < 1 \\
-#'       1 & x \geq 1
-#'     \end{cases}
+#'     \left \{
+#'       \begin{array}{ll}
+#'         0 & x < 0 \\
+#'         1 - p & 0 \leq x < 1 \\
+#'         1 & x \geq 1
+#'       \end{array}
+#'     \right.
 #'   }{
 #'     P(X \le x) = (1 - p) 1_{[0, 1)}(x) + 1_{1}(x)
 #'   }
