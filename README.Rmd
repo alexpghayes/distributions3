@@ -78,15 +78,15 @@ The initial goal of `distributions` is to replace the base R `d`, `p`, `q`, and 
 - [x] `norm` - documented
 - [x] `pois` - documented
 - [x] `t`
-- [ ] `multinomial`
-- [ ] `unif`
+- [ ] `multinomial` - ugh multivariate is hard
+- [x] `unif`
 - [x] `geom`
-- [ ] `hyper`
-- [ ] `logis`
+- [x] `hyper`
+- [x] `logis`
 - [x] `lnorm`
 - [x] `nbinom`
-- [ ] `weibull`
-- [ ] `tukey`
+- [x] `weibull`
+- [x] `tukey`
 
 We also want to write detailed vignettes describing the most common use cases for each of these distributions. Realistically, this means we need to document how to perform the statistical tests most common in intro stats classes.
 

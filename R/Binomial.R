@@ -8,7 +8,7 @@
 #'
 #' @param size The number of trials. Must be an integer greater than or equal
 #'   to one. When `size = 1L`, the Binomial distribution reduces to the
-#'   bernoulli distribution. Oftened called `n` in textbooks.
+#'   bernoulli distribution. Often called `n` in textbooks.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
