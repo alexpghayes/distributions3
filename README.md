@@ -68,27 +68,11 @@ the plot.
 ## Development roadmap
 
 The initial goal of `distributions` is to replace the base R `d`, `p`,
-`q`, and `r` functions for the following families:
+`q`, and `r` functions for the following families. Currently we have
+replicated all of base R’s functionality. Next steps:
 
-  - [x] `beta` - documented
-  - [x] `binom` - documented
-  - [x] `cauchy` - documented
-  - [x] `chisq`
-  - [x] `exp`
-  - [x] `f`
-  - [x] `gamma`
-  - [x] `norm` - documented
-  - [x] `pois` - documented
-  - [x] `t`
-  - [ ] `multinomial`
-  - [ ] `unif`
-  - [x] `geom`
-  - [ ] `hyper`
-  - [ ] `logis`
-  - [x] `lnorm`
-  - [x] `nbinom`
-  - [ ] `weibull`
-  - [ ] `tukey`
+  - Fill in missing documentation
+  - Tests
 
 We also want to write detailed vignettes describing the most common use
 cases for each of these distributions. Realistically, this means we need
