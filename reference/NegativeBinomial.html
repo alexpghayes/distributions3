@@ -190,14 +190,15 @@ success probability <code>p</code> = \(p\).</p>
 
     <div class='dont-index'><p>Other discrete distributions: <code><a href='Bernoulli.html'>Bernoulli</a></code>,
   <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='geometric.html'>Geometric</a></code>,
-  <code><a href='LogNormal.html'>LogNormal</a></code>, <code><a href='poisson.html'>Poisson</a></code></p></div>
+  <code><a href='HyperGeometric.html'>HyperGeometric</a></code>, <code><a href='Multinomial.html'>Multinomial</a></code>,
+  <code><a href='poisson.html'>Poisson</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>NegativeBinomial</span>(<span class='fl'>10</span>, <span class='fl'>0.3</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Negative Binomial distribution (size = 10, p = 0.3)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 36 21 38 30 30 34 14 27  8 39</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 12 34 14 27  8 39 43 31 16 24</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0001591371</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -8.745745</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.001665663</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 27</div><div class='input'>
 </div></pre>
