@@ -71,7 +71,7 @@ That is
   H_0: \mu = 3 \qquad H_A: \mu \neq 3
 \]
 
-First we need to calculate our Z-statistic. Let's use do this with R.
+First we need to calculate our Z-statistic. Let's do this with R.
 Remember that the Z-statistic is defined as
 
 \[
@@ -225,15 +225,53 @@ You can also think about this in terms of $\mu_0$. We will reject the test when 
 
 which you may recognize as the confidence interval for $\mu$! So the confidence interval contains all the values of $\mu_0$ that we cannot reject at the $\alpha$ level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either $\infty$ or $-\infty$.
 
-## Power
-
-TODO
+## Power and sample size calculations
 
 ### Formulas for power
 
-TODO: power formula in terms of test statistics
+We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test have high power: $P(\text{reject } H_0 | H_0 \text{ is false})$. The problem here is that $H_0$ can be wrong in many different way: it could be that the true $\mu$ is $2$, it could be $7$, it could be $4.26$. So to calculate power as it is actually formualted above is not really possible. However, we can calculate power for specific versions of "$H_0$ is false". 
 
-To achieve a power of $1 - \beta$ for a (two-sided) one sample Z-test, you need
+Let's pretend that $H_0$ is false, and that the true value of $\mu$ is $\mu_A$. In this case, the power of our test is $P(\text{reject H_0} | \mu = \mu_A)$. As seen [above](#rejection-regions), $H_0$ is rejected when $\bar{x} > \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}$ or $\bar{x} < \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}$, so the power of our test when $\mu = \mu_A$ is
+
+\[
+  P(\text{reject } H_0 \left | \mu = \mu_A \right .) = P\left( \left . \bar{x} > \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right) + P\left( \left . \bar{x} < \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right).
+\]
+
+Remember, $\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)$, so given that $\mu = \mu_A$, $\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)$, which let's us calculate the probabilities we need to find the power:
+
+\begin{align}
+  P\left( \left . \bar{x} > \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right)
+  &= P\left( \frac{\bar{x} - \mu_A}{\sigma/\sqrt{n}} > \frac{\mu_0 + z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} - \mu_A}{\sigma/\sqrt{n}} \right) \\
+  &= P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right),
+\end{align}
+
+and similarly
+
+\[
+  P\left( \left . \bar{x} < \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\]
+
+So, the power of our test, IF the true mean value is $\mu_A$, is 
+
+\begin{align}
+  \text{Power} &= P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
+  (1 - P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right)) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
+\end{align}
+
+Let's calculate this if $\mu_A = 5$. 
+
+```{r}
+power_lower <- (3 - 5) / (2 / sqrt(10)) + quantile(Z, 0.025)
+power_upper <- (3 - 5) / (2 / sqrt(10)) + quantile(Z, 1-0.025)
+
+cdf(Z, power_lower) + (1-cdf(Z, power_upper))
+```
+
+This means that the probability that we reject the null hypothesis ($H_0: \mu = 3$) if the true mean is $5$ is about `r round(cdf(Z, power_lower) + (1-cdf(Z, power_upper)), 2)`. 
+
+### Formulas for sample size calculations
+
+Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of $1 - \beta$ for a (two-sided) one sample Z-test, you need 
 
 \[
   n \approx \left(
@@ -244,4 +282,4 @@ To achieve a power of $1 - \beta$ for a (two-sided) one sample Z-test, you need
   \right)^2
 \]
 
-round up
+samples. If $n$ is not an integer, round up. 
