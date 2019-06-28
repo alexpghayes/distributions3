@@ -32,11 +32,11 @@ dput(x)
 ```
 
 
-\[
-  1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 
-  0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 
-  0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
-\]
+\begin{align}
+  & 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,     \\
+  & 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0,  \\
+  & 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+\end{align}
 
 But it is much easier to just remember that there are 17 ones and 45 zeros.
 
@@ -48,12 +48,12 @@ treat the mean of this sample as normally distributed. The data is definitely no
 Most of the time we would check if there were 30 data points or more, but for a proportion, we do something slightly different. When data is binary, like we have here, the central limit theorem kicks in slower than usual. The standard thing to check is whether
 
 - $n \cdot \pi > 5$
-- $n \cdpt (1 - \pi) > 5$
+- $n \cdot (1 - \pi) > 5$
 
 Where $n$ is the sample size (62 in our case) and $\pi$ is the sample average. Note that some textbooks might use $p$ rather than $\pi$. In our case we have $\pi = 17 / 62$, and
 
 - $62 \cdot 17 / 62 = 17$
-- $62 \cdpt (1 - 17 / 62) = 45$
+- $62 \cdot (1 - 17 / 62) = 45$
 
 So we're good to go.
 
