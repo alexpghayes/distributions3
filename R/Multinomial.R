@@ -1,6 +1,5 @@
 #' Create a Multinomial distribution
 #'
-#'
 #' @param size The number of trials. Must be an integer greater than or equal
 #'   to one. When `size = 1L`, the Multinomial distribution reduces to the
 #'   categorical distribution (also called the discrete uniform).

@@ -64,7 +64,7 @@ quantile(X, 0.7)
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Custom}},
+  \code{\link{Binomial}}, \code{\link{Categorical}},
   \code{\link{Geometric}}, \code{\link{HyperGeometric}},
   \code{\link{Multinomial}}, \code{\link{Poisson}}
 }

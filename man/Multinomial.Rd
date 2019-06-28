@@ -63,7 +63,7 @@ random(X, 10)
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Custom}},
+  \code{\link{Binomial}}, \code{\link{Categorical}},
   \code{\link{Geometric}}, \code{\link{HyperGeometric}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }

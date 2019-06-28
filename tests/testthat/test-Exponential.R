@@ -1,4 +1,4 @@
-context("test-exponential")
+context("test-Exponential")
 
 test_that("fit_mle.Exponential works correctly", {
 
