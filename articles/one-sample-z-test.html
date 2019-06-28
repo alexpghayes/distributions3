@@ -146,7 +146,7 @@
 <p><span class="math display">\[
   H_0: \mu = 3 \qquad H_A: \mu \neq 3
 \]</span></p>
-<p>First we need to calculate our Z-statistic. Let’s use do this with R. Remember that the Z-statistic is defined as</p>
+<p>First we need to calculate our Z-statistic. Let’s do this with R. Remember that the Z-statistic is defined as</p>
 <p><span class="math display">\[
   Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} \sim \mathrm{Normal}(0, 1)
 \]</span></p>
@@ -226,15 +226,37 @@
 
 <p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains all the values of <span class="math inline">\(\mu_0\)</span> that we cannot reject at the <span class="math inline">\(\alpha\)</span> level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either <span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
 </div>
-<div id="power" class="section level2">
+<div id="power-and-sample-size-calculations" class="section level2">
 <h2 class="hasAnchor">
-<a href="#power" class="anchor"></a>Power</h2>
-<p>TODO</p>
+<a href="#power-and-sample-size-calculations" class="anchor"></a>Power and sample size calculations</h2>
 <div id="formulas-for-power" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formulas-for-power" class="anchor"></a>Formulas for power</h3>
-<p>TODO: power formula in terms of test statistics</p>
-<p>To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a (two-sided) one sample Z-test, you need</p>
+<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test have high power: <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different way: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as it is actually formualted above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
+<p>Let’s pretend that <span class="math inline">\(H_0\)</span> is false, and that the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our test is <span class="math inline">\(P(\text{reject H_0} | \mu = \mu_A)\)</span>. As seen <a href="#rejection-regions">above</a>, <span class="math inline">\(H_0\)</span> is rejected when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the power of our test when <span class="math inline">\(\mu = \mu_A\)</span> is</p>
+<p><span class="math display">\[
+  P(\text{reject } H_0 \left | \mu = \mu_A \right .) = P\left( \left . \bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right) + P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right).
+\]</span></p>
+<p>Remember, <span class="math inline">\(\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)\)</span>, so given that <span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)\)</span>, which let’s us calculate the probabilities we need to find the power:</p>
+
+<p>and similarly</p>
+<p><span class="math display">\[
+  P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\]</span></p>
+<p>So, the power of our test, IF the true mean value is <span class="math inline">\(\mu_A\)</span>, is</p>
+
+<p>Let’s calculate this if <span class="math inline">\(\mu_A = 5\)</span>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">power_lower &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="fl">0.025</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">power_upper &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="dv">1</span><span class="fl">-0.025</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_lower) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_upper))</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [1] 0.8853791</span></a></code></pre></div>
+<p>This means that the probability that we reject the null hypothesis (<span class="math inline">\(H_0: \mu = 3\)</span>) if the true mean is <span class="math inline">\(5\)</span> is about 0.89.</p>
+</div>
+<div id="formulas-for-sample-size-calculations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#formulas-for-sample-size-calculations" class="anchor"></a>Formulas for sample size calculations</h3>
+<p>Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a (two-sided) one sample Z-test, you need</p>
 <p><span class="math display">\[
   n \approx \left(
     {
@@ -243,7 +265,7 @@
     }
   \right)^2
 \]</span></p>
-<p>round up</p>
+<p>samples. If <span class="math inline">\(n\)</span> is not an integer, round up.</p>
 </div>
 </div>
   </div>
@@ -258,7 +280,7 @@
       <li><a href="#null-hypothesis-and-test-statistic">Null hypothesis and test statistic</a></li>
       <li><a href="#calculating-p-values">Calculating p-values</a></li>
       <li><a href="#rejection-regions">Rejection regions</a></li>
-      <li><a href="#power">Power</a></li>
+      <li><a href="#power-and-sample-size-calculations">Power and sample size calculations</a></li>
       </ul>
 </div>
       </div>
