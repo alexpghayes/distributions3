@@ -18,7 +18,7 @@ random <- function(d, n = 1L, ...) {
 }
 
 #' Evaluate the probability density of a probability distribution
-#'
+#' @family
 #' For discrete distributions, the probabilty mass function. `pmf()`
 #' is an alias.
 #'

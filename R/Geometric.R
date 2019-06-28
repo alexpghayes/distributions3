@@ -118,6 +118,7 @@ random.Geometric <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Geometric <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dgeom(x = x, prob = d$p)
 }
 
@@ -125,6 +126,7 @@ pdf.Geometric <- function(d, x, ...) {
 #' @export
 #'
 log_pdf.Geometric <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dgeom(x = x, prob = d$p, log = TRUE)
 }
 

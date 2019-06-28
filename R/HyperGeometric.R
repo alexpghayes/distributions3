@@ -104,12 +104,14 @@ random.HyperGeometric <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.HyperGeometric <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dhyper(x = x, m = d$m, n = d$n, k = d$k)
 }
 
 #' @rdname pdf.HyperGeometric
 #' @export
 log_pdf.HyperGeometric <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dhyper(x = x, m = d$m, n = d$n, k = d$k, log = TRUE)
 }
 

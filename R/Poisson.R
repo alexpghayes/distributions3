@@ -108,6 +108,7 @@ random.Poisson <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Poisson <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dpois(x = x, lambda = d$lambda)
 }
 
@@ -115,6 +116,7 @@ pdf.Poisson <- function(d, x, ...) {
 #' @export
 #'
 log_pdf.Poisson <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dpois(x = x, lambda = d$lambda, log = TRUE)
 }
 

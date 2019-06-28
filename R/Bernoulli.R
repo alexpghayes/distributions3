@@ -120,6 +120,7 @@ random.Bernoulli <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Bernoulli <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dbinom(x = x, size = 1, prob = d$p)
 }
 
@@ -127,6 +128,7 @@ pdf.Bernoulli <- function(d, x, ...) {
 #' @export
 #'
 log_pdf.Bernoulli <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dbinom(x = x, size = 1, prob = d$p, log = TRUE)
 }
 

@@ -101,6 +101,7 @@ random.NegativeBinomial <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.NegativeBinomial <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dnbinom(x = x, size = d$size, prob = d$p)
 }
 
@@ -108,6 +109,7 @@ pdf.NegativeBinomial <- function(d, x, ...) {
 #' @export
 #'
 log_pdf.NegativeBinomial <- function(d, x, ...) {
+  if (any(x %% 1 != 0)) stop("`x` must be an integer.")
   dnbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
 
