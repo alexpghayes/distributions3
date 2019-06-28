@@ -24,7 +24,7 @@ Suppose we're interested in people's happiness before and after discovering the 
 
 The data looks like this
 
-```{r}
+```{r echo = FALSE}
 set.seed(27)
 
 before <- round(rnorm(10, 50, 20))
@@ -45,9 +45,21 @@ diff <- after - before
 diff
 ```
 
-
-
 ## Paired tests versus two sample tests
+
+One key question is: when should we use paired instead of two sample tests? Students typically struggle with this, and it's worth spending some time thinking about this. In abstract terms, we should use paired tests when we have *two observations on the same experimental unit* and two sample tests when we have *two observations on different experimental units*.
+
+The difficulty here is that it takes some time to become comfortable with experimental units. I recommend memorizing
+
+Some examples where paired tests are appropriate:
+
+- left/right shoe
+
+Some examples where you should use a two sample test:
+
+Also note that we
+
+twosample tests, and when should we use 
 
 why pair - power
 pair if you can

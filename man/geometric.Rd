@@ -73,8 +73,8 @@ quantile(X, 0.7)
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{HyperGeometric}},
-  \code{\link{Multinomial}},
+  \code{\link{Binomial}}, \code{\link{Custom}},
+  \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }
 \concept{discrete distributions}
