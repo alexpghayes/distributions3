@@ -1,5 +1,4 @@
-#' Create a Beta distribution
-#'
+#' Create a custom discrete distribution
 #'
 #' @param ss A vector specifying the sample space.
 #' @param probs A vector of same length as `ss` giving the probabilities of each outcome. Must sum to 1.
@@ -26,7 +25,7 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 #'
-Custom <- function(ss = NULL, probs = NULL) {
+Custom <- function(ss = NULL, probs = NULL){
 
   if(is.null(probs)){
     probs <- rep(1/length(ss), length.out = length(ss))
@@ -41,7 +40,7 @@ Custom <- function(ss = NULL, probs = NULL) {
   d <- list(ss = ss, probs = probs)
   class(d) <- c("Custom", "distribution")
 
-  d
+  return(d)
 }
 
 #' @export
@@ -54,7 +53,7 @@ print.Custom <- function(x, ...) {
     probs_print <- paste(round(x$probs, 3), collapse = ', ')
   }
 
-  cat(glue::glue("Custom discrete distribution\n(Sample space = {[ss_print]}, Probabilities = {[probs_print]})",
+  cat(glue::glue("Custom discrete distribution (Sample space = {[ss_print]}, Probabilities = {[probs_print]})",
                  .open = '[',
                  .close = ']'))
 }
@@ -93,9 +92,6 @@ pdf.Custom <- function(d, x, ...) {
   d$probs[d$ss == x]
 }
 
-#' @rdname pdf.Custom
-#' @export
-
 #' Evaluate the cumulative distribution function of a Custom discrete distribution
 #'
 #' @inherit Custom examples
@@ -112,6 +108,9 @@ pdf.Custom <- function(d, x, ...) {
 cdf.Custom <- function(d, x, ...) {
   if(!is.numeric(d$ss))
     stop("The sample space is not numeric, and so the cdf is not well-defined.")
+
+  if(!x %in% d$ss)
+    stop("x is not in the sample space.")
 
   probs <- setNames(d$probs, d$ss)[order(d$ss)]
   setNames(cumsum(probs)[x], NULL)
@@ -134,6 +133,9 @@ cdf.Custom <- function(d, x, ...) {
 quantile.Custom <- function(d, p, ...) {
   if(!is.numeric(d$ss))
     stop("The sample space is not numeric, and so quantiles are not well-defined.")
+
+  if(any(p > 1) | any(p < 0))
+    stop("All elements of p must be between 0 and 1.")
 
   probs <- setNames(d$probs, d$ss)[order(d$ss)]
   tmp_cdf <- cumsum(probs)
