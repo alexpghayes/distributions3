@@ -1,5 +1,9 @@
 context("test-bernoulli")
 
+test_that("print.Bernoulli works", {
+  expect_output(print(Bernoulli()), regexp = "Bernoulli distribution")
+})
+
 test_that("fit_mle.Bernoulli works correctly", {
 
   expect_equal(fit_mle(Bernoulli(), c(0, 1)), Bernoulli(0.5))
@@ -33,7 +37,7 @@ test_that("likelihood.Bernoulli and log_likelihood.Bernoulli work correctly", {
 
 test_that("random.Bernoulli work correctly", {
 
-  b <- Bernoulli(0.1)
+  b <- Bernoulli()
 
   expect_length(random(b), 1)
   expect_length(random(b, 100), 100)
