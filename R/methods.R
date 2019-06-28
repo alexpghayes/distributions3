@@ -11,6 +11,10 @@
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
+#' @examples
+#' n <- Normal()
+#'
+#' random(n, 10)
 #' @export
 random <- function(d, n = 1L, ...) {
   ellipsis::check_dots_used()
@@ -28,8 +32,16 @@ random <- function(d, n = 1L, ...) {
 #'   determine given the distribution `d`.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
-#' @export
 #'
+#' @examples
+#' n <- Normal()
+#'
+#' pdf(n, c(1, 2, 3, 4, 5))
+#' pmf(n, c(1, 2, 3, 4, 5))
+#'
+#' log_pdf(n, c(1, 2, 3, 4, 5))
+#'
+#' @export
 pdf <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("pdf")
@@ -58,8 +70,13 @@ pmf <- function(d, x, ...) {
 #'   like to determine given the distribution `d`.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
-#' @export
 #'
+#' @examples
+#' n <- Normal()
+#'
+#' cdf(n, c(1, 2, 3, 4, 5))
+#'
+#' @export
 cdf <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("cdf")
@@ -77,6 +94,11 @@ cdf <- function(d, x, ...) {
 #'
 #' @return A vector of quantiles, one for each element of `p`.
 #'
+#' @examples
+#' n <- Normal()
+#'
+#' cdf(n, c(0.2, 0.4, 0.6, 0.8))
+#'
 #' @export
 quantile <- function(d, p, ...) {
   ellipsis::check_dots_used()
@@ -93,6 +115,11 @@ quantile <- function(d, p, ...) {
 #'
 #' @return the likelihood
 #'
+#' @examples
+#' n <- Normal()
+#'
+#' likelihood(n, c(-1, 0, 0, 0, 3))
+#'
 #' @export
 likelihood <- function(d, x, ...) {
   exp(log_likelihood(d, x, ...))
@@ -103,6 +130,11 @@ likelihood <- function(d, x, ...) {
 #' @inheritParams likelihood
 #'
 #' @return the log-likelihood
+#'
+#' @examples
+#' n <- Normal()
+#'
+#' log_likelihood(n, c(-1, 0, 0, 0, 3))
 #'
 #' @export
 log_likelihood <- function(d, x, ...) {
@@ -116,6 +148,12 @@ log_likelihood <- function(d, x, ...) {
 #' @inheritParams likelihood
 #'
 #' @return an object the same class as \code{d} with updated parameters
+#'
+#' @examples
+#' n <- Normal()
+#'
+#' fit_mle(n, c(-1, 0, 0, 0, 3))
+#'
 #' @export
 fit_mle <- function(d, x, ...) {
   ellipsis::check_dots_used()
