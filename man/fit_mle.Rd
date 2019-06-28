@@ -21,3 +21,9 @@ an object the same class as \code{d} with updated parameters
 \description{
 Approximates an empirical distribution with a theoretical one
 }
+\examples{
+n <- Normal()
+
+fit_mle(n, c(-1, 0, 0, 0, 3))
+
+}
