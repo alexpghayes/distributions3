@@ -84,7 +84,7 @@ quantile(X, cdf(X, 0.7))
 }
 \seealso{
 Other discrete distributions: \code{\link{Binomial}},
-  \code{\link{Custom}}, \code{\link{Geometric}},
+  \code{\link{Categorical}}, \code{\link{Geometric}},
   \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }

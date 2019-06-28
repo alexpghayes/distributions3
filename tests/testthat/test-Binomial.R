@@ -1,4 +1,4 @@
-context("test-binomial")
+context("test-Binomial")
 
 test_that("print.Binomial works", {
   expect_output(print(Binomial(1)), regexp = "Binomial distribution")

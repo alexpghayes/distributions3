@@ -1,4 +1,4 @@
-context("test-normal")
+context("test-Normal")
 
 test_that("print.Normal works", {
   expect_output(print(Normal()), regexp = "Normal distribution")
