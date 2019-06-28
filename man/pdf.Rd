@@ -30,11 +30,12 @@ For discrete distributions, the probabilty mass function. \code{pmf()}
 is an alias.
 }
 \examples{
-n <- Normal()
 
-pdf(n, c(1, 2, 3, 4, 5))
-pmf(n, c(1, 2, 3, 4, 5))
+X <- Normal()
 
-log_pdf(n, c(1, 2, 3, 4, 5))
+pdf(X, c(1, 2, 3, 4, 5))
+pmf(X, c(1, 2, 3, 4, 5))
+
+log_pdf(X, c(1, 2, 3, 4, 5))
 
 }

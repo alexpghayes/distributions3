@@ -22,7 +22,6 @@ A vector of quantiles, one for each element of \code{p}.
 }
 \examples{
 
-
 X <- Categorical(1:3, p = c(0.4, 0.1, 0.5))
 X
 

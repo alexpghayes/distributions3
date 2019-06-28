@@ -50,7 +50,7 @@ library(distributions)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 1 0
+#>  [1] 0 0 1 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 
@@ -87,7 +87,7 @@ currently as follows:
 
 **One sample tests**
 
-  - [ ] Update the one sample z-test vignette to include rejection
+  - [x] Update the one sample z-test vignette to include rejection
     regions and power calculations
   - [ ] Update the one sample z-test for a proportion vignette to
     include rejection regions and power calculations
