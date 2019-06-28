@@ -20,7 +20,9 @@ catch mispellings or other possible errors.}
 Draw a random sample from a probability distribution
 }
 \examples{
-n <- Normal()
 
-random(n, 10)
+X <- Normal()
+
+random(X, 10)
+
 }

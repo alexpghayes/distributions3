@@ -2,7 +2,7 @@
 % Please edit documentation in R/Categorical.R
 \name{cdf.Categorical}
 \alias{cdf.Categorical}
-\title{Evaluate the cumulative distribution function of a Categorical discrete distribution}
+\title{Evaluate the cumulative distribution function of a Categorical distribution}
 \usage{
 \method{cdf}{Categorical}(d, x, ...)
 }
@@ -19,10 +19,9 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-Evaluate the cumulative distribution function of a Categorical discrete distribution
+Evaluate the cumulative distribution function of a Categorical distribution
 }
 \examples{
-
 
 X <- Categorical(1:3, p = c(0.4, 0.1, 0.5))
 X

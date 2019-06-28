@@ -16,14 +16,16 @@ a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or
 catch mispellings or other possible errors.}
 }
 \value{
-an object the same class as \code{d} with updated parameters
+A distribution (the same kind as \code{d}) where the parameters
+are the MLE estimates based on \code{x}.
 }
 \description{
 Approximates an empirical distribution with a theoretical one
 }
 \examples{
-n <- Normal()
 
-fit_mle(n, c(-1, 0, 0, 0, 3))
+X <- Normal()
+
+fit_mle(X, c(-1, 0, 0, 0, 3))
 
 }

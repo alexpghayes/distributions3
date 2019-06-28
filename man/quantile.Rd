@@ -24,8 +24,9 @@ to allow for consistent argument names and warnings when arguments
 disappear into \code{...}.
 }
 \examples{
-n <- Normal()
 
-cdf(n, c(0.2, 0.4, 0.6, 0.8))
+X <- Normal()
+
+cdf(X, c(0.2, 0.4, 0.6, 0.8))
 
 }
