@@ -19,3 +19,8 @@ catch mispellings or other possible errors.}
 \description{
 Draw a random sample from a probability distribution
 }
+\examples{
+n <- Normal()
+
+random(n, 10)
+}
