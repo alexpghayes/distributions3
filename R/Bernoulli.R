@@ -23,6 +23,12 @@
 #'   `p` = \eqn{p}. Some textbooks also define \eqn{q = 1 - p}, or use
 #'   \eqn{\pi} instead of \eqn{p}.
 #'
+#'   The Bernoulli probability  distribution is widely used to model
+#'   binary variables, such as 'failure' and 'success'. The most
+#'   typical example is the flip of a coin, when  \eqn{p} is thought as the
+#'   probability of flipping a head, and \eqn{q = 1 - p} is the
+#'   probability of flipping a tail.
+#'
 #'   **Support**: \eqn{\{0, 1\}}{{0, 1}}
 #'
 #'   **Mean**: \eqn{p}
