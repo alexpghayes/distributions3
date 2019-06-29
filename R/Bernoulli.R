@@ -78,8 +78,7 @@
 #'
 Bernoulli <- function(p = 0.5) {
 
-  # TODO: check that 0 <= p <= 1
-
+  if(!((p >= 0) & (p <= 1))) stop("p is not in {0,1}.")
   d <- list(p = p)
   class(d) <- c("Bernoulli", "distribution")
   d
@@ -120,6 +119,7 @@ random.Bernoulli <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Bernoulli <- function(d, x, ...) {
+  if(!x%%1==0) stop("x needs to be an integer.")
   dbinom(x = x, size = 1, prob = d$p)
 }
 
@@ -127,6 +127,7 @@ pdf.Bernoulli <- function(d, x, ...) {
 #' @export
 #'
 log_pdf.Bernoulli <- function(d, x, ...) {
+  if(!x%%1==0) stop("x needs to be an integer.")
   dbinom(x = x, size = 1, prob = d$p, log = TRUE)
 }
 
