@@ -56,6 +56,11 @@
 #' X <- Cauchy(10, 0.2)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -77,6 +82,18 @@ Cauchy <- function(location = 0, scale = 1) {
 print.Cauchy <- function(x, ...) {
   cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"))
 }
+
+#' @export
+mean.Cauchy <- function(d, ...) NaN
+
+#' @export
+variance.Cauchy <- function(d, ...) NaN
+
+#' @export
+skewness.Cauchy <- function(d, ...) NaN
+
+#' @export
+kurtosis.Cauchy <- function(d, ...) NaN
 
 #' Draw a random sample from a Cauchy distribution
 #'
