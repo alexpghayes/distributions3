@@ -65,6 +65,11 @@
 #' X <- Bernoulli(0.7)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #' pdf(X, 1)
 #' log_pdf(X, 1)
@@ -75,6 +80,7 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
+#'
 #'
 Bernoulli <- function(p = 0.5) {
 
@@ -88,6 +94,26 @@ Bernoulli <- function(p = 0.5) {
 #' @export
 print.Bernoulli <- function(x, ...) {
   cat(glue("Bernoulli distribution (p = {x$p})"))
+}
+
+#' @export
+mean.Bernoulli <- function(d, ...) d$p
+
+#' @export
+variance.Bernoulli <- function(d, ...) d$p * (1 - d$p)
+
+#' @export
+skewness.Bernoulli <- function(d, ...) {
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (2 * p)) / sqrt(p * q)
+}
+
+#' @export
+kurtosis.Bernoulli <- function(d, ...) {
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (6 * p * q)) / (p * q)
 }
 
 #' Draw a random sample from a Bernoulli distribution
