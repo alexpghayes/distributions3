@@ -110,6 +110,33 @@ quantile <- function(d, p, ...) {
   UseMethod("quantile")
 }
 
+#' Compute the moments of a probability distribution
+#'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
+#'
+#' @return A numeric scalar
+#' @export
+#'
+variance <- function(d, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("variance")
+}
+
+#' @rdname variance
+#' @export
+skewness <- function(d, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("skewness")
+}
+
+#' @rdname variance
+kurtosis <- function(d, ...) {
+  ellipsis::check_dots_used()
+  UseMethod("kurtosis")
+}
+
+
 #' Compute the likelihood of a probability distribution given data
 #'
 #' @param d A probability distribution object such as those created by
