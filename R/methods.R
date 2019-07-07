@@ -133,7 +133,7 @@ skewness <- function(d, ...) {
 #' @rdname variance
 kurtosis <- function(d, ...) {
   ellipsis::check_dots_used()
-  UseMethod("skewness")
+  UseMethod("kurtosis")
 }
 
 
