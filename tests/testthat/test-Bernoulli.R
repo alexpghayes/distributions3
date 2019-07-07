@@ -91,5 +91,5 @@ test_that("{moments}.Bernoulli work correctly", {
   expect_equal(mean(n), 0.5)
   expect_equal(variance(n), 0.25)
   expect_equal(skewness(n), 0)
-  expect_equal(kurtosis(n), 0)
+  expect_equal(kurtosis(n), -2)
 })

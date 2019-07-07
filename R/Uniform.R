@@ -41,6 +41,18 @@ print.Uniform <- function(x, ...) {
   cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"))
 }
 
+#' @export
+mean.Uniform <- function(d, ...) (d$a + d$b) / 2
+
+#' @export
+variance.Uniform <- function(d, ...) (1 / 12) * (d$b - d$a) ^ 2
+
+#' @export
+skewness.Uniform <- function(d, ...) 0
+
+#' @export
+kurtosis.Uniform <- function(d, ...) -6/5
+
 #' Draw a random sample from a continuous Uniform distribution
 #'
 #' @inherit Uniform examples

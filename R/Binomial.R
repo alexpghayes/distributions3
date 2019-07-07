@@ -68,6 +68,11 @@
 #' X <- Binomial(10, 0.2)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2L)
@@ -88,6 +93,28 @@ Binomial <- function(size, p = 0.5) {
 #' @export
 print.Binomial <- function(x, ...) {
   cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"))
+}
+
+#' @export
+mean.Binomial <- function(d, ...) d$size * d$p
+
+#' @export
+variance.Binomial <- function(d, ...) d$size * d$p * (1 - d$p)
+
+#' @export
+skewness.Binomial <- function(d, ...) {
+  n <- d$size
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (2 * p)) / sqrt(n * p * q)
+}
+
+#' @export
+kurtosis.Binomial <- function(d, ...) {
+  n <- d$size
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (6 * p * q)) / (n * p * q)
 }
 
 #' Draw a random sample from a Binomial distribution
