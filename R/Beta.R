@@ -24,6 +24,11 @@
 #' cdf(X, 0.7)
 #' quantile(X, 0.7)
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 #'
@@ -36,6 +41,32 @@ Beta <- function(alpha = 1, beta = 1) {
 #' @export
 print.Beta <- function(x, ...) {
   cat(glue("Beta distribution (alpha = {x$alpha}, beta = {x$beta})"))
+}
+
+#' @export
+mean.Beta <- function(d, ...) d$alpha / (d$alpha + d$beta)
+
+#' @export
+variance.Beta <- function(d, ...) {
+  a <- d$alpha
+  b <- d$beta
+  (a * b) /  ((a + b)^2 * (a + b + 1))
+}
+
+#' @export
+skewness.Beta <- function(d, ...) {
+  a <- d$alpha
+  b <- d$beta
+  2 * (b - a) * sqrt(a + b + 1) / (a + b + 2) * sqrt(a * b)
+}
+
+#' @export
+kurtosis.Beta <- function(d, ...) {
+  a <- d$alpha
+  b <- d$beta
+  num <- 6 * ((a - b)^2 * (a + b + 1) - (a * b) * (a + b + 2))
+  denom <- a * b * (a + b + 2) * (a + b + 3)
+  num / denom
 }
 
 #' Draw a random sample from a Beta distribution
