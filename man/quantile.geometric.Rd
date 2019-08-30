@@ -32,7 +32,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Geometric distribution: \code{\link{cdf.Geometric}},

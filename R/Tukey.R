@@ -31,7 +31,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Tukey <- function(nmeans, df, nranges) {
   d <- list(nmeans = nmeans, df = df, nranges = nranges)
   class(d) <- c("Tukey", "distribution")
@@ -41,8 +40,11 @@ Tukey <- function(nmeans, df, nranges) {
 #' @export
 print.Tukey <- function(x, ...) {
   cat(
-    glue("Tukey distribution (nmeans = {x$nmeans}",
-         "df = {x$df}, nranges = {x$nranges})\n"))
+    glue(
+      "Tukey distribution (nmeans = {x$nmeans}",
+      "df = {x$df}, nranges = {x$nranges})\n"
+    )
+  )
 }
 
 #' Evaluate the cumulative distribution function of a Tukey distribution

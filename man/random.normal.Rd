@@ -100,5 +100,4 @@ ks.test(ns, pgamma, shape = 8, rate = 3)
 # note that the cdf() and quantile() functions are inverses
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }

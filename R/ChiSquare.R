@@ -21,13 +21,8 @@
 #' are also distributed as \eqn{\chi^2} distributions, where the
 #' degrees of freedom of the contributing distributions get summed.
 #' The ratio of two \eqn{\chi^2} distributions is a [FisherF()]
-#' distribution.
-#'
-#' TODO: flesh this out.if we have an \eqn{X_1 \sim Normal(0, 1)} and
-#' an \eqn{X_2 \sim ChiSq(n)}, the result of \eqn{\frac{X_1}{\sqrt{X_2/}}}
-#' will have a Student's T distribution (see [StudentsT()]).
-#' Such properties are useful to understand the distributions involved
-#' in the most common hypothesis tests.
+#' distribution. The ratio of a [Normal()] and the square root
+#' of a scaled [ChiSquare()] is a [StudentsT()] distribution.
 #'
 #' @details
 #'
@@ -91,7 +86,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 ChiSquare <- function(df) {
   d <- list(df = df)
   class(d) <- c("ChiSquare", "distribution")

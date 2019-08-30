@@ -110,7 +110,6 @@
 #' # also equivalent to
 #' mean(x) + quantile(T, 0.12 / 2) * sd(x) / sqrt(nx)
 #' mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
-#'
 StudentsT <- function(df) {
   d <- list(df = df)
   class(d) <- c("StudentsT", "distribution")

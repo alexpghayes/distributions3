@@ -149,7 +149,6 @@
 #' # note that the cdf() and quantile() functions are inverses
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Normal <- function(mu = 0, sigma = 1) {
   d <- list(mu = mu, sigma = sigma)
   class(d) <- c("Normal", "distribution")

@@ -24,5 +24,4 @@ Draw a random sample from a probability distribution
 X <- Normal()
 
 random(X, 10)
-
 }

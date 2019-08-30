@@ -54,7 +54,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Weibull <- function(shape, scale) {
   d <- list(shape = shape, scale = scale)
   class(d) <- c("Weibull", "distribution")

@@ -69,8 +69,6 @@
 #'
 #' # pdf(X, 2)
 #' # log_pdf(X, 2)
-#'
-#'
 Multinomial <- function(size, p) {
   d <- list(size = size, p = p)
   class(d) <- c("Multinomial", "multivariate", "distribution")

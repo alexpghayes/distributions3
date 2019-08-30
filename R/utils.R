@@ -12,7 +12,6 @@
 #'
 #' is_distribution(Z)
 #' is_distribution(1L)
-#'
 is_distribution <- function(x) {
   inherits(x, "distribution")
 }

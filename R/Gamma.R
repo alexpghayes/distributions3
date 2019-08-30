@@ -77,7 +77,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Gamma <- function(shape, rate = 1) {
   d <- list(shape = shape, rate = rate)
   class(d) <- c("Gamma", "distribution")
@@ -186,6 +185,6 @@ fit_mle.Gamma <- function(d, x, ...) {
 #' @inherit fit_mle.Gamma
 #' @export
 suff_stat.Gamma <- function(d, x, ...) {
-  if(any(x < 0)) stop("`x` must only contain positive real numbers")
+  if (any(x < 0)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), log_sum = sum(log(x)), samples = length(x))
 }

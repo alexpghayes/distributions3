@@ -24,11 +24,15 @@ Useful links:
 \author{
 \strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
 
+Authors:
+\itemize{
+  \item Ralph Moller-Trane
+}
+
 Other contributors:
 \itemize{
   \item Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (0000-0002-0679-1945) [contributor]
   \item Daniel Jordan \email{dandermotj@gmail.com} [contributor]
-  \item Ralph Moller-Trane [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} [contributor]
 }
 

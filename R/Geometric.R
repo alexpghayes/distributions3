@@ -62,7 +62,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Geometric <- function(p = 0.5) {
   d <- list(p = p)
   class(d) <- c("Geometric", "distribution")
@@ -191,9 +190,8 @@ fit_mle.Geometric <- function(d, x, ...) {
 #'
 suff_stat.Geometric <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) {
+  if (any(!valid_x)) {
     stop("`x` must be a vector of positive discrete numbers")
   }
   list(trials = sum(x), experiments = length(x))
 }
-

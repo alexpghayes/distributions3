@@ -74,13 +74,8 @@ to a half. Sums of \eqn{\chi^2} distributions
 are also distributed as \eqn{\chi^2} distributions, where the
 degrees of freedom of the contributing distributions get summed.
 The ratio of two \eqn{\chi^2} distributions is a \code{\link[=FisherF]{FisherF()}}
-distribution.
-
-TODO: flesh this out.if we have an \eqn{X_1 \sim Normal(0, 1)} and
-an \eqn{X_2 \sim ChiSq(n)}, the result of \eqn{\frac{X_1}{\sqrt{X_2/}}}
-will have a Student's T distribution (see \code{\link[=StudentsT]{StudentsT()}}).
-Such properties are useful to understand the distributions involved
-in the most common hypothesis tests.
+distribution. The ratio of a \code{\link[=Normal]{Normal()}} and the square root
+of a scaled \code{\link[=ChiSquare]{ChiSquare()}} is a \code{\link[=StudentsT]{StudentsT()}} distribution.
 }
 
 \examples{
@@ -98,7 +93,6 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},

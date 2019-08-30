@@ -4,7 +4,7 @@
 \alias{cdf.Categorical}
 \title{Evaluate the cumulative distribution function of a Categorical distribution}
 \usage{
-\method{cdf}{Categorical}(d, x = NULL, ...)
+\method{cdf}{Categorical}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
@@ -37,7 +37,6 @@ log_pdf(X, 1)
 
 cdf(X, 1)
 quantile(X, 0.5)
-
 \dontrun{
 # cdfs are only defined for numeric sample spaces. this errors!
 cdf(Y, "a")

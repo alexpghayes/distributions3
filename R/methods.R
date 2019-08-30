@@ -16,7 +16,6 @@
 #' X <- Normal()
 #'
 #' random(X, 10)
-#'
 #' @export
 random <- function(d, n = 1L, ...) {
   ellipsis::check_dots_used()
@@ -43,7 +42,6 @@ random <- function(d, n = 1L, ...) {
 #' pmf(X, c(1, 2, 3, 4, 5))
 #'
 #' log_pdf(X, c(1, 2, 3, 4, 5))
-#'
 #' @export
 pdf <- function(d, x, ...) {
   ellipsis::check_dots_used()
@@ -79,7 +77,6 @@ pmf <- function(d, x, ...) {
 #' X <- Normal()
 #'
 #' cdf(X, c(1, 2, 3, 4, 5))
-#'
 #' @export
 cdf <- function(d, x, ...) {
   ellipsis::check_dots_used()
@@ -103,7 +100,6 @@ cdf <- function(d, x, ...) {
 #' X <- Normal()
 #'
 #' cdf(X, c(0.2, 0.4, 0.6, 0.8))
-#'
 #' @export
 quantile <- function(d, p, ...) {
   ellipsis::check_dots_used()
@@ -125,7 +121,6 @@ quantile <- function(d, p, ...) {
 #' X <- Normal()
 #'
 #' likelihood(X, c(-1, 0, 0, 0, 3))
-#'
 #' @export
 likelihood <- function(d, x, ...) {
   exp(log_likelihood(d, x, ...))
@@ -142,7 +137,6 @@ likelihood <- function(d, x, ...) {
 #' X <- Normal()
 #'
 #' log_likelihood(X, c(-1, 0, 0, 0, 3))
-#'
 #' @export
 log_likelihood <- function(d, x, ...) {
   sum(log_pdf(d, x, ...))
@@ -162,7 +156,6 @@ log_likelihood <- function(d, x, ...) {
 #' X <- Normal()
 #'
 #' fit_mle(X, c(-1, 0, 0, 0, 3))
-#'
 #' @export
 fit_mle <- function(d, x, ...) {
   ellipsis::check_dots_used()

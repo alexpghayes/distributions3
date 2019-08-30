@@ -38,7 +38,6 @@ X
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},

@@ -70,7 +70,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Logistic <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
   class(d) <- c("Logistic", "distribution")

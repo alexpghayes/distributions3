@@ -66,7 +66,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Cauchy <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
   class(d) <- c("Cauchy", "distribution")

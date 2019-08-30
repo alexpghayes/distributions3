@@ -35,8 +35,6 @@ random(X, 10)
 
 # pdf(X, 2)
 # log_pdf(X, 2)
-
-
 }
 \seealso{
 Other Multinomial distribution: \code{\link{random.Multinomial}}

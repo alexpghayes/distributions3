@@ -40,7 +40,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Logistic distribution: \code{\link{cdf.Logistic}},

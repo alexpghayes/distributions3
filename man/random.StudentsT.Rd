@@ -78,7 +78,6 @@ mean(x) + c(-1, 1) * quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
 # also equivalent to
 mean(x) + quantile(T, 0.12 / 2) * sd(x) / sqrt(nx)
 mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
-
 }
 \seealso{
 Other StudentsT distribution: \code{\link{cdf.StudentsT}},

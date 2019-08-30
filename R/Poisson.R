@@ -66,7 +66,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Poisson <- function(lambda) {
   d <- list(lambda = lambda)
   class(d) <- c("Poisson", "distribution")
@@ -182,7 +181,6 @@ fit_mle.Poisson <- function(d, x, ...) {
 #' @export
 suff_stat.Poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) stop("`x` must only contain positive integers")
+  if (any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))
 }
-

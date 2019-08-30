@@ -23,7 +23,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Exponential <- function(rate = 1) {
   d <- list(rate = rate)
   class(d) <- c("Exponential", "distribution")
@@ -139,6 +138,6 @@ fit_mle.Exponential <- function(d, x, ...) {
 #' @export
 suff_stat.Exponential <- function(d, x, ...) {
   valid_x <- (x > 0)
-  if(any(!valid_x)) stop("`x` must only contain positive real numbers")
+  if (any(!valid_x)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), samples = length(x))
 }

@@ -57,7 +57,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 NegativeBinomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- c("NegativeBinomial", "distribution")

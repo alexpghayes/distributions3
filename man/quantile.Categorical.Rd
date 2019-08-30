@@ -36,7 +36,6 @@ log_pdf(X, 1)
 
 cdf(X, 1)
 quantile(X, 0.5)
-
 \dontrun{
 # cdfs are only defined for numeric sample spaces. this errors!
 cdf(Y, "a")

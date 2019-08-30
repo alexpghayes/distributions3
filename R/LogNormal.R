@@ -53,7 +53,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 LogNormal <- function(log_mu = 0, log_sigma = 1) {
   d <- list(log_mu = log_mu, log_sigma = log_sigma)
   class(d) <- c("LogNormal", "distribution")
@@ -179,7 +178,7 @@ fit_mle.LogNormal <- function(d, x, ...) {
 #'
 suff_stat.LogNormal <- function(d, x, ...) {
   valid_x <- x > 0
-  if(any(!valid_x)) stop("`x` must be a vector of positive real numbers")
+  if (any(!valid_x)) stop("`x` must be a vector of positive real numbers")
   log_x <- log(x)
   list(mu = mean(log_x), sigma = sd(log_x), samples = length(x))
 }

@@ -26,5 +26,4 @@ Compute the likelihood of a probability distribution given data
 X <- Normal()
 
 likelihood(X, c(-1, 0, 0, 0, 3))
-
 }
