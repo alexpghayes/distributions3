@@ -75,7 +75,7 @@ Poisson <- function(lambda) {
 
 #' @export
 print.Poisson <- function(x, ...) {
-  cat(glue("Poisson distribution (lambda = {x$lambda})"))
+  cat(glue("Poisson distribution (lambda = {x$lambda})\n"))
 }
 
 #' Draw a random sample from a Poisson distribution

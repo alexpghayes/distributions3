@@ -34,7 +34,7 @@ FisherF <- function(df1, df2, lambda = 0) {
 
 #' @export
 print.FisherF <- function(x, ...) {
-  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})"))
+  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})\n"))
 }
 
 #' Draw a random sample from an F distribution

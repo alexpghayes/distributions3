@@ -91,13 +91,13 @@ mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
 set.seed(27)
 
 # generate a random sample
-Normal_sample <- random(Normal(3, 7), 26)
+ns <- random(Normal(3, 7), 26)
 
 # test if sample is Normal(3, 7)
-ks.test(Normal_sample, pnorm, mean = 3, sd = 7)
+ks.test(ns, pnorm, mean = 3, sd = 7)
 
 # test if sample is gamma(8, 3) using base R pgamma()
-ks.test(Normal_sample, pgamma, shape = 8, rate = 3)
+ks.test(ns, pgamma, shape = 8, rate = 3)
 
 ###
 

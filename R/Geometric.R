@@ -72,7 +72,7 @@ Geometric <- function(p = 0.5) {
 
 #' @export
 print.Geometric <- function(x, ...) {
-  cat(glue("Geometric distribution (p = {x$p})"))
+  cat(glue("Geometric distribution (p = {x$p})\n"))
 }
 
 #' Draw a random sample from a Geometric distribution

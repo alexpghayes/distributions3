@@ -75,7 +75,7 @@ HyperGeometric <- function(m, n, k) {
 
 #' @export
 print.HyperGeometric <- function(x, ...) {
-  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})"))
+  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})\n"))
 }
 
 #' Draw a random sample from a HyperGeometric distribution

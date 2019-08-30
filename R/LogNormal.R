@@ -62,7 +62,7 @@ LogNormal <- function(log_mu = 0, log_sigma = 1) {
 
 #' @export
 print.LogNormal <- function(x, ...) {
-  cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})"))
+  cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})\n"))
 }
 
 #' Draw a random sample from a LogNormal distribution

@@ -32,7 +32,7 @@ Exponential <- function(rate = 1) {
 
 #' @export
 print.Exponential <- function(x, ...) {
-  cat(glue("Exponential distribution (rate = {x$rate})"))
+  cat(glue("Exponential distribution (rate = {x$rate})\n"))
 }
 
 #' Draw a random sample from a Exponential distribution
