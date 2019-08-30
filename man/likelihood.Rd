@@ -21,3 +21,10 @@ the likelihood
 \description{
 Compute the likelihood of a probability distribution given data
 }
+\examples{
+
+X <- Normal()
+
+likelihood(X, c(-1, 0, 0, 0, 3))
+
+}

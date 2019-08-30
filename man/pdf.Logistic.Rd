@@ -28,6 +28,8 @@ showing to how calculate p-values and confidence intervals.
 }
 \examples{
 
+set.seed(27)
+
 X <- Logistic(2, 4)
 X
 

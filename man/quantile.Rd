@@ -23,3 +23,10 @@ TODO: Note that this current masks the \code{\link[stats:quantile]{stats::quanti
 to allow for consistent argument names and warnings when arguments
 disappear into \code{...}.
 }
+\examples{
+
+X <- Normal()
+
+cdf(X, c(0.2, 0.4, 0.6, 0.8))
+
+}

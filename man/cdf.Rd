@@ -22,3 +22,10 @@ A vector of probabilities, one for each element of \code{x}.
 \description{
 For discrete distributions, the probabilty mass function.
 }
+\examples{
+
+X <- Normal()
+
+cdf(X, c(1, 2, 3, 4, 5))
+
+}

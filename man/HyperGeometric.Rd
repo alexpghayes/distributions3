@@ -7,17 +7,26 @@
 HyperGeometric(m, n, k)
 }
 \arguments{
-\item{m}{TODO}
+\item{m}{The number of type I elements available.}
 
-\item{n}{TODO}
+\item{n}{The number of type II elements available.}
 
-\item{k}{TODO}
+\item{k}{The size of the sample taken.}
 }
 \value{
 A \code{HyperGeometric} object.
 }
 \description{
-TODO
+To understand the HyperGeometric distribution, consider a set of
+\eqn{r} objects, of which \eqn{m} are of the type I and
+\eqn{n} are of the type II. A sample with size \eqn{k} (\eqn{k<r})
+with no replacement is randomly chosen. The number of observed
+type I elements observed in this sample is set to be our random
+variable \eqn{X}. For example, consider that in a set of 20
+car parts, there are 4 that are defective (type I).
+If we take a sample of size 5 from those car parts, the
+probability of finding 2 that are defective will be given by
+the HyperGeometric distribution (needs double checking).
 }
 \details{
 We recommend reading this documentation on
@@ -25,25 +34,31 @@ We recommend reading this documentation on
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a HyperGeometric random variable with
-success probability \code{p} = \eqn{p}.
+success probability \code{p} = \eqn{p = m/(m+n)}.
 
-\strong{Support}: TODO
+\strong{Support}: \eqn{x \in \left{ \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}\right}\}}
 
-\strong{Mean}: TODO
+\strong{Mean}: \eqn{\frac{km}{n+m} = kp}
 
-\strong{Variance}: TODO
+\strong{Variance}: \eqn{\frac{km(n)(n+m-k)}{(n+m)^2 (n+m-1)} =
+  kp(1-p)(1 - \frac{k-1}{m+n-1})}
 
 \strong{Probability mass function (p.m.f)}:
 
-TODO
+\deqn{
+    P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m+n \choose k}}
+  }{
+    P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m+n \choose k}}
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
-
+\deqn{
+    P(X \le k) \approx \Phi\Big(\frac{x - kp}{\sqrt{kp(1-p)}}\Big)
+ }
 \strong{Moment generating function (m.g.f)}:
 
-TODO
+Not useful.
 }
 \examples{
 
@@ -61,8 +76,8 @@ quantile(X, 0.7)
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Geometric}},
-  \code{\link{Multinomial}},
+  \code{\link{Binomial}}, \code{\link{Categorical}},
+  \code{\link{Geometric}}, \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }
 \concept{discrete distributions}

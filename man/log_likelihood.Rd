@@ -21,3 +21,10 @@ the log-likelihood
 \description{
 Compute the log-likelihood of a probability distribution given data
 }
+\examples{
+
+X <- Normal()
+
+log_likelihood(X, c(-1, 0, 0, 0, 3))
+
+}

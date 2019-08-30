@@ -27,9 +27,8 @@ We recommend reading this documentation on
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Geometric random variable with
-success probability \code{p} = \eqn{p}.
-
-TODO: multiple parameterizations BLEH (ignore it?)
+success probability \code{p} = \eqn{p}. Note that there are multiple
+parameterizations of the Geometric distribution.
 
 \strong{Support}: 0 < p < 1, \eqn{x = 0, 1, \dots}
 
@@ -73,8 +72,8 @@ quantile(X, 0.7)
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{HyperGeometric}},
-  \code{\link{Multinomial}},
+  \code{\link{Binomial}}, \code{\link{Categorical}},
+  \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }
 \concept{discrete distributions}

@@ -18,11 +18,16 @@ value in \code{[0, 1]}, and defaults to \code{0.5}.}
 A \code{Binomial} object.
 }
 \description{
-Bernoulli distributions are used to represent situations can that can
-thought of as \code{size} (often called \eqn{n} in textbooks) independent
-coin flips, where each coin flip has probability \code{p} of success. The
-\code{\link[=Bernoulli]{Bernoulli()}} distribution is a special case of Binomial distribution
-when \code{n = 1}.
+Binomial distributions are used to represent situations can that can
+be thought as the result of \eqn{n} Bernoulli experiments (here the
+\eqn{n} is defined as the \code{size} of the experiment). The classical
+example is \eqn{n} independent coin flips, where each coin flip has
+probability \code{p} of success. In this case, the individual probability of
+flipping heads or tails is given by the  Bernoulli(p) distribution,
+and the probability of having \eqn{x} equal results (\eqn{x} heads,
+for example), in \eqn{n} trials is given by the Binomial(n, p) distribution.
+The equation of the Binomial distribution is directly derived from
+the equation of the Bernoulli distribution.
 }
 \details{
 The Binomial distribution comes up when you are interested in the portion
@@ -88,8 +93,8 @@ quantile(X, cdf(X, 7))
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Geometric}}, \code{\link{HyperGeometric}},
-  \code{\link{Multinomial}},
+  \code{\link{Categorical}}, \code{\link{Geometric}},
+  \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
   \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
 }
 \concept{discrete distributions}

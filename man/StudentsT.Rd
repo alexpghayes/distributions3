@@ -7,20 +7,25 @@
 StudentsT(df)
 }
 \arguments{
-\item{df}{Degrees of freedom. Can be any positive number.}
+\item{df}{Degrees of freedom. Can be any positive number. Often
+called \eqn{\nu} in textbooks.}
 }
 \value{
 A \code{StudentsT} object.
 }
 \description{
-TODO
+The Student's T distribution is closely related to the \code{\link[=Normal]{Normal()}}
+distribution, but has heavier tails. As \eqn{\nu} increases to \eqn{\infty},
+the Student's T converges to a Normal. The T distribution appears
+repeatedly throughout classic frequentist hypothesis testing when
+comparing group means.
 }
 \details{
 We recommend reading this documentation on
 \url{https://alexpghayes.github.io/distributions}, where the math
 will render with additional detail and much greater clarity.
 
-In the following, let \eqn{X} be a StudentsT random variable with
+In the following, let \eqn{X} be a Students T random variable with
 \code{df} = \eqn{\nu}.
 
 \strong{Support}: \eqn{R}, the set of all real numbers
@@ -32,19 +37,27 @@ zero.
 
 \deqn{
     \frac{\nu}{\nu - 2}
+  }{
+    \nu / (\nu - 2)
   }
 
 Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \nu \le 2}.
 
 \strong{Probability density function (p.d.f)}:
 
-TODO
+\deqn{
+    f(x) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu \pi} \Gamma(\frac{\nu}{2})} \left(1 + \frac{x^2}{\nu} \right)^{- \frac{\nu + 1}{2}}
+  }{
+    f(x) = \Gamma((\nu + 1) / 2) / (\sqrt(\nu \pi) \Gamma(\nu / 2)) (1 + x^2 / \nu)^(- (\nu + 1) / 2)
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+Nasty, omitted.
 
 \strong{Moment generating function (m.g.f)}:
+
+Undefined.
 }
 \examples{
 
