@@ -138,7 +138,10 @@ log_pdf.Categorical <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Categorical <- function(d, x, ...) {
+cdf.Categorical <- function(d, x = NULL, ...) {
+
+  if(length(x) == 0)
+    return(numeric(0))
 
   if (!is.numeric(d$outcomes))
     stop(
@@ -146,10 +149,7 @@ cdf.Categorical <- function(d, x, ...) {
       call. = FALSE
     )
 
-  if (!all(x %in% d$outcomes))
-    stop("All elements of `x` must be in the sample space.", call. = FALSE)
-
-  cumsum(pdf(d, d$outcomes))[max(which(x >= d$outcomes))]
+  Vectorize(function(k) cumsum(pdf(d, d$outcomes))[max(which(k >= d$outcomes))])(x)
 }
 
 #' Determine quantiles of a Categorical discrete distribution
@@ -182,6 +182,5 @@ quantile.Categorical <- function(d, p, ...) {
 
   full_cdf <- cumsum(pdf(d, d$outcomes))
 
-  # TODO: vectorize. this currently breaks a test.
-  d$outcomes[min(which(full_cdf >= p))]
+  Vectorize(function(k) d$outcomes[min(which(full_cdf >= k))])(p)
 }
