@@ -16,22 +16,32 @@ reference:
       - "log_pdf"
       - "cdf"
       - "quantile"
-      - "fit_mle"
-      - "suff_stat"
   - title: Distributions
     desc: ~
     contents:
       - "Bernoulli"
       - "Beta"
       - "Binomial"
+      - "Categorical"
       - "Cauchy"
       - "ChiSquare"
       - "Exponential"
+      - "FisherF"
       - "Gamma"
       - "Geometric"
+      - "HyperGeometric"
+      - "Logistic"
       - "LogNormal"
+      - "Multinomial"
       - "NegativeBinomial"
       - "Normal"
       - "Poisson"
       - "StudentsT"
+      - "Tukey"
       - "Uniform"
+      - "Weibull"
+  - title: Experimental Generics
+    desc: ~
+    contents:
+      - "fit_mle"
+      - "suff_stat"

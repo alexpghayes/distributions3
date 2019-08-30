@@ -1,4 +1,4 @@
-#' Create a continuous uniform distribution
+#' Create a Continuous Uniform distribution
 #'
 #' A distribution with constant density on an interval. The
 #' continuous analogue to the [Categorical()] distribution.

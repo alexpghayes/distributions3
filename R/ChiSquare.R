@@ -1,4 +1,4 @@
-#' Create a chi-square distribution
+#' Create a Chi-Square distribution
 #'
 #' Chi-square distributions show up often in frequentist settings
 #' as the sampling distribution of test statistics, especially
