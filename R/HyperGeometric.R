@@ -30,7 +30,7 @@
 #'   In the following, let \eqn{X} be a HyperGeometric random variable with
 #'   success probability `p` = \eqn{p = m/(m+n)}.
 #'
-#'   **Support**: \eqn{x \in \left{ \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}\right}\}}
+#'   **Support**: \eqn{x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}}
 #'
 #'   **Mean**: \eqn{\frac{km}{n+m} = kp}
 #'
