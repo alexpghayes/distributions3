@@ -89,7 +89,7 @@ random.Custom <- function(d, n = 1L, ...){
 #' @export
 #'
 pdf.Custom <- function(d, x, ...) {
-  d$probs[d$ss == x]
+  ifelse(x %in% d$ss, d$probs[d$ss], 0)
 }
 
 #' Evaluate the cumulative distribution function of a Custom discrete distribution
@@ -109,11 +109,8 @@ cdf.Custom <- function(d, x, ...) {
   if(!is.numeric(d$ss))
     stop("The sample space is not numeric, and so the cdf is not well-defined.")
 
-  if(!x %in% d$ss)
-    stop("x is not in the sample space.")
-
   probs <- setNames(d$probs, d$ss)[order(d$ss)]
-  setNames(cumsum(probs)[x], NULL)
+  setNames(cumsum(probs)[max(which(x >= d$ss))], NULL)
 }
 
 #' Determine quantiles of a Custom discrete distribution
