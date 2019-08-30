@@ -1,7 +1,9 @@
 #' Create a Weibull distribution
 #'
-#' @param shape TODO
-#' @param scale TODO
+#' Generalization of the gamma distribution. Often used in survival and time-to-event analyses.
+#'
+#' @param shape The shape parameter \eqn{k}. Can be any positive real number.
+#' @param scale The scale parameter \eqn{\lambda}. Can be any positive real number.
 #'
 #' @return A `Weibull` object.
 #' @export
@@ -17,23 +19,25 @@
 #'   In the following, let \eqn{X} be a Weibull random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   **Support**: TODO
+#'   **Support**: \eqn{R^+} and zero.
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is the gamma function.
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+\frac{1}{k}))^2 ]}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     f(x) = \frac{k}{\lambda}(\frac{x}{\lambda})^{k-1}e^{-(x/\lambda)^k}, x \ge 0
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   \deqn{F(x) = 1 - e^{-(x/\lambda)^k}, x \ge 0}
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{\sum_{n=0}^\infty \frac{t^n\lambda^n}{n!} \Gamma(1+n/k), k\ge 1}
 #'
 #' @examples
 #'

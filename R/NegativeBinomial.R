@@ -1,10 +1,10 @@
 #' Create a Negative Binomial distribution
 #'
-#' TODO
+#' A generalization of the geometric distribution. It is the number of successes in a sequence of
+#' i.i.d. Bernoulli trials before a specified number (\eqn{r}) of failures occurs.
 #'
-#' @param size The number of trials. Must be an integer greater than or equal
-#'   to one. When `size = 1L`, the binomial distribution reduces to the
-#'   bernoulli distribution. Oftened called `n` in textbooks.
+#'
+#' @param size The number of failures (an integer greater than \eqn{0}) until the experiment is stopped. Denoted \eqn{r} below.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
@@ -22,25 +22,28 @@
 #'   In the following, let \eqn{X} be a Negative Binomial random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   TODO: multiple parameterizations BLEH
 #'
-#'   **Support**: TODO
+#'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\frac{p r}{1-p}}
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\frac{pr}{(1-p)^2}}
 #'
-#'   **Probability density function (p.d.f)**:
+#'   **Probability mass function (p.m.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   Too nasty, ommited.
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
+#'   }
 #'
 #' @examples
 #'

@@ -1,7 +1,13 @@
 #' Create a LogNormal distribution
 #'
-#' @param log_mu TODO explain what the hell this is
-#' @param log_sigma TODO explain what the hell this is
+#' The exponential of a normal random variable. I.e. if \eqn{X \sim \text{Normal}(\mu, \sigma^2)}, then
+#' \eqn{e^X \sim \text{Lognormal}(\mu, \sigma)}.Conversely,if \eqn{Y \sim \text{Lognormal}(\mu, \sigma)},
+#' then \eqn{\log{Y} \sim \text{Normal}(\mu, \sigma^2)}.
+#'
+#' @param log_mu The location parameter, written \eqn{\mu} in textbooks. Can be any real number.
+#'   Defaults to `0`.
+#' @param log_sigma The scale parameter, written \eqn{\sigma} in textbooks. Can be any positive real number.
+#'   Defaults to `1`.
 #'
 #' @return A `LogNormal` object.
 #' @export
@@ -17,25 +23,23 @@
 #'   In the following, let \eqn{X} be a LogNormal random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   TODO: multiple parameterizations BLEH
+#'   **Support**: \eqn{R^+}
 #'
-#'   **Support**: TODO
+#'   **Mean**: \eqn{\exp(\mu + \sigma^2/2)}
 #'
-#'   **Mean**: TODO
-#'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{[\exp(\sigma^2)-1]\exp(2\mu+\sigma^2)}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   TODO
+#'   \deqn{f(x) = \frac{1}{x\sigma\sqrt{2\pi}}\exp(-\frac{(\log x - \mu)^2}{2\sigma^2})}
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   \deqn{F(x) = \frac{1}{2} + \frac{1}{2\sqrt{pi}}\int_{-x}^x e^{-t^2} dt}
 #'
 #'   **Moment generating function (m.g.f)**:
+#'   Undefined.
 #'
-#'   TODO
 #'
 #' @examples
 #'
