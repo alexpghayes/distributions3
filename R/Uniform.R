@@ -1,6 +1,7 @@
 #' Create a continuous uniform distribution
 #'
-#' TODO: A categorical distribution that can be used for discrete uniforms.
+#' A distribution with constant density on an interval. The
+#' continuous analogue to the [Categorical()] distribution.
 #'
 #' @param a The a parameter. `a` can be any value in the set of real
 #'   numbers. Defaults to `0`.

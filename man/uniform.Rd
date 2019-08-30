@@ -18,7 +18,8 @@ order of the parameters is inverted. Defaults to \code{1}.}
 A \code{Uniform} object.
 }
 \description{
-TODO: A categorical distribution that can be used for discrete uniforms.
+A distribution with constant density on an interval. The
+continuous analogue to the \code{\link[=Categorical]{Categorical()}} distribution.
 }
 \examples{
 

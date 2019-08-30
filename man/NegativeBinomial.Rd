@@ -7,9 +7,7 @@
 NegativeBinomial(size, p = 0.5)
 }
 \arguments{
-\item{size}{The number of trials. Must be an integer greater than or equal
-to one. When \code{size = 1L}, the binomial distribution reduces to the
-bernoulli distribution. Oftened called \code{n} in textbooks.}
+\item{size}{The number of failures (an integer greater than \eqn{0}) until the experiment is stopped. Denoted \eqn{r} below.}
 
 \item{p}{The success probability for a given trial. \code{p} can be any
 value in \code{[0, 1]}, and defaults to \code{0.5}.}
@@ -18,7 +16,8 @@ value in \code{[0, 1]}, and defaults to \code{0.5}.}
 A \code{NegativeBinomial} object.
 }
 \description{
-TODO
+A generalization of the geometric distribution. It is the number of successes in a sequence of
+i.i.d. Bernoulli trials before a specified number (\eqn{r}) of failures occurs.
 }
 \details{
 We recommend reading this documentation on
@@ -28,25 +27,27 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a Negative Binomial random variable with
 success probability \code{p} = \eqn{p}.
 
-TODO: multiple parameterizations BLEH
+\strong{Support}: \eqn{\{0, 1, 2, 3, ...\}}
 
-\strong{Support}: TODO
+\strong{Mean}: \eqn{\frac{p r}{1-p}}
 
-\strong{Mean}: TODO
+\strong{Variance}: \eqn{\frac{pr}{(1-p)^2}}
 
-\strong{Variance}: TODO
+\strong{Probability mass function (p.m.f)}:
 
-\strong{Probability density function (p.d.f)}:
-
-TODO
+\deqn{
+     f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+Too nasty, ommited.
 
 \strong{Moment generating function (m.g.f)}:
 
-TODO
+\deqn{
+     \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
+  }
 }
 \examples{
 

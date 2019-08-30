@@ -161,10 +161,6 @@ cdf.Gamma <- function(d, x, ...) {
 #' @export
 #'
 quantile.Gamma <- function(d, p, ...) {
-
-  # TODO: in the documentation, more information on return and
-  # how quantiles are calculated
-
   qgamma(p = p, shape = d$shape, rate = d$rate)
 }
 

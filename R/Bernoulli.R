@@ -77,8 +77,6 @@
 #' cdf(X, 0)
 #' quantile(X, 0.7)
 #'
-#' # TODO: make sure these are inverses of each other
-#'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 #'

@@ -1,9 +1,11 @@
 #' Create a Weibull distribution
 #'
-#' Generalization of the gamma distribution. Often used in survival and time-to-event analyses.
+#' Generalization of the gamma distribution. Often used in survival and
+#' time-to-event analyses.
 #'
 #' @param shape The shape parameter \eqn{k}. Can be any positive real number.
-#' @param scale The scale parameter \eqn{\lambda}. Can be any positive real number.
+#' @param scale The scale parameter \eqn{\lambda}. Can be any positive real
+#'   number.
 #'
 #' @return A `Weibull` object.
 #' @export
@@ -21,9 +23,10 @@
 #'
 #'   **Support**: \eqn{R^+} and zero.
 #'
-#'   **Mean**: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is the gamma function.
+#'   **Mean**: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is
+#'   the gamma function.
 #'
-#'   **Variance**: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+\frac{1}{k}))^2 ]}
+#'   **Variance**: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+ \frac{1}{k}))^2 ]}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
@@ -37,7 +40,7 @@
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   \deqn{\sum_{n=0}^\infty \frac{t^n\lambda^n}{n!} \Gamma(1+n/k), k\ge 1}
+#'   \deqn{\sum_{n=0}^\infty \frac{t^n\lambda^n}{n!} \Gamma(1+n/k), k \ge 1}
 #'
 #' @examples
 #'
@@ -60,7 +63,7 @@ Weibull <- function(shape, scale) {
 
 #' @export
 print.Weibull <- function(x, ...) {
-  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})"))
+  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})\n"))
 }
 
 #' Draw a random sample from a Weibull distribution

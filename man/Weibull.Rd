@@ -7,15 +7,17 @@
 Weibull(shape, scale)
 }
 \arguments{
-\item{shape}{TODO}
+\item{shape}{The shape parameter \eqn{k}. Can be any positive real number.}
 
-\item{scale}{TODO}
+\item{scale}{The scale parameter \eqn{\lambda}. Can be any positive real
+number.}
 }
 \value{
 A \code{Weibull} object.
 }
 \description{
-Create a Weibull distribution
+Generalization of the gamma distribution. Often used in survival and
+time-to-event analyses.
 }
 \details{
 We recommend reading this documentation on
@@ -25,23 +27,26 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a Weibull random variable with
 success probability \code{p} = \eqn{p}.
 
-\strong{Support}: TODO
+\strong{Support}: \eqn{R^+} and zero.
 
-\strong{Mean}: TODO
+\strong{Mean}: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is
+the gamma function.
 
-\strong{Variance}: TODO
+\strong{Variance}: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+ \frac{1}{k}))^2 ]}
 
 \strong{Probability density function (p.d.f)}:
 
-TODO
+\deqn{
+    f(x) = \frac{k}{\lambda}(\frac{x}{\lambda})^{k-1}e^{-(x/\lambda)^k}, x \ge 0
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+\deqn{F(x) = 1 - e^{-(x/\lambda)^k}, x \ge 0}
 
 \strong{Moment generating function (m.g.f)}:
 
-TODO
+\deqn{\sum_{n=0}^\infty \frac{t^n\lambda^n}{n!} \Gamma(1+n/k), k \ge 1}
 }
 \examples{
 

@@ -107,10 +107,6 @@ cdf.Exponential <- function(d, x, ...) {
 #' @export
 #'
 quantile.Exponential <- function(d, p, ...) {
-
-  # TODO: in the documentation, more information on return and
-  # how quantiles are calculated
-
   qexp(p = p, rate = d$rate)
 }
 
