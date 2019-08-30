@@ -131,7 +131,6 @@ pdf.Binomial <- function(d, x, ...) {
 
 #' @rdname pdf.Binomial
 #' @export
-#'
 log_pdf.Binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }

@@ -22,12 +22,21 @@
 #' Y
 #'
 #' random(X, 10)
+#' random(Y, 10)
 #'
-#' pdf(X, 0.7)
-#' log_pdf(X, 0.7)
+#' pdf(X, 1)
+#' log_pdf(X, 1)
 #'
-#' cdf(X, 0.7)
-#' quantile(X, 0.7)
+#' cdf(X, 1)
+#' quantile(X, 0.5)
+#'
+#' \dontrun{
+#' # cdfs are only defined for numeric sample spaces. this errors!
+#' cdf(Y, "a")
+#'
+#' # same for quantiles. this also errors!
+#' quantile(Y, 0.7)
+#' }
 #'
 Categorical <- function(outcomes, p = NULL){
 
@@ -107,7 +116,13 @@ pdf.Categorical <- function(d, x, ...) {
   if (!all(x %in% d$outcomes))
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
 
-  d$p[d$outcomes == x]
+  ifelse(x %in% d$outcomes, d$p[d$outcomes == x], 0)
+}
+
+#' @rdname pdf.Categorical
+#' @export
+log_pdf.Categorical <- function(d, x, ...) {
+  log(pdf(d, x))
 }
 
 #' Evaluate the cumulative distribution function of a Categorical distribution
@@ -134,7 +149,7 @@ cdf.Categorical <- function(d, x, ...) {
   if (!all(x %in% d$outcomes))
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
 
-  cumsum(pdf(d, d$outcomes))[match(x, d$outcomes)]
+  cumsum(pdf(d, d$outcomes))[max(which(x >= d$outcomes))]
 }
 
 #' Determine quantiles of a Categorical discrete distribution
