@@ -7,19 +7,19 @@
 LogNormal(log_mu = 0, log_sigma = 1)
 }
 \arguments{
-\item{log_mu}{The location parameter, written \eqn{\mu} in textbooks. Can be any real number.
-Defaults to \code{0}.}
+\item{log_mu}{The location parameter, written \eqn{\mu} in textbooks.
+Can be any real number. Defaults to \code{0}.}
 
-\item{log_sigma}{The scale parameter, written \eqn{\sigma} in textbooks. Can be any positive real number.
-Defaults to \code{1}.}
+\item{log_sigma}{The scale parameter, written \eqn{\sigma} in textbooks.
+Can be any positive real number. Defaults to \code{1}.}
 }
 \value{
 A \code{LogNormal} object.
 }
 \description{
-The exponential of a normal random variable. I.e. if \eqn{X \sim \text{Normal}(\mu, \sigma^2)}, then
-\eqn{e^X \sim \text{Lognormal}(\mu, \sigma)}.Conversely,if \eqn{Y \sim \text{Lognormal}(\mu, \sigma)},
-then \eqn{\log{Y} \sim \text{Normal}(\mu, \sigma^2)}.
+A random variable created by exponentiating a \code{\link[=Normal]{Normal()}}
+distribution. Taking the log of LogNormal data returns in
+\code{\link[=Normal]{Normal()}} data.
 }
 \details{
 We recommend reading this documentation on

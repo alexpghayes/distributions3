@@ -5,9 +5,9 @@
 #' exponential distribution with parameter \eqn{1/\beta}. When the
 #' \eqn{shape = n/2} and \eqn{rate = 1/2}, the Gamma is a equivalent to
 #' a chi squared distribution with n degrees of freedom. Moreover, if
-#' we have \eqn{X_1 \sim Gamma(\alpha_1, \beta)} and
-#' \eqn{X_2 \sim Gamma(\alpha_2, \beta)}, a function of these two variables
-#' of the form \eqn{\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)}.
+#' we have \eqn{X_1} is \eqn{Gamma(\alpha_1, \beta)} and
+#' \eqn{X_2} is \eqn{Gamma(\alpha_2, \beta)}, a function of these two variables
+#' of the form \eqn{\frac{X_1}{X_1 + X_2}} \eqn{Beta(\alpha_1, \alpha_2)}.
 #' This last property frequently appears in another distributions, and it
 #' has extensively been used in multivariate methods. More about the Gamma
 #' distribution will be added soon.

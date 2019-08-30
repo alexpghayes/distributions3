@@ -1,7 +1,7 @@
 #' Create a Logistic distribution
 #'
 #' A continuous distribution on the real line. For binary outcomes
-#' the model given by \eqn{P(Y = 1 | X) = F(X \Beta)} where
+#' the model given by \eqn{P(Y = 1 | X) = F(X \beta)} where
 #' \eqn{F} is the Logistic [cdf()] is called *logistic regression*.
 #'
 #' @param location The location parameter for the distribution. For Logistic
@@ -49,12 +49,12 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     E(e^{tX}) = e^{\mu t} \Beta(1 - st, 1 + st)
+#'     E(e^{tX}) = e^{\mu t} \beta(1 - st, 1 + st)
 #'   }{
-#'     E(e^(tX)) = = e^(\mu t) \Beta(1 - st, 1 + st)
+#'     E(e^(tX)) = = e^(\mu t) \beta(1 - st, 1 + st)
 #'   }
 #'
-#'   where \eqn{\Beta(x, y)} is the Beta function.
+#'   where \eqn{\beta(x, y)} is the Beta function.
 #'
 #' @examples
 #'

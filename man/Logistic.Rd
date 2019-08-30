@@ -18,7 +18,7 @@ A \code{Logistic} object.
 }
 \description{
 A continuous distribution on the real line. For binary outcomes
-the model given by \eqn{P(Y = 1 | X) = F(X \Beta)} where
+the model given by \eqn{P(Y = 1 | X) = F(X \beta)} where
 \eqn{F} is the Logistic \code{\link[=cdf]{cdf()}} is called \emph{logistic regression}.
 }
 \details{
@@ -54,12 +54,12 @@ In the following, let \eqn{X} be a Logistic random variable with
 \strong{Moment generating function (m.g.f)}:
 
 \deqn{
-    E(e^{tX}) = e^{\mu t} \Beta(1 - st, 1 + st)
+    E(e^{tX}) = e^{\mu t} \beta(1 - st, 1 + st)
   }{
-    E(e^(tX)) = = e^(\mu t) \Beta(1 - st, 1 + st)
+    E(e^(tX)) = = e^(\mu t) \beta(1 - st, 1 + st)
   }
 
-where \eqn{\Beta(x, y)} is the Beta function.
+where \eqn{\beta(x, y)} is the Beta function.
 }
 \examples{
 
