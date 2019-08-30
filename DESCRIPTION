@@ -40,7 +40,6 @@ Suggests:
     cowplot,
     ggplot2,
     knitr,
-    patchwork (>= 0.0.1),
     rmarkdown,
     testthat (>= 2.1.0)
 VignetteBuilder: 
