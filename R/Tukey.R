@@ -59,7 +59,7 @@ Tukey <- function(nmeans, df, nranges) {
 print.Tukey <- function(x, ...) {
   cat(
     glue("Tukey distribution (nmeans = {x$nmeans}",
-         "df = {x$df}, nranges = {x$nranges})"))
+         "df = {x$df}, nranges = {x$nranges})\n"))
 }
 
 #' Evaluate the cumulative distribution function of a Tukey distribution

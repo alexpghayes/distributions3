@@ -80,7 +80,7 @@ Logistic <- function(location = 0, scale = 1) {
 #' @export
 print.Logistic <- function(x, ...) {
   cat(
-    glue("Logistic distribution (location = {x$location}, scale = {x$scale})")
+    glue("Logistic distribution (location = {x$location}, scale = {x$scale})\n")
   )
 }
 

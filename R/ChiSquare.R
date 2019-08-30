@@ -2,35 +2,32 @@
 #'
 #' Chi-square distributions show up often in frequentist settings
 #' as the sampling distribution of test statistics, especially
-#' in maximum likelihood estimation settings. The chi-square
-#' distribution with a single degree of freedom is equivalent
-#' to a squared standard normal distribution, and also to a Gamma distribution
-#' with \eqn{shape = 1/2} and \eqn{rate = 1/2} chi squar\eqn{n}
-#' e
-#- distr distributions, with  \eqn{n_i = n_1,\dots, n_n},
-#' results in a new chi-square distribution with added degrees of
-#' freedom, given by \eqn{\sum_{i = 1}^{n} n_i}. Thereby, summing up
-#' normal random variables (which are \eqn{ChiSq(1)}) will result in a
-#' \eqn{ChiSq(n)}. A chi-square distribution with \eqn{n} degrees of freedom
-#' is also a special case of the Gamma distribution with
-#' \eqn{shape = n/2} and \eqn{rate = 1/2} (see [Gamma()]).
+#' in maximum likelihood estimation settings.
 #'
-#' Many more relationships can be built around the chi-square distribution.
-#' For instance, if we have an \eqn{X_1 \sim ChiSq(n)} and an
-#' \eqn{X_2 \sim ChiSq(m)}, the result of \eqn{\frac{X_1}{n}/\frac{X_2}{m}}
-#' is a new random variable which follows an \eqn{F(n, m)} distribution.
-#' On the other hand, if we have an \eqn{X_1 \sim Normal(0, 1)} and
-#' an \eqn{X_2 \sim ChiSq(n)}, the result of \eqn{\frac{X_1}{\sqrt{X_2/}}
-#' will have a Student's T distribution (see [StudentsT()]).
-#' Such properties are useful to understand the distributions involved
-#' in the most common hypothesis tests.
-#'
-#'m df Degrees of freedom. Must be positive.
+#' @param df Degrees of freedom. Must be positive.
 #'
 #' @return A `ChiSquare` object.
 #' @export
 #'
 #' @family continuous distributions
+#'
+#' @section Transformations:
+#'
+#' A squared standard [Normal()] distribution is equivalent to a
+#' \eqn{\chi^2_1} distribution with one degree of freedom. The
+#' \eqn{\chi^2} distribution is a special case of the [Gamma()]
+#' distribution with shape (TODO: check this) parameter equal
+#' to a half. Sums of \eqn{\chi^2} distributions
+#' are also distributed as \eqn{\chi^2} distributions, where the
+#' degrees of freedom of the contributing distributions get summed.
+#' The ratio of two \eqn{\chi^2} distributions is a [FisherF()]
+#' distribution.
+#'
+#' TODO: flesh this out.if we have an \eqn{X_1 \sim Normal(0, 1)} and
+#' an \eqn{X_2 \sim ChiSq(n)}, the result of \eqn{\frac{X_1}{\sqrt{X_2/}}}
+#' will have a Student's T distribution (see [StudentsT()]).
+#' Such properties are useful to understand the distributions involved
+#' in the most common hypothesis tests.
 #'
 #' @details
 #'
@@ -103,7 +100,7 @@ ChiSquare <- function(df) {
 
 #' @export
 print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})"))
+  cat(glue("Chi Square distribution (df = {x$df})\n"))
 }
 
 #' Draw a random sample from a chi square distribution
