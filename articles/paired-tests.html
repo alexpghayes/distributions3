@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -117,12 +117,6 @@
 <a href="#problem-setup" class="anchor"></a>Problem setup</h2>
 <p>Suppose we’re interested in people’s happiness before and after discovering the #rstats Twitter community. We survey them get before and after happiness scores, using a happiness survey that goes from 0 to 100.</p>
 <p>The data looks like this</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">27</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">before &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">20</span>))</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">after &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(before <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">person =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, before, after))</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">person</th>
@@ -187,16 +181,25 @@
 <h2 class="hasAnchor">
 <a href="#working-with-the-differences" class="anchor"></a>Working with the differences</h2>
 <p>Crucially, since the before measurement and the after measurement are on the <em>same person</em>, we can subtract the before measurement from the after measurement and do a one sample test on these differences.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">before &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">88</span>, <span class="dv">73</span>, <span class="dv">35</span>, <span class="dv">21</span>, <span class="dv">28</span>, <span class="dv">56</span>, <span class="dv">50</span>, <span class="dv">73</span>, <span class="dv">93</span>, <span class="dv">55</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">after &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">80</span>, <span class="dv">78</span>, <span class="dv">56</span>, <span class="dv">28</span>, <span class="dv">26</span>, <span class="dv">50</span>, <span class="dv">39</span>, <span class="dv">67</span>, <span class="dv">98</span>, <span class="dv">63</span>) </a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">diff &lt;-<span class="st"> </span>after <span class="op">-</span><span class="st"> </span>before</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">diff</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  [1]  -8   5  21   7  -2  -6 -11  -6   5   8</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">before &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">88</span>, <span class="dv">73</span>, <span class="dv">35</span>, <span class="dv">21</span>, <span class="dv">28</span>, <span class="dv">56</span>, <span class="dv">50</span>, <span class="dv">73</span>, <span class="dv">93</span>, <span class="dv">55</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">after &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">80</span>, <span class="dv">78</span>, <span class="dv">56</span>, <span class="dv">28</span>, <span class="dv">26</span>, <span class="dv">50</span>, <span class="dv">39</span>, <span class="dv">67</span>, <span class="dv">98</span>, <span class="dv">63</span>) </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">diff &lt;-<span class="st"> </span>after <span class="op">-</span><span class="st"> </span>before</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">diff</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;  [1]  -8   5  21   7  -2  -6 -11  -6   5   8</span></a></code></pre></div>
 </div>
 <div id="paired-tests-versus-two-sample-tests" class="section level2">
 <h2 class="hasAnchor">
 <a href="#paired-tests-versus-two-sample-tests" class="anchor"></a>Paired tests versus two sample tests</h2>
+<p>One key question is: when should we use paired instead of two sample tests? Students typically struggle with this, and it’s worth spending some time thinking about this. In abstract terms, we should use paired tests when we have <em>two observations on the same experimental unit</em> and two sample tests when we have <em>two observations on different experimental units</em>.</p>
+<p>The difficulty here is that it takes some time to become comfortable with experimental units. I recommend memorizing</p>
+<p>Some examples where paired tests are appropriate:</p>
+<ul>
+<li>left/right shoe</li>
+</ul>
+<p>Some examples where you should use a two sample test:</p>
+<p>Also note that we</p>
+<p>twosample tests, and when should we use</p>
 <p>why pair - power pair if you can memorize and analogize</p>
 </div>
 <div id="paired-z-test" class="section level2">
@@ -214,6 +217,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -232,7 +236,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

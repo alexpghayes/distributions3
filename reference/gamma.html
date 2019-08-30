@@ -8,10 +8,12 @@
 
 <title>Create a Gamma distribution — Gamma • distributions</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -30,20 +32,21 @@
 
 
 
-<meta property="og:title" content="Create a Gamma distribution — Gamma" />
 
+<meta property="og:title" content="Create a Gamma distribution — Gamma" />
 <meta property="og:description" content="Several important distributions are special cases of the Gamma
 distribution. When the shape parameter is 1, the Gamma is an
 exponential distribution with parameter \(1/\beta\). When the
 \(shape = n/2\) and \(rate = 1/2\), the Gamma is a equivalent to
 a chi squared distribution with n degrees of freedom. Moreover, if
-we have \(X_1 \sim Gamma(\alpha_1, \beta)\) and
-\(X_2 \sim Gamma(\alpha_2, \beta)\), a function of these two variables
-of the form \(\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)\).
+we have \(X_1\) is \(Gamma(\alpha_1, \beta)\) and
+\(X_2\) is \(Gamma(\alpha_2, \beta)\), a function of these two variables
+of the form \(\frac{X_1}{X_1 + X_2}\) \(Beta(\alpha_1, \alpha_2)\).
 This last property frequently appears in another distributions, and it
 has extensively been used in multivariate methods. More about the Gamma
 distribution will be added soon." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -73,7 +76,7 @@ distribution will be added soon." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -125,7 +128,6 @@ distribution will be added soon." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexpghayes/distributions">
@@ -151,23 +153,21 @@ distribution will be added soon." />
     </div>
 
     <div class="ref-description">
-    
     <p>Several important distributions are special cases of the Gamma
 distribution. When the shape parameter is <code>1</code>, the Gamma is an
 exponential distribution with parameter \(1/\beta\). When the
 \(shape = n/2\) and \(rate = 1/2\), the Gamma is a equivalent to
 a chi squared distribution with n degrees of freedom. Moreover, if
-we have \(X_1 \sim Gamma(\alpha_1, \beta)\) and
-\(X_2 \sim Gamma(\alpha_2, \beta)\), a function of these two variables
-of the form \(\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)\).
+we have \(X_1\) is \(Gamma(\alpha_1, \beta)\) and
+\(X_2\) is \(Gamma(\alpha_2, \beta)\), a function of these two variables
+of the form \(\frac{X_1}{X_1 + X_2}\) \(Beta(\alpha_1, \alpha_2)\).
 This last property frequently appears in another distributions, and it
 has extensively been used in multivariate methods. More about the Gamma
 distribution will be added soon.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>Gamma</span>(<span class='no'>shape</span>, <span class='kw'>rate</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -181,11 +181,10 @@ distribution will be added soon.</p>
 to <code>1</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>Gamma</code> object.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>We recommend reading this documentation on
@@ -210,7 +209,6 @@ with parameters
 <p>$$
     E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t &lt; \beta
   $$</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other continuous distributions: <code><a href='Beta.html'>Beta</a></code>,
@@ -220,7 +218,6 @@ with parameters
   <code><a href='normal.html'>Normal</a></code>, <code><a href='StudentsT.html'>StudentsT</a></code>,
   <code><a href='Tukey.html'>Tukey</a></code>, <code><a href='uniform.html'>Uniform</a></code>,
   <code><a href='Weibull.html'>Weibull</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -230,20 +227,15 @@ with parameters
 #&gt;  [8] 3.1022415 4.9676063 0.4918818</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.3907336</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -0.9397292</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9003676</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 2.945181</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
-</div></pre>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -252,7 +244,7 @@ with parameters
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

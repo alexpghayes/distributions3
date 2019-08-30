@@ -8,10 +8,12 @@
 
 <title>Create a HyperGeometric distribution — HyperGeometric • distributions</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -30,10 +32,20 @@
 
 
 
-<meta property="og:title" content="Create a HyperGeometric distribution — HyperGeometric" />
 
-<meta property="og:description" content="TODO" />
+<meta property="og:title" content="Create a HyperGeometric distribution — HyperGeometric" />
+<meta property="og:description" content="To understand the HyperGeometric distribution, consider a set of
+\(r\) objects, of which \(m\) are of the type I and
+\(n\) are of the type II. A sample with size \(k\) (\(k&amp;lt;r\))
+with no replacement is randomly chosen. The number of observed
+type I elements observed in this sample is set to be our random
+variable \(X\). For example, consider that in a set of 20
+car parts, there are 4 that are defective (type I).
+If we take a sample of size 5 from those car parts, the
+probability of finding 2 that are defective will be given by
+the HyperGeometric distribution (needs double checking)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -63,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -115,7 +127,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexpghayes/distributions">
@@ -141,79 +152,83 @@
     </div>
 
     <div class="ref-description">
-    
-    <p>TODO</p>
-    
+    <p>To understand the HyperGeometric distribution, consider a set of
+\(r\) objects, of which \(m\) are of the type I and
+\(n\) are of the type II. A sample with size \(k\) (\(k&lt;r\))
+with no replacement is randomly chosen. The number of observed
+type I elements observed in this sample is set to be our random
+variable \(X\). For example, consider that in a set of 20
+car parts, there are 4 that are defective (type I).
+If we take a sample of size 5 from those car parts, the
+probability of finding 2 that are defective will be given by
+the HyperGeometric distribution (needs double checking).</p>
     </div>
 
     <pre class="usage"><span class='fu'>HyperGeometric</span>(<span class='no'>m</span>, <span class='no'>n</span>, <span class='no'>k</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>m</th>
-      <td><p>TODO</p></td>
+      <td><p>The number of type I elements available.</p></td>
     </tr>
     <tr>
       <th>n</th>
-      <td><p>TODO</p></td>
+      <td><p>The number of type II elements available.</p></td>
     </tr>
     <tr>
       <th>k</th>
-      <td><p>TODO</p></td>
+      <td><p>The size of the sample taken.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>HyperGeometric</code> object.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>We recommend reading this documentation on
 <a href='https://alexpghayes.github.io/distributions'>https://alexpghayes.github.io/distributions</a>, where the math
 will render with additional detail and much greater clarity.</p>
 <p>In the following, let \(X\) be a HyperGeometric random variable with
-success probability <code>p</code> = \(p\).</p>
-<p><strong>Support</strong>: TODO</p>
-<p><strong>Mean</strong>: TODO</p>
-<p><strong>Variance</strong>: TODO</p>
+success probability <code>p</code> = \(p = m/(m+n)\).</p>
+<p><strong>Support</strong>: \(x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}\)</p>
+<p><strong>Mean</strong>: \(\frac{km}{n+m} = kp\)</p>
+<p><strong>Variance</strong>: \(\frac{km(n)(n+m-k)}{(n+m)^2 (n+m-1)} =
+  kp(1-p)(1 - \frac{k-1}{m+n-1})\)</p>
 <p><strong>Probability mass function (p.m.f)</strong>:</p>
-<p>TODO</p>
+<p>$$
+    P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m+n \choose k}}
+  $$</p>
 <p><strong>Cumulative distribution function (c.d.f)</strong>:</p>
-<p>TODO</p>
-<p><strong>Moment generating function (m.g.f)</strong>:</p>
-<p>TODO</p>
-    
+<p>$$
+    P(X \le k) \approx \Phi\Big(\frac{x - kp}{\sqrt{kp(1-p)}}\Big)
+ $$
+<strong>Moment generating function (m.g.f)</strong>:</p>
+<p>Not useful.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other discrete distributions: <code><a href='Bernoulli.html'>Bernoulli</a></code>,
-  <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='geometric.html'>Geometric</a></code>,
-  <code><a href='Multinomial.html'>Multinomial</a></code>,
+  <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='Categorical.html'>Categorical</a></code>,
+  <code><a href='geometric.html'>Geometric</a></code>, <code><a href='Multinomial.html'>Multinomial</a></code>,
   <code><a href='NegativeBinomial.html'>NegativeBinomial</a></code>, <code><a href='poisson.html'>Poisson</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>HyperGeometric</span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>8</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; HyperGeometric distribution (m = 4, n = 5, k = 8)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4 3 4 3 4 3 3 3 4 3</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4 3 3 4 4 3 4 3 3 4</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -Inf</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'>
-</div></pre>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -222,7 +237,7 @@ success probability <code>p</code> = \(p\).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

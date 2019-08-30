@@ -8,10 +8,12 @@
 
 <title>Create a Geometric distribution — Geometric • distributions</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -30,15 +32,15 @@
 
 
 
-<meta property="og:title" content="Create a Geometric distribution — Geometric" />
 
+<meta property="og:title" content="Create a Geometric distribution — Geometric" />
 <meta property="og:description" content="The Geometric distribution can be thought of as a generalization
 of the Bernoulli() distribution where we ask: &quot;if I keep flipping a
 coin with probability p of heads, what is the probability I need
 \(k\) flips before I get my first heads?&quot; The Geometric
-distribution is a special case of Negative Binomial distribution
-with parameters TODO." />
+distribution is a special case of Negative Binomial distribution." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -68,7 +70,7 @@ with parameters TODO." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -120,7 +122,6 @@ with parameters TODO." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexpghayes/distributions">
@@ -146,18 +147,15 @@ with parameters TODO." />
     </div>
 
     <div class="ref-description">
-    
     <p>The Geometric distribution can be thought of as a generalization
 of the <code><a href='Bernoulli.html'>Bernoulli()</a></code> distribution where we ask: "if I keep flipping a
 coin with probability <code>p</code> of heads, what is the probability I need
 \(k\) flips before I get my first heads?" The Geometric
-distribution is a special case of Negative Binomial distribution
-with parameters TODO.</p>
-    
+distribution is a special case of Negative Binomial distribution.</p>
     </div>
 
     <pre class="usage"><span class='fu'>Geometric</span>(<span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -167,19 +165,18 @@ with parameters TODO.</p>
 any value in <code>[0, 1]</code>, and defaults to <code>0.5</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>Geometric</code> object.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>We recommend reading this documentation on
 <a href='https://alexpghayes.github.io/distributions'>https://alexpghayes.github.io/distributions</a>, where the math
 will render with additional detail and much greater clarity.</p>
 <p>In the following, let \(X\) be a Geometric random variable with
-success probability <code>p</code> = \(p\).</p>
-<p>TODO: multiple parameterizations BLEH (ignore it?)</p>
+success probability <code>p</code> = \(p\). Note that there are multiple
+parameterizations of the Geometric distribution.</p>
 <p><strong>Support</strong>: 0 &lt; p &lt; 1, \(x = 0, 1, \dots\)</p>
 <p><strong>Mean</strong>: \(\frac{1-p}{p}\)</p>
 <p><strong>Variance</strong>: \(\frac{1-p}{p^2}\)</p>
@@ -195,14 +192,12 @@ success probability <code>p</code> = \(p\).</p>
 <p>$$
     E(e^{tX}) = \frac{pe^t}{1 - (1-p)e^t}
   $$</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other discrete distributions: <code><a href='Bernoulli.html'>Bernoulli</a></code>,
-  <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='HyperGeometric.html'>HyperGeometric</a></code>,
-  <code><a href='Multinomial.html'>Multinomial</a></code>,
+  <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='Categorical.html'>Categorical</a></code>,
+  <code><a href='HyperGeometric.html'>HyperGeometric</a></code>, <code><a href='Multinomial.html'>Multinomial</a></code>,
   <code><a href='NegativeBinomial.html'>NegativeBinomial</a></code>, <code><a href='poisson.html'>Poisson</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -210,20 +205,15 @@ success probability <code>p</code> = \(p\).</p>
 <span class='no'>X</span></div><div class='output co'>#&gt; Geometric distribution (p = 0.3)</div><div class='input'>
 <span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4 1 5 0 1 0 2 1 3 8</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.147</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -1.917323</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.83193</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
-</div></pre>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.83193</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 3</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -232,7 +222,7 @@ success probability <code>p</code> = \(p\).</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

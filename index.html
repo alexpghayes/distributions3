@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -115,22 +115,21 @@
 <a href="#distributions" class="anchor"></a>distributions</h1></div>
 <!-- badges: start -->
 
-<p><code>distributions</code>, inspired by the <a href="https://github.com/JuliaStats/Distributions.jl">eponynmous Julia package</a>, provides a generic function interface to probability distributions.</p>
-<p><code>distributions</code> has two goals:</p>
+<p><code>distributions</code>, inspired by the <a href="https://github.com/JuliaStats/Distributions.jl">eponynmous Julia package</a>, provides a generic function interface to probability distributions. <code>distributions</code> has two goals:</p>
 <ol style="list-style-type: decimal">
 <li><p>Replace the <code><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm()</a></code>, <code><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">pnorm()</a></code>, etc, family of functions with S3 methods for distribution objects</p></li>
-<li><p>Be extremely well documented and friendly toward students in intro stat classes.</p></li>
+<li><p>Be extremely well documented and friendly for students in intro stat classes.</p></li>
 </ol>
 <p>The main generics are:</p>
 <ul>
 <li>
 <code><a href="reference/random.html">random()</a></code>: Draw samples from a distribution.</li>
 <li>
-<code><a href="reference/pdf.html">pdf()</a></code>: Evaluate the probability density of mass at a point <code>x</code>.</li>
+<code><a href="reference/pdf.html">pdf()</a></code>: Evaluate the probability density of mass at a point.</li>
 <li>
-<code><a href="reference/cdf.html">cdf()</a></code>: Evaluate the cumulative probability up to a point <code>x</code>.</li>
+<code><a href="reference/cdf.html">cdf()</a></code>: Evaluate the cumulative probability up to a point.</li>
 <li>
-<code><a href="reference/quantile.html">quantile()</a></code>: Determine the quantile at <code>p</code>. Inverse of <code><a href="reference/cdf.html">cdf()</a></code>.</li>
+<code><a href="reference/quantile.html">quantile()</a></code>: Determine the quantile for a given probability. Inverse of <code><a href="reference/cdf.html">cdf()</a></code>.</li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -158,83 +157,11 @@
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; [1] 0</span></a></code></pre></div>
 <p>Note that <code><a href="reference/quantile.html">quantile()</a></code> <strong>always</strong> returns lower tail probabilities. If you aren’t sure what this means, please read the last several paragraphs of <code><a href="articles/one-sample-z-confidence-interval.html">vignette("one-sample-z-confidence-interval")</a></code> and have a gander at the plot.</p>
 </div>
-<div id="development-roadmap" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development-roadmap" class="anchor"></a>Development roadmap</h2>
-<p>The initial goal of <code>distributions</code> is to replace the base R <code>d</code>, <code>p</code>, <code>q</code>, and <code>r</code> functions for the following families. Currently we have replicated all of base R’s functionality. Next steps:</p>
-<ul>
-<li>Fill in missing documentation</li>
-<li>Tests</li>
-</ul>
-<p>We also want to write detailed vignettes describing the most common use cases for each of these distributions. Realistically, this means we need to document how to perform the statistical tests most common in intro stats classes.</p>
-<p>This documentation should live in vignettes that explicitly write down both math and code in a cookbook style mashup. These cookbooks should also provide code and guidance for basic assumption checking. See <code><a href="articles/one-sample-z-test.html">vignette("one-sample-z-test")</a></code> for an example. The vignette wishlist is currently as follows:</p>
-<p><strong>One sample tests</strong></p>
-<ul>
-<li>[ ] Update the one sample z-test vignette to include rejection regions and power calculations</li>
-<li>[ ] Update the one sample z-test for a proportion vignette to include rejection regions and power calculations
-<ul>
-<li>Include note about rejection region not being inverted CI due to different standard errors</li>
-</ul>
-</li>
-<li>[ ] Update the one sample t-test vignette to include rejection regions and power calculations</li>
-<li>[x] Signs test (binomial tests) using the binomial distribution</li>
-<li>[ ] One sample z confidence interval for a proportion</li>
-<li>[ ] Chi squared tests for counts
-<ul>
-<li>Would be really great to get help with this one</li>
-</ul>
-</li>
-</ul>
-<p><strong>Two sample tests</strong></p>
-<ul>
-<li>[ ] Two sample T-test (independent / equal variance)
-<ul>
-<li>Comment on <span class="math inline">\(F = T^2\)</span> relationship</li>
-</ul>
-</li>
-<li>[ ] Two sample T-test (Welch’s)
-<ul>
-<li>Show use of <code><a href="https://www.rdocumentation.org/packages/stats/topics/power.t.test">power.t.test()</a></code>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>Paired tests</strong></p>
-<ul>
-<li>[ ] Paired Z-test</li>
-<li>[ ] Paired T-test</li>
-<li>[ ] Paired sign-test</li>
-</ul>
-<p><strong>ANOVA and linear regression</strong></p>
-<ul>
-<li>[ ] One-way ANOVA using the F distribution
-<ul>
-<li>Confirm results with both <code><a href="https://www.rdocumentation.org/packages/stats/topics/aov">aov()</a></code> and <code><a href="https://www.rdocumentation.org/packages/stats/topics/anova">anova(lm())</a></code>
-</li>
-<li>Show power calculations with <code><a href="https://www.rdocumentation.org/packages/stats/topics/power.anova.test">power.anova.test()</a></code>
-</li>
-<li>Diagnostic plots / assumption checking</li>
-</ul>
-</li>
-</ul>
-<p><strong>Fancier tests (asymptotic versions)</strong></p>
-<ul>
-<li>[ ] Likelihood ratio test</li>
-<li>[ ] Wald test</li>
-<li>[ ] Rao score test</li>
-</ul>
-<p>After that the goal will probably to support more generics like those in the <code>Distributions.jl</code>, with the hope that the community will contribute additional distributions.</p>
-<p>Candidates for the next set of generics:</p>
-<ul>
-<li><code>log_cdf()</code></li>
-<li><code>plot_pdf()</code></li>
-<li><code>plot_cdf()</code></li>
-</ul>
-</div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>The best way to get started is to look at <code>R/beta.R</code> and <code>tests/testthat/test-beta.R</code>, copy them, and modify them for whatever new distribution you’d like to add.</p>
+<p>I am very happy to review PRs and provide advice on how to add new functionality to the package. Documentation improvements are particularly appreciated!</p>
+<p>To add a new distribution, the best way to get started is to look at <code>R/Beta.R</code> and <code>tests/testthat/test-Beta.R</code>, copy them, and modify them for whatever new distribution you’d like to add.</p>
 <p>Please note that <code>distributions</code> is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="related-work" class="section level2">
@@ -243,7 +170,9 @@
 <p>For a comprehensive overview of the many packages providing various distribution related functionality see the <a href="https://cran.r-project.org/web/views/Distributions.html">CRAN Task View</a>.</p>
 <ul>
 <li>
-<a href="http://distr.r-forge.r-project.org/"><code>distr</code></a> is quite similar to <code>distributions</code>, but uses S4 objects and is less focused on documentation</li>
+<a href="http://distr.r-forge.r-project.org/"><code>distr</code></a> is quite similar to <code>distributions</code>, but uses S4 objects and is less focused on documentation.</li>
+<li>
+<a href="https://alan-turing-institute.github.io/distr6/"><code>distr6</code></a> builds on <code>distr</code>, but uses R6 objects</li>
 <li>
 <a href="https://cran.r-project.org/web/packages/fitdistrplus/index.html"><code>fitdistrplus</code></a> provides extensive functionality for fitting various distributions but does not treat distributions themselves as objects</li>
 </ul>
@@ -274,9 +203,11 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Alex Hayes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4985-5160" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Ralph Moller-Trane <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
+
 
       <div class="dev-status">
 <h2>Dev status</h2>
@@ -291,7 +222,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -129,7 +129,7 @@
 <li>The data comes from a normal distribution.</li>
 <li>We have lots of data. How much? Many textbooks use 30 data points as a rule of thumb.</li>
 </ol>
-<p>Since we have a small sample, we let’s check if the data comes from a normal distribution using a normal quantile-quantile plot.</p>
+<p>Since we have a small sample, we should check if the data comes from a normal distribution using a normal quantile-quantile plot.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># read in the data</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
@@ -232,31 +232,35 @@
 <div id="formulas-for-power" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formulas-for-power" class="anchor"></a>Formulas for power</h3>
-<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test have high power: <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different way: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as it is actually formualted above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
-<p>Let’s pretend that <span class="math inline">\(H_0\)</span> is false, and that the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our test is <span class="math inline">\(P(\text{reject H_0} | \mu = \mu_A)\)</span>. As seen <a href="#rejection-regions">above</a>, <span class="math inline">\(H_0\)</span> is rejected when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the power of our test when <span class="math inline">\(\mu = \mu_A\)</span> is</p>
+<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test has high power. Mathematically, this means that <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different ways: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as formualted above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
+<p>Let’s consider the case that <span class="math inline">\(H_0\)</span> is false, and in particular the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our test is <span class="math inline">\(P(\text{reject } H_0 | \mu = \mu_A)\)</span>. <a href="#rejection-regions">Recall</a> that we reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the power of our test when <span class="math inline">\(\mu = \mu_A\)</span> is</p>
 <p><span class="math display">\[
-  P(\text{reject } H_0 \left | \mu = \mu_A \right .) = P\left( \left . \bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right) + P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right).
+  P(\text{reject } H_0 \left | \mu = \mu_A \right .) =
+  P\left( \left . \bar x &gt; \mu_0 + z_{1 - \alpha / 2}
+    \frac{\sigma}{\sqrt n} \right | \mu =
+  \mu_A \right) + P\left( \left . \bar x &lt; \mu_0 + z_{\alpha / 2}
+    \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right).
 \]</span></p>
-<p>Remember, <span class="math inline">\(\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)\)</span>, so given that <span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal}\left(\mu, \frac{\sigma^2}{n}\right)\)</span>, which let’s us calculate the probabilities we need to find the power:</p>
+<p>Remember that <span class="math inline">\(\bar X \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>. This means that, given <span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>, which let’s us calculate the probabilities we need to find the power:</p>
 
 <p>and similarly</p>
 <p><span class="math display">\[
   P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
 \]</span></p>
-<p>So, the power of our test, IF the true mean value is <span class="math inline">\(\mu_A\)</span>, is</p>
+<p>So, the power of our test, <em>if the true population mean is <span class="math inline">\(\mu_A\)</span></em>, is</p>
 
 <p>Let’s calculate this if <span class="math inline">\(\mu_A = 5\)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">power_lower &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="fl">0.025</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">power_upper &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="dv">1</span><span class="fl">-0.025</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">power_upper &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.025</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_lower) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_upper))</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_lower) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, power_upper))</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [1] 0.8853791</span></a></code></pre></div>
 <p>This means that the probability that we reject the null hypothesis (<span class="math inline">\(H_0: \mu = 3\)</span>) if the true mean is <span class="math inline">\(5\)</span> is about 0.89.</p>
 </div>
 <div id="formulas-for-sample-size-calculations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formulas-for-sample-size-calculations" class="anchor"></a>Formulas for sample size calculations</h3>
-<p>Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a (two-sided) one sample Z-test, you need</p>
+<p>Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a one sample Z-test with <span class="math inline">\(H_0 : \mu = \mu_0\)</span>, you need</p>
 <p><span class="math display">\[
   n \approx \left(
     {
@@ -265,12 +269,36 @@
     }
   \right)^2
 \]</span></p>
-<p>samples. If <span class="math inline">\(n\)</span> is not an integer, round up.</p>
+<p>samples. If <span class="math inline">\(n\)</span> is not an integer, round up. Often, the denominator is thought of as the detectable difference. So, the question becomes how many samples are required to have sufficient power to detect a difference of some particular size.</p>
+<p>This equation is simply a rewrite of the equation presented above for power. Recall, the power for a two sided test is</p>
+<p><span class="math display">\[
+\text{Power} = P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\]</span></p>
+<p>Usually, only one of these terms is contributing while the other is very close to zero. Let’s say the first term is the one clearly different from zero. To determine the sample size, we want to determine <span class="math inline">\(n\)</span> such that <span class="math inline">\(P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta\)</span>. Or, similarly, <span class="math inline">\(P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta\)</span>. I.e. we need <span class="math inline">\(\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} = z_{\beta}\)</span>.</p>
+
+<p>Since <span class="math inline">\(z_{1-\alpha/2} = -z_{\alpha/2}\)</span>, we have the equation above:</p>
+<p><span class="math display">\[
+  \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 = n.
+\]</span></p>
+<p>As an example, say the student prior to the experiment had determined that they wanted to test if the number of memes their professors know and love is 2. They want to make sure their sample size is large enough so that they are likely to reject the null hypothesis if the true number is 3. They determine that they want a probability of 0.9 of rejecting the null if the true number is 3. So, a sample size calculation looks like this:</p>
+<p><span class="math display">\[
+  n \approx \left(
+    {
+      2 \cdot (1.96 + 1.28) \over 
+      2-3
+    }
+  \right)^2 = 41.99
+\]</span></p>
+<p>So to make sure that they reject the null hypothesis with a probability of 0.9 if the true value is 3, they would have to ask 53 professors.</p>
+<p>Below is this same calculation done in <code>R</code>. Remember, <span class="math inline">\(\beta = 1-\text{Power}\)</span>. Note the small descrepency. This is due to rounding error.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="fl">0.05</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.9</span>)) <span class="op">/</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] 42.02969</span></a></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -289,7 +317,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

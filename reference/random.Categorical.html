@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine quantiles of a chi square distribution — quantile.ChiSquare • distributions</title>
+<title>Draw a random sample from a Categorical distribution — random.Categorical • distributions</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,8 @@
 
 
 
-<meta property="og:title" content="Determine quantiles of a chi square distribution — quantile.ChiSquare" />
-<meta property="og:description" content="quantile() is the inverse of cdf()." />
+<meta property="og:title" content="Draw a random sample from a Categorical distribution — random.Categorical" />
+<meta property="og:description" content="Draw a random sample from a Categorical distribution" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -137,28 +137,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine quantiles of a chi square distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/ChiSquare.R'><code>R/ChiSquare.R</code></a></small>
-    <div class="hidden name"><code>quantile.ChiSquare.Rd</code></div>
+    <h1>Draw a random sample from a Categorical distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Categorical.R'><code>R/Categorical.R</code></a></small>
+    <div class="hidden name"><code>random.Categorical.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='quantile.html'>quantile()</a></code> is the inverse of <code><a href='cdf.html'>cdf()</a></code>.</p>
+    <p>Draw a random sample from a Categorical distribution</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for ChiSquare</span>
-<span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>d</span>, <span class='no'>p</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for Categorical</span>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>d</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>d</th>
-      <td><p>A <code>ChiSquare</code> object created by a call to <code><a href='ChiSquare.html'>ChiSquare()</a></code>.</p></td>
+      <td><p>A <code>Categorical</code> object created by a call to <code><a href='Categorical.html'>Categorical()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>p</th>
-      <td><p>A vector of probabilites.</p></td>
+      <th>n</th>
+      <td><p>The number of samples to draw. Defaults to <code>1L</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -169,17 +169,28 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector of quantiles, one for each element of <code>p</code>.</p>
+    <p>A vector containing values from <code>outcomes</code> of length <code>n</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ChiSquare.html'>ChiSquare</a></span>(<span class='fl'>5</span>)
-<span class='no'>X</span></div><div class='output co'>#&gt; Chi Square distribution (df = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 13.144074  5.983758  3.010943  8.467705  2.102437  3.857333  2.193281
-#&gt;  [8]  9.441981  3.447967  5.776933</div><div class='input'>
-<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.1383692</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -1.97783</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.450584</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.06443</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Categorical.html'>Categorical</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.4</span>, <span class='fl'>0.1</span>, <span class='fl'>0.5</span>))
+<span class='no'>X</span></div><div class='output co'>#&gt; Categorical distribution
+#&gt;   outcomes = [1, 2, 3]
+#&gt;   p = [0.4, 0.1, 0.5] </div><div class='input'>
+<span class='no'>Y</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Categorical.html'>Categorical</a></span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>Y</span></div><div class='output co'>#&gt; Categorical distribution
+#&gt;   outcomes = [A, B, ..., D]
+#&gt;   p = [0.25, 0.25, ..., 0.25] </div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1 1 3 1 2 1 3 2 3 3</div><div class='input'><span class='fu'><a href='random.html'>random</a></span>(<span class='no'>Y</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] "D" "D" "C" "D" "C" "B" "D" "A" "C" "B"</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.4</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] -0.9162907</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.4</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] 2</div><span class='co'># NOT RUN {</span>
+<span class='co'># cdfs are only defined for numeric sample spaces. this errors!</span>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Y</span>, <span class='st'>"a"</span>)
+
+<span class='co'># same for quantiles. this also errors!</span>
+<span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Y</span>, <span class='fl'>0.7</span>)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

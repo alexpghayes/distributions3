@@ -8,10 +8,12 @@
 
 <title>Draw a random sample from a StudentsT distribution — random.StudentsT • distributions</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -30,12 +32,13 @@
 
 
 
-<meta property="og:title" content="Draw a random sample from a StudentsT distribution — random.StudentsT" />
 
+<meta property="og:title" content="Draw a random sample from a StudentsT distribution — random.StudentsT" />
 <meta property="og:description" content="Please see the documentation of StudentsT() for some properties
 of the T distribution, as well as extensive examples
 showing to how calculate p-values and confidence intervals." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -65,7 +68,7 @@ showing to how calculate p-values and confidence intervals." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -117,7 +120,6 @@ showing to how calculate p-values and confidence intervals." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/alexpghayes/distributions">
@@ -143,16 +145,14 @@ showing to how calculate p-values and confidence intervals." />
     </div>
 
     <div class="ref-description">
-    
     <p>Please see the documentation of <code><a href='StudentsT.html'>StudentsT()</a></code> for some properties
 of the T distribution, as well as extensive examples
 showing to how calculate p-values and confidence intervals.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for StudentsT</span>
 <span class='fu'><a href='random.html'>random</a></span>(<span class='no'>d</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -170,33 +170,65 @@ showing to how calculate p-values and confidence intervals.</p>
 catch mispellings or other possible errors.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A numeric vector of length <code>n</code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other StudentsT distribution: <code><a href='cdf.StudentsT.html'>cdf.StudentsT</a></code>,
   <code><a href='pdf.StudentsT.html'>pdf.StudentsT</a></code>,
   <code><a href='quantile.StudentsT.html'>quantile.StudentsT</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-# TODO
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='StudentsT.html'>StudentsT</a></span>(<span class='fl'>3</span>)
+<span class='no'>X</span></div><div class='output co'>#&gt; Student's T distribution (df = 3)</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] -0.3840458  0.3880068 -0.0752866 -0.7244318 -2.2732893  1.4493233
+#&gt;  [7]  0.2644958  0.3389957 -1.1277259 -0.1363400</div><div class='input'>
+<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.06750966</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -2.695485</div><div class='input'>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9859958</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.5843897</div><div class='input'>
+<span class='co'>### example: calculating p-values for two-sided T-test</span>
 
-</div></pre>
+<span class='co'># here the null hypothesis is H_0: mu = 3</span>
+
+<span class='co'># data to test</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>7</span>, <span class='fl'>11</span>, <span class='fl'>0</span>, <span class='fl'>7</span>, <span class='fl'>0</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>2</span>)
+<span class='no'>nx</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>x</span>)
+
+<span class='co'># calculate the T-statistic</span>
+<span class='no'>t_stat</span> <span class='kw'>&lt;-</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) - <span class='fl'>3</span>) / (<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>))
+<span class='no'>t_stat</span></div><div class='output co'>#&gt; [1] 1.378916</div><div class='input'>
+<span class='co'># null distribution of statistic depends on sample size!</span>
+<span class='no'>T</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='StudentsT.html'>StudentsT</a></span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>nx</span> - <span class='fl'>1</span>)
+
+<span class='co'># calculate the two-sided p-value</span>
+<span class='fl'>1</span> - <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>T</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>t_stat</span>)) + <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>T</span>, -<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>t_stat</span>))</div><div class='output co'>#&gt; [1] 0.2012211</div><div class='input'>
+<span class='co'># exactly equivalent to the above</span>
+<span class='fl'>2</span> * <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>T</span>, -<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>abs</a></span>(<span class='no'>t_stat</span>))</div><div class='output co'>#&gt; [1] 0.2012211</div><div class='input'>
+<span class='co'># p-value for one-sided test</span>
+<span class='co'># H_0: mu &lt;= 3   vs   H_A: mu &gt; 3</span>
+<span class='fl'>1</span> - <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>T</span>, <span class='no'>t_stat</span>)</div><div class='output co'>#&gt; [1] 0.1006105</div><div class='input'>
+<span class='co'># p-value for one-sided test</span>
+<span class='co'># H_0: mu &gt;= 3   vs   H_A: mu &lt; 3</span>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>T</span>, <span class='no'>t_stat</span>)</div><div class='output co'>#&gt; [1] 0.8993895</div><div class='input'>
+<span class='co'>### example: calculating a 88 percent T CI for a mean</span>
+
+<span class='co'># lower-bound</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) - <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>T</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; [1] 2.631598</div><div class='input'>
+<span class='co'># upper-bound</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>T</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; [1] 6.368402</div><div class='input'>
+<span class='co'># equivalent to</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>1</span>, <span class='fl'>1</span>) * <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>T</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; [1] 2.631598 6.368402</div><div class='input'>
+<span class='co'># also equivalent to</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>T</span>, <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; [1] 2.631598</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a></span>(<span class='no'>x</span>) + <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>T</span>, <span class='fl'>1</span> - <span class='fl'>0.12</span> / <span class='fl'>2</span>) * <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a></span>(<span class='no'>x</span>) / <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/MathFun'>sqrt</a></span>(<span class='no'>nx</span>)</div><div class='output co'>#&gt; [1] 6.368402</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -205,7 +237,7 @@ catch mispellings or other possible errors.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">

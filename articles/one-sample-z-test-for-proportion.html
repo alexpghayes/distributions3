@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -117,11 +117,7 @@
 <a href="#problem-setup" class="anchor"></a>Problem setup</h2>
 <p>Let’s suppose that a student is interesting in estimating what percent of professors in their department watches Game of Thrones. They go to office hours and ask each professor and it turns out 17 out of 62 professors in their department watch Game of Thrones. Several of the faculty think Game of Thrones is a board game.</p>
 <p>We can imagine that the data is a bunch of zeros and ones, where the <span class="math inline">\(i^{th}\)</span> data point, <span class="math inline">\(x_i\)</span> is one if professor <span class="math inline">\(i\)</span> watches Game of Thrones, and zero otherwise. So the full dataset might look something like:</p>
-<p><span class="math display">\[
-  1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 
-  0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 
-  0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
-\]</span></p>
+
 <p>But it is much easier to just remember that there are 17 ones and 45 zeros.</p>
 </div>
 <div id="assumption-checking" class="section level2">
@@ -131,12 +127,12 @@
 <p>Most of the time we would check if there were 30 data points or more, but for a proportion, we do something slightly different. When data is binary, like we have here, the central limit theorem kicks in slower than usual. The standard thing to check is whether</p>
 <ul>
 <li><span class="math inline">\(n \cdot \pi &gt; 5\)</span></li>
-<li><span class="math inline">\(n \cdpt (1 - \pi) &gt; 5\)</span></li>
+<li><span class="math inline">\(n \cdot (1 - \pi) &gt; 5\)</span></li>
 </ul>
 <p>Where <span class="math inline">\(n\)</span> is the sample size (62 in our case) and <span class="math inline">\(\pi\)</span> is the sample average. Note that some textbooks might use <span class="math inline">\(p\)</span> rather than <span class="math inline">\(\pi\)</span>. In our case we have <span class="math inline">\(\pi = 17 / 62\)</span>, and</p>
 <ul>
 <li><span class="math inline">\(62 \cdot 17 / 62 = 17\)</span></li>
-<li><span class="math inline">\(62 \cdpt (1 - 17 / 62) = 45\)</span></li>
+<li><span class="math inline">\(62 \cdot (1 - 17 / 62) = 45\)</span></li>
 </ul>
 <p>So we’re good to go.</p>
 </div>
@@ -219,6 +215,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -236,7 +233,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">
