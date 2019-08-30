@@ -46,7 +46,7 @@ Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \nu \le 2}.
 \strong{Probability density function (p.d.f)}:
 
 \deqn{
-    f(x) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu \pi} \Gamma(\frac{\nu}{2})} \left(1 + \frac{x^2}{\nu} \right)^{- \frac{\nu + 1}{2}}
+    f(x) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu \pi} \Gamma(\frac{\nu}{2})} (1 + \frac{x^2}{\nu} )^{- \frac{\nu + 1}{2}}
   }{
     f(x) = \Gamma((\nu + 1) / 2) / (\sqrt(\nu \pi) \Gamma(\nu / 2)) (1 + x^2 / \nu)^(- (\nu + 1) / 2)
   }

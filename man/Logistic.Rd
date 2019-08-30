@@ -38,7 +38,7 @@ In the following, let \eqn{X} be a Logistic random variable with
 \strong{Probability density function (p.d.f)}:
 
 \deqn{
-    f(x) = \frac{e^{-(\frac{x - \mu}{s})}}{s \left(1 + e^{-(\frac{x - \mu}{s})} \right)^2}
+    f(x) = \frac{e^{-(\frac{x - \mu}{s})}}{s [1 + \exp(-(\frac{x - \mu}{s})) ]^2}
   }{
     f(x) = e^(-(t - \mu) / s) / (s (1 + e^(-(t - \mu) / s))^2)
   }

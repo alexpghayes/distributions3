@@ -18,8 +18,7 @@ The Geometric distribution can be thought of as a generalization
 of the \code{\link[=Bernoulli]{Bernoulli()}} distribution where we ask: "if I keep flipping a
 coin with probability \code{p} of heads, what is the probability I need
 \eqn{k} flips before I get my first heads?" The Geometric
-distribution is a special case of Negative Binomial distribution
-with parameters TODO.
+distribution is a special case of Negative Binomial distribution.
 }
 \details{
 We recommend reading this documentation on

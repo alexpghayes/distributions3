@@ -54,7 +54,7 @@ test_that("cdf.Exponential work correctly", {
   e <- Exponential()
 
   expect_equal(cdf(e, 0), 0)
-  expect_equal(cdf(e, 1), 1-1/exp(1))
+  expect_equal(cdf(e, 1), 1 - 1 / exp(1))
 
 
   expect_length(cdf(e, seq_len(0)), 0)

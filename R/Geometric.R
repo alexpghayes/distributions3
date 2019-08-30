@@ -4,8 +4,7 @@
 #' of the [Bernoulli()] distribution where we ask: "if I keep flipping a
 #' coin with probability `p` of heads, what is the probability I need
 #' \eqn{k} flips before I get my first heads?" The Geometric
-#' distribution is a special case of Negative Binomial distribution
-#' with parameters TODO.
+#' distribution is a special case of Negative Binomial distribution.
 #'
 #' @param p The success probability for the distribution. `p` can be
 #'   any value in `[0, 1]`, and defaults to `0.5`.

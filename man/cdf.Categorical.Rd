@@ -4,7 +4,7 @@
 \alias{cdf.Categorical}
 \title{Evaluate the cumulative distribution function of a Categorical distribution}
 \usage{
-\method{cdf}{Categorical}(d, x, ...)
+\method{cdf}{Categorical}(d, x = NULL, ...)
 }
 \arguments{
 \item{d}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}

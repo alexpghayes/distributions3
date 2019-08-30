@@ -167,10 +167,6 @@ cdf.Binomial <- function(d, x, ...) {
 #' @export
 #'
 quantile.Binomial <- function(d, p, ...) {
-
-  # TODO: in the documentation, more information on return and
-  # how quantiles are calculated
-
   qbinom(p = p, size = d$size, prob = d$p)
 }
 

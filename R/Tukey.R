@@ -1,11 +1,11 @@
 #' Create a Tukey distribution
 #'
-#' Tukey's studentized range distribution, used mostly for Tukey's
-#' honestly significant differences test in ANOVA
+#' Tukey's studentized range distribution, used for Tukey's
+#' honestly significant differences test in ANOVA.
 #'
-#' @param nmeans TODO
-#' @param df TODO
-#' @param nranges TODO
+#' @param nmeans Sample size for each range.
+#' @param df Degrees of freedom.
+#' @param nranges Number of groups being compared.
 #'
 #' @return A `Tukey` object.
 #' @export
@@ -18,28 +18,11 @@
 #'   <https://alexpghayes.github.io/distributions>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a Tukey random variable with
-#'   success probability `p` = \eqn{p}.
+#'   **Support**: \eqn{R^+}, the set of positive real numbers.
 #'
-#'   TODO: multiple parameterizations BLEH
-#'
-#'   **Support**: TODO
-#'
-#'   **Mean**: TODO
-#'
-#'   **Variance**: TODO
-#'
-#'   **Probability density function (p.d.f)**:
-#'
-#'   TODO
-#'
-#'   **Cumulative distribution function (c.d.f)**:
-#'
-#'   TODO
-#'
-#'   **Moment generating function (m.g.f)**:
-#'
-#'   TODO
+#'   Other properties of Tukey's Studentized Range Distribution
+#'   are omitted, largely because the distribution is not fun
+#'   to work with.
 #'
 #' @examples
 #'
