@@ -258,12 +258,8 @@ and similarly
 So, the power of our test, *if the true population mean is $\mu_A$*, is 
 
 \begin{align}
-  \text{Power} &= P \left( Z > \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} +
-    z_{1 - \alpha / 2} \right) + 
-    P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} + z_{\alpha/2} \right) \\
-  &= \left(1 - P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} +
-    z_{1 - \alpha / 2} \right) \right) +
-    P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} + z_{\alpha / 2} \right)
+  \text{Power} &= P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
+  &= \left[1 - P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right)\right] + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
 \end{align}
 
 Let's calculate this if $\mu_A = 5$. 
@@ -290,4 +286,46 @@ Often times researchers like to go in the other direction: aim for a specific le
   \right)^2
 \]
 
-samples. If $n$ is not an integer, round up.
+samples. If $n$ is not an integer, round up. Often, the denominator is thought of as the detectable difference. So, the question becomes how many samples are required to have sufficient power to detect a difference of size XX. 
+
+This equation is simply a rewrite of the equation presented above for power. Recall, the power for a two sided test is 
+
+\[
+\text{Power} = P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\]
+
+Usually, only one of these terms is contributing while the other is very close to zero. Let's say the first term is the one clearly different from zero. To determine the sample size, we want to determine $n$ such that $P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta$. Or, similarly, $P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta$. I.e. we need $\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-alpha/2} = z_{\beta}$. 
+
+\begin{align}
+ z_{\beta} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} & \Longleftrightarrow z_{\beta} - z_{1-\alpha/2} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} \\
+  & \Longleftrightarrow \sigma (z_{\beta} - z_{1-\alpha/2}) = (\mu_0-\mu_A)\sqrt{n} \\
+ & \Longleftrightarrow \frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A} = \sqrt{n} \\
+ & \Longleftrightarrow \left(\frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A}\right)^2 = n
+\end{align}
+
+Since $z_{1-\alpha/2} = -z_{\alpha/2}$, we have the equation above:
+
+$$
+  \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 = n.
+$$
+
+As an example, say the student prior to the experiment had determined that they wanted to test if the number of memes their professors know and love is 2. They want to make sure their sample size is large enough so that they are likely to reject the null hypothesis if the true number is 3. They determine that they want a probability of 0.9 of rejecting the null if the true number is 3. So, a sample size calculation looks like this:
+
+\[
+  n \approx \left(
+    {
+      2 \cdot (1.96 + 1.28) \over 
+      2-3
+    }
+  \right)^2 = `r round((2*(1.96+1.28)/(2-3))^2, digits = 2)`
+\]
+
+So to make sure that they reject the null hypothesis with a probability of 0.9 if the true value is 3, they would have to ask 53 professors. 
+
+Below is this same calculation done in `R`. Remember, $\beta = 1-\text{Power}$. Note the small descrepency. This is due to rounding error. 
+
+```{r}
+(2*(quantile(Z, 0.05/2) + quantile(Z, 1-0.9))/(3 - 2))^2
+```
+
+
