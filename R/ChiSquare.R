@@ -1,16 +1,31 @@
-#' Create a chi square distribution
+#' Create a chi-square distribution
 #'
-#' Chi square distributions show up often in frequentist settings
+#' Chi-square distributions show up often in frequentist settings
 #' as the sampling distribution of test statistics, especially
-#' in maximum likelihood estimation settings. The chi square
+#' in maximum likelihood estimation settings. The chi-square
 #' distribution with a single degree of freedom is equivalent
-#' to a squared standard normal distribution. Summing chi square
-#' distributions results in a new chi square distribution with
-#' added degrees of freedom. A chi square distribution is a special
-#' case of the gamma distribution with `shape = 2` (double check this).
-#' TODO: add relationship to F and T distributions.
+#' to a squared standard normal distribution, and also to a Gamma distribution
+#' with \eqn{shape = 1/2} and \eqn{rate = 1/2} chi squar\eqn{n}
+#' e
+#- distr distributions, with  \eqn{n_i = n_1,\dots, n_n},
+#' results in a new chi-square distribution with added degrees of
+#' freedom, given by \eqn{\sum_{i = 1}^{n} n_i}. Thereby, summing up
+#' normal random variables (which are \eqn{ChiSq(1)}) will result in a
+#' \eqn{ChiSq(n)}. A chi-square distribution with \eqn{n} degrees of freedom
+#' is also a special case of the Gamma distribution with
+#' \eqn{shape = n/2} and \eqn{rate = 1/2} (see [Gamma()]).
 #'
-#' @param df Degrees of freedom. Must be positive.
+#' Many more relationships can be built around the chi-square distribution.
+#' For instance, if we have an \eqn{X_1 \sim ChiSq(n)} and an
+#' \eqn{X_2 \sim ChiSq(m)}, the result of \eqn{\frac{X_1}{n}/\frac{X_2}{m}}
+#' is a new random variable which follows an \eqn{F(n, m)} distribution.
+#' On the other hand, if we have an \eqn{X_1 \sim Normal(0, 1)} and
+#' an \eqn{X_2 \sim ChiSq(n)}, the result of \eqn{\frac{X_1}{\sqrt{X_2/}}
+#' will have a Student's T distribution (see [StudentsT()]).
+#' Such properties are useful to understand the distributions involved
+#' in the most common hypothesis tests.
+#'
+#'m df Degrees of freedom. Must be positive.
 #'
 #' @return A `ChiSquare` object.
 #' @export
