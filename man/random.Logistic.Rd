@@ -22,6 +22,8 @@ Draw a random sample from a Logistic distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Logistic(2, 4)
 X
 

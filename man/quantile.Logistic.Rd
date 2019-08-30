@@ -22,6 +22,8 @@ Determine quantiles of a Logistic distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Logistic(2, 4)
 X
 

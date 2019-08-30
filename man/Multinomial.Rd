@@ -19,35 +19,50 @@ take on any positive value, and the vector is normalized internally.}
 A \code{Multinomial} object.
 }
 \description{
-Create a Multinomial distribution
+The multinomial distribution is a generalization of the binomial
+distribution to multiple categories. It is perhaps easiest to think
+that we first extend a \code{\link[=Bernoulli]{Bernoulli()}} distribution to include more
+than two categories, resulting in a \code{\link[=Categorical]{Categorical()}} distribution.
+We then extend repeat the Categorical experiment several (\eqn{n})
+times.
 }
 \details{
 We recommend reading this documentation on
 \url{https://alexpghayes.github.io/distributions}, where the math
 will render with additional detail and much greater clarity.
 
-In the following, let \eqn{X} be a Multinomial random variable with
-success probability \code{p} = \eqn{p}.
+In the following, let \eqn{X = (X_1, ..., X_k)} be a Multinomial
+random variable with success probability \code{p} = \eqn{p}. Note that
+\eqn{p} is vector with \eqn{k} elements that sum to one. Assume
+that we repeat the Categorical experiment \code{size} = \eqn{n} times.
 
-TODO: multiple parameterizations BLEH
+\strong{Support}: Each \eqn{X_i} is in \eqn{{0, 1, 2, ..., n}}.
 
-\strong{Support}: TODO
+\strong{Mean}: The mean of \eqn{X_i} is \eqn{n p_i}.
 
-\strong{Mean}: TODO
+\strong{Variance}: The variance of \eqn{X_i} is \eqn{n p_i (1 - p_i)}.
+For \eqn{i \neq j}, the covariance of \eqn{X_i} and \eqn{X_j}
+is \eqn{-n p_i p_j}.
 
-\strong{Variance}: TODO
+\strong{Probability mass function (p.m.f)}:
 
-\strong{Probability density function (p.d.f)}:
-
-TODO
+\deqn{
+    P(X_1 = x_1, ..., X_k = x_k) = \frac{n!}{x_1! x_2! ... x_k!} p_1^x_1 \cdot p_2^x_2 \cdot ... \cdot p_k^x_k
+  }{
+    P(X_1 = x_1, ..., X_k = x_k) = n! / (x_1! x_2! ... x_k!) p_1^x_1 p_2^x_2 ... p_k^x_k
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+Omitted for multivariate random variables for the time being.
 
 \strong{Moment generating function (m.g.f)}:
 
-TODO
+\deqn{
+    E(e^{tX}) = \left(\sum_{i=1}^k p_i e^{t_i} \right)^n
+  }{
+    E(e^(tX)) = (p_1 e^t_1 + p_2 e^t_2 + ... + p_k e^t_k)^n
+  }
 }
 \examples{
 

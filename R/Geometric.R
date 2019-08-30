@@ -22,9 +22,8 @@
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Geometric random variable with
-#'   success probability `p` = \eqn{p}.
-#'
-#'   TODO: multiple parameterizations BLEH (ignore it?)
+#'   success probability `p` = \eqn{p}. Note that there are multiple
+#'   parameterizations of the Geometric distribution.
 #'
 #'   **Support**: 0 < p < 1, \eqn{x = 0, 1, \dots}
 #'

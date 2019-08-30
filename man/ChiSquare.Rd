@@ -2,72 +2,27 @@
 % Please edit documentation in R/ChiSquare.R
 \name{ChiSquare}
 \alias{ChiSquare}
-\title{Create a chi square distribution}
+\title{Create a chi-square distribution}
 \usage{
 ChiSquare(df)
-}
-\arguments{
-\item{df}{Degrees of freedom. Must be positive.}
 }
 \value{
 A \code{ChiSquare} object.
 }
 \description{
-Chi square distributions show up often in frequentist settings
+Chi-square distributions show up often in frequentist settings
 as the sampling distribution of test statistics, especially
-in maximum likelihood estimation settings. The chi square
+in maximum likelihood estimation settings. The chi-square
 distribution with a single degree of freedom is equivalent
-to a squared standard normal distribution. Summing chi square
-distributions results in a new chi square distribution with
-added degrees of freedom. A chi square distribution is a special
-case of the gamma distribution with \code{shape = 2} (double check this).
-TODO: add relationship to F and T distributions.
-}
-\details{
-We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
-will render with additional detail and much greater clarity.
-
-In the following, let \eqn{X} be a \eqn{\chi^2} random variable with
-\code{df} = \eqn{k}.
-
-\strong{Support}: \eqn{R^+}, the set of positive real numbers
-
-\strong{Mean}: \eqn{k}
-
-\strong{Variance}: \eqn{2k}
-
-\strong{Probability density function (p.d.f)}:
-
-\deqn{
-    f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(x - \mu)^2 / 2 \sigma^2}
-  }{
-    f(x) = 1 / (2 \pi \sigma^2) exp(-(x - \mu)^2 / (2 \sigma^2))
-  }
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-The cumulative distribution function has the form
-
-\deqn{
-    F(t) = \int_{-\infty}^t \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(x - \mu)^2 / 2 \sigma^2} dx
-  }{
-    F(t) = integral_{-\infty}^t 1 / (2 \pi \sigma^2) exp(-(x - \mu)^2 / (2 \sigma^2)) dx
-  }
-
-but this integral does not have a closed form solution and must be
-approximated numerically. The c.d.f. of a standard normal is sometimes
-called the "error function". The notation \eqn{\Phi(t)} also stands
-for the c.d.f. of a standard normal evaluated at \eqn{t}. Z-tables
-list the value of \eqn{\Phi(t)} for various \eqn{t}.
-
-\strong{Moment generating function (m.g.f)}:
-
-\deqn{
-    E(e^{tX}) = e^{\mu t + \sigma^2 t^2 / 2}
-  }{
-    E(e^(tX)) = e^(\mu t + \sigma^2 t^2 / 2)
-  }
+to a squared standard normal distribution, and also to a Gamma distribution
+with \eqn{shape = 1/2} and \eqn{rate = 1/2} chi squar\eqn{n}
+e
+results in a new chi-square distribution with added degrees of
+freedom, given by \eqn{\sum_{i = 1}^{n} n_i}. Thereby, summing up
+normal random variables (which are \eqn{ChiSq(1)}) will result in a
+\eqn{ChiSq(n)}. A chi-square distribution with \eqn{n} degrees of freedom
+is also a special case of the Gamma distribution with
+\eqn{shape = n/2} and \eqn{rate = 1/2} (see \code{\link[=Gamma]{Gamma()}}).
 }
 \examples{
 
