@@ -53,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Poisson(2)
 #' X
 #'
@@ -66,6 +68,7 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
+#'
 Poisson <- function(lambda) {
   d <- list(lambda = lambda)
   class(d) <- c("Poisson", "distribution")

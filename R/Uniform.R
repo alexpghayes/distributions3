@@ -16,6 +16,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Uniform(1, 2)
 #' X
 #'
@@ -29,6 +31,7 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
+#'
 Uniform <- function(a = 0, b = 1) {
   d <- list(a = a, b = b)
   class(d) <- "Uniform"

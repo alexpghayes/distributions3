@@ -53,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Cauchy(10, 0.2)
 #' X
 #'

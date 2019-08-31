@@ -26,11 +26,14 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Tukey(4L, 16L, 2L)
 #' X
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
+#'
 Tukey <- function(nmeans, df, nranges) {
   d <- list(nmeans = nmeans, df = df, nranges = nranges)
   class(d) <- c("Tukey", "distribution")

@@ -73,6 +73,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- ChiSquare(5)
 #' X
 #'

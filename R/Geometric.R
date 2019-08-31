@@ -52,6 +52,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Geometric(0.3)
 #' X
 #'
@@ -62,6 +64,7 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
+#'
 Geometric <- function(p = 0.5) {
   d <- list(p = p)
   class(d) <- c("Geometric", "distribution")

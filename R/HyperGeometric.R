@@ -56,6 +56,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- HyperGeometric(4, 5, 8)
 #' X
 #'

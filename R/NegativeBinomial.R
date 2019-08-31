@@ -1,10 +1,12 @@
 #' Create a Negative Binomial distribution
 #'
-#' A generalization of the geometric distribution. It is the number of successes in a sequence of
-#' i.i.d. Bernoulli trials before a specified number (\eqn{r}) of failures occurs.
+#' A generalization of the geometric distribution. It is the number
+#' of successes in a sequence of i.i.d. Bernoulli trials before
+#' a specified number (\eqn{r}) of failures occurs.
 #'
 #'
-#' @param size The number of failures (an integer greater than \eqn{0}) until the experiment is stopped. Denoted \eqn{r} below.
+#' @param size The number of failures (an integer greater than \eqn{0})
+#'   until the experiment is stopped. Denoted \eqn{r} below.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
@@ -46,6 +48,8 @@
 #'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- NegativeBinomial(10, 0.3)
 #' X

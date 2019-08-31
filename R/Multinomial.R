@@ -62,6 +62,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Multinomial(size = 5, p = c(0.3, 0.4, 0.2, 0.1))
 #' X
 #'
@@ -69,6 +71,7 @@
 #'
 #' # pdf(X, 2)
 #' # log_pdf(X, 2)
+#'
 Multinomial <- function(size, p) {
   d <- list(size = size, p = p)
   class(d) <- c("Multinomial", "multivariate", "distribution")
