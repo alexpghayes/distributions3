@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluate the cumulative distribution function of a Normal distribution — cdf.Normal • distributions</title>
+<title>Evaluate the cumulative distribution function of a Normal distribution — cdf.Normal • distributions3</title>
 
 
 <!-- jquery -->
@@ -65,8 +65,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <a class="navbar-link" href="../index.html">distributions3</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions">
+  <a href="https://github.com/alexpghayes/distributions3">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -141,7 +141,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Evaluate the cumulative distribution function of a Normal distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Normal.R'><code>R/Normal.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/Normal.R'><code>R/Normal.R</code></a></small>
     <div class="hidden name"><code>cdf.normal.Rd</code></div>
     </div>
 
@@ -181,10 +181,12 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
+
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='normal.html'>Normal</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Normal distribution (mu = 5, sigma = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 6.141341 4.426760 7.441544 6.601643 4.002187 5.883946 8.267753 4.737248
-#&gt;  [9] 5.336119 7.033873</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 8.814325 7.289754 3.470939 2.085135 2.813062 5.590482 5.013772 7.314822
+#&gt;  [9] 9.269276 5.475689</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0647588</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -2.737086</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.3085375</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 6.048801</div><div class='input'>
 <span class='co'>### example: calculating p-values for two-sided Z-test</span>
@@ -247,10 +249,11 @@ catch mispellings or other possible errors.</p></td>
 #&gt; D = 0.46154, p-value = 1.37e-05
 #&gt; alternative hypothesis: two-sided
 #&gt; </div><div class='input'>
-<span class='co'>###</span>
+<span class='co'>### MISC</span>
 
 <span class='co'># note that the cdf() and quantile() functions are inverses</span>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

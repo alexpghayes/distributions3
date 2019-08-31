@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluate the probability mass function of a Gamma distribution — pdf.Gamma • distributions3</title>
+<title>distributions3: Probability Distributions as S3 Objects — distributions3-package • distributions3</title>
 
 
 <!-- jquery -->
@@ -33,8 +33,13 @@
 
 
 
-<meta property="og:title" content="Evaluate the probability mass function of a Gamma distribution — pdf.Gamma" />
-<meta property="og:description" content="Evaluate the probability mass function of a Gamma distribution" />
+<meta property="og:title" content="distributions3: Probability Distributions as S3 Objects — distributions3-package" />
+<meta property="og:description" content="Tools to create and manipulate probability
+    distributions using S3.  Generics random(), pdf(), cdf() and
+    quantile() provide replacements for base R's r/d/p/q style functions.
+    Functions and arguments have been named carefully to minimize
+    confusion for students in intro stats courses. The documentation for
+    each distribution contains detailed mathematical notes." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -140,63 +145,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Evaluate the probability mass function of a Gamma distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/Gamma.R'><code>R/Gamma.R</code></a></small>
-    <div class="hidden name"><code>pdf.gamma.Rd</code></div>
+    <h1>distributions3: Probability Distributions as S3 Objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/distributions_package.R'><code>R/distributions_package.R</code></a></small>
+    <div class="hidden name"><code>distributions3-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Evaluate the probability mass function of a Gamma distribution</p>
+    <p>Tools to create and manipulate probability
+    distributions using S3.  Generics random(), pdf(), cdf() and
+    quantile() provide replacements for base R's r/d/p/q style functions.
+    Functions and arguments have been named carefully to minimize
+    confusion for students in intro stats courses. The documentation for
+    each distribution contains detailed mathematical notes.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for Gamma</span>
-<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>d</span>, <span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for Gamma</span>
-<span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>d</span>, <span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>d</th>
-      <td><p>A <code>Gamma</code> object created by a call to <code><a href='gamma.html'>Gamma()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>A vector of elements whose probabilities you would like to
-determine given the distribution <code>d</code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.</p></td>
-    </tr>
-    </table>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://github.com/alexpghayes/distributions3'>https://github.com/alexpghayes/distributions3</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/alexpghayes/distributions3/issues'>https://github.com/alexpghayes/distributions3/issues</a></p></li>
+</ul></div>
 
-    <p>A vector of probabilities, one for each element of <code>x</code>.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
-
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gamma.html'>Gamma</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>)
-<span class='no'>X</span></div><div class='output co'>#&gt; Gamma distribution (shape = 5, rate = 2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 4.727510 3.628168 1.512156 4.771854 2.257310 3.645070 5.083710 2.509344
-#&gt;  [9] 1.093361 2.021506</div><div class='input'>
-<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.3907336</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -0.9397292</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9003676</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 2.945181</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#see-also">See also</a></li>
     </ul>
+
+    <h2>Author</h2>
+    <p><strong>Maintainer</strong>: Alex Hayes <a href='mailto:alexpghayes@gmail.com'>alexpghayes@gmail.com</a> (0000-0002-4985-5160)</p>
+<p>Authors:</p><ul>
+<li><p>Ralph Moller-Trane</p></li>
+</ul>
+
+<p>Other contributors:</p><ul>
+<li><p>Emil Hvitfeldt <a href='mailto:emilhhvitfeldt@gmail.com'>emilhhvitfeldt@gmail.com</a> (0000-0002-0679-1945) [contributor]</p></li>
+<li><p>Daniel Jordan <a href='mailto:dandermotj@gmail.com'>dandermotj@gmail.com</a> [contributor]</p></li>
+<li><p>Bruna Wundervald <a href='mailto:brunadaviesw@gmail.com'>brunadaviesw@gmail.com</a> [contributor]</p></li>
+</ul>
+
 
   </div>
 </div>

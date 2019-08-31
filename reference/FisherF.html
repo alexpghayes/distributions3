@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an F distribution — FisherF • distributions</title>
+<title>Create an F distribution — FisherF • distributions3</title>
 
 
 <!-- jquery -->
@@ -65,8 +65,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <a class="navbar-link" href="../index.html">distributions3</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions">
+  <a href="https://github.com/alexpghayes/distributions3">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -141,7 +141,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create an F distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/FisherF.R'><code>R/FisherF.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/FisherF.R'><code>R/FisherF.R</code></a></small>
     <div class="hidden name"><code>FisherF.Rd</code></div>
     </div>
 
@@ -184,10 +184,12 @@ Defaults to <code>0</code>.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
+
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>FisherF</span>(<span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>0.2</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Fisher's F distribution (df1 = 5, df2 = 10, lambda = 0.2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.37647455 1.30401151 1.27431903 0.02613154 0.71280701 2.38344999
-#&gt;  [7] 0.93894305 0.43444964 0.27550659 1.16310363</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 3.1450634 0.2781146 0.5846266 0.8103721 0.6263227 2.4989529 0.6281965
+#&gt;  [8] 0.3110039 0.5357005 0.4882204</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.1699603</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -1.77219</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.9667464</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 1.467954</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>

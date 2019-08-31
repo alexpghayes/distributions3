@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Draw a random sample from a Exponential distribution — random.Exponential • distributions</title>
+<title>Draw a random sample from a Exponential distribution — random.Exponential • distributions3</title>
 
 
 <!-- jquery -->
@@ -65,8 +65,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <a class="navbar-link" href="../index.html">distributions3</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions">
+  <a href="https://github.com/alexpghayes/distributions3">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -141,7 +141,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draw a random sample from a Exponential distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Exponential.R'><code>R/Exponential.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/Exponential.R'><code>R/Exponential.R</code></a></small>
     <div class="hidden name"><code>random.exponential.Rd</code></div>
     </div>
 
@@ -176,10 +176,12 @@ catch mispellings or other possible errors.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
+
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='exponential.html'>Exponential</a></span>(<span class='fl'>5</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Exponential distribution (rate = 5)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.084984553 0.121847686 0.225333367 0.348549263 0.107484606 0.024352706
-#&gt;  [7] 0.113964051 0.721696405 0.090810617 0.003930859</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 0.01161126 0.28730930 1.15993941 0.29660927 0.38431337 0.04643808
+#&gt;  [7] 0.06969554 0.10900366 0.50608948 0.03759968</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0002269996</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -8.390562</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 0.2407946</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 6.989008</div></pre>

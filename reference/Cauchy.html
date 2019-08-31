@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Cauchy distribution — Cauchy • distributions</title>
+<title>Create a Cauchy distribution — Cauchy • distributions3</title>
 
 
 <!-- jquery -->
@@ -68,8 +68,8 @@ as priors in Bayesian contexts due to their heavy tails." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <a class="navbar-link" href="../index.html">distributions3</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -126,7 +126,7 @@ as priors in Bayesian contexts due to their heavy tails." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions">
+  <a href="https://github.com/alexpghayes/distributions3">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -144,7 +144,7 @@ as priors in Bayesian contexts due to their heavy tails." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a Cauchy distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/Cauchy.R'><code>R/Cauchy.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/Cauchy.R'><code>R/Cauchy.R</code></a></small>
     <div class="hidden name"><code>Cauchy.Rd</code></div>
     </div>
 
@@ -208,10 +208,12 @@ will render with additional detail and much greater clarity.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
+
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>Cauchy</span>(<span class='fl'>10</span>, <span class='fl'>0.2</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Cauchy distribution (location = 10, scale = 0.2)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  9.966881  8.510288  8.582064 10.239601 11.183280 10.468260 10.017677
-#&gt;  [8] 11.864577 10.555693 10.012624</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  9.982203 10.053876  9.916324 10.336325 10.167877 10.626557 10.046357
+#&gt;  [8] 10.001540 10.091892 10.137681</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0009940971</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -6.913676</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.00795609</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 10.14531</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>))</div><div class='output co'>#&gt; [1] 0.7</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>7</span>))</div><div class='output co'>#&gt; [1] 7</div></pre>

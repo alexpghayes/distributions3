@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Negative Binomial distribution — NegativeBinomial • distributions</title>
+<title>Create a Negative Binomial distribution — NegativeBinomial • distributions3</title>
 
 
 <!-- jquery -->
@@ -34,8 +34,9 @@
 
 
 <meta property="og:title" content="Create a Negative Binomial distribution — NegativeBinomial" />
-<meta property="og:description" content="A generalization of the geometric distribution. It is the number of successes in a sequence of
-i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs." />
+<meta property="og:description" content="A generalization of the geometric distribution. It is the number
+of successes in a sequence of i.i.d. Bernoulli trials before
+a specified number (\(r\)) of failures occurs." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,8 +67,8 @@ i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs." /
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">distributions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <a class="navbar-link" href="../index.html">distributions3</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -124,7 +125,7 @@ i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs." /
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions">
+  <a href="https://github.com/alexpghayes/distributions3">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -142,13 +143,14 @@ i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs." /
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a Negative Binomial distribution</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions/blob/master/R/NegativeBinomial.R'><code>R/NegativeBinomial.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/alexpghayes/distributions3/blob/master/R/NegativeBinomial.R'><code>R/NegativeBinomial.R</code></a></small>
     <div class="hidden name"><code>NegativeBinomial.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A generalization of the geometric distribution. It is the number of successes in a sequence of
-i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs.</p>
+    <p>A generalization of the geometric distribution. It is the number
+of successes in a sequence of i.i.d. Bernoulli trials before
+a specified number (\(r\)) of failures occurs.</p>
     </div>
 
     <pre class="usage"><span class='fu'>NegativeBinomial</span>(<span class='no'>size</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
@@ -158,7 +160,8 @@ i.i.d. Bernoulli trials before a specified number (\(r\)) of failures occurs.</p
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>size</th>
-      <td><p>The number of failures (an integer greater than \(0\)) until the experiment is stopped. Denoted \(r\) below.</p></td>
+      <td><p>The number of failures (an integer greater than \(0\))
+until the experiment is stopped. Denoted \(r\) below.</p></td>
     </tr>
     <tr>
       <th>p</th>
@@ -199,9 +202,11 @@ success probability <code>p</code> = \(p\).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Random'>set.seed</a></span>(<span class='fl'>27</span>)
+
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>NegativeBinomial</span>(<span class='fl'>10</span>, <span class='fl'>0.3</span>)
 <span class='no'>X</span></div><div class='output co'>#&gt; Negative Binomial distribution (size = 10, p = 0.3)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 24 43 17 21 16 17 21 35 10 29</div><div class='input'>
+<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 45 25 27 41 13 11 16 22 12 23</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0.0001591371</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -8.745745</div><div class='input'>
 <span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 0.001665663</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 27</div></pre>
   </div>
