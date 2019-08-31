@@ -2,7 +2,7 @@
 % Please edit documentation in R/ChiSquare.R
 \name{ChiSquare}
 \alias{ChiSquare}
-\title{Create a chi-square distribution}
+\title{Create a Chi-Square distribution}
 \usage{
 ChiSquare(df)
 }

@@ -1,6 +1,6 @@
-Package: distributions
+Package: distributions3
 Title: Probability Distributions as S3 Objects
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Alex",
              family = "Hayes",
@@ -30,8 +30,8 @@ Description: Tools to create and manipulate probability
     confusion for students in intro stats courses. The documentation for
     each distribution contains detailed mathematical notes.
 License: MIT + file LICENSE
-URL: https://github.com/alexpghayes/distributions
-BugReports: https://github.com/alexpghayes/distributions/issues
+URL: https://github.com/alexpghayes/distributions3
+BugReports: https://github.com/alexpghayes/distributions3/issues
 Imports: 
     ellipsis,
     glue

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Uniform.R
 \name{Uniform}
 \alias{Uniform}
-\title{Create a continuous uniform distribution}
+\title{Create a Continuous Uniform distribution}
 \usage{
 Uniform(a = 0, b = 1)
 }
