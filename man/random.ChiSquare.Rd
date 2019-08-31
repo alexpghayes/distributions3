@@ -22,6 +22,8 @@ Draw a random sample from a chi square distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- ChiSquare(5)
 X
 

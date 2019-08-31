@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Gamma distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Gamma(5, 2)
 X
 

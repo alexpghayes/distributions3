@@ -26,6 +26,8 @@ Evaluate the probability mass function of a Exponential distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Exponential(5)
 X
 

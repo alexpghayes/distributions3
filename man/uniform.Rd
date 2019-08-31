@@ -23,6 +23,8 @@ continuous analogue to the \code{\link[=Categorical]{Categorical()}} distributio
 }
 \examples{
 
+set.seed(27)
+
 X <- Uniform(1, 2)
 X
 
@@ -36,6 +38,7 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
+
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},

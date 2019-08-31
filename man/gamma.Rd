@@ -70,6 +70,8 @@ with parameters
 }
 \examples{
 
+set.seed(27)
+
 X <- Gamma(5, 2)
 X
 

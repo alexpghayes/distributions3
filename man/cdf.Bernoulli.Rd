@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Bernoulli distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Bernoulli(0.7)
 X
 

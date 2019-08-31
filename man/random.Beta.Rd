@@ -22,6 +22,8 @@ Draw a random sample from a Beta distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Beta(1, 2)
 X
 

@@ -22,6 +22,8 @@ A vector of quantiles, one for each element of \code{p}.
 }
 \examples{
 
+set.seed(27)
+
 X <- ChiSquare(5)
 X
 

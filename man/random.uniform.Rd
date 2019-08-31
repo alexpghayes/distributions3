@@ -22,6 +22,8 @@ Draw a random sample from a continuous Uniform distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Uniform(1, 2)
 X
 
@@ -35,4 +37,5 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
+
 }

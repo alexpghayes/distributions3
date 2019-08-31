@@ -23,6 +23,8 @@ Draw a random sample from a Binomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Binomial(10, 0.2)
 X
 

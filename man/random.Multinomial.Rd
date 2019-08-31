@@ -22,6 +22,8 @@ Draw a random sample from a Multinomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Multinomial(size = 5, p = c(0.3, 0.4, 0.2, 0.1))
 X
 
@@ -29,6 +31,7 @@ random(X, 10)
 
 # pdf(X, 2)
 # log_pdf(X, 2)
+
 }
 \seealso{
 Other Multinomial distribution: \code{\link{pdf.Multinomial}}

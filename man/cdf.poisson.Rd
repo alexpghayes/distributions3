@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Poisson distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Poisson(2)
 X
 
@@ -36,4 +38,5 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
+
 }

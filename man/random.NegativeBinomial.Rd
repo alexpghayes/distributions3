@@ -23,6 +23,8 @@ Draw a random sample from a negative binomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- NegativeBinomial(10, 0.3)
 X
 

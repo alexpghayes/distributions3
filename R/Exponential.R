@@ -10,6 +10,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Exponential(5)
 #' X
 #'

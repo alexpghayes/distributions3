@@ -24,6 +24,8 @@ Evaluate the cumulative distribution function of a negative binomial distributio
 }
 \examples{
 
+set.seed(27)
+
 X <- NegativeBinomial(10, 0.3)
 X
 

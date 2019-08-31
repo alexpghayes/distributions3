@@ -73,6 +73,8 @@ probability of flipping a tail.
 }
 \examples{
 
+set.seed(27)
+
 X <- Bernoulli(0.7)
 X
 

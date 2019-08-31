@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Beta distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Beta(1, 2)
 X
 

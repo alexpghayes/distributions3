@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a StudentsT distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- StudentsT(3)
 X
 

@@ -22,6 +22,8 @@ Draw a random sample from an F distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- FisherF(5, 10, 0.2)
 X
 

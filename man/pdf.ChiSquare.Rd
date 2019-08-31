@@ -26,6 +26,8 @@ Evaluate the probability mass function of a chi square distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- ChiSquare(5)
 X
 

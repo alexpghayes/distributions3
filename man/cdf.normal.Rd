@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Normal distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Normal(5, 2)
 X
 
@@ -94,11 +96,12 @@ ks.test(ns, pnorm, mean = 3, sd = 7)
 # test if sample is gamma(8, 3) using base R pgamma()
 ks.test(ns, pgamma, shape = 8, rate = 3)
 
-###
+### MISC
 
 # note that the cdf() and quantile() functions are inverses
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
+
 }
 \seealso{
 Other Normal distribution: \code{\link{fit_mle.Normal}},

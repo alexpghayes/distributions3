@@ -58,6 +58,8 @@ In the following, let \eqn{X} be a Poisson random variable with parameter
 }
 \examples{
 
+set.seed(27)
+
 X <- Poisson(2)
 X
 
@@ -71,6 +73,7 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
+
 }
 \seealso{
 Other discrete distributions: \code{\link{Bernoulli}},

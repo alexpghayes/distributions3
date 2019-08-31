@@ -22,11 +22,14 @@ Determine quantiles of a Tukey distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Tukey(4L, 16L, 2L)
 X
 
 cdf(X, 4)
 quantile(X, 0.7)
+
 }
 \seealso{
 Other Tukey distribution: \code{\link{cdf.Tukey}}

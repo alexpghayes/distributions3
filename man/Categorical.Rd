@@ -23,6 +23,8 @@ Create a Categorical distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Categorical(1:3, p = c(0.4, 0.1, 0.5))
 X
 

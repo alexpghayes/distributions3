@@ -7,7 +7,8 @@
 NegativeBinomial(size, p = 0.5)
 }
 \arguments{
-\item{size}{The number of failures (an integer greater than \eqn{0}) until the experiment is stopped. Denoted \eqn{r} below.}
+\item{size}{The number of failures (an integer greater than \eqn{0})
+until the experiment is stopped. Denoted \eqn{r} below.}
 
 \item{p}{The success probability for a given trial. \code{p} can be any
 value in \code{[0, 1]}, and defaults to \code{0.5}.}
@@ -16,8 +17,9 @@ value in \code{[0, 1]}, and defaults to \code{0.5}.}
 A \code{NegativeBinomial} object.
 }
 \description{
-A generalization of the geometric distribution. It is the number of successes in a sequence of
-i.i.d. Bernoulli trials before a specified number (\eqn{r}) of failures occurs.
+A generalization of the geometric distribution. It is the number
+of successes in a sequence of i.i.d. Bernoulli trials before
+a specified number (\eqn{r}) of failures occurs.
 }
 \details{
 We recommend reading this documentation on
@@ -50,6 +52,8 @@ Too nasty, ommited.
   }
 }
 \examples{
+
+set.seed(27)
 
 X <- NegativeBinomial(10, 0.3)
 X

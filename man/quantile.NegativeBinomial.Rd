@@ -23,6 +23,8 @@ Determine quantiles of a NegativeBinomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- NegativeBinomial(10, 0.3)
 X
 

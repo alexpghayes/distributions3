@@ -80,6 +80,8 @@ of a scaled \code{\link[=ChiSquare]{ChiSquare()}} is a \code{\link[=StudentsT]{S
 
 \examples{
 
+set.seed(27)
+
 X <- ChiSquare(5)
 X
 

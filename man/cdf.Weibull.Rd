@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Weibull distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Weibull(0.3, 2)
 X
 
@@ -33,6 +35,7 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
+
 }
 \seealso{
 Other Weibull distribution: \code{\link{pdf.Weibull}},

@@ -24,6 +24,8 @@ showing to how calculate p-values and confidence intervals.
 }
 \examples{
 
+set.seed(27)
+
 X <- StudentsT(3)
 X
 
