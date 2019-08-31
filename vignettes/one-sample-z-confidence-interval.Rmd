@@ -55,7 +55,7 @@ which may look slightly more familiar. Having trouble seeing what the difference
 so that $\alpha = 0.12$. Now we can get started.
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 # read in the data
 x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)

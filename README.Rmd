@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
 <!-- badges: end -->
 
-`distributions`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions` has two goals:
+`distributions3`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions` has two goals:
 
 1. Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects
 
@@ -41,15 +41,15 @@ The main generics are:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("alexpghayes/distributions")
+devtools::install_github("alexpghayes/distributions3")
 ```
 
 ## Basic Usage
 
-The basic usage of `distributions` looks like:
+The basic usage of `distributions3` looks like:
 
-```{r intro}
-library(distributions)
+```{r}
+library(distributions3)
 
 X <- Bernoulli(0.1)
 

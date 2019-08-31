@@ -101,7 +101,7 @@ Since the sample size is 10, to calculate a two-sided p-value, we need to find
 To do this we need to c.d.f. of a $t_9$ distribution.
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 T_9 <- StudentsT(df = 9)  # make a T_9 distribution
 1 - cdf(T_9, 1.38) + cdf(T_9, -1.38)

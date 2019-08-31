@@ -11,7 +11,7 @@ status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](http
 coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
 <!-- badges: end -->
 
-`distributions`, inspired by the [eponynmous Julia
+`distributions3`, inspired by the [eponynmous Julia
 package](https://github.com/JuliaStats/Distributions.jl), provides a
 generic function interface to probability distributions. `distributions`
 has two goals:
@@ -42,15 +42,15 @@ devtools::install_github("alexpghayes/distributions")
 
 ## Basic Usage
 
-The basic usage of `distributions` looks like:
+The basic usage of `distributions3` looks like:
 
 ``` r
-library(distributions)
+library(distributions3)
 
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 1 0 0
+#>  [1] 0 0 0 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 
