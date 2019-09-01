@@ -37,7 +37,7 @@ also comes up in the sign test, sometimes called the Binomial test
 compute p-values.
 
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail.
 
 In the following, let \eqn{X} be a Binomial random variable with parameter

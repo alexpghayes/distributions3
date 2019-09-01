@@ -21,7 +21,7 @@ distribution with \code{n = 1}.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail.
 
 In the following, let \eqn{X} be a Bernoulli random variable with parameter

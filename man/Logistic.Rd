@@ -23,7 +23,7 @@ the model given by \eqn{P(Y = 1 | X) = F(X \beta)} where
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Logistic random variable with

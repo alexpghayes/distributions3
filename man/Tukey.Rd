@@ -22,7 +22,7 @@ honestly significant differences test in ANOVA.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 \strong{Support}: \eqn{R^+}, the set of positive real numbers.

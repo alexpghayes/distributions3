@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
+status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
 [![Codecov test
-coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
+coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
 <!-- badges: end -->
 
 `distributions3`, inspired by the [eponynmous Julia
@@ -37,7 +37,7 @@ version with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("alexpghayes/distributions")
+devtools::install_github("alexpghayes/distributions3")
 ```
 
 ## Basic Usage
@@ -50,7 +50,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
+#>  [1] 1 0 0 1 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 
@@ -83,13 +83,13 @@ you agree to abide by its terms.
 
 For a comprehensive overview of the many packages providing various
 distribution related functionality see the [CRAN Task
-View](https://cran.r-project.org/web/views/Distributions.html).
+View](https://cran.r-project.org/view=Distributions).
 
-  - [`distr`](http://distr.r-forge.r-project.org/) is quite similar to
-    `distributions`, but uses S4 objects and is less focused on
+  - [`distr`](https://cran.r-project.org/package=distr) is quite similar
+    to `distributions`, but uses S4 objects and is less focused on
     documentation.
-  - [`distr6`](https://alan-turing-institute.github.io/distr6/) builds
-    on `distr`, but uses R6 objects
-  - [`fitdistrplus`](https://cran.r-project.org/web/packages/fitdistrplus/index.html)
+  - [`distr6`](https://cran.r-project.org/package=distr6) builds on
+    `distr`, but uses R6 objects
+  - [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
     provides extensive functionality for fitting various distributions
     but does not treat distributions themselves as objects

@@ -1,3 +1,5 @@
+Resubmission to fix URLs
+
 ## Test environments
 
 * local windows 8 install, R 3.5.3
