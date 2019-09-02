@@ -128,7 +128,7 @@
 <li>
 <code><a href="reference/random.html">random()</a></code>: Draw samples from a distribution.</li>
 <li>
-<code><a href="reference/pdf.html">pdf()</a></code>: Evaluate the probability density of mass at a point.</li>
+<code><a href="reference/pdf.html">pdf()</a></code>: Evaluate the probability density (or mass) at a point.</li>
 <li>
 <code><a href="reference/cdf.html">cdf()</a></code>: Evaluate the cumulative probability up to a point.</li>
 <li>
@@ -150,7 +150,7 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3">X &lt;-<span class="st"> </span><span class="kw"><a href="reference/Bernoulli.html">Bernoulli</a></span>(<span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="reference/random.html">random</a></span>(X, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  [1] 1 0 0 1 0 0 0 0 0 0</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  [1] 0 0 1 0 0 0 0 0 0 0</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="reference/pdf.html">pdf</a></span>(X, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; [1] 0.1</span></a>
 <a class="sourceLine" id="cb2-9" data-line-number="9"></a>
@@ -165,7 +165,7 @@
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>I am very happy to review PRs and provide advice on how to add new functionality to the package. Documentation improvements are particularly appreciated!</p>
 <p>To add a new distribution, the best way to get started is to look at <code>R/Beta.R</code> and <code>tests/testthat/test-Beta.R</code>, copy them, and modify them for whatever new distribution you’d like to add.</p>
-<p>Please note that <code>distributions</code> is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that <code>distributions3</code> is released with a <a href="https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="related-work" class="section level2">
 <h2 class="hasAnchor">
