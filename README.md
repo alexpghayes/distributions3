@@ -25,7 +25,7 @@ has two goals:
 The main generics are:
 
   - `random()`: Draw samples from a distribution.
-  - `pdf()`: Evaluate the probability density of mass at a point.
+  - `pdf()`: Evaluate the probability density (or mass) at a point.
   - `cdf()`: Evaluate the cumulative probability up to a point.
   - `quantile()`: Determine the quantile for a given probability.
     Inverse of `cdf()`.
@@ -50,7 +50,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 1 0 0 1 0 0 0 0 0 0
+#>  [1] 0 0 0 0 0 0 0 0 0 1
 pdf(X, 1)
 #> [1] 0.1
 
@@ -75,9 +75,10 @@ To add a new distribution, the best way to get started is to look at
 `R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them
 for whatever new distribution you’d like to add.
 
-Please note that `distributions` is released with a [Contributor Code of
-Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Please note that `distributions3` is released with a [Contributor Code
+of
+Conduct](https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## Related work
 
