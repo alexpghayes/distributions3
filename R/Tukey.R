@@ -46,7 +46,8 @@ print.Tukey <- function(x, ...) {
     glue(
       "Tukey distribution (nmeans = {x$nmeans}",
       "df = {x$df}, nranges = {x$nranges})\n"
-    )
+    ),
+    "\n"
   )
 }
 

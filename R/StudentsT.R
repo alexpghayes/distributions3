@@ -120,7 +120,7 @@ StudentsT <- function(df) {
 
 #' @export
 print.StudentsT <- function(x, ...) {
-  cat(glue("Student's T distribution (df = {x$df})\n"))
+  cat(glue("Student's T distribution (df = {x$df})"), "\n")
 }
 
 #' Draw a random sample from a StudentsT distribution

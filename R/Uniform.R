@@ -41,7 +41,7 @@ Uniform <- function(a = 0, b = 1) {
 #' @export
 print.Uniform <- function(x, ...) {
   if (x$a > x$b) names(x) <- c("b", "a")
-  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})\n"))
+  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"), "\n")
 }
 
 #' Draw a random sample from a continuous Uniform distribution

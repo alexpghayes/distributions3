@@ -160,7 +160,7 @@ Normal <- function(mu = 0, sigma = 1) {
 
 #' @export
 print.Normal <- function(x, ...) {
-  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})\n"))
+  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})"), "\n")
 }
 
 #' Draw a random sample from a Normal distribution

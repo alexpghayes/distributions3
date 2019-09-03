@@ -96,7 +96,7 @@ ChiSquare <- function(df) {
 
 #' @export
 print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})\n"))
+  cat(glue("Chi Square distribution (df = {x$df})"), "\n")
 }
 
 #' Draw a random sample from a chi square distribution

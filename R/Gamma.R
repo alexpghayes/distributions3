@@ -87,7 +87,7 @@ Gamma <- function(shape, rate = 1) {
 
 #' @export
 print.Gamma <- function(x, ...) {
-  cat(glue("Gamma distribution (shape = {x$shape}, rate = {x$rate})\n"))
+  cat(glue("Gamma distribution (shape = {x$shape}, rate = {x$rate})"), "\n")
 }
 
 #' Draw a random sample from a Gamma distribution
