@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# distributions
+# distributions3
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
 <!-- badges: end -->
 
-`distributions3`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions` has two goals:
+`distributions3`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions3` has two goals:
 
 1. Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects
 

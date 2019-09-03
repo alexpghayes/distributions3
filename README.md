@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# distributions
+# distributions3
 
 <!-- badges: start -->
 
@@ -15,8 +15,8 @@ coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/b
 
 `distributions3`, inspired by the [eponynmous Julia
 package](https://github.com/JuliaStats/Distributions.jl), provides a
-generic function interface to probability distributions. `distributions`
-has two goals:
+generic function interface to probability distributions.
+`distributions3` has two goals:
 
 1.  Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3
     methods for distribution objects
@@ -57,7 +57,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
+#>  [1] 1 0 0 0 0 0 0 1 0 0
 pdf(X, 1)
 #> [1] 0.1
 
