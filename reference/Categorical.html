@@ -192,13 +192,10 @@ distribution is assumed to be uniform.</p></td>
 #&gt;   p = [0.25, 0.25, ..., 0.25] </div><div class='input'>
 <span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 2 3 1 3 3 3 3 3 3 3</div><div class='input'><span class='fu'><a href='random.html'>random</a></span>(<span class='no'>Y</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] "D" "A" "D" "D" "A" "A" "A" "B" "D" "B"</div><div class='input'>
 <span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.4</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] -0.9162907</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.4</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] 2</div><span class='co'># NOT RUN {</span>
-<span class='co'># cdfs are only defined for numeric sample spaces. this errors!</span>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Y</span>, <span class='st'>"a"</span>)
-
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] 0.4</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='co'># cdfs are only defined for numeric sample spaces. this errors!</span>
+<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>Y</span>, <span class='st'>"a"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: The sample space of `x` must be numeric to evaluate the cdf.</span></div><div class='input'>
 <span class='co'># same for quantiles. this also errors!</span>
-<span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Y</span>, <span class='fl'>0.7</span>)
-<span class='co'># }</span><div class='input'>
+<span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>Y</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; <span class='error'>Error: The sample space of `x` must be numeric to evaluate quantiles.</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
