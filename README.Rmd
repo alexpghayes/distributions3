@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 # distributions
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
 [![Travis build status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
 [![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
 <!-- badges: end -->
@@ -37,7 +38,13 @@ The main generics are:
 
 ## Installation
 
-`distributions` is not yet on CRAN. You can install the development version with:
+You can install `distributions3` with:
+
+``` r
+install.packages("distributions3")
+```
+
+You can install the development version with:
 
 ``` r
 install.packages("devtools")

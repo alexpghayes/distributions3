@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
 [![Travis build
 status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
 [![Codecov test
@@ -32,8 +34,13 @@ The main generics are:
 
 ## Installation
 
-`distributions` is not yet on CRAN. You can install the development
-version with:
+You can install `distributions3` with:
+
+``` r
+install.packages("distributions3")
+```
+
+You can install the development version with:
 
 ``` r
 install.packages("devtools")
@@ -50,7 +57,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 1
+#>  [1] 0 0 0 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 
