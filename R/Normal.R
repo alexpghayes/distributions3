@@ -326,3 +326,10 @@ support.Normal <- function(d){
   }
   return(c(-Inf, Inf))
 }
+
+#' @export
+`+.Normal` <- function(e1, e2) {
+  stopifnot(inherits(e2, "Normal"))
+
+  Normal(e1$mu + e2$mu, sqrt(e1$sigma^2 + e2$sigma^2))
+}
