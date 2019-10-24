@@ -55,7 +55,7 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     E(e^{tX}) = (\sum_{i=1}^k p_i e^{t_i} )^n
+#'     E(e^{tX}) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
 #'   }{
 #'     E(e^(tX)) = (p_1 e^t_1 + p_2 e^t_2 + ... + p_k e^t_k)^n
 #'   }

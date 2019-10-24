@@ -33,6 +33,8 @@
 #'
 #'   \deqn{
 #'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'   }{
+#'      f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
 #'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
@@ -42,6 +44,8 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
+#'      \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+#'   }{
 #'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
 #'   }
 #'

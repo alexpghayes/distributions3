@@ -10,6 +10,66 @@
 #'
 #' @examples
 #'
+#' TODO update details
+#'
+#' @details
+#'
+#'   We recommend reading this documentation on
+#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   will render with additional detail.
+#'
+#'   In the following, let \eqn{X} be a Gamma random variable
+#'   with parameters
+#'   `shape` = \eqn{\alpha} and
+#'   `rate` = \eqn{\beta}.
+#'
+#'   **Support**: \eqn{x \in (0, \infty)}
+#'
+#'   **Mean**: \eqn{\frac{\alpha}{\beta}}
+#'
+#'   **Variance**: \eqn{\frac{\alpha}{\beta^2}}
+#'
+#'   **Probability density function (p.m.f)**:
+#'
+#'   \deqn{
+#'     f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+#'   }{
+#'     f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+#'   }
+#'
+#'   **Cumulative distribution function (c.d.f)**:
+#'
+#'   \deqn{
+#'     f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+#'   }{
+#'     f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+#'   }
+#'
+#'   **Moment generating function (m.g.f)**:
+#'
+#'   \deqn{
+#'     E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+#'   }{
+#'     E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+#'   }
+#'
+#' @examples
+#'
+#' X <- Gamma(5, 2)
+#' X
+#'
+#' random(X, 10)
+#'
+#' pdf(X, 2)
+#' log_pdf(X, 2)
+#'
+#' cdf(X, 4)
+#' quantile(X, 0.7)
+#'
+#' cdf(X, quantile(X, 0.7))
+#' quantile(X, cdf(X, 7))
+#'
+#'
 #' X <- Exponential(5)
 #' X
 #'
