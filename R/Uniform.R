@@ -34,7 +34,7 @@
 #'
 Uniform <- function(a = 0, b = 1) {
   d <- list(a = a, b = b)
-  class(d) <- "Uniform"
+  class(d) <- c("Uniform", "distribution")
   d
 }
 
