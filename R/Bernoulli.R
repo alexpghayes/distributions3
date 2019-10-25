@@ -196,3 +196,16 @@ suff_stat.Bernoulli <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
+
+#' Return the support of the Bernoulli distribution
+#'
+#' @param d An `Bernoulli` object created by a call to [Bernoulli()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Bernoulli <- function(d, ...){
+  return(c(0, 1))
+}
+
+

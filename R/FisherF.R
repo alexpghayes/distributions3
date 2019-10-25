@@ -156,3 +156,16 @@ cdf.FisherF <- function(d, x, ...) {
 quantile.FisherF <- function(d, p, ...) {
   qf(p = p, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
 }
+
+#' Return the support of the FisherF distribution
+#'
+#' @param d An `FisherF` object created by a call to [FisherF()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.FisherF <- function(d, ...){
+  return(c(0, Inf))
+}
+
+

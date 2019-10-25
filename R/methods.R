@@ -171,3 +171,19 @@ suff_stat <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("suff_stat")
 }
+
+#' Return the support of a distribution
+#'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
+#' @return A vector with two elements indicating the range of the support.
+#'
+#' @export
+support <- function(d, ...){
+  if(!is_distribution(d))
+    stop("d must be a supported distribution object")
+
+  ellipsis::check_dots_used()
+  UseMethod("support")
+}
+

@@ -15,3 +15,104 @@
 is_distribution <- function(x) {
   inherits(x, "distribution")
 }
+
+#' Plot the CDF of a distribution
+#'
+#' @export
+plot_cdf <- function(d, limits = NULL, p = 0.001,
+                     plot_theme = ggplot2::theme_minimal, ...){
+
+  if(!"ggplot2" %in% loadedNamespaces())
+    stop("You must load ggplot2 for this function to work.")
+
+  if(is.null(limits))
+    limits <- support(d)
+
+  if(limits[1] == -Inf){
+    limits[1] <- quantile(d, p = p)
+  }
+
+  if(limits[2] == Inf){
+    limits[2] <- quantile(d, p = 1-p)
+  }
+
+  if(class(d)[1] %in% c('Bernoulli', 'Binomial', 'Geometric', 'HyperGeometric',
+                        'NegativeBinomial', 'Poisson')){
+    plot_df <- data.frame(x = seq(limits[1], limits[2], by = 1))
+    plot_df$y <- cdf(d, plot_df$x)
+
+    out_plot <- ggplot2::ggplot(data = plot_df,
+           aes(x = x, y = y)) +
+      ggplot2::geom_bar(stat = 'identity', width = 1,
+                        aes(color = I("black"),
+                            fill = I("grey50"))) +
+      plot_theme()
+  }
+
+  if(class(d)[1] %in% c('Beta', 'Cauchy', 'ChiSquare', 'Exponential',
+                        'FisherF', 'Gamma', 'Logistic', 'LogNormal',
+                        'Normal', 'StudentsT', 'Tukey', 'Uniform', 'Weibull')){
+    plot_df <- data.frame(x = seq(limits[1], limits[2], by = 0.001))
+    plot_df$y <- cdf(d, plot_df$x)
+
+    out_plot <- ggplot2::ggplot(data = plot_df,
+                    aes(x = x, y = y)) +
+      ggplot2::geom_line() +
+      plot_theme()
+  }
+
+  return(out_plot)
+
+}
+
+
+#' Plot the CDF of a distribution
+#'
+#' @export
+plot_pdf <- function(d, limits = NULL, p = 0.001,
+                     plot_theme = ggplot2::theme_minimal, ...){
+
+  if(!"ggplot2" %in% loadedNamespaces())
+    stop("You must load ggplot2 for this function to work.")
+
+
+  if(is.null(limits))
+    limits <- support(d)
+
+  if(limits[1] == -Inf){
+    limits[1] <- quantile(d, p = p)
+  }
+
+  if(limits[2] == Inf){
+    limits[2] <- quantile(d, p = 1-p)
+  }
+
+  if(class(d)[1] %in% c('Bernoulli', 'Binomial', 'Geometric', 'HyperGeometric',
+                        'NegativeBinomial', 'Poisson')){
+    plot_df <- data.frame(x = seq(limits[1], limits[2], by = 1))
+    plot_df$y <- pdf(d, plot_df$x)
+
+    out_plot <- ggplot(data = plot_df,
+                    aes(x = x, y = y)) +
+      geom_bar(stat = 'identity', width = 1,
+                        aes(color = I("black"),
+                            fill = I("grey50"))) +
+      plot_theme()
+  }
+
+  if(class(d)[1] %in% c('Beta', 'Cauchy', 'ChiSquare', 'Exponential',
+                        'FisherF', 'Gamma', 'Logistic', 'LogNormal',
+                        'Normal', 'StudentsT', 'Tukey', 'Uniform', 'Weibull')){
+    plot_df <- data.frame(x = seq(limits[1], limits[2], by = 0.001))
+    plot_df$y <- pdf(d, plot_df$x)
+
+    out_plot <- ggplot(data = plot_df,
+                    aes(x = x, y = y)) +
+      geom_line() +
+      plot_theme()
+  }
+
+  return(out_plot)
+
+}
+

@@ -118,3 +118,17 @@ cdf.Uniform <- function(d, x, ...) {
 quantile.Uniform <- function(d, p, ...) {
   qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
 }
+
+
+#' Return the support of the Uniform distribution
+#'
+#' @param d An `Uniform` object created by a call to [Uniform()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Uniform <- function(d, ...){
+  return(c(d$a, d$b))
+}
+
+

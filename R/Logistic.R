@@ -166,3 +166,18 @@ cdf.Logistic <- function(d, x, ...) {
 quantile.Logistic <- function(d, p, ...) {
   qlogis(p = p, location = d$location, scale = d$scale)
 }
+
+#' Return the support of the Logistic distribution
+#'
+#' @param d An `Logistic` object created by a call to [Logistic()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Logistic <- function(d, ...){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
+}

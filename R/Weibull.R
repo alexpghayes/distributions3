@@ -151,3 +151,19 @@ cdf.Weibull <- function(d, x, ...) {
 quantile.Weibull <- function(d, p, ...) {
   qweibull(p = p, shape = d$shape, scale = d$scale)
 }
+
+
+#' Return the support of the Weibull distribution
+#'
+#' @param d An `Weibull` object created by a call to [Weibull()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Weibull <- function(d, ...){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
+}

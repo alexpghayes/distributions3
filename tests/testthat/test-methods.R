@@ -17,3 +17,37 @@ test_that("fit_mle() works", {
   expect_equal(Bernoulli(), fit_mle(bern, c(0, 1)))
   expect_equal(Binomial(10, 0.5), fit_mle(B, c(5, 5)))
 })
+
+test_that("support() works", {
+  expect_equal(support(Normal()), c(-Inf, Inf))
+
+  expect_equal(support(Exponential()), c(0, Inf))
+
+  expect_equal(support(Binomial(size = 2)), c(0, 2))
+  expect_equal(support(Binomial(size = 12)), c(0, 12))
+
+  expect_equal(support(Gamma(1)), c(0, Inf))
+
+  expect_equal(support(LogNormal()), c(0, Inf))
+
+  expect_equal(support(NegativeBinomial(size = 10)), c(0, Inf))
+
+  expect_equal(support(Poisson(5)), c(0, Inf))
+
+  expect_equal(support(Weibull(shape = 1, scale = 4)), c(0, Inf))
+
+  expect_equal(support(Logistic()), c(-Inf, Inf))
+
+  expect_equal(support(Bernoulli()), c(0,1))
+
+  expect_equal(support(Beta()), c(0,1))
+
+  expect_equal(support(FisherF(df1 = 2, df2 = 5)), c(0, Inf))
+
+  expect_equal(support(Uniform(0,1)), c(0,1))
+  expect_equal(support(Uniform(-14,12)), c(-14,12))
+
+  expect_equal(support(Tukey(nmeans = 2, df = 17, nranges = 3)), c(0, Inf))
+
+  expect_error(support(1))
+})
