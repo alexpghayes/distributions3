@@ -69,6 +69,9 @@
 #' cdf(X, 4)
 #' quantile(X, 0.7)
 HyperGeometric <- function(m, n, k) {
+  if(k > n + m)
+    stop("k must be less than m+n")
+
   d <- list(m = m, n = n, k = k)
   class(d) <- c("HyperGeometric", "distribution")
   d
