@@ -1,5 +1,9 @@
 context("test-HyperGeometric")
 
+test_that("HyperGeometric works", {
+  expect_error(HyperGeometric(1,1,3))
+})
+
 test_that("print.HyperGeometric works", {
   expect_output(print(HyperGeometric(1, 1, 1)), regexp = "HyperGeometric distribution")
 })
