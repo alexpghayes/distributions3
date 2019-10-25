@@ -1,6 +1,6 @@
 context("test-HyperGeometric")
 
-test_that("HyperGeometric works", {
+test_that("HyperGeometric works as intended when k > n + m", {
   expect_error(HyperGeometric(1,1,3))
 })
 

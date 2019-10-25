@@ -49,5 +49,19 @@ test_that("support() works", {
 
   expect_equal(support(Tukey(nmeans = 2, df = 17, nranges = 3)), c(0, Inf))
 
+  expect_equal(support(StudentsT(df = 2)), c(-Inf, Inf))
+
+  expect_equal(support(HyperGeometric(m = 7, n = 4, k = 2)), c(0, 2))
+  expect_equal(support(HyperGeometric(m = 5, n = 1, k = 6)), c(5, 5))
+
+  expect_equal(support(Geometric()), c(0, Inf))
+
+  expect_equal(support(Geometric()), c(0, Inf))
+
+  expect_equal(support(Cauchy()), c(-Inf, Inf))
+
+  expect_equal(support(ChiSquare(df = 2)), c(0, Inf))
+
   expect_error(support(1))
 })
+

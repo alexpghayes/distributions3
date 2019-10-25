@@ -70,7 +70,7 @@
 #' quantile(X, 0.7)
 HyperGeometric <- function(m, n, k) {
   if(k > n + m)
-    stop("k must be less than m+n")
+    stop(glue::glue("k ({k}) cannot be greater than m + n ({m} + {n} = {m+n})"))
 
   d <- list(m = m, n = n, k = k)
   class(d) <- c("HyperGeometric", "distribution")

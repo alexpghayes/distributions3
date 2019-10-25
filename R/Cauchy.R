@@ -153,3 +153,15 @@ cdf.Cauchy <- function(d, x, ...) {
 quantile.Cauchy <- function(d, p, ...) {
   qcauchy(p = p, location = d$location, scale = d$scale)
 }
+
+#' Return the support of the Cauchy distribution
+#'
+#' @param d An `Cauchy` object created by a call to [Cauchy()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Cauchy <- function(d){
+  c(-Inf, Inf)
+}
+

@@ -121,24 +121,11 @@ random.Multinomial <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size)
+  dmultinom(x = x, size = d$size, prob = d$p)
 }
 
 #' @rdname pdf.Multinomial
 #' @export
 log_pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size, log = TRUE)
+  dmultinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
-
-
-#' Return the support of the Multinomial distribution
-#'
-#' @param d An `Multinomial` object created by a call to [Multinomial()].
-#'
-#' @return A vector of length 2 with the minimum and maximum value of the support.
-#'
-#' @export
-support.Multinomial <- function(d, ...){
-  return(c(0, d$size))
-}
-
