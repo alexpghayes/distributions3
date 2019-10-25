@@ -1,4 +1,4 @@
-#' Create a continuous uniform distribution
+#' Create a Continuous Uniform distribution
 #'
 #' A distribution with constant density on an interval. The
 #' continuous analogue to the [Categorical()] distribution.
@@ -15,6 +15,8 @@
 #' @family continuous distributions
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Uniform(1, 2)
 #' X
@@ -38,7 +40,7 @@ Uniform <- function(a = 0, b = 1) {
 
 #' @export
 print.Uniform <- function(x, ...) {
-  if(x$a >  x$b) names(x) <- c("b", "a")
+  if (x$a > x$b) names(x) <- c("b", "a")
   cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})\n"))
 }
 

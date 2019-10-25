@@ -55,7 +55,7 @@ which may look slightly more familiar. Having trouble seeing what the difference
 so that $\alpha = 0.12$. Now we can get started.
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 # read in the data
 x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
@@ -94,7 +94,7 @@ The difference is easiest to understand with a picture:
 
 ```{r echo = FALSE}
 library(ggplot2)
-library(patchwork)
+library(cowplot)
 
 grid <- seq(-4, 4, length.out = 300)
 density <- pdf(Z, grid)
@@ -137,7 +137,7 @@ upper_quantile_plot <- ggplot(data = NULL) +
   theme_minimal() +
   theme(legend.position = "none")
 
-lower_quantile_plot + upper_quantile_plot
+cowplot::plot_grid(lower_quantile_plot, upper_quantile_plot)
 ```
 
 Note that `distributions` **always** returns a lower quantile from the `quantile()` function.

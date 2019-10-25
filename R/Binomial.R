@@ -31,7 +31,7 @@
 #'   compute p-values.
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Binomial random variable with parameter
@@ -70,6 +70,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Binomial(10, 0.2)
 #' X
 #'
@@ -83,7 +85,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- c("Binomial", "distribution")
@@ -200,7 +201,7 @@ fit_mle.Binomial <- function(d, x, ...) {
 #' @export
 suff_stat.Binomial <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)
-  if(any(!valid_x)) {
+  if (any(!valid_x)) {
     stop("`x` must be an integer between zero and the size parameter of the Binomial distribution")
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)

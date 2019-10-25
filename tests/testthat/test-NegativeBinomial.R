@@ -5,7 +5,6 @@ test_that("print.NegativeBinomial works", {
 })
 
 test_that("likelihood.NegativeBinomial and log_likelihood.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.NegativeBinomial and log_likelihood.NegativeBinomial work 
 
   expect_equal(log_likelihood(cau, 1), log(dnbinom(1, 1, 1)))
   expect_equal(log_likelihood(cau, x), log(dnbinom(1, 1, 1) * dnbinom(1, 1, 1) * dnbinom(0, 1, 1)))
-
 })
 
 test_that("random.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
 
   expect_length(random(cau), 1)
@@ -28,7 +25,6 @@ test_that("random.NegativeBinomial work correctly", {
 })
 
 test_that("pdf.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
 
   expect_equal(pdf(cau, 0), dnbinom(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.NegativeBinomial work correctly", {
 })
 
 test_that("log_pdf.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
 
   expect_equal(log_pdf(cau, 0), log(dnbinom(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.NegativeBinomial work correctly", {
 })
 
 test_that("cdf.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
 
   expect_equal(cdf(cau, 0), pnbinom(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.NegativeBinomial work correctly", {
 })
 
 test_that("quantile.NegativeBinomial work correctly", {
-
   cau <- NegativeBinomial(1, 1)
 
   expect_equal(quantile(cau, 0), qnbinom(0, 0, 1))

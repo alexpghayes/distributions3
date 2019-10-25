@@ -1,28 +1,28 @@
-Package: distributions
+Package: distributions3
 Title: Probability Distributions as S3 Objects
-Version: 0.0.0.9001
-Authors@R: c(
-    person(given = "Alex",
-           family = "Hayes",
-           role = c("aut", "cre"),
-           email = "alexpghayes@gmail.com",
-           comment = c(ORCID = "0000-0002-4985-5160")),
-    person(given = "Emil",
-           family = "Hvitfeldt",
-           role = "ctb",
-           email = "emilhhvitfeldt@gmail.com",
-           comment = c(ORCID = "0000-0002-0679-1945")),
-    person(given = "Daniel",
-           family = "Jordan",
-           role = "ctb",
-           email = "dandermotj@gmail.com"),
-    person(given = "Ralph",
-           family = "Moller-Trane",
-           role = "ctb"),
-    person(given = "Bruna",
-           family = "Wundervald",
-           role = "ctb",
-           email = "brunadaviesw@gmail.com"))
+Version: 0.1.1
+Authors@R: 
+    c(person(given = "Alex",
+             family = "Hayes",
+             role = c("aut", "cre"),
+             email = "alexpghayes@gmail.com",
+             comment = c(ORCID = "0000-0002-4985-5160")),
+      person(given = "Ralph",
+             family = "Moller-Trane",
+             role = "aut"),
+      person(given = "Emil",
+             family = "Hvitfeldt",
+             role = "ctb",
+             email = "emilhhvitfeldt@gmail.com",
+             comment = c(ORCID = "0000-0002-0679-1945")),
+      person(given = "Daniel",
+             family = "Jordan",
+             role = "ctb",
+             email = "dandermotj@gmail.com"),
+      person(given = "Bruna",
+             family = "Wundervald",
+             role = "ctb",
+             email = "brunadaviesw@gmail.com"))
 Description: Tools to create and manipulate probability
     distributions using S3.  Generics random(), pdf(), cdf() and
     quantile() provide replacements for base R's r/d/p/q style functions.
@@ -30,22 +30,21 @@ Description: Tools to create and manipulate probability
     confusion for students in intro stats courses. The documentation for
     each distribution contains detailed mathematical notes.
 License: MIT + file LICENSE
-URL: https://github.com/alexpghayes/distributions
-BugReports: https://github.com/alexpghayes/distributions/issues
+URL: https://github.com/alexpghayes/distributions3
+BugReports: https://github.com/alexpghayes/distributions3/issues
 Imports: 
     ellipsis,
     glue
 Suggests: 
-    testthat (>= 2.1.0),
+    covr,
+    cowplot,
     ggplot2,
     knitr,
     rmarkdown,
-    patchwork (>= 0.0.1),
-    covr
+    testthat (>= 2.1.0)
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
-Remotes: 
-    thomasp85/patchwork

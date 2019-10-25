@@ -17,7 +17,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Students T random variable with
@@ -55,6 +55,8 @@
 #'   Undefined.
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- StudentsT(3)
 #' X
@@ -110,7 +112,6 @@
 #' # also equivalent to
 #' mean(x) + quantile(T, 0.12 / 2) * sd(x) / sqrt(nx)
 #' mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
-#'
 StudentsT <- function(df) {
   d <- list(df = df)
   class(d) <- c("StudentsT", "distribution")

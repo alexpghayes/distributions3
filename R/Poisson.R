@@ -13,7 +13,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Poisson random variable with parameter
@@ -52,6 +52,8 @@
 #'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Poisson(2)
 #' X
@@ -182,7 +184,6 @@ fit_mle.Poisson <- function(d, x, ...) {
 #' @export
 suff_stat.Poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) stop("`x` must only contain positive integers")
+  if (any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))
 }
-

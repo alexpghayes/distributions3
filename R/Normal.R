@@ -27,7 +27,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Normal random variable with mean
@@ -72,6 +72,8 @@
 #'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Normal(5, 2)
 #' X
@@ -144,7 +146,7 @@
 #' # test if sample is gamma(8, 3) using base R pgamma()
 #' ks.test(ns, pgamma, shape = 8, rate = 3)
 #'
-#' ###
+#' ### MISC
 #'
 #' # note that the cdf() and quantile() functions are inverses
 #' cdf(X, quantile(X, 0.7))

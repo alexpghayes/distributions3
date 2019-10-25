@@ -1,13 +1,13 @@
 #' Create a LogNormal distribution
 #'
-#' The exponential of a normal random variable. I.e. if \eqn{X \sim \text{Normal}(\mu, \sigma^2)}, then
-#' \eqn{e^X \sim \text{Lognormal}(\mu, \sigma)}.Conversely,if \eqn{Y \sim \text{Lognormal}(\mu, \sigma)},
-#' then \eqn{\log{Y} \sim \text{Normal}(\mu, \sigma^2)}.
+#' A random variable created by exponentiating a [Normal()]
+#' distribution. Taking the log of LogNormal data returns in
+#' [Normal()] data.
 #'
-#' @param log_mu The location parameter, written \eqn{\mu} in textbooks. Can be any real number.
-#'   Defaults to `0`.
-#' @param log_sigma The scale parameter, written \eqn{\sigma} in textbooks. Can be any positive real number.
-#'   Defaults to `1`.
+#' @param log_mu The location parameter, written \eqn{\mu} in textbooks.
+#'   Can be any real number. Defaults to `0`.
+#' @param log_sigma The scale parameter, written \eqn{\sigma} in textbooks.
+#'   Can be any positive real number. Defaults to `1`.
 #'
 #' @return A `LogNormal` object.
 #' @export
@@ -17,7 +17,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a LogNormal random variable with
@@ -46,6 +46,8 @@
 #'
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- LogNormal(0.3, 2)
 #' X
@@ -183,7 +185,7 @@ fit_mle.LogNormal <- function(d, x, ...) {
 #'
 suff_stat.LogNormal <- function(d, x, ...) {
   valid_x <- x > 0
-  if(any(!valid_x)) stop("`x` must be a vector of positive real numbers")
+  if (any(!valid_x)) stop("`x` must be a vector of positive real numbers")
   log_x <- log(x)
   list(mu = mean(log_x), sigma = sd(log_x), samples = length(x))
 }

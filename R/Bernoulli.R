@@ -16,7 +16,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Bernoulli random variable with parameter
@@ -68,6 +68,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Bernoulli(0.7)
 #' X
 #'
@@ -79,9 +81,7 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Bernoulli <- function(p = 0.5) {
-
   d <- list(p = p)
   class(d) <- c("Bernoulli", "distribution")
   d
@@ -193,10 +193,6 @@ fit_mle.Bernoulli <- function(d, x, ...) {
 #' @export
 suff_stat.Bernoulli <- function(d, x, ...) {
   valid_x <- (x %in% c(0L, 1L))
-  if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
+  if (any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
-
-
-
-

@@ -1,20 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# distributions
+# distributions3
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
 [![Travis build
-status](https://travis-ci.org/alexpghayes/distributions.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions)
+status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
 [![Codecov test
-coverage](https://codecov.io/gh/alexpghayes/distributions/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions?branch=master)
+coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
 <!-- badges: end -->
 
-`distributions`, inspired by the [eponynmous Julia
+`distributions3`, inspired by the [eponynmous Julia
 package](https://github.com/JuliaStats/Distributions.jl), provides a
-generic function interface to probability distributions. `distributions`
-has two goals:
+generic function interface to probability distributions.
+`distributions3` has two goals:
 
 1.  Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3
     methods for distribution objects
@@ -25,32 +27,37 @@ has two goals:
 The main generics are:
 
   - `random()`: Draw samples from a distribution.
-  - `pdf()`: Evaluate the probability density of mass at a point.
+  - `pdf()`: Evaluate the probability density (or mass) at a point.
   - `cdf()`: Evaluate the cumulative probability up to a point.
   - `quantile()`: Determine the quantile for a given probability.
     Inverse of `cdf()`.
 
 ## Installation
 
-`distributions` is not yet on CRAN. You can install the development
-version with:
+You can install `distributions3` with:
+
+``` r
+install.packages("distributions3")
+```
+
+You can install the development version with:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("alexpghayes/distributions")
+devtools::install_github("alexpghayes/distributions3")
 ```
 
 ## Basic Usage
 
-The basic usage of `distributions` looks like:
+The basic usage of `distributions3` looks like:
 
 ``` r
-library(distributions)
+library(distributions3)
 
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 1 0 0
+#>  [1] 1 0 0 0 0 0 0 1 0 0
 pdf(X, 1)
 #> [1] 0.1
 
@@ -75,21 +82,22 @@ To add a new distribution, the best way to get started is to look at
 `R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them
 for whatever new distribution you’d like to add.
 
-Please note that `distributions` is released with a [Contributor Code of
-Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Please note that `distributions3` is released with a [Contributor Code
+of
+Conduct](https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## Related work
 
 For a comprehensive overview of the many packages providing various
 distribution related functionality see the [CRAN Task
-View](https://cran.r-project.org/web/views/Distributions.html).
+View](https://cran.r-project.org/view=Distributions).
 
-  - [`distr`](http://distr.r-forge.r-project.org/) is quite similar to
-    `distributions`, but uses S4 objects and is less focused on
+  - [`distr`](https://cran.r-project.org/package=distr) is quite similar
+    to `distributions`, but uses S4 objects and is less focused on
     documentation.
-  - [`distr6`](https://alan-turing-institute.github.io/distr6/) builds
-    on `distr`, but uses R6 objects
-  - [`fitdistrplus`](https://cran.r-project.org/web/packages/fitdistrplus/index.html)
+  - [`distr6`](https://cran.r-project.org/package=distr6) builds on
+    `distr`, but uses R6 objects
+  - [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
     provides extensive functionality for fitting various distributions
     but does not treat distributions themselves as objects

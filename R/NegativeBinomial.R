@@ -1,10 +1,12 @@
 #' Create a Negative Binomial distribution
 #'
-#' A generalization of the geometric distribution. It is the number of successes in a sequence of
-#' i.i.d. Bernoulli trials before a specified number (\eqn{r}) of failures occurs.
+#' A generalization of the geometric distribution. It is the number
+#' of successes in a sequence of i.i.d. Bernoulli trials before
+#' a specified number (\eqn{r}) of failures occurs.
 #'
 #'
-#' @param size The number of failures (an integer greater than \eqn{0}) until the experiment is stopped. Denoted \eqn{r} below.
+#' @param size The number of failures (an integer greater than \eqn{0})
+#'   until the experiment is stopped. Denoted \eqn{r} below.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
@@ -16,7 +18,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Negative Binomial random variable with
@@ -51,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- NegativeBinomial(10, 0.3)
 #' X
 #'
@@ -61,7 +65,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 NegativeBinomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- c("NegativeBinomial", "distribution")

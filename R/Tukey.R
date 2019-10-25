@@ -15,7 +15,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   **Support**: \eqn{R^+}, the set of positive real numbers.
@@ -25,6 +25,8 @@
 #'   to work with.
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Tukey(4L, 16L, 2L)
 #' X
@@ -41,8 +43,11 @@ Tukey <- function(nmeans, df, nranges) {
 #' @export
 print.Tukey <- function(x, ...) {
   cat(
-    glue("Tukey distribution (nmeans = {x$nmeans}",
-         "df = {x$df}, nranges = {x$nranges})\n"))
+    glue(
+      "Tukey distribution (nmeans = {x$nmeans}",
+      "df = {x$df}, nranges = {x$nranges})\n"
+    )
+  )
 }
 
 #' Evaluate the cumulative distribution function of a Tukey distribution

@@ -5,7 +5,6 @@ test_that("print.Gamma works", {
 })
 
 test_that("likelihood.Gamma and log_likelihood.Gamma work correctly", {
-
   cau <- Gamma(1)
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.Gamma and log_likelihood.Gamma work correctly", {
 
   expect_equal(log_likelihood(cau, 1), log(dgamma(1, 1, 1)))
   expect_equal(log_likelihood(cau, x), log(dgamma(1, 1, 1) * dgamma(1, 1, 1) * dgamma(0, 1, 1)))
-
 })
 
 test_that("random.Gamma work correctly", {
-
   cau <- Gamma(1, 1)
 
   expect_length(random(cau), 1)
@@ -28,7 +25,6 @@ test_that("random.Gamma work correctly", {
 })
 
 test_that("pdf.Gamma work correctly", {
-
   cau <- Gamma(0, 1)
 
   expect_equal(pdf(cau, 0), dgamma(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.Gamma work correctly", {
 })
 
 test_that("log_pdf.Gamma work correctly", {
-
   cau <- Gamma(0, 1)
 
   expect_equal(log_pdf(cau, 0), log(dgamma(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.Gamma work correctly", {
 })
 
 test_that("cdf.Gamma work correctly", {
-
   cau <- Gamma(0, 1)
 
   expect_equal(cdf(cau, 0), pgamma(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.Gamma work correctly", {
 })
 
 test_that("quantile.Gamma work correctly", {
-
   cau <- Gamma(0, 1)
 
   expect_equal(quantile(cau, 0), qgamma(0, 0, 1))

@@ -15,6 +15,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Categorical(1:3, p = c(0.4, 0.1, 0.5))
 #' X
 #'
@@ -29,8 +31,7 @@
 #'
 #' cdf(X, 1)
 #' quantile(X, 0.5)
-#'
-#' \dontrun{
+#' \donttest{
 #' # cdfs are only defined for numeric sample spaces. this errors!
 #' cdf(Y, "a")
 #'
@@ -38,13 +39,14 @@
 #' quantile(Y, 0.7)
 #' }
 #'
-Categorical <- function(outcomes, p = NULL){
-
-  if (!is.null(p) && length(outcomes) != length(p))
+Categorical <- function(outcomes, p = NULL) {
+  if (!is.null(p) && length(outcomes) != length(p)) {
     stop("`outcomes` and `p` must be the same length.", call. = FALSE)
+  }
 
-  if (is.null(p))
+  if (is.null(p)) {
     p <- rep(1 / length(outcomes), length(outcomes))
+  }
 
   p <- p / sum(p)
 
@@ -55,22 +57,21 @@ Categorical <- function(outcomes, p = NULL){
 
 #' @export
 print.Categorical <- function(x, ...) {
-
   num_categories <- length(x$outcomes)
 
-  if (num_categories > 3){
+  if (num_categories > 3) {
     outcomes <- paste(
-      c(x$outcomes[1:2], '...', x$outcomes[num_categories]),
-      collapse = ', '
+      c(x$outcomes[1:2], "...", x$outcomes[num_categories]),
+      collapse = ", "
     )
 
     p <- paste(
-      c(round(x$p, 3)[1:2], '...', round(x$p, 3)[num_categories]),
-      collapse = ', '
+      c(round(x$p, 3)[1:2], "...", round(x$p, 3)[num_categories]),
+      collapse = ", "
     )
   } else {
-    outcomes <- paste(x$outcomes, collapse = ', ')
-    p <- paste(round(x$p, 3), collapse = ', ')
+    outcomes <- paste(x$outcomes, collapse = ", ")
+    p <- paste(round(x$p, 3), collapse = ", ")
   }
 
   cat(
@@ -94,7 +95,7 @@ print.Categorical <- function(x, ...) {
 #' @return A vector containing values from `outcomes` of length `n`.
 #' @export
 #'
-random.Categorical <- function(d, n = 1L, ...){
+random.Categorical <- function(d, n = 1L, ...) {
   sample(x = d$outcomes, size = n, prob = d$p, replace = TRUE)
 }
 
@@ -112,9 +113,9 @@ random.Categorical <- function(d, n = 1L, ...){
 #' @export
 #'
 pdf.Categorical <- function(d, x, ...) {
-
-  if (!all(x %in% d$outcomes))
+  if (!all(x %in% d$outcomes)) {
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
+  }
 
   ifelse(x %in% d$outcomes, d$p[d$outcomes == x], 0)
 }
@@ -138,16 +139,17 @@ log_pdf.Categorical <- function(d, x, ...) {
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Categorical <- function(d, x = NULL, ...) {
-
-  if(length(x) == 0)
+cdf.Categorical <- function(d, x, ...) {
+  if (length(x) == 0) {
     return(numeric(0))
+  }
 
-  if (!is.numeric(d$outcomes))
+  if (!is.numeric(d$outcomes)) {
     stop(
       "The sample space of `x` must be numeric to evaluate the cdf.",
       call. = FALSE
     )
+  }
 
   Vectorize(function(k) cumsum(pdf(d, d$outcomes))[max(which(k >= d$outcomes))])(x)
 }
@@ -167,18 +169,20 @@ cdf.Categorical <- function(d, x = NULL, ...) {
 #' @export
 #'
 quantile.Categorical <- function(d, p, ...) {
-
-  if (!is.numeric(d$outcomes))
+  if (!is.numeric(d$outcomes)) {
     stop(
       "The sample space of `x` must be numeric to evaluate quantiles.",
       call. = FALSE
     )
+  }
 
-  if (any(p < 0) || any(1 < p))
+  if (any(p < 0) || any(1 < p)) {
     stop("Elements of `p` must be between 0 and 1.", call. = FALSE)
+  }
 
-  if (length(p) == 0)
+  if (length(p) == 0) {
     return(numeric(0))
+  }
 
   full_cdf <- cumsum(pdf(d, d$outcomes))
 

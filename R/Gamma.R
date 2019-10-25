@@ -5,9 +5,9 @@
 #' exponential distribution with parameter \eqn{1/\beta}. When the
 #' \eqn{shape = n/2} and \eqn{rate = 1/2}, the Gamma is a equivalent to
 #' a chi squared distribution with n degrees of freedom. Moreover, if
-#' we have \eqn{X_1 \sim Gamma(\alpha_1, \beta)} and
-#' \eqn{X_2 \sim Gamma(\alpha_2, \beta)}, a function of these two variables
-#' of the form \eqn{\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)}.
+#' we have \eqn{X_1} is \eqn{Gamma(\alpha_1, \beta)} and
+#' \eqn{X_2} is \eqn{Gamma(\alpha_2, \beta)}, a function of these two variables
+#' of the form \eqn{\frac{X_1}{X_1 + X_2}} \eqn{Beta(\alpha_1, \alpha_2)}.
 #' This last property frequently appears in another distributions, and it
 #' has extensively been used in multivariate methods. More about the Gamma
 #' distribution will be added soon.
@@ -24,7 +24,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Gamma random variable
@@ -64,6 +64,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Gamma(5, 2)
 #' X
 #'
@@ -77,7 +79,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Gamma <- function(shape, rate = 1) {
   d <- list(shape = shape, rate = rate)
   class(d) <- c("Gamma", "distribution")
@@ -186,6 +187,6 @@ fit_mle.Gamma <- function(d, x, ...) {
 #' @inherit fit_mle.Gamma
 #' @export
 suff_stat.Gamma <- function(d, x, ...) {
-  if(any(x < 0)) stop("`x` must only contain positive real numbers")
+  if (any(x < 0)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), log_sum = sum(log(x)), samples = length(x))
 }

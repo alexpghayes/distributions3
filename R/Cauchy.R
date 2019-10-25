@@ -18,7 +18,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Cauchy variable with mean
@@ -53,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Cauchy(10, 0.2)
 #' X
 #'
@@ -66,7 +68,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Cauchy <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
   class(d) <- c("Cauchy", "distribution")

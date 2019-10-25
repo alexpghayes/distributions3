@@ -17,7 +17,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Geometric random variable with
@@ -51,6 +51,8 @@
 #'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Geometric(0.3)
 #' X
@@ -191,9 +193,8 @@ fit_mle.Geometric <- function(d, x, ...) {
 #'
 suff_stat.Geometric <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) {
+  if (any(!valid_x)) {
     stop("`x` must be a vector of positive discrete numbers")
   }
   list(trials = sum(x), experiments = length(x))
 }
-

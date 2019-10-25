@@ -24,7 +24,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X = (X_1, ..., X_k)} be a Multinomial
@@ -43,7 +43,7 @@
 #'   **Probability mass function (p.m.f)**:
 #'
 #'   \deqn{
-#'     P(X_1 = x_1, ..., X_k = x_k) = \frac{n!}{x_1! x_2! ... x_k!} p_1^x_1 \cdot p_2^x_2 \cdot ... \cdot p_k^x_k
+#'     P(X_1 = x_1, ..., X_k = x_k) = \frac{n!}{x_1! x_2! ... x_k!} p_1^{x_1} \cdot p_2^{x_2} \cdot ... \cdot p_k^{x_k}
 #'   }{
 #'     P(X_1 = x_1, ..., X_k = x_k) = n! / (x_1! x_2! ... x_k!) p_1^x_1 p_2^x_2 ... p_k^x_k
 #'   }
@@ -62,6 +62,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Multinomial(size = 5, p = c(0.3, 0.4, 0.2, 0.1))
 #' X
 #'
@@ -69,7 +71,6 @@
 #'
 #' # pdf(X, 2)
 #' # log_pdf(X, 2)
-#'
 #'
 Multinomial <- function(size, p) {
   d <- list(size = size, p = p)

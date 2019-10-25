@@ -56,6 +56,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- FisherF(5, 10, 0.2)
 #' X
 #'
@@ -69,7 +71,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 FisherF <- function(df1, df2, lambda = 0) {
   d <- list(df1 = df1, df2 = df2, lambda = lambda)
   class(d) <- c("FisherF", "distribution")

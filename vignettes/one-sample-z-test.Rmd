@@ -102,7 +102,7 @@ To calculate a two-sided p-value, we need to find
 To do this we need to c.d.f. of a standard normal
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 Z <- Normal(0, 1)  # make a standard normal r.v.
 1 - cdf(Z, 2.37) + cdf(Z, -2.37)

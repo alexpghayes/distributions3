@@ -82,7 +82,7 @@ To calculate a two-sided p-value, we need to find
 To do this we need to c.d.f. of a binomial random variable:
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 X <- Binomial(n, 0.5)
 2 * min(cdf(X, b), 1 - cdf(X, b - 1))

@@ -13,6 +13,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Beta(1, 2)
 #' X
 #'
@@ -26,7 +28,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Beta <- function(alpha = 1, beta = 1) {
   d <- list(alpha = alpha, beta = beta)
   class(d) <- c("Beta", "distribution")

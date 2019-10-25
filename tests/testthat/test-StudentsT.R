@@ -5,7 +5,6 @@ test_that("print.StudentsT works", {
 })
 
 test_that("likelihood.StudentsT and log_likelihood.StudentsT work correctly", {
-
   s <- StudentsT(1)
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.StudentsT and log_likelihood.StudentsT work correctly", {
 
   expect_equal(log_likelihood(s, 1), log(dt(1, 1)))
   expect_equal(log_likelihood(s, x), log(dt(1, 1) * dt(1, 1) * dt(0, 1)))
-
 })
 
 test_that("random.StudentsT work correctly", {
-
   s <- StudentsT(1)
 
   expect_length(random(s), 1)
@@ -28,7 +25,6 @@ test_that("random.StudentsT work correctly", {
 })
 
 test_that("pdf.StudentsT work correctly", {
-
   s <- StudentsT(1)
 
   expect_equal(pdf(s, 0), dt(0, 1))
@@ -41,7 +37,6 @@ test_that("pdf.StudentsT work correctly", {
 })
 
 test_that("log_pdf.StudentsT work correctly", {
-
   s <- StudentsT(1)
 
   expect_equal(log_pdf(s, 0), log(dt(0, 1)))
@@ -54,7 +49,6 @@ test_that("log_pdf.StudentsT work correctly", {
 })
 
 test_that("cdf.StudentsT work correctly", {
-
   s <- StudentsT(1)
 
   expect_equal(cdf(s, 0), pt(0, 1))
@@ -67,7 +61,6 @@ test_that("cdf.StudentsT work correctly", {
 })
 
 test_that("quantile.StudentsT work correctly", {
-
   s <- StudentsT(1)
 
   expect_equal(quantile(s, 0), qt(0, 1))
@@ -77,4 +70,3 @@ test_that("quantile.StudentsT work correctly", {
   expect_length(quantile(s, seq_len(0)), 0)
   expect_length(quantile(s, c(0, 1)), 2)
 })
-

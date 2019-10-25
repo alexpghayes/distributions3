@@ -5,7 +5,6 @@ test_that("print.LogNormal works", {
 })
 
 test_that("likelihood.LogNormal and log_likelihood.LogNormal work correctly", {
-
   cau <- LogNormal()
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.LogNormal and log_likelihood.LogNormal work correctly", {
 
   expect_equal(log_likelihood(cau, 1), log(dlnorm(1)))
   expect_equal(log_likelihood(cau, x), log(dlnorm(1) * dlnorm(1) * dlnorm(0)))
-
 })
 
 test_that("random.LogNormal work correctly", {
-
   cau <- LogNormal()
 
   expect_length(random(cau), 1)
@@ -28,7 +25,6 @@ test_that("random.LogNormal work correctly", {
 })
 
 test_that("pdf.LogNormal work correctly", {
-
   cau <- LogNormal()
 
   expect_equal(pdf(cau, 0), dlnorm(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.LogNormal work correctly", {
 })
 
 test_that("log_pdf.LogNormal work correctly", {
-
   cau <- LogNormal()
 
   expect_equal(log_pdf(cau, 0), log(dlnorm(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.LogNormal work correctly", {
 })
 
 test_that("cdf.LogNormal work correctly", {
-
   cau <- LogNormal()
 
   expect_equal(cdf(cau, 0), plnorm(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.LogNormal work correctly", {
 })
 
 test_that("quantile.LogNormal work correctly", {
-
   cau <- LogNormal()
 
   expect_equal(quantile(cau, 0), qlnorm(0, 0, 1))

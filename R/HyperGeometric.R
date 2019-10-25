@@ -24,7 +24,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a HyperGeometric random variable with
@@ -56,6 +56,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- HyperGeometric(4, 5, 8)
 #' X
 #'
@@ -66,7 +68,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 HyperGeometric <- function(m, n, k) {
   d <- list(m = m, n = n, k = k)
   class(d) <- c("HyperGeometric", "distribution")
@@ -165,4 +166,3 @@ cdf.HyperGeometric <- function(d, x, ...) {
 quantile.HyperGeometric <- function(d, p, ...) {
   qhyper(p = p, m = d$m, n = d$n, k = d$k)
 }
-
