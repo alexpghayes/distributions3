@@ -232,7 +232,7 @@ quantile.StudentsT <- function(d, p, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.StudentsT <- function(d, ...){
+support.StudentsT <- function(d){
   return(c(-Inf, Inf))
 }
 

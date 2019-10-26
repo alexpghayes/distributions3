@@ -4,7 +4,7 @@
 \alias{support.Exponential}
 \title{Return the support of the Exponential distribution}
 \usage{
-\method{support}{Exponential}(d, ...)
+\method{support}{Exponential}(d)
 }
 \arguments{
 \item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}

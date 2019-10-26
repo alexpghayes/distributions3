@@ -178,7 +178,7 @@ quantile.HyperGeometric <- function(d, p, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.HyperGeometric <- function(d, ...){
+support.HyperGeometric <- function(d){
   c(max(0, d$k - d$n), min(d$m, d$k))
 }
 

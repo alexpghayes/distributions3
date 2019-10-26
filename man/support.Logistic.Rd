@@ -4,7 +4,7 @@
 \alias{support.Logistic}
 \title{Return the support of the Logistic distribution}
 \usage{
-\method{support}{Logistic}(d, ...)
+\method{support}{Logistic}(d)
 }
 \arguments{
 \item{d}{An \code{Logistic} object created by a call to \code{\link[=Logistic]{Logistic()}}.}

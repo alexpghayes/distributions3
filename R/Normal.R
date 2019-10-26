@@ -302,7 +302,7 @@ suff_stat.Normal <- function(d, x, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Normal <- function(d, ...){
+support.Normal <- function(d){
   if(!is_distribution(d)){
     message("d has to be a disitrubtion")
     stop()

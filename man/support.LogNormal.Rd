@@ -4,7 +4,7 @@
 \alias{support.LogNormal}
 \title{Return the support of the LogNormal distribution}
 \usage{
-\method{support}{LogNormal}(d, ...)
+\method{support}{LogNormal}(d)
 }
 \arguments{
 \item{d}{An \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}

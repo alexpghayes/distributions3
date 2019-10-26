@@ -4,7 +4,7 @@
 \alias{support.Weibull}
 \title{Return the support of the Weibull distribution}
 \usage{
-\method{support}{Weibull}(d, ...)
+\method{support}{Weibull}(d)
 }
 \arguments{
 \item{d}{An \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}

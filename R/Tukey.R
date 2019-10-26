@@ -96,6 +96,6 @@ quantile.Tukey <- function(d, p, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Tukey <- function(d, ...){
+support.Tukey <- function(d){
   return(c(0, Inf))
 }

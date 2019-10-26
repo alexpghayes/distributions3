@@ -4,7 +4,7 @@
 \alias{support}
 \title{Return the support of a distribution}
 \usage{
-support(d, ...)
+support(d)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by

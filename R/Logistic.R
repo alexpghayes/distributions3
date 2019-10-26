@@ -174,7 +174,7 @@ quantile.Logistic <- function(d, p, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Logistic <- function(d, ...){
+support.Logistic <- function(d){
   if(!is_distribution(d)){
     message("d has to be a disitrubtion")
     stop()

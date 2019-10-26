@@ -204,7 +204,7 @@ suff_stat.Bernoulli <- function(d, x, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Bernoulli <- function(d, ...){
+support.Bernoulli <- function(d){
   return(c(0, 1))
 }
 

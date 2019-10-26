@@ -4,7 +4,7 @@
 \alias{support.StudentsT}
 \title{Return the support of the StudentsT distribution}
 \usage{
-\method{support}{StudentsT}(d, ...)
+\method{support}{StudentsT}(d)
 }
 \arguments{
 \item{d}{An \code{StudentsT} object created by a call to \code{\link[=StudentsT]{StudentsT()}}.}

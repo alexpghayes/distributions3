@@ -4,7 +4,7 @@
 \alias{support.Uniform}
 \title{Return the support of the Uniform distribution}
 \usage{
-\method{support}{Uniform}(d, ...)
+\method{support}{Uniform}(d)
 }
 \arguments{
 \item{d}{An \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}

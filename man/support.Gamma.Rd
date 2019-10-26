@@ -4,7 +4,7 @@
 \alias{support.Gamma}
 \title{Return the support of the Gamma distribution}
 \usage{
-\method{support}{Gamma}(d, ...)
+\method{support}{Gamma}(d)
 }
 \arguments{
 \item{d}{An \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}

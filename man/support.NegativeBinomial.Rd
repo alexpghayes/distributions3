@@ -4,7 +4,7 @@
 \alias{support.NegativeBinomial}
 \title{Return the support of the NegativeBinomial distribution}
 \usage{
-\method{support}{NegativeBinomial}(d, ...)
+\method{support}{NegativeBinomial}(d)
 }
 \arguments{
 \item{d}{An \code{NegativeBinomial} object created by a call to \code{\link[=NegativeBinomial]{NegativeBinomial()}}.}

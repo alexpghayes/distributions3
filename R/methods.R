@@ -179,11 +179,10 @@ suff_stat <- function(d, x, ...) {
 #' @return A vector with two elements indicating the range of the support.
 #'
 #' @export
-support <- function(d, ...){
+support <- function(d){
   if(!is_distribution(d))
     stop("d must be a supported distribution object")
 
-  ellipsis::check_dots_used()
   UseMethod("support")
 }
 

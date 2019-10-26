@@ -4,7 +4,7 @@
 \alias{support.Tukey}
 \title{Return the support of the Tukey distribution}
 \usage{
-\method{support}{Tukey}(d, ...)
+\method{support}{Tukey}(d)
 }
 \arguments{
 \item{d}{An \code{Tukey} object created by a call to \code{\link[=Tukey]{Tukey()}}.}

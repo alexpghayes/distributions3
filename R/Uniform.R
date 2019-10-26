@@ -127,7 +127,7 @@ quantile.Uniform <- function(d, p, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Uniform <- function(d, ...){
+support.Uniform <- function(d){
   return(c(d$a, d$b))
 }
 

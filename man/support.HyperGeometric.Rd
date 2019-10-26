@@ -4,7 +4,7 @@
 \alias{support.HyperGeometric}
 \title{Return the support of the HyperGeometric distribution}
 \usage{
-\method{support}{HyperGeometric}(d, ...)
+\method{support}{HyperGeometric}(d)
 }
 \arguments{
 \item{d}{An \code{HyperGeometric} object created by a call to \code{\link[=HyperGeometric]{HyperGeometric()}}.}

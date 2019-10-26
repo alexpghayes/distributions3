@@ -4,7 +4,7 @@
 \alias{support.Binomial}
 \title{Return the support of the Binomial distribution}
 \usage{
-\method{support}{Binomial}(d, ...)
+\method{support}{Binomial}(d)
 }
 \arguments{
 \item{d}{An \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}

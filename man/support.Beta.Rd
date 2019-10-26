@@ -4,7 +4,7 @@
 \alias{support.Beta}
 \title{Return the support of the Beta distribution}
 \usage{
-\method{support}{Beta}(d, ...)
+\method{support}{Beta}(d)
 }
 \arguments{
 \item{d}{An \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}

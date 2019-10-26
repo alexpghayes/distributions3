@@ -4,7 +4,7 @@
 \alias{support.Normal}
 \title{Return the support of the Normal distribution}
 \usage{
-\method{support}{Normal}(d, ...)
+\method{support}{Normal}(d)
 }
 \arguments{
 \item{d}{An \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}

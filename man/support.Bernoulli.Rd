@@ -4,7 +4,7 @@
 \alias{support.Bernoulli}
 \title{Return the support of the Bernoulli distribution}
 \usage{
-\method{support}{Bernoulli}(d, ...)
+\method{support}{Bernoulli}(d)
 }
 \arguments{
 \item{d}{An \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}

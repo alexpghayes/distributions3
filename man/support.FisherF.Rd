@@ -4,7 +4,7 @@
 \alias{support.FisherF}
 \title{Return the support of the FisherF distribution}
 \usage{
-\method{support}{FisherF}(d, ...)
+\method{support}{FisherF}(d)
 }
 \arguments{
 \item{d}{An \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
