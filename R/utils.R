@@ -18,6 +18,15 @@ is_distribution <- function(x) {
 
 #' Plot the CDF of a distribution
 #'
+#' A function to easily plot the CDF of a distribution using `ggplot2`. Requires `ggplot2` to be loaded.
+#'
+#' @param d A `distribution` object
+#' @param limits either `NULL` (default) or a vector of length 2 that specifies the range of the x-axis
+#' @param p If `limits` is `NULL`, the range of the x-axis will be the support of `d` if this is a bounded
+#'   interval, or `quantile(d, p)` and `quantile(d, 1 - p)` if lower and/or upper limits of the support is
+#'   `-Inf`/`Inf`.  Defaults to 0.001.
+#' @param plot_theme specify theme of resulting plot using `ggplot2`. Default is `theme_minimal`
+#'
 #' @export
 plot_cdf <- function(d, limits = NULL, p = 0.001,
                      plot_theme = ggplot2::theme_minimal, ...){
@@ -67,6 +76,8 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 
 
 #' Plot the CDF of a distribution
+#'
+#'
 #'
 #' @export
 plot_pdf <- function(d, limits = NULL, p = 0.001,
