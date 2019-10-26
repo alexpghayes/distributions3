@@ -80,7 +80,17 @@ Multinomial <- function(size, p) {
 
 #' @export
 print.Multinomial <- function(x, ...) {
-  cat(glue("Multinomial distribution (size = {x$size}, p = {x$p})\n"))
+  num_categories <- length(x$p)
+
+  if (num_categories > 3) {
+    p <- paste(
+      c(round(x$p, 3)[1:2], "...", round(x$p, 3)[num_categories]),
+      collapse = ", "
+    )
+  } else {
+    p <- paste(round(x$p, 3), collapse = ", ")
+  }
+  cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])\n"))
 }
 
 #' Draw a random sample from a Multinomial distribution
