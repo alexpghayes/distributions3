@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One sample sign tests • distributions3</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="One sample sign tests">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -88,7 +89,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/alexpghayes/distributions3">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -101,6 +102,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -124,10 +126,10 @@
     2, 40298, 39, 10780, 2268583, 3404930
 \]</span></p>
 <p>If we look at a QQ plot, we see there are massive outliers:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">incomes &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">8478</span>, <span class="dv">21564</span>, <span class="dv">36562</span>, <span class="dv">176602</span>, <span class="dv">9395</span>, <span class="dv">18320</span>, <span class="dv">50000</span>, <span class="dv">2</span>, <span class="dv">40298</span>, <span class="dv">39</span>, <span class="dv">10780</span>, <span class="dv">2268583</span>, <span class="dv">3404930</span>)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">incomes &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">8478</span>, <span class="dv">21564</span>, <span class="dv">36562</span>, <span class="dv">176602</span>, <span class="dv">9395</span>, <span class="dv">18320</span>, <span class="dv">50000</span>, <span class="dv">2</span>, <span class="dv">40298</span>, <span class="dv">39</span>, <span class="dv">10780</span>, <span class="dv">2268583</span>, <span class="dv">3404930</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/qqnorm">qqnorm</a></span>(incomes)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/qqnorm">qqline</a></span>(incomes)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span>(incomes)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span>(incomes)</a></code></pre></div>
 <p><img src="one-sample-sign-tests_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Luckily, the sign test only requires independent samples for valid inference (as a consequence, it has been low power).</p>
 </div>
@@ -144,15 +146,15 @@
 \]</span></p>
 <p>Here <span class="math inline">\(B\)</span> is the number of data points observed that are strictly greater than the median, and <span class="math inline">\(N\)</span> is sample size <strong>after exact ties</strong> with the median have been removed. Forgetting to remove exact ties is a very frequent mistake when students do this test in classes I TA.</p>
 <p>If we sort the data we can see that <span class="math inline">\(B = 3\)</span> and <span class="math inline">\(N = 12\)</span> in our case:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sort">sort</a></span>(incomes)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(incomes)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;  [1]       2      39    8478    9395   10780   18320   21564   36562</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;  [9]   40298   50000  176602 2268583 3404930</span></a></code></pre></div>
 <p>We can verify this with R as well:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">&gt;</span><span class="st"> </span><span class="dv">50000</span>)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(incomes <span class="op">&gt;</span><span class="st"> </span><span class="dv">50000</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">b</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; [1] 3</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">n &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(incomes <span class="op">!=</span><span class="st"> </span><span class="dv">50000</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">n &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(incomes <span class="op">!=</span><span class="st"> </span><span class="dv">50000</span>)</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">n</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [1] 12</span></a></code></pre></div>
 </div>
@@ -162,10 +164,10 @@
 <p>To calculate a two-sided p-value, we need to find</p>
 
 <p>To do this we need to c.d.f. of a binomial random variable:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(distributions3)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(distributions3)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">X &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Binomial.html">Binomial</a></span>(n, <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(<span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b), <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(X, b <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; [1] 0.1459961</span></a></code></pre></div>
 <p>In practice computing the c.d.f. of binomial random variables is rather tedious and there aren’t great shortcuts for small samples. If you got a question like this on an exam, you’d want to use the binomial p.m.f. repeatedly, like this:</p>
 
@@ -193,9 +195,9 @@
 <div id="using-the-binom-test-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-the-binom-test-function" class="anchor"></a>Using the binom.test() function</h2>
-<p>To verify results we can use the <code><a href="https://www.rdocumentation.org/packages/stats/topics/binom.test">binom.test()</a></code> from base R. The <code>x</code> argument gets the value of <span class="math inline">\(B\)</span>, <code>n</code> the value of <span class="math inline">\(N\)</span>, and <code>p = 0.5</code> for a test of the median.</p>
+<p>To verify results we can use the <code><a href="https://rdrr.io/r/stats/binom.test.html">binom.test()</a></code> from base R. The <code>x</code> argument gets the value of <span class="math inline">\(B\)</span>, <code>n</code> the value of <span class="math inline">\(N\)</span>, and <code>p = 0.5</code> for a test of the median.</p>
 <p>That is, for <span class="math inline">\(H_0 : m = 3\)</span> we would use</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/binom.test">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;  Exact binomial test</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -208,7 +210,7 @@
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; probability of success </span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;                   0.25</span></a></code></pre></div>
 <p>For <span class="math inline">\(H_0 : m \le 3\)</span></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/binom.test">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>, <span class="dt">alternative =</span> <span class="st">"greater"</span>)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>, <span class="dt">alternative =</span> <span class="st">"greater"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;  Exact binomial test</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -221,7 +223,7 @@
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; probability of success </span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;                   0.25</span></a></code></pre></div>
 <p>For <span class="math inline">\(H_0 : m \ge 3\)</span></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/binom.test">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>, <span class="dt">alternative =</span> <span class="st">"less"</span>)</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span>(<span class="dv">3</span>, <span class="dt">n =</span> <span class="dv">12</span>, <span class="dt">p =</span> <span class="fl">0.5</span>, <span class="dt">alternative =</span> <span class="st">"less"</span>)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;  Exact binomial test</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; </span></a>
@@ -254,17 +256,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
