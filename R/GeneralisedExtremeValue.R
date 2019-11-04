@@ -62,9 +62,9 @@
 #'   support.
 #'
 #'   In the \eqn{\xi = 0} (Gumbel) special case
-#'   \deqn{F(x) = \sigma ^ {-1} \exp[-(x - \mu) / \sigma]%
+#'   \deqn{f(x) = \sigma ^ {-1} \exp[-(x - \mu) / \sigma]%
 #'         \exp\{-\exp[-(x - \mu) / \sigma] \}}{%
-#'        F(x) = (1 / \sigma) exp[-(x - \mu) / \sigma]%
+#'        f(x) = (1 / \sigma) exp[-(x - \mu) / \sigma]%
 #'         exp{-exp[-(x - \mu) / \sigma]}}
 #'   for \eqn{x} in \eqn{R}, the set of all real numbers.
 #'
