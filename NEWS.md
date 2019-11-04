@@ -2,7 +2,7 @@
 
 * Rename to `distributions3` for CRAN
 
-* GEV distribution added
+* Generalised Extreme Value (GEV) and Generalised Pareto (GP) distributions added
 
 # distributions 0.1.0
 
