@@ -24,11 +24,11 @@ A \code{GEV} object.
 The GEV distribution arises from the Extremal Types Theorem, which is rather
 like the Central Limit Theorem (see \code{\link{Normal}}) but it relates to
 the \emph{maximum} of \eqn{n} i.i.d. random variables rather than to the sum.
-If, as \eqn{n} tends to infinity, the distribution of this maximum tends to
-a non-degenerate limit then this limit must be a GEV distribution.
-The requirement that the variable be independent can be relaxed
-substantially. Therefore, the GEV distribution is often used to model the
-maximum of a large number of random variables.
+If, after a suitable linear rescaling, the distribution of this maximum
+tends to a non-degenerate limit as \eqn{n} tends to infinity then this limit
+must be a GEV distribution. The requirement that the variable be independent
+can be relaxed substantially. Therefore, the GEV distribution is often used
+to model the maximum of a large number of random variables.
 }
 \details{
 We recommend reading this documentation on
