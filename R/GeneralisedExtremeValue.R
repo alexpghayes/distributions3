@@ -2,11 +2,12 @@
 #'
 #' The GEV distribution arises from the Extremal Types Theorem, which is rather
 #' like the Central Limit Theorem (see \code{\link{Normal}}) but it relates to
-#' the maximum of \eqn{n} i.i.d. random variables rather than to the sum.
+#' the *maximum* of \eqn{n} i.i.d. random variables rather than to the sum.
 #' If, as \eqn{n} tends to infinity, the distribution of this maximum tends to
 #' a non-degenerate limit then this limit must be a GEV distribution.
-#' Therefore, the GEV distribution is often used to model the maximum of
-#' a large number of random variables.
+#' The requirement that the variable be independent can be relaxed
+#' substantially. Therefore, the GEV distribution is often used to model the
+#' maximum of a large number of random variables.
 #'
 #' @param mu The location parameter, written \eqn{\mu} in textbooks.
 #'   `mu` can be any real number.  Defaults to `0`.
@@ -42,13 +43,13 @@
 #'   is Euler's constant, approximately equal to 0.57722; undefined otherwise.
 #'
 #'   **Median**: \eqn{\mu + \sigma[(\ln 2) ^ {-\xi} - 1]/\xi}{%
-#'   \mu + \sigma[(ln 2) ^ (-\xi) - 1] / \xi} for \eqn{\xi \neq 0}{\xi != 0};
+#'   \mu + \sigma[(ln 2)^(-\xi) - 1] / \xi} for \eqn{\xi \neq 0}{\xi != 0};
 #'   \eqn{\mu - \sigma\ln(\ln 2)}{\mu - \sigma ln(ln 2)} for \eqn{\xi = 0}.
 #'
 #'   **Variance**:
-#'   \eqn{\sigma ^ 2 [\Gamma(1 - 2 \xi) - \Gamma(1 - \xi) ^ 2] / \xi ^ 2}
+#'   \eqn{\sigma^2 [\Gamma(1 - 2 \xi) - \Gamma(1 - \xi)^2] / \xi^2}
 #'   for \eqn{\xi < 1 / 2, \xi \neq 0}{\xi < 1 / 2, \xi != 0};
-#'   \eqn{\sigma ^ 2 \pi ^ 2 / 6} for \eqn{\xi = 0}; undefined otherwise.
+#'   \eqn{\sigma^2 \pi^2 / 6} for \eqn{\xi = 0}; undefined otherwise.
 #'
 #'   **Probability density function (p.d.f)**:
 #'
