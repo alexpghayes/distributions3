@@ -44,7 +44,7 @@ Suggests:
     cowplot,
     ggplot2,
     knitr,
-    revdbayes,
+    revdbayes (>= 1.3.5),
     rmarkdown,
     testthat (>= 2.1.0)
 VignetteBuilder: 
