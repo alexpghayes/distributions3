@@ -111,7 +111,7 @@ print.GP <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector containing values in ??? of length `n`.
+#' @return A numeric vector of length `n`.
 #' @export
 #'
 random.GP <- function(d, n = 1L, ...) {

@@ -118,7 +118,7 @@ print.GEV <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector containing values in ??? of length `n`.
+#' @return A numeric vector of length `n`.
 #' @export
 #'
 random.GEV <- function(d, n = 1L, ...) {
