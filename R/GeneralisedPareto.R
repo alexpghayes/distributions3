@@ -1,6 +1,6 @@
 #' Create a Generalised Pareto (GP) distribution
 #'
-#' The GP distribution has a link to the \code{\link{GEV}} distribution.
+#' The GP distribution has a link to the `\link{GEV}` distribution.
 #' Suppose that the maximum of \eqn{n} i.i.d. random variables has
 #' approximately a GEV distribution. For a sufficiently large threshold
 #' \eqn{u}, the conditional distribution of the amount (the threshold
