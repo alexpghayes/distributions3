@@ -40,8 +40,8 @@ parameter  \code{mu} = \eqn{\mu}, scale parameter \code{sigma} = \eqn{\sigma} an
 shape parameter \code{xi} = \eqn{\xi}.
 
 \strong{Support}:
-\eqn{(-\infty, \mu - \sigma / \xi]} for \eqn{\xi < 0};
-\eqn{[\mu - \sigma / \xi, \infty)} for \eqn{\xi > 0};
+\eqn{(-\infty, \mu - \sigma / \xi)} for \eqn{\xi < 0};
+\eqn{(\mu - \sigma / \xi, \infty)} for \eqn{\xi > 0};
 and \eqn{R}, the set of all real numbers, for \eqn{\xi = 0}.
 
 \strong{Mean}: \eqn{\mu + \sigma[\Gamma(1 - \xi) - 1]/\xi} for
@@ -110,10 +110,11 @@ quantile(X, cdf(X, 0.7))
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
   \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{GP}}, \code{\link{Gamma}},
-  \code{\link{Gumbel}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+  \code{\link{Frechet}}, \code{\link{GP}},
+  \code{\link{Gamma}}, \code{\link{Gumbel}},
+  \code{\link{LogNormal}}, \code{\link{Logistic}},
+  \code{\link{Normal}}, \code{\link{StudentsT}},
+  \code{\link{Tukey}}, \code{\link{Uniform}},
+  \code{\link{Weibull}}
 }
 \concept{continuous distributions}

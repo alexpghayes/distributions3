@@ -33,8 +33,8 @@
 #'   shape parameter `xi` = \eqn{\xi}.
 #'
 #'   **Support**:
-#'   \eqn{(-\infty, \mu - \sigma / \xi]} for \eqn{\xi < 0};
-#'   \eqn{[\mu - \sigma / \xi, \infty)} for \eqn{\xi > 0};
+#'   \eqn{(-\infty, \mu - \sigma / \xi)} for \eqn{\xi < 0};
+#'   \eqn{(\mu - \sigma / \xi, \infty)} for \eqn{\xi > 0};
 #'   and \eqn{R}, the set of all real numbers, for \eqn{\xi = 0}.
 #'
 #'   **Mean**: \eqn{\mu + \sigma[\Gamma(1 - \xi) - 1]/\xi} for
