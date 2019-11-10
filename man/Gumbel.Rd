@@ -18,6 +18,7 @@ A \code{Gumbel} object.
 }
 \description{
 The Gumbel distribution is a special case of the \code{\link{GEV}} distribution.
+It may be referred to as a type I extreme value distribution.
 }
 \details{
 We recommend reading this documentation on

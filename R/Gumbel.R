@@ -1,6 +1,7 @@
 #' Create a Gumbel distribution
 #'
 #' The Gumbel distribution is a special case of the `\link{GEV}` distribution.
+#' It may be referred to as a type I extreme value distribution.
 #'
 #' @param mu The location parameter, written \eqn{\mu} in textbooks.
 #'   `mu` can be any real number.  Defaults to `0`.
@@ -137,7 +138,7 @@ cdf.Gumbel <- function(d, x, ...) {
 #' @inherit Gumbel examples
 #' @inheritParams random.Gumbel
 #'
-#' @param p A vector of probabilites.
+#' @param p A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
