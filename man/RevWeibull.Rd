@@ -52,7 +52,7 @@ parameter \eqn{\lambda}.
 
 \strong{Probability density function (p.d.f)}:
 
-\deqn{f(x) = \alpha s ^ {-1} [-(x - m) / s] ^ {(\alpha - 1)}%
+\deqn{f(x) = \alpha s ^ {-1} [-(x - m) / s] ^ {\alpha - 1}%
         \exp\{-[-(x - m) / s] ^ {\alpha} \}}{%
        f(x) = (\alpha / s) [-(x - m) / s] ^ (\alpha - 1)%
         exp{-[-(x - m) / s] ^ \alpha}}
