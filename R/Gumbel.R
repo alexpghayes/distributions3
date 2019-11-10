@@ -1,6 +1,7 @@
 #' Create a Gumbel distribution
 #'
-#' The Gumbel distribution is a special case of the `\link{GEV}` distribution.
+#' The Gumbel distribution is a special case of the `\link{GEV}` distribution,
+#' obtained when the GEV shape parameter \eqn{\xi} is equal to 0.
 #' It may be referred to as a type I extreme value distribution.
 #'
 #' @param mu The location parameter, written \eqn{\mu} in textbooks.
@@ -25,7 +26,7 @@
 #'   **Support**: \eqn{R}, the set of all real numbers.
 #'
 #'   **Mean**: \eqn{\mu + \sigma\gamma}, where \eqn{\gamma} is Euler's
-#'   constant, approximately equal to 0.57722; undefined otherwise.
+#'   constant, approximately equal to 0.57722.
 #'
 #'   **Median**: \eqn{\mu - \sigma\ln(\ln 2)}{\mu - \sigma ln(ln 2)}.
 #'

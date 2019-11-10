@@ -17,7 +17,8 @@ Gumbel(mu = 0, sigma = 1)
 A \code{Gumbel} object.
 }
 \description{
-The Gumbel distribution is a special case of the \code{\link{GEV}} distribution.
+The Gumbel distribution is a special case of the \code{\link{GEV}} distribution,
+obtained when the GEV shape parameter \eqn{\xi} is equal to 0.
 It may be referred to as a type I extreme value distribution.
 }
 \details{
@@ -31,7 +32,7 @@ parameter  \code{mu} = \eqn{\mu}, scale parameter \code{sigma} = \eqn{\sigma}.
 \strong{Support}: \eqn{R}, the set of all real numbers.
 
 \strong{Mean}: \eqn{\mu + \sigma\gamma}, where \eqn{\gamma} is Euler's
-constant, approximately equal to 0.57722; undefined otherwise.
+constant, approximately equal to 0.57722.
 
 \strong{Median}: \eqn{\mu - \sigma\ln(\ln 2)}{\mu - \sigma ln(ln 2)}.
 
@@ -74,7 +75,8 @@ quantile(X, cdf(X, 0.7))
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
   \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Frechet}}, \code{\link{GEV}},
+  \code{\link{GP}}, \code{\link{Gamma}},
   \code{\link{LogNormal}}, \code{\link{Logistic}},
   \code{\link{Normal}}, \code{\link{StudentsT}},
   \code{\link{Tukey}}, \code{\link{Uniform}},
