@@ -103,7 +103,8 @@ Other continuous distributions: \code{\link{Beta}},
   \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
   \code{\link{Gumbel}}, \code{\link{LogNormal}},
   \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
+  \code{\link{Tukey}}, \code{\link{Uniform}},
+  \code{\link{Weibull}}
 }
 \concept{continuous distributions}
