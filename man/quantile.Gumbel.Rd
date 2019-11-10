@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{p}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
