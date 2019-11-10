@@ -51,13 +51,13 @@ for \eqn{\alpha > 2}; undefined otherwise.
 \deqn{f(x) = \alpha s ^ {-1} [(x - m) / s] ^ {-(1 + \alpha)}%
         \exp\{-[(x - m) / s] ^ {-\alpha} \}}{%
        f(x) = (\alpha / s) [(x - m) / s] ^ [-(1 + \alpha)]%
-        exp{-[-(x - m) / s] ^ (-\alpha)}}
+        exp{-[(x - m) / s] ^ (-\alpha)}}
 for \eqn{x > m}.  The p.d.f. is 0 outside the support.
 
 \strong{Cumulative distribution function (c.d.f)}:
 
 \deqn{F(x) = \exp\{-[(x - m) / s] ^ {-\alpha} \}}{%
-       F(x) = exp{-[-(x - m) / s] ^ (-\alpha)}}
+       F(x) = exp{-[(x - m) / s] ^ (-\alpha)}}
 for \eqn{x > m}.  The c.d.f. is 0 below the support and 1 above the
 support.
 }
@@ -87,6 +87,7 @@ Other continuous distributions: \code{\link{Beta}},
   \code{\link{Gumbel}}, \code{\link{LogNormal}},
   \code{\link{Logistic}}, \code{\link{Normal}},
   \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+  \code{\link{Uniform}}, \code{\link{Weibull}},
+  \code{\link{rWeibull}}
 }
 \concept{continuous distributions}

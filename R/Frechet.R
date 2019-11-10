@@ -50,7 +50,7 @@
 #'   **Cumulative distribution function (c.d.f)**:
 #'
 #'   \deqn{F(x) = \exp\{-[(x - m) / s] ^ {-\alpha} \}}{%
-#'        F(x) = exp{-[-(x - m) / s] ^ (-\alpha)}}
+#'        F(x) = exp{-[(x - m) / s] ^ (-\alpha)}}
 #'   for \eqn{x > m}.  The c.d.f. is 0 below the support and 1 above the
 #'   support.
 #'
