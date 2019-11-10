@@ -9,7 +9,7 @@
 \arguments{
 \item{d}{A \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{p}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

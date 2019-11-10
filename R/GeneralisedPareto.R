@@ -166,7 +166,7 @@ cdf.GP <- function(d, x, ...) {
 #' @inherit GP examples
 #' @inheritParams random.GP
 #'
-#' @param p A vector of probabilites.
+#' @param p A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
