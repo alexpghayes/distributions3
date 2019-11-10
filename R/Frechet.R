@@ -33,7 +33,7 @@
 #'   **Mean**: \eqn{m + s\Gamma(1 - 1/\alpha)}, for \eqn{\alpha > 1}; undefined
 #'   otherwise.
 #'
-#'   **Median**: \eqn{m + (\ln 2)^{-1/\alpha}}{m + (\ln 2)^(-1/\alpha)}.
+#'   **Median**: \eqn{m + s(\ln 2)^{-1/\alpha}}{m + s(\ln 2)^(-1/\alpha)}.
 #'
 #'   **Variance**:
 #'   \eqn{s^2 [\Gamma(1 - 2 / \alpha) - \Gamma(1 - 1 / \alpha)^2]}
