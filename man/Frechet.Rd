@@ -52,7 +52,7 @@ for \eqn{\alpha > 2}; undefined otherwise.
         \exp\{-[(x - m) / s] ^ {-\alpha} \}}{%
        f(x) = (\alpha / s) [(x - m) / s] ^ [-(1 + \alpha)]%
         exp{-[(x - m) / s] ^ (-\alpha)}}
-for \eqn{x > m}.  The p.d.f. is 0 outside the support.
+for \eqn{x > m}.  The p.d.f. is 0 for \eqn{x \leq m}{x <= m}.
 
 \strong{Cumulative distribution function (c.d.f)}:
 
