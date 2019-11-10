@@ -58,8 +58,7 @@ for \eqn{x > m}.  The p.d.f. is 0 outside the support.
 
 \deqn{F(x) = \exp\{-[(x - m) / s] ^ {-\alpha} \}}{%
        F(x) = exp{-[(x - m) / s] ^ (-\alpha)}}
-for \eqn{x > m}.  The c.d.f. is 0 below the support and 1 above the
-support.
+for \eqn{x > m}.  The c.d.f. is 0 for \eqn{x \leq m}{x <= m}.
 }
 \examples{
 
