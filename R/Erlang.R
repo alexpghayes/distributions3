@@ -103,7 +103,7 @@ cdf.Erlang <- function(d, x, ...) {
     summation <- vector(mode = "numeric", length = d$k)
     n <- 0:(d$k - 1)
     summation <- 1 / factorial(n) * exp(-d$lambda * x) * (d$lambda * x)^n
-    1 - sum(summation)
+    return(1 - sum(summation))
   }, vectorize.args = "x")
   internal(d = d, x = x, ...)
 }
