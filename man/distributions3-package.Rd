@@ -34,6 +34,7 @@ Other contributors:
   \item Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (0000-0002-0679-1945) [contributor]
   \item Daniel Jordan \email{dandermotj@gmail.com} [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} [contributor]
+  \item Alessandro Gasparini \email{alessandro.gasparini@ki.se} [contributor]
 }
 
 }
