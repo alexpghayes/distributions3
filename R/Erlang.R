@@ -121,12 +121,14 @@ cdf.Erlang <- function(d, x, ...) {
 #' @param p A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
+#' @param interval Interval being used to search for the quantile using numerical root finding. Defaults to (0, 1e6)
+#' @param tol Tolerance of the root finding algorithm. Defaults to `.Machine$double.eps`
 #'
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps^0.25) {
-  if (any(p < 0) | (p > 1)) stop("'p' must be between 0 and 1.", call. = TRUE)
+quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
+  if (any(p < 0) | any(p > 1)) stop("'p' must be between 0 and 1.", call. = TRUE)
   p[p == 1] <- (1 - .Machine$double.eps^0.25)
   internal <- Vectorize(FUN = function(d, p, ..., interval, tol) {
     qf <- function(x) cdf(d = d, x = x) - p

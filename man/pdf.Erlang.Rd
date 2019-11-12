@@ -2,9 +2,12 @@
 % Please edit documentation in R/Erlang.R
 \name{pdf.Erlang}
 \alias{pdf.Erlang}
+\alias{log_pdf.Erlang}
 \title{Evaluate the probability mass function of an Erlang distribution}
 \usage{
 \method{pdf}{Erlang}(d, x, ...)
+
+\method{log_pdf}{Erlang}(d, x, ...)
 }
 \arguments{
 \item{d}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
