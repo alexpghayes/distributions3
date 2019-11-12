@@ -135,30 +135,3 @@ quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$doub
   }, vectorize.args = "p")
   internal(d = d, p = p, ..., interval = interval, tol = tol)
 }
-
-#' Fit a Erlang distribution to data
-#'
-#' @param d A `Erlang` object created by a call to [Erlang()].
-#' @param x A vector to fit the Erlang distribution to.
-#' @param ... Unused.
-#'
-#' @return a `Erlang` object
-#' @export
-fit_mle.Erlang <- function(d, x, ...) {
-  # ss <- suff_stat(d, x, ...)
-  stop("`fit_mle` is not implemented for the Erlang distribution yet")
-}
-
-#' Compute the sufficient statistics for an Erlang distribution from data
-#'
-#'   - `sum`: The sum of the data.
-#'   - `log_sum`: The log of the sum of the data.
-#'   - `samples`: The number of samples in the data.
-#'
-#' @inherit fit_mle.Erlang
-#' @export
-suff_stat.Erlang <- function(d, x, ...) {
-  # if (any(x < 0)) stop("`x` must only contain positive real numbers")
-  # list(sum = sum(x), log_sum = sum(log(x)), samples = length(x))
-  stop("`suff_stat` is not implemented for the Erlang distribution yet")
-}
