@@ -122,8 +122,15 @@ cdf.Erlang <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Erlang <- function(d, p, ...) {
-  stop("`quantile` is not implemented for the Erlang distribution yet")
+quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps^0.25) {
+  if (any(p < 0) | (p > 1)) stop("'p' must be between 0 and 1.", call. = TRUE)
+  p[p == 1] <- (1 - .Machine$double.eps^0.25)
+  internal <- Vectorize(FUN = function(d, p, ..., interval, tol) {
+    qf <- function(x) cdf(d = d, x = x) - p
+    root <- stats::uniroot(qf, interval = interval, tol = tol, check.conv = TRUE)
+    return(root$root)
+  }, vectorize.args = "p")
+  internal(d = d, p = p, ..., interval = interval, tol = tol)
 }
 
 #' Fit a Erlang distribution to data
