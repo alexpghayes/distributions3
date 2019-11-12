@@ -81,8 +81,8 @@ pdf.Erlang <- function(d, x, ...) {
 #' @rdname pdf.Gamma
 #' @export
 #'
-log_pdf.Gamma <- function(d, x, ...) {
-  stop("`log_pdf` is not implemented for the Erlang distribution yet")
+log_pdf.Erlang <- function(d, x, ...) {
+  d$k * log(d$lambda) + (d$k - 1) * log(x) - d$lambda * x - log(factorial(d$k - 1))
 }
 
 #' Evaluate the cumulative distribution function of an Erlang distribution
