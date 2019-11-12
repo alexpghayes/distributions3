@@ -75,13 +75,15 @@ random.Erlang <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Erlang <- function(d, x, ...) {
+  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
   (d$lambda^d$k) * (x^(d$k - 1)) * exp(-d$lambda * x) / factorial(d$k - 1)
 }
 
-#' @rdname pdf.Gamma
+#' @rdname pdf.Erlang
 #' @export
 #'
 log_pdf.Erlang <- function(d, x, ...) {
+  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
   d$k * log(d$lambda) + (d$k - 1) * log(x) - d$lambda * x - log(factorial(d$k - 1))
 }
 
@@ -99,6 +101,7 @@ log_pdf.Erlang <- function(d, x, ...) {
 #' @export
 #'
 cdf.Erlang <- function(d, x, ...) {
+  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
   internal <- Vectorize(FUN = function(d, x, ...) {
     summation <- vector(mode = "numeric", length = d$k)
     n <- 0:(d$k - 1)
