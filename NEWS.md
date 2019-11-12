@@ -1,6 +1,6 @@
 # distributions3 (development version)
 
-* Added Erlang distribution (@ellessenne)
+* Added support for the Erlang distribution (@ellessenne, PR #54)
 
 # distributions 0.1.1
 
