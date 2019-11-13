@@ -71,6 +71,12 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 Frechet <- function(location = 0, scale = 1, shape = 1) {
+  if (scale <= 0) {
+    stop("scale must be positive")
+  }
+  if (shape <= 0) {
+    stop("shape must be positive")
+  }
   d <- list(location = location, scale = scale, shape = shape)
   class(d) <- c("Frechet", "distribution")
   d

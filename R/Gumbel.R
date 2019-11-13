@@ -65,6 +65,9 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 Gumbel <- function(mu = 0, sigma = 1) {
+  if (sigma <= 0) {
+    stop("sigma must be positive")
+  }
   d <- list(mu = mu, sigma = sigma)
   class(d) <- c("Gumbel", "distribution")
   d

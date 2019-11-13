@@ -99,6 +99,9 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 GEV <- function(mu = 0, sigma = 1, xi = 0) {
+  if (sigma <= 0) {
+    stop("sigma must be positive")
+  }
   d <- list(mu = mu, sigma = sigma, xi = xi)
   class(d) <- c("GEV", "distribution")
   d
