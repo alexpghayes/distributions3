@@ -30,6 +30,7 @@ reference:
       - "Gamma"
       - "Geometric"
       - "HyperGeometric"
+      - "Laplace"
       - "Logistic"
       - "LogNormal"
       - "Multinomial"
