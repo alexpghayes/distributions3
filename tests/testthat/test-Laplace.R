@@ -7,6 +7,7 @@ test_that("print.Laplace works", {
 theta <- 1
 phi <- 2
 L <- Laplace(theta, phi)
+set.seed(27)
 
 test_that("suff_stat.Laplace works correctly", {
   n <- 10
@@ -20,6 +21,10 @@ test_that("suff_stat.Laplace works correctly", {
 })
 
 test_that("fit_mle.Laplace works correctly", {
+  n <- 10
+  x <- random(L, n)
+  thetahat <- median(x)
+  phihat <- mean(abs(x - median(x)))
   expect_equal(fit_mle(Laplace(), x), Laplace(thetahat, phihat))
 })
 
