@@ -23,7 +23,7 @@ parameter \eqn{\theta} and scale parameter \eqn{\phi} then
 \eqn{| X - \theta |} has an exponential distribution with rate
 parameter \eqn{1 / \phi}.  If \eqn{\theta} is zero then a Laplace
 distribution may be viewed as a composite of two identical exponential
-distributions placed back-to-back.  Hence it may be referred to as a
+distributions placed back-to-back.  Therefore, it may be referred to as a
 \emph{double exponential}, \emph{two-tailed exponential} or \emph{bilateral exponential}
 distribution.
 }
@@ -52,11 +52,14 @@ parameter \code{theta} = \eqn{\theta} and scale parameter \code{phi} = \eqn{\phi
 \strong{Cumulative distribution function (c.d.f)}:
 
 \deqn{
-    F(x) = \frac{1}{2} + \frac{1}{2} sign(x - \theta)%
+    F(x) = \frac{1}{2} + \frac{1}{2} {\rm ~sgn}(x - \theta)%
      [1 - \exp(-|x - \theta| / \phi)]
   }{
-    F(x) = 1/2 + (1/2) sign(x - \theta) [1 - exp(-|x - \theta| / \phi)]
+    F(x) = 1/2 + (1/2) sgn(x - \theta) [1 - exp(-|x - \theta| / \phi)]
   }
+where sgn() is the sign function: sgn(\eqn{x}) is equal to \eqn{-1} if
+\eqn{x} is negative, \eqn{0} if \eqn{x} is zero and \eqn{1} if \eqn{x} is
+positive.
 
 \strong{Moment generating function (m.g.f)}:
 
