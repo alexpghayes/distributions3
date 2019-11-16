@@ -43,6 +43,5 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 
 x <- random(X, 100)
-suff_stat(X, x)
 fit_mle(X, x)
 }

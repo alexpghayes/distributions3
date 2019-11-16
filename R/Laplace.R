@@ -79,7 +79,6 @@
 #' quantile(X, cdf(X, 0.7))
 #'
 #' x <- random(X, 100)
-#' suff_stat(X, x)
 #' fit_mle(X, x)
 Laplace <- function(theta = 0, phi = 1) {
   d <- list(theta = theta, phi = phi)
