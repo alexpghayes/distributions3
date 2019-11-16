@@ -84,6 +84,10 @@ quantile(X, c(0.25, 0.5, 0.75))
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
+
+x <- random(X, 100)
+suff_stat(X, x)
+fit_mle(X, x)
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},

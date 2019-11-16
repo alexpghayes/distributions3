@@ -77,6 +77,10 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
+#'
+#' x <- random(X, 100)
+#' suff_stat(X, x)
+#' fit_mle(X, x)
 Laplace <- function(theta = 0, phi = 1) {
   d <- list(theta = theta, phi = phi)
   class(d) <- c("Laplace", "distribution")
@@ -200,4 +204,39 @@ quantile.Laplace <- function(d, p, ...) {
   d$theta <- rep_len(d$theta, max_len)
   d$phi <- rep_len(d$phi, max_len)
   d$theta + sign(p - 0.5) * qexp(2 * abs(p - 0.5), rate = 1 / d$phi)
+}
+
+#' Fit a Laplace distribution to data
+#'
+#' @param d A `Laplace` object created by a call to [Laplace()].
+#' @param x A vector of data.
+#' @param ... Unused.
+#'
+#' @family Laplace distribution
+#'
+#' @return A `Laplace` object.
+#' @export
+fit_mle.Laplace <- function(d, x, ...) {
+  ss <- suff_stat(d, x, ...)
+  Laplace(ss$theta, ss$phi)
+}
+
+#' Compute the sufficient statistics for a Laplace distribution from data
+#'
+#' @inheritParams fit_mle.Laplace
+#'
+#' @return A named list of the sufficient statistics of the Laplace
+#'   distribution:
+#'
+#'   - `theta`: The sample median.
+#'   - `sigma`: The sample mean absolute deviation from the sample median.
+#'   - `samples`: The number of samples in the data.
+#'
+#' @export
+suff_stat.Laplace <- function(d, x, ...) {
+  valid_x <- is.numeric(x)
+  if (!valid_x) stop("`x` must be a numeric vector")
+  thetahat <- median(x)
+  phihat <- mean(abs(x - median(x)))
+  list(theta = thetahat, phi = phihat, samples = length(x))
 }

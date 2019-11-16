@@ -8,6 +8,21 @@ theta <- 1
 phi <- 2
 L <- Laplace(theta, phi)
 
+test_that("suff_stat.Laplace works correctly", {
+  n <- 10
+  x <- random(L, n)
+  thetahat <- median(x)
+  phihat <- mean(abs(x - median(x)))
+  ss <- list(theta = thetahat, phi = phihat, samples = n)
+  expect_equal(suff_stat(Laplace(), x), ss)
+
+  expect_error(suff_stat(Laplace(), "abc"))
+})
+
+test_that("fit_mle.Laplace works correctly", {
+  expect_equal(fit_mle(Laplace(), x), Laplace(thetahat, phihat))
+})
+
 test_that("random.Laplace works correctly", {
   expect_length(random(L), 1)
   expect_length(random(L, 100), 100)
