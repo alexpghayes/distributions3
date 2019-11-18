@@ -74,10 +74,12 @@ n
 
 To calculate a two-sided p-value, we need to find
 
+\[
 \begin{align}
   2 \cdot \min(P(B \ge 3), P(B \le 3)) =
   2 \cdot \min(1 - P(B \le 2), P(B \le 3))
 \end{align}
+\]
 
 To do this we need to c.d.f. of a binomial random variable:
 
@@ -90,6 +92,7 @@ X <- Binomial(n, 0.5)
 
 In practice computing the c.d.f. of binomial random variables is rather tedious and there aren't great shortcuts for small samples. If you got a question like this on an exam, you'd want to use the binomial p.m.f. repeatedly, like this:
 
+\[
 \begin{align}
 P(B \le 3)
 &= P(B = 0) + P(B = 1) + P(B = 2) + P(B = 3) \\
@@ -98,12 +101,15 @@ P(B \le 3)
   \binom{12}{2} 0.5^2 0.5^10 +
   \binom{12}{3} 0.5^3 0.5^9
 \end{align}
+\]
 
 Finally, sometimes we are interest in one sided sign tests. For the test
 
+\[
 \begin{align}
   H_0: m \le 3 \qquad H_A: m > 3
 \end{align}
+\]
 
 the p-value is given by
 
