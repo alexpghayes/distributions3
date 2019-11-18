@@ -167,7 +167,14 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5">z_stat</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] 2.371708</span></a></code></pre></div>
 <p>To calculate a two-sided p-value, we need to find</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |2.37|)
+  &amp;= P(Z \ge 2.37) + P(Z \le -2.37) \\
+  &amp;= 1 - P(Z \le 2.37) + P(Z \le -2.37) \\
+  &amp;= 1 - \Phi(2.37) + \Phi(-2.37)
+\end{align}
+\]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(distributions3)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
@@ -180,12 +187,22 @@
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.0177. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(Z, 2.37)</a></code> and looking up <code>2.37</code> on a Z-table.</p>
 <p>You may also have seen a different formula for the p-value of a two-sided Z-test, which makes use of the fact that the normal distribution is symmetric:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |2.37|)
+  &amp;= 2 \cdot P(Z \le -|2.37|) \\
+  &amp;= 2 \cdot \Phi(-2.37)
+\end{align}
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">-2.37</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] 0.01778809</span></a></code></pre></div>
 <p>Finally, sometimes we are interest in one sided Z-tests. For the test</p>
-
+<p><span class="math display">\[
+\begin{align}
+  H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
+\end{align}
+\]</span></p>
 <p>the p-value is given by</p>
 <p><span class="math display">\[
   P(Z &gt; 2.37)
@@ -216,19 +233,44 @@
 <li>The rejection region in terms of the sample mean</li>
 </ol>
 <p>For a given <span class="math inline">\(\alpha\)</span> level threshold, all of these rejection regions are equivalent. We’ll start by thinking about the rejection of a two-sided test. That is</p>
-
+<p><span class="math display">\[
+\begin{align}
+H_0 : \mu = \mu_0 \qquad H_A : \mu \neq \mu_0
+\end{align}
+\]</span></p>
 <p>We then calculate a test statistic <span class="math inline">\(Z_\text{obs}\)</span>, and a p-value <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|)\)</span> and reject when <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha\)</span>. This defines our first rejection region. Using our observation from before, this is exactly equivalent to rejecting when</p>
-
+<p><span class="math display">\[
+\begin{align}
+P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha 
+&amp; \Longleftrightarrow 2 \cdot P(Z &lt; -|Z_\text{obs}|) &lt; \alpha \\
+&amp; \Longleftrightarrow P(Z &lt; -|Z_\text{obs}|) &lt; \alpha / 2
+\end{align}
+\]</span></p>
 <p>and this last statement is exactly the same as when <span class="math inline">\(Z_\text{obs} &lt; z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2} &lt; Z_\text{obs}\)</span>. This is our second region region, in terms of the test statistic. Finally, recall that</p>
 <p><span class="math display">\[
   Z_\text{obs} = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}}
 \]</span></p>
 <p>So we take the conditions and rearrange to in terms of <span class="math inline">\(\bar x\)</span></p>
-
+<p><span class="math display">\[
+\begin{align}
+\frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &gt; z_{1 - \alpha / 2}
+&amp; \Longleftrightarrow \bar x &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}
+\end{align}
+\]</span></p>
 <p>and</p>
-
+<p><span class="math display">\[
+\begin{align}
+\frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &lt; z_{\alpha / 2}
+&amp; \Longleftrightarrow \bar x &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}
+\end{align}
+\]</span></p>
 <p>You can also think about this in terms of <span class="math inline">\(\mu_0\)</span>. We will reject the test when <span class="math inline">\(\mu_0\)</span> is not in</p>
-
+<p><span class="math display">\[
+\begin{align}
+\left( \bar x + z_{\alpha / 2} \frac{\sigma}{\sqrt n},
+  \bar x + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right)
+\end{align}
+\]</span></p>
 <p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains all the values of <span class="math inline">\(\mu_0\)</span> that we cannot reject at the <span class="math inline">\(\alpha\)</span> level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either <span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
 </div>
 <div id="power-and-sample-size-calculations" class="section level2">
@@ -247,13 +289,24 @@
     \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right).
 \]</span></p>
 <p>Remember that <span class="math inline">\(\bar X \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>. This means that, given <span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>, which let’s us calculate the probabilities we need to find the power:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P\left( \left . \bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right)
+  &amp;= P\left( \frac{\bar{x} - \mu_A}{\sigma/\sqrt{n}} &gt; \frac{\mu_0 + z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} - \mu_A}{\sigma/\sqrt{n}} \right) \\
+  &amp;= P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right),
+\end{align}
+\]</span></p>
 <p>and similarly</p>
 <p><span class="math display">\[
   P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
 \]</span></p>
 <p>So, the power of our test, <em>if the true population mean is <span class="math inline">\(\mu_A\)</span></em>, is</p>
-
+<p><span class="math display">\[
+\begin{align}
+  \text{Power} &amp;= P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
+  &amp;= \left[1 - P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right)\right] + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
+\end{align}
+\]</span></p>
 <p>Let’s calculate this if <span class="math inline">\(\mu_A = 5\)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">power_lower &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="fl">0.025</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">power_upper &lt;-<span class="st"> </span>(<span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span>(<span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/quantile.html">quantile</a></span>(Z, <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.025</span>)</a>
@@ -280,7 +333,14 @@
 \text{Power} = P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
 \]</span></p>
 <p>Usually, only one of these terms is contributing while the other is very close to zero. Let’s say the first term is the one clearly different from zero. To determine the sample size, we want to determine <span class="math inline">\(n\)</span> such that <span class="math inline">\(P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta\)</span>. Or, similarly, <span class="math inline">\(P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta\)</span>. I.e. we need <span class="math inline">\(\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} = z_{\beta}\)</span>.</p>
-
+<p><span class="math display">\[
+\begin{align}
+ z_{\beta} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} &amp; \Longleftrightarrow z_{\beta} - z_{1-\alpha/2} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} \\
+  &amp; \Longleftrightarrow \sigma (z_{\beta} - z_{1-\alpha/2}) = (\mu_0-\mu_A)\sqrt{n} \\
+ &amp; \Longleftrightarrow \frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A} = \sqrt{n} \\
+ &amp; \Longleftrightarrow \left(\frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A}\right)^2 = n
+\end{align}
+\]</span></p>
 <p>Since <span class="math inline">\(z_{1-\alpha/2} = -z_{\alpha/2}\)</span>, we have the equation above:</p>
 <p><span class="math display">\[
   \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 = n.

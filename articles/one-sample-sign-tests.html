@@ -147,8 +147,8 @@
 <p>Here <span class="math inline">\(B\)</span> is the number of data points observed that are strictly greater than the median, and <span class="math inline">\(N\)</span> is sample size <strong>after exact ties</strong> with the median have been removed. Forgetting to remove exact ties is a very frequent mistake when students do this test in classes I TA.</p>
 <p>If we sort the data we can see that <span class="math inline">\(B = 3\)</span> and <span class="math inline">\(N = 12\)</span> in our case:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(incomes)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;  [1]       2      39    8478    9395   10780   18320   21564   36562</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;  [9]   40298   50000  176602 2268583 3404930</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;  [1]       2      39    8478    9395   10780   18320   21564   36562   40298</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; [10]   50000  176602 2268583 3404930</span></a></code></pre></div>
 <p>We can verify this with R as well:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(incomes <span class="op">&gt;</span><span class="st"> </span><span class="dv">50000</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">b</a>
