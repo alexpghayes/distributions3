@@ -122,7 +122,13 @@
 <a href="#problem-setup" class="anchor"></a>Problem setup</h2>
 <p>Let’s suppose that a student is interesting in estimating what percent of professors in their department watches Game of Thrones. They go to office hours and ask each professor and it turns out 17 out of 62 professors in their department watch Game of Thrones. Several of the faculty think Game of Thrones is a board game.</p>
 <p>We can imagine that the data is a bunch of zeros and ones, where the <span class="math inline">\(i^{th}\)</span> data point, <span class="math inline">\(x_i\)</span> is one if professor <span class="math inline">\(i\)</span> watches Game of Thrones, and zero otherwise. So the full dataset might look something like:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  &amp; 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,     \\
+  &amp; 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0,  \\
+  &amp; 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+\end{align}
+\]</span></p>
 <p>But it is much easier to just remember that there are 17 ones and 45 zeros.</p>
 </div>
 <div id="assumption-checking" class="section level2">
@@ -167,7 +173,14 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7">z_stat</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; [1] 1.460501</span></a></code></pre></div>
 <p>To calculate a two-sided p-value, we need to find</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |1.46|)
+  &amp;= P(Z \ge 1.46) + P(Z \le -1.46) \\
+  &amp;= 1 - P(Z \le 1.46) + P(Z \le -1.46) \\
+  &amp;= 1 - \Phi(1.46) + \Phi(-1.46)
+\end{align}
+\]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(distributions3)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; </span></a>
@@ -188,7 +201,13 @@
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.14. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(Z, 1.46)</a></code> and looking up <code>1.46</code> on a Z-table.</p>
 <p>You may also have seen a different formula for the p-value of a two-sided Z-test, which makes use of the fact that the normal distribution is symmetric:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |1.46|)
+  &amp;= 2 \cdot P(Z \le -|1.46|)
+  &amp;= 2 \cdot \Phi(-1.46)
+\end{align}
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">-1.46</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [1] 0.1442901</span></a></code></pre></div>
@@ -197,7 +216,11 @@
 <h2 class="hasAnchor">
 <a href="#one-sided-z-tests" class="anchor"></a>One-sided Z-tests</h2>
 <p>Finally, sometimes we are interest in one sided Z-tests. For the test</p>
-
+<p><span class="math display">\[
+\begin{align}
+  H_0: \pi \le 0.2 \qquad H_A: \pi &gt; 0.2
+\end{align}
+\]</span></p>
 <p>the p-value is given by</p>
 <p><span class="math display">\[
   P(Z &gt; 1.46)

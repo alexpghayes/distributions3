@@ -205,7 +205,14 @@
 <h2 class="hasAnchor">
 <a href="#calculating-p-values" class="anchor"></a>Calculating p-values</h2>
 <p>To calculate a two-sided p-value, we need to find</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |-0.376|)
+  &amp;= P(Z \ge 0.376) + P(Z \le -0.376) \\
+  &amp;= 1 - P(Z \le 0.376) + P(Z \le -0.376) \\
+  &amp;= 1 - \Phi(0.376) + \Phi(0.376)
+\end{align}
+\]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(distributions3)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
@@ -218,12 +225,22 @@
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.71. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(Z, -0.376)</a></code> and looking up <code>-0.376</code> on a Z-table.</p>
 <p>You may also have seen a different formula for the p-value of a two-sided Z-test, which makes use of the fact that the normal distribution is symmetric:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|Z| \ge |-0.376|)
+  &amp;= 2 \cdot P(Z \le -|-0.376|)
+  &amp;= 2 \cdot \Phi(-0.376)
+\end{align}
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(Z, <span class="fl">-0.376</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] 0.7069169</span></a></code></pre></div>
 <p>Finally, sometimes we are interest in one sided Z-tests. For the test</p>
-
+<p><span class="math display">\[
+\begin{align}
+  H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
+\end{align}
+\]</span></p>
 <p>the p-value is given by</p>
 <p><span class="math display">\[
   P(Z &gt; -0.376)

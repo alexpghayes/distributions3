@@ -168,7 +168,13 @@
 <a class="sourceLine" id="cb2-5" data-line-number="5">t_stat</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] 1.378916</span></a></code></pre></div>
 <p>Since the sample size is 10, to calculate a two-sided p-value, we need to find</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|t_9| \ge |1.38|)
+  &amp;= P(t_9 \ge 1.38) + P(t_9 \le -1.38) \\
+  &amp;= 1 - P(t_9 \le 1.38) + P(t_9 \le -1.38) \\
+\end{align}
+\]</span></p>
 <p>To do this we need to c.d.f. of a <span class="math inline">\(t_9\)</span> distribution.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(distributions3)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
@@ -181,12 +187,21 @@
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.20. You should verify this with a T-table. Note that you should get the <em>same</em> value from <code><a href="../reference/cdf.html">cdf(T_9, 1.38)</a></code> and looking up <code>1.38</code> on a T-table.</p>
 <p>You may also have seen a different formula for the p-value of a two-sided T-test, which makes use of the fact that the T distribution is symmetric:</p>
-
+<p><span class="math display">\[
+\begin{align}
+  P(|t_9| \ge |1.38|)
+  &amp;= 2 \cdot P(t_9 \le -|1.38|)
+\end{align}
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw"><a href="../reference/cdf.html">cdf</a></span>(T_<span class="dv">9</span>, <span class="fl">-1.38</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1] 0.2008985</span></a></code></pre></div>
 <p>Finally, sometimes we are interest in one sided T-tests. For the test</p>
-
+<p><span class="math display">\[
+\begin{align}
+  H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
+\end{align}
+\]</span></p>
 <p>the p-value is given by</p>
 <p><span class="math display">\[
   P(t_9 &gt; 1.38)
@@ -237,7 +252,11 @@
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; mean of x </span></a>
 <a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;       4.5</span></a></code></pre></div>
 <p>We can also get one-sided p-values from <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> by specifying the alternative hypothesis. For the test</p>
-
+<p><span class="math display">\[
+\begin{align}
+  H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
+\end{align}
+\]</span></p>
 <p>we would use</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(x, <span class="dt">mu =</span> <span class="dv">3</span>, <span class="dt">alternative =</span> <span class="st">"greater"</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; </span></a>
