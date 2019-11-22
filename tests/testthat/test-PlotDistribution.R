@@ -22,7 +22,7 @@ test_that("Binomial pmf plot for vector parameters, all = FALSE", {
 
 test_that("Binomial cdf plot for vector parameters, all = TRUE", {
   B <- Binomial(20, c(0.1, 0.5, 0.9))
-  expect_equal(plot(B2, cdf = TRUE, all = TRUE)$size, c(20, 20, 20))
+  expect_equal(plot(B, cdf = TRUE, all = TRUE)$size, c(20, 20, 20))
 })
 
 test_that("Gamma plot for vector parameters, all = FALSE", {
