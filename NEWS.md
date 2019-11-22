@@ -1,3 +1,7 @@
+# distributions3 (development version)
+
+* Added a plotting generic for univariate distributions (@paulnorthrop, PR #56)
+
 # distributions 0.1.1
 
 * Rename to `distributions3` for CRAN
