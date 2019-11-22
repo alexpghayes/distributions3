@@ -252,7 +252,7 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
                       col = col, ...)
     graphics::axis(1, at = xvals)
     graphics::axis(2)
-    # If n_disns > 1 then add a legend
+    # If n_distns > 1 then add a legend
     if (n_distns > 1) {
       if (is.null(legend_args[['legend']])) {
         legend_args$legend <- create_legend_text(xx, n_distns)
