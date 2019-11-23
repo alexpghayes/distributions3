@@ -35,6 +35,7 @@ reference:
       - "Multinomial"
       - "NegativeBinomial"
       - "Normal"
+      - "Pareto"
       - "Poisson"
       - "StudentsT"
       - "Tukey"
