@@ -1,3 +1,7 @@
+# distributions3 (development version)
+
+* Added support for the (Type I) Pareto distribution (@paulnorthrop, PR #57)
+
 # distributions 0.1.1
 
 * Rename to `distributions3` for CRAN
