@@ -124,7 +124,7 @@ Other continuous distributions: \code{\link{Beta}},
   \code{\link{Exponential}}, \code{\link{FisherF}},
   \code{\link{Gamma}}, \code{\link{LogNormal}},
   \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{Pareto}}, \code{\link{Tukey}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}
