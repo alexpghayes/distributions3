@@ -74,6 +74,9 @@ test_that("quantile.Laplace works correctly", {
 
   expect_length(quantile(L, seq_len(0)), 0)
   expect_length(quantile(L, c(0, 1)), 2)
+
+  expect_error(quantile(L, -0.1))
+  expect_error(quantile(L, -1.1))
 })
 
 test_that("cdf.Laplace and quantile.Laplace are consistent", {
