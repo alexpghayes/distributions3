@@ -73,6 +73,9 @@ test_that("quantile.Pareto work correctly", {
 
   expect_length(quantile(P, seq_len(0)), 0)
   expect_length(quantile(P, c(0, 1)), 2)
+
+  expect_error(quantile(L, -0.1))
+  expect_error(quantile(L, -1.1))
 })
 
 test_that("cdf.Pareto and quantile.Pareto are consistent", {
