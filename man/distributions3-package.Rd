@@ -33,6 +33,7 @@ Other contributors:
 \itemize{
   \item Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (0000-0002-0679-1945) [contributor]
   \item Daniel Jordan \email{dandermotj@gmail.com} [contributor]
+  \item Paul Northrop \email{p.northrop@ucl.ac.uk} [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} [contributor]
 }
 

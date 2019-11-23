@@ -61,7 +61,7 @@
 #'   \deqn{
 #'     E(e^{tX}) = \exp(\theta t) / (1 - \phi^2 t^2)
 #'   }{
-#'     E(e^{tX}) = exp(\theta t) / (1 - \phi^2 t^2)
+#'     E(e^(tX)) = exp(\theta t) / (1 - \phi^2 t^2)
 #'   }
 #'   for \eqn{|t| < 1 / \phi}.
 #' @examples
