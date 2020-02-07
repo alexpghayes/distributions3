@@ -111,17 +111,18 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
     plot_df$y <- pdf(d, plot_df$x)
 
     out_plot <- ggplot(data = plot_df,
-                    aes(x = x, y = y)) +
+                       aes(x = x, y = y)) +
       geom_bar(stat = 'identity', width = 1,
-                        aes(color = I("black"),
-                            fill = I("grey50"))) +
+               aes(color = I("black"),
+                   fill = I("grey50"))) +
+      #xlab("x") +
       plot_theme()
   }
 
   if(class(d)[1] %in% c('Beta', 'Cauchy', 'ChiSquare', 'Exponential',
                         'FisherF', 'Gamma', 'Logistic', 'LogNormal',
                         'Normal', 'StudentsT', 'Tukey', 'Uniform', 'Weibull')){
-    plot_df <- data.frame(x = seq(limits[1], limits[2], by = 0.001))
+    plot_df <- data.frame(x = seq(limits[1], limits[2], length.out = 5000))
     plot_df$y <- pdf(d, plot_df$x)
 
     out_plot <- ggplot(data = plot_df,
@@ -134,3 +135,42 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
 }
 
+#' Stat for Area Under Curve
+#'
+#' @export
+StatAUC <- ggplot2::ggproto("StatAUC", ggplot2::Stat,
+                            compute_group = function(data, scales, from = from, to = to) {
+                              data[data$x < from | data$x > to, 'y'] <- 0
+
+                              return(data)
+                            },
+
+                            required_aes = c("x", "y")
+)
+
+#' Fill out area under the curve
+#'
+#' @param from Left end-point of interval
+#' @param to right end-point of interval
+#' @inheritParams ggplot2::layer
+#' @inheritParams ggplot2::geom_area
+#'
+#' @export
+#'
+#' @examples
+#'
+#' X <- Normal()
+#'
+#' plot_pdf(X) + geom_auc(to = -0.645)
+#' plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
+geom_auc <- function(mapping = NULL, data = NULL,
+                     position = "identity", na.rm = FALSE, show.legend = NA,
+                     inherit.aes = TRUE,
+                     from = -Inf, to = Inf,
+                     ...){
+  ggplot2::layer(
+    stat = StatAUC, geom = GeomArea, data = data, mapping = mapping,
+    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
+    params = list(na.rm = na.rm, from = from, to = to, ...)
+  )
+}
