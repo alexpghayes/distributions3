@@ -88,7 +88,7 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 #'
 #' @export
 plot_pdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = ggplot2::theme_minimal){
+                     plot_theme = ggplot2::theme_bw){
 
   if(!"ggplot2" %in% loadedNamespaces())
     stop("You must load ggplot2 for this function to work.")
