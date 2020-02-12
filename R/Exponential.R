@@ -143,3 +143,18 @@ suff_stat.Exponential <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), samples = length(x))
 }
+
+#' Return the support of the Exponential distribution
+#'
+#' @param d An `Exponential` object created by a call to [Exponential()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Exponential <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
+}

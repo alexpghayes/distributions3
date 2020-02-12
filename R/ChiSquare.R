@@ -177,3 +177,16 @@ quantile.ChiSquare <- function(d, p, ...) {
 
   qchisq(p = p, df = d$df)
 }
+
+
+#' Return the support of the ChiSquare distribution
+#'
+#' @param d An `ChiSquare` object created by a call to [ChiSquare()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.ChiSquare <- function(d){
+  c(0, Inf)
+}
+

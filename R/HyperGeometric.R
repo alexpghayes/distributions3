@@ -30,7 +30,7 @@
 #'   In the following, let \eqn{X} be a HyperGeometric random variable with
 #'   success probability `p` = \eqn{p = m/(m+n)}.
 #'
-#'   **Support**: \eqn{x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}}
+#'   **Support**: \eqn{x \in { \{\max{(0, k-n)}, \dots, \min{(k,m)}}\}}
 #'
 #'   **Mean**: \eqn{\frac{km}{n+m} = kp}
 #'
@@ -69,6 +69,9 @@
 #' cdf(X, 4)
 #' quantile(X, 0.7)
 HyperGeometric <- function(m, n, k) {
+  if(k > n + m)
+    stop(glue::glue("k ({k}) cannot be greater than m + n ({m} + {n} = {m+n})"))
+
   d <- list(m = m, n = n, k = k)
   class(d) <- c("HyperGeometric", "distribution")
   d
@@ -166,3 +169,16 @@ cdf.HyperGeometric <- function(d, x, ...) {
 quantile.HyperGeometric <- function(d, p, ...) {
   qhyper(p = p, m = d$m, n = d$n, k = d$k)
 }
+
+
+#' Return the support of the HyperGeometric distribution
+#'
+#' @param d An `HyperGeometric` object created by a call to [HyperGeometric()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.HyperGeometric <- function(d){
+  c(max(0, d$k - d$n), min(d$m, d$k))
+}
+

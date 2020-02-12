@@ -187,3 +187,19 @@ suff_stat.Poisson <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))
 }
+
+
+#' Return the support of the Poisson distribution
+#'
+#' @param d An `Poisson` object created by a call to [Poisson()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Poisson <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
+}

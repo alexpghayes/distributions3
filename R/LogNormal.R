@@ -31,7 +31,11 @@
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   \deqn{f(x) = \frac{1}{x\sigma\sqrt{2\pi}}\exp(-\frac{(\log x - \mu)^2}{2\sigma^2})}
+#'   \deqn{
+#'     f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp \left(-\frac{(\log x - \mu)^2}{2 \sigma^2} \right)
+#'   }{
+#'     f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp (-\frac{(\log x - \mu)^2}{2 \sigma^2})
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
@@ -184,4 +188,19 @@ suff_stat.LogNormal <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` must be a vector of positive real numbers")
   log_x <- log(x)
   list(mu = mean(log_x), sigma = sd(log_x), samples = length(x))
+}
+
+#' Return the support of the LogNormal distribution
+#'
+#' @param d An `LogNormal` object created by a call to [LogNormal()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.LogNormal <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

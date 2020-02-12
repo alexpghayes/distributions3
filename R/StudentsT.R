@@ -223,3 +223,17 @@ cdf.StudentsT <- function(d, x, ...) {
 quantile.StudentsT <- function(d, p, ...) {
   qt(p = p, df = d$df)
 }
+
+
+#' Return the support of the StudentsT distribution
+#'
+#' @param d An `StudentsT` object created by a call to [StudentsT()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.StudentsT <- function(d){
+  return(c(-Inf, Inf))
+}
+
+

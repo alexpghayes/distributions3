@@ -35,6 +35,8 @@
 #'
 #'   \deqn{
 #'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'   }{
+#'      f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
 #'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
@@ -44,6 +46,8 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
+#'      \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+#'   }{
 #'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
 #'   }
 #'
@@ -152,4 +156,20 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #'
 quantile.NegativeBinomial <- function(d, p, ...) {
   qnbinom(p = p, size = d$size, prob = d$p)
+}
+
+
+#' Return the support of the NegativeBinomial distribution
+#'
+#' @param d An `NegativeBinomial` object created by a call to [NegativeBinomial()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.NegativeBinomial <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

@@ -113,3 +113,15 @@ cdf.Beta <- function(d, x, ...) {
 quantile.Beta <- function(d, p, ...) {
   qbeta(p = p, shape1 = d$alpha, shape2 = d$beta)
 }
+
+
+#' Return the support of the Beta distribution
+#'
+#' @param d An `Beta` object created by a call to [Beta()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Beta <- function(d){
+  return(c(0, 1))
+}
