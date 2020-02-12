@@ -55,7 +55,7 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
-#'     E(e^{tX}) = (\sum_{i=1}^k p_i e^{t_i} )^n
+#'     E(e^{tX}) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
 #'   }{
 #'     E(e^(tX)) = (p_1 e^t_1 + p_2 e^t_2 + ... + p_k e^t_k)^n
 #'   }
@@ -80,7 +80,17 @@ Multinomial <- function(size, p) {
 
 #' @export
 print.Multinomial <- function(x, ...) {
-  cat(glue("Multinomial distribution (size = {x$size}, p = {x$p})\n"))
+  num_categories <- length(x$p)
+
+  if (num_categories > 3) {
+    p <- paste(
+      c(round(x$p, 3)[1:2], "...", round(x$p, 3)[num_categories]),
+      collapse = ", "
+    )
+  } else {
+    p <- paste(round(x$p, 3), collapse = ", ")
+  }
+  cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])\n"))
 }
 
 #' Draw a random sample from a Multinomial distribution
@@ -98,7 +108,7 @@ print.Multinomial <- function(x, ...) {
 #' @export
 #'
 random.Multinomial <- function(d, n = 1L, ...) {
-  rmultinom(n = n, size = d$size, prob = d$size)
+  rmultinom(n = n, size = d$size, prob = d$p)
 }
 
 #' Evaluate the probability mass function of a Multinomial distribution
@@ -121,11 +131,11 @@ random.Multinomial <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size)
+  dmultinom(x = x, size = d$size, prob = d$p)
 }
 
 #' @rdname pdf.Multinomial
 #' @export
 log_pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size, log = TRUE)
+  dmultinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }

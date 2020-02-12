@@ -294,3 +294,18 @@ suff_stat.Normal <- function(d, x, ...) {
   if (!valid_x) stop("`x` must be a numeric vector")
   list(mu = mean(x), sigma = sd(x), samples = length(x))
 }
+
+#' Return the support of the Normal distribution
+#'
+#' @param d An `Normal` object created by a call to [Normal()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Normal <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
+}

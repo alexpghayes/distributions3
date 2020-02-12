@@ -45,10 +45,9 @@ quantile(X, 0.7)
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{Exponential}}, \code{\link{Gamma}},
+  \code{\link{LogNormal}}, \code{\link{Logistic}},
+  \code{\link{Normal}}, \code{\link{StudentsT}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

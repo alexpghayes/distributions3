@@ -36,7 +36,7 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a HyperGeometric random variable with
 success probability \code{p} = \eqn{p = m/(m+n)}.
 
-\strong{Support}: \eqn{x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}}
+\strong{Support}: \eqn{x \in { \{\max{(0, k-n)}, \dots, \min{(k,m)}}\}}
 
 \strong{Mean}: \eqn{\frac{km}{n+m} = kp}
 

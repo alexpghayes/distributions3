@@ -198,3 +198,15 @@ suff_stat.Geometric <- function(d, x, ...) {
   }
   list(trials = sum(x), experiments = length(x))
 }
+
+#' Return the support of the Geometric distribution
+#'
+#' @param d An `Geometric` object created by a call to [Geometric()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Geometric <- function(d){
+  c(0, Inf)
+}
+

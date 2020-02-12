@@ -206,3 +206,17 @@ suff_stat.Binomial <- function(d, x, ...) {
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)
 }
+
+
+#' Return the support of the Binomial distribution
+#'
+#' @param d An `Binomial` object created by a call to [Binomial()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Binomial <- function(d){
+
+  return(c(0, d$size))
+}
+
