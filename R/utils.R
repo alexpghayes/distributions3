@@ -188,7 +188,7 @@ geom_auc <- function(mapping = NULL, data = NULL,
 #' the two.
 #'
 #' @export
-quantile.default <- function(d, p, ...){
+quantile.default <- function(d, p, names = FALSE, ...){
   args <- list(...)
 
   if(!is.null(args[["x"]])){
@@ -202,5 +202,5 @@ quantile.default <- function(d, p, ...){
   }
 
   do.call(stats:::quantile.default,
-          args = c(list(x = d, probs = p), args))
+          args = c(list(x = d, probs = p, names = names), args))
 }
