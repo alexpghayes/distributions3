@@ -4,8 +4,11 @@
 \alias{quantile.default}
 \title{Use stats::quantile if passing non-distribution object}
 \usage{
-quantile.default(x, ...)
+\method{quantile}{default}(d, p, ...)
 }
 \description{
-Use stats::quantile if passing non-distribution object
+This function allows us to use the stats::quantile function along side
+distributions3::quantile. It accepts both the distributions3 style arguments
+(d, p) and stats style arguments (x, probs) as well as any combination of
+the two.
 }

@@ -182,5 +182,25 @@ geom_auc <- function(mapping = NULL, data = NULL,
 
 #' Use stats::quantile if passing non-distribution object
 #'
+#' This function allows us to use the stats::quantile function along side
+#' distributions3::quantile. It accepts both the distributions3 style arguments
+#' (d, p) and stats style arguments (x, probs) as well as any combination of
+#' the two.
+#'
 #' @export
-quantile.default <- stats::quantile
+quantile.default <- function(d, p, ...){
+  args <- list(...)
+
+  if(!is.null(args[["x"]])){
+    d <- args[["x"]]
+    args[["x"]] <- NULL
+  }
+
+  if(!is.null(args[["probs"]])){
+    p <- args[["probs"]]
+    args[["probs"]] <- NULL
+  }
+
+  do.call(stats:::quantile.default,
+          args = c(list(x = d, probs = p), args))
+}
