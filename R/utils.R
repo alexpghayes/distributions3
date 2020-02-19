@@ -133,8 +133,8 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
   out_plot$mapping$d <- class(d)[1]
 
-  for(i in seq_along(X))
-    out_plot$mapping[[paste0("param", i)]] <- X[[i]]
+  for(i in seq_along(d))
+    out_plot$mapping[[paste0("param", i)]] <- d[[i]]
 
   return(out_plot)
 }
@@ -148,8 +148,7 @@ StatAUC <- ggplot2::ggproto(
     data[data$x < from | data$x > to, 'y'] <- 0
 
     return(data)
-  },
-  required_aes = c("x", "y")
+  }
 )
 
 
@@ -205,10 +204,10 @@ geom_auc <- function(mapping = NULL, data = NULL,
 geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){
   out <- geom_auc(from = from, to = to, ...)
 
-  n_params <- sum(stringr::str_detect(names(mapping), "param"))
+  n_params <- sum(stringr::str_detect(names(out$mapping), "param"))
 
-  d <- do.call(eval(parse(text = paste0("function(...) ", mapping$d, "(...)"))),
-               args = purrr::map(paste0("param", 1:n_params), function(x) mapping[[x]]))
+  d <- do.call(eval(parse(text = paste0("function(...) ", out$mapping$d, "(...)"))),
+               args = purrr::map(paste0("param", 1:n_params), function(x) out$mapping[[x]]))
 
   lab <- paste0("P(", from, "< X < ", to, ") = ", round(cdf(d, to) - cdf(d, from), digits = digits))
 
@@ -223,3 +222,9 @@ geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){
 
   return(out)
 }
+
+
+#' Use stats::quantile if passing non-distribution object
+#'
+#' @export
+quantile.default <- stats::quantile
