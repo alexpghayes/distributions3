@@ -179,50 +179,6 @@ geom_auc <- function(mapping = NULL, data = NULL,
 }
 
 
-#' Show probabilities as area under curve
-#'
-#' A function that let's us draw area under curve, and with option to annotate plot
-#' with P(from < X < to).
-#'
-#' @param from Left end-point of interval
-#' @param to right end-point of interval
-#' @param digits number of digits to include when printing probability
-#' @param annotate logical. If FALSE (default), the probability is not shown on plot.
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_auc
-#'
-#' @export
-#'
-#' @examples
-#'
-#' X <- Normal()
-#'
-#' plot_pdf(X) + geom_prob(to = -0.645)
-#' plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
-#'
-#' @export
-geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){
-  out <- geom_auc(from = from, to = to, ...)
-
-  n_params <- sum(stringr::str_detect(names(out$mapping), "param"))
-
-  d <- do.call(eval(parse(text = paste0("function(...) ", out$mapping$d, "(...)"))),
-               args = purrr::map(paste0("param", 1:n_params), function(x) out$mapping[[x]]))
-
-  lab <- paste0("P(", from, "< X < ", to, ") = ", round(cdf(d, to) - cdf(d, from), digits = digits))
-
-  if(annotate){
-    out <- list(
-      out,
-      geom_text(x = -Inf, y = Inf,
-                label = lab,
-                hjust = -0.1, vjust = 2)
-    )
-  }
-
-  return(out)
-}
-
 
 #' Use stats::quantile if passing non-distribution object
 #'
