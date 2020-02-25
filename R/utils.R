@@ -29,11 +29,14 @@ is_distribution <- function(x) {
 #'
 #' @export
 plot_cdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = ggplot2::theme_minimal){
+                     plot_theme = NULL){
 
-#  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-#    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
-#  }
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
+  }
+  if (is.null(plot_theme)) {
+    plot_theme <- ggplot2::theme_minimal
+  }
   if(is.null(limits))
     limits <- support(d)
 
@@ -88,11 +91,14 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 #'
 #' @export
 plot_pdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = ggplot2::theme_bw){
+                     plot_theme = NULL){
 
-#  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-#    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
-#  }
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
+  }
+  if (is.null(plot_theme)) {
+    plot_theme <- ggplot2::theme_bw
+  }
   if(is.null(limits))
     limits <- support(d)
 
