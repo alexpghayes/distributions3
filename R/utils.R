@@ -171,8 +171,8 @@ StatAUC <- ggplot2::ggproto(
 #'
 #' X <- Normal()
 #'
-#' plot_pdf(X) + geom_auc(to = -0.645)
-#' plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
+#' #plot_pdf(X) + geom_auc(to = -0.645)
+#' #plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
 geom_auc <- function(mapping = NULL, data = NULL,
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, from = -Inf, to = Inf,
@@ -203,8 +203,8 @@ geom_auc <- function(mapping = NULL, data = NULL,
 #'
 #' X <- Normal()
 #'
-#' plot_pdf(X) + geom_prob(to = -0.645)
-#' plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
+#' #plot_pdf(X) + geom_prob(to = -0.645)
+#' #plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
 #'
 #' @export
 geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){

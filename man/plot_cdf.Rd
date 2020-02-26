@@ -4,8 +4,7 @@
 \alias{plot_cdf}
 \title{Plot the CDF of a distribution}
 \usage{
-plot_cdf(d, limits = NULL, p = 0.001,
-  plot_theme = ggplot2::theme_minimal)
+plot_cdf(d, limits = NULL, p = 0.001, plot_theme = NULL)
 }
 \arguments{
 \item{d}{A \code{distribution} object}
