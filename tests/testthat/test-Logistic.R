@@ -5,7 +5,6 @@ test_that("print.Logistic works", {
 })
 
 test_that("likelihood.Logistic and log_likelihood.Logistic work correctly", {
-
   cau <- Logistic()
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.Logistic and log_likelihood.Logistic work correctly", {
 
   expect_equal(log_likelihood(cau, 1), log(dlogis(1)))
   expect_equal(log_likelihood(cau, x), log(dlogis(1) * dlogis(1) * dlogis(0)))
-
 })
 
 test_that("random.Logistic work correctly", {
-
   cau <- Logistic()
 
   expect_length(random(cau), 1)
@@ -28,7 +25,6 @@ test_that("random.Logistic work correctly", {
 })
 
 test_that("pdf.Logistic work correctly", {
-
   cau <- Logistic()
 
   expect_equal(pdf(cau, 0), dlogis(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.Logistic work correctly", {
 })
 
 test_that("log_pdf.Logistic work correctly", {
-
   cau <- Logistic()
 
   expect_equal(log_pdf(cau, 0), log(dlogis(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.Logistic work correctly", {
 })
 
 test_that("cdf.Logistic work correctly", {
-
   cau <- Logistic()
 
   expect_equal(cdf(cau, 0), plogis(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.Logistic work correctly", {
 })
 
 test_that("quantile.Logistic work correctly", {
-
   cau <- Logistic()
 
   expect_equal(quantile(cau, 0), qlogis(0, 0, 1))

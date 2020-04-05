@@ -21,16 +21,16 @@ distribution. When the shape parameter is \code{1}, the Gamma is an
 exponential distribution with parameter \eqn{1/\beta}. When the
 \eqn{shape = n/2} and \eqn{rate = 1/2}, the Gamma is a equivalent to
 a chi squared distribution with n degrees of freedom. Moreover, if
-we have \eqn{X_1 \sim Gamma(\alpha_1, \beta)} and
-\eqn{X_2 \sim Gamma(\alpha_2, \beta)}, a function of these two variables
-of the form \eqn{\frac{X_1}{X_1 + X_2} \sim Beta(\alpha_1, \alpha_2)}.
+we have \eqn{X_1} is \eqn{Gamma(\alpha_1, \beta)} and
+\eqn{X_2} is \eqn{Gamma(\alpha_2, \beta)}, a function of these two variables
+of the form \eqn{\frac{X_1}{X_1 + X_2}} \eqn{Beta(\alpha_1, \alpha_2)}.
 This last property frequently appears in another distributions, and it
 has extensively been used in multivariate methods. More about the Gamma
 distribution will be added soon.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail.
 
 In the following, let \eqn{X} be a Gamma random variable
@@ -70,6 +70,8 @@ with parameters
 }
 \examples{
 
+set.seed(27)
+
 X <- Gamma(5, 2)
 X
 
@@ -83,14 +85,15 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{LogNormal}}, \code{\link{Logistic}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
+  \code{\link{Logistic}}, \code{\link{Normal}},
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
   \code{\link{Tukey}}, \code{\link{Uniform}},
   \code{\link{Weibull}}
 }

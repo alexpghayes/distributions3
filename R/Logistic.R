@@ -1,11 +1,14 @@
 #' Create a Logistic distribution
 #'
-#' TODO
+#' A continuous distribution on the real line. For binary outcomes
+#' the model given by \eqn{P(Y = 1 | X) = F(X \beta)} where
+#' \eqn{F} is the Logistic [cdf()] is called *logistic regression*.
 #'
-#' be sure to include connection to logistic regression
+#' @param location The location parameter for the distribution. For Logistic
+#'   distributions, the location parameter is the mean, median and also mode.
+#'   Defaults to zero.
 #'
-#' @param location TODO
-#' @param scale TODO
+#' @param scale The scale parameter for the distribution. Defaults to one.
 #'
 #' @return A `Logistic` object.
 #' @export
@@ -15,33 +18,47 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Logistic random variable with
-#'   success probability `p` = \eqn{p}.
+#'   `location` = \eqn{\mu} and `scale` = \eqn{s}.
 #'
-#'   TODO: multiple parameterizations BLEH
+#'   **Support**: \eqn{R}, the set of all real numbers
 #'
-#'   **Support**: TODO
+#'   **Mean**: \eqn{\mu}
 #'
-#'   **Mean**: TODO
-#'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{s^2 \pi^2 / 3}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     f(x) = \frac{e^{-(\frac{x - \mu}{s})}}{s [1 + \exp(-(\frac{x - \mu}{s})) ]^2}
+#'   }{
+#'     f(x) = e^(-(t - \mu) / s) / (s (1 + e^(-(t - \mu) / s))^2)
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     F(t) = \frac{1}{1 + e^{-(\frac{t - \mu}{s})}}
+#'   }{
+#'     F(t) = 1 / (1 +  e^(-(t - \mu) / s))
+#'   }
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     E(e^{tX}) = e^{\mu t} \beta(1 - st, 1 + st)
+#'   }{
+#'     E(e^(tX)) = = e^(\mu t) \beta(1 - st, 1 + st)
+#'   }
+#'
+#'   where \eqn{\beta(x, y)} is the Beta function.
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Logistic(2, 4)
 #' X
@@ -53,7 +70,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Logistic <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
   class(d) <- c("Logistic", "distribution")
@@ -63,7 +79,7 @@ Logistic <- function(location = 0, scale = 1) {
 #' @export
 print.Logistic <- function(x, ...) {
   cat(
-    glue("Logistic distribution (location = {x$location}, scale = {x$scale})")
+    glue("Logistic distribution (location = {x$location}, scale = {x$scale})\n")
   )
 }
 
@@ -149,4 +165,19 @@ cdf.Logistic <- function(d, x, ...) {
 #'
 quantile.Logistic <- function(d, p, ...) {
   qlogis(p = p, location = d$location, scale = d$scale)
+}
+
+#' Return the support of the Logistic distribution
+#'
+#' @param d An `Logistic` object created by a call to [Logistic()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Logistic <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
 }

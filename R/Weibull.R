@@ -1,7 +1,11 @@
 #' Create a Weibull distribution
 #'
-#' @param shape TODO
-#' @param scale TODO
+#' Generalization of the gamma distribution. Often used in survival and
+#' time-to-event analyses.
+#'
+#' @param shape The shape parameter \eqn{k}. Can be any positive real number.
+#' @param scale The scale parameter \eqn{\lambda}. Can be any positive real
+#'   number.
 #'
 #' @return A `Weibull` object.
 #' @export
@@ -11,31 +15,36 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Weibull random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   **Support**: TODO
+#'   **Support**: \eqn{R^+} and zero.
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is
+#'   the gamma function.
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+ \frac{1}{k}))^2 ]}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     f(x) = \frac{k}{\lambda}(\frac{x}{\lambda})^{k-1}e^{-(x/\lambda)^k}, x \ge 0
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   \deqn{F(x) = 1 - e^{-(x/\lambda)^k}, x \ge 0}
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{\sum_{n=0}^\infty \frac{t^n\lambda^n}{n!} \Gamma(1+n/k), k \ge 1}
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Weibull(0.3, 2)
 #' X
@@ -56,7 +65,7 @@ Weibull <- function(shape, scale) {
 
 #' @export
 print.Weibull <- function(x, ...) {
-  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})"))
+  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})\n"))
 }
 
 #' Draw a random sample from a Weibull distribution
@@ -141,4 +150,20 @@ cdf.Weibull <- function(d, x, ...) {
 #'
 quantile.Weibull <- function(d, p, ...) {
   qweibull(p = p, shape = d$shape, scale = d$scale)
+}
+
+
+#' Return the support of the Weibull distribution
+#'
+#' @param d An `Weibull` object created by a call to [Weibull()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Weibull <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Tukey distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Tukey(4L, 16L, 2L)
 X
 

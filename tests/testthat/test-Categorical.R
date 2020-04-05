@@ -1,7 +1,6 @@
 context("test-Categorical")
 
 test_that("print.Categorical", {
-
   X <- Categorical(1:6)
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))
 
@@ -10,7 +9,6 @@ test_that("print.Categorical", {
 })
 
 test_that("random.Categorical", {
-
   X <- Categorical(1:6)
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))
 
@@ -27,7 +25,6 @@ test_that("random.Categorical", {
 
 
 test_that("pdf.Categorical", {
-
   X <- Categorical(1:6)
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))
 
@@ -52,7 +49,6 @@ test_that("pdf.Categorical", {
 })
 
 test_that("cdf.Categorical", {
-
   X <- Categorical(1:6)
 
   expect_equal(cdf(X, 1), 1 / 6)
@@ -66,11 +62,9 @@ test_that("cdf.Categorical", {
 
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))
   expect_error(cdf(Y, "A"))
-
 })
 
 test_that("quantile.Categorical", {
-
   X <- Categorical(1:6)
 
   expect_equal(cdf(X, 1), 1 / 6)
@@ -79,10 +73,9 @@ test_that("quantile.Categorical", {
   # TODO: later on: cdf() outside of support
 
   expect_length(quantile(X, seq_len(0)), 0)
-  expect_length(quantile(X, 1/6), 1)
+  expect_length(quantile(X, 1 / 6), 1)
   expect_length(quantile(X, (1:10) / 10), 10)
 
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))
   expect_error(quantile(Y, "A"))
 })
-

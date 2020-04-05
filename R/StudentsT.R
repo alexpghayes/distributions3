@@ -1,8 +1,13 @@
 #' Create a Student's T distribution
 #'
-#' TODO
+#' The Student's T distribution is closely related to the [Normal()]
+#' distribution, but has heavier tails. As \eqn{\nu} increases to \eqn{\infty},
+#' the Student's T converges to a Normal. The T distribution appears
+#' repeatedly throughout classic frequentist hypothesis testing when
+#' comparing group means.
 #'
-#' @param df Degrees of freedom. Can be any positive number.
+#' @param df Degrees of freedom. Can be any positive number. Often
+#'   called \eqn{\nu} in textbooks.
 #'
 #' @return A `StudentsT` object.
 #' @export
@@ -12,10 +17,10 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a StudentsT random variable with
+#'   In the following, let \eqn{X} be a Students T random variable with
 #'   `df` = \eqn{\nu}.
 #'
 #'   **Support**: \eqn{R}, the set of all real numbers
@@ -27,24 +32,86 @@
 #'
 #'   \deqn{
 #'     \frac{\nu}{\nu - 2}
+#'   }{
+#'     \nu / (\nu - 2)
 #'   }
 #'
 #'   Undefined if \eqn{\nu < 1}, infinite when \eqn{1 < \nu \le 2}.
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     f(x) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu \pi} \Gamma(\frac{\nu}{2})} (1 + \frac{x^2}{\nu} )^{- \frac{\nu + 1}{2}}
+#'   }{
+#'     f(x) = \Gamma((\nu + 1) / 2) / (\sqrt(\nu \pi) \Gamma(\nu / 2)) (1 + x^2 / \nu)^(- (\nu + 1) / 2)
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   Nasty, omitted.
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
+#'   Undefined.
+#'
 #' @examples
 #'
-#' # TODO
+#' set.seed(27)
 #'
+#' X <- StudentsT(3)
+#' X
+#'
+#' random(X, 10)
+#'
+#' pdf(X, 2)
+#' log_pdf(X, 2)
+#'
+#' cdf(X, 4)
+#' quantile(X, 0.7)
+#'
+#' ### example: calculating p-values for two-sided T-test
+#'
+#' # here the null hypothesis is H_0: mu = 3
+#'
+#' # data to test
+#' x <- c(3, 7, 11, 0, 7, 0, 4, 5, 6, 2)
+#' nx <- length(x)
+#'
+#' # calculate the T-statistic
+#' t_stat <- (mean(x) - 3) / (sd(x) / sqrt(nx))
+#' t_stat
+#'
+#' # null distribution of statistic depends on sample size!
+#' T <- StudentsT(df = nx - 1)
+#'
+#' # calculate the two-sided p-value
+#' 1 - cdf(T, abs(t_stat)) + cdf(T, -abs(t_stat))
+#'
+#' # exactly equivalent to the above
+#' 2 * cdf(T, -abs(t_stat))
+#'
+#' # p-value for one-sided test
+#' # H_0: mu <= 3   vs   H_A: mu > 3
+#' 1 - cdf(T, t_stat)
+#'
+#' # p-value for one-sided test
+#' # H_0: mu >= 3   vs   H_A: mu < 3
+#' cdf(T, t_stat)
+#'
+#' ### example: calculating a 88 percent T CI for a mean
+#'
+#' # lower-bound
+#' mean(x) - quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
+#'
+#' # upper-bound
+#' mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
+#'
+#' # equivalent to
+#' mean(x) + c(-1, 1) * quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
+#'
+#' # also equivalent to
+#' mean(x) + quantile(T, 0.12 / 2) * sd(x) / sqrt(nx)
+#' mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
 StudentsT <- function(df) {
   d <- list(df = df)
   class(d) <- c("StudentsT", "distribution")
@@ -53,7 +120,7 @@ StudentsT <- function(df) {
 
 #' @export
 print.StudentsT <- function(x, ...) {
-  cat(glue("Student's T distribution (df = {x$df})"))
+  cat(glue("Student's T distribution (df = {x$df})\n"))
 }
 
 #' Draw a random sample from a StudentsT distribution
@@ -156,3 +223,17 @@ cdf.StudentsT <- function(d, x, ...) {
 quantile.StudentsT <- function(d, p, ...) {
   qt(p = p, df = d$df)
 }
+
+
+#' Return the support of the StudentsT distribution
+#'
+#' @param d An `StudentsT` object created by a call to [StudentsT()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.StudentsT <- function(d){
+  return(c(-Inf, Inf))
+}
+
+

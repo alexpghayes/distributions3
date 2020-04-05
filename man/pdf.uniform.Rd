@@ -26,6 +26,8 @@ Evaluate the probability mass function of a continuous Uniform distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Uniform(1, 2)
 X
 

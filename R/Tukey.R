@@ -1,11 +1,11 @@
 #' Create a Tukey distribution
 #'
-#' Tukey's studentized range distribution, used mostly for Tukey's
-#' honestly significant differences test in ANOVA
+#' Tukey's studentized range distribution, used for Tukey's
+#' honestly significant differences test in ANOVA.
 #'
-#' @param nmeans TODO
-#' @param df TODO
-#' @param nranges TODO
+#' @param nmeans Sample size for each range.
+#' @param df Degrees of freedom.
+#' @param nranges Number of groups being compared.
 #'
 #' @return A `Tukey` object.
 #' @export
@@ -15,33 +15,18 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a Tukey random variable with
-#'   success probability `p` = \eqn{p}.
+#'   **Support**: \eqn{R^+}, the set of positive real numbers.
 #'
-#'   TODO: multiple parameterizations BLEH
-#'
-#'   **Support**: TODO
-#'
-#'   **Mean**: TODO
-#'
-#'   **Variance**: TODO
-#'
-#'   **Probability density function (p.d.f)**:
-#'
-#'   TODO
-#'
-#'   **Cumulative distribution function (c.d.f)**:
-#'
-#'   TODO
-#'
-#'   **Moment generating function (m.g.f)**:
-#'
-#'   TODO
+#'   Other properties of Tukey's Studentized Range Distribution
+#'   are omitted, largely because the distribution is not fun
+#'   to work with.
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Tukey(4L, 16L, 2L)
 #' X
@@ -58,8 +43,11 @@ Tukey <- function(nmeans, df, nranges) {
 #' @export
 print.Tukey <- function(x, ...) {
   cat(
-    glue("Tukey distribution (nmeans = {x$nmeans}",
-         "df = {x$df}, nranges = {x$nranges})"))
+    glue(
+      "Tukey distribution (nmeans = {x$nmeans},",
+      "df = {x$df}, nranges = {x$nranges})\n"
+    )
+  )
 }
 
 #' Evaluate the cumulative distribution function of a Tukey distribution
@@ -98,4 +86,16 @@ cdf.Tukey <- function(d, x, ...) {
 #'
 quantile.Tukey <- function(d, p, ...) {
   qtukey(p = p, nmeans = d$nmeans, df = d$nmeans, nranges = d$nranges)
+}
+
+
+#' Return the support of the Tukey distribution
+#'
+#' @param d An `Tukey` object created by a call to [Tukey()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Tukey <- function(d){
+  return(c(0, Inf))
 }

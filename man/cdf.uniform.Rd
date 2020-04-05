@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a continuous Uniform distributi
 }
 \examples{
 
+set.seed(27)
+
 X <- Uniform(1, 2)
 X
 

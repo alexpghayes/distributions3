@@ -45,7 +45,7 @@ the case of either of following hold:
 2. We have lots of data. How much? Many textbooks use 30 data points
   as a rule of thumb.
 
-Since we have a small sample, we let's check if the data comes from
+Since we have a small sample, we should check if the data comes from
 a normal distribution using a normal quantile-quantile plot.
 
 ```{r}
@@ -92,17 +92,19 @@ z_stat
 
 To calculate a two-sided p-value, we need to find
 
+\[
 \begin{align}
   P(|Z| \ge |2.37|)
   &= P(Z \ge 2.37) + P(Z \le -2.37) \\
   &= 1 - P(Z \le 2.37) + P(Z \le -2.37) \\
   &= 1 - \Phi(2.37) + \Phi(-2.37)
 \end{align}
+\]
 
 To do this we need to c.d.f. of a standard normal
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 Z <- Normal(0, 1)  # make a standard normal r.v.
 1 - cdf(Z, 2.37) + cdf(Z, -2.37)
@@ -124,11 +126,13 @@ You may also have seen a different formula for the p-value of a two-sided
 Z-test, which makes use of the fact that the normal distribution is
 symmetric:
 
+\[
 \begin{align}
   P(|Z| \ge |2.37|)
   &= 2 \cdot P(Z \le -|2.37|) \\
   &= 2 \cdot \Phi(-2.37)
 \end{align}
+\]
 
 Using this formula we get the same result:
 
@@ -138,9 +142,11 @@ Using this formula we get the same result:
 
 Finally, sometimes we are interest in one sided Z-tests. For the test
 
+\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu > 3
 \end{align}
+\]
 
 the p-value is given by
 
@@ -184,17 +190,21 @@ We can think about three different rejection regions for a Z-test:
 
 For a given $\alpha$ level threshold, all of these rejection regions are equivalent. We'll start by thinking about the rejection of a two-sided test. That is
 
+\[
 \begin{align}
 H_0 : \mu = \mu_0 \qquad H_A : \mu \neq \mu_0
 \end{align}
+\]
 
 We then calculate a test statistic $Z_\text{obs}$, and a p-value $P(|Z| > |Z_\text{obs}|)$ and reject when $P(|Z| > |Z_\text{obs}|) < \alpha$. This defines our first rejection region. Using our observation from before, this is exactly equivalent to rejecting when
 
+\[
 \begin{align}
 P(|Z| > |Z_\text{obs}|) < \alpha 
 & \Longleftrightarrow 2 \cdot P(Z < -|Z_\text{obs}|) < \alpha \\
 & \Longleftrightarrow P(Z < -|Z_\text{obs}|) < \alpha / 2
 \end{align}
+\]
 
 and this last statement is exactly the same as when $Z_\text{obs} < z_{\alpha / 2}$ or $z_{1 - \alpha / 2} < Z_\text{obs}$. This is our second region region, in terms of the test statistic. Finally, recall that
 
@@ -204,24 +214,30 @@ and this last statement is exactly the same as when $Z_\text{obs} < z_{\alpha / 
 
 So we take the conditions and rearrange to in terms of $\bar x$
 
+\[
 \begin{align}
 \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} > z_{1 - \alpha / 2}
 & \Longleftrightarrow \bar x > \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}
 \end{align}
+\]
 
 and
 
+\[
 \begin{align}
 \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} < z_{\alpha / 2}
 & \Longleftrightarrow \bar x < \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}
 \end{align}
+\]
 
 You can also think about this in terms of $\mu_0$. We will reject the test when $\mu_0$ is not in 
 
+\[
 \begin{align}
 \left( \bar x + z_{\alpha / 2} \frac{\sigma}{\sqrt n},
   \bar x + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right)
 \end{align}
+\]
 
 which you may recognize as the confidence interval for $\mu$! So the confidence interval contains all the values of $\mu_0$ that we cannot reject at the $\alpha$ level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either $\infty$ or $-\infty$.
 
@@ -243,11 +259,13 @@ Let's consider the case that $H_0$ is false, and in particular the true value of
 
 Remember that $\bar X \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)$. This means that, given $\mu = \mu_A$, $\bar{x} \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)$, which let's us calculate the probabilities we need to find the power:
 
+\[
 \begin{align}
   P\left( \left . \bar{x} > \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right)
   &= P\left( \frac{\bar{x} - \mu_A}{\sigma/\sqrt{n}} > \frac{\mu_0 + z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} - \mu_A}{\sigma/\sqrt{n}} \right) \\
   &= P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right),
 \end{align}
+\]
 
 and similarly
 
@@ -257,14 +275,12 @@ and similarly
 
 So, the power of our test, *if the true population mean is $\mu_A$*, is 
 
+\[
 \begin{align}
-  \text{Power} &= P \left( Z > \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} +
-    z_{1 - \alpha / 2} \right) + 
-    P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} + z_{\alpha/2} \right) \\
-  &= \left(1 - P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} +
-    z_{1 - \alpha / 2} \right) \right) +
-    P \left( Z < \frac{\mu_0 - \mu_A}{\sigma / \sqrt{n}} + z_{\alpha / 2} \right)
+  \text{Power} &= P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
+  &= \left[1 - P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right)\right] + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
 \end{align}
+\]
 
 Let's calculate this if $\mu_A = 5$. 
 
@@ -290,4 +306,48 @@ Often times researchers like to go in the other direction: aim for a specific le
   \right)^2
 \]
 
-samples. If $n$ is not an integer, round up.
+samples. If $n$ is not an integer, round up. Often, the denominator is thought of as the detectable difference. So, the question becomes how many samples are required to have sufficient power to detect a difference of some particular size. 
+
+This equation is simply a rewrite of the equation presented above for power. Recall, the power for a two sided test is 
+
+\[
+\text{Power} = P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\]
+
+Usually, only one of these terms is contributing while the other is very close to zero. Let's say the first term is the one clearly different from zero. To determine the sample size, we want to determine $n$ such that $P\left( Z > \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta$. Or, similarly, $P\left( Z < \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta$. I.e. we need $\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} = z_{\beta}$. 
+
+\[
+\begin{align}
+ z_{\beta} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} & \Longleftrightarrow z_{\beta} - z_{1-\alpha/2} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} \\
+  & \Longleftrightarrow \sigma (z_{\beta} - z_{1-\alpha/2}) = (\mu_0-\mu_A)\sqrt{n} \\
+ & \Longleftrightarrow \frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A} = \sqrt{n} \\
+ & \Longleftrightarrow \left(\frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A}\right)^2 = n
+\end{align}
+\]
+
+Since $z_{1-\alpha/2} = -z_{\alpha/2}$, we have the equation above:
+
+\[
+  \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 = n.
+\]
+
+As an example, say the student prior to the experiment had determined that they wanted to test if the number of memes their professors know and love is 2. They want to make sure their sample size is large enough so that they are likely to reject the null hypothesis if the true number is 3. They determine that they want a probability of 0.9 of rejecting the null if the true number is 3. So, a sample size calculation looks like this:
+
+\[
+  n \approx \left(
+    {
+      2 \cdot (1.96 + 1.28) \over 
+      2-3
+    }
+  \right)^2 = `r round((2*(1.96+1.28)/(2-3))^2, digits = 2)`
+\]
+
+So to make sure that they reject the null hypothesis with a probability of 0.9 if the true value is 3, they would have to ask 53 professors. 
+
+Below is this same calculation done in `R`. Remember, $\beta = 1-\text{Power}$. Note the small descrepency. This is due to rounding error. 
+
+```{r}
+(2 * (quantile(Z, 0.05 / 2) + quantile(Z, 1 - 0.9)) / (3 - 2))^2
+```
+
+

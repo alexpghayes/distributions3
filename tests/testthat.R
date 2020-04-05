@@ -1,4 +1,4 @@
 library(testthat)
-library(distributions)
+library(distributions3)
 
-test_check("distributions")
+test_check("distributions3")

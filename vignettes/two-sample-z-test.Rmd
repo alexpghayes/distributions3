@@ -127,17 +127,19 @@ z_stat
 
 To calculate a two-sided p-value, we need to find
 
+\[
 \begin{align}
   P(|Z| \ge |-0.376|)
   &= P(Z \ge 0.376) + P(Z \le -0.376) \\
   &= 1 - P(Z \le 0.376) + P(Z \le -0.376) \\
   &= 1 - \Phi(0.376) + \Phi(0.376)
 \end{align}
+\]
 
 To do this we need to c.d.f. of a standard normal
 
 ```{r}
-library(distributions)
+library(distributions3)
 
 Z <- Normal(0, 1)  # make a standard normal r.v.
 1 - cdf(Z, 0.376) + cdf(Z, -0.376)
@@ -159,11 +161,13 @@ You may also have seen a different formula for the p-value of a two-sided
 Z-test, which makes use of the fact that the normal distribution is
 symmetric:
 
+\[
 \begin{align}
   P(|Z| \ge |-0.376|)
   &= 2 \cdot P(Z \le -|-0.376|)
   &= 2 \cdot \Phi(-0.376)
 \end{align}
+\]
 
 Using this formula we get the same result:
 
@@ -173,9 +177,11 @@ Using this formula we get the same result:
 
 Finally, sometimes we are interest in one sided Z-tests. For the test
 
+\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu > 3
 \end{align}
+\]
 
 the p-value is given by
 

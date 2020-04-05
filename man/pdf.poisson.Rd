@@ -26,6 +26,8 @@ Evaluate the probability mass function of a Poisson distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Poisson(2)
 X
 

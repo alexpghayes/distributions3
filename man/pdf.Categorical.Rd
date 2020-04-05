@@ -2,9 +2,12 @@
 % Please edit documentation in R/Categorical.R
 \name{pdf.Categorical}
 \alias{pdf.Categorical}
+\alias{log_pdf.Categorical}
 \title{Evaluate the probability mass function of a Categorical discrete distribution}
 \usage{
 \method{pdf}{Categorical}(d, x, ...)
+
+\method{log_pdf}{Categorical}(d, x, ...)
 }
 \arguments{
 \item{d}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
@@ -23,6 +26,8 @@ Evaluate the probability mass function of a Categorical discrete distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Categorical(1:3, p = c(0.4, 0.1, 0.5))
 X
 
@@ -30,11 +35,19 @@ Y <- Categorical(LETTERS[1:4])
 Y
 
 random(X, 10)
+random(Y, 10)
 
-pdf(X, 0.7)
-log_pdf(X, 0.7)
+pdf(X, 1)
+log_pdf(X, 1)
 
-cdf(X, 0.7)
-quantile(X, 0.7)
+cdf(X, 1)
+quantile(X, 0.5)
+\donttest{
+# cdfs are only defined for numeric sample spaces. this errors!
+cdf(Y, "a")
+
+# same for quantiles. this also errors!
+quantile(Y, 0.7)
+}
 
 }

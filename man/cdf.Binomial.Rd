@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Binomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Binomial(10, 0.2)
 X
 
@@ -36,5 +38,4 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }

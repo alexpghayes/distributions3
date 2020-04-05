@@ -22,6 +22,8 @@ Draw a random sample from a continuous Uniform distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Uniform(1, 2)
 X
 

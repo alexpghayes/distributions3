@@ -5,7 +5,6 @@ test_that("print.Uniform works", {
 })
 
 test_that("likelihood.Uniform and log_likelihood.Uniform work correctly", {
-
   u <- Uniform()
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.Uniform and log_likelihood.Uniform work correctly", {
 
   expect_equal(log_likelihood(u, 1), log(dunif(1)))
   expect_equal(log_likelihood(u, x), log(dunif(1) * dunif(1) * dunif(0)))
-
 })
 
 test_that("random.Uniform work correctly", {
-
   u <- Uniform()
 
   expect_length(random(u), 1)
@@ -28,7 +25,6 @@ test_that("random.Uniform work correctly", {
 })
 
 test_that("pdf.Uniform work correctly", {
-
   u <- Uniform()
 
   expect_equal(pdf(u, 0), dunif(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.Uniform work correctly", {
 })
 
 test_that("log_pdf.Uniform work correctly", {
-
   u <- Uniform()
 
   expect_equal(log_pdf(u, 0), log(dunif(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.Uniform work correctly", {
 })
 
 test_that("cdf.Uniform work correctly", {
-
   u <- Uniform()
 
   expect_equal(cdf(u, 0), punif(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.Uniform work correctly", {
 })
 
 test_that("quantile.Uniform work correctly", {
-
   u <- Uniform()
 
   expect_equal(quantile(u, 0), qunif(0, 0, 1))

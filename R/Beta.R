@@ -13,6 +13,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Beta(1, 2)
 #' X
 #'
@@ -31,7 +33,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Beta <- function(alpha = 1, beta = 1) {
   d <- list(alpha = alpha, beta = beta)
   class(d) <- c("Beta", "distribution")
@@ -40,7 +41,7 @@ Beta <- function(alpha = 1, beta = 1) {
 
 #' @export
 print.Beta <- function(x, ...) {
-  cat(glue("Beta distribution (alpha = {x$alpha}, beta = {x$beta})"))
+  cat(glue("Beta distribution (alpha = {x$alpha}, beta = {x$beta})\n"))
 }
 
 #' @export
@@ -142,4 +143,16 @@ cdf.Beta <- function(d, x, ...) {
 #'
 quantile.Beta <- function(d, p, ...) {
   qbeta(p = p, shape1 = d$alpha, shape2 = d$beta)
+}
+
+
+#' Return the support of the Beta distribution
+#'
+#' @param d An `Beta` object created by a call to [Beta()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Beta <- function(d){
+  return(c(0, 1))
 }

@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Bernoulli distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Bernoulli(0.7)
 X
 
@@ -32,9 +34,6 @@ log_pdf(X, 1)
 cdf(X, 0)
 quantile(X, 0.7)
 
-# TODO: make sure these are inverses of each other
-
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
-
 }

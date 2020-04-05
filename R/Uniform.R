@@ -1,6 +1,7 @@
-#' Create a continuous uniform distribution
+#' Create a Continuous Uniform distribution
 #'
-#' TODO: A categorical distribution that can be used for discrete uniforms.
+#' A distribution with constant density on an interval. The
+#' continuous analogue to the [Categorical()] distribution.
 #'
 #' @param a The a parameter. `a` can be any value in the set of real
 #'   numbers. Defaults to `0`.
@@ -14,6 +15,8 @@
 #' @family continuous distributions
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Uniform(1, 2)
 #' X
@@ -31,14 +34,14 @@
 #'
 Uniform <- function(a = 0, b = 1) {
   d <- list(a = a, b = b)
-  class(d) <- "Uniform"
+  class(d) <- c("Uniform", "distribution")
   d
 }
 
 #' @export
 print.Uniform <- function(x, ...) {
-  if(x$a >  x$b) names(x) <- c("b", "a")
-  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"))
+  if (x$a > x$b) names(x) <- c("b", "a")
+  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})\n"))
 }
 
 #' @export
@@ -127,3 +130,17 @@ cdf.Uniform <- function(d, x, ...) {
 quantile.Uniform <- function(d, p, ...) {
   qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
 }
+
+
+#' Return the support of the Uniform distribution
+#'
+#' @param d An `Uniform` object created by a call to [Uniform()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Uniform <- function(d){
+  return(c(d$a, d$b))
+}
+
+

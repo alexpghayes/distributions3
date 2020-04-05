@@ -63,7 +63,7 @@ The idea is that if this number is very small, then our null distribution can't 
 
 ```{r}
 library(ggplot2)
-library(distributions)
+library(distributions3)
 
 z_score <- 1.6
 

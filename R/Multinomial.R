@@ -1,9 +1,17 @@
 #' Create a Multinomial distribution
 #'
+#' The multinomial distribution is a generalization of the binomial
+#' distribution to multiple categories. It is perhaps easiest to think
+#' that we first extend a [Bernoulli()] distribution to include more
+#' than two categories, resulting in a [Categorical()] distribution.
+#' We then extend repeat the Categorical experiment several (\eqn{n})
+#' times.
+#'
 #' @param size The number of trials. Must be an integer greater than or equal
 #'   to one. When `size = 1L`, the Multinomial distribution reduces to the
 #'   categorical distribution (also called the discrete uniform).
 #'   Often called `n` in textbooks.
+#'
 #' @param p A vector of success probabilities for each trial. `p` can
 #'   take on any positive value, and the vector is normalized internally.
 #'
@@ -16,33 +24,45 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a Multinomial random variable with
-#'   success probability `p` = \eqn{p}.
+#'   In the following, let \eqn{X = (X_1, ..., X_k)} be a Multinomial
+#'   random variable with success probability `p` = \eqn{p}. Note that
+#'   \eqn{p} is vector with \eqn{k} elements that sum to one. Assume
+#'   that we repeat the Categorical experiment `size` = \eqn{n} times.
 #'
-#'   TODO: multiple parameterizations BLEH
+#'   **Support**: Each \eqn{X_i} is in \eqn{{0, 1, 2, ..., n}}.
 #'
-#'   **Support**: TODO
+#'   **Mean**: The mean of \eqn{X_i} is \eqn{n p_i}.
 #'
-#'   **Mean**: TODO
+#'   **Variance**: The variance of \eqn{X_i} is \eqn{n p_i (1 - p_i)}.
+#'     For \eqn{i \neq j}, the covariance of \eqn{X_i} and \eqn{X_j}
+#'     is \eqn{-n p_i p_j}.
 #'
-#'   **Variance**: TODO
+#'   **Probability mass function (p.m.f)**:
 #'
-#'   **Probability density function (p.d.f)**:
-#'
-#'   TODO
+#'   \deqn{
+#'     P(X_1 = x_1, ..., X_k = x_k) = \frac{n!}{x_1! x_2! ... x_k!} p_1^{x_1} \cdot p_2^{x_2} \cdot ... \cdot p_k^{x_k}
+#'   }{
+#'     P(X_1 = x_1, ..., X_k = x_k) = n! / (x_1! x_2! ... x_k!) p_1^x_1 p_2^x_2 ... p_k^x_k
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   Omitted for multivariate random variables for the time being.
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     E(e^{tX}) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
+#'   }{
+#'     E(e^(tX)) = (p_1 e^t_1 + p_2 e^t_2 + ... + p_k e^t_k)^n
+#'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Multinomial(size = 5, p = c(0.3, 0.4, 0.2, 0.1))
 #' X
@@ -52,7 +72,6 @@
 #' # pdf(X, 2)
 #' # log_pdf(X, 2)
 #'
-#'
 Multinomial <- function(size, p) {
   d <- list(size = size, p = p)
   class(d) <- c("Multinomial", "multivariate", "distribution")
@@ -61,7 +80,17 @@ Multinomial <- function(size, p) {
 
 #' @export
 print.Multinomial <- function(x, ...) {
-  cat(glue("Multinomial distribution (size = {x$size}, p = {x$p})"))
+  num_categories <- length(x$p)
+
+  if (num_categories > 3) {
+    p <- paste(
+      c(round(x$p, 3)[1:2], "...", round(x$p, 3)[num_categories]),
+      collapse = ", "
+    )
+  } else {
+    p <- paste(round(x$p, 3), collapse = ", ")
+  }
+  cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])\n"))
 }
 
 #' Draw a random sample from a Multinomial distribution
@@ -79,7 +108,7 @@ print.Multinomial <- function(x, ...) {
 #' @export
 #'
 random.Multinomial <- function(d, n = 1L, ...) {
-  rmultinom(n = n, size = d$size, prob = d$size)
+  rmultinom(n = n, size = d$size, prob = d$p)
 }
 
 #' Evaluate the probability mass function of a Multinomial distribution
@@ -102,11 +131,11 @@ random.Multinomial <- function(d, n = 1L, ...) {
 #' @export
 #'
 pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size)
+  dmultinom(x = x, size = d$size, prob = d$p)
 }
 
 #' @rdname pdf.Multinomial
 #' @export
 log_pdf.Multinomial <- function(d, x, ...) {
-  dmultinom(x = x, size = d$size, prob = d$size, log = TRUE)
+  dmultinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }

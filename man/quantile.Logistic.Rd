@@ -22,6 +22,8 @@ Determine quantiles of a Logistic distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Logistic(2, 4)
 X
 
@@ -32,7 +34,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Logistic distribution: \code{\link{cdf.Logistic}},

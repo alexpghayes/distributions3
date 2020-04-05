@@ -5,7 +5,6 @@ test_that("print.Cauchy works", {
 })
 
 test_that("likelihood.Cauchy and log_likelihood.Cauchy work correctly", {
-
   cau <- Cauchy()
   x <- c(1, 1, 0)
 
@@ -14,11 +13,9 @@ test_that("likelihood.Cauchy and log_likelihood.Cauchy work correctly", {
 
   expect_equal(log_likelihood(cau, 1), log(dcauchy(1)))
   expect_equal(log_likelihood(cau, x), log(dcauchy(1) * dcauchy(1) * dcauchy(0)))
-
 })
 
 test_that("random.Cauchy work correctly", {
-
   cau <- Cauchy()
 
   expect_length(random(cau), 1)
@@ -28,7 +25,6 @@ test_that("random.Cauchy work correctly", {
 })
 
 test_that("pdf.Cauchy work correctly", {
-
   cau <- Cauchy()
 
   expect_equal(pdf(cau, 0), dcauchy(0, 0, 1))
@@ -40,7 +36,6 @@ test_that("pdf.Cauchy work correctly", {
 })
 
 test_that("log_pdf.Cauchy work correctly", {
-
   cau <- Cauchy()
 
   expect_equal(log_pdf(cau, 0), log(dcauchy(0, 0, 1)))
@@ -52,7 +47,6 @@ test_that("log_pdf.Cauchy work correctly", {
 })
 
 test_that("cdf.Cauchy work correctly", {
-
   cau <- Cauchy()
 
   expect_equal(cdf(cau, 0), pcauchy(0, 0, 1))
@@ -65,7 +59,6 @@ test_that("cdf.Cauchy work correctly", {
 })
 
 test_that("quantile.Cauchy work correctly", {
-
   cau <- Cauchy()
 
   expect_equal(quantile(cau, 0), qcauchy(0, 0, 1))

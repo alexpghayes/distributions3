@@ -18,18 +18,16 @@ The Geometric distribution can be thought of as a generalization
 of the \code{\link[=Bernoulli]{Bernoulli()}} distribution where we ask: "if I keep flipping a
 coin with probability \code{p} of heads, what is the probability I need
 \eqn{k} flips before I get my first heads?" The Geometric
-distribution is a special case of Negative Binomial distribution
-with parameters TODO.
+distribution is a special case of Negative Binomial distribution.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Geometric random variable with
-success probability \code{p} = \eqn{p}.
-
-TODO: multiple parameterizations BLEH (ignore it?)
+success probability \code{p} = \eqn{p}. Note that there are multiple
+parameterizations of the Geometric distribution.
 
 \strong{Support}: 0 < p < 1, \eqn{x = 0, 1, \dots}
 
@@ -58,6 +56,8 @@ TODO: multiple parameterizations BLEH (ignore it?)
   }
 }
 \examples{
+
+set.seed(27)
 
 X <- Geometric(0.3)
 X

@@ -21,6 +21,8 @@ Create a Beta distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Beta(1, 2)
 X
 
@@ -34,14 +36,15 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Cauchy}},
   \code{\link{ChiSquare}}, \code{\link{Exponential}},
-  \code{\link{FisherF}}, \code{\link{Gamma}},
-  \code{\link{LogNormal}}, \code{\link{Logistic}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
+  \code{\link{Frechet}}, \code{\link{GEV}},
+  \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
+  \code{\link{Logistic}}, \code{\link{Normal}},
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
   \code{\link{Tukey}}, \code{\link{Uniform}},
   \code{\link{Weibull}}
 }

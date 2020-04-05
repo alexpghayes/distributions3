@@ -1,10 +1,12 @@
 #' Create a Negative Binomial distribution
 #'
-#' TODO
+#' A generalization of the geometric distribution. It is the number
+#' of successes in a sequence of i.i.d. Bernoulli trials before
+#' a specified number (\eqn{r}) of failures occurs.
 #'
-#' @param size The number of trials. Must be an integer greater than or equal
-#'   to one. When `size = 1L`, the binomial distribution reduces to the
-#'   bernoulli distribution. Oftened called `n` in textbooks.
+#'
+#' @param size The number of failures (an integer greater than \eqn{0})
+#'   until the experiment is stopped. Denoted \eqn{r} below.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
 #'
@@ -16,33 +18,42 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Negative Binomial random variable with
 #'   success probability `p` = \eqn{p}.
 #'
-#'   TODO: multiple parameterizations BLEH
 #'
-#'   **Support**: TODO
+#'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\frac{p r}{1-p}}
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\frac{pr}{(1-p)^2}}
 #'
-#'   **Probability density function (p.d.f)**:
+#'   **Probability mass function (p.m.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'   }{
+#'      f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
+#'   Too nasty, ommited.
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'      \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+#'   }{
+#'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
+#'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- NegativeBinomial(10, 0.3)
 #' X
@@ -54,7 +65,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 NegativeBinomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- c("NegativeBinomial", "distribution")
@@ -63,7 +73,7 @@ NegativeBinomial <- function(size, p = 0.5) {
 
 #' @export
 print.NegativeBinomial <- function(x, ...) {
-  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})"))
+  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})\n"))
 }
 
 #' Draw a random sample from a negative binomial distribution
@@ -146,4 +156,20 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #'
 quantile.NegativeBinomial <- function(d, p, ...) {
   qnbinom(p = p, size = d$size, prob = d$p)
+}
+
+
+#' Return the support of the NegativeBinomial distribution
+#'
+#' @param d An `NegativeBinomial` object created by a call to [NegativeBinomial()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.NegativeBinomial <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

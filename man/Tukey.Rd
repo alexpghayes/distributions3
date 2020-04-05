@@ -7,48 +7,33 @@
 Tukey(nmeans, df, nranges)
 }
 \arguments{
-\item{nmeans}{TODO}
+\item{nmeans}{Sample size for each range.}
 
-\item{df}{TODO}
+\item{df}{Degrees of freedom.}
 
-\item{nranges}{TODO}
+\item{nranges}{Number of groups being compared.}
 }
 \value{
 A \code{Tukey} object.
 }
 \description{
-Tukey's studentized range distribution, used mostly for Tukey's
-honestly significant differences test in ANOVA
+Tukey's studentized range distribution, used for Tukey's
+honestly significant differences test in ANOVA.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
-In the following, let \eqn{X} be a Tukey random variable with
-success probability \code{p} = \eqn{p}.
+\strong{Support}: \eqn{R^+}, the set of positive real numbers.
 
-TODO: multiple parameterizations BLEH
-
-\strong{Support}: TODO
-
-\strong{Mean}: TODO
-
-\strong{Variance}: TODO
-
-\strong{Probability density function (p.d.f)}:
-
-TODO
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-TODO
-
-\strong{Moment generating function (m.g.f)}:
-
-TODO
+Other properties of Tukey's Studentized Range Distribution
+are omitted, largely because the distribution is not fun
+to work with.
 }
 \examples{
+
+set.seed(27)
 
 X <- Tukey(4L, 16L, 2L)
 X
@@ -60,10 +45,11 @@ quantile(X, 0.7)
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{LogNormal}},
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
   \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

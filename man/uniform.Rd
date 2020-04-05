@@ -2,7 +2,7 @@
 % Please edit documentation in R/Uniform.R
 \name{Uniform}
 \alias{Uniform}
-\title{Create a continuous uniform distribution}
+\title{Create a Continuous Uniform distribution}
 \usage{
 Uniform(a = 0, b = 1)
 }
@@ -18,9 +18,12 @@ order of the parameters is inverted. Defaults to \code{1}.}
 A \code{Uniform} object.
 }
 \description{
-TODO: A categorical distribution that can be used for discrete uniforms.
+A distribution with constant density on an interval. The
+continuous analogue to the \code{\link[=Categorical]{Categorical()}} distribution.
 }
 \examples{
+
+set.seed(27)
 
 X <- Uniform(1, 2)
 X
@@ -40,10 +43,11 @@ quantile(X, cdf(X, 0.7))
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{LogNormal}},
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
   \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Weibull}}
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
+  \code{\link{Tukey}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

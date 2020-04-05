@@ -4,8 +4,7 @@
 #' of the [Bernoulli()] distribution where we ask: "if I keep flipping a
 #' coin with probability `p` of heads, what is the probability I need
 #' \eqn{k} flips before I get my first heads?" The Geometric
-#' distribution is a special case of Negative Binomial distribution
-#' with parameters TODO.
+#' distribution is a special case of Negative Binomial distribution.
 #'
 #' @param p The success probability for the distribution. `p` can be
 #'   any value in `[0, 1]`, and defaults to `0.5`.
@@ -18,13 +17,12 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Geometric random variable with
-#'   success probability `p` = \eqn{p}.
-#'
-#'   TODO: multiple parameterizations BLEH (ignore it?)
+#'   success probability `p` = \eqn{p}. Note that there are multiple
+#'   parameterizations of the Geometric distribution.
 #'
 #'   **Support**: 0 < p < 1, \eqn{x = 0, 1, \dots}
 #'
@@ -54,6 +52,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Geometric(0.3)
 #' X
 #'
@@ -73,7 +73,7 @@ Geometric <- function(p = 0.5) {
 
 #' @export
 print.Geometric <- function(x, ...) {
-  cat(glue("Geometric distribution (p = {x$p})"))
+  cat(glue("Geometric distribution (p = {x$p})\n"))
 }
 
 #' Draw a random sample from a Geometric distribution
@@ -193,9 +193,20 @@ fit_mle.Geometric <- function(d, x, ...) {
 #'
 suff_stat.Geometric <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) {
+  if (any(!valid_x)) {
     stop("`x` must be a vector of positive discrete numbers")
   }
   list(trials = sum(x), experiments = length(x))
+}
+
+#' Return the support of the Geometric distribution
+#'
+#' @param d An `Geometric` object created by a call to [Geometric()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Geometric <- function(d){
+  c(0, Inf)
 }
 

@@ -33,7 +33,7 @@ gaussian distribution.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Normal random variable with mean
@@ -78,6 +78,8 @@ list the value of \eqn{\Phi(t)} for various \eqn{t}.
   }
 }
 \examples{
+
+set.seed(27)
 
 X <- Normal(5, 2)
 X
@@ -142,15 +144,15 @@ mean(x) + quantile(Z, 1 - 0.12 / 2) * 2 / sqrt(nx)
 set.seed(27)
 
 # generate a random sample
-Normal_sample <- random(Normal(3, 7), 26)
+ns <- random(Normal(3, 7), 26)
 
 # test if sample is Normal(3, 7)
-ks.test(Normal_sample, pnorm, mean = 3, sd = 7)
+ks.test(ns, pnorm, mean = 3, sd = 7)
 
 # test if sample is gamma(8, 3) using base R pgamma()
-ks.test(Normal_sample, pgamma, shape = 8, rate = 3)
+ks.test(ns, pgamma, shape = 8, rate = 3)
 
-###
+### MISC
 
 # note that the cdf() and quantile() functions are inverses
 cdf(X, quantile(X, 0.7))
@@ -160,10 +162,11 @@ quantile(X, cdf(X, 7))
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{StudentsT}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
+  \code{\link{Logistic}}, \code{\link{RevWeibull}},
+  \code{\link{StudentsT}}, \code{\link{Tukey}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

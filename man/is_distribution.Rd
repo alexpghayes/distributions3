@@ -18,5 +18,4 @@ Z <- Normal()
 
 is_distribution(Z)
 is_distribution(1L)
-
 }

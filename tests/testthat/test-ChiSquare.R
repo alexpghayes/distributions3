@@ -3,7 +3,6 @@ test_that("print.ChiSquare works", {
 })
 
 test_that("random.ChiSquare work correctly", {
-
   cs <- ChiSquare(1)
 
   expect_length(random(cs), 1)
@@ -13,7 +12,6 @@ test_that("random.ChiSquare work correctly", {
 })
 
 test_that("pdf.ChiSquare work correctly", {
-
   cs <- ChiSquare(1)
 
   expect_equal(pdf(cs, 0), Inf)
@@ -26,7 +24,6 @@ test_that("pdf.ChiSquare work correctly", {
 })
 
 test_that("log_pdf.ChiSquare work correctly", {
-
   cs <- ChiSquare(1)
 
   expect_equal(log_pdf(cs, 0), Inf)
@@ -39,7 +36,6 @@ test_that("log_pdf.ChiSquare work correctly", {
 })
 
 test_that("cdf.ChiSquare work correctly", {
-
   cs <- ChiSquare(1)
 
   expect_equal(cdf(cs, 0), 0)
@@ -52,7 +48,6 @@ test_that("cdf.ChiSquare work correctly", {
 })
 
 test_that("quantile.ChiSquare work correctly", {
-
   cs <- ChiSquare(1)
 
   expect_equal(quantile(cs, 0), 0)

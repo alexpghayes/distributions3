@@ -5,20 +5,17 @@ test_that("print.FisherF works", {
 })
 
 test_that("likelihood.FisherF and log_likelihood.FisherF work correctly", {
-
   s <- FisherF(1, 1)
   x <- c(1, 1, 0)
 
   expect_equal(likelihood(s, 1), df(1, 1, 1, 0))
-  expect_equal(likelihood(s, x), df(1, 1, 1, 0) * df(1, 1, 1, 0) *df(0, 1, 1, 0))
+  expect_equal(likelihood(s, x), df(1, 1, 1, 0) * df(1, 1, 1, 0) * df(0, 1, 1, 0))
 
   expect_equal(log_likelihood(s, 1), log(df(1, 1, 1, 0)))
-  expect_equal(log_likelihood(s, x), log(df(1, 1, 1, 0) * df(1, 1, 1, 0) *df(0, 1, 1, 0)))
-
+  expect_equal(log_likelihood(s, x), log(df(1, 1, 1, 0) * df(1, 1, 1, 0) * df(0, 1, 1, 0)))
 })
 
 test_that("random.FisherF work correctly", {
-
   s <- FisherF(1, 1)
 
   expect_length(random(s), 1)
@@ -28,7 +25,6 @@ test_that("random.FisherF work correctly", {
 })
 
 test_that("pdf.FisherF work correctly", {
-
   s <- FisherF(1, 1)
 
   expect_equal(pdf(s, 0), Inf)
@@ -41,7 +37,6 @@ test_that("pdf.FisherF work correctly", {
 })
 
 test_that("log_pdf.FisherF work correctly", {
-
   s <- FisherF(1, 1)
 
   expect_equal(log_pdf(s, 0), Inf)
@@ -54,7 +49,6 @@ test_that("log_pdf.FisherF work correctly", {
 })
 
 test_that("cdf.FisherF work correctly", {
-
   s <- FisherF(1, 1)
 
   expect_equal(cdf(s, 0), pf(0, 1, 1, 0))
@@ -67,7 +61,6 @@ test_that("cdf.FisherF work correctly", {
 })
 
 test_that("quantile.FisherF work correctly", {
-
   s <- FisherF(1, 1)
 
   expect_equal(quantile(s, 0), qf(0, 1, 1, 0))
@@ -77,4 +70,3 @@ test_that("quantile.FisherF work correctly", {
   expect_length(quantile(s, seq_len(0)), 0)
   expect_length(quantile(s, c(0, 1)), 2)
 })
-

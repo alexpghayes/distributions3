@@ -23,6 +23,8 @@ Evaluate the cumulative distribution function of a Geometric distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Geometric(0.3)
 X
 

@@ -22,6 +22,8 @@ Draw a random sample from a Cauchy distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- Cauchy(10, 0.2)
 X
 
@@ -35,5 +37,4 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }

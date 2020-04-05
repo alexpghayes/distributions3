@@ -1,10 +1,20 @@
 #' Create a HyperGeometric distribution
 #'
-#' TODO
+#' To understand the HyperGeometric distribution, consider a set of
+#' \eqn{r} objects, of which \eqn{m} are of the type I and
+#' \eqn{n} are of the type II. A sample with size \eqn{k} (\eqn{k<r})
+#'  with no replacement is randomly chosen. The number of observed
+#'  type I elements observed in this sample is set to be our random
+#'  variable \eqn{X}. For example, consider that in a set of 20
+#'  car parts, there are 4 that are defective (type I).
+#'  If we take a sample of size 5 from those car parts, the
+#'  probability of finding 2 that are defective will be given by
+#'  the HyperGeometric distribution (needs double checking).
 #'
-#' @param m TODO
-#' @param n TODO
-#' @param k TODO
+#'
+#' @param m The number of type I elements available.
+#' @param n The number of type II elements available.
+#' @param k The size of the sample taken.
 #'
 #' @return A `HyperGeometric` object.
 #' @export
@@ -14,31 +24,39 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a HyperGeometric random variable with
-#'   success probability `p` = \eqn{p}.
+#'   success probability `p` = \eqn{p = m/(m+n)}.
 #'
-#'   **Support**: TODO
+#'   **Support**: \eqn{x \in { \{\max{(0, k-n)}, \dots, \min{(k,m)}}\}}
 #'
-#'   **Mean**: TODO
+#'   **Mean**: \eqn{\frac{km}{n+m} = kp}
 #'
-#'   **Variance**: TODO
+#'   **Variance**: \eqn{\frac{km(n)(n+m-k)}{(n+m)^2 (n+m-1)} =
+#'   kp(1-p)(1 - \frac{k-1}{m+n-1})}
 #'
 #'   **Probability mass function (p.m.f)**:
 #'
-#'   TODO
+#'   \deqn{
+#'     P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m+n \choose k}}
+#'   }{
+#'     P(X = x) = \frac{{m \choose x}{n \choose k-x}}{{m+n \choose k}}
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   TODO
-#'
+#'   \deqn{
+#'     P(X \le k) \approx \Phi\Big(\frac{x - kp}{\sqrt{kp(1-p)}}\Big)
+#'  }
 #'   **Moment generating function (m.g.f)**:
 #'
-#'   TODO
+#'   Not useful.
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- HyperGeometric(4, 5, 8)
 #' X
@@ -50,8 +68,10 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 HyperGeometric <- function(m, n, k) {
+  if(k > n + m)
+    stop(glue::glue("k ({k}) cannot be greater than m + n ({m} + {n} = {m+n})"))
+
   d <- list(m = m, n = n, k = k)
   class(d) <- c("HyperGeometric", "distribution")
   d
@@ -59,7 +79,7 @@ HyperGeometric <- function(m, n, k) {
 
 #' @export
 print.HyperGeometric <- function(x, ...) {
-  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})"))
+  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})\n"))
 }
 
 #' Draw a random sample from a HyperGeometric distribution
@@ -148,5 +168,17 @@ cdf.HyperGeometric <- function(d, x, ...) {
 #'
 quantile.HyperGeometric <- function(d, p, ...) {
   qhyper(p = p, m = d$m, n = d$n, k = d$k)
+}
+
+
+#' Return the support of the HyperGeometric distribution
+#'
+#' @param d An `HyperGeometric` object created by a call to [HyperGeometric()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.HyperGeometric <- function(d){
+  c(max(0, d$k - d$n), min(d$m, d$k))
 }
 

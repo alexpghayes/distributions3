@@ -27,7 +27,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Normal random variable with mean
@@ -72,6 +72,8 @@
 #'   }
 #'
 #' @examples
+#'
+#' set.seed(27)
 #'
 #' X <- Normal(5, 2)
 #' X
@@ -141,15 +143,15 @@
 #' set.seed(27)
 #'
 #' # generate a random sample
-#' Normal_sample <- random(Normal(3, 7), 26)
+#' ns <- random(Normal(3, 7), 26)
 #'
 #' # test if sample is Normal(3, 7)
-#' ks.test(Normal_sample, pnorm, mean = 3, sd = 7)
+#' ks.test(ns, pnorm, mean = 3, sd = 7)
 #'
 #' # test if sample is gamma(8, 3) using base R pgamma()
-#' ks.test(Normal_sample, pgamma, shape = 8, rate = 3)
+#' ks.test(ns, pgamma, shape = 8, rate = 3)
 #'
-#' ###
+#' ### MISC
 #'
 #' # note that the cdf() and quantile() functions are inverses
 #' cdf(X, quantile(X, 0.7))
@@ -163,7 +165,7 @@ Normal <- function(mu = 0, sigma = 1) {
 
 #' @export
 print.Normal <- function(x, ...) {
-  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})"))
+  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})\n"))
 }
 
 #' @export
@@ -308,4 +310,19 @@ suff_stat.Normal <- function(d, x, ...) {
   valid_x <- is.numeric(x)
   if (!valid_x) stop("`x` must be a numeric vector")
   list(mu = mean(x), sigma = sd(x), samples = length(x))
+}
+
+#' Return the support of the Normal distribution
+#'
+#' @param d An `Normal` object created by a call to [Normal()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Normal <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
 }

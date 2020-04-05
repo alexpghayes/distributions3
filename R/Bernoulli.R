@@ -16,12 +16,18 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Bernoulli random variable with parameter
 #'   `p` = \eqn{p}. Some textbooks also define \eqn{q = 1 - p}, or use
 #'   \eqn{\pi} instead of \eqn{p}.
+#'
+#'   The Bernoulli probability  distribution is widely used to model
+#'   binary variables, such as 'failure' and 'success'. The most
+#'   typical example is the flip of a coin, when  \eqn{p} is thought as the
+#'   probability of flipping a head, and \eqn{q = 1 - p} is the
+#'   probability of flipping a tail.
 #'
 #'   **Support**: \eqn{\{0, 1\}}{{0, 1}}
 #'
@@ -62,6 +68,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Bernoulli(0.7)
 #' X
 #'
@@ -76,16 +84,10 @@
 #' cdf(X, 0)
 #' quantile(X, 0.7)
 #'
-#' # TODO: make sure these are inverses of each other
-#'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 #'
-#'
 Bernoulli <- function(p = 0.5) {
-
-  # TODO: check that 0 <= p <= 1
-
   d <- list(p = p)
   class(d) <- c("Bernoulli", "distribution")
   d
@@ -93,7 +95,7 @@ Bernoulli <- function(p = 0.5) {
 
 #' @export
 print.Bernoulli <- function(x, ...) {
-  cat(glue("Bernoulli distribution (p = {x$p})"))
+  cat(glue("Bernoulli distribution (p = {x$p})\n"))
 }
 
 #' @export
@@ -217,10 +219,19 @@ fit_mle.Bernoulli <- function(d, x, ...) {
 #' @export
 suff_stat.Bernoulli <- function(d, x, ...) {
   valid_x <- (x %in% c(0L, 1L))
-  if(any(!valid_x)) stop("`x` contains elements other than 0 or 1")
+  if (any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
 
-
+#' Return the support of the Bernoulli distribution
+#'
+#' @param d An `Bernoulli` object created by a call to [Bernoulli()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Bernoulli <- function(d){
+  return(c(0, 1))
+}
 
 

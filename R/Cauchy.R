@@ -18,7 +18,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a Cauchy variable with mean
@@ -53,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Cauchy(10, 0.2)
 #' X
 #'
@@ -71,7 +73,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Cauchy <- function(location = 0, scale = 1) {
   d <- list(location = location, scale = scale)
   class(d) <- c("Cauchy", "distribution")
@@ -80,7 +81,7 @@ Cauchy <- function(location = 0, scale = 1) {
 
 #' @export
 print.Cauchy <- function(x, ...) {
-  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"))
+  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})\n"))
 }
 
 #' @export
@@ -169,3 +170,15 @@ cdf.Cauchy <- function(d, x, ...) {
 quantile.Cauchy <- function(d, p, ...) {
   qcauchy(p = p, location = d$location, scale = d$scale)
 }
+
+#' Return the support of the Cauchy distribution
+#'
+#' @param d An `Cauchy` object created by a call to [Cauchy()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Cauchy <- function(d){
+  c(-Inf, Inf)
+}
+

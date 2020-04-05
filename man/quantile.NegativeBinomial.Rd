@@ -23,6 +23,8 @@ Determine quantiles of a NegativeBinomial distribution
 }
 \examples{
 
+set.seed(27)
+
 X <- NegativeBinomial(10, 0.3)
 X
 
@@ -33,7 +35,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other NegativeBinomial distribution: \code{\link{cdf.NegativeBinomial}},

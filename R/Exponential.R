@@ -10,6 +10,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Exponential(5)
 #' X
 #'
@@ -28,7 +30,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Exponential <- function(rate = 1) {
   d <- list(rate = rate)
   class(d) <- c("Exponential", "distribution")
@@ -37,7 +38,7 @@ Exponential <- function(rate = 1) {
 
 #' @export
 print.Exponential <- function(x, ...) {
-  cat(glue("Exponential distribution (rate = {x$rate})"))
+  cat(glue("Exponential distribution (rate = {x$rate})\n"))
 }
 
 #' @export
@@ -124,10 +125,6 @@ cdf.Exponential <- function(d, x, ...) {
 #' @export
 #'
 quantile.Exponential <- function(d, p, ...) {
-
-  # TODO: in the documentation, more information on return and
-  # how quantiles are calculated
-
   qexp(p = p, rate = d$rate)
 }
 
@@ -160,6 +157,21 @@ fit_mle.Exponential <- function(d, x, ...) {
 #' @export
 suff_stat.Exponential <- function(d, x, ...) {
   valid_x <- (x > 0)
-  if(any(!valid_x)) stop("`x` must only contain positive real numbers")
+  if (any(!valid_x)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), samples = length(x))
+}
+
+#' Return the support of the Exponential distribution
+#'
+#' @param d An `Exponential` object created by a call to [Exponential()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Exponential <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

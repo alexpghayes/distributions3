@@ -2,7 +2,7 @@
 % Please edit documentation in R/ChiSquare.R
 \name{ChiSquare}
 \alias{ChiSquare}
-\title{Create a chi square distribution}
+\title{Create a Chi-Square distribution}
 \usage{
 ChiSquare(df)
 }
@@ -13,19 +13,13 @@ ChiSquare(df)
 A \code{ChiSquare} object.
 }
 \description{
-Chi square distributions show up often in frequentist settings
+Chi-square distributions show up often in frequentist settings
 as the sampling distribution of test statistics, especially
-in maximum likelihood estimation settings. The chi square
-distribution with a single degree of freedom is equivalent
-to a squared standard normal distribution. Summing chi square
-distributions results in a new chi square distribution with
-added degrees of freedom. A chi square distribution is a special
-case of the gamma distribution with \code{shape = 2} (double check this).
-TODO: add relationship to F and T distributions.
+in maximum likelihood estimation settings.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a \eqn{\chi^2} random variable with
@@ -69,7 +63,24 @@ list the value of \eqn{\Phi(t)} for various \eqn{t}.
     E(e^(tX)) = e^(\mu t + \sigma^2 t^2 / 2)
   }
 }
+\section{Transformations}{
+
+
+A squared standard \code{\link[=Normal]{Normal()}} distribution is equivalent to a
+\eqn{\chi^2_1} distribution with one degree of freedom. The
+\eqn{\chi^2} distribution is a special case of the \code{\link[=Gamma]{Gamma()}}
+distribution with shape (TODO: check this) parameter equal
+to a half. Sums of \eqn{\chi^2} distributions
+are also distributed as \eqn{\chi^2} distributions, where the
+degrees of freedom of the contributing distributions get summed.
+The ratio of two \eqn{\chi^2} distributions is a \code{\link[=FisherF]{FisherF()}}
+distribution. The ratio of a \code{\link[=Normal]{Normal()}} and the square root
+of a scaled \code{\link[=ChiSquare]{ChiSquare()}} is a \code{\link[=StudentsT]{StudentsT()}} distribution.
+}
+
 \examples{
+
+set.seed(27)
 
 X <- ChiSquare(5)
 X
@@ -84,14 +95,15 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{Exponential}},
-  \code{\link{FisherF}}, \code{\link{Gamma}},
-  \code{\link{LogNormal}}, \code{\link{Logistic}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
+  \code{\link{Frechet}}, \code{\link{GEV}},
+  \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
+  \code{\link{Logistic}}, \code{\link{Normal}},
+  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
   \code{\link{Tukey}}, \code{\link{Uniform}},
   \code{\link{Weibull}}
 }

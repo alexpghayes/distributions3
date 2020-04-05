@@ -6,7 +6,6 @@ test_that("print.Normal works", {
 
 
 test_that("suff_stat.Normal works correctly", {
-
   ss <- list(mu = 0, sigma = 0, samples = 2)
   expect_equal(suff_stat(Normal(), c(0, 0)), ss)
 
@@ -14,13 +13,10 @@ test_that("suff_stat.Normal works correctly", {
 })
 
 test_that("fit_mle.Normal works correctly", {
-
   expect_equal(fit_mle(Normal(), c(0, 0)), Normal(0, 0))
-
 })
 
 test_that("random.Normal work correctly", {
-
   n <- Normal()
 
   expect_length(random(n), 1)
@@ -31,7 +27,6 @@ test_that("random.Normal work correctly", {
 
 
 test_that("pdf.Normal work correctly", {
-
   n <- Normal()
 
   expect_equal(pdf(n, 0), dnorm(0, 0, 1))
@@ -43,7 +38,6 @@ test_that("pdf.Normal work correctly", {
 })
 
 test_that("log_pdf.Normal work correctly", {
-
   n <- Normal()
 
   expect_equal(log_pdf(n, 0), log(dnorm(0, 0, 1)))
@@ -56,7 +50,6 @@ test_that("log_pdf.Normal work correctly", {
 
 
 test_that("cdf.Normal work correctly", {
-
   n <- Normal()
 
   expect_equal(cdf(n, 0), 0.5)
@@ -67,7 +60,6 @@ test_that("cdf.Normal work correctly", {
 })
 
 test_that("quantile.Normal work correctly", {
-
   n <- Normal()
 
   expect_equal(quantile(n, 0), -Inf)

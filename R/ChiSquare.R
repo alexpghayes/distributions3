@@ -1,14 +1,8 @@
-#' Create a chi square distribution
+#' Create a Chi-Square distribution
 #'
-#' Chi square distributions show up often in frequentist settings
+#' Chi-square distributions show up often in frequentist settings
 #' as the sampling distribution of test statistics, especially
-#' in maximum likelihood estimation settings. The chi square
-#' distribution with a single degree of freedom is equivalent
-#' to a squared standard normal distribution. Summing chi square
-#' distributions results in a new chi square distribution with
-#' added degrees of freedom. A chi square distribution is a special
-#' case of the gamma distribution with `shape = 2` (double check this).
-#' TODO: add relationship to F and T distributions.
+#' in maximum likelihood estimation settings.
 #'
 #' @param df Degrees of freedom. Must be positive.
 #'
@@ -17,10 +11,23 @@
 #'
 #' @family continuous distributions
 #'
+#' @section Transformations:
+#'
+#' A squared standard [Normal()] distribution is equivalent to a
+#' \eqn{\chi^2_1} distribution with one degree of freedom. The
+#' \eqn{\chi^2} distribution is a special case of the [Gamma()]
+#' distribution with shape (TODO: check this) parameter equal
+#' to a half. Sums of \eqn{\chi^2} distributions
+#' are also distributed as \eqn{\chi^2} distributions, where the
+#' degrees of freedom of the contributing distributions get summed.
+#' The ratio of two \eqn{\chi^2} distributions is a [FisherF()]
+#' distribution. The ratio of a [Normal()] and the square root
+#' of a scaled [ChiSquare()] is a [StudentsT()] distribution.
+#'
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
 #'   In the following, let \eqn{X} be a \eqn{\chi^2} random variable with
@@ -66,6 +73,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- ChiSquare(5)
 #' X
 #'
@@ -84,7 +93,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 ChiSquare <- function(df) {
   d <- list(df = df)
   class(d) <- c("ChiSquare", "distribution")
@@ -93,7 +101,7 @@ ChiSquare <- function(df) {
 
 #' @export
 print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})"))
+  cat(glue("Chi Square distribution (df = {x$df})\n"))
 }
 
 #' @export
@@ -186,3 +194,16 @@ quantile.ChiSquare <- function(d, p, ...) {
 
   qchisq(p = p, df = d$df)
 }
+
+
+#' Return the support of the ChiSquare distribution
+#'
+#' @param d An `ChiSquare` object created by a call to [ChiSquare()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.ChiSquare <- function(d){
+  c(0, Inf)
+}
+

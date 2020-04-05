@@ -7,45 +7,52 @@
 LogNormal(log_mu = 0, log_sigma = 1)
 }
 \arguments{
-\item{log_mu}{TODO explain what the hell this is}
+\item{log_mu}{The location parameter, written \eqn{\mu} in textbooks.
+Can be any real number. Defaults to \code{0}.}
 
-\item{log_sigma}{TODO explain what the hell this is}
+\item{log_sigma}{The scale parameter, written \eqn{\sigma} in textbooks.
+Can be any positive real number. Defaults to \code{1}.}
 }
 \value{
 A \code{LogNormal} object.
 }
 \description{
-Create a LogNormal distribution
+A random variable created by exponentiating a \code{\link[=Normal]{Normal()}}
+distribution. Taking the log of LogNormal data returns in
+\code{\link[=Normal]{Normal()}} data.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a LogNormal random variable with
 success probability \code{p} = \eqn{p}.
 
-TODO: multiple parameterizations BLEH
+\strong{Support}: \eqn{R^+}
 
-\strong{Support}: TODO
+\strong{Mean}: \eqn{\exp(\mu + \sigma^2/2)}
 
-\strong{Mean}: TODO
-
-\strong{Variance}: TODO
+\strong{Variance}: \eqn{[\exp(\sigma^2)-1]\exp(2\mu+\sigma^2)}
 
 \strong{Probability density function (p.d.f)}:
 
-TODO
+\deqn{
+    f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp \left(-\frac{(\log x - \mu)^2}{2 \sigma^2} \right)
+  }{
+    f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp (-\frac{(\log x - \mu)^2}{2 \sigma^2})
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+\deqn{F(x) = \frac{1}{2} + \frac{1}{2\sqrt{pi}}\int_{-x}^x e^{-t^2} dt}
 
 \strong{Moment generating function (m.g.f)}:
-
-TODO
+Undefined.
 }
 \examples{
+
+set.seed(27)
 
 X <- LogNormal(0.3, 2)
 X
@@ -62,10 +69,11 @@ quantile(X, 0.7)
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{Logistic}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{Logistic}},
+  \code{\link{Normal}}, \code{\link{RevWeibull}},
+  \code{\link{StudentsT}}, \code{\link{Tukey}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

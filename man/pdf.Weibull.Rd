@@ -28,6 +28,8 @@ showing to how calculate p-values and confidence intervals.
 }
 \examples{
 
+set.seed(27)
+
 X <- Weibull(0.3, 2)
 X
 

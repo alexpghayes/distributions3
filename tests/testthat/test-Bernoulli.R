@@ -5,13 +5,10 @@ test_that("print.Bernoulli works", {
 })
 
 test_that("fit_mle.Bernoulli works correctly", {
-
   expect_equal(fit_mle(Bernoulli(), c(0, 1)), Bernoulli(0.5))
-
 })
 
 test_that("suff_stats.Bernoulli works correctly", {
-
   ss <- list(successes = 3, failures = 2)
 
   expect_equal(suff_stat(Bernoulli(), c(1, 1, 1, 0, 0)), ss)
@@ -23,7 +20,6 @@ test_that("suff_stats.Bernoulli works correctly", {
 
 
 test_that("likelihood.Bernoulli and log_likelihood.Bernoulli work correctly", {
-
   b <- Bernoulli(0.1)
   x <- c(1, 1, 0)
 
@@ -32,11 +28,9 @@ test_that("likelihood.Bernoulli and log_likelihood.Bernoulli work correctly", {
 
   expect_equal(log_likelihood(b, 1), log(0.1))
   expect_equal(log_likelihood(b, x), log(0.009))
-
 })
 
 test_that("random.Bernoulli work correctly", {
-
   b <- Bernoulli()
 
   expect_length(random(b), 1)
@@ -46,7 +40,6 @@ test_that("random.Bernoulli work correctly", {
 })
 
 test_that("pdf.Bernoulli work correctly", {
-
   b <- Bernoulli(0.1)
 
   expect_equal(pdf(b, 0), 0.9)
@@ -61,7 +54,6 @@ test_that("pdf.Bernoulli work correctly", {
 })
 
 test_that("cdf.Bernoulli work correctly", {
-
   b <- Bernoulli(0.1)
 
   expect_equal(cdf(b, 0), 0.9)
@@ -74,7 +66,6 @@ test_that("cdf.Bernoulli work correctly", {
 })
 
 test_that("quantile.Bernoulli work correctly", {
-
   b <- Bernoulli(0.1)
 
   expect_equal(quantile(b, 0), 0)

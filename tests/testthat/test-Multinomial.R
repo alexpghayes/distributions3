@@ -5,18 +5,15 @@ test_that("print.Multinomial works", {
 })
 
 test_that("likelihood.Multinomial and log_likelihood.Multinomial work correctly", {
-
   m <- Multinomial(1, 0.5)
   x <- c(1, 1, 0)
 
   expect_equal(likelihood(m, 1), 1)
 
   expect_equal(log_likelihood(m, 1), 0)
-
 })
 
 test_that("random.Multinomial work correctly", {
-
   m <- Multinomial(2, 0.5)
 
   expect_length(random(m), 1)
@@ -24,5 +21,3 @@ test_that("random.Multinomial work correctly", {
   expect_length(random(m, 0), 0)
   expect_error(random(m, -2))
 })
-
-

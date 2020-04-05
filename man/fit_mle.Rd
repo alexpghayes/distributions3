@@ -27,5 +27,4 @@ Approximates an empirical distribution with a theoretical one
 X <- Normal()
 
 fit_mle(X, c(-1, 0, 0, 0, 3))
-
 }

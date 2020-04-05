@@ -5,7 +5,6 @@ test_that("print.Beta works", {
 })
 
 test_that("random.Beta work correctly", {
-
   b <- Beta(1, 5)
 
   expect_length(random(b), 1)
@@ -15,7 +14,6 @@ test_that("random.Beta work correctly", {
 })
 
 test_that("pdf.Beta work correctly", {
-
   b <- Beta(1, 2)
 
   expect_equal(pdf(b, 0), 2)
@@ -28,7 +26,6 @@ test_that("pdf.Beta work correctly", {
 })
 
 test_that("log_pdf.Beta work correctly", {
-
   b <- Beta(1, 2)
 
   expect_equal(log_pdf(b, 0), log(2))
@@ -41,7 +38,6 @@ test_that("log_pdf.Beta work correctly", {
 })
 
 test_that("cdf.Beta work correctly", {
-
   b <- Beta(1, 2)
 
   expect_equal(cdf(b, 0), 0)
@@ -55,7 +51,6 @@ test_that("cdf.Beta work correctly", {
 })
 
 test_that("quantile.Beta work correctly", {
-
   b <- Beta(1, 2)
 
   expect_equal(quantile(b, 0), 0)

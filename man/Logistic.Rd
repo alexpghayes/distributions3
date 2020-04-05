@@ -7,47 +7,63 @@
 Logistic(location = 0, scale = 1)
 }
 \arguments{
-\item{location}{TODO}
+\item{location}{The location parameter for the distribution. For Logistic
+distributions, the location parameter is the mean, median and also mode.
+Defaults to zero.}
 
-\item{scale}{TODO}
+\item{scale}{The scale parameter for the distribution. Defaults to one.}
 }
 \value{
 A \code{Logistic} object.
 }
 \description{
-TODO
+A continuous distribution on the real line. For binary outcomes
+the model given by \eqn{P(Y = 1 | X) = F(X \beta)} where
+\eqn{F} is the Logistic \code{\link[=cdf]{cdf()}} is called \emph{logistic regression}.
 }
 \details{
-be sure to include connection to logistic regression
-
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Logistic random variable with
-success probability \code{p} = \eqn{p}.
+\code{location} = \eqn{\mu} and \code{scale} = \eqn{s}.
 
-TODO: multiple parameterizations BLEH
+\strong{Support}: \eqn{R}, the set of all real numbers
 
-\strong{Support}: TODO
+\strong{Mean}: \eqn{\mu}
 
-\strong{Mean}: TODO
-
-\strong{Variance}: TODO
+\strong{Variance}: \eqn{s^2 \pi^2 / 3}
 
 \strong{Probability density function (p.d.f)}:
 
-TODO
+\deqn{
+    f(x) = \frac{e^{-(\frac{x - \mu}{s})}}{s [1 + \exp(-(\frac{x - \mu}{s})) ]^2}
+  }{
+    f(x) = e^(-(t - \mu) / s) / (s (1 + e^(-(t - \mu) / s))^2)
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-TODO
+\deqn{
+    F(t) = \frac{1}{1 + e^{-(\frac{t - \mu}{s})}}
+  }{
+    F(t) = 1 / (1 +  e^(-(t - \mu) / s))
+  }
 
 \strong{Moment generating function (m.g.f)}:
 
-TODO
+\deqn{
+    E(e^{tX}) = e^{\mu t} \beta(1 - st, 1 + st)
+  }{
+    E(e^(tX)) = = e^(\mu t) \beta(1 - st, 1 + st)
+  }
+
+where \eqn{\beta(x, y)} is the Beta function.
 }
 \examples{
+
+set.seed(27)
 
 X <- Logistic(2, 4)
 X
@@ -59,15 +75,15 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other continuous distributions: \code{\link{Beta}},
   \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{FisherF}},
-  \code{\link{Gamma}}, \code{\link{LogNormal}},
-  \code{\link{Normal}}, \code{\link{StudentsT}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+  \code{\link{Exponential}}, \code{\link{Frechet}},
+  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
+  \code{\link{Gumbel}}, \code{\link{LogNormal}},
+  \code{\link{Normal}}, \code{\link{RevWeibull}},
+  \code{\link{StudentsT}}, \code{\link{Tukey}},
+  \code{\link{Uniform}}, \code{\link{Weibull}}
 }
 \concept{continuous distributions}

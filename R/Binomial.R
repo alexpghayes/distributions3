@@ -1,10 +1,15 @@
 #' Create a Binomial distribution
 #'
-#' Bernoulli distributions are used to represent situations can that can
-#' thought of as `size` (often called \eqn{n} in textbooks) independent
-#' coin flips, where each coin flip has probability `p` of success. The
-#' [Bernoulli()] distribution is a special case of Binomial distribution
-#' when `n = 1`.
+#' Binomial distributions are used to represent situations can that can
+#' be thought as the result of \eqn{n} Bernoulli experiments (here the
+#' \eqn{n} is defined as the `size` of the experiment). The classical
+#' example is \eqn{n} independent coin flips, where each coin flip has
+#' probability `p` of success. In this case, the individual probability of
+#' flipping heads or tails is given by the  Bernoulli(p) distribution,
+#' and the probability of having \eqn{x} equal results (\eqn{x} heads,
+#' for example), in \eqn{n} trials is given by the Binomial(n, p) distribution.
+#' The equation of the Binomial distribution is directly derived from
+#' the equation of the Bernoulli distribution.
 #'
 #' @param size The number of trials. Must be an integer greater than or equal
 #'   to one. When `size = 1L`, the Binomial distribution reduces to the
@@ -26,7 +31,7 @@
 #'   compute p-values.
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Binomial random variable with parameter
@@ -65,6 +70,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Binomial(10, 0.2)
 #' X
 #'
@@ -83,7 +90,6 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Binomial <- function(size, p = 0.5) {
   d <- list(size = size, p = p)
   class(d) <- c("Binomial", "distribution")
@@ -92,7 +98,7 @@ Binomial <- function(size, p = 0.5) {
 
 #' @export
 print.Binomial <- function(x, ...) {
-  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"))
+  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})\n"))
 }
 
 #' @export
@@ -153,7 +159,6 @@ pdf.Binomial <- function(d, x, ...) {
 
 #' @rdname pdf.Binomial
 #' @export
-#'
 log_pdf.Binomial <- function(d, x, ...) {
   dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
 }
@@ -190,10 +195,6 @@ cdf.Binomial <- function(d, x, ...) {
 #' @export
 #'
 quantile.Binomial <- function(d, p, ...) {
-
-  # TODO: in the documentation, more information on return and
-  # how quantiles are calculated
-
   qbinom(p = p, size = d$size, prob = d$p)
 }
 
@@ -227,8 +228,22 @@ fit_mle.Binomial <- function(d, x, ...) {
 #' @export
 suff_stat.Binomial <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x <= d$size) & (x %% 1 == 0)
-  if(any(!valid_x)) {
+  if (any(!valid_x)) {
     stop("`x` must be an integer between zero and the size parameter of the Binomial distribution")
   }
   list(successes = sum(x), experiments = length(x), trials = d$size)
 }
+
+
+#' Return the support of the Binomial distribution
+#'
+#' @param d An `Binomial` object created by a call to [Binomial()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Binomial <- function(d){
+
+  return(c(0, d$size))
+}
+

@@ -13,7 +13,7 @@
 #' @details
 #'
 #'   We recommend reading this documentation on
-#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   <https://alexpghayes.github.io/distributions3>, where the math
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Poisson random variable with parameter
@@ -53,6 +53,8 @@
 #'
 #' @examples
 #'
+#' set.seed(27)
+#'
 #' X <- Poisson(2)
 #' X
 #'
@@ -75,7 +77,7 @@ Poisson <- function(lambda) {
 
 #' @export
 print.Poisson <- function(x, ...) {
-  cat(glue("Poisson distribution (lambda = {x$lambda})"))
+  cat(glue("Poisson distribution (lambda = {x$lambda})\n"))
 }
 
 #' Draw a random sample from a Poisson distribution
@@ -182,7 +184,22 @@ fit_mle.Poisson <- function(d, x, ...) {
 #' @export
 suff_stat.Poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
-  if(any(!valid_x)) stop("`x` must only contain positive integers")
+  if (any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))
 }
 
+
+#' Return the support of the Poisson distribution
+#'
+#' @param d An `Poisson` object created by a call to [Poisson()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Poisson <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
+}

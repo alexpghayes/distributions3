@@ -22,6 +22,8 @@ A vector of quantiles, one for each element of \code{p}.
 }
 \examples{
 
+set.seed(27)
+
 X <- FisherF(5, 10, 0.2)
 X
 
@@ -35,5 +37,4 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }
