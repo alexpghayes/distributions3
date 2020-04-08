@@ -105,6 +105,46 @@ print.GP <- function(x, ...) {
   cat(glue("GP distribution (mu = {x$mu}, sigma = {x$sigma}, xi = {x$xi})\n"))
 }
 
+#' @export
+mean.GP <- function(d, ...) {
+  mu <- d$mu
+  sigma <- d$sigma
+  xi <- d$xi
+
+  if (xi < 1) mu + sigma / (1 - xi)
+  else Inf
+}
+
+#' @export
+variance.GP <- function(d, ...) {
+  sigma <- d$sigma
+  xi <- d$xi
+
+  if (xi < 1/2) sigma^2 / ((1 - xi)^2 - (1 - 2*xi))
+  else Inf
+}
+
+#' @export
+skewness.GP <- function(d, ...) {
+  xi <- d$xi
+
+  if (xi < 1/3) 2*(1 + xi) * sqrt(1 - 2*xi) / (1 - 3*xi)
+  else Inf
+}
+
+#' @export
+kurtosis.GP <- function(d, ...) {
+  xi <- d$xi
+
+  if (xi < 1/4) {
+    k1 <- (1 - 2*xi) * (2*xi^2 + xi + 3)
+    k2 <- (1 - 3*xi) * (1 - 4*xi)
+    3 * k1 / k2 - 3
+  } else {
+    Inf
+  }
+}
+
 #' Draw a random sample from a GP distribution
 #'
 #' @inherit GP examples

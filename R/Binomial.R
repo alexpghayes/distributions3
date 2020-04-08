@@ -242,8 +242,5 @@ suff_stat.Binomial <- function(d, x, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Binomial <- function(d){
-
-  return(c(0, d$size))
-}
+support.Binomial <- function(d) c(0, d$size)
 

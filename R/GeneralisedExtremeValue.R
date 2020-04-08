@@ -112,6 +112,61 @@ print.GEV <- function(x, ...) {
   cat(glue("GEV distribution (mu = {x$mu}, sigma = {x$sigma}, xi = {x$xi})\n"))
 }
 
+# don't export
+g <- function(d, k) gamma(1 - k * d$xi)
+
+#' @export
+mean.GEV <- function(d, ...) {
+  euler <- -digamma(1)
+  if (d$xi == 0) d$mu + d$sigma * euler
+  else if (d$xi < 1) d$mu + d$sigma * (gamma(1 - d$xi) - 1) / d$xi
+  else Inf
+}
+
+#' @export
+variance.GEV <- function(d, ...) {
+  euler <- -digamma(1)
+  if (d$xi == 0) {
+    d$sigma^2 * pi^2 / 6
+  } else if (d$xi < 1/2) {
+    d$sigma^2 * (g(d, 2) - g(d, 1)^2) / d$xi ^ 2
+  } else {
+    Inf
+  }
+}
+
+#' @export
+skewness.GEV <- function(d, ...) {
+  if (d$xi == 1) {
+    # no useful zeta fn without adding a dependency
+    zeta3 <- 1.202056903159594014596
+    12 * sqrt(6) * zeta3 / pi ^ 3
+  } else if (d$xi < 1/3) {
+    s <- sign(d$xi)
+    g1 <- g(d, 1)
+    g2 <- g(d, 2)
+    g3 <- g(d, 3)
+    s * (g3 - 3*g1*g2 + 2*g1^3) / (g2 - g1^2)^(3/2)
+  } else {
+    Inf
+  }
+}
+
+#' @export
+kurtosis.GEV <- function(d, ...) {
+  if (d$xi == 0) {
+    12/5
+  } else if (d$xi < 1/3) {
+    g1 <- g(d, 1)
+    g2 <- g(d, 2)
+    g3 <- g(d, 3)
+    g4 <- g(d, 4)
+    (g4 - 4*g3*g1 - 3*g2^2 + 12*g2*g1^2 - 6*g1^4) / (g2 - g1^2)^2
+  } else {
+    Inf
+  }
+}
+
 #' Draw a random sample from a GEV distribution
 #'
 #' @inherit GEV examples

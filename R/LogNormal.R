@@ -71,6 +71,34 @@ print.LogNormal <- function(x, ...) {
   cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})\n"))
 }
 
+#' @export
+mean.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  exp(mu + sigma^2 / 2)
+}
+
+#' @export
+variance.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  (exp(sigma^2) - 1) * exp(2 * mu + sigma^2)
+}
+
+#' @export
+skewness.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  (exp(sigma^2) + 2) * sqrt(exp(sigma^2) - 1)
+}
+
+#' @export
+kurtosis.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  exp(4 * sigma^2) + 2 * exp(3 * sigma^2) + 3 * exp(2 * sigma^2) - 6
+}
+
 #' Draw a random sample from a LogNormal distribution
 #'
 #' @inherit LogNormal examples

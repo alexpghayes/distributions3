@@ -8,7 +8,7 @@
 #'   `location` can be any real number.  Defaults to `0`.
 #' @param scale The scale parameter \eqn{s}.
 #'   `scale` can be any positive number.  Defaults to `1`.
-#' @param shape The scale parameter \eqn{\alpha}.
+#' @param shape The shape parameter \eqn{\alpha}.
 #'   `shape` can be any positive number.  Defaults to `1`.
 #'
 #' @return A `Frechet` object.
@@ -86,6 +86,65 @@ Frechet <- function(location = 0, scale = 1, shape = 1) {
 print.Frechet <- function(x, ...) {
   cat(glue("Frechet distribution (location = {x$location},
            scale = {x$scale}, shape = {x$shape})\n"))
+}
+
+#' @export
+mean.Frechet <- function(d, ...) {
+  a <- d$shape
+  m <- d$location
+  s <- d$scale
+  if (a > 1) {
+    m + s * gamma(1 - 1/a)
+  } else {
+    Inf
+  }
+}
+
+#' @export
+variance.Frechet <- function(d, ...) {
+  a <- d$shape
+  m <- d$location
+  s <- d$scale
+  if (a > 2) {
+    s^2 * (gamma(1 - 2/a) - gamma(1 - 1/a)^2)
+  } else {
+    Inf
+  }
+}
+
+#' @export
+skewness.Frechet <- function(d, ...) {
+  a <- d$shape
+  m <- d$location
+  s <- d$scale
+  if (a > 3) {
+    g1 <- gamma(1 - 1/a)
+    g2 <- gamma(1 - 2/a)
+    g3 <- gamma(1 - 3/a)
+    a <- g3 - 3*g2 * g1 + 2 * g1^3
+    b <- (g2 - g1^2)^1.5
+    a / b
+  } else {
+    Inf
+  }
+}
+
+#' @export
+kurtosis.Frechet <- function(d, ...) {
+  a <- d$shape
+  m <- d$locations
+  s <- d$scale
+  if (a > 4) {
+    g1 <- gamma(1 - 1/a)
+    g2 <- gamma(1 - 2/a)
+    g3 <- gamma(1 - 3/a)
+    g4 <- gamma(1 - 4/a)
+    a <- 4*g3 * g1 + 3 * g2^2
+    b <- (g2 - g1^2)^2
+    a / b - 6
+  } else {
+    Inf
+  }
 }
 
 #' Draw a random sample from a Frechet distribution

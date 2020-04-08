@@ -78,6 +78,21 @@ print.Gumbel <- function(x, ...) {
   cat(glue("Gumbel distribution (mu = {x$mu}, sigma = {x$sigma})\n"))
 }
 
+#' @export
+mean.Gumbel <- function(d, ...) d$mu + d$sigma * -digamma(1)
+
+#' @export
+variance.Gumbel <- function(d, ...) pi^(2/6) * d$sigma^2
+
+#' @export
+skewness.Gumbel <- function(d, ...) {
+    zeta3 <- 1.20205690315959401459612
+    (12 * sqrt(6) * zeta3) / pi^3
+}
+
+#' @export
+kurtosis.Gumbel <- function(d, ...) 12/5
+
 #' Draw a random sample from a Gumbel distribution
 #'
 #' @inherit Gumbel examples

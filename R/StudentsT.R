@@ -123,6 +123,27 @@ print.StudentsT <- function(x, ...) {
   cat(glue("Student's T distribution (df = {x$df})\n"))
 }
 
+#' @export
+mean.StudentsT <- function(d, ...) if (d$df > 1) 0 else NaN
+
+#' @export
+variance.StudentsT <- function(d, ...) {
+  if (d$df > 2) d$df / (d$df - 2)
+  else if (d$df > 1) Inf
+  else NaN
+}
+
+#' @export
+skewness.StudentsT <- function(d, ...) if(d$df > 3) 0 else NaN
+
+#' @export
+kurtosis.StudentsT <- function(d, ...) {
+  if (d$df > 4) 6 / (d$df - 4)
+  else if (d$df > 2) Inf
+  else NaN
+}
+
+
 #' Draw a random sample from a StudentsT distribution
 #'
 #' Please see the documentation of [StudentsT()] for some properties
@@ -235,5 +256,3 @@ quantile.StudentsT <- function(d, p, ...) {
 support.StudentsT <- function(d){
   return(c(-Inf, Inf))
 }
-
-

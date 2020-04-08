@@ -73,6 +73,8 @@
 #' # log_pdf(X, 2)
 #'
 Multinomial <- function(size, p) {
+  # Ensure sum of probabilities is 1
+  p <- p / sum(p)
   d <- list(size = size, p = p)
   class(d) <- c("Multinomial", "multivariate", "distribution")
   d
@@ -92,6 +94,12 @@ print.Multinomial <- function(x, ...) {
   }
   cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])\n"))
 }
+
+#' @export
+mean.Multinomial <- function(d, ...) d$size * d$p
+
+#' @export
+variance.Multinomial <- function(d, ...) d$size * d$p * (1 - d$p)
 
 #' Draw a random sample from a Multinomial distribution
 #'

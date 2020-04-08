@@ -82,6 +82,52 @@ print.FisherF <- function(x, ...) {
   cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})\n"))
 }
 
+#' The k-th moment of an F(df1, df2) distribution exists and
+#' is finite only when 2k < d2
+#' @export
+mean.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 2) d2 / (d2 - 2) else NaN
+}
+
+#' @export
+variance.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 4) {
+    (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4))
+  } else {
+    NaN
+  }
+}
+
+#' @export
+skewness.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 6) {
+    a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
+    b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
+    a / b
+  } else {
+    NaN
+  }
+}
+
+#' @export
+kurtosis.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 8) {
+    a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
+    b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
+    12 * a / b
+  } else {
+    NaN
+  }
+}
+
 #' Draw a random sample from an F distribution
 #'
 #' @inherit FisherF examples
@@ -167,5 +213,3 @@ quantile.FisherF <- function(d, p, ...) {
 support.FisherF <- function(d){
   return(c(0, Inf))
 }
-
-

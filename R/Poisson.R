@@ -80,6 +80,18 @@ print.Poisson <- function(x, ...) {
   cat(glue("Poisson distribution (lambda = {x$lambda})\n"))
 }
 
+#' @export
+mean.Poisson <- function(d, ...) d$lambda
+
+#' @export
+variance.Poisson <- function(d, ...) d$lambda
+
+#' @export
+skewness.Poisson <- function(d, ...) 1 / sqrt(d$lambda)
+
+#' @export
+kurtosis.Poisson <- function(d, ...) 1 / d$lambda
+
 #' Draw a random sample from a Poisson distribution
 #'
 #' @inherit Poisson examples

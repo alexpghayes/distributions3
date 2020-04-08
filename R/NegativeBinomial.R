@@ -76,6 +76,18 @@ print.NegativeBinomial <- function(x, ...) {
   cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})\n"))
 }
 
+#' @export
+mean.NegativeBinomial <- function(d, ...) d$p * d$size / (1 - d$p)
+
+#' @export
+variance.NegativeBinomial <- function(d, ...) (d$p * d$size) / (1 - d$p)^2
+
+#' @export
+skewness.NegativeBinomial <- function(d, ...) (1 + d$p) / sqrt(d$p * d$size)
+
+#' @export
+kurtosis.NegativeBinomial <- function(d, ...) 6 / d$size + (1 - d$p)^2 / d$size * d$p
+
 #' Draw a random sample from a negative binomial distribution
 #'
 #' @inherit NegativeBinomial examples
