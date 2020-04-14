@@ -4,7 +4,7 @@
 \alias{quantile.default}
 \title{Use stats::quantile if passing non-distribution object}
 \usage{
-\method{quantile}{default}(d, p, ...)
+\method{quantile}{default}(d, p, names = FALSE, ...)
 }
 \description{
 This function allows us to use the stats::quantile function along side
