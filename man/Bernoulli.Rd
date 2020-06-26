@@ -8,7 +8,7 @@ Bernoulli(p = 0.5)
 }
 \arguments{
 \item{p}{The success probability for the distribution. \code{p} can be any
-value in \code{[0, 1]}, and defaults to \code{0.5}.}
+value in \verb{[0, 1]}, and defaults to \code{0.5}.}
 }
 \value{
 A \code{Bernoulli} object.
@@ -78,6 +78,11 @@ set.seed(27)
 X <- Bernoulli(0.7)
 X
 
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
+
 random(X, 10)
 pdf(X, 1)
 log_pdf(X, 1)
@@ -86,11 +91,16 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
+
 }
 \seealso{
-Other discrete distributions: \code{\link{Binomial}},
-  \code{\link{Categorical}}, \code{\link{Geometric}},
-  \code{\link{HyperGeometric}}, \code{\link{Multinomial}},
-  \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
+Other discrete distributions: 
+\code{\link{Binomial}()},
+\code{\link{Categorical}()},
+\code{\link{Geometric}()},
+\code{\link{HyperGeometric}()},
+\code{\link{Multinomial}()},
+\code{\link{NegativeBinomial}()},
+\code{\link{Poisson}()}
 }
 \concept{discrete distributions}

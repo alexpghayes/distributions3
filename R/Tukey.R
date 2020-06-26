@@ -44,9 +44,10 @@ Tukey <- function(nmeans, df, nranges) {
 print.Tukey <- function(x, ...) {
   cat(
     glue(
-      "Tukey distribution (nmeans = {x$nmeans}",
+      "Tukey distribution (nmeans = {x$nmeans},",
       "df = {x$df}, nranges = {x$nranges})\n"
-    )
+    ),
+    "\n"
   )
 }
 
@@ -86,4 +87,16 @@ cdf.Tukey <- function(d, x, ...) {
 #'
 quantile.Tukey <- function(d, p, ...) {
   qtukey(p = p, nmeans = d$nmeans, df = d$nmeans, nranges = d$nranges)
+}
+
+
+#' Return the support of the Tukey distribution
+#'
+#' @param d An `Tukey` object created by a call to [Tukey()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Tukey <- function(d){
+  return(c(0, Inf))
 }

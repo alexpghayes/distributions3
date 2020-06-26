@@ -15,7 +15,7 @@
 catch mispellings or other possible errors.}
 }
 \value{
-A numeric vector containing values in \code{[0, 1]} of length \code{n}.
+A numeric vector containing values in \verb{[0, 1]} of length \code{n}.
 }
 \description{
 Draw a random sample from a Beta distribution
@@ -34,6 +34,11 @@ log_pdf(X, 0.7)
 
 cdf(X, 0.7)
 quantile(X, 0.7)
+
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))

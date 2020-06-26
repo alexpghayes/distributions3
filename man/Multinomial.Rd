@@ -59,7 +59,7 @@ Omitted for multivariate random variables for the time being.
 \strong{Moment generating function (m.g.f)}:
 
 \deqn{
-    E(e^{tX}) = (\sum_{i=1}^k p_i e^{t_i} )^n
+    E(e^{tX}) = \left(\sum_{i=1}^k p_i e^{t_i}\right)^n
   }{
     E(e^(tX)) = (p_1 e^t_1 + p_2 e^t_2 + ... + p_k e^t_k)^n
   }
@@ -78,10 +78,14 @@ random(X, 10)
 
 }
 \seealso{
-Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Categorical}},
-  \code{\link{Geometric}}, \code{\link{HyperGeometric}},
-  \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
+Other discrete distributions: 
+\code{\link{Bernoulli}()},
+\code{\link{Binomial}()},
+\code{\link{Categorical}()},
+\code{\link{Geometric}()},
+\code{\link{HyperGeometric}()},
+\code{\link{NegativeBinomial}()},
+\code{\link{Poisson}()}
 }
 \concept{discrete distributions}
 \concept{multivariate distributions}

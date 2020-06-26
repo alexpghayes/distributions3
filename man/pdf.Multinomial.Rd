@@ -40,6 +40,7 @@ random(X, 10)
 
 }
 \seealso{
-Other Multinomial distribution: \code{\link{random.Multinomial}}
+Other Multinomial distribution: 
+\code{\link{random.Multinomial}()}
 }
 \concept{Multinomial distribution}

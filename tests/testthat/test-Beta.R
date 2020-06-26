@@ -61,3 +61,12 @@ test_that("quantile.Beta work correctly", {
   expect_length(quantile(b, seq_len(0)), 0)
   expect_length(quantile(b, c(0, 1)), 2)
 })
+
+test_that("{moments}.Beta work correctly", {
+  b <- Beta(1, 1)
+
+  expect_equal(mean(b), 0.5)
+  expect_equal(variance(b), 1/12)
+  expect_equal(skewness(b), 0)
+  expect_equal(kurtosis(b), -6/5)
+})

@@ -28,6 +28,11 @@ set.seed(27)
 X <- Bernoulli(0.7)
 X
 
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
+
 random(X, 10)
 pdf(X, 1)
 log_pdf(X, 1)
@@ -36,4 +41,5 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
+
 }

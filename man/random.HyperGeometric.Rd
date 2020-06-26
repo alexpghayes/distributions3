@@ -38,8 +38,9 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other HyperGeometric distribution: \code{\link{cdf.HyperGeometric}},
-  \code{\link{pdf.HyperGeometric}},
-  \code{\link{quantile.HyperGeometric}}
+Other HyperGeometric distribution: 
+\code{\link{cdf.HyperGeometric}()},
+\code{\link{pdf.HyperGeometric}()},
+\code{\link{quantile.HyperGeometric}()}
 }
 \concept{HyperGeometric distribution}

@@ -37,7 +37,9 @@ quantile(X, 0.7)
 
 }
 \seealso{
-Other Weibull distribution: \code{\link{cdf.Weibull}},
-  \code{\link{pdf.Weibull}}, \code{\link{quantile.Weibull}}
+Other Weibull distribution: 
+\code{\link{cdf.Weibull}()},
+\code{\link{pdf.Weibull}()},
+\code{\link{quantile.Weibull}()}
 }
 \concept{Weibull distribution}

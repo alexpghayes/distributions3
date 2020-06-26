@@ -31,12 +31,13 @@ x[ones] <- 1
 dput(x)
 ```
 
-
+\[
 \begin{align}
   & 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,     \\
   & 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0,  \\
   & 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
 \end{align}
+\]
 
 But it is much easier to just remember that there are 17 ones and 45 zeros.
 
@@ -88,12 +89,14 @@ z_stat
 
 To calculate a two-sided p-value, we need to find
 
+\[
 \begin{align}
   P(|Z| \ge |1.46|)
   &= P(Z \ge 1.46) + P(Z \le -1.46) \\
   &= 1 - P(Z \le 1.46) + P(Z \le -1.46) \\
   &= 1 - \Phi(1.46) + \Phi(-1.46)
 \end{align}
+\]
 
 To do this we need to c.d.f. of a standard normal
 
@@ -120,11 +123,13 @@ You may also have seen a different formula for the p-value of a two-sided
 Z-test, which makes use of the fact that the normal distribution is
 symmetric:
 
+\[
 \begin{align}
   P(|Z| \ge |1.46|)
   &= 2 \cdot P(Z \le -|1.46|)
   &= 2 \cdot \Phi(-1.46)
 \end{align}
+\]
 
 Using this formula we get the same result:
 
@@ -136,9 +141,11 @@ Using this formula we get the same result:
 
 Finally, sometimes we are interest in one sided Z-tests. For the test
 
+\[
 \begin{align}
   H_0: \pi \le 0.2 \qquad H_A: \pi > 0.2
 \end{align}
+\]
 
 the p-value is given by
 

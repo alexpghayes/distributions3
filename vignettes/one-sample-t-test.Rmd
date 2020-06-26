@@ -92,11 +92,13 @@ t_stat
 
 Since the sample size is 10, to calculate a two-sided p-value, we need to find
 
+\[
 \begin{align}
   P(|t_9| \ge |1.38|)
   &= P(t_9 \ge 1.38) + P(t_9 \le -1.38) \\
   &= 1 - P(t_9 \le 1.38) + P(t_9 \le -1.38) \\
 \end{align}
+\]
 
 To do this we need to c.d.f. of a $t_9$ distribution.
 
@@ -123,10 +125,12 @@ You may also have seen a different formula for the p-value of a two-sided
 T-test, which makes use of the fact that the T distribution is
 symmetric:
 
+\[
 \begin{align}
   P(|t_9| \ge |1.38|)
   &= 2 \cdot P(t_9 \le -|1.38|)
 \end{align}
+\]
 
 Using this formula we get the same result:
 
@@ -136,9 +140,11 @@ Using this formula we get the same result:
 
 Finally, sometimes we are interest in one sided T-tests. For the test
 
+\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu > 3
 \end{align}
+\]
 
 the p-value is given by
 
@@ -188,9 +194,11 @@ t.test(x)
 
 We can also get one-sided p-values from `t.test()` by specifying the alternative hypothesis. For the test
 
+\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu > 3
 \end{align}
+\]
 
 we would use
 

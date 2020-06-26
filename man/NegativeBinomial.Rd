@@ -11,7 +11,7 @@ NegativeBinomial(size, p = 0.5)
 until the experiment is stopped. Denoted \eqn{r} below.}
 
 \item{p}{The success probability for a given trial. \code{p} can be any
-value in \code{[0, 1]}, and defaults to \code{0.5}.}
+value in \verb{[0, 1]}, and defaults to \code{0.5}.}
 }
 \value{
 A \code{NegativeBinomial} object.
@@ -39,6 +39,8 @@ success probability \code{p} = \eqn{p}.
 
 \deqn{
      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+  }{
+     f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
   }
 
 \strong{Cumulative distribution function (c.d.f)}:
@@ -48,6 +50,8 @@ Too nasty, ommited.
 \strong{Moment generating function (m.g.f)}:
 
 \deqn{
+     \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+  }{
      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
   }
 }
@@ -67,9 +71,13 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Categorical}},
-  \code{\link{Geometric}}, \code{\link{HyperGeometric}},
-  \code{\link{Multinomial}}, \code{\link{Poisson}}
+Other discrete distributions: 
+\code{\link{Bernoulli}()},
+\code{\link{Binomial}()},
+\code{\link{Categorical}()},
+\code{\link{Geometric}()},
+\code{\link{HyperGeometric}()},
+\code{\link{Multinomial}()},
+\code{\link{Poisson}()}
 }
 \concept{discrete distributions}

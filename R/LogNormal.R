@@ -31,7 +31,11 @@
 #'
 #'   **Probability density function (p.d.f)**:
 #'
-#'   \deqn{f(x) = \frac{1}{x\sigma\sqrt{2\pi}}\exp(-\frac{(\log x - \mu)^2}{2\sigma^2})}
+#'   \deqn{
+#'     f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp \left(-\frac{(\log x - \mu)^2}{2 \sigma^2} \right)
+#'   }{
+#'     f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp (-\frac{(\log x - \mu)^2}{2 \sigma^2})
+#'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
@@ -64,7 +68,35 @@ LogNormal <- function(log_mu = 0, log_sigma = 1) {
 
 #' @export
 print.LogNormal <- function(x, ...) {
-  cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})\n"))
+  cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})"), "\n")
+}
+
+#' @export
+mean.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  exp(mu + sigma^2 / 2)
+}
+
+#' @export
+variance.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  (exp(sigma^2) - 1) * exp(2 * mu + sigma^2)
+}
+
+#' @export
+skewness.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  (exp(sigma^2) + 2) * sqrt(exp(sigma^2) - 1)
+}
+
+#' @export
+kurtosis.LogNormal <- function(d, ...) {
+  mu <- d$log_mu
+  sigma <- d$log_sigma
+  exp(4 * sigma^2) + 2 * exp(3 * sigma^2) + 3 * exp(2 * sigma^2) - 6
 }
 
 #' Draw a random sample from a LogNormal distribution
@@ -184,4 +216,19 @@ suff_stat.LogNormal <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` must be a vector of positive real numbers")
   log_x <- log(x)
   list(mu = mean(log_x), sigma = sd(log_x), samples = length(x))
+}
+
+#' Return the support of the LogNormal distribution
+#'
+#' @param d An `LogNormal` object created by a call to [LogNormal()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.LogNormal <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

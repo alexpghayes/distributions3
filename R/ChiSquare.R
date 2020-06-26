@@ -78,6 +78,11 @@
 #' X <- ChiSquare(5)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -96,8 +101,20 @@ ChiSquare <- function(df) {
 
 #' @export
 print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})\n"))
+  cat(glue("Chi Square distribution (df = {x$df})"), "\n")
 }
+
+#' @export
+mean.ChiSquare <- function(d, ...) d$df
+
+#' @export
+variance.ChiSquare <- function(d, ...) d$df * 2
+
+#' @export
+skewness.ChiSquare <- function(d, ...) sqrt(8 / d$df)
+
+#' @export
+kurtosis.ChiSquare <- function(d, ...) 12 / d$df
 
 #' Draw a random sample from a chi square distribution
 #'
@@ -177,3 +194,16 @@ quantile.ChiSquare <- function(d, p, ...) {
 
   qchisq(p = p, df = d$df)
 }
+
+
+#' Return the support of the ChiSquare distribution
+#'
+#' @param d An `ChiSquare` object created by a call to [ChiSquare()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.ChiSquare <- function(d){
+  c(0, Inf)
+}
+

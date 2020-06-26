@@ -61,7 +61,11 @@ and now we ask how probable is this statistic *given that we have assumed that n
 
 The idea is that if this number is very small, then our null distribution can't be correct: we shouldn't observe highly unlikely statistics. This means that hypothesis testing is a form of *falsification testing*.
 
-```{r}
+```{r, echo = FALSE}
+got_ggplot2 <- requireNamespace("ggplot2", quietly = TRUE)
+```
+
+```{r, eval = got_ggplot2}
 library(ggplot2)
 library(distributions3)
 

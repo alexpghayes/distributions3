@@ -37,7 +37,11 @@ success probability \code{p} = \eqn{p}.
 
 \strong{Probability density function (p.d.f)}:
 
-\deqn{f(x) = \frac{1}{x\sigma\sqrt{2\pi}}\exp(-\frac{(\log x - \mu)^2}{2\sigma^2})}
+\deqn{
+    f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp \left(-\frac{(\log x - \mu)^2}{2 \sigma^2} \right)
+  }{
+    f(x) = \frac{1}{x \sigma \sqrt{2 \pi}} \exp (-\frac{(\log x - \mu)^2}{2 \sigma^2})
+  }
 
 \strong{Cumulative distribution function (c.d.f)}:
 

@@ -43,9 +43,10 @@ quantile(X, 0.7)
 
 }
 \seealso{
-Other LogNormal distribution: \code{\link{cdf.LogNormal}},
-  \code{\link{fit_mle.LogNormal}},
-  \code{\link{quantile.LogNormal}},
-  \code{\link{random.LogNormal}}
+Other LogNormal distribution: 
+\code{\link{cdf.LogNormal}()},
+\code{\link{fit_mle.LogNormal}()},
+\code{\link{quantile.LogNormal}()},
+\code{\link{random.LogNormal}()}
 }
 \concept{LogNormal distribution}

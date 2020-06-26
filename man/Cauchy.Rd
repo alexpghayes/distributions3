@@ -28,7 +28,7 @@ We recommend reading this documentation on
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Cauchy variable with mean
-\code{location =} \eqn{x_0} and \code{scale} = \eqn{\gamma}.
+\verb{location =} \eqn{x_0} and \code{scale} = \eqn{\gamma}.
 
 \strong{Support}: \eqn{R}, the set of all real numbers
 
@@ -63,6 +63,11 @@ set.seed(27)
 
 X <- Cauchy(10, 0.2)
 X
+
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
 
 random(X, 10)
 

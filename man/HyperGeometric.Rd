@@ -36,7 +36,7 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be a HyperGeometric random variable with
 success probability \code{p} = \eqn{p = m/(m+n)}.
 
-\strong{Support}: \eqn{x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}}
+\strong{Support}: \eqn{x \in { \{\max{(0, k-n)}, \dots, \min{(k,m)}}\}}
 
 \strong{Mean}: \eqn{\frac{km}{n+m} = kp}
 
@@ -76,9 +76,13 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Categorical}},
-  \code{\link{Geometric}}, \code{\link{Multinomial}},
-  \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
+Other discrete distributions: 
+\code{\link{Bernoulli}()},
+\code{\link{Binomial}()},
+\code{\link{Categorical}()},
+\code{\link{Geometric}()},
+\code{\link{Multinomial}()},
+\code{\link{NegativeBinomial}()},
+\code{\link{Poisson}()}
 }
 \concept{discrete distributions}

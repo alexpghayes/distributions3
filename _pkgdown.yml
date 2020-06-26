@@ -16,6 +16,7 @@ reference:
       - "log_pdf"
       - "cdf"
       - "quantile"
+      - "plot.distribution"
   - title: Distributions
     desc: ~
     contents:
@@ -27,8 +28,12 @@ reference:
       - "ChiSquare"
       - "Exponential"
       - "FisherF"
+      - "Frechet"
       - "Gamma"
       - "Geometric"
+      - "GEV"
+      - "GP"
+      - "Gumbel"
       - "HyperGeometric"
       - "Logistic"
       - "LogNormal"
@@ -36,6 +41,7 @@ reference:
       - "NegativeBinomial"
       - "Normal"
       - "Poisson"
+      - "RevWeibull"
       - "StudentsT"
       - "Tukey"
       - "Uniform"
