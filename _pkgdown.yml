@@ -16,6 +16,7 @@ reference:
       - "log_pdf"
       - "cdf"
       - "quantile"
+      - "plot.distribution"
   - title: Distributions
     desc: ~
     contents:
