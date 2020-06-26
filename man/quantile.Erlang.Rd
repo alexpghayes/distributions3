@@ -4,8 +4,7 @@
 \alias{quantile.Erlang}
 \title{Determine quantiles of an Erlang distribution}
 \usage{
-\method{quantile}{Erlang}(d, p, ..., interval = c(0, 1e+06),
-  tol = .Machine$double.eps)
+\method{quantile}{Erlang}(d, p, ..., interval = c(0, 1e+06), tol = .Machine$double.eps)
 }
 \arguments{
 \item{d}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
