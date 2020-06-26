@@ -137,3 +137,12 @@ quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$doub
   }, vectorize.args = "p")
   internal(d = d, p = p, ..., interval = interval, tol = tol)
 }
+
+#' Return the support of the Erlang distribution
+#'
+#' @param d An `Erlang` object created by a call to [Erlang()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Erlang <- function(d) c(0, Inf)
