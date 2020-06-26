@@ -101,7 +101,7 @@ ChiSquare <- function(df) {
 
 #' @export
 print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})\n"))
+  cat(glue("Chi Square distribution (df = {x$df})"), "\n")
 }
 
 #' @export

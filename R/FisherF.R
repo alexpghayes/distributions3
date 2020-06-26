@@ -79,7 +79,7 @@ FisherF <- function(df1, df2, lambda = 0) {
 
 #' @export
 print.FisherF <- function(x, ...) {
-  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})\n"))
+  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})"), "\n")
 }
 
 #' The k-th moment of an F(df1, df2) distribution exists and

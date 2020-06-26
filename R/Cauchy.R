@@ -81,7 +81,7 @@ Cauchy <- function(location = 0, scale = 1) {
 
 #' @export
 print.Cauchy <- function(x, ...) {
-  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})\n"))
+  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"), "\n")
 }
 
 #' @export

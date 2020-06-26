@@ -73,7 +73,7 @@ NegativeBinomial <- function(size, p = 0.5) {
 
 #' @export
 print.NegativeBinomial <- function(x, ...) {
-  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})\n"))
+  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})"), "\n")
 }
 
 #' @export

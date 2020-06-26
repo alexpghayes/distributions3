@@ -98,7 +98,7 @@ Binomial <- function(size, p = 0.5) {
 
 #' @export
 print.Binomial <- function(x, ...) {
-  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})\n"))
+  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"), "\n")
 }
 
 #' @export

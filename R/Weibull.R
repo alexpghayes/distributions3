@@ -65,7 +65,7 @@ Weibull <- function(shape, scale) {
 
 #' @export
 print.Weibull <- function(x, ...) {
-  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})\n"))
+  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})"), "\n")
 }
 
 #' @export

@@ -79,7 +79,7 @@ HyperGeometric <- function(m, n, k) {
 
 #' @export
 print.HyperGeometric <- function(x, ...) {
-  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})\n"))
+  cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})"), "\n")
 }
 
 #' @export
