@@ -58,6 +58,11 @@
 #' X <- Cauchy(10, 0.2)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -76,8 +81,20 @@ Cauchy <- function(location = 0, scale = 1) {
 
 #' @export
 print.Cauchy <- function(x, ...) {
-  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})\n"))
+  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"), "\n")
 }
+
+#' @export
+mean.Cauchy <- function(d, ...) NaN
+
+#' @export
+variance.Cauchy <- function(d, ...) NaN
+
+#' @export
+skewness.Cauchy <- function(d, ...) NaN
+
+#' @export
+kurtosis.Cauchy <- function(d, ...) NaN
 
 #' Draw a random sample from a Cauchy distribution
 #'
@@ -153,3 +170,15 @@ cdf.Cauchy <- function(d, x, ...) {
 quantile.Cauchy <- function(d, p, ...) {
   qcauchy(p = p, location = d$location, scale = d$scale)
 }
+
+#' Return the support of the Cauchy distribution
+#'
+#' @param d An `Cauchy` object created by a call to [Cauchy()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Cauchy <- function(d){
+  c(-Inf, Inf)
+}
+

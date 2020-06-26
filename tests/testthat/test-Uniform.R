@@ -68,3 +68,12 @@ test_that("quantile.Uniform work correctly", {
   expect_length(quantile(u, seq_len(0)), 0)
   expect_length(quantile(u, c(0, 1)), 2)
 })
+
+test_that("{moments}.Uniform work correctly", {
+  u <- Uniform()
+
+  expect_equal(mean(u), 0.5)
+  expect_equal(variance(u), 1/12)
+  expect_equal(skewness(u), 0)
+  expect_equal(kurtosis(u), -6/5)
+})

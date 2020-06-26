@@ -78,6 +78,11 @@
 #' X <- Normal(5, 2)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -160,8 +165,20 @@ Normal <- function(mu = 0, sigma = 1) {
 
 #' @export
 print.Normal <- function(x, ...) {
-  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})\n"))
+  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})"), "\n")
 }
+
+#' @export
+mean.Normal <- function(d, ...) d$mu
+
+#' @export
+variance.Normal <- function(d, ...) d$sigma ^ 2
+
+#' @export
+skewness.Normal <- function(d, ...) 0
+
+#' @export
+kurtosis.Normal <- function(d, ...) 0
 
 #' Draw a random sample from a Normal distribution
 #'
@@ -293,4 +310,19 @@ suff_stat.Normal <- function(d, x, ...) {
   valid_x <- is.numeric(x)
   if (!valid_x) stop("`x` must be a numeric vector")
   list(mu = mean(x), sigma = sd(x), samples = length(x))
+}
+
+#' Return the support of the Normal distribution
+#'
+#' @param d An `Normal` object created by a call to [Normal()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Normal <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
 }

@@ -35,6 +35,8 @@
 #'
 #'   \deqn{
 #'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'   }{
+#'      f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
 #'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
@@ -44,6 +46,8 @@
 #'   **Moment generating function (m.g.f)**:
 #'
 #'   \deqn{
+#'      \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+#'   }{
 #'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
 #'   }
 #'
@@ -69,8 +73,20 @@ NegativeBinomial <- function(size, p = 0.5) {
 
 #' @export
 print.NegativeBinomial <- function(x, ...) {
-  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})\n"))
+  cat(glue("Negative Binomial distribution (size = {x$size}, p = {x$p})"), "\n")
 }
+
+#' @export
+mean.NegativeBinomial <- function(d, ...) d$p * d$size / (1 - d$p)
+
+#' @export
+variance.NegativeBinomial <- function(d, ...) (d$p * d$size) / (1 - d$p)^2
+
+#' @export
+skewness.NegativeBinomial <- function(d, ...) (1 + d$p) / sqrt(d$p * d$size)
+
+#' @export
+kurtosis.NegativeBinomial <- function(d, ...) 6 / d$size + (1 - d$p)^2 / d$size * d$p
 
 #' Draw a random sample from a negative binomial distribution
 #'
@@ -152,4 +168,20 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #'
 quantile.NegativeBinomial <- function(d, p, ...) {
   qnbinom(p = p, size = d$size, prob = d$p)
+}
+
+
+#' Return the support of the NegativeBinomial distribution
+#'
+#' @param d An `NegativeBinomial` object created by a call to [NegativeBinomial()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.NegativeBinomial <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }

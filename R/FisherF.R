@@ -10,6 +10,50 @@
 #'
 #' @family continuous distributions
 #'
+#' TODO update details
+#'
+#' @details
+#'
+#'   We recommend reading this documentation on
+#'   <https://alexpghayes.github.io/distributions>, where the math
+#'   will render with additional detail.
+#'
+#'   In the following, let \eqn{X} be a Gamma random variable
+#'   with parameters
+#'   `shape` = \eqn{\alpha} and
+#'   `rate` = \eqn{\beta}.
+#'
+#'   **Support**: \eqn{x \in (0, \infty)}
+#'
+#'   **Mean**: \eqn{\frac{\alpha}{\beta}}
+#'
+#'   **Variance**: \eqn{\frac{\alpha}{\beta^2}}
+#'
+#'   **Probability density function (p.m.f)**:
+#'
+#'   \deqn{
+#'     f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+#'   }{
+#'     f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
+#'   }
+#'
+#'   **Cumulative distribution function (c.d.f)**:
+#'
+#'   \deqn{
+#'     f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+#'   }{
+#'     f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
+#'   }
+#'
+#'   **Moment generating function (m.g.f)**:
+#'
+#'   \deqn{
+#'     E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+#'   }{
+#'     E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
+#'   }
+#'
+#'
 #' @examples
 #'
 #' set.seed(27)
@@ -35,7 +79,53 @@ FisherF <- function(df1, df2, lambda = 0) {
 
 #' @export
 print.FisherF <- function(x, ...) {
-  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})\n"))
+  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})"), "\n")
+}
+
+#' The k-th moment of an F(df1, df2) distribution exists and
+#' is finite only when 2k < d2
+#' @export
+mean.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 2) d2 / (d2 - 2) else NaN
+}
+
+#' @export
+variance.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 4) {
+    (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4))
+  } else {
+    NaN
+  }
+}
+
+#' @export
+skewness.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 6) {
+    a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
+    b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
+    a / b
+  } else {
+    NaN
+  }
+}
+
+#' @export
+kurtosis.FisherF <- function(d, ...) {
+  d1 <- d$df1
+  d2 <- d$df2
+  if (d2 > 8) {
+    a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
+    b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
+    12 * a / b
+  } else {
+    NaN
+  }
 }
 
 #' Draw a random sample from an F distribution
@@ -111,4 +201,15 @@ cdf.FisherF <- function(d, x, ...) {
 #'
 quantile.FisherF <- function(d, p, ...) {
   qf(p = p, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+}
+
+#' Return the support of the FisherF distribution
+#'
+#' @param d An `FisherF` object created by a call to [FisherF()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.FisherF <- function(d){
+  return(c(0, Inf))
 }

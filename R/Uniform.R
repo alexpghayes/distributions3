@@ -34,15 +34,27 @@
 #'
 Uniform <- function(a = 0, b = 1) {
   d <- list(a = a, b = b)
-  class(d) <- "Uniform"
+  class(d) <- c("Uniform", "distribution")
   d
 }
 
 #' @export
 print.Uniform <- function(x, ...) {
   if (x$a > x$b) names(x) <- c("b", "a")
-  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})\n"))
+  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"), "\n")
 }
+
+#' @export
+mean.Uniform <- function(d, ...) (d$a + d$b) / 2
+
+#' @export
+variance.Uniform <- function(d, ...) (1 / 12) * (d$b - d$a) ^ 2
+
+#' @export
+skewness.Uniform <- function(d, ...) 0
+
+#' @export
+kurtosis.Uniform <- function(d, ...) -6/5
 
 #' Draw a random sample from a continuous Uniform distribution
 #'
@@ -118,3 +130,13 @@ cdf.Uniform <- function(d, x, ...) {
 quantile.Uniform <- function(d, p, ...) {
   qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
 }
+
+
+#' Return the support of the Uniform distribution
+#'
+#' @param d An `Uniform` object created by a call to [Uniform()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Uniform <- function(d) c(d$a, d$b)

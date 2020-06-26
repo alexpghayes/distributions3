@@ -65,7 +65,34 @@ Weibull <- function(shape, scale) {
 
 #' @export
 print.Weibull <- function(x, ...) {
-  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})\n"))
+  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})"), "\n")
+}
+
+#' @export
+mean.Weibull <- function(d, ...) {
+  d$scale * gamma(1 + 1/d$shape)
+}
+
+#' @export
+variance.Weibull <- function(d, ...) {
+  d$scale^2 * gamma(1 + 2/d$shape) - mean(d)^2
+}
+
+#' @export
+skewness.Weibull <- function(d, ...) {
+  mu <- mean(d)
+  sigma <- sqrt(variance(d))
+  r <- mu / sigma
+  gamma(1 + 3/d$shape) * (d$scale/sigma)^3 - 3*r - 3^r
+}
+
+#' @export
+kurtosis.Weibull <- function(d, ...) {
+  mu <- mean(d)
+  sigma <- sqrt(variance(d))
+  gamma <- skewness(d)
+  r <- mu / sigma
+  (d$scale/sigma)^4 * gamma(1 + 4/d$shape) - 4*gamma*r -6*r^2 - r^4 - 3
 }
 
 #' Draw a random sample from a Weibull distribution
@@ -151,3 +178,13 @@ cdf.Weibull <- function(d, x, ...) {
 quantile.Weibull <- function(d, p, ...) {
   qweibull(p = p, shape = d$shape, scale = d$scale)
 }
+
+
+#' Return the support of the Weibull distribution
+#'
+#' @param d An `Weibull` object created by a call to [Weibull()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Weibull <- function(d) c(0, Inf)

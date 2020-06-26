@@ -57,3 +57,13 @@ test_that("quantile.ChiSquare work correctly", {
   expect_length(quantile(cs, seq_len(0)), 0)
   expect_length(quantile(cs, c(0, 1)), 2)
 })
+
+test_that("{moments}.Normal work correctly", {
+  df <- 5
+  cs <- ChiSquare(5)
+
+  expect_equal(mean(cs), df)
+  expect_equal(variance(cs), 2 * df)
+  expect_equal(skewness(cs), sqrt(8 / df))
+  expect_equal(kurtosis(cs), 12 / df)
+})

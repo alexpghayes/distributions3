@@ -79,9 +79,21 @@ Logistic <- function(location = 0, scale = 1) {
 #' @export
 print.Logistic <- function(x, ...) {
   cat(
-    glue("Logistic distribution (location = {x$location}, scale = {x$scale})\n")
+    glue("Logistic distribution (location = {x$location}, scale = {x$scale})", "\n")
   )
 }
+
+#' @export
+mean.Logistic <- function(d, ...) d$location
+
+#' @export
+variance.Logistic <- function(d, ...) d$scale^2 * pi^2 / 3
+
+#' @export
+skewness.Logistic <- function(d, ...) 0
+
+#' @export
+kurtosis.Logistic <- function(d, ...) 6 / 5
 
 #' Draw a random sample from a Logistic distribution
 #'
@@ -165,4 +177,19 @@ cdf.Logistic <- function(d, x, ...) {
 #'
 quantile.Logistic <- function(d, p, ...) {
   qlogis(p = p, location = d$location, scale = d$scale)
+}
+
+#' Return the support of the Logistic distribution
+#'
+#' @param d An `Logistic` object created by a call to [Logistic()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Logistic <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(-Inf, Inf))
 }

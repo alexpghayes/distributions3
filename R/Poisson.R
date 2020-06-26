@@ -77,8 +77,20 @@ Poisson <- function(lambda) {
 
 #' @export
 print.Poisson <- function(x, ...) {
-  cat(glue("Poisson distribution (lambda = {x$lambda})\n"))
+  cat(glue("Poisson distribution (lambda = {x$lambda})"), "\n")
 }
+
+#' @export
+mean.Poisson <- function(d, ...) d$lambda
+
+#' @export
+variance.Poisson <- function(d, ...) d$lambda
+
+#' @export
+skewness.Poisson <- function(d, ...) 1 / sqrt(d$lambda)
+
+#' @export
+kurtosis.Poisson <- function(d, ...) 1 / d$lambda
 
 #' Draw a random sample from a Poisson distribution
 #'
@@ -186,4 +198,20 @@ suff_stat.Poisson <- function(d, x, ...) {
   valid_x <- (x >= 0) & (x %% 1 == 0)
   if (any(!valid_x)) stop("`x` must only contain positive integers")
   list(sum = sum(x), samples = length(x))
+}
+
+
+#' Return the support of the Poisson distribution
+#'
+#' @param d An `Poisson` object created by a call to [Poisson()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Poisson <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }
