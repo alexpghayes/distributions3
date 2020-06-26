@@ -92,6 +92,17 @@ print.RevWeibull <- function(x, ...) {
            scale = {x$scale}, shape = {x$shape})\n"))
 }
 
+#' @export
+mean.RevWeibull <- function(d, ...) {
+  d$location + d$scale * gamma(1 + 1/d$shape)
+}
+
+#' @export
+variance.RevWeibull <- function(d, ...) {
+  d$scale^2 * gamma(1 + 2/d$shape) - gamma(1 + 1/d$shape)^2
+}
+
+
 #' Draw a random sample from an RevWeibull distribution
 #'
 #' @inherit RevWeibull examples
@@ -186,3 +197,7 @@ quantile.RevWeibull <- function(d, p, ...) {
   shape <- -1 / d$shape
   revdbayes::qgev(p = p, loc = loc, scale = scale, shape = shape)
 }
+
+
+#' @export
+support.RevWeibull <- function(d) c(-Inf, d$location)

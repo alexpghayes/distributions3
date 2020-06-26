@@ -67,3 +67,12 @@ test_that("quantile.Exponential work correctly", {
   expect_length(quantile(e, seq_len(0)), 0)
   expect_length(quantile(e, c(0, 1)), 2)
 })
+
+test_that("{moments}.Exponential work correctly", {
+  e <- Exponential()
+
+  expect_equal(mean(e), 1)
+  expect_equal(variance(e), 1)
+  expect_equal(skewness(e), 2)
+  expect_equal(kurtosis(e), 6)
+})

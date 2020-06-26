@@ -75,3 +75,12 @@ test_that("quantile.Bernoulli work correctly", {
   expect_length(quantile(b, seq_len(0)), 0)
   expect_length(quantile(b, c(0, 1)), 2)
 })
+
+test_that("{moments}.Bernoulli work correctly", {
+  n <- Bernoulli()
+
+  expect_equal(mean(n), 0.5)
+  expect_equal(variance(n), 0.25)
+  expect_equal(skewness(n), 0)
+  expect_equal(kurtosis(n), -2)
+})

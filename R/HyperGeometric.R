@@ -82,6 +82,48 @@ print.HyperGeometric <- function(x, ...) {
   cat(glue("HyperGeometric distribution (m = {x$m}, n = {x$n}, k = {x$k})\n"))
 }
 
+#' @export
+mean.HyperGeometric <- function(d, ...) {
+  # Reformulating to match Wikipedia
+  # N is the population size
+  N <- d$n + d$m
+  # K number of success states
+  K <- d$m
+  # n number of draws
+  n <- d$k
+
+  n * K / N
+}
+
+#' @export
+variance.HyperGeometric <- function(d, ...) {
+  N <- d$n + d$m
+  K <- d$m
+  n <- d$k
+
+  (n * K * (N - K) * (N - n)) / (N^2 * (N - 1))
+}
+
+#' @export
+skewness.HyperGeometric <- function(d, ...) {
+  N <- d$n + d$m
+  K <- d$m
+  n <- d$k
+
+  a <- (N - 2 * K) * (N - 1)^0.5 * (N - 2 * n)
+  b <- (n * K * (N - K) * (N - n))^0.5 * (N - 2)
+  a / b
+}
+
+#' @export
+kurtosis.HyperGeometric <- function(d, ...) {
+  N <- d$n + d$m
+  K <- d$m
+  n <- d$k
+
+  1 / (n * K * (N - K) * (N - n) * (N - 2) * (N - 3))
+}
+
 #' Draw a random sample from a HyperGeometric distribution
 #'
 #' Please see the documentation of [HyperGeometric()] for some properties
@@ -181,4 +223,3 @@ quantile.HyperGeometric <- function(d, p, ...) {
 support.HyperGeometric <- function(d){
   c(max(0, d$k - d$n), min(d$m, d$k))
 }
-

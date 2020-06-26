@@ -15,6 +15,11 @@
 #' X <- Exponential(5)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -35,6 +40,18 @@ Exponential <- function(rate = 1) {
 print.Exponential <- function(x, ...) {
   cat(glue("Exponential distribution (rate = {x$rate})\n"))
 }
+
+#' @export
+mean.Exponential <- function(d, ...) d$rate ^ -1
+
+#' @export
+variance.Exponential <- function(d, ...) d$rate ^ 2
+
+#' @export
+skewness.Exponential <- function(d, ...) 2
+
+#' @export
+kurtosis.Exponential <- function(d, ...) 6
 
 #' Draw a random sample from a Exponential distribution
 #'

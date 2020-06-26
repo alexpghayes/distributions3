@@ -83,6 +83,18 @@ print.Logistic <- function(x, ...) {
   )
 }
 
+#' @export
+mean.Logistic <- function(d, ...) d$location
+
+#' @export
+variance.Logistic <- function(d, ...) d$scale^2 * pi^2 / 3
+
+#' @export
+skewness.Logistic <- function(d, ...) 0
+
+#' @export
+kurtosis.Logistic <- function(d, ...) 6 / 5
+
 #' Draw a random sample from a Logistic distribution
 #'
 #' @inherit Logistic examples

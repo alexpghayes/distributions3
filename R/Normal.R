@@ -78,6 +78,11 @@
 #' X <- Normal(5, 2)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -162,6 +167,18 @@ Normal <- function(mu = 0, sigma = 1) {
 print.Normal <- function(x, ...) {
   cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})\n"))
 }
+
+#' @export
+mean.Normal <- function(d, ...) d$mu
+
+#' @export
+variance.Normal <- function(d, ...) d$sigma ^ 2
+
+#' @export
+skewness.Normal <- function(d, ...) 0
+
+#' @export
+kurtosis.Normal <- function(d, ...) 0
 
 #' Draw a random sample from a Normal distribution
 #'
