@@ -92,7 +92,13 @@ This looks almost like the second approach, except using $z_{\alpha / 2}$ instea
 
 The difference is easiest to understand with a picture:
 
-```{r echo = FALSE}
+```{r, echo = FALSE}
+got_ggplot2 <- requireNamespace("ggplot2", quietly = TRUE)
+got_cowplot <- requireNamespace("cowplot", quietly = TRUE)
+got_ggplot2_and_cowplot <- got_ggplot2 * got_cowplot
+```
+
+```{r, echo = FALSE, eval = got_ggplot2_and_cowplot}
 library(ggplot2)
 library(cowplot)
 

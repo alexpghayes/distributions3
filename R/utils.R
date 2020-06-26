@@ -29,11 +29,14 @@ is_distribution <- function(x) {
 #'
 #' @export
 plot_cdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = ggplot2::theme_minimal){
+                     plot_theme = NULL){
 
-  if(!"ggplot2" %in% loadedNamespaces())
-    stop("You must load ggplot2 for this function to work.")
-
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
+  }
+  if (is.null(plot_theme)) {
+    plot_theme <- ggplot2::theme_minimal
+  }
   if(is.null(limits))
     limits <- support(d)
 
@@ -88,12 +91,14 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 #'
 #' @export
 plot_pdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = ggplot2::theme_bw){
+                     plot_theme = NULL){
 
-  if(!"ggplot2" %in% loadedNamespaces())
-    stop("You must load ggplot2 for this function to work.")
-
-
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
+  }
+  if (is.null(plot_theme)) {
+    plot_theme <- ggplot2::theme_bw
+  }
   if(is.null(limits))
     limits <- support(d)
 
@@ -166,8 +171,8 @@ StatAUC <- ggplot2::ggproto(
 #'
 #' X <- Normal()
 #'
-#' plot_pdf(X) + geom_auc(to = -0.645)
-#' plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
+#' #plot_pdf(X) + geom_auc(to = -0.645)
+#' #plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
 geom_auc <- function(mapping = NULL, data = NULL,
                      position = "identity", na.rm = FALSE, show.legend = NA,
                      inherit.aes = TRUE, from = -Inf, to = Inf,
@@ -198,8 +203,8 @@ geom_auc <- function(mapping = NULL, data = NULL,
 #'
 #' X <- Normal()
 #'
-#' plot_pdf(X) + geom_prob(to = -0.645)
-#' plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
+#' #plot_pdf(X) + geom_prob(to = -0.645)
+#' #plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
 #'
 #' @export
 geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){

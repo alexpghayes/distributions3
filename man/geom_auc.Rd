@@ -62,6 +62,6 @@ Fill out area under the curve
 
 X <- Normal()
 
-plot_pdf(X) + geom_auc(to = -0.645)
-plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
+#plot_pdf(X) + geom_auc(to = -0.645)
+#plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
 }

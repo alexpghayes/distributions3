@@ -66,7 +66,11 @@ qqline(english)
 
 And it seems fine as well. We can also create side-by-side boxplots of the data using the `ggplot2` package to get a nice comparison of the two groups. This requires a little bit of data manipulation:
 
-```{r}
+```{r, echo = FALSE}
+got_ggplot2 <- requireNamespace("ggplot2", quietly = TRUE)
+```
+
+```{r, eval = got_ggplot2}
 library(ggplot2)
 
 # make a data frame in long format for plotting

@@ -4,7 +4,7 @@
 \alias{plot_pdf}
 \title{Plot the PDF of a distribution}
 \usage{
-plot_pdf(d, limits = NULL, p = 0.001, plot_theme = ggplot2::theme_bw)
+plot_pdf(d, limits = NULL, p = 0.001, plot_theme = NULL)
 }
 \arguments{
 \item{d}{A \code{distribution} object}

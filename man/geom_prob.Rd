@@ -23,7 +23,7 @@ with P(from < X < to).
 
 X <- Normal()
 
-plot_pdf(X) + geom_prob(to = -0.645)
-plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
+#plot_pdf(X) + geom_prob(to = -0.645)
+#plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
 
 }
