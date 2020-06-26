@@ -73,6 +73,11 @@
 #' X <- Bernoulli(0.7)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #' pdf(X, 1)
 #' log_pdf(X, 1)
@@ -81,6 +86,7 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
+#'
 Bernoulli <- function(p = 0.5) {
   d <- list(p = p)
   class(d) <- c("Bernoulli", "distribution")
@@ -90,6 +96,26 @@ Bernoulli <- function(p = 0.5) {
 #' @export
 print.Bernoulli <- function(x, ...) {
   cat(glue("Bernoulli distribution (p = {x$p})"), "\n")
+}
+
+#' @export
+mean.Bernoulli <- function(d, ...) d$p
+
+#' @export
+variance.Bernoulli <- function(d, ...) d$p * (1 - d$p)
+
+#' @export
+skewness.Bernoulli <- function(d, ...) {
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (2 * p)) / sqrt(p * q)
+}
+
+#' @export
+kurtosis.Bernoulli <- function(d, ...) {
+  p <- d$p
+  q <- 1 - d$p
+  (1 - (6 * p * q)) / (p * q)
 }
 
 #' Draw a random sample from a Bernoulli distribution
@@ -196,3 +222,16 @@ suff_stat.Bernoulli <- function(d, x, ...) {
   if (any(!valid_x)) stop("`x` contains elements other than 0 or 1")
   list(successes = sum(x == 1), failures = sum(x == 0))
 }
+
+#' Return the support of the Bernoulli distribution
+#'
+#' @param d An `Bernoulli` object created by a call to [Bernoulli()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Bernoulli <- function(d){
+  return(c(0, 1))
+}
+
+

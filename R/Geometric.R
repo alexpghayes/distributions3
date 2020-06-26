@@ -76,6 +76,18 @@ print.Geometric <- function(x, ...) {
   cat(glue("Geometric distribution (p = {x$p})"), "\n")
 }
 
+#' @export
+mean.Geometric <- function(d, ...) 1 / d$p
+
+#' @export
+variance.Geometric <- function(d, ...) (1 - d$p) / d$p^2
+
+#' @export
+skewness.Geometric <- function(d, ...) (2 - d$p) / sqrt(1 - d$p)
+
+#' @export
+kurtosis.Geometric <- function(d, ...) 6 + (d$p^2 / (1 - d$p))
+
 #' Draw a random sample from a Geometric distribution
 #'
 #' Please see the documentation of [Geometric()] for some properties
@@ -197,4 +209,15 @@ suff_stat.Geometric <- function(d, x, ...) {
     stop("`x` must be a vector of positive discrete numbers")
   }
   list(trials = sum(x), experiments = length(x))
+}
+
+#' Return the support of the Geometric distribution
+#'
+#' @param d An `Geometric` object created by a call to [Geometric()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Geometric <- function(d){
+  c(0, Inf)
 }

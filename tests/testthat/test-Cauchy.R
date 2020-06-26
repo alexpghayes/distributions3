@@ -68,3 +68,12 @@ test_that("quantile.Cauchy work correctly", {
   expect_length(quantile(cau, seq_len(0)), 0)
   expect_length(quantile(cau, c(0, 1)), 2)
 })
+
+test_that("{moments}.Cauchy work correctly", {
+  cau <- Cauchy()
+
+  expect_true(is.nan(mean(cau)))
+  expect_true(is.nan(variance(cau)))
+  expect_true(is.nan(skewness(cau)))
+  expect_true(is.nan(kurtosis(cau)))
+})

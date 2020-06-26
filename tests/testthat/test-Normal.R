@@ -70,3 +70,12 @@ test_that("quantile.Normal work correctly", {
   expect_length(quantile(n, seq_len(0)), 0)
   expect_length(quantile(n, c(0, 1)), 2)
 })
+
+test_that("{moments}.Normal work correctly", {
+  n <- Normal()
+
+  expect_equal(mean(n), 0)
+  expect_equal(variance(n), 1)
+  expect_equal(skewness(n), 0)
+  expect_equal(kurtosis(n), 0)
+})

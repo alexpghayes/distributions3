@@ -90,6 +90,18 @@ print.Gamma <- function(x, ...) {
   cat(glue("Gamma distribution (shape = {x$shape}, rate = {x$rate})"), "\n")
 }
 
+#' @export
+mean.Gamma <- function(d, ...) d$shape / d$rate
+
+#' @export
+variance.Gamma <- function(d, ...) d$shape / d$rate^2
+
+#' @export
+skewness.Gamma <- function(d, ...) 2 / sqrt(d$shape)
+
+#' @export
+kurtosis.Gamma <- function(d, ...) 6 / d$shape
+
 #' Draw a random sample from a Gamma distribution
 #'
 #' @inherit Gamma examples
@@ -178,7 +190,7 @@ fit_mle.Gamma <- function(d, x, ...) {
   stop("`fit_mle` is not implemented for the Gamma distribution yet")
 }
 
-#' Compute the sufficient statistics for a bernoulli distribution from data
+#' Compute the sufficient statistics for a Gamma distribution from data
 #'
 #'   - `sum`: The sum of the data.
 #'   - `log_sum`: The log of the sum of the data.
@@ -190,3 +202,12 @@ suff_stat.Gamma <- function(d, x, ...) {
   if (any(x < 0)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), log_sum = sum(log(x)), samples = length(x))
 }
+
+#' Return the support of the Gamma distribution
+#'
+#' @param d An `Gamma` object created by a call to [Gamma()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Gamma <- function(d) c(0, Inf)

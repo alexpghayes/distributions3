@@ -15,6 +15,11 @@
 #' X <- Exponential(5)
 #' X
 #'
+#' mean(X)
+#' variance(X)
+#' skewness(X)
+#' kurtosis(X)
+#'
 #' random(X, 10)
 #'
 #' pdf(X, 2)
@@ -35,6 +40,18 @@ Exponential <- function(rate = 1) {
 print.Exponential <- function(x, ...) {
   cat(glue("Exponential distribution (rate = {x$rate})"), "\n")
 }
+
+#' @export
+mean.Exponential <- function(d, ...) d$rate ^ -1
+
+#' @export
+variance.Exponential <- function(d, ...) d$rate ^ 2
+
+#' @export
+skewness.Exponential <- function(d, ...) 2
+
+#' @export
+kurtosis.Exponential <- function(d, ...) 6
 
 #' Draw a random sample from a Exponential distribution
 #'
@@ -142,4 +159,19 @@ suff_stat.Exponential <- function(d, x, ...) {
   valid_x <- (x > 0)
   if (any(!valid_x)) stop("`x` must only contain positive real numbers")
   list(sum = sum(x), samples = length(x))
+}
+
+#' Return the support of the Exponential distribution
+#'
+#' @param d An `Exponential` object created by a call to [Exponential()].
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
+#' @export
+support.Exponential <- function(d){
+  if(!is_distribution(d)){
+    message("d has to be a disitrubtion")
+    stop()
+  }
+  return(c(0, Inf))
 }
