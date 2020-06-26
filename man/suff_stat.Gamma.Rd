@@ -2,7 +2,7 @@
 % Please edit documentation in R/Gamma.R
 \name{suff_stat.Gamma}
 \alias{suff_stat.Gamma}
-\title{Compute the sufficient statistics for a bernoulli distribution from data}
+\title{Compute the sufficient statistics for a Gamma distribution from data}
 \usage{
 \method{suff_stat}{Gamma}(d, x, ...)
 }
@@ -19,9 +19,7 @@ a \code{Gamma} object
 \description{
 \itemize{
 \item \code{sum}: The sum of the data.
-\itemize{
 \item \code{log_sum}: The log of the sum of the data.
 \item \code{samples}: The number of samples in the data.
-}
 }
 }

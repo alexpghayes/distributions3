@@ -37,8 +37,9 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other NegativeBinomial distribution: \code{\link{cdf.NegativeBinomial}},
-  \code{\link{pdf.NegativeBinomial}},
-  \code{\link{quantile.NegativeBinomial}}
+Other NegativeBinomial distribution: 
+\code{\link{cdf.NegativeBinomial}()},
+\code{\link{pdf.NegativeBinomial}()},
+\code{\link{quantile.NegativeBinomial}()}
 }
 \concept{NegativeBinomial distribution}

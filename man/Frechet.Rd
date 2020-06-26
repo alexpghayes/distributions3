@@ -13,14 +13,14 @@ Frechet(location = 0, scale = 1, shape = 1)
 \item{scale}{The scale parameter \eqn{s}.
 \code{scale} can be any positive number.  Defaults to \code{1}.}
 
-\item{shape}{The scale parameter \eqn{\alpha}.
+\item{shape}{The shape parameter \eqn{\alpha}.
 \code{shape} can be any positive number.  Defaults to \code{1}.}
 }
 \value{
 A \code{Frechet} object.
 }
 \description{
-The Frechet distribution is a special case of the \code{\link{GEV}} distribution,
+The Frechet distribution is a special case of the \verb{\link{GEV}} distribution,
 obtained when the GEV shape parameter \eqn{\xi} is positive.
 It may be referred to as a type II extreme value distribution.
 }
@@ -33,7 +33,7 @@ In the following, let \eqn{X} be a Frechet random variable with location
 parameter  \code{location} = \eqn{m}, scale parameter \code{scale} =
 \eqn{s}, and shape parameter \code{shape} = \eqn{\alpha}.
 A Frechet(\eqn{m, s, \alpha}) distribution is equivalent to a
-\code{\link{GEV}}(\eqn{m + s, s / \alpha, 1 / \alpha}) distribution.
+\verb{\link{GEV}}(\eqn{m + s, s / \alpha, 1 / \alpha}) distribution.
 
 \strong{Support}: \eqn{(m, \infty)}.
 
@@ -79,14 +79,22 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 }
 \seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{GEV}},
-  \code{\link{GP}}, \code{\link{Gamma}},
-  \code{\link{Gumbel}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+Other continuous distributions: 
+\code{\link{Beta}()},
+\code{\link{Cauchy}()},
+\code{\link{ChiSquare}()},
+\code{\link{Exponential}()},
+\code{\link{GEV}()},
+\code{\link{GP}()},
+\code{\link{Gamma}()},
+\code{\link{Gumbel}()},
+\code{\link{LogNormal}()},
+\code{\link{Logistic}()},
+\code{\link{Normal}()},
+\code{\link{RevWeibull}()},
+\code{\link{StudentsT}()},
+\code{\link{Tukey}()},
+\code{\link{Uniform}()},
+\code{\link{Weibull}()}
 }
 \concept{continuous distributions}

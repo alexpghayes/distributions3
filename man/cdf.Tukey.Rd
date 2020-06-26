@@ -33,6 +33,7 @@ quantile(X, 0.7)
 
 }
 \seealso{
-Other Tukey distribution: \code{\link{quantile.Tukey}}
+Other Tukey distribution: 
+\code{\link{quantile.Tukey}()}
 }
 \concept{Tukey distribution}

@@ -76,9 +76,13 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other discrete distributions: \code{\link{Bernoulli}},
-  \code{\link{Binomial}}, \code{\link{Categorical}},
-  \code{\link{Geometric}}, \code{\link{Multinomial}},
-  \code{\link{NegativeBinomial}}, \code{\link{Poisson}}
+Other discrete distributions: 
+\code{\link{Bernoulli}()},
+\code{\link{Binomial}()},
+\code{\link{Categorical}()},
+\code{\link{Geometric}()},
+\code{\link{Multinomial}()},
+\code{\link{NegativeBinomial}()},
+\code{\link{Poisson}()}
 }
 \concept{discrete distributions}

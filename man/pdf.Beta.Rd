@@ -39,6 +39,11 @@ log_pdf(X, 0.7)
 cdf(X, 0.7)
 quantile(X, 0.7)
 
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
+
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 }

@@ -28,6 +28,11 @@ set.seed(27)
 X <- ChiSquare(5)
 X
 
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
+
 random(X, 10)
 
 pdf(X, 2)

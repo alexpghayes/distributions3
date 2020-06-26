@@ -4,8 +4,15 @@
 \alias{plot.distribution}
 \title{Plot the p.m.f, p.d.f or c.d.f. of a univariate distribution}
 \usage{
-\method{plot}{distribution}(x, cdf = FALSE, p = c(0.1, 99.9),
-  len = 1000, all = FALSE, legend_args = list(), ...)
+\method{plot}{distribution}(
+  x,
+  cdf = FALSE,
+  p = c(0.1, 99.9),
+  len = 1000,
+  all = FALSE,
+  legend_args = list(),
+  ...
+)
 }
 \arguments{
 \item{x}{an object of class \code{c("name", "distribution")}, where
@@ -70,7 +77,7 @@ If \code{xlim} is not passed in \code{...} then the range of values spans
 the support of the distribution, with the following proviso: if the
 lower (upper) endpoint of the distribution is \code{-Inf} (\code{Inf})
 then the lower (upper) limit of the plotting range is set to the
-\code{p[1]}\% (\code{p[2]}\%) quantile of the distribution.
+\code{p[1]}\\% (\code{p[2]}\\%) quantile of the distribution.
 
 If the name of \code{x} is a single upper case letter then that name is
 used to labels the axes of the plot.  Otherwise, \code{x} and

@@ -15,7 +15,7 @@
 catch mispellings or other possible errors.}
 }
 \value{
-A numeric vector containing values in \code{[a, b]} of length \code{n}.
+A numeric vector containing values in \verb{[a, b]} of length \code{n}.
 }
 \description{
 Draw a random sample from a continuous Uniform distribution

@@ -43,13 +43,22 @@ quantile(X, 0.7)
 
 }
 \seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{Frechet}},
-  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
-  \code{\link{Gumbel}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+Other continuous distributions: 
+\code{\link{Beta}()},
+\code{\link{Cauchy}()},
+\code{\link{ChiSquare}()},
+\code{\link{Exponential}()},
+\code{\link{Frechet}()},
+\code{\link{GEV}()},
+\code{\link{GP}()},
+\code{\link{Gamma}()},
+\code{\link{Gumbel}()},
+\code{\link{LogNormal}()},
+\code{\link{Logistic}()},
+\code{\link{Normal}()},
+\code{\link{RevWeibull}()},
+\code{\link{StudentsT}()},
+\code{\link{Uniform}()},
+\code{\link{Weibull}()}
 }
 \concept{continuous distributions}

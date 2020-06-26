@@ -93,7 +93,7 @@ print.Multinomial <- function(x, ...) {
   } else {
     p <- paste(round(x$p, 3), collapse = ", ")
   }
-  cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])"), "\n"))
+  cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])"), "\n")
 
 }
 

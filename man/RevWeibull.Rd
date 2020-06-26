@@ -21,7 +21,7 @@ A \code{RevWeibull} object.
 }
 \description{
 The reversed (or negated) Weibull distribution is a special case of the
-\code{\link{GEV}} distribution, obtained when the GEV shape parameter \eqn{\xi}
+\verb{\link{GEV}} distribution, obtained when the GEV shape parameter \eqn{\xi}
 is negative.  It may be referred to as a type III extreme value
 distribution.
 }
@@ -34,10 +34,10 @@ In the following, let \eqn{X} be a reversed Weibull random variable with
 location parameter  \code{location} = \eqn{m}, scale parameter \code{scale} =
 \eqn{s}, and shape parameter \code{shape} = \eqn{\alpha}.
 An RevWeibull(\eqn{m, s, \alpha}) distribution is equivalent to a
-\code{\link{GEV}}(\eqn{m - s, s / \alpha, -1 / \alpha}) distribution.
+\verb{\link{GEV}}(\eqn{m - s, s / \alpha, -1 / \alpha}) distribution.
 
 If \eqn{X} has an RevWeibull(\eqn{m, \lambda, k}) distribution then
-\eqn{m - X} has a \code{\link{Weibull}}(\eqn{k, \lambda}) distribution,
+\eqn{m - X} has a \verb{\link{Weibull}}(\eqn{k, \lambda}) distribution,
 that is, a Weibull distribution with shape parameter \eqn{k} and scale
 parameter \eqn{\lambda}.
 
@@ -83,13 +83,22 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 }
 \seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{Frechet}},
-  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
-  \code{\link{Gumbel}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+Other continuous distributions: 
+\code{\link{Beta}()},
+\code{\link{Cauchy}()},
+\code{\link{ChiSquare}()},
+\code{\link{Exponential}()},
+\code{\link{Frechet}()},
+\code{\link{GEV}()},
+\code{\link{GP}()},
+\code{\link{Gamma}()},
+\code{\link{Gumbel}()},
+\code{\link{LogNormal}()},
+\code{\link{Logistic}()},
+\code{\link{Normal}()},
+\code{\link{StudentsT}()},
+\code{\link{Tukey}()},
+\code{\link{Uniform}()},
+\code{\link{Weibull}()}
 }
 \concept{continuous distributions}

@@ -21,7 +21,7 @@ Gumbel distribution.}
 A \code{GP} object.
 }
 \description{
-The GP distribution has a link to the \code{\link{GEV}} distribution.
+The GP distribution has a link to the \verb{\link{GEV}} distribution.
 Suppose that the maximum of \eqn{n} i.i.d. random variables has
 approximately a GEV distribution. For a sufficiently large threshold
 \eqn{u}, the conditional distribution of the amount (the threshold
@@ -100,14 +100,22 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 }
 \seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{Frechet}},
-  \code{\link{GEV}}, \code{\link{Gamma}},
-  \code{\link{Gumbel}}, \code{\link{LogNormal}},
-  \code{\link{Logistic}}, \code{\link{Normal}},
-  \code{\link{RevWeibull}}, \code{\link{StudentsT}},
-  \code{\link{Tukey}}, \code{\link{Uniform}},
-  \code{\link{Weibull}}
+Other continuous distributions: 
+\code{\link{Beta}()},
+\code{\link{Cauchy}()},
+\code{\link{ChiSquare}()},
+\code{\link{Exponential}()},
+\code{\link{Frechet}()},
+\code{\link{GEV}()},
+\code{\link{Gamma}()},
+\code{\link{Gumbel}()},
+\code{\link{LogNormal}()},
+\code{\link{Logistic}()},
+\code{\link{Normal}()},
+\code{\link{RevWeibull}()},
+\code{\link{StudentsT}()},
+\code{\link{Tukey}()},
+\code{\link{Uniform}()},
+\code{\link{Weibull}()}
 }
 \concept{continuous distributions}

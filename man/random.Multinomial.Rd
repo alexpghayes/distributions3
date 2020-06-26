@@ -34,6 +34,7 @@ random(X, 10)
 
 }
 \seealso{
-Other Multinomial distribution: \code{\link{pdf.Multinomial}}
+Other Multinomial distribution: 
+\code{\link{pdf.Multinomial}()}
 }
 \concept{Multinomial distribution}

@@ -4,7 +4,9 @@
 \name{StatAUC}
 \alias{StatAUC}
 \title{Stat for Area Under Curve}
-\format{An object of class \code{StatAUC} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.}
+\format{
+An object of class \code{StatAUC} (inherits from \code{Stat}, \code{ggproto}, \code{gg}) of length 3.
+}
 \usage{
 StatAUC
 }

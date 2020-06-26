@@ -17,7 +17,7 @@ Gumbel(mu = 0, sigma = 1)
 A \code{Gumbel} object.
 }
 \description{
-The Gumbel distribution is a special case of the \code{\link{GEV}} distribution,
+The Gumbel distribution is a special case of the \verb{\link{GEV}} distribution,
 obtained when the GEV shape parameter \eqn{\xi} is equal to 0.
 It may be referred to as a type I extreme value distribution.
 }
@@ -72,13 +72,22 @@ cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
 }
 \seealso{
-Other continuous distributions: \code{\link{Beta}},
-  \code{\link{Cauchy}}, \code{\link{ChiSquare}},
-  \code{\link{Exponential}}, \code{\link{Frechet}},
-  \code{\link{GEV}}, \code{\link{GP}}, \code{\link{Gamma}},
-  \code{\link{LogNormal}}, \code{\link{Logistic}},
-  \code{\link{Normal}}, \code{\link{RevWeibull}},
-  \code{\link{StudentsT}}, \code{\link{Tukey}},
-  \code{\link{Uniform}}, \code{\link{Weibull}}
+Other continuous distributions: 
+\code{\link{Beta}()},
+\code{\link{Cauchy}()},
+\code{\link{ChiSquare}()},
+\code{\link{Exponential}()},
+\code{\link{Frechet}()},
+\code{\link{GEV}()},
+\code{\link{GP}()},
+\code{\link{Gamma}()},
+\code{\link{LogNormal}()},
+\code{\link{Logistic}()},
+\code{\link{Normal}()},
+\code{\link{RevWeibull}()},
+\code{\link{StudentsT}()},
+\code{\link{Tukey}()},
+\code{\link{Uniform}()},
+\code{\link{Weibull}()}
 }
 \concept{continuous distributions}

@@ -22,7 +22,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (0000-0002-4985-5160)
+\strong{Maintainer}: Alex Hayes \email{alexpghayes@gmail.com} (\href{https://orcid.org/0000-0002-4985-5160}{ORCID})
 
 Authors:
 \itemize{
@@ -31,7 +31,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (0000-0002-0679-1945) [contributor]
+  \item Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (\href{https://orcid.org/0000-0002-0679-1945}{ORCID}) [contributor]
   \item Daniel Jordan \email{dandermotj@gmail.com} [contributor]
   \item Paul Northrop \email{p.northrop@ucl.ac.uk} [contributor]
   \item Bruna Wundervald \email{brunadaviesw@gmail.com} [contributor]

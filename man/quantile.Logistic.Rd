@@ -36,7 +36,9 @@ cdf(X, 4)
 quantile(X, 0.7)
 }
 \seealso{
-Other Logistic distribution: \code{\link{cdf.Logistic}},
-  \code{\link{pdf.Logistic}}, \code{\link{random.Logistic}}
+Other Logistic distribution: 
+\code{\link{cdf.Logistic}()},
+\code{\link{pdf.Logistic}()},
+\code{\link{random.Logistic}()}
 }
 \concept{Logistic distribution}

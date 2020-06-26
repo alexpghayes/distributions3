@@ -37,8 +37,9 @@ quantile(X, 0.7)
 
 }
 \seealso{
-Other Geometric distribution: \code{\link{cdf.Geometric}},
-  \code{\link{pdf.Geometric}},
-  \code{\link{random.Geometric}}
+Other Geometric distribution: 
+\code{\link{cdf.Geometric}()},
+\code{\link{pdf.Geometric}()},
+\code{\link{random.Geometric}()}
 }
 \concept{Geometric distribution}

@@ -28,6 +28,11 @@ set.seed(27)
 X <- Normal(5, 2)
 X
 
+mean(X)
+variance(X)
+skewness(X)
+kurtosis(X)
+
 random(X, 10)
 
 pdf(X, 2)
@@ -104,7 +109,9 @@ quantile(X, cdf(X, 7))
 
 }
 \seealso{
-Other Normal distribution: \code{\link{fit_mle.Normal}},
-  \code{\link{pdf.Normal}}, \code{\link{quantile.Normal}}
+Other Normal distribution: 
+\code{\link{fit_mle.Normal}()},
+\code{\link{pdf.Normal}()},
+\code{\link{quantile.Normal}()}
 }
 \concept{Normal distribution}
