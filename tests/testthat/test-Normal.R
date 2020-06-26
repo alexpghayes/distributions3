@@ -79,3 +79,20 @@ test_that("{moments}.Normal work correctly", {
   expect_equal(skewness(n), 0)
   expect_equal(kurtosis(n), 0)
 })
+
+test_that("Normal ops work correctly", {
+  x <- Normal(1,1)
+  y <- Normal(2,sqrt(3))
+
+  s <- x + y
+
+  expect_equal(s$mu, 3)
+  expect_equal(s$sigma, 2)
+
+  d <- x - y
+
+  expect_equal(d$mu, -1)
+  expect_equal(d$sigma, 2)
+
+})
+
