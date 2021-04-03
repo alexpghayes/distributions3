@@ -1,12 +1,52 @@
-#' Create a Exponential distribution
+#' Create an Exponential distribution
 #'
-#' @param rate The rate parameter. Can be any positive number. Defaults
-#'   to `1`.
+#' Exponential distributions are frequently used for modeling the amount
+#' of time that passes until a specific event occurs. For example, exponential
+#' distributions could be used to model the time between two earthquakes,
+#' the amount of delay between internet packets, or the amount of time a piece
+#' of machinery can run before needing repair.
 #'
-#' @return A `Exponential` object.
+#'
+#' @param rate The rate parameter, written \eqn{\lambda} in textbooks.
+#'   Can be any positive number. Defaults to `1`.
+#'
+#' @return An `Exponential` object.
 #' @export
 #'
 #' @family continuous distributions
+#'
+#' @details
+#'
+#'   We recommend reading this documentation on
+#'   <https://alexpghayes.github.io/distributions3>, where the math
+#'   will render with additional detail and much greater clarity.
+#'
+#'   In the following, let \eqn{X} be an Exponential random variable with
+#'   rate parameter `rate` = \eqn{\lambda}.
+#'
+#'   **Support**: {x in [0, \eqn{\infty})}
+#'
+#'   **Mean**: 1 / \eqn{\lambda}
+#'
+#'   **Variance**: 1 / \eqn{\lambda^2}
+#'
+#'   **Probability density function (p.d.f)**:
+#'
+#'   \deqn{
+#'     f(x) = \lambdae^{-\lambdax}
+#'   }
+#'
+#'   **Cumulative distribution function (c.d.f)**:
+#'
+#'   \deqn{
+#'     F(x) = 1 - e^{-\lambdax}
+#'   }
+#'
+#'   **Moment generating function (m.g.f)**:
+#'
+#'   \deqn{
+#'     \frac{\lambda}{\lambda - t}, for t < \lambda
+#'   }
 #'
 #' @examples
 #'
@@ -53,11 +93,11 @@ skewness.Exponential <- function(d, ...) 2
 #' @export
 kurtosis.Exponential <- function(d, ...) 6
 
-#' Draw a random sample from a Exponential distribution
+#' Draw a random sample from an Exponential distribution
 #'
 #' @inherit Exponential examples
 #'
-#' @param d A `Exponential` object created by a call to [Exponential()].
+#' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -69,7 +109,7 @@ random.Exponential <- function(d, n = 1L, ...) {
   rexp(n = n, rate = d$rate)
 }
 
-#' Evaluate the probability mass function of a Exponential distribution
+#' Evaluate the probability density function of an Exponential distribution
 #'
 #' @inherit Exponential examples
 #' @inheritParams random.Exponential
@@ -93,7 +133,7 @@ log_pdf.Exponential <- function(d, x, ...) {
   dexp(x = x, rate = d$rate, log = TRUE)
 }
 
-#' Evaluate the cumulative distribution function of a Exponential distribution
+#' Evaluate the cumulative distribution function of an Exponential distribution
 #'
 #' @inherit Exponential examples
 #' @inheritParams random.Exponential
@@ -110,7 +150,7 @@ cdf.Exponential <- function(d, x, ...) {
   pexp(q = x, rate = d$rate)
 }
 
-#' Determine quantiles of a Exponential distribution
+#' Determine quantiles of an Exponential distribution
 #'
 #' `quantile()` is the inverse of `cdf()`.
 #'
