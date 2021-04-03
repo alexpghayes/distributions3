@@ -17,7 +17,7 @@
 #'   will render with additional detail.
 #'
 #'   In the following, let \eqn{X} be a Poisson random variable with parameter
-#'   `lamdba` = \eqn{\lambda}.
+#'   `lambda` = \eqn{\lambda}.
 #'
 #'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}{{0, 1, 2, 3, ...}}
 #'
