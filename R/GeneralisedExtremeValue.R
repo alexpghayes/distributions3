@@ -116,10 +116,10 @@ print.GEV <- function(x, ...) {
 g <- function(d, k) gamma(1 - k * d$xi)
 
 #' @export
-mean.GEV <- function(d, ...) {
+mean.GEV <- function(x, ...) {
   euler <- -digamma(1)
-  if (d$xi == 0) d$mu + d$sigma * euler
-  else if (d$xi < 1) d$mu + d$sigma * (gamma(1 - d$xi) - 1) / d$xi
+  if (x$xi == 0) x$mu + x$sigma * euler
+  else if (x$xi < 1) x$mu + x$sigma * (gamma(1 - x$xi) - 1) / x$xi
   else Inf
 }
 

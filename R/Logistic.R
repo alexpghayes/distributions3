@@ -84,7 +84,7 @@ print.Logistic <- function(x, ...) {
 }
 
 #' @export
-mean.Logistic <- function(d, ...) d$location
+mean.Logistic <- function(x, ...) x$location
 
 #' @export
 variance.Logistic <- function(d, ...) d$scale^2 * pi^2 / 3

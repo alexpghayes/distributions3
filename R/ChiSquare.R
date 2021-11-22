@@ -105,7 +105,7 @@ print.ChiSquare <- function(x, ...) {
 }
 
 #' @export
-mean.ChiSquare <- function(d, ...) d$df
+mean.ChiSquare <- function(x, ...) x$df
 
 #' @export
 variance.ChiSquare <- function(d, ...) d$df * 2

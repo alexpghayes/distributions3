@@ -83,14 +83,14 @@ print.HyperGeometric <- function(x, ...) {
 }
 
 #' @export
-mean.HyperGeometric <- function(d, ...) {
+mean.HyperGeometric <- function(x, ...) {
   # Reformulating to match Wikipedia
   # N is the population size
-  N <- d$n + d$m
+  N <- x$n + x$m
   # K number of success states
-  K <- d$m
+  K <- x$m
   # n number of draws
-  n <- d$k
+  n <- x$k
 
   n * K / N
 }

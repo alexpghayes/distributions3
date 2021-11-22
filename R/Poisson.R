@@ -81,7 +81,7 @@ print.Poisson <- function(x, ...) {
 }
 
 #' @export
-mean.Poisson <- function(d, ...) d$lambda
+mean.Poisson <- function(x, ...) x$lambda
 
 #' @export
 variance.Poisson <- function(d, ...) d$lambda

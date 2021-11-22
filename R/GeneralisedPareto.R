@@ -106,10 +106,10 @@ print.GP <- function(x, ...) {
 }
 
 #' @export
-mean.GP <- function(d, ...) {
-  mu <- d$mu
-  sigma <- d$sigma
-  xi <- d$xi
+mean.GP <- function(x, ...) {
+  mu <- x$mu
+  sigma <- x$sigma
+  xi <- x$xi
 
   if (xi < 1) mu + sigma / (1 - xi)
   else Inf

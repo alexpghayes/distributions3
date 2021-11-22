@@ -82,7 +82,7 @@ print.Exponential <- function(x, ...) {
 }
 
 #' @export
-mean.Exponential <- function(d, ...) d$rate ^ -1
+mean.Exponential <- function(x, ...) x$rate ^ -1
 
 #' @export
 variance.Exponential <- function(d, ...) d$rate ^ 2
