@@ -16,6 +16,7 @@ is_distribution <- function(x) {
   inherits(x, "distribution")
 }
 
+
 #' Plot the CDF of a distribution
 #'
 #' A function to easily plot the CDF of a distribution using `ggplot2`. Requires `ggplot2` to be loaded.
@@ -54,9 +55,9 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
     plot_df$y <- cdf(d, plot_df$x)
 
     out_plot <- ggplot2::ggplot(data = plot_df,
-           aes(x = x, y = y)) +
+           ggplot2::aes_string(x = "x", y = "y")) +
       ggplot2::geom_bar(stat = 'identity', width = 1,
-                        aes(color = I("black"),
+                        ggplot2::aes(color = I("black"),
                             fill = I("grey50"))) +
       plot_theme()
   }
@@ -68,7 +69,7 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
     plot_df$y <- cdf(d, plot_df$x)
 
     out_plot <- ggplot2::ggplot(data = plot_df,
-                    aes(x = x, y = y)) +
+                    ggplot2::aes_string(x = "x", y = "y")) +
       ggplot2::geom_line() +
       plot_theme()
   }
@@ -115,10 +116,10 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
     plot_df <- data.frame(x = seq(limits[1], limits[2], by = 1))
     plot_df$y <- pdf(d, plot_df$x)
 
-    out_plot <- ggplot(data = plot_df,
-                       aes(x = x, y = y)) +
-      geom_bar(stat = 'identity', width = 1,
-               aes(color = I("black"),
+    out_plot <- ggplot2::ggplot(data = plot_df,
+                       ggplot2::aes_string(x = "x", y = "y")) +
+     ggplot2::geom_bar(stat = 'identity', width = 1,
+               ggplot2::aes(color = I("black"),
                    fill = I("grey50"))) +
       #xlab("x") +
       plot_theme()
@@ -130,16 +131,16 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
     plot_df <- data.frame(x = seq(limits[1], limits[2], length.out = 5000))
     plot_df$y <- pdf(d, plot_df$x)
 
-    out_plot <- ggplot(data = plot_df,
-                    aes(x = x, y = y)) +
-      geom_line() +
+    out_plot <- ggplot2::ggplot(data = plot_df,
+                    ggplot2::aes_string(x = "x", y = "y")) +
+      ggplot2::geom_line() +
       plot_theme()
   }
 
   out_plot$mapping$d <- class(d)[1]
 
-  for(i in seq_along(X))
-    out_plot$mapping[[paste0("param", i)]] <- X[[i]]
+  for(i in seq_along(d))
+    out_plot$mapping[[paste0("param", i)]] <- d[[i]]
 
   return(out_plot)
 }
