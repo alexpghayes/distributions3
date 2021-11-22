@@ -16,7 +16,6 @@ is_distribution <- function(x) {
   inherits(x, "distribution")
 }
 
-
 #' Plot the CDF of a distribution
 #'
 #' A function to easily plot the CDF of a distribution using `ggplot2`. Requires `ggplot2` to be loaded.
@@ -145,24 +144,87 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
   return(out_plot)
 }
 
-#' Stat for Area Under Curve
-#'
+
+#' @rdname geom_auc
 #' @export
-StatAUC <- ggplot2::ggproto(
-  "StatAUC", ggplot2::Stat,
-  compute_group = function(data, scales, from = from, to = to) {
+stat_auc <- function(mapping = NULL, 
+                     data = NULL, 
+                     geom = "auc",
+                     position = "identity", 
+                     na.rm = FALSE,
+                     show.legend = NA, 
+                     inherit.aes = TRUE,
+                     from = -Inf, 
+                     to = Inf, 
+                     annotate = FALSE, 
+                     digits = 3, 
+                     ...) {
+
+  ggplot2::layer(
+    geom = geom,
+    stat = StatAuc,
+    data = data,
+    mapping = mapping,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      from = from,
+      to = to,
+      annotate = annotate,
+      digits = digits,
+      ...
+    )
+  )
+}
+
+
+#' @rdname geom_auc
+#' @format NULL
+#' @usage NULL
+#' @export
+StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
+
+  compute_group = function(data, 
+                           scales, 
+                           from = -Inf,
+                           to = Inf,  
+                           annotate = FALSE,
+                           digits = 3) {
+
+    
+    ## set data outside interval to zero    
     data[data$x < from | data$x > to, 'y'] <- 0
+
+    if (!isFALSE(annotate)) {
+      ## compute auc for label based on original implementation
+      n_params <- sum(grepl("param", names(data)))
+      d <- do.call(eval(parse(text = paste0("function(...) ", data$d[1], "(...)"))),
+                   args = lapply(paste0("param", 1:n_params), function(x) data[[x]][1]))
+
+      data$label <- paste0(
+        "P(", from, "< X < ", to, ") = ", 
+        round(cdf(d, to) - cdf(d, from), digits = digits)
+      )
+    } else {
+      data$label <- NA
+    }
 
     return(data)
   },
+
   required_aes = c("x", "y")
 )
 
 
-#' Fill out area under the curve
+#' Fill out area under the curve for a plotted PDF
 #'
 #' @param from Left end-point of interval
-#' @param to right end-point of interval
+#' @param to Right end-point of interval
+#' @param annotate Should P() be added in the upper left corner as an annotation?
+#' Works also with a colour character, e.g., "red".
+#' @param digits Number of digits shown in annotation
 #' @inheritParams ggplot2::layer
 #' @inheritParams ggplot2::geom_area
 #'
@@ -172,60 +234,106 @@ StatAUC <- ggplot2::ggproto(
 #'
 #' X <- Normal()
 #'
-#' #plot_pdf(X) + geom_auc(to = -0.645)
-#' #plot_pdf(X) + geom_auc(from = -0.645, to = 0.1)
-geom_auc <- function(mapping = NULL, data = NULL,
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, from = -Inf, to = Inf,
-                     ...){
+#' plot_pdf(X) + geom_auc(to = -0.645)
+#' plot_pdf(X) + geom_auc(from = -0.645, to = 0.1, annotate = TRUE)
+geom_auc <- function(mapping = NULL, 
+                     data = NULL, 
+                     stat = "auc",
+                     position = "identity", 
+                     na.rm = FALSE, 
+                     show.legend = NA, 
+                     inherit.aes = TRUE, 
+                     from = -Inf, 
+                     to = Inf, 
+                     annotate = FALSE,
+                     digits = 3, 
+                     ...) {
+
   ggplot2::layer(
-    stat = StatAUC, geom = GeomArea, data = data, mapping = mapping,
-    position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, from = from, to = to, ...)
+    data = data, 
+    mapping = mapping,
+    stat = stat, 
+    geom = GeomAuc, 
+    position = position, 
+    show.legend = show.legend, 
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm, 
+      from = from, 
+      to = to, 
+      annotate  = annotate, 
+      digits = digits,
+      ...
+    )
   )
 }
 
 
-#' Show probabilities as area under curve
-#'
-#' A function that let's us draw area under curve, and with option to annotate plot
-#' with P(from < X < to).
-#'
-#' @param from Left end-point of interval
-#' @param to right end-point of interval
-#' @param digits number of digits to include when printing probability
-#' @param annotate logical. If FALSE (default), the probability is not shown on plot.
-#' @inheritParams ggplot2::layer
-#' @inheritParams ggplot2::geom_auc
-#'
+#' @rdname geom_auc
+#' @format NULL
+#' @usage NULL
 #' @export
-#'
-#' @examples
-#'
-#' X <- Normal()
-#'
-#' #plot_pdf(X) + geom_prob(to = -0.645)
-#' #plot_pdf(X) + geom_prob(from = -0.645, to = 0.1)
-#'
-#' @export
-geom_prob <- function(from = -Inf, to = Inf, digits = 3, annotate = FALSE, ...){
-  out <- geom_auc(from = from, to = to, ...)
+GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
 
-  n_params <- sum(stringr::str_detect(names(mapping), "param"))
+  required_aes = c("x", "y", "label"),
 
-  d <- do.call(eval(parse(text = paste0("function(...) ", mapping$d, "(...)"))),
-               args = purrr::map(paste0("param", 1:n_params), function(x) mapping[[x]]))
+  default_aes = ggplot2::aes(colour = NA, fill = "grey40", size = 0.5, linetype = 1,
+    alpha = NA),
 
-  lab <- paste0("P(", from, "< X < ", to, ") = ", round(cdf(d, to) - cdf(d, from), digits = digits))
+  draw_panel = function(data, 
+                        panel_params, 
+                        coord, 
+                        na.rm = FALSE, 
+                        flipped_aes = FALSE, 
+                        outline.type = c("both", "upper", "lower", "full"),
+                        parse = FALSE,
+                        check_overlab = FALSE,
+                        annotate = FALSE) {
 
-  if(annotate){
-    out <- list(
-      out,
-      geom_text(x = -Inf, y = Inf,
-                label = lab,
-                hjust = -0.1, vjust = 2)
-    )
+    outline.type <- match.arg(outline.type)
+
+    if (!isFALSE(annotate)) {
+
+      annotate <- if (isTRUE(annotate)) "black" else annotate[1]
+  
+      data_annotate <- data.frame(
+        x = -Inf,
+        y = Inf,
+        label = data$label[1],
+        colour = annotate,
+        size = 3.88 * data$size[1] * 2,
+        angle = 0,
+        hjust = -0.1,
+        vjust = 2,
+        alpha = NA,
+        family = "",
+        fontface = 1,
+        lineheight = 1.2
+      )
+      
+      grid::grobTree(
+        ggplot2::GeomArea$draw_group(data, 
+                                 panel_params, 
+                                 coord, 
+                                 na.rm = na.rm,
+                                 flipped_aes = flipped_aes,
+                                 outline.type = outline.type),
+        ggplot2::GeomText$draw_panel(data_annotate, 
+                                     panel_params, 
+                                     coord, 
+                                     parse = parse, 
+                                     na.rm = na.rm, 
+                                     check_overlap = check_overlab)
+      )
+    } else { 
+        ggplot2::GeomArea$draw_group(data,
+                                 panel_params,
+                                 coord,
+                                 na.rm = na.rm,
+                                 flipped_aes = flipped_aes,
+                                 outline.type = outline.type)
+    }
+
   }
 
-  return(out)
-}
+)
