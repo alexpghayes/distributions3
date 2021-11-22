@@ -2,12 +2,12 @@
 % Please edit documentation in R/Exponential.R
 \name{random.Exponential}
 \alias{random.Exponential}
-\title{Draw a random sample from a Exponential distribution}
+\title{Draw a random sample from an Exponential distribution}
 \usage{
 \method{random}{Exponential}(d, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
+\item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
@@ -18,7 +18,7 @@ catch mispellings or other possible errors.}
 A numeric vector of length \code{n}.
 }
 \description{
-Draw a random sample from a Exponential distribution
+Draw a random sample from an Exponential distribution
 }
 \examples{
 

@@ -3,14 +3,14 @@
 \name{pdf.Exponential}
 \alias{pdf.Exponential}
 \alias{log_pdf.Exponential}
-\title{Evaluate the probability mass function of a Exponential distribution}
+\title{Evaluate the probability density function of an Exponential distribution}
 \usage{
 \method{pdf}{Exponential}(d, x, ...)
 
 \method{log_pdf}{Exponential}(d, x, ...)
 }
 \arguments{
-\item{d}{A \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
+\item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution \code{d}.}
@@ -22,7 +22,7 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-Evaluate the probability mass function of a Exponential distribution
+Evaluate the probability density function of an Exponential distribution
 }
 \examples{
 

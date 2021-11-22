@@ -2,12 +2,12 @@
 % Please edit documentation in R/Exponential.R
 \name{quantile.Exponential}
 \alias{quantile.Exponential}
-\title{Determine quantiles of a Exponential distribution}
+\title{Determine quantiles of an Exponential distribution}
 \usage{
 \method{quantile}{Exponential}(d, p, ...)
 }
 \arguments{
-\item{d}{A \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
+\item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{p}{A vector of probabilites.}
 

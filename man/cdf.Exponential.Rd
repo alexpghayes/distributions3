@@ -2,12 +2,12 @@
 % Please edit documentation in R/Exponential.R
 \name{cdf.Exponential}
 \alias{cdf.Exponential}
-\title{Evaluate the cumulative distribution function of a Exponential distribution}
+\title{Evaluate the cumulative distribution function of an Exponential distribution}
 \usage{
 \method{cdf}{Exponential}(d, x, ...)
 }
 \arguments{
-\item{d}{A \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
+\item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}
@@ -19,7 +19,7 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-Evaluate the cumulative distribution function of a Exponential distribution
+Evaluate the cumulative distribution function of an Exponential distribution
 }
 \examples{
 
