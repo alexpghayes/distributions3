@@ -31,13 +31,12 @@
 #'
 #' cdf(X, 1)
 #' quantile(X, 0.5)
-#' \donttest{
+#'
 #' # cdfs are only defined for numeric sample spaces. this errors!
-#' cdf(Y, "a")
+#' # cdf(Y, "a") 
 #'
 #' # same for quantiles. this also errors!
 #' quantile(Y, 0.7)
-#' }
 #'
 Categorical <- function(outcomes, p = NULL) {
   if (!is.null(p) && length(outcomes) != length(p)) {
