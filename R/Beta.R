@@ -45,7 +45,7 @@ print.Beta <- function(x, ...) {
 }
 
 #' @export
-mean.Beta <- function(d, ...) d$alpha / (d$alpha + d$beta)
+mean.Beta <- function(x, ...) x$alpha / (x$alpha + x$beta)
 
 #' @export
 variance.Beta <- function(d, ...) {

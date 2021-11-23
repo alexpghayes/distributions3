@@ -82,12 +82,13 @@ print.FisherF <- function(x, ...) {
   cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})"), "\n")
 }
 
-#' The k-th moment of an F(df1, df2) distribution exists and
-#' is finite only when 2k < d2
+
 #' @export
-mean.FisherF <- function(d, ...) {
-  d1 <- d$df1
-  d2 <- d$df2
+mean.FisherF <- function(x, ...) {
+  # The k-th moment of an F(df1, df2) distribution exists and
+  # is finite only when 2k < d2
+  d1 <- x$df1
+  d2 <- x$df2
   if (d2 > 2) d2 / (d2 - 2) else NaN
 }
 

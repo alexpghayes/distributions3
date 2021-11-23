@@ -169,7 +169,7 @@ print.Normal <- function(x, ...) {
 }
 
 #' @export
-mean.Normal <- function(d, ...) d$mu
+mean.Normal <- function(x, ...) x$mu
 
 #' @export
 variance.Normal <- function(d, ...) d$sigma ^ 2

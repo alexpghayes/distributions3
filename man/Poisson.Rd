@@ -22,7 +22,7 @@ We recommend reading this documentation on
 will render with additional detail.
 
 In the following, let \eqn{X} be a Poisson random variable with parameter
-\code{lamdba} = \eqn{\lambda}.
+\code{lambda} = \eqn{\lambda}.
 
 \strong{Support}: \eqn{\{0, 1, 2, 3, ...\}}{{0, 1, 2, 3, ...}}
 

@@ -85,7 +85,7 @@ print.Cauchy <- function(x, ...) {
 }
 
 #' @export
-mean.Cauchy <- function(d, ...) NaN
+mean.Cauchy <- function(x, ...) NaN
 
 #' @export
 variance.Cauchy <- function(d, ...) NaN

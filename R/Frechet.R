@@ -89,10 +89,10 @@ print.Frechet <- function(x, ...) {
 }
 
 #' @export
-mean.Frechet <- function(d, ...) {
-  a <- d$shape
-  m <- d$location
-  s <- d$scale
+mean.Frechet <- function(x, ...) {
+  a <- x$shape
+  m <- x$location
+  s <- x$scale
   if (a > 1) {
     m + s * gamma(1 - 1/a)
   } else {

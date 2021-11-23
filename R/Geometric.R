@@ -77,7 +77,7 @@ print.Geometric <- function(x, ...) {
 }
 
 #' @export
-mean.Geometric <- function(d, ...) 1 / d$p
+mean.Geometric <- function(x, ...) 1 / x$p
 
 #' @export
 variance.Geometric <- function(d, ...) (1 - d$p) / d$p^2

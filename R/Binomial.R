@@ -102,7 +102,7 @@ print.Binomial <- function(x, ...) {
 }
 
 #' @export
-mean.Binomial <- function(d, ...) d$size * d$p
+mean.Binomial <- function(x, ...) x$size * x$p
 
 #' @export
 variance.Binomial <- function(d, ...) d$size * d$p * (1 - d$p)

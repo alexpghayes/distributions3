@@ -45,7 +45,7 @@ print.Uniform <- function(x, ...) {
 }
 
 #' @export
-mean.Uniform <- function(d, ...) (d$a + d$b) / 2
+mean.Uniform <- function(x, ...) (x$a + x$b) / 2
 
 #' @export
 variance.Uniform <- function(d, ...) (1 / 12) * (d$b - d$a) ^ 2

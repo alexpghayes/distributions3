@@ -110,6 +110,7 @@ quantile <- function(d, p, ...) {
 #'
 #' @param d A probability distribution object such as those created by
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
+#' @param ... Further arguments passed to or from other methods (currently not used).
 #'
 #' @return A numeric scalar
 #' @export
@@ -127,6 +128,7 @@ skewness <- function(d, ...) {
 }
 
 #' @rdname variance
+#' @export
 kurtosis <- function(d, ...) {
   ellipsis::check_dots_used()
   UseMethod("kurtosis")
