@@ -116,7 +116,7 @@ pdf.Categorical <- function(d, x, ...) {
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
   }
 
-  ifelse(x %in% d$outcomes, d$p[d$outcomes == x], 0)
+  sapply(x, function(y) ifelse(y %in% d$outcomes, d$p[d$outcomes == y], 0))
 }
 
 #' @rdname pdf.Categorical

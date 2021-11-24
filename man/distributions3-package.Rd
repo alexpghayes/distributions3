@@ -12,6 +12,7 @@ Tools to create and manipulate probability distributions using S3. Generics rand
 Useful links:
 \itemize{
   \item \url{https://github.com/alexpghayes/distributions3}
+  \item \url{https://alexpghayes.github.io/distributions3}
   \item Report bugs at \url{https://github.com/alexpghayes/distributions3/issues}
 }
 

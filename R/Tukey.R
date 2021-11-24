@@ -68,7 +68,7 @@ print.Tukey <- function(x, ...) {
 #' @export
 #'
 cdf.Tukey <- function(d, x, ...) {
-  ptukey(q = x, nmeans = d$nmeans, df = d$nmeans, nranges = d$nranges)
+  ptukey(q = x, nmeans = d$nmeans, df = d$df, nranges = d$nranges)
 }
 
 #' Determine quantiles of a Tukey distribution
@@ -86,7 +86,7 @@ cdf.Tukey <- function(d, x, ...) {
 #' @family Tukey distribution
 #'
 quantile.Tukey <- function(d, p, ...) {
-  qtukey(p = p, nmeans = d$nmeans, df = d$nmeans, nranges = d$nranges)
+  qtukey(p = p, nmeans = d$nmeans, df = d$df, nranges = d$nranges)
 }
 
 
