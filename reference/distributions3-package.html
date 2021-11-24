@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -36,13 +40,7 @@
 
 
 <meta property="og:title" content="distributions3: Probability Distributions as S3 Objects — distributions3-package" />
-<meta property="og:description" content="Tools to create and manipulate probability
-    distributions using S3.  Generics random(), pdf(), cdf() and
-    quantile() provide replacements for base R's r/d/p/q style functions.
-    Functions and arguments have been named carefully to minimize
-    confusion for students in intro stats courses. The documentation for
-    each distribution contains detailed mathematical notes." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:description" content="Tools to create and manipulate probability distributions using S3. Generics random(), pdf(), cdf() and quantile() provide replacements for base R's r/d/p/q style functions. Functions and arguments have been named carefully to minimize confusion for students in intro stats courses. The documentation for each distribution contains detailed mathematical notes." />
 
 
 
@@ -60,7 +58,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -82,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -131,8 +129,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions3">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/alexpghayes/distributions3/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -155,12 +153,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Tools to create and manipulate probability
-    distributions using S3.  Generics random(), pdf(), cdf() and
-    quantile() provide replacements for base R's r/d/p/q style functions.
-    Functions and arguments have been named carefully to minimize
-    confusion for students in intro stats courses. The documentation for
-    each distribution contains detailed mathematical notes.</p>
+    <p>Tools to create and manipulate probability distributions using S3. Generics random(), pdf(), cdf() and quantile() provide replacements for base R's r/d/p/q style functions. Functions and arguments have been named carefully to minimize confusion for students in intro stats courses. The documentation for each distribution contains detailed mathematical notes.</p>
     </div>
 
 
@@ -173,38 +166,38 @@
 </ul>
 
 </div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Alex Hayes <a href='mailto:alexpghayes@gmail.com'>alexpghayes@gmail.com</a> (0000-0002-4985-5160)</p>
+    <p><strong>Maintainer</strong>: Alex Hayes <a href='mailto:alexpghayes@gmail.com'>alexpghayes@gmail.com</a> (<a href='https://orcid.org/0000-0002-4985-5160'>ORCID</a>)</p>
 <p>Authors:</p><ul>
 <li><p>Ralph Moller-Trane</p></li>
+<li><p>Daniel Jordan <a href='mailto:dandermotj@gmail.com'>dandermotj@gmail.com</a></p></li>
+<li><p>Paul Northrop <a href='mailto:p.northrop@ucl.ac.uk'>p.northrop@ucl.ac.uk</a></p></li>
 </ul>
 
 <p>Other contributors:</p><ul>
-<li><p>Emil Hvitfeldt <a href='mailto:emilhhvitfeldt@gmail.com'>emilhhvitfeldt@gmail.com</a> (0000-0002-0679-1945) [contributor]</p></li>
-<li><p>Daniel Jordan <a href='mailto:dandermotj@gmail.com'>dandermotj@gmail.com</a> [contributor]</p></li>
+<li><p>Emil Hvitfeldt <a href='mailto:emilhhvitfeldt@gmail.com'>emilhhvitfeldt@gmail.com</a> (<a href='https://orcid.org/0000-0002-0679-1945'>ORCID</a>) [contributor]</p></li>
 <li><p>Bruna Wundervald <a href='mailto:brunadaviesw@gmail.com'>brunadaviesw@gmail.com</a> [contributor]</p></li>
 </ul>
 
 
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

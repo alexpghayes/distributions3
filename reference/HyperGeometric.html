@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/paper/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,7 +50,6 @@ car parts, there are 4 that are defective (type I).
 If we take a sample of size 5 from those car parts, the
 probability of finding 2 that are defective will be given by
 the HyperGeometric distribution (needs double checking)." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -64,7 +67,7 @@ the HyperGeometric distribution (needs double checking)." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -86,7 +89,7 @@ the HyperGeometric distribution (needs double checking)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,8 +138,8 @@ the HyperGeometric distribution (needs double checking)." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/alexpghayes/distributions3">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/alexpghayes/distributions3/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +174,7 @@ probability of finding 2 that are defective will be given by
 the HyperGeometric distribution (needs double checking).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>HyperGeometric</span>(<span class='no'>m</span>, <span class='no'>n</span>, <span class='no'>k</span>)</pre>
+    <pre class="usage"><span class='fu'>HyperGeometric</span><span class='op'>(</span><span class='va'>m</span>, <span class='va'>n</span>, <span class='va'>k</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,7 +203,7 @@ the HyperGeometric distribution (needs double checking).</p>
 will render with additional detail and much greater clarity.</p>
 <p>In the following, let \(X\) be a HyperGeometric random variable with
 success probability <code>p</code> = \(p = m/(m+n)\).</p>
-<p><strong>Support</strong>: \(x \in { \{\max{(0, k-(n-m)}, \dots, \min{(k,m)}}\}\)</p>
+<p><strong>Support</strong>: \(x \in { \{\max{(0, k-n)}, \dots, \min{(k,m)}}\}\)</p>
 <p><strong>Mean</strong>: \(\frac{km}{n+m} = kp\)</p>
 <p><strong>Variance</strong>: \(\frac{km(n)(n+m-k)}{(n+m)^2 (n+m-1)} =
   kp(1-p)(1 - \frac{k-1}{m+n-1})\)</p>
@@ -216,42 +219,52 @@ success probability <code>p</code> = \(p = m/(m+n)\).</p>
 <p>Not useful.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other discrete distributions: <code><a href='Bernoulli.html'>Bernoulli</a></code>,
-  <code><a href='Binomial.html'>Binomial</a></code>, <code><a href='Categorical.html'>Categorical</a></code>,
-  <code><a href='geometric.html'>Geometric</a></code>, <code><a href='Multinomial.html'>Multinomial</a></code>,
-  <code><a href='NegativeBinomial.html'>NegativeBinomial</a></code>, <code><a href='poisson.html'>Poisson</a></code></p></div>
+    <div class='dont-index'><p>Other discrete distributions: 
+<code><a href='Bernoulli.html'>Bernoulli</a>()</code>,
+<code><a href='Binomial.html'>Binomial</a>()</code>,
+<code><a href='Categorical.html'>Categorical</a>()</code>,
+<code><a href='Geometric.html'>Geometric</a>()</code>,
+<code><a href='Multinomial.html'>Multinomial</a>()</code>,
+<code><a href='NegativeBinomial.html'>NegativeBinomial</a>()</code>,
+<code><a href='Poisson.html'>Poisson</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>27</span>)
-
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'>HyperGeometric</span>(<span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>8</span>)
-<span class='no'>X</span></div><div class='output co'>#&gt; HyperGeometric distribution (m = 4, n = 5, k = 8)</div><div class='input'>
-<span class='fu'><a href='random.html'>random</a></span>(<span class='no'>X</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 3 4 3 4 4 4 4 4 4 4</div><div class='input'>
-<span class='fu'><a href='pdf.html'>pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'><a href='pdf.html'>log_pdf</a></span>(<span class='no'>X</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] -Inf</div><div class='input'>
-<span class='fu'><a href='cdf.html'>cdf</a></span>(<span class='no'>X</span>, <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'><a href='quantile.html'>quantile</a></span>(<span class='no'>X</span>, <span class='fl'>0.7</span>)</div><div class='output co'>#&gt; [1] 4</div></pre>
+    <pre class="examples"><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>27</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'>HyperGeometric</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>8</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>X</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> HyperGeometric distribution (m = 4, n = 5, k = 8) </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='random.html'>random</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 3 4 3 4 4 4 4 4 4 4</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='pdf.html'>pdf</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-in'><span class='fu'><a href='pdf.html'>log_pdf</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] -Inf</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='cdf.html'>cdf</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-in'><span class='fu'><a href='quantile.html'>quantile</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fl'>0.7</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+</pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
