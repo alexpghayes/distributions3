@@ -1,0 +1,18 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  intro-to-hypothesis-testing: intro-to-hypothesis-testing.html
+  one-sample-sign-tests: one-sample-sign-tests.html
+  one-sample-t-confidence-interval: one-sample-t-confidence-interval.html
+  one-sample-t-test: one-sample-t-test.html
+  one-sample-z-confidence-interval: one-sample-z-confidence-interval.html
+  one-sample-z-test-for-proportion: one-sample-z-test-for-proportion.html
+  one-sample-z-test: one-sample-z-test.html
+  paired-tests: paired-tests.html
+  two-sample-z-test: two-sample-z-test.html
+last_built: 2021-11-24T03:11Z
+urls:
+  reference: https://alexpghayes.github.io/distributions3/reference
+  article: https://alexpghayes.github.io/distributions3/articles
+
