@@ -147,17 +147,17 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
 #' @rdname geom_auc
 #' @export
-stat_auc <- function(mapping = NULL, 
-                     data = NULL, 
+stat_auc <- function(mapping = NULL,
+                     data = NULL,
                      geom = "auc",
-                     position = "identity", 
+                     position = "identity",
                      na.rm = FALSE,
-                     show.legend = NA, 
+                     show.legend = NA,
                      inherit.aes = TRUE,
-                     from = -Inf, 
-                     to = Inf, 
-                     annotate = FALSE, 
-                     digits = 3, 
+                     from = -Inf,
+                     to = Inf,
+                     annotate = FALSE,
+                     digits = 3,
                      ...) {
 
   ggplot2::layer(
@@ -186,15 +186,15 @@ stat_auc <- function(mapping = NULL,
 #' @export
 StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
 
-  compute_group = function(data, 
-                           scales, 
+  compute_group = function(data,
+                           scales,
                            from = -Inf,
-                           to = Inf,  
+                           to = Inf,
                            annotate = FALSE,
                            digits = 3) {
 
-    
-    ## set data outside interval to zero    
+
+    ## set data outside interval to zero
     data[data$x < from | data$x > to, 'y'] <- 0
 
     if (!isFALSE(annotate)) {
@@ -204,7 +204,7 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
                    args = lapply(paste0("param", 1:n_params), function(x) data[[x]][1]))
 
       data$label <- paste0(
-        "P(", from, "< X < ", to, ") = ", 
+        "P(", from, "< X < ", to, ") = ",
         round(cdf(d, to) - cdf(d, from), digits = digits)
       )
     } else {
@@ -236,38 +236,37 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
 #'
 #' plot_pdf(X) + geom_auc(to = -0.645)
 #' plot_pdf(X) + geom_auc(from = -0.645, to = 0.1, annotate = TRUE)
-geom_auc <- function(mapping = NULL, 
-                     data = NULL, 
+geom_auc <- function(mapping = NULL,
+                     data = NULL,
                      stat = "auc",
-                     position = "identity", 
-                     na.rm = FALSE, 
-                     show.legend = NA, 
-                     inherit.aes = TRUE, 
-                     from = -Inf, 
-                     to = Inf, 
+                     position = "identity",
+                     na.rm = FALSE,
+                     show.legend = NA,
+                     inherit.aes = TRUE,
+                     from = -Inf,
+                     to = Inf,
                      annotate = FALSE,
-                     digits = 3, 
+                     digits = 3,
                      ...) {
 
   ggplot2::layer(
-    data = data, 
+    data = data,
     mapping = mapping,
-    stat = stat, 
-    geom = GeomAuc, 
-    position = position, 
-    show.legend = show.legend, 
+    stat = stat,
+    geom = GeomAuc,
+    position = position,
+    show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(
-      na.rm = na.rm, 
-      from = from, 
-      to = to, 
-      annotate  = annotate, 
+      na.rm = na.rm,
+      from = from,
+      to = to,
+      annotate  = annotate,
       digits = digits,
       ...
     )
   )
 }
-
 
 #' @rdname geom_auc
 #' @format NULL
@@ -280,11 +279,11 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
   default_aes = ggplot2::aes(colour = NA, fill = "grey40", size = 0.5, linetype = 1,
     alpha = NA),
 
-  draw_panel = function(data, 
-                        panel_params, 
-                        coord, 
-                        na.rm = FALSE, 
-                        flipped_aes = FALSE, 
+  draw_panel = function(data,
+                        panel_params,
+                        coord,
+                        na.rm = FALSE,
+                        flipped_aes = FALSE,
                         outline.type = c("both", "upper", "lower", "full"),
                         parse = FALSE,
                         check_overlab = FALSE,
@@ -295,7 +294,7 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
     if (!isFALSE(annotate)) {
 
       annotate <- if (isTRUE(annotate)) "black" else annotate[1]
-  
+
       data_annotate <- data.frame(
         x = -Inf,
         y = Inf,
@@ -310,22 +309,22 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
         fontface = 1,
         lineheight = 1.2
       )
-      
+
       grid::grobTree(
-        ggplot2::GeomArea$draw_group(data, 
-                                 panel_params, 
-                                 coord, 
+        ggplot2::GeomArea$draw_group(data,
+                                 panel_params,
+                                 coord,
                                  na.rm = na.rm,
                                  flipped_aes = flipped_aes,
                                  outline.type = outline.type),
-        ggplot2::GeomText$draw_panel(data_annotate, 
-                                     panel_params, 
-                                     coord, 
-                                     parse = parse, 
-                                     na.rm = na.rm, 
+        ggplot2::GeomText$draw_panel(data_annotate,
+                                     panel_params,
+                                     coord,
+                                     parse = parse,
+                                     na.rm = na.rm,
                                      check_overlap = check_overlab)
       )
-    } else { 
+    } else {
         ggplot2::GeomArea$draw_group(data,
                                  panel_params,
                                  coord,
@@ -337,3 +336,5 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
   }
 
 )
+
+
