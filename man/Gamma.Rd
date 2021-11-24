@@ -91,6 +91,7 @@ Other continuous distributions:
 \code{\link{Beta}()},
 \code{\link{Cauchy}()},
 \code{\link{ChiSquare}()},
+\code{\link{Erlang}()},
 \code{\link{Exponential}()},
 \code{\link{Frechet}()},
 \code{\link{GEV}()},

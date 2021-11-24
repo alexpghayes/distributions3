@@ -46,6 +46,7 @@ quantile(X, cdf(X, 0.7))
 Other continuous distributions: 
 \code{\link{Cauchy}()},
 \code{\link{ChiSquare}()},
+\code{\link{Erlang}()},
 \code{\link{Exponential}()},
 \code{\link{Frechet}()},
 \code{\link{GEV}()},
