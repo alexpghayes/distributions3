@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
 [![R-CMD-check](https://github.com/alexpghayes/distributions3/workflows/R-CMD-check/badge.svg)](https://github.com/alexpghayes/distributions3/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=master)
+coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=main)
 <!-- badges: end -->
 
 `distributions3`, inspired by the [eponynmous Julia
@@ -56,7 +56,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
+#>  [1] 0 0 0 1 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 cdf(X, 0)
