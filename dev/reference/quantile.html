@@ -40,9 +40,11 @@
 
 
 <meta property="og:title" content="Find the quantile of a probability distribution — quantile" />
-<meta property="og:description" content="TODO: Note that this current masks the stats::quantile() generic
-to allow for consistent argument names and warnings when arguments
-disappear into ...." />
+<meta property="og:description" content="This function allows us to use the stats::quantile() alongside
+custom S3 methods for distributions objects. When passing arguments
+to stats::quantile(), accepts both
+distributions3 style arguments d, p and stats style arguments
+x, probs as well as any combination of the two." />
 
 
 <meta name="robots" content="noindex">
@@ -155,12 +157,17 @@ disappear into ...." />
     </div>
 
     <div class="ref-description">
-    <p>TODO: Note that this current masks the <code><a href='https://rdrr.io/r/stats/quantile.html'>stats::quantile()</a></code> generic
-to allow for consistent argument names and warnings when arguments
-disappear into <code>...</code>.</p>
+    <p>This function allows us to use the <code><a href='https://rdrr.io/r/stats/quantile.html'>stats::quantile()</a></code> alongside
+custom S3 methods for <code>distributions</code> objects. When passing arguments
+to <code><a href='https://rdrr.io/r/stats/quantile.html'>stats::quantile()</a></code>, accepts both
+<code>distributions3</code> style arguments <code>d</code>, <code>p</code> and stats style arguments
+<code>x</code>, <code>probs</code> as well as any combination of the two.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>quantile</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>p</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>quantile</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>p</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>quantile</span><span class='op'>(</span><span class='va'>d</span>, <span class='va'>p</span>, names <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +179,7 @@ a call to <code><a href='Bernoulli.html'>Bernoulli()</a></code>, <code><a href='
     </tr>
     <tr>
       <th>p</th>
-      <td><p>A vector of probabilites.</p></td>
+      <td><p>A vector of probabilities.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -191,6 +198,7 @@ catch mispellings or other possible errors.</p></td>
 <span class='r-in'></span>
 <span class='r-in'><span class='fu'><a href='cdf.html'>cdf</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>, <span class='fl'>0.4</span>, <span class='fl'>0.6</span>, <span class='fl'>0.8</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.5792597 0.6554217 0.7257469 0.7881446</span>
+<span class='r-in'></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
