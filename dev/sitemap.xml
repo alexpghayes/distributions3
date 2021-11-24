@@ -22,6 +22,9 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/ChiSquare.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/Erlang.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/Exponential.html</loc>
   </url>
   <url>
@@ -98,6 +101,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/cdf.ChiSquare.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Erlang.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Exponential.html</loc>
@@ -220,6 +226,9 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/pdf.ChiSquare.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Erlang.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Exponential.html</loc>
   </url>
   <url>
@@ -307,6 +316,9 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/quantile.ChiSquare.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Erlang.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Exponential.html</loc>
   </url>
   <url>
@@ -383,6 +395,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/random.ChiSquare.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/random.Erlang.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/random.Exponential.html</loc>
@@ -485,6 +500,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/support.ChiSquare.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/support.Erlang.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/support.Exponential.html</loc>
