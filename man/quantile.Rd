@@ -2,15 +2,18 @@
 % Please edit documentation in R/methods.R
 \name{quantile}
 \alias{quantile}
+\alias{quantile.default}
 \title{Find the quantile of a probability distribution}
 \usage{
 quantile(d, p, ...)
+
+\method{quantile}{default}(d, p, names = FALSE, ...)
 }
 \arguments{
 \item{d}{A probability distribution object such as those created by
 a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{p}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
@@ -19,13 +22,16 @@ catch mispellings or other possible errors.}
 A vector of quantiles, one for each element of \code{p}.
 }
 \description{
-TODO: Note that this current masks the \code{\link[stats:quantile]{stats::quantile()}} generic
-to allow for consistent argument names and warnings when arguments
-disappear into \code{...}.
+This function allows us to use the \code{\link[stats:quantile]{stats::quantile()}} alongside
+custom S3 methods for \code{distributions} objects. When passing arguments
+to \code{\link[stats:quantile]{stats::quantile()}}, accepts both
+\code{distributions3} style arguments \code{d}, \code{p} and stats style arguments
+\code{x}, \code{probs} as well as any combination of the two.
 }
 \examples{
 
 X <- Normal()
 
 cdf(X, c(0.2, 0.4, 0.6, 0.8))
+
 }
