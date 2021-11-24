@@ -56,7 +56,7 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 1 0 0 0 0 0 0
+#>  [1] 0 1 0 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 cdf(X, 0)
@@ -72,13 +72,11 @@ the plot.
 
 ## Contributing
 
-I am very happy to review PRs and provide advice on how to add new
-functionality to the package. Documentation improvements are
-particularly appreciated!
-
-To add a new distribution, the best way to get started is to look at
-`R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them
-for whatever new distribution you’d like to add.
+`distributions3` is not under active development, but is fairly stable
+and used by several academics for teaching intro stat courses. We are
+happy to review PRs contributing bug fixes. If you are interested in
+more actively maintaining and developing `distributions3`, please reach
+out on Github!
 
 Please note that `distributions3` is released with a [Contributor Code
 of
@@ -102,9 +100,3 @@ View](https://cran.r-project.org/view=Distributions).
 -   [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
     provides extensive functionality for fitting various distributions
     but does not treat distributions themselves as objects
-
-**Development note:** `distributions3` is not under active development,
-but is fairly stable and used by several academics for teaching intro
-stat courses. We are happy to review PRs contributing bug fixes. If you
-are interested in more actively maintaining and developing
-`distributions3`, please reach out on Github!

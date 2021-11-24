@@ -71,9 +71,7 @@ Note that `quantile()` **always** returns lower tail probabilities. If you aren'
 
 ## Contributing
 
-I am very happy to review PRs and provide advice on how to add new functionality to the package. Documentation improvements are particularly appreciated!
-
-To add a new distribution, the best way to get started is to look at `R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them for whatever new distribution you'd like to add.
+`distributions3` is not under active development, but is fairly stable and used by several academics for teaching intro stat courses. We are happy to review PRs contributing bug fixes. If you are interested in more actively maintaining and developing `distributions3`, please reach out on Github!
 
 Please note that `distributions3` is released with a
 [Contributor Code of Conduct](https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
@@ -86,5 +84,3 @@ For a comprehensive overview of the many packages providing various distribution
 - [`distr6`](https://cran.r-project.org/package=distr6) builds on `distr`, but uses R6 objects
 - [`distr`](https://cran.r-project.org/package=distr) is quite similar to `distributions`, but uses S4 objects and is less focused on documentation. 
 - [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus) provides extensive functionality for fitting various distributions but does not treat distributions themselves as objects
-
-**Development note:** `distributions3` is not under active development, but is fairly stable and used by several academics for teaching intro stat courses. We are happy to review PRs contributing bug fixes. If you are interested in more actively maintaining and developing `distributions3`, please reach out on Github!
