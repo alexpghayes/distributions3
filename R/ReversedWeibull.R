@@ -93,8 +93,8 @@ print.RevWeibull <- function(x, ...) {
 }
 
 #' @export
-mean.RevWeibull <- function(d, ...) {
-  d$location + d$scale * gamma(1 + 1/d$shape)
+mean.RevWeibull <- function(x, ...) {
+  x$location + x$scale * gamma(1 + 1/x$shape)
 }
 
 #' @export

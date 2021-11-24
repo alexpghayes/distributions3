@@ -2,19 +2,55 @@
 % Please edit documentation in R/Exponential.R
 \name{Exponential}
 \alias{Exponential}
-\title{Create a Exponential distribution}
+\title{Create an Exponential distribution}
 \usage{
 Exponential(rate = 1)
 }
 \arguments{
-\item{rate}{The rate parameter. Can be any positive number. Defaults
-to \code{1}.}
+\item{rate}{The rate parameter, written \eqn{\lambda} in textbooks.
+Can be any positive number. Defaults to \code{1}.}
 }
 \value{
-A \code{Exponential} object.
+An \code{Exponential} object.
 }
 \description{
-Create a Exponential distribution
+Exponential distributions are frequently used for modeling the amount
+of time that passes until a specific event occurs. For example, exponential
+distributions could be used to model the time between two earthquakes,
+the amount of delay between internet packets, or the amount of time a piece
+of machinery can run before needing repair.
+}
+\details{
+We recommend reading this documentation on
+\url{https://alexpghayes.github.io/distributions3}, where the math
+will render with additional detail and much greater clarity.
+
+In the following, let \eqn{X} be an Exponential random variable with
+rate parameter \code{rate} = \eqn{\lambda}.
+
+\strong{Support}: {x in [0, \eqn{\infty})}
+
+\strong{Mean}: 1 / \eqn{\lambda}
+
+\strong{Variance}: 1 / \eqn{\lambda^2}
+
+\strong{Probability density function (p.d.f)}:
+
+\deqn{
+    f(x) = \lambdae^{-\lambdax}
+  }
+
+\strong{Cumulative distribution function (c.d.f)}:
+
+\deqn{
+    F(x) = 1 - e^{-\lambdax}
+  }
+
+\strong{Moment generating function (m.g.f)}:
+
+\deqn{
+    \frac{\lambda}{\lambda - t}, for t < \lambda
+  }
 }
 \examples{
 

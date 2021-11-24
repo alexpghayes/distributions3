@@ -79,7 +79,7 @@ print.Gumbel <- function(x, ...) {
 }
 
 #' @export
-mean.Gumbel <- function(d, ...) d$mu + d$sigma * -digamma(1)
+mean.Gumbel <- function(x, ...) x$mu + x$sigma * -digamma(1)
 
 #' @export
 variance.Gumbel <- function(d, ...) pi^(2/6) * d$sigma^2

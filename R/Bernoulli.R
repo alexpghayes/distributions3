@@ -99,7 +99,7 @@ print.Bernoulli <- function(x, ...) {
 }
 
 #' @export
-mean.Bernoulli <- function(d, ...) d$p
+mean.Bernoulli <- function(x, ...) x$p
 
 #' @export
 variance.Bernoulli <- function(d, ...) d$p * (1 - d$p)

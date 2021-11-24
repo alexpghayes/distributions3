@@ -69,8 +69,8 @@ print.Weibull <- function(x, ...) {
 }
 
 #' @export
-mean.Weibull <- function(d, ...) {
-  d$scale * gamma(1 + 1/d$shape)
+mean.Weibull <- function(x, ...) {
+  x$scale * gamma(1 + 1/x$shape)
 }
 
 #' @export

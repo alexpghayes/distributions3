@@ -91,7 +91,7 @@ print.Gamma <- function(x, ...) {
 }
 
 #' @export
-mean.Gamma <- function(d, ...) d$shape / d$rate
+mean.Gamma <- function(x, ...) x$shape / x$rate
 
 #' @export
 variance.Gamma <- function(d, ...) d$shape / d$rate^2

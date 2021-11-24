@@ -31,13 +31,12 @@
 #'
 #' cdf(X, 1)
 #' quantile(X, 0.5)
-#' \donttest{
+#'
 #' # cdfs are only defined for numeric sample spaces. this errors!
-#' cdf(Y, "a")
+#' # cdf(Y, "a")
 #'
 #' # same for quantiles. this also errors!
-#' quantile(Y, 0.7)
-#' }
+#' # quantile(Y, 0.7)
 #'
 Categorical <- function(outcomes, p = NULL) {
   if (!is.null(p) && length(outcomes) != length(p)) {
@@ -117,7 +116,7 @@ pdf.Categorical <- function(d, x, ...) {
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
   }
 
-  ifelse(x %in% d$outcomes, d$p[d$outcomes == x], 0)
+  unname(sapply(x, function(y) ifelse(y %in% d$outcomes, d$p[d$outcomes == y], 0)))
 }
 
 #' @rdname pdf.Categorical

@@ -15,6 +15,8 @@ kurtosis(d, ...)
 \arguments{
 \item{d}{A probability distribution object such as those created by
 a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+
+\item{...}{Further arguments passed to or from other methods (currently not used).}
 }
 \value{
 A numeric scalar

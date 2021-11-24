@@ -98,7 +98,7 @@ print.Multinomial <- function(x, ...) {
 }
 
 #' @export
-mean.Multinomial <- function(d, ...) d$size * d$p
+mean.Multinomial <- function(x, ...) x$size * x$p
 
 #' @export
 variance.Multinomial <- function(d, ...) d$size * d$p * (1 - d$p)

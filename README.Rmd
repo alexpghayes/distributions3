@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
-[![Travis build status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
-[![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
+[![R-CMD-check](https://github.com/alexpghayes/distributions3/workflows/R-CMD-check/badge.svg)](https://github.com/alexpghayes/distributions3/actions)
+[![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=main)
 <!-- badges: end -->
 
 `distributions3`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions3` has two goals:
@@ -71,9 +71,7 @@ Note that `quantile()` **always** returns lower tail probabilities. If you aren'
 
 ## Contributing
 
-I am very happy to review PRs and provide advice on how to add new functionality to the package. Documentation improvements are particularly appreciated!
-
-To add a new distribution, the best way to get started is to look at `R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them for whatever new distribution you'd like to add.
+`distributions3` is not under active development, but is fairly stable and used by several academics for teaching intro stat courses. We are happy to review PRs contributing bug fixes. If you are interested in more actively maintaining and developing `distributions3`, please reach out on Github!
 
 Please note that `distributions3` is released with a
 [Contributor Code of Conduct](https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
@@ -82,6 +80,7 @@ Please note that `distributions3` is released with a
 
 For a comprehensive overview of the many packages providing various distribution related functionality see the [CRAN Task View](https://cran.r-project.org/view=Distributions).
 
-- [`distr`](https://cran.r-project.org/package=distr) is quite similar to `distributions`, but uses S4 objects and is less focused on documentation. 
+- [`distributional`](https://cran.r-project.org/package=distributional) provides distribution objects as vectorized S3 objects
 - [`distr6`](https://cran.r-project.org/package=distr6) builds on `distr`, but uses R6 objects
+- [`distr`](https://cran.r-project.org/package=distr) is quite similar to `distributions`, but uses S4 objects and is less focused on documentation. 
 - [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus) provides extensive functionality for fitting various distributions but does not treat distributions themselves as objects

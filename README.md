@@ -7,10 +7,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
-[![Travis build
-status](https://travis-ci.org/alexpghayes/distributions3.svg?branch=master)](https://travis-ci.org/alexpghayes/distributions3)
+[![R-CMD-check](https://github.com/alexpghayes/distributions3/workflows/R-CMD-check/badge.svg)](https://github.com/alexpghayes/distributions3/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/master/graph/badge.svg)](https://codecov.io/gh/alexpghayes/distributions3?branch=master)
+coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=main)
 <!-- badges: end -->
 
 `distributions3`, inspired by the [eponynmous Julia
@@ -26,10 +25,10 @@ generic function interface to probability distributions.
 
 The main generics are:
 
-  - `random()`: Draw samples from a distribution.
-  - `pdf()`: Evaluate the probability density (or mass) at a point.
-  - `cdf()`: Evaluate the cumulative probability up to a point.
-  - `quantile()`: Determine the quantile for a given probability.
+-   `random()`: Draw samples from a distribution.
+-   `pdf()`: Evaluate the probability density (or mass) at a point.
+-   `cdf()`: Evaluate the cumulative probability up to a point.
+-   `quantile()`: Determine the quantile for a given probability.
     Inverse of `cdf()`.
 
 ## Installation
@@ -57,10 +56,9 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 1 0 0 0 0 0 0 1 0 0
+#>  [1] 0 1 0 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
-
 cdf(X, 0)
 #> [1] 0.9
 quantile(X, 0.5)
@@ -74,13 +72,11 @@ the plot.
 
 ## Contributing
 
-I am very happy to review PRs and provide advice on how to add new
-functionality to the package. Documentation improvements are
-particularly appreciated\!
-
-To add a new distribution, the best way to get started is to look at
-`R/Beta.R` and `tests/testthat/test-Beta.R`, copy them, and modify them
-for whatever new distribution you’d like to add.
+`distributions3` is not under active development, but is fairly stable
+and used by several academics for teaching intro stat courses. We are
+happy to review PRs contributing bug fixes. If you are interested in
+more actively maintaining and developing `distributions3`, please reach
+out on Github!
 
 Please note that `distributions3` is released with a [Contributor Code
 of
@@ -93,11 +89,14 @@ For a comprehensive overview of the many packages providing various
 distribution related functionality see the [CRAN Task
 View](https://cran.r-project.org/view=Distributions).
 
-  - [`distr`](https://cran.r-project.org/package=distr) is quite similar
+-   [`distributional`](https://cran.r-project.org/package=distributional)
+    provides distribution objects as vectorized S3 objects, and is more
+    actively developed that `distributions3`
+-   [`distr6`](https://cran.r-project.org/package=distr6) builds on
+    `distr`, but uses R6 objects
+-   [`distr`](https://cran.r-project.org/package=distr) is quite similar
     to `distributions`, but uses S4 objects and is less focused on
     documentation.
-  - [`distr6`](https://cran.r-project.org/package=distr6) builds on
-    `distr`, but uses R6 objects
-  - [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
+-   [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
     provides extensive functionality for fitting various distributions
     but does not treat distributions themselves as objects

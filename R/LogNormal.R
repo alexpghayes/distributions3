@@ -72,9 +72,9 @@ print.LogNormal <- function(x, ...) {
 }
 
 #' @export
-mean.LogNormal <- function(d, ...) {
-  mu <- d$log_mu
-  sigma <- d$log_sigma
+mean.LogNormal <- function(x, ...) {
+  mu <- x$log_mu
+  sigma <- x$log_sigma
   exp(mu + sigma^2 / 2)
 }
 
