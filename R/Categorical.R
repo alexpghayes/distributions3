@@ -116,7 +116,7 @@ pdf.Categorical <- function(d, x, ...) {
     stop("All elements of `x` must be in the sample space.", call. = FALSE)
   }
 
-  sapply(x, function(y) ifelse(y %in% d$outcomes, d$p[d$outcomes == y], 0))
+  unname(sapply(x, function(y) ifelse(y %in% d$outcomes, d$p[d$outcomes == y], 0)))
 }
 
 #' @rdname pdf.Categorical
