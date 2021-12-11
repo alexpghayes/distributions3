@@ -4,10 +4,10 @@
 \alias{quantile.Frechet}
 \title{Determine quantiles of a Frechet distribution}
 \usage{
-\method{quantile}{Frechet}(d, p, ...)
+\method{quantile}{Frechet}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
+\item{x}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
 
 \item{p}{A vector of probabilities.}
 

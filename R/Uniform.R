@@ -48,19 +48,19 @@ print.Uniform <- function(x, ...) {
 mean.Uniform <- function(x, ...) (x$a + x$b) / 2
 
 #' @export
-variance.Uniform <- function(d, ...) (1 / 12) * (d$b - d$a) ^ 2
+variance.Uniform <- function(x, ...) (1 / 12) * (x$b - x$a) ^ 2
 
 #' @export
-skewness.Uniform <- function(d, ...) 0
+skewness.Uniform <- function(x, ...) 0
 
 #' @export
-kurtosis.Uniform <- function(d, ...) -6/5
+kurtosis.Uniform <- function(x, ...) -6/5
 
 #' Draw a random sample from a continuous Uniform distribution
 #'
 #' @inherit Uniform examples
 #'
-#' @param d A `Uniform` object created by a call to [Uniform()].
+#' @param x A `Uniform` object created by a call to [Uniform()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -68,15 +68,15 @@ kurtosis.Uniform <- function(d, ...) -6/5
 #' @return A numeric vector containing values in `[a, b]` of length `n`.
 #' @export
 #'
-random.Uniform <- function(d, n = 1L, ...) {
-  runif(n = n, min = min(d$a, d$b), max = max(d$a, d$b))
+random.Uniform <- function(x, n = 1L, ...) {
+  runif(n = n, min = min(x$a, x$b), max = max(x$a, x$b))
 }
 
 #' Evaluate the probability mass function of a continuous Uniform distribution
 #'
 #' @inherit Uniform examples
-#' @inheritParams random.Uniform
 #'
+#' @param d A `Uniform` object created by a call to [Uniform()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -99,8 +99,8 @@ log_pdf.Uniform <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a continuous Uniform distribution
 #'
 #' @inherit Uniform examples
-#' @inheritParams random.Uniform
 #'
+#' @param d A `Uniform` object created by a call to [Uniform()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -127,8 +127,8 @@ cdf.Uniform <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Uniform <- function(d, p, ...) {
-  qunif(p = p, min = min(d$a, d$b), max = max(d$a, d$b))
+quantile.Uniform <- function(x, p, ...) {
+  qunif(p = p, min = min(x$a, x$b), max = max(x$a, x$b))
 }
 
 

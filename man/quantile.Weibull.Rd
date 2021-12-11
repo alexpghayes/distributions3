@@ -4,10 +4,10 @@
 \alias{quantile.Weibull}
 \title{Determine quantiles of a Weibull distribution}
 \usage{
-\method{quantile}{Weibull}(d, p, ...)
+\method{quantile}{Weibull}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
+\item{x}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
 
 \item{p}{A vector of probabilites.}
 

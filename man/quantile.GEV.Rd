@@ -4,10 +4,10 @@
 \alias{quantile.GEV}
 \title{Determine quantiles of a GEV distribution}
 \usage{
-\method{quantile}{GEV}(d, p, ...)
+\method{quantile}{GEV}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
+\item{x}{A \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
 
 \item{p}{A vector of probabilities.}
 

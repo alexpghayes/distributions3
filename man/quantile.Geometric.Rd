@@ -4,10 +4,10 @@
 \alias{quantile.Geometric}
 \title{Determine quantiles of a Geometric distribution}
 \usage{
-\method{quantile}{Geometric}(d, p, ...)
+\method{quantile}{Geometric}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
+\item{x}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
 
 \item{p}{A vector of probabilites.}
 

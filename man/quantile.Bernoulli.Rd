@@ -4,10 +4,10 @@
 \alias{quantile.Bernoulli}
 \title{Determine quantiles of a Bernoulli distribution}
 \usage{
-\method{quantile}{Bernoulli}(d, p, ...)
+\method{quantile}{Bernoulli}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
+\item{x}{A \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
 
 \item{p}{A vector of probabilites.}
 

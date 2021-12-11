@@ -4,10 +4,10 @@
 \alias{random.RevWeibull}
 \title{Draw a random sample from an RevWeibull distribution}
 \usage{
-\method{random}{RevWeibull}(d, n = 1L, ...)
+\method{random}{RevWeibull}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
+\item{x}{A \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

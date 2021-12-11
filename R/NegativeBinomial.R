@@ -80,19 +80,19 @@ print.NegativeBinomial <- function(x, ...) {
 mean.NegativeBinomial <- function(x, ...) x$p * x$size / (1 - x$p)
 
 #' @export
-variance.NegativeBinomial <- function(d, ...) (d$p * d$size) / (1 - d$p)^2
+variance.NegativeBinomial <- function(x, ...) (x$p * x$size) / (1 - x$p)^2
 
 #' @export
-skewness.NegativeBinomial <- function(d, ...) (1 + d$p) / sqrt(d$p * d$size)
+skewness.NegativeBinomial <- function(x, ...) (1 + x$p) / sqrt(x$p * x$size)
 
 #' @export
-kurtosis.NegativeBinomial <- function(d, ...) 6 / d$size + (1 - d$p)^2 / d$size * d$p
+kurtosis.NegativeBinomial <- function(x, ...) 6 / x$size + (1 - x$p)^2 / x$size * x$p
 
 #' Draw a random sample from a negative binomial distribution
 #'
 #' @inherit NegativeBinomial examples
 #'
-#' @param d A `NegativeBinomial` object created by a call to
+#' @param x A `NegativeBinomial` object created by a call to
 #'   [NegativeBinomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -103,15 +103,16 @@ kurtosis.NegativeBinomial <- function(d, ...) 6 / d$size + (1 - d$p)^2 / d$size 
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.NegativeBinomial <- function(d, n = 1L, ...) {
-  rnbinom(n = n, size = d$size, prob = d$p)
+random.NegativeBinomial <- function(x, n = 1L, ...) {
+  rnbinom(n = n, size = x$size, prob = x$p)
 }
 
 #' Evaluate the probability mass function of a NegativeBinomial distribution
 #'
 #' @inherit NegativeBinomial examples
-#' @inheritParams random.NegativeBinomial
 #'
+#' @param d A `NegativeBinomial` object created by a call to
+#'   [NegativeBinomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -136,8 +137,9 @@ log_pdf.NegativeBinomial <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a negative binomial distribution
 #'
 #' @inherit NegativeBinomial examples
-#' @inheritParams random.NegativeBinomial
 #'
+#' @param d A `NegativeBinomial` object created by a call to
+#'   [NegativeBinomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -166,8 +168,8 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #'
 #' @family NegativeBinomial distribution
 #'
-quantile.NegativeBinomial <- function(d, p, ...) {
-  qnbinom(p = p, size = d$size, prob = d$p)
+quantile.NegativeBinomial <- function(x, p, ...) {
+  qnbinom(p = p, size = x$size, prob = x$p)
 }
 
 

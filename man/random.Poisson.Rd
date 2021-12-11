@@ -4,10 +4,10 @@
 \alias{random.Poisson}
 \title{Draw a random sample from a Poisson distribution}
 \usage{
-\method{random}{Poisson}(d, n = 1L, ...)
+\method{random}{Poisson}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
+\item{x}{A \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

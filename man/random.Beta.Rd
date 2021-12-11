@@ -4,10 +4,10 @@
 \alias{random.Beta}
 \title{Draw a random sample from a Beta distribution}
 \usage{
-\method{random}{Beta}(d, n = 1L, ...)
+\method{random}{Beta}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}
+\item{x}{A \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

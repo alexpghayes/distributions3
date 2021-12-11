@@ -4,10 +4,10 @@
 \alias{quantile.LogNormal}
 \title{Determine quantiles of a LogNormal distribution}
 \usage{
-\method{quantile}{LogNormal}(d, p, ...)
+\method{quantile}{LogNormal}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
+\item{x}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{p}{A vector of probabilites.}
 

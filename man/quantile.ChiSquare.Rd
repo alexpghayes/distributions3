@@ -4,10 +4,10 @@
 \alias{quantile.ChiSquare}
 \title{Determine quantiles of a chi square distribution}
 \usage{
-\method{quantile}{ChiSquare}(d, p, ...)
+\method{quantile}{ChiSquare}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{ChiSquare} object created by a call to \code{\link[=ChiSquare]{ChiSquare()}}.}
+\item{x}{A \code{ChiSquare} object created by a call to \code{\link[=ChiSquare]{ChiSquare()}}.}
 
 \item{p}{A vector of probabilites.}
 

@@ -4,10 +4,10 @@
 \alias{quantile.Normal}
 \title{Determine quantiles of a Normal distribution}
 \usage{
-\method{quantile}{Normal}(d, p, ...)
+\method{quantile}{Normal}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
+\item{x}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{p}{A vector of probabilites.}
 

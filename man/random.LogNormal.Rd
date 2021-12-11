@@ -4,10 +4,10 @@
 \alias{random.LogNormal}
 \title{Draw a random sample from a LogNormal distribution}
 \usage{
-\method{random}{LogNormal}(d, n = 1L, ...)
+\method{random}{LogNormal}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
+\item{x}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

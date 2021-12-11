@@ -6,14 +6,14 @@
 \alias{kurtosis}
 \title{Compute the moments of a probability distribution}
 \usage{
-variance(d, ...)
+variance(x, ...)
 
-skewness(d, ...)
+skewness(x, ...)
 
-kurtosis(d, ...)
+kurtosis(x, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
+\item{x}{A probability distribution object such as those created by
 a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
 \item{...}{Further arguments passed to or from other methods (currently not used).}

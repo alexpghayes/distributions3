@@ -4,10 +4,10 @@
 \alias{random.Gamma}
 \title{Draw a random sample from a Gamma distribution}
 \usage{
-\method{random}{Gamma}(d, n = 1L, ...)
+\method{random}{Gamma}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}
+\item{x}{A \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

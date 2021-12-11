@@ -4,10 +4,10 @@
 \alias{random.Gumbel}
 \title{Draw a random sample from a Gumbel distribution}
 \usage{
-\method{random}{Gumbel}(d, n = 1L, ...)
+\method{random}{Gumbel}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
+\item{x}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

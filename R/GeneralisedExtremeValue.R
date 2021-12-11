@@ -124,28 +124,28 @@ mean.GEV <- function(x, ...) {
 }
 
 #' @export
-variance.GEV <- function(d, ...) {
+variance.GEV <- function(x, ...) {
   euler <- -digamma(1)
-  if (d$xi == 0) {
-    d$sigma^2 * pi^2 / 6
-  } else if (d$xi < 1/2) {
-    d$sigma^2 * (g(d, 2) - g(d, 1)^2) / d$xi ^ 2
+  if (x$xi == 0) {
+    x$sigma^2 * pi^2 / 6
+  } else if (x$xi < 1/2) {
+    x$sigma^2 * (g(x, 2) - g(x, 1)^2) / x$xi ^ 2
   } else {
     Inf
   }
 }
 
 #' @export
-skewness.GEV <- function(d, ...) {
-  if (d$xi == 1) {
+skewness.GEV <- function(x, ...) {
+  if (x$xi == 1) {
     # no useful zeta fn without adding a dependency
     zeta3 <- 1.202056903159594014596
     12 * sqrt(6) * zeta3 / pi ^ 3
-  } else if (d$xi < 1/3) {
-    s <- sign(d$xi)
-    g1 <- g(d, 1)
-    g2 <- g(d, 2)
-    g3 <- g(d, 3)
+  } else if (x$xi < 1/3) {
+    s <- sign(x$xi)
+    g1 <- g(x, 1)
+    g2 <- g(x, 2)
+    g3 <- g(x, 3)
     s * (g3 - 3*g1*g2 + 2*g1^3) / (g2 - g1^2)^(3/2)
   } else {
     Inf
@@ -153,14 +153,14 @@ skewness.GEV <- function(d, ...) {
 }
 
 #' @export
-kurtosis.GEV <- function(d, ...) {
-  if (d$xi == 0) {
+kurtosis.GEV <- function(x, ...) {
+  if (x$xi == 0) {
     12/5
-  } else if (d$xi < 1/3) {
-    g1 <- g(d, 1)
-    g2 <- g(d, 2)
-    g3 <- g(d, 3)
-    g4 <- g(d, 4)
+  } else if (x$xi < 1/3) {
+    g1 <- g(x, 1)
+    g2 <- g(x, 2)
+    g3 <- g(x, 3)
+    g4 <- g(x, 4)
     (g4 - 4*g3*g1 - 3*g2^2 + 12*g2*g1^2 - 6*g1^4) / (g2 - g1^2)^2
   } else {
     Inf
@@ -171,7 +171,7 @@ kurtosis.GEV <- function(d, ...) {
 #'
 #' @inherit GEV examples
 #'
-#' @param d A `GEV` object created by a call to [GEV()].
+#' @param x A `GEV` object created by a call to [GEV()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -179,15 +179,15 @@ kurtosis.GEV <- function(d, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.GEV <- function(d, n = 1L, ...) {
-  revdbayes::rgev(n = n, loc = d$mu, scale = d$sigma, shape = d$xi)
+random.GEV <- function(x, n = 1L, ...) {
+  revdbayes::rgev(n = n, loc = x$mu, scale = x$sigma, shape = x$xi)
 }
 
 #' Evaluate the probability mass function of a GEV distribution
 #'
 #' @inherit GEV examples
-#' @inheritParams random.GEV
 #'
+#' @param d A `GEV` object created by a call to [GEV()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -210,8 +210,8 @@ log_pdf.GEV <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a GEV distribution
 #'
 #' @inherit GEV examples
-#' @inheritParams random.GEV
 #'
+#' @param d A `GEV` object created by a call to [GEV()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -238,6 +238,6 @@ cdf.GEV <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.GEV <- function(d, p, ...) {
-  revdbayes::qgev(p = p, loc = d$mu, scale = d$sigma, shape = d$xi)
+quantile.GEV <- function(x, p, ...) {
+  revdbayes::qgev(p = p, loc = x$mu, scale = x$sigma, shape = x$xi)
 }

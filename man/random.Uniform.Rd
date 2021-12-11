@@ -4,10 +4,10 @@
 \alias{random.Uniform}
 \title{Draw a random sample from a continuous Uniform distribution}
 \usage{
-\method{random}{Uniform}(d, n = 1L, ...)
+\method{random}{Uniform}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
+\item{x}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

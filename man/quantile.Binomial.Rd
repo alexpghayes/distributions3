@@ -4,10 +4,10 @@
 \alias{quantile.Binomial}
 \title{Determine quantiles of a Binomial distribution}
 \usage{
-\method{quantile}{Binomial}(d, p, ...)
+\method{quantile}{Binomial}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
+\item{x}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
 
 \item{p}{A vector of probabilites.}
 

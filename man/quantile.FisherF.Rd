@@ -4,10 +4,10 @@
 \alias{quantile.FisherF}
 \title{Determine quantiles of an F distribution}
 \usage{
-\method{quantile}{FisherF}(d, p, ...)
+\method{quantile}{FisherF}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
+\item{x}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
 
 \item{p}{A vector of probabilites.}
 

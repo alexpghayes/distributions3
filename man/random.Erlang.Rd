@@ -4,10 +4,10 @@
 \alias{random.Erlang}
 \title{Draw a random sample from an Erlang distribution}
 \usage{
-\method{random}{Erlang}(d, n = 1L, ...)
+\method{random}{Erlang}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
+\item{x}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

@@ -74,32 +74,32 @@ mean.Weibull <- function(x, ...) {
 }
 
 #' @export
-variance.Weibull <- function(d, ...) {
-  d$scale^2 * gamma(1 + 2/d$shape) - mean(d)^2
+variance.Weibull <- function(x, ...) {
+  x$scale^2 * gamma(1 + 2/x$shape) - mean(x)^2
 }
 
 #' @export
-skewness.Weibull <- function(d, ...) {
-  mu <- mean(d)
-  sigma <- sqrt(variance(d))
+skewness.Weibull <- function(x, ...) {
+  mu <- mean(x)
+  sigma <- sqrt(variance(x))
   r <- mu / sigma
-  gamma(1 + 3/d$shape) * (d$scale/sigma)^3 - 3*r - 3^r
+  gamma(1 + 3/x$shape) * (x$scale/sigma)^3 - 3*r - 3^r
 }
 
 #' @export
-kurtosis.Weibull <- function(d, ...) {
-  mu <- mean(d)
-  sigma <- sqrt(variance(d))
-  gamma <- skewness(d)
+kurtosis.Weibull <- function(x, ...) {
+  mu <- mean(x)
+  sigma <- sqrt(variance(x))
+  gamma <- skewness(x)
   r <- mu / sigma
-  (d$scale/sigma)^4 * gamma(1 + 4/d$shape) - 4*gamma*r -6*r^2 - r^4 - 3
+  (x$scale/sigma)^4 * gamma(1 + 4/x$shape) - 4*gamma*r -6*r^2 - r^4 - 3
 }
 
 #' Draw a random sample from a Weibull distribution
 #'
 #' @inherit Weibull examples
 #'
-#' @param d A `Weibull` object created by a call to [Weibull()].
+#' @param x A `Weibull` object created by a call to [Weibull()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -109,8 +109,8 @@ kurtosis.Weibull <- function(d, ...) {
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.Weibull <- function(d, n = 1L, ...) {
-  rweibull(n = n, shape = d$shape, scale = d$scale)
+random.Weibull <- function(x, n = 1L, ...) {
+  rweibull(n = n, shape = x$shape, scale = x$scale)
 }
 
 #' Evaluate the probability mass function of a Weibull distribution
@@ -120,8 +120,8 @@ random.Weibull <- function(d, n = 1L, ...) {
 #' showing to how calculate p-values and confidence intervals.
 #'
 #' @inherit Weibull examples
-#' @inheritParams random.Weibull
 #'
+#' @param d A `Weibull` object created by a call to [Weibull()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -145,8 +145,8 @@ log_pdf.Weibull <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Weibull distribution
 #'
 #' @inherit Weibull examples
-#' @inheritParams random.Weibull
 #'
+#' @param d A `Weibull` object created by a call to [Weibull()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -175,8 +175,8 @@ cdf.Weibull <- function(d, x, ...) {
 #'
 #' @family Weibull distribution
 #'
-quantile.Weibull <- function(d, p, ...) {
-  qweibull(p = p, shape = d$shape, scale = d$scale)
+quantile.Weibull <- function(x, p, ...) {
+  qweibull(p = p, shape = x$shape, scale = x$scale)
 }
 
 

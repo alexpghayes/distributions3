@@ -4,10 +4,10 @@
 \alias{quantile.Exponential}
 \title{Determine quantiles of an Exponential distribution}
 \usage{
-\method{quantile}{Exponential}(d, p, ...)
+\method{quantile}{Exponential}(x, p, ...)
 }
 \arguments{
-\item{d}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
+\item{x}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{p}{A vector of probabilites.}
 

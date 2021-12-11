@@ -4,10 +4,10 @@
 \alias{random.GEV}
 \title{Draw a random sample from a GEV distribution}
 \usage{
-\method{random}{GEV}(d, n = 1L, ...)
+\method{random}{GEV}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
+\item{x}{A \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

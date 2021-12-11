@@ -4,10 +4,10 @@
 \alias{quantile.Gumbel}
 \title{Determine quantiles of a Gumbel distribution}
 \usage{
-\method{quantile}{Gumbel}(d, p, ...)
+\method{quantile}{Gumbel}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
+\item{x}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
 
 \item{p}{A vector of probabilities.}
 

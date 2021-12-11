@@ -4,10 +4,10 @@
 \alias{random.Multinomial}
 \title{Draw a random sample from a Multinomial distribution}
 \usage{
-\method{random}{Multinomial}(d, n = 1L, ...)
+\method{random}{Multinomial}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Multinomial} object created by a call to \code{\link[=Multinomial]{Multinomial()}}.}
+\item{x}{A \code{Multinomial} object created by a call to \code{\link[=Multinomial]{Multinomial()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

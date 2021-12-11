@@ -4,10 +4,10 @@
 \alias{quantile.RevWeibull}
 \title{Determine quantiles of a RevWeibull distribution}
 \usage{
-\method{quantile}{RevWeibull}(d, p, ...)
+\method{quantile}{RevWeibull}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
+\item{x}{A \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
 
 \item{p}{A vector of probabilities.}
 

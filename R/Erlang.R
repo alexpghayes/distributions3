@@ -47,7 +47,7 @@ print.Erlang <- function(x, ...) {
 #'
 #' @inherit Erlang examples
 #'
-#' @param d An `Erlang` object created by a call to [Erlang()].
+#' @param x An `Erlang` object created by a call to [Erlang()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -55,17 +55,17 @@ print.Erlang <- function(x, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Erlang <- function(d, n = 1L, ...) {
+random.Erlang <- function(x, n = 1L, ...) {
   replicate(n = n, expr = {
-    -1 / d$lambda * log(prod(runif(n = d$k)))
+    -1 / x$lambda * log(prod(runif(n = x$k)))
   })
 }
 
 #' Evaluate the probability mass function of an Erlang distribution
 #'
 #' @inherit Erlang examples
-#' @inheritParams random.Erlang
 #'
+#' @param d An `Erlang` object created by a call to [Erlang()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -90,8 +90,8 @@ log_pdf.Erlang <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of an Erlang distribution
 #'
 #' @inherit Erlang examples
-#' @inheritParams random.Erlang
 #'
+#' @param d An `Erlang` object created by a call to [Erlang()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -127,7 +127,7 @@ cdf.Erlang <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
+quantile.Erlang <- function(x, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
   if (any(p < 0) | any(p > 1)) stop("'p' must be between 0 and 1.", call. = TRUE)
   p[p == 1] <- (1 - .Machine$double.eps^0.25)
   internal <- Vectorize(FUN = function(d, p, ..., interval, tol) {
@@ -135,7 +135,7 @@ quantile.Erlang <- function(d, p, ..., interval = c(0, 1e6), tol = .Machine$doub
     root <- stats::uniroot(qf, interval = interval, tol = tol, check.conv = TRUE)
     return(root$root)
   }, vectorize.args = "p")
-  internal(d = d, p = p, ..., interval = interval, tol = tol)
+  internal(d = x, p = p, ..., interval = interval, tol = tol)
 }
 
 #' Return the support of the Erlang distribution

@@ -172,13 +172,13 @@ print.Normal <- function(x, ...) {
 mean.Normal <- function(x, ...) x$mu
 
 #' @export
-variance.Normal <- function(d, ...) d$sigma ^ 2
+variance.Normal <- function(x, ...) x$sigma ^ 2
 
 #' @export
-skewness.Normal <- function(d, ...) 0
+skewness.Normal <- function(x, ...) 0
 
 #' @export
-kurtosis.Normal <- function(d, ...) 0
+kurtosis.Normal <- function(x, ...) 0
 
 #' Draw a random sample from a Normal distribution
 #'
@@ -188,7 +188,7 @@ kurtosis.Normal <- function(d, ...) 0
 #'
 #' @inherit Normal examples
 #'
-#' @param d A `Normal` object created by a call to [Normal()].
+#' @param x A `Normal` object created by a call to [Normal()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -197,8 +197,8 @@ kurtosis.Normal <- function(d, ...) 0
 #' @export
 #'
 #'
-random.Normal <- function(d, n = 1L, ...) {
-  rnorm(n = n, mean = d$mu, sd = d$sigma)
+random.Normal <- function(x, n = 1L, ...) {
+  rnorm(n = n, mean = x$mu, sd = x$sigma)
 }
 
 #' Evaluate the probability mass function of a Normal distribution
@@ -208,8 +208,8 @@ random.Normal <- function(d, n = 1L, ...) {
 #' showing to how calculate p-values and confidence intervals.
 #'
 #' @inherit Normal examples
-#' @inheritParams random.Normal
 #'
+#' @param d A `Normal` object created by a call to [Normal()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -234,8 +234,8 @@ log_pdf.Normal <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Normal distribution
 #'
 #' @inherit Normal examples
-#' @inheritParams random.Normal
 #'
+#' @param d A `Normal` object created by a call to [Normal()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -274,8 +274,8 @@ cdf.Normal <- function(d, x, ...) {
 #'
 #' @family Normal distribution
 #'
-quantile.Normal <- function(d, p, ...) {
-  qnorm(p = p, mean = d$mu, sd = d$sigma)
+quantile.Normal <- function(x, p, ...) {
+  qnorm(p = p, mean = x$mu, sd = x$sigma)
 }
 
 #' Fit a Normal distribution to data

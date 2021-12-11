@@ -4,10 +4,10 @@
 \alias{quantile.HyperGeometric}
 \title{Determine quantiles of a HyperGeometric distribution}
 \usage{
-\method{quantile}{HyperGeometric}(d, p, ...)
+\method{quantile}{HyperGeometric}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{HyperGeometric} object created by a call to \code{\link[=HyperGeometric]{HyperGeometric()}}.}
+\item{x}{A \code{HyperGeometric} object created by a call to \code{\link[=HyperGeometric]{HyperGeometric()}}.}
 
 \item{p}{A vector of probabilites.}
 

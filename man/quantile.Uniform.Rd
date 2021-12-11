@@ -4,10 +4,10 @@
 \alias{quantile.Uniform}
 \title{Determine quantiles of a continuous Uniform  distribution}
 \usage{
-\method{quantile}{Uniform}(d, p, ...)
+\method{quantile}{Uniform}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
+\item{x}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
 
 \item{p}{A vector of probabilites.}
 

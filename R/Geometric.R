@@ -80,13 +80,13 @@ print.Geometric <- function(x, ...) {
 mean.Geometric <- function(x, ...) 1 / x$p
 
 #' @export
-variance.Geometric <- function(d, ...) (1 - d$p) / d$p^2
+variance.Geometric <- function(x, ...) (1 - x$p) / x$p^2
 
 #' @export
-skewness.Geometric <- function(d, ...) (2 - d$p) / sqrt(1 - d$p)
+skewness.Geometric <- function(x, ...) (2 - x$p) / sqrt(1 - x$p)
 
 #' @export
-kurtosis.Geometric <- function(d, ...) 6 + (d$p^2 / (1 - d$p))
+kurtosis.Geometric <- function(x, ...) 6 + (x$p^2 / (1 - x$p))
 
 #' Draw a random sample from a Geometric distribution
 #'
@@ -96,7 +96,7 @@ kurtosis.Geometric <- function(d, ...) 6 + (d$p^2 / (1 - d$p))
 #'
 #' @inherit Geometric examples
 #'
-#' @param d A `Geometric` object created by a call to [Geometric()].
+#' @param x A `Geometric` object created by a call to [Geometric()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -106,8 +106,8 @@ kurtosis.Geometric <- function(d, ...) 6 + (d$p^2 / (1 - d$p))
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.Geometric <- function(d, n = 1L, ...) {
-  rgeom(n = n, prob = d$p)
+random.Geometric <- function(x, n = 1L, ...) {
+  rgeom(n = n, prob = x$p)
 }
 
 #' Evaluate the probability mass function of a Geometric distribution
@@ -117,8 +117,8 @@ random.Geometric <- function(d, n = 1L, ...) {
 #' showing to how calculate p-values and confidence intervals.
 #'
 #' @inherit Geometric examples
-#' @inheritParams random.Geometric
 #'
+#' @param d A `Geometric` object created by a call to [Geometric()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -143,8 +143,8 @@ log_pdf.Geometric <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Geometric distribution
 #'
 #' @inherit Geometric examples
-#' @inheritParams random.Geometric
 #'
+#' @param d A `Geometric` object created by a call to [Geometric()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -173,8 +173,8 @@ cdf.Geometric <- function(d, x, ...) {
 #'
 #' @family Geometric distribution
 #'
-quantile.Geometric <- function(d, p, ...) {
-  qgeom(p = p, prob = d$p)
+quantile.Geometric <- function(x, p, ...) {
+  qgeom(p = p, prob = x$p)
 }
 
 #' Fit a Geometric distribution to data

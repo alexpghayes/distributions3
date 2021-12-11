@@ -4,10 +4,10 @@
 \alias{quantile.Cauchy}
 \title{Determine quantiles of a Cauchy distribution}
 \usage{
-\method{quantile}{Cauchy}(d, p, ...)
+\method{quantile}{Cauchy}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
+\item{x}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
 
 \item{p}{A vector of probabilites.}
 

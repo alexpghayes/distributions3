@@ -5,12 +5,12 @@
 \alias{quantile.default}
 \title{Find the quantile of a probability distribution}
 \usage{
-quantile(d, p, ...)
+quantile(x, p, ...)
 
-\method{quantile}{default}(d, p, names = FALSE, ...)
+\method{quantile}{default}(x, p, names = FALSE, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
+\item{x}{A probability distribution object such as those created by
 a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
 \item{p}{A vector of probabilities.}

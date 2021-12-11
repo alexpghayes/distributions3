@@ -88,19 +88,19 @@ print.Cauchy <- function(x, ...) {
 mean.Cauchy <- function(x, ...) NaN
 
 #' @export
-variance.Cauchy <- function(d, ...) NaN
+variance.Cauchy <- function(x, ...) NaN
 
 #' @export
-skewness.Cauchy <- function(d, ...) NaN
+skewness.Cauchy <- function(x, ...) NaN
 
 #' @export
-kurtosis.Cauchy <- function(d, ...) NaN
+kurtosis.Cauchy <- function(x, ...) NaN
 
 #' Draw a random sample from a Cauchy distribution
 #'
 #' @inherit Cauchy examples
 #'
-#' @param d A `Cauchy` object created by a call to [Cauchy()].
+#' @param x A `Cauchy` object created by a call to [Cauchy()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -108,15 +108,15 @@ kurtosis.Cauchy <- function(d, ...) NaN
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Cauchy <- function(d, n = 1L, ...) {
-  rcauchy(n = n, location = d$location, scale = d$scale)
+random.Cauchy <- function(x, n = 1L, ...) {
+  rcauchy(n = n, location = x$location, scale = x$scale)
 }
 
 #' Evaluate the probability mass function of a Cauchy distribution
 #'
 #' @inherit Cauchy examples
-#' @inheritParams random.Cauchy
 #'
+#' @param d A `Cauchy` object created by a call to [Cauchy()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -139,8 +139,8 @@ log_pdf.Cauchy <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Cauchy distribution
 #'
 #' @inherit Cauchy examples
-#' @inheritParams random.Cauchy
 #'
+#' @param d A `Cauchy` object created by a call to [Cauchy()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -167,8 +167,8 @@ cdf.Cauchy <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Cauchy <- function(d, p, ...) {
-  qcauchy(p = p, location = d$location, scale = d$scale)
+quantile.Cauchy <- function(x, p, ...) {
+  qcauchy(p = p, location = x$location, scale = x$scale)
 }
 
 #' Return the support of the Cauchy distribution

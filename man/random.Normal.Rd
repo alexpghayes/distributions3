@@ -4,10 +4,10 @@
 \alias{random.Normal}
 \title{Draw a random sample from a Normal distribution}
 \usage{
-\method{random}{Normal}(d, n = 1L, ...)
+\method{random}{Normal}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
+\item{x}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

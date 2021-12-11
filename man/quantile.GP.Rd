@@ -4,10 +4,10 @@
 \alias{quantile.GP}
 \title{Determine quantiles of a GP distribution}
 \usage{
-\method{quantile}{GP}(d, p, ...)
+\method{quantile}{GP}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
+\item{x}{A \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
 
 \item{p}{A vector of probabilities.}
 

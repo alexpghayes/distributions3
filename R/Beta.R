@@ -48,23 +48,23 @@ print.Beta <- function(x, ...) {
 mean.Beta <- function(x, ...) x$alpha / (x$alpha + x$beta)
 
 #' @export
-variance.Beta <- function(d, ...) {
-  a <- d$alpha
-  b <- d$beta
+variance.Beta <- function(x, ...) {
+  a <- x$alpha
+  b <- x$beta
   (a * b) /  ((a + b)^2 * (a + b + 1))
 }
 
 #' @export
-skewness.Beta <- function(d, ...) {
-  a <- d$alpha
-  b <- d$beta
+skewness.Beta <- function(x, ...) {
+  a <- x$alpha
+  b <- x$beta
   2 * (b - a) * sqrt(a + b + 1) / (a + b + 2) * sqrt(a * b)
 }
 
 #' @export
-kurtosis.Beta <- function(d, ...) {
-  a <- d$alpha
-  b <- d$beta
+kurtosis.Beta <- function(x, ...) {
+  a <- x$alpha
+  b <- x$beta
   num <- 6 * ((a - b)^2 * (a + b + 1) - (a * b) * (a + b + 2))
   denom <- a * b * (a + b + 2) * (a + b + 3)
   num / denom
@@ -74,7 +74,7 @@ kurtosis.Beta <- function(d, ...) {
 #'
 #' @inherit Beta examples
 #'
-#' @param d A `Beta` object created by a call to [Beta()].
+#' @param x A `Beta` object created by a call to [Beta()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -82,15 +82,15 @@ kurtosis.Beta <- function(d, ...) {
 #' @return A numeric vector containing values in `[0, 1]` of length `n`.
 #' @export
 #'
-random.Beta <- function(d, n = 1L, ...) {
-  rbeta(n = n, shape1 = d$alpha, shape2 = d$beta)
+random.Beta <- function(x, n = 1L, ...) {
+  rbeta(n = n, shape1 = x$alpha, shape2 = x$beta)
 }
 
 #' Evaluate the probability mass function of a Beta distribution
 #'
 #' @inherit Beta examples
-#' @inheritParams random.Beta
 #'
+#' @param d A `Beta` object created by a call to [Beta()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -113,8 +113,8 @@ log_pdf.Beta <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Beta distribution
 #'
 #' @inherit Beta examples
-#' @inheritParams random.Beta
 #'
+#' @param d A `Beta` object created by a call to [Beta()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -141,8 +141,8 @@ cdf.Beta <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.Beta <- function(d, p, ...) {
-  qbeta(p = p, shape1 = d$alpha, shape2 = d$beta)
+quantile.Beta <- function(x, p, ...) {
+  qbeta(p = p, shape1 = x$alpha, shape2 = x$beta)
 }
 
 

@@ -4,10 +4,10 @@
 \alias{quantile.Beta}
 \title{Determine quantiles of a Beta distribution}
 \usage{
-\method{quantile}{Beta}(d, p, ...)
+\method{quantile}{Beta}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}
+\item{x}{A \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}
 
 \item{p}{A vector of probabilites.}
 

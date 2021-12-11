@@ -98,8 +98,8 @@ mean.RevWeibull <- function(x, ...) {
 }
 
 #' @export
-variance.RevWeibull <- function(d, ...) {
-  d$scale^2 * gamma(1 + 2/d$shape) - gamma(1 + 1/d$shape)^2
+variance.RevWeibull <- function(x, ...) {
+  x$scale^2 * gamma(1 + 2/x$shape) - gamma(1 + 1/x$shape)^2
 }
 
 
@@ -107,7 +107,7 @@ variance.RevWeibull <- function(d, ...) {
 #'
 #' @inherit RevWeibull examples
 #'
-#' @param d A `RevWeibull` object created by a call to [RevWeibull()].
+#' @param x A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -115,19 +115,19 @@ variance.RevWeibull <- function(d, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.RevWeibull <- function(d, n = 1L, ...) {
+random.RevWeibull <- function(x, n = 1L, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location - d$scale
-  scale <- d$scale / d$shape
-  shape <- -1 / d$shape
+  loc <- x$location - x$scale
+  scale <- x$scale / x$shape
+  shape <- -1 / x$shape
   revdbayes::rgev(n = n, loc = loc, scale = scale, shape = shape)
 }
 
 #' Evaluate the probability mass function of an RevWeibull distribution
 #'
 #' @inherit RevWeibull examples
-#' @inheritParams random.RevWeibull
 #'
+#' @param d A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -158,8 +158,8 @@ log_pdf.RevWeibull <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of an RevWeibull distribution
 #'
 #' @inherit RevWeibull examples
-#' @inheritParams random.RevWeibull
 #'
+#' @param d A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -190,11 +190,11 @@ cdf.RevWeibull <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.RevWeibull <- function(d, p, ...) {
+quantile.RevWeibull <- function(x, p, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location - d$scale
-  scale <- d$scale / d$shape
-  shape <- -1 / d$shape
+  loc <- x$location - x$scale
+  scale <- x$scale / x$shape
+  shape <- -1 / x$shape
   revdbayes::qgev(p = p, loc = loc, scale = scale, shape = shape)
 }
 

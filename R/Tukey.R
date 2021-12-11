@@ -85,8 +85,8 @@ cdf.Tukey <- function(d, x, ...) {
 #'
 #' @family Tukey distribution
 #'
-quantile.Tukey <- function(d, p, ...) {
-  qtukey(p = p, nmeans = d$nmeans, df = d$df, nranges = d$nranges)
+quantile.Tukey <- function(x, p, ...) {
+  qtukey(p = p, nmeans = x$nmeans, df = x$df, nranges = x$nranges)
 }
 
 

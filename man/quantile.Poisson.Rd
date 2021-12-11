@@ -4,10 +4,10 @@
 \alias{quantile.Poisson}
 \title{Determine quantiles of a Poisson distribution}
 \usage{
-\method{quantile}{Poisson}(d, p, ...)
+\method{quantile}{Poisson}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
+\item{x}{A \code{Poisson} object created by a call to \code{\link[=Poisson]{Poisson()}}.}
 
 \item{p}{A vector of probabilites.}
 

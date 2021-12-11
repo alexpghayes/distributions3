@@ -4,10 +4,10 @@
 \alias{quantile.NegativeBinomial}
 \title{Determine quantiles of a NegativeBinomial distribution}
 \usage{
-\method{quantile}{NegativeBinomial}(d, p, ...)
+\method{quantile}{NegativeBinomial}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{NegativeBinomial} object created by a call to
+\item{x}{A \code{NegativeBinomial} object created by a call to
 \code{\link[=NegativeBinomial]{NegativeBinomial()}}.}
 
 \item{p}{A vector of probabilites.}

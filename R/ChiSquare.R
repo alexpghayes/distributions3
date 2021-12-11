@@ -108,19 +108,19 @@ print.ChiSquare <- function(x, ...) {
 mean.ChiSquare <- function(x, ...) x$df
 
 #' @export
-variance.ChiSquare <- function(d, ...) d$df * 2
+variance.ChiSquare <- function(x, ...) x$df * 2
 
 #' @export
-skewness.ChiSquare <- function(d, ...) sqrt(8 / d$df)
+skewness.ChiSquare <- function(x, ...) sqrt(8 / x$df)
 
 #' @export
-kurtosis.ChiSquare <- function(d, ...) 12 / d$df
+kurtosis.ChiSquare <- function(x, ...) 12 / x$df
 
 #' Draw a random sample from a chi square distribution
 #'
 #' @inherit ChiSquare examples
 #'
-#' @param d A `ChiSquare` object created by a call to [ChiSquare()].
+#' @param x A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -128,15 +128,15 @@ kurtosis.ChiSquare <- function(d, ...) 12 / d$df
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.ChiSquare <- function(d, n = 1L, ...) {
-  rchisq(n = n, df = d$df)
+random.ChiSquare <- function(x, n = 1L, ...) {
+  rchisq(n = n, df = x$df)
 }
 
 #' Evaluate the probability mass function of a chi square distribution
 #'
 #' @inherit ChiSquare examples
-#' @inheritParams random.ChiSquare
 #'
+#' @param d A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -159,8 +159,8 @@ log_pdf.ChiSquare <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a chi square distribution
 #'
 #' @inherit ChiSquare examples
-#' @inheritParams random.ChiSquare
 #'
+#' @param d A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -187,12 +187,12 @@ cdf.ChiSquare <- function(d, x, ...) {
 #' @return A vector of quantiles, one for each element of `p`.
 #' @export
 #'
-quantile.ChiSquare <- function(d, p, ...) {
+quantile.ChiSquare <- function(x, p, ...) {
 
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
 
-  qchisq(p = p, df = d$df)
+  qchisq(p = p, df = x$df)
 }
 
 

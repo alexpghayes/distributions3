@@ -4,10 +4,10 @@
 \alias{random.FisherF}
 \title{Draw a random sample from an F distribution}
 \usage{
-\method{random}{FisherF}(d, n = 1L, ...)
+\method{random}{FisherF}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
+\item{x}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

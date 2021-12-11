@@ -4,10 +4,10 @@
 \alias{quantile.Logistic}
 \title{Determine quantiles of a Logistic distribution}
 \usage{
-\method{quantile}{Logistic}(d, p, ...)
+\method{quantile}{Logistic}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Logistic} object created by a call to \code{\link[=Logistic]{Logistic()}}.}
+\item{x}{A \code{Logistic} object created by a call to \code{\link[=Logistic]{Logistic()}}.}
 
 \item{p}{A vector of probabilites.}
 

@@ -4,10 +4,10 @@
 \alias{random.Geometric}
 \title{Draw a random sample from a Geometric distribution}
 \usage{
-\method{random}{Geometric}(d, n = 1L, ...)
+\method{random}{Geometric}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
+\item{x}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

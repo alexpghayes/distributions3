@@ -4,7 +4,7 @@
 
 #' Draw a random sample from a probability distribution
 #'
-#' @param d A probability distribution object such as those created by
+#' @param x A probability distribution object such as those created by
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param n The number of samples to draw. Should be a positive
 #'   integer. Defaults to `1L`.
@@ -17,7 +17,7 @@
 #'
 #' random(X, 10)
 #' @export
-random <- function(d, n = 1L, ...) {
+random <- function(x, n = 1L, ...) {
   ellipsis::check_dots_used()
   UseMethod("random")
 }
@@ -29,6 +29,8 @@ random <- function(d, n = 1L, ...) {
 #'
 #' @inheritParams random
 #'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #'
@@ -67,6 +69,8 @@ pmf <- function(d, x, ...) {
 #'
 #' @inheritParams random
 #'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #'
@@ -104,14 +108,14 @@ cdf <- function(d, x, ...) {
 #' cdf(X, c(0.2, 0.4, 0.6, 0.8))
 #'
 #' @export
-quantile <- function(d, p, ...) {
+quantile <- function(x, p, ...) {
   ellipsis::check_dots_used()
   UseMethod("quantile")
 }
 
 #' @rdname quantile
 #' @export
-quantile.default <- function(d, p, names = FALSE, ...) {
+quantile.default <- function(x, p, names = FALSE, ...) {
   args <- list(...)
 
   if (!is.null(args[["x"]])) {
@@ -131,28 +135,28 @@ quantile.default <- function(d, p, names = FALSE, ...) {
 
 #' Compute the moments of a probability distribution
 #'
-#' @param d A probability distribution object such as those created by
+#' @param x A probability distribution object such as those created by
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param ... Further arguments passed to or from other methods (currently not used).
 #'
 #' @return A numeric scalar
 #' @export
 #'
-variance <- function(d, ...) {
+variance <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("variance")
 }
 
 #' @rdname variance
 #' @export
-skewness <- function(d, ...) {
+skewness <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("skewness")
 }
 
 #' @rdname variance
 #' @export
-kurtosis <- function(d, ...) {
+kurtosis <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("kurtosis")
 }

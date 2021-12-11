@@ -4,10 +4,10 @@
 \alias{quantile.Categorical}
 \title{Determine quantiles of a Categorical discrete distribution}
 \usage{
-\method{quantile}{Categorical}(d, p, ...)
+\method{quantile}{Categorical}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
+\item{x}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
 
 \item{p}{A vector of probabilites.}
 

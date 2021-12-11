@@ -4,10 +4,10 @@
 \alias{quantile.Gamma}
 \title{Determine quantiles of a Gamma distribution}
 \usage{
-\method{quantile}{Gamma}(d, p, ...)
+\method{quantile}{Gamma}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}
+\item{x}{A \code{Gamma} object created by a call to \code{\link[=Gamma]{Gamma()}}.}
 
 \item{p}{A vector of probabilites.}
 

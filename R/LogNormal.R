@@ -79,23 +79,23 @@ mean.LogNormal <- function(x, ...) {
 }
 
 #' @export
-variance.LogNormal <- function(d, ...) {
-  mu <- d$log_mu
-  sigma <- d$log_sigma
+variance.LogNormal <- function(x, ...) {
+  mu <- x$log_mu
+  sigma <- x$log_sigma
   (exp(sigma^2) - 1) * exp(2 * mu + sigma^2)
 }
 
 #' @export
-skewness.LogNormal <- function(d, ...) {
-  mu <- d$log_mu
-  sigma <- d$log_sigma
+skewness.LogNormal <- function(x, ...) {
+  mu <- x$log_mu
+  sigma <- x$log_sigma
   (exp(sigma^2) + 2) * sqrt(exp(sigma^2) - 1)
 }
 
 #' @export
-kurtosis.LogNormal <- function(d, ...) {
-  mu <- d$log_mu
-  sigma <- d$log_sigma
+kurtosis.LogNormal <- function(x, ...) {
+  mu <- x$log_mu
+  sigma <- x$log_sigma
   exp(4 * sigma^2) + 2 * exp(3 * sigma^2) + 3 * exp(2 * sigma^2) - 6
 }
 
@@ -103,7 +103,7 @@ kurtosis.LogNormal <- function(d, ...) {
 #'
 #' @inherit LogNormal examples
 #'
-#' @param d A `LogNormal` object created by a call to [LogNormal()].
+#' @param x A `LogNormal` object created by a call to [LogNormal()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -113,8 +113,8 @@ kurtosis.LogNormal <- function(d, ...) {
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.LogNormal <- function(d, n = 1L, ...) {
-  rlnorm(n = n, meanlog = d$log_mu, sdlog = d$log_sigma)
+random.LogNormal <- function(x, n = 1L, ...) {
+  rlnorm(n = n, meanlog = x$log_mu, sdlog = x$log_sigma)
 }
 
 #' Evaluate the probability mass function of a LogNormal distribution
@@ -124,8 +124,8 @@ random.LogNormal <- function(d, n = 1L, ...) {
 #' showing to how calculate p-values and confidence intervals.
 #'
 #' @inherit LogNormal examples
-#' @inheritParams random.LogNormal
 #'
+#' @param d A `LogNormal` object created by a call to [LogNormal()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -149,8 +149,8 @@ log_pdf.LogNormal <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a LogNormal distribution
 #'
 #' @inherit LogNormal examples
-#' @inheritParams random.LogNormal
 #'
+#' @param d A `LogNormal` object created by a call to [LogNormal()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -179,8 +179,8 @@ cdf.LogNormal <- function(d, x, ...) {
 #'
 #' @family LogNormal distribution
 #'
-quantile.LogNormal <- function(d, p, ...) {
-  qlnorm(p = p, meanlog = d$log_mu, sdlog = d$log_sigma)
+quantile.LogNormal <- function(x, p, ...) {
+  qlnorm(p = p, meanlog = x$log_mu, sdlog = x$log_sigma)
 }
 
 #' Fit a Log Normal distribution to data

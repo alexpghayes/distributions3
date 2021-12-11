@@ -4,10 +4,10 @@
 \alias{quantile.StudentsT}
 \title{Determine quantiles of a StudentsT distribution}
 \usage{
-\method{quantile}{StudentsT}(d, p, ...)
+\method{quantile}{StudentsT}(x, p, ...)
 }
 \arguments{
-\item{d}{A \code{StudentsT} object created by a call to \code{\link[=StudentsT]{StudentsT()}}.}
+\item{x}{A \code{StudentsT} object created by a call to \code{\link[=StudentsT]{StudentsT()}}.}
 
 \item{p}{A vector of probabilites.}
 
