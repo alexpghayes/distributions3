@@ -170,17 +170,18 @@ cdf.LogNormal <- function(d, x, ...) {
 #' @inherit LogNormal examples
 #' @inheritParams random.LogNormal
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family LogNormal distribution
 #'
-quantile.LogNormal <- function(x, p, ...) {
-  qlnorm(p = p, meanlog = x$log_mu, sdlog = x$log_sigma)
+quantile.LogNormal <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qlnorm(p = probs, meanlog = x$log_mu, sdlog = x$log_sigma)
 }
 
 #' Fit a Log Normal distribution to data

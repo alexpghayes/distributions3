@@ -166,17 +166,18 @@ cdf.Logistic <- function(d, x, ...) {
 #' @inherit Logistic examples
 #' @inheritParams random.Logistic
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family Logistic distribution
 #'
-quantile.Logistic <- function(x, p, ...) {
-  qlogis(p = p, location = x$location, scale = x$scale)
+quantile.Logistic <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qlogis(p = probs, location = x$location, scale = x$scale)
 }
 
 #' Return the support of the Logistic distribution

@@ -160,15 +160,16 @@ cdf.Cauchy <- function(d, x, ...) {
 #' @inherit Cauchy examples
 #' @inheritParams random.Cauchy
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Cauchy <- function(x, p, ...) {
-  qcauchy(p = p, location = x$location, scale = x$scale)
+quantile.Cauchy <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qcauchy(p = probs, location = x$location, scale = x$scale)
 }
 
 #' Return the support of the Cauchy distribution

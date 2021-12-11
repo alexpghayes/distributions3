@@ -166,15 +166,16 @@ cdf.Gamma <- function(d, x, ...) {
 #' @inherit Gamma examples
 #' @inheritParams random.Gamma
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Gamma <- function(x, p, ...) {
-  qgamma(p = p, shape = x$shape, rate = x$rate)
+quantile.Gamma <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qgamma(p = probs, shape = x$shape, rate = x$rate)
 }
 
 #' Fit a Gamma distribution to data

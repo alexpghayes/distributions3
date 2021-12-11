@@ -120,15 +120,16 @@ cdf.Uniform <- function(d, x, ...) {
 #' @inherit Uniform examples
 #' @inheritParams random.Uniform
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Uniform <- function(x, p, ...) {
-  qunif(p = p, min = min(x$a, x$b), max = max(x$a, x$b))
+quantile.Uniform <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qunif(p = probs, min = min(x$a, x$b), max = max(x$a, x$b))
 }
 
 

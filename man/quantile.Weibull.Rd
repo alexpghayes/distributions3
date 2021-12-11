@@ -4,18 +4,18 @@
 \alias{quantile.Weibull}
 \title{Determine quantiles of a Weibull distribution}
 \usage{
-\method{quantile}{Weibull}(x, p, ...)
+\method{quantile}{Weibull}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 Determine quantiles of a Weibull distribution

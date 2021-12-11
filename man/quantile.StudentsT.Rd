@@ -4,18 +4,18 @@
 \alias{quantile.StudentsT}
 \title{Determine quantiles of a StudentsT distribution}
 \usage{
-\method{quantile}{StudentsT}(x, p, ...)
+\method{quantile}{StudentsT}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{StudentsT} object created by a call to \code{\link[=StudentsT]{StudentsT()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 Please see the documentation of \code{\link[=StudentsT]{StudentsT()}} for some properties

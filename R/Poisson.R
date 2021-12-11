@@ -156,15 +156,16 @@ cdf.Poisson <- function(d, x, ...) {
 #' @inherit Poisson examples
 #' @inheritParams random.Poisson
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Poisson <- function(x, p, ...) {
-  qpois(p = p, lambda = x$lambda)
+quantile.Poisson <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qpois(p = probs, lambda = x$lambda)
 }
 
 #' Fit an Poisson distribution to data

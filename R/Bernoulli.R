@@ -182,15 +182,16 @@ cdf.Bernoulli <- function(d, x, ...) {
 #' @inherit Bernoulli examples
 #' @inheritParams random.Bernoulli
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Bernoulli <- function(x, p, ...) {
-  qbinom(p = p, size = 1, prob = x$p)
+quantile.Bernoulli <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qbinom(p = probs, size = 1, prob = x$p)
 }
 
 #' Fit a Bernoulli distribution to data

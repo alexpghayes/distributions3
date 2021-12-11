@@ -159,17 +159,18 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #' @inherit NegativeBinomial examples
 #' @inheritParams random.NegativeBinomial
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family NegativeBinomial distribution
 #'
-quantile.NegativeBinomial <- function(x, p, ...) {
-  qnbinom(p = p, size = x$size, prob = x$p)
+quantile.NegativeBinomial <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qnbinom(p = probs, size = x$size, prob = x$p)
 }
 
 

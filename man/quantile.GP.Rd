@@ -4,18 +4,18 @@
 \alias{quantile.GP}
 \title{Determine quantiles of a GP distribution}
 \usage{
-\method{quantile}{GP}(x, p, ...)
+\method{quantile}{GP}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
 
-\item{p}{A vector of probabilities.}
+\item{probs}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

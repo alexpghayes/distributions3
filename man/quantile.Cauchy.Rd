@@ -4,18 +4,18 @@
 \alias{quantile.Cauchy}
 \title{Determine quantiles of a Cauchy distribution}
 \usage{
-\method{quantile}{Cauchy}(x, p, ...)
+\method{quantile}{Cauchy}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

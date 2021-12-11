@@ -227,17 +227,18 @@ cdf.Frechet <- function(d, x, ...) {
 #' @inherit Frechet examples
 #' @inheritParams random.Frechet
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Frechet <- function(x, p, ...) {
+quantile.Frechet <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
   # Convert to the GEV parameterisation
   loc <- x$location + x$scale
   scale <- x$scale / x$shape
   shape <- 1 / x$shape
-  revdbayes::qgev(p = p, loc = loc, scale = scale, shape = shape)
+  revdbayes::qgev(p = probs, loc = loc, scale = scale, shape = shape)
 }

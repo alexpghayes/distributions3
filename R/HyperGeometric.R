@@ -199,17 +199,18 @@ cdf.HyperGeometric <- function(d, x, ...) {
 #' @inherit HyperGeometric examples
 #' @inheritParams random.HyperGeometric
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family HyperGeometric distribution
 #'
-quantile.HyperGeometric <- function(x, p, ...) {
-  qhyper(p = p, m = x$m, n = x$n, k = x$k)
+quantile.HyperGeometric <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qhyper(p = probs, m = x$m, n = x$n, k = x$k)
 }
 
 

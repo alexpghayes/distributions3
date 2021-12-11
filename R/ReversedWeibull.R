@@ -183,19 +183,20 @@ cdf.RevWeibull <- function(d, x, ...) {
 #' @inherit RevWeibull examples
 #' @inheritParams random.RevWeibull
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.RevWeibull <- function(x, p, ...) {
+quantile.RevWeibull <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
   # Convert to the GEV parameterisation
   loc <- x$location - x$scale
   scale <- x$scale / x$shape
   shape <- -1 / x$shape
-  revdbayes::qgev(p = p, loc = loc, scale = scale, shape = shape)
+  revdbayes::qgev(p = probs, loc = loc, scale = scale, shape = shape)
 }
 
 

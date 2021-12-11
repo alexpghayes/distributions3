@@ -4,18 +4,18 @@
 \alias{quantile.Normal}
 \title{Determine quantiles of a Normal distribution}
 \usage{
-\method{quantile}{Normal}(x, p, ...)
+\method{quantile}{Normal}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 Please see the documentation of \code{\link[=Normal]{Normal()}} for some properties

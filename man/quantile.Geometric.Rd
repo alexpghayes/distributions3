@@ -4,18 +4,18 @@
 \alias{quantile.Geometric}
 \title{Determine quantiles of a Geometric distribution}
 \usage{
-\method{quantile}{Geometric}(x, p, ...)
+\method{quantile}{Geometric}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 Determine quantiles of a Geometric distribution

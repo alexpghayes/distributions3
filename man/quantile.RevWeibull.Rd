@@ -4,18 +4,18 @@
 \alias{quantile.RevWeibull}
 \title{Determine quantiles of a RevWeibull distribution}
 \usage{
-\method{quantile}{RevWeibull}(x, p, ...)
+\method{quantile}{RevWeibull}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
 
-\item{p}{A vector of probabilities.}
+\item{probs}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

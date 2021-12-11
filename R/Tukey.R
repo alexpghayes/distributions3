@@ -76,17 +76,18 @@ cdf.Tukey <- function(d, x, ...) {
 #' @inherit Tukey examples
 #' @inheritParams cdf.Tukey
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family Tukey distribution
 #'
-quantile.Tukey <- function(x, p, ...) {
-  qtukey(p = p, nmeans = x$nmeans, df = x$df, nranges = x$nranges)
+quantile.Tukey <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qtukey(p = probs, nmeans = x$nmeans, df = x$df, nranges = x$nranges)
 }
 
 

@@ -187,15 +187,16 @@ cdf.Binomial <- function(d, x, ...) {
 #' @inherit Binomial examples
 #' @inheritParams random.Binomial
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Binomial <- function(x, p, ...) {
-  qbinom(p = p, size = x$size, prob = x$p)
+quantile.Binomial <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qbinom(p = probs, size = x$size, prob = x$p)
 }
 
 #' Fit a Binomial distribution to data

@@ -157,15 +157,16 @@ cdf.Exponential <- function(d, x, ...) {
 #' @inherit Exponential examples
 #' @inheritParams random.Exponential
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Exponential <- function(x, p, ...) {
-  qexp(p = p, rate = x$rate)
+quantile.Exponential <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qexp(p = probs, rate = x$rate)
 }
 
 #' Fit an Exponential distribution to data

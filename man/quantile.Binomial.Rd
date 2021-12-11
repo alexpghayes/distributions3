@@ -4,18 +4,18 @@
 \alias{quantile.Binomial}
 \title{Determine quantiles of a Binomial distribution}
 \usage{
-\method{quantile}{Binomial}(x, p, ...)
+\method{quantile}{Binomial}(x, probs, ...)
 }
 \arguments{
 \item{x}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

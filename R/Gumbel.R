@@ -157,13 +157,14 @@ cdf.Gumbel <- function(d, x, ...) {
 #' @inherit Gumbel examples
 #' @inheritParams random.Gumbel
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Gumbel <- function(x, p, ...) {
-  revdbayes::qgev(p = p, loc = x$mu, scale = x$sigma, shape = 0)
+quantile.Gumbel <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  revdbayes::qgev(p = probs, loc = x$mu, scale = x$sigma, shape = 0)
 }

@@ -180,19 +180,20 @@ cdf.ChiSquare <- function(d, x, ...) {
 #' @inherit ChiSquare examples
 #' @inheritParams random.ChiSquare
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.ChiSquare <- function(x, p, ...) {
+quantile.ChiSquare <- function(x, probs, ...) {
 
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
 
-  qchisq(p = p, df = x$df)
+  ellipsis::check_dots_used()
+  qchisq(p = probs, df = x$df)
 }
 
 

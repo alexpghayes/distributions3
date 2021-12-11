@@ -87,52 +87,6 @@ cdf <- function(d, x, ...) {
   UseMethod("cdf")
 }
 
-#' Find the quantile of a probability distribution
-#'
-#' This function allows us to use the [stats::quantile()] alongside
-#' custom S3 methods for `distributions` objects. When passing arguments
-#' to [stats::quantile()], accepts both
-#' `distributions3` style arguments `d`, `p` and stats style arguments
-#' `x`, `probs` as well as any combination of the two.
-#'
-#' @inheritParams random
-#'
-#' @param p A vector of probabilities.
-#'
-#' @return A vector of quantiles, one for each element of `p`.
-#'
-#' @examples
-#'
-#' X <- Normal()
-#'
-#' cdf(X, c(0.2, 0.4, 0.6, 0.8))
-#'
-#' @export
-quantile <- function(x, p, ...) {
-  ellipsis::check_dots_used()
-  UseMethod("quantile")
-}
-
-#' @rdname quantile
-#' @export
-quantile.default <- function(x, p, names = FALSE, ...) {
-  args <- list(...)
-
-  if (!is.null(args[["x"]])) {
-    d <- args[["x"]]
-    args[["x"]] <- NULL
-  }
-
-  if (!is.null(args[["probs"]])) {
-    p <- args[["probs"]]
-    args[["probs"]] <- NULL
-  }
-
-  do.call(stats:::quantile.default,
-    args = c(list(x = d, probs = p, names = names), args)
-  )
-}
-
 #' Compute the moments of a probability distribution
 #'
 #' @param x A probability distribution object such as those created by

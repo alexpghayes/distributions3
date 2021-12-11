@@ -118,24 +118,25 @@ cdf.Erlang <- function(d, x, ...) {
 #' @inherit Erlang examples
 #' @inheritParams random.Erlang
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #' @param interval Interval being used to search for the quantile using numerical root finding. Defaults to (0, 1e6)
 #' @param tol Tolerance of the root finding algorithm. Defaults to `.Machine$double.eps`
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Erlang <- function(x, p, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
-  if (any(p < 0) | any(p > 1)) stop("'p' must be between 0 and 1.", call. = TRUE)
-  p[p == 1] <- (1 - .Machine$double.eps^0.25)
+quantile.Erlang <- function(x, probs, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
+  ellipsis::check_dots_used()
+  if (any(probs < 0) | any(probs > 1)) stop("'probs' must be between 0 and 1.", call. = TRUE)
+  probs[probs == 1] <- (1 - .Machine$double.eps^0.25)
   internal <- Vectorize(FUN = function(d, p, ..., interval, tol) {
     qf <- function(x) cdf(d = d, x = x) - p
     root <- stats::uniroot(qf, interval = interval, tol = tol, check.conv = TRUE)
     return(root$root)
   }, vectorize.args = "p")
-  internal(d = x, p = p, ..., interval = interval, tol = tol)
+  internal(d = x, p = probs, ..., interval = interval, tol = tol)
 }
 
 #' Return the support of the Erlang distribution

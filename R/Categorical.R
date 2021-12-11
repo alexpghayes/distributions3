@@ -160,14 +160,15 @@ cdf.Categorical <- function(d, x, ...) {
 #' @inherit Categorical examples
 #' @inheritParams random.Categorical
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Categorical <- function(x, p, ...) {
+quantile.Categorical <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
   if (!is.numeric(x$outcomes)) {
     stop(
       "The sample space of `x` must be numeric to evaluate quantiles.",
@@ -175,15 +176,15 @@ quantile.Categorical <- function(x, p, ...) {
     )
   }
 
-  if (any(p < 0) || any(1 < p)) {
-    stop("Elements of `p` must be between 0 and 1.", call. = FALSE)
+  if (any(probs < 0) || any(1 < probs)) {
+    stop("Elements of `probs` must be between 0 and 1.", call. = FALSE)
   }
 
-  if (length(p) == 0) {
+  if (length(probs) == 0) {
     return(numeric(0))
   }
 
   full_cdf <- cumsum(pdf(x, x$outcomes))
 
-  Vectorize(function(k) x$outcomes[min(which(full_cdf >= k))])(p)
+  Vectorize(function(k) x$outcomes[min(which(full_cdf >= k))])(probs)
 }

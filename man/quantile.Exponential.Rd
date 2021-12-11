@@ -4,18 +4,18 @@
 \alias{quantile.Exponential}
 \title{Determine quantiles of an Exponential distribution}
 \usage{
-\method{quantile}{Exponential}(x, p, ...)
+\method{quantile}{Exponential}(x, probs, ...)
 }
 \arguments{
 \item{x}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.
