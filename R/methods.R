@@ -89,11 +89,24 @@ cdf <- function(d, x, ...) {
 
 #' Compute the moments of a probability distribution
 #'
-#' @param x A probability distribution object such as those created by
-#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
-#' @param ... Further arguments passed to or from other methods (currently not used).
+#' The functions \code{variance}, \code{skewness}, and \code{kurtosis} are new
+#' generic functions for computing moments of probability distributions such as
+#' those provided in this package. Additionally, the probability distributions
+#' from \pkg{distributions3} all have methods for the \code{\link[base]{mean}}
+#' generic. Moreover, quantiles can be computed with methods for
+#' \code{\link[stats]{quantile}}. For examples illustrating the usage with
+#' probability distribution objects, see the manual pages of the respective
+#' distributions, e.g., \code{\link{Normal}} or \code{\link{Binomial}} etc.
+#'
+#' @param x An object. The package provides methods for probability
+#' distribution objects, e.g., those created by [Normal()] or [Beta()] etc.
+#' @param ... Further arguments passed to or from other methods. Unevaluated
+#' arguments will generate a warning to catch mispellings or other possible
+#' errors.
 #'
 #' @return A numeric scalar
+#' @seealso \code{\link[base]{mean}}, \code{\link[stats]{quantile}},
+#' \code{\link{cdf}}, \code{\link{random}} 
 #' @export
 #'
 variance <- function(x, ...) {
