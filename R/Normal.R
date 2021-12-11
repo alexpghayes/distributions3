@@ -169,7 +169,10 @@ print.Normal <- function(x, ...) {
 }
 
 #' @export
-mean.Normal <- function(x, ...) x$mu
+mean.Normal <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$mu
+}
 
 #' @export
 variance.Normal <- function(x, ...) x$sigma ^ 2

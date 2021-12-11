@@ -98,7 +98,10 @@ print.Multinomial <- function(x, ...) {
 }
 
 #' @export
-mean.Multinomial <- function(x, ...) x$size * x$p
+mean.Multinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$size * x$p
+}
 
 #' @export
 variance.Multinomial <- function(x, ...) x$size * x$p * (1 - x$p)

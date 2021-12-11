@@ -81,7 +81,10 @@ print.Poisson <- function(x, ...) {
 }
 
 #' @export
-mean.Poisson <- function(x, ...) x$lambda
+mean.Poisson <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$lambda
+}
 
 #' @export
 variance.Poisson <- function(x, ...) x$lambda

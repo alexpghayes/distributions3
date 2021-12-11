@@ -84,7 +84,10 @@ print.Logistic <- function(x, ...) {
 }
 
 #' @export
-mean.Logistic <- function(x, ...) x$location
+mean.Logistic <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$location
+}
 
 #' @export
 variance.Logistic <- function(x, ...) x$scale^2 * pi^2 / 3

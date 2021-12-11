@@ -99,7 +99,10 @@ print.Bernoulli <- function(x, ...) {
 }
 
 #' @export
-mean.Bernoulli <- function(x, ...) x$p
+mean.Bernoulli <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$p
+}
 
 #' @export
 variance.Bernoulli <- function(x, ...) x$p * (1 - x$p)

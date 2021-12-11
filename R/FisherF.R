@@ -51,6 +51,7 @@ print.FisherF <- function(x, ...) {
 
 #' @export
 mean.FisherF <- function(x, ...) {
+  ellipsis::check_dots_used()
   # The k-th moment of an F(df1, df2) distribution exists and
   # is finite only when 2k < d2
   d1 <- x$df1

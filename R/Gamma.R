@@ -91,7 +91,10 @@ print.Gamma <- function(x, ...) {
 }
 
 #' @export
-mean.Gamma <- function(x, ...) x$shape / x$rate
+mean.Gamma <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$shape / x$rate
+}
 
 #' @export
 variance.Gamma <- function(x, ...) x$shape / x$rate^2

@@ -90,6 +90,7 @@ print.Frechet <- function(x, ...) {
 
 #' @export
 mean.Frechet <- function(x, ...) {
+  ellipsis::check_dots_used()
   a <- x$shape
   m <- x$location
   s <- x$scale

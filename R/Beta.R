@@ -45,7 +45,10 @@ print.Beta <- function(x, ...) {
 }
 
 #' @export
-mean.Beta <- function(x, ...) x$alpha / (x$alpha + x$beta)
+mean.Beta <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$alpha / (x$alpha + x$beta)
+}
 
 #' @export
 variance.Beta <- function(x, ...) {

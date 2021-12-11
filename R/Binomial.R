@@ -102,7 +102,10 @@ print.Binomial <- function(x, ...) {
 }
 
 #' @export
-mean.Binomial <- function(x, ...) x$size * x$p
+mean.Binomial <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$size * x$p
+}
 
 #' @export
 variance.Binomial <- function(x, ...) x$size * x$p * (1 - x$p)

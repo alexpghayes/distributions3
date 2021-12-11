@@ -85,7 +85,10 @@ print.Cauchy <- function(x, ...) {
 }
 
 #' @export
-mean.Cauchy <- function(x, ...) NaN
+mean.Cauchy <- function(x, ...) {
+  ellipsis::check_dots_used()
+  NaN
+}
 
 #' @export
 variance.Cauchy <- function(x, ...) NaN

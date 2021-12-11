@@ -45,7 +45,10 @@ print.Uniform <- function(x, ...) {
 }
 
 #' @export
-mean.Uniform <- function(x, ...) (x$a + x$b) / 2
+mean.Uniform <- function(x, ...) {
+  ellipsis::check_dots_used()
+  (x$a + x$b) / 2
+}
 
 #' @export
 variance.Uniform <- function(x, ...) (1 / 12) * (x$b - x$a) ^ 2

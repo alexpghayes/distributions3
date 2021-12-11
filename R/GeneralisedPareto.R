@@ -107,6 +107,7 @@ print.GP <- function(x, ...) {
 
 #' @export
 mean.GP <- function(x, ...) {
+  ellipsis::check_dots_used()
   mu <- x$mu
   sigma <- x$sigma
   xi <- x$xi

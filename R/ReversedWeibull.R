@@ -94,6 +94,7 @@ print.RevWeibull <- function(x, ...) {
 
 #' @export
 mean.RevWeibull <- function(x, ...) {
+  ellipsis::check_dots_used()
   x$location + x$scale * gamma(1 + 1/x$shape)
 }
 

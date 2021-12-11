@@ -82,7 +82,10 @@ print.Exponential <- function(x, ...) {
 }
 
 #' @export
-mean.Exponential <- function(x, ...) x$rate ^ -1
+mean.Exponential <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$rate ^ -1
+}
 
 #' @export
 variance.Exponential <- function(x, ...) x$rate ^ 2

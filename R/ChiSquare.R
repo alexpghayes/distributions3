@@ -105,7 +105,11 @@ print.ChiSquare <- function(x, ...) {
 }
 
 #' @export
-mean.ChiSquare <- function(x, ...) x$df
+mean.ChiSquare <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$df
+}
+
 
 #' @export
 variance.ChiSquare <- function(x, ...) x$df * 2

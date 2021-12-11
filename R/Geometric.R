@@ -77,8 +77,10 @@ print.Geometric <- function(x, ...) {
 }
 
 #' @export
-mean.Geometric <- function(x, ...) 1 / x$p
-
+mean.Geometric <- function(x, ...) {
+  ellipsis::check_dots_used()
+  1 / x$p
+}
 #' @export
 variance.Geometric <- function(x, ...) (1 - x$p) / x$p^2
 

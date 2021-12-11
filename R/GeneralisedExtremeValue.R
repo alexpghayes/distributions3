@@ -117,6 +117,7 @@ g <- function(d, k) gamma(1 - k * d$xi)
 
 #' @export
 mean.GEV <- function(x, ...) {
+  ellipsis::check_dots_used()
   euler <- -digamma(1)
   if (x$xi == 0) x$mu + x$sigma * euler
   else if (x$xi < 1) x$mu + x$sigma * (gamma(1 - x$xi) - 1) / x$xi

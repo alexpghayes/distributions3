@@ -73,6 +73,7 @@ print.LogNormal <- function(x, ...) {
 
 #' @export
 mean.LogNormal <- function(x, ...) {
+  ellipsis::check_dots_used()
   mu <- x$log_mu
   sigma <- x$log_sigma
   exp(mu + sigma^2 / 2)

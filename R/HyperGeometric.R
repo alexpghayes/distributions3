@@ -84,6 +84,7 @@ print.HyperGeometric <- function(x, ...) {
 
 #' @export
 mean.HyperGeometric <- function(x, ...) {
+  ellipsis::check_dots_used()
   # Reformulating to match Wikipedia
   # N is the population size
   N <- x$n + x$m

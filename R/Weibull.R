@@ -70,6 +70,7 @@ print.Weibull <- function(x, ...) {
 
 #' @export
 mean.Weibull <- function(x, ...) {
+  ellipsis::check_dots_used()
   x$scale * gamma(1 + 1/x$shape)
 }
 

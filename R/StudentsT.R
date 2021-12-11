@@ -124,7 +124,10 @@ print.StudentsT <- function(x, ...) {
 }
 
 #' @export
-mean.StudentsT <- function(x, ...) if (x$df > 1) 0 else NaN
+mean.StudentsT <- function(x, ...) {
+  ellipsis::check_dots_used()
+  if (x$df > 1) 0 else NaN
+}
 
 #' @export
 variance.StudentsT <- function(x, ...) {

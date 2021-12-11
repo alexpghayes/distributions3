@@ -77,7 +77,10 @@ print.NegativeBinomial <- function(x, ...) {
 }
 
 #' @export
-mean.NegativeBinomial <- function(x, ...) x$p * x$size / (1 - x$p)
+mean.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$p * x$size / (1 - x$p)
+}
 
 #' @export
 variance.NegativeBinomial <- function(x, ...) (x$p * x$size) / (1 - x$p)^2
