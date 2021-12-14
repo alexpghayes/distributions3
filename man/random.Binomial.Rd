@@ -4,10 +4,10 @@
 \alias{random.Binomial}
 \title{Draw a random sample from a Binomial distribution}
 \usage{
-\method{random}{Binomial}(d, n = 1L, ...)
+\method{random}{Binomial}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
+\item{x}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
@@ -15,7 +15,7 @@
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector containing values between \code{0} and \code{d$size}
+An integer vector containing values between \code{0} and \code{x$size}
 of length \code{n}.
 }
 \description{

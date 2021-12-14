@@ -4,10 +4,10 @@
 \alias{random}
 \title{Draw a random sample from a probability distribution}
 \usage{
-random(d, n = 1L, ...)
+random(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
+\item{x}{A probability distribution object such as those created by
 a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
 
 \item{n}{The number of samples to draw. Should be a positive

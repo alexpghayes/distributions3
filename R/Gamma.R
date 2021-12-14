@@ -91,22 +91,25 @@ print.Gamma <- function(x, ...) {
 }
 
 #' @export
-mean.Gamma <- function(x, ...) x$shape / x$rate
+mean.Gamma <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$shape / x$rate
+}
 
 #' @export
-variance.Gamma <- function(d, ...) d$shape / d$rate^2
+variance.Gamma <- function(x, ...) x$shape / x$rate^2
 
 #' @export
-skewness.Gamma <- function(d, ...) 2 / sqrt(d$shape)
+skewness.Gamma <- function(x, ...) 2 / sqrt(x$shape)
 
 #' @export
-kurtosis.Gamma <- function(d, ...) 6 / d$shape
+kurtosis.Gamma <- function(x, ...) 6 / x$shape
 
 #' Draw a random sample from a Gamma distribution
 #'
 #' @inherit Gamma examples
 #'
-#' @param d A `Gamma` object created by a call to [Gamma()].
+#' @param x A `Gamma` object created by a call to [Gamma()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -114,15 +117,15 @@ kurtosis.Gamma <- function(d, ...) 6 / d$shape
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Gamma <- function(d, n = 1L, ...) {
-  rgamma(n = n, shape = d$shape, rate = d$rate)
+random.Gamma <- function(x, n = 1L, ...) {
+  rgamma(n = n, shape = x$shape, rate = x$rate)
 }
 
 #' Evaluate the probability mass function of a Gamma distribution
 #'
 #' @inherit Gamma examples
-#' @inheritParams random.Gamma
 #'
+#' @param d A `Gamma` object created by a call to [Gamma()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -145,8 +148,8 @@ log_pdf.Gamma <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Gamma distribution
 #'
 #' @inherit Gamma examples
-#' @inheritParams random.Gamma
 #'
+#' @param d A `Gamma` object created by a call to [Gamma()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -166,15 +169,16 @@ cdf.Gamma <- function(d, x, ...) {
 #' @inherit Gamma examples
 #' @inheritParams random.Gamma
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Gamma <- function(d, p, ...) {
-  qgamma(p = p, shape = d$shape, rate = d$rate)
+quantile.Gamma <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qgamma(p = probs, shape = x$shape, rate = x$rate)
 }
 
 #' Fit a Gamma distribution to data

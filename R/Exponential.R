@@ -82,22 +82,25 @@ print.Exponential <- function(x, ...) {
 }
 
 #' @export
-mean.Exponential <- function(x, ...) x$rate ^ -1
+mean.Exponential <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$rate ^ -1
+}
 
 #' @export
-variance.Exponential <- function(d, ...) d$rate ^ 2
+variance.Exponential <- function(x, ...) x$rate ^ 2
 
 #' @export
-skewness.Exponential <- function(d, ...) 2
+skewness.Exponential <- function(x, ...) 2
 
 #' @export
-kurtosis.Exponential <- function(d, ...) 6
+kurtosis.Exponential <- function(x, ...) 6
 
 #' Draw a random sample from an Exponential distribution
 #'
 #' @inherit Exponential examples
 #'
-#' @param d An `Exponential` object created by a call to [Exponential()].
+#' @param x An `Exponential` object created by a call to [Exponential()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -105,15 +108,15 @@ kurtosis.Exponential <- function(d, ...) 6
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Exponential <- function(d, n = 1L, ...) {
-  rexp(n = n, rate = d$rate)
+random.Exponential <- function(x, n = 1L, ...) {
+  rexp(n = n, rate = x$rate)
 }
 
 #' Evaluate the probability density function of an Exponential distribution
 #'
 #' @inherit Exponential examples
-#' @inheritParams random.Exponential
 #'
+#' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -136,8 +139,8 @@ log_pdf.Exponential <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of an Exponential distribution
 #'
 #' @inherit Exponential examples
-#' @inheritParams random.Exponential
 #'
+#' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -157,15 +160,16 @@ cdf.Exponential <- function(d, x, ...) {
 #' @inherit Exponential examples
 #' @inheritParams random.Exponential
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Exponential <- function(d, p, ...) {
-  qexp(p = p, rate = d$rate)
+quantile.Exponential <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qexp(p = probs, rate = x$rate)
 }
 
 #' Fit an Exponential distribution to data

@@ -4,10 +4,10 @@
 \alias{random.Bernoulli}
 \title{Draw a random sample from a Bernoulli distribution}
 \usage{
-\method{random}{Bernoulli}(d, n = 1L, ...)
+\method{random}{Bernoulli}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
+\item{x}{A \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

@@ -79,25 +79,28 @@ print.Gumbel <- function(x, ...) {
 }
 
 #' @export
-mean.Gumbel <- function(x, ...) x$mu + x$sigma * -digamma(1)
+mean.Gumbel <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$mu + x$sigma * -digamma(1)
+}
 
 #' @export
-variance.Gumbel <- function(d, ...) pi^(2/6) * d$sigma^2
+variance.Gumbel <- function(x, ...) pi^(2/6) * x$sigma^2
 
 #' @export
-skewness.Gumbel <- function(d, ...) {
+skewness.Gumbel <- function(x, ...) {
     zeta3 <- 1.20205690315959401459612
     (12 * sqrt(6) * zeta3) / pi^3
 }
 
 #' @export
-kurtosis.Gumbel <- function(d, ...) 12/5
+kurtosis.Gumbel <- function(x, ...) 12/5
 
 #' Draw a random sample from a Gumbel distribution
 #'
 #' @inherit Gumbel examples
 #'
-#' @param d A `Gumbel` object created by a call to [Gumbel()].
+#' @param x A `Gumbel` object created by a call to [Gumbel()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -105,15 +108,15 @@ kurtosis.Gumbel <- function(d, ...) 12/5
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Gumbel <- function(d, n = 1L, ...) {
-  revdbayes::rgev(n = n, loc = d$mu, scale = d$sigma, shape = 0)
+random.Gumbel <- function(x, n = 1L, ...) {
+  revdbayes::rgev(n = n, loc = x$mu, scale = x$sigma, shape = 0)
 }
 
 #' Evaluate the probability mass function of a Gumbel distribution
 #'
 #' @inherit Gumbel examples
-#' @inheritParams random.Gumbel
 #'
+#' @param d A `Gumbel` object created by a call to [Gumbel()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -136,8 +139,8 @@ log_pdf.Gumbel <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Gumbel distribution
 #'
 #' @inherit Gumbel examples
-#' @inheritParams random.Gumbel
 #'
+#' @param d A `Gumbel` object created by a call to [Gumbel()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -157,13 +160,14 @@ cdf.Gumbel <- function(d, x, ...) {
 #' @inherit Gumbel examples
 #' @inheritParams random.Gumbel
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Gumbel <- function(d, p, ...) {
-  revdbayes::qgev(p = p, loc = d$mu, scale = d$sigma, shape = 0)
+quantile.Gumbel <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  revdbayes::qgev(p = probs, loc = x$mu, scale = x$sigma, shape = 0)
 }

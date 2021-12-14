@@ -4,18 +4,19 @@
 \alias{quantile.Tukey}
 \title{Determine quantiles of a Tukey distribution}
 \usage{
-\method{quantile}{Tukey}(d, p, ...)
+\method{quantile}{Tukey}(x, probs, ...)
 }
 \arguments{
-\item{d}{A \code{Tukey} distribution created by a call to \code{\link[=Tukey]{Tukey()}}.}
+\item{x}{A vector of elements whose cumulative probabilities you would
+like to determine given the distribution \code{d}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 Determine quantiles of a Tukey distribution

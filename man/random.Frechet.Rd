@@ -4,10 +4,10 @@
 \alias{random.Frechet}
 \title{Draw a random sample from a Frechet distribution}
 \usage{
-\method{random}{Frechet}(d, n = 1L, ...)
+\method{random}{Frechet}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
+\item{x}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

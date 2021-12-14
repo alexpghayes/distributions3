@@ -99,22 +99,25 @@ print.Bernoulli <- function(x, ...) {
 }
 
 #' @export
-mean.Bernoulli <- function(x, ...) x$p
+mean.Bernoulli <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$p
+}
 
 #' @export
-variance.Bernoulli <- function(d, ...) d$p * (1 - d$p)
+variance.Bernoulli <- function(x, ...) x$p * (1 - x$p)
 
 #' @export
-skewness.Bernoulli <- function(d, ...) {
-  p <- d$p
-  q <- 1 - d$p
+skewness.Bernoulli <- function(x, ...) {
+  p <- x$p
+  q <- 1 - x$p
   (1 - (2 * p)) / sqrt(p * q)
 }
 
 #' @export
-kurtosis.Bernoulli <- function(d, ...) {
-  p <- d$p
-  q <- 1 - d$p
+kurtosis.Bernoulli <- function(x, ...) {
+  p <- x$p
+  q <- 1 - x$p
   (1 - (6 * p * q)) / (p * q)
 }
 
@@ -122,7 +125,7 @@ kurtosis.Bernoulli <- function(d, ...) {
 #'
 #' @inherit Bernoulli examples
 #'
-#' @param d A `Bernoulli` object created by a call to [Bernoulli()].
+#' @param x A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -130,15 +133,15 @@ kurtosis.Bernoulli <- function(d, ...) {
 #' @return An integer vector of zeros and ones of length `n`.
 #' @export
 #'
-random.Bernoulli <- function(d, n = 1L, ...) {
-  rbinom(n = n, size = 1, prob = d$p)
+random.Bernoulli <- function(x, n = 1L, ...) {
+  rbinom(n = n, size = 1, prob = x$p)
 }
 
 #' Evaluate the probability mass function of a Bernoulli distribution
 #'
 #' @inherit Bernoulli examples
-#' @inheritParams random.Bernoulli
 #'
+#' @param d A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -161,8 +164,8 @@ log_pdf.Bernoulli <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Bernoulli distribution
 #'
 #' @inherit Bernoulli examples
-#' @inheritParams random.Bernoulli
 #'
+#' @param d A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -182,15 +185,16 @@ cdf.Bernoulli <- function(d, x, ...) {
 #' @inherit Bernoulli examples
 #' @inheritParams random.Bernoulli
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Bernoulli <- function(d, p, ...) {
-  qbinom(p = p, size = 1, prob = d$p)
+quantile.Bernoulli <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qbinom(p = probs, size = 1, prob = x$p)
 }
 
 #' Fit a Bernoulli distribution to data

@@ -81,22 +81,25 @@ print.Poisson <- function(x, ...) {
 }
 
 #' @export
-mean.Poisson <- function(x, ...) x$lambda
+mean.Poisson <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$lambda
+}
 
 #' @export
-variance.Poisson <- function(d, ...) d$lambda
+variance.Poisson <- function(x, ...) x$lambda
 
 #' @export
-skewness.Poisson <- function(d, ...) 1 / sqrt(d$lambda)
+skewness.Poisson <- function(x, ...) 1 / sqrt(x$lambda)
 
 #' @export
-kurtosis.Poisson <- function(d, ...) 1 / d$lambda
+kurtosis.Poisson <- function(x, ...) 1 / x$lambda
 
 #' Draw a random sample from a Poisson distribution
 #'
 #' @inherit Poisson examples
 #'
-#' @param d A `Poisson` object created by a call to [Poisson()].
+#' @param x A `Poisson` object created by a call to [Poisson()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -104,15 +107,15 @@ kurtosis.Poisson <- function(d, ...) 1 / d$lambda
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Poisson <- function(d, n = 1L, ...) {
-  rpois(n = n, lambda = d$lambda)
+random.Poisson <- function(x, n = 1L, ...) {
+  rpois(n = n, lambda = x$lambda)
 }
 
 #' Evaluate the probability mass function of a Poisson distribution
 #'
 #' @inherit Poisson examples
-#' @inheritParams random.Poisson
 #'
+#' @param d A `Poisson` object created by a call to [Poisson()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -135,8 +138,8 @@ log_pdf.Poisson <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Poisson distribution
 #'
 #' @inherit Poisson examples
-#' @inheritParams random.Poisson
 #'
+#' @param d A `Poisson` object created by a call to [Poisson()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -156,15 +159,16 @@ cdf.Poisson <- function(d, x, ...) {
 #' @inherit Poisson examples
 #' @inheritParams random.Poisson
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Poisson <- function(d, p, ...) {
-  qpois(p = p, lambda = d$lambda)
+quantile.Poisson <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qpois(p = probs, lambda = x$lambda)
 }
 
 #' Fit an Poisson distribution to data

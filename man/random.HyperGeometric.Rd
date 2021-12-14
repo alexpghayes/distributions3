@@ -4,10 +4,10 @@
 \alias{random.HyperGeometric}
 \title{Draw a random sample from a HyperGeometric distribution}
 \usage{
-\method{random}{HyperGeometric}(d, n = 1L, ...)
+\method{random}{HyperGeometric}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{HyperGeometric} object created by a call to \code{\link[=HyperGeometric]{HyperGeometric()}}.}
+\item{x}{A \code{HyperGeometric} object created by a call to \code{\link[=HyperGeometric]{HyperGeometric()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

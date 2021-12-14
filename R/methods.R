@@ -4,7 +4,7 @@
 
 #' Draw a random sample from a probability distribution
 #'
-#' @param d A probability distribution object such as those created by
+#' @param x A probability distribution object such as those created by
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param n The number of samples to draw. Should be a positive
 #'   integer. Defaults to `1L`.
@@ -17,7 +17,7 @@
 #'
 #' random(X, 10)
 #' @export
-random <- function(d, n = 1L, ...) {
+random <- function(x, n = 1L, ...) {
   ellipsis::check_dots_used()
   UseMethod("random")
 }
@@ -29,6 +29,8 @@ random <- function(d, n = 1L, ...) {
 #'
 #' @inheritParams random
 #'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #'
@@ -67,6 +69,8 @@ pmf <- function(d, x, ...) {
 #'
 #' @inheritParams random
 #'
+#' @param d A probability distribution object such as those created by
+#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #'
@@ -83,76 +87,43 @@ cdf <- function(d, x, ...) {
   UseMethod("cdf")
 }
 
-#' Find the quantile of a probability distribution
-#'
-#' This function allows us to use the [stats::quantile()] alongside
-#' custom S3 methods for `distributions` objects. When passing arguments
-#' to [stats::quantile()], accepts both
-#' `distributions3` style arguments `d`, `p` and stats style arguments
-#' `x`, `probs` as well as any combination of the two.
-#'
-#' @inheritParams random
-#'
-#' @param p A vector of probabilities.
-#'
-#' @return A vector of quantiles, one for each element of `p`.
-#'
-#' @examples
-#'
-#' X <- Normal()
-#'
-#' cdf(X, c(0.2, 0.4, 0.6, 0.8))
-#'
-#' @export
-quantile <- function(d, p, ...) {
-  ellipsis::check_dots_used()
-  UseMethod("quantile")
-}
-
-#' @rdname quantile
-#' @export
-quantile.default <- function(d, p, names = FALSE, ...) {
-  args <- list(...)
-
-  if (!is.null(args[["x"]])) {
-    d <- args[["x"]]
-    args[["x"]] <- NULL
-  }
-
-  if (!is.null(args[["probs"]])) {
-    p <- args[["probs"]]
-    args[["probs"]] <- NULL
-  }
-
-  do.call(stats:::quantile.default,
-    args = c(list(x = d, probs = p, names = names), args)
-  )
-}
-
 #' Compute the moments of a probability distribution
 #'
-#' @param d A probability distribution object such as those created by
-#'   a call to [Bernoulli()], [Beta()], or [Binomial()].
-#' @param ... Further arguments passed to or from other methods (currently not used).
+#' The functions \code{variance}, \code{skewness}, and \code{kurtosis} are new
+#' generic functions for computing moments of probability distributions such as
+#' those provided in this package. Additionally, the probability distributions
+#' from \pkg{distributions3} all have methods for the \code{\link[base]{mean}}
+#' generic. Moreover, quantiles can be computed with methods for
+#' \code{\link[stats]{quantile}}. For examples illustrating the usage with
+#' probability distribution objects, see the manual pages of the respective
+#' distributions, e.g., \code{\link{Normal}} or \code{\link{Binomial}} etc.
+#'
+#' @param x An object. The package provides methods for probability
+#' distribution objects, e.g., those created by [Normal()] or [Beta()] etc.
+#' @param ... Further arguments passed to or from other methods. Unevaluated
+#' arguments will generate a warning to catch mispellings or other possible
+#' errors.
 #'
 #' @return A numeric scalar
+#' @seealso \code{\link[base]{mean}}, \code{\link[stats]{quantile}},
+#' \code{\link{cdf}}, \code{\link{random}} 
 #' @export
 #'
-variance <- function(d, ...) {
+variance <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("variance")
 }
 
 #' @rdname variance
 #' @export
-skewness <- function(d, ...) {
+skewness <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("skewness")
 }
 
 #' @rdname variance
 #' @export
-kurtosis <- function(d, ...) {
+kurtosis <- function(x, ...) {
   ellipsis::check_dots_used()
   UseMethod("kurtosis")
 }

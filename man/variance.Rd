@@ -6,21 +6,34 @@
 \alias{kurtosis}
 \title{Compute the moments of a probability distribution}
 \usage{
-variance(d, ...)
+variance(x, ...)
 
-skewness(d, ...)
+skewness(x, ...)
 
-kurtosis(d, ...)
+kurtosis(x, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{x}{An object. The package provides methods for probability
+distribution objects, e.g., those created by \code{\link[=Normal]{Normal()}} or \code{\link[=Beta]{Beta()}} etc.}
 
-\item{...}{Further arguments passed to or from other methods (currently not used).}
+\item{...}{Further arguments passed to or from other methods. Unevaluated
+arguments will generate a warning to catch mispellings or other possible
+errors.}
 }
 \value{
 A numeric scalar
 }
 \description{
-Compute the moments of a probability distribution
+The functions \code{variance}, \code{skewness}, and \code{kurtosis} are new
+generic functions for computing moments of probability distributions such as
+those provided in this package. Additionally, the probability distributions
+from \pkg{distributions3} all have methods for the \code{\link[base]{mean}}
+generic. Moreover, quantiles can be computed with methods for
+\code{\link[stats]{quantile}}. For examples illustrating the usage with
+probability distribution objects, see the manual pages of the respective
+distributions, e.g., \code{\link{Normal}} or \code{\link{Binomial}} etc.
+}
+\seealso{
+\code{\link[base]{mean}}, \code{\link[stats]{quantile}},
+\code{\link{cdf}}, \code{\link{random}}
 }

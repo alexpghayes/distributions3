@@ -86,7 +86,7 @@ print.Categorical <- function(x, ...) {
 #'
 #' @inherit Categorical examples
 #'
-#' @param d A `Categorical` object created by a call to [Categorical()].
+#' @param x A `Categorical` object created by a call to [Categorical()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -94,15 +94,15 @@ print.Categorical <- function(x, ...) {
 #' @return A vector containing values from `outcomes` of length `n`.
 #' @export
 #'
-random.Categorical <- function(d, n = 1L, ...) {
-  sample(x = d$outcomes, size = n, prob = d$p, replace = TRUE)
+random.Categorical <- function(x, n = 1L, ...) {
+  sample(x = x$outcomes, size = n, prob = x$p, replace = TRUE)
 }
 
 #' Evaluate the probability mass function of a Categorical discrete distribution
 #'
 #' @inherit Categorical examples
-#' @inheritParams random.Categorical
 #'
+#' @param d A `Categorical` object created by a call to [Categorical()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -128,8 +128,8 @@ log_pdf.Categorical <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Categorical distribution
 #'
 #' @inherit Categorical examples
-#' @inheritParams random.Categorical
 #'
+#' @param d A `Categorical` object created by a call to [Categorical()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -160,30 +160,31 @@ cdf.Categorical <- function(d, x, ...) {
 #' @inherit Categorical examples
 #' @inheritParams random.Categorical
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Categorical <- function(d, p, ...) {
-  if (!is.numeric(d$outcomes)) {
+quantile.Categorical <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  if (!is.numeric(x$outcomes)) {
     stop(
       "The sample space of `x` must be numeric to evaluate quantiles.",
       call. = FALSE
     )
   }
 
-  if (any(p < 0) || any(1 < p)) {
-    stop("Elements of `p` must be between 0 and 1.", call. = FALSE)
+  if (any(probs < 0) || any(1 < probs)) {
+    stop("Elements of `probs` must be between 0 and 1.", call. = FALSE)
   }
 
-  if (length(p) == 0) {
+  if (length(probs) == 0) {
     return(numeric(0))
   }
 
-  full_cdf <- cumsum(pdf(d, d$outcomes))
+  full_cdf <- cumsum(pdf(x, x$outcomes))
 
-  Vectorize(function(k) d$outcomes[min(which(full_cdf >= k))])(p)
+  Vectorize(function(k) x$outcomes[min(which(full_cdf >= k))])(probs)
 }

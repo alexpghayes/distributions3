@@ -4,10 +4,10 @@
 \alias{random.Cauchy}
 \title{Draw a random sample from a Cauchy distribution}
 \usage{
-\method{random}{Cauchy}(d, n = 1L, ...)
+\method{random}{Cauchy}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
+\item{x}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

@@ -98,16 +98,19 @@ print.Multinomial <- function(x, ...) {
 }
 
 #' @export
-mean.Multinomial <- function(x, ...) x$size * x$p
+mean.Multinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
+  x$size * x$p
+}
 
 #' @export
-variance.Multinomial <- function(d, ...) d$size * d$p * (1 - d$p)
+variance.Multinomial <- function(x, ...) x$size * x$p * (1 - x$p)
 
 #' Draw a random sample from a Multinomial distribution
 #'
 #' @inherit Multinomial examples
 #'
-#' @param d A `Multinomial` object created by a call to [Multinomial()].
+#' @param x A `Multinomial` object created by a call to [Multinomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -117,8 +120,8 @@ variance.Multinomial <- function(d, ...) d$size * d$p * (1 - d$p)
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.Multinomial <- function(d, n = 1L, ...) {
-  rmultinom(n = n, size = d$size, prob = d$p)
+random.Multinomial <- function(x, n = 1L, ...) {
+  rmultinom(n = n, size = x$size, prob = x$p)
 }
 
 #' Evaluate the probability mass function of a Multinomial distribution
@@ -128,8 +131,8 @@ random.Multinomial <- function(d, n = 1L, ...) {
 #' showing to how calculate p-values and confidence intervals.
 #'
 #' @inherit Multinomial examples
-#' @inheritParams random.Multinomial
 #'
+#' @param d A `Multinomial` object created by a call to [Multinomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to

@@ -90,6 +90,7 @@ print.Frechet <- function(x, ...) {
 
 #' @export
 mean.Frechet <- function(x, ...) {
+  ellipsis::check_dots_used()
   a <- x$shape
   m <- x$location
   s <- x$scale
@@ -101,10 +102,10 @@ mean.Frechet <- function(x, ...) {
 }
 
 #' @export
-variance.Frechet <- function(d, ...) {
-  a <- d$shape
-  m <- d$location
-  s <- d$scale
+variance.Frechet <- function(x, ...) {
+  a <- x$shape
+  m <- x$location
+  s <- x$scale
   if (a > 2) {
     s^2 * (gamma(1 - 2/a) - gamma(1 - 1/a)^2)
   } else {
@@ -113,10 +114,10 @@ variance.Frechet <- function(d, ...) {
 }
 
 #' @export
-skewness.Frechet <- function(d, ...) {
-  a <- d$shape
-  m <- d$location
-  s <- d$scale
+skewness.Frechet <- function(x, ...) {
+  a <- x$shape
+  m <- x$location
+  s <- x$scale
   if (a > 3) {
     g1 <- gamma(1 - 1/a)
     g2 <- gamma(1 - 2/a)
@@ -130,10 +131,10 @@ skewness.Frechet <- function(d, ...) {
 }
 
 #' @export
-kurtosis.Frechet <- function(d, ...) {
-  a <- d$shape
-  m <- d$locations
-  s <- d$scale
+kurtosis.Frechet <- function(x, ...) {
+  a <- x$shape
+  m <- x$locations
+  s <- x$scale
   if (a > 4) {
     g1 <- gamma(1 - 1/a)
     g2 <- gamma(1 - 2/a)
@@ -151,7 +152,7 @@ kurtosis.Frechet <- function(d, ...) {
 #'
 #' @inherit Frechet examples
 #'
-#' @param d A `Frechet` object created by a call to [Frechet()].
+#' @param x A `Frechet` object created by a call to [Frechet()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -159,19 +160,19 @@ kurtosis.Frechet <- function(d, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Frechet <- function(d, n = 1L, ...) {
+random.Frechet <- function(x, n = 1L, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location + d$scale
-  scale <- d$scale / d$shape
-  shape <- 1 / d$shape
+  loc <- x$location + x$scale
+  scale <- x$scale / x$shape
+  shape <- 1 / x$shape
   revdbayes::rgev(n = n, loc = loc, scale = scale, shape = shape)
 }
 
 #' Evaluate the probability mass function of a Frechet distribution
 #'
 #' @inherit Frechet examples
-#' @inheritParams random.Frechet
 #'
+#' @param d A `Frechet` object created by a call to [Frechet()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -202,8 +203,8 @@ log_pdf.Frechet <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a Frechet distribution
 #'
 #' @inherit Frechet examples
-#' @inheritParams random.Frechet
 #'
+#' @param d A `Frechet` object created by a call to [Frechet()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -227,17 +228,18 @@ cdf.Frechet <- function(d, x, ...) {
 #' @inherit Frechet examples
 #' @inheritParams random.Frechet
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Frechet <- function(d, p, ...) {
+quantile.Frechet <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
   # Convert to the GEV parameterisation
-  loc <- d$location + d$scale
-  scale <- d$scale / d$shape
-  shape <- 1 / d$shape
-  revdbayes::qgev(p = p, loc = loc, scale = scale, shape = shape)
+  loc <- x$location + x$scale
+  scale <- x$scale / x$shape
+  shape <- 1 / x$shape
+  revdbayes::qgev(p = probs, loc = loc, scale = scale, shape = shape)
 }

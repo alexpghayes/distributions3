@@ -51,6 +51,7 @@ print.FisherF <- function(x, ...) {
 
 #' @export
 mean.FisherF <- function(x, ...) {
+  ellipsis::check_dots_used()
   # The k-th moment of an F(df1, df2) distribution exists and
   # is finite only when 2k < d2
   d1 <- x$df1
@@ -59,9 +60,9 @@ mean.FisherF <- function(x, ...) {
 }
 
 #' @export
-variance.FisherF <- function(d, ...) {
-  d1 <- d$df1
-  d2 <- d$df2
+variance.FisherF <- function(x, ...) {
+  d1 <- x$df1
+  d2 <- x$df2
   if (d2 > 4) {
     (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4))
   } else {
@@ -70,9 +71,9 @@ variance.FisherF <- function(d, ...) {
 }
 
 #' @export
-skewness.FisherF <- function(d, ...) {
-  d1 <- d$df1
-  d2 <- d$df2
+skewness.FisherF <- function(x, ...) {
+  d1 <- x$df1
+  d2 <- x$df2
   if (d2 > 6) {
     a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
     b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
@@ -83,9 +84,9 @@ skewness.FisherF <- function(d, ...) {
 }
 
 #' @export
-kurtosis.FisherF <- function(d, ...) {
-  d1 <- d$df1
-  d2 <- d$df2
+kurtosis.FisherF <- function(x, ...) {
+  d1 <- x$df1
+  d2 <- x$df2
   if (d2 > 8) {
     a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
     b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
@@ -99,7 +100,7 @@ kurtosis.FisherF <- function(d, ...) {
 #'
 #' @inherit FisherF examples
 #'
-#' @param d A `FisherF` object created by a call to [FisherF()].
+#' @param x A `FisherF` object created by a call to [FisherF()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -107,15 +108,15 @@ kurtosis.FisherF <- function(d, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.FisherF <- function(d, n = 1L, ...) {
-  rf(n = n, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+random.FisherF <- function(x, n = 1L, ...) {
+  rf(n = n, df1 = x$df1, df2 = x$df2, ncp = x$lambda)
 }
 
 #' Evaluate the probability mass function of an F distribution
 #'
 #' @inherit FisherF examples
-#' @inheritParams random.FisherF
 #'
+#' @param d A `FisherF` object created by a call to [FisherF()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -138,8 +139,8 @@ log_pdf.FisherF <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of an F distribution
 #'
 #' @inherit FisherF examples
-#' @inheritParams random.FisherF
 #'
+#' @param d A `FisherF` object created by a call to [FisherF()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -159,15 +160,16 @@ cdf.FisherF <- function(d, x, ...) {
 #' @inherit FisherF examples
 #' @inheritParams random.FisherF
 #'
-#' @param p A vector of probabilites.
+#' @param probs A vector of probabilites.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.FisherF <- function(d, p, ...) {
-  qf(p = p, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+quantile.FisherF <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  qf(p = probs, df1 = x$df1, df2 = x$df2, ncp = x$lambda)
 }
 
 #' Return the support of the FisherF distribution

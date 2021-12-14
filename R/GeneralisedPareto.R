@@ -107,6 +107,7 @@ print.GP <- function(x, ...) {
 
 #' @export
 mean.GP <- function(x, ...) {
+  ellipsis::check_dots_used()
   mu <- x$mu
   sigma <- x$sigma
   xi <- x$xi
@@ -116,25 +117,25 @@ mean.GP <- function(x, ...) {
 }
 
 #' @export
-variance.GP <- function(d, ...) {
-  sigma <- d$sigma
-  xi <- d$xi
+variance.GP <- function(x, ...) {
+  sigma <- x$sigma
+  xi <- x$xi
 
   if (xi < 1/2) sigma^2 / ((1 - xi)^2 - (1 - 2*xi))
   else Inf
 }
 
 #' @export
-skewness.GP <- function(d, ...) {
-  xi <- d$xi
+skewness.GP <- function(x, ...) {
+  xi <- x$xi
 
   if (xi < 1/3) 2*(1 + xi) * sqrt(1 - 2*xi) / (1 - 3*xi)
   else Inf
 }
 
 #' @export
-kurtosis.GP <- function(d, ...) {
-  xi <- d$xi
+kurtosis.GP <- function(x, ...) {
+  xi <- x$xi
 
   if (xi < 1/4) {
     k1 <- (1 - 2*xi) * (2*xi^2 + xi + 3)
@@ -149,7 +150,7 @@ kurtosis.GP <- function(d, ...) {
 #'
 #' @inherit GP examples
 #'
-#' @param d A `GP` object created by a call to [GP()].
+#' @param x A `GP` object created by a call to [GP()].
 #' @param n The number of samples to draw. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
@@ -157,15 +158,15 @@ kurtosis.GP <- function(d, ...) {
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.GP <- function(d, n = 1L, ...) {
-  revdbayes::rgp(n = n, loc = d$mu, scale = d$sigma, shape = d$xi)
+random.GP <- function(x, n = 1L, ...) {
+  revdbayes::rgp(n = n, loc = x$mu, scale = x$sigma, shape = x$xi)
 }
 
 #' Evaluate the probability mass function of a GP distribution
 #'
 #' @inherit GP examples
-#' @inheritParams random.GP
 #'
+#' @param d A `GP` object created by a call to [GP()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -188,8 +189,8 @@ log_pdf.GP <- function(d, x, ...) {
 #' Evaluate the cumulative distribution function of a GP distribution
 #'
 #' @inherit GP examples
-#' @inheritParams random.GP
 #'
+#' @param d A `GP` object created by a call to [GP()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
@@ -209,13 +210,14 @@ cdf.GP <- function(d, x, ...) {
 #' @inherit GP examples
 #' @inheritParams random.GP
 #'
-#' @param p A vector of probabilities.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `p`.
+#' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.GP <- function(d, p, ...) {
-  revdbayes::qgp(p = p, loc = d$mu, scale = d$sigma, shape = d$xi)
+quantile.GP <- function(x, probs, ...) {
+  ellipsis::check_dots_used()
+  revdbayes::qgp(p = probs, loc = x$mu, scale = x$sigma, shape = x$xi)
 }

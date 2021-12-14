@@ -4,10 +4,10 @@
 \alias{random.GP}
 \title{Draw a random sample from a GP distribution}
 \usage{
-\method{random}{GP}(d, n = 1L, ...)
+\method{random}{GP}(x, n = 1L, ...)
 }
 \arguments{
-\item{d}{A \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
+\item{x}{A \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 

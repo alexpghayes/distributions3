@@ -4,18 +4,18 @@
 \alias{quantile.Gumbel}
 \title{Determine quantiles of a Gumbel distribution}
 \usage{
-\method{quantile}{Gumbel}(d, p, ...)
+\method{quantile}{Gumbel}(x, probs, ...)
 }
 \arguments{
-\item{d}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
+\item{x}{A \code{Gumbel} object created by a call to \code{\link[=Gumbel]{Gumbel()}}.}
 
-\item{p}{A vector of probabilities.}
+\item{probs}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

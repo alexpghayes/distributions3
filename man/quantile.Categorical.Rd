@@ -4,18 +4,18 @@
 \alias{quantile.Categorical}
 \title{Determine quantiles of a Categorical discrete distribution}
 \usage{
-\method{quantile}{Categorical}(d, p, ...)
+\method{quantile}{Categorical}(x, probs, ...)
 }
 \arguments{
-\item{d}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
+\item{x}{A \code{Categorical} object created by a call to \code{\link[=Categorical]{Categorical()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

@@ -4,12 +4,12 @@
 \alias{quantile.Erlang}
 \title{Determine quantiles of an Erlang distribution}
 \usage{
-\method{quantile}{Erlang}(d, p, ..., interval = c(0, 1e+06), tol = .Machine$double.eps)
+\method{quantile}{Erlang}(x, probs, ..., interval = c(0, 1e+06), tol = .Machine$double.eps)
 }
 \arguments{
-\item{d}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
+\item{x}{An \code{Erlang} object created by a call to \code{\link[=Erlang]{Erlang()}}.}
 
-\item{p}{A vector of probabilites.}
+\item{probs}{A vector of probabilites.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
@@ -19,7 +19,7 @@ catch mispellings or other possible errors.}
 \item{tol}{Tolerance of the root finding algorithm. Defaults to \code{.Machine$double.eps}}
 }
 \value{
-A vector of quantiles, one for each element of \code{p}.
+A vector of quantiles, one for each element of \code{probs}.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.
