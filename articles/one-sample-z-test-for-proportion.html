@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions3</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +84,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/alexpghayes/distributions3/">
+  <a href="https://github.com/alexpghayes/distributions3/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +105,7 @@
       <h1 data-toc-skip>One sample Z-tests for a proportion</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/master/vignettes/one-sample-z-test-for-proportion.Rmd"><code>vignettes/one-sample-z-test-for-proportion.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/one-sample-z-test-for-proportion.Rmd" class="external-link"><code>vignettes/one-sample-z-test-for-proportion.Rmd</code></a></small>
       <div class="hidden name"><code>one-sample-z-test-for-proportion.Rmd</code></div>
 
     </div>
@@ -117,9 +113,9 @@
     
     
 <p>In this vignette, we work through an example Z-test a proportion, and point out a number of points where you might get stuck along the way.</p>
-<div id="problem-setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#problem-setup" class="anchor"></a>Problem setup</h2>
+<div class="section level2">
+<h2 id="problem-setup">Problem setup<a class="anchor" aria-label="anchor" href="#problem-setup"></a>
+</h2>
 <p>Let’s suppose that a student is interesting in estimating what percent of professors in their department watches Game of Thrones. They go to office hours and ask each professor and it turns out 17 out of 62 professors in their department watch Game of Thrones. Several of the faculty think Game of Thrones is a board game.</p>
 <p>We can imagine that the data is a bunch of zeros and ones, where the <span class="math inline">\(i^{th}\)</span> data point, <span class="math inline">\(x_i\)</span> is one if professor <span class="math inline">\(i\)</span> watches Game of Thrones, and zero otherwise. So the full dataset might look something like:</p>
 <p><span class="math display">\[
@@ -131,9 +127,9 @@
 \]</span></p>
 <p>But it is much easier to just remember that there are 17 ones and 45 zeros.</p>
 </div>
-<div id="assumption-checking" class="section level2">
-<h2 class="hasAnchor">
-<a href="#assumption-checking" class="anchor"></a>Assumption checking</h2>
+<div class="section level2">
+<h2 id="assumption-checking">Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"></a>
+</h2>
 <p>Before we can do a Z-test, we need to make check if we can reasonably treat the mean of this sample as normally distributed. The data is definitely not from a normal distribution since it’s only zeros and ones, so we need to check if the central limit theorem kicks in.</p>
 <p>Most of the time we would check if there were 30 data points or more, but for a proportion, we do something slightly different. When data is binary, like we have here, the central limit theorem kicks in slower than usual. The standard thing to check is whether</p>
 <ul>
@@ -147,9 +143,9 @@
 </ul>
 <p>So we’re good to go.</p>
 </div>
-<div id="null-hypothesis-and-test-statistic" class="section level2">
-<h2 class="hasAnchor">
-<a href="#null-hypothesis-and-test-statistic" class="anchor"></a>Null hypothesis and test statistic</h2>
+<div class="section level2">
+<h2 id="null-hypothesis-and-test-statistic">Null hypothesis and test statistic<a class="anchor" aria-label="anchor" href="#null-hypothesis-and-test-statistic"></a>
+</h2>
 <p>Let’s test the null hypothesis that, on average, twenty percent of professors what Game of Thrones. The corresponding null hypothesis is</p>
 <p><span class="math display">\[
   H_0: \pi = 0.2 \qquad H_A: \pi \neq 0.2
@@ -160,9 +156,9 @@
     \mathrm{Normal}(0, 1)
 \]</span></p>
 </div>
-<div id="calculating-p-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#calculating-p-values" class="anchor"></a>Calculating p-values</h2>
+<div class="section level2">
+<h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
+</h2>
 <p>In R this looks like:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">62</span>
@@ -170,7 +166,7 @@
 <span class="va">pi_0</span> <span class="op">&lt;-</span> <span class="fl">0.2</span>
 
 <span class="co"># calculate the z-statistic</span>
-<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">pi</span> <span class="op">-</span> <span class="va">pi_0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">pi_0</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">pi_0</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span>
+<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">pi</span> <span class="op">-</span> <span class="va">pi_0</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">pi_0</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">pi_0</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span>
 <span class="va">z_stat</span>
 <span class="co">#&gt; [1] 1.460501</span></code></pre></div>
 <p>To calculate a two-sided p-value, we need to find</p>
@@ -184,12 +180,12 @@
 \]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3">distributions3</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'distributions3'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; The following object is masked from 'package:stats':</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Gamma, quantile</span>
+<span class="co">#&gt;     Gamma</span>
 <span class="co">#&gt; The following object is masked from 'package:grDevices':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     pdf</span>
@@ -199,7 +195,7 @@
 <span class="co">#&gt; [1] 0.1442901</span></code></pre></div>
 <p>Note that we saved <code>z_stat</code> above so we could have also done</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.1441523</span></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.14. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code>cdf(Z, 1.46)</code> and looking up <code>1.46</code> on a Z-table.</p>
@@ -216,9 +212,9 @@
 <code class="sourceCode R"><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">1.46</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.1442901</span></code></pre></div>
 </div>
-<div id="one-sided-z-tests" class="section level2">
-<h2 class="hasAnchor">
-<a href="#one-sided-z-tests" class="anchor"></a>One-sided Z-tests</h2>
+<div class="section level2">
+<h2 id="one-sided-z-tests">One-sided Z-tests<a class="anchor" aria-label="anchor" href="#one-sided-z-tests"></a>
+</h2>
 <p>Finally, sometimes we are interest in one sided Z-tests. For the test</p>
 <p><span class="math display">\[
 \begin{align}
@@ -259,11 +255,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
+  <p></p>
+<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -271,6 +269,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions3</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +84,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/alexpghayes/distributions3/">
+  <a href="https://github.com/alexpghayes/distributions3/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +105,7 @@
       <h1 data-toc-skip>Two sample Z-tests</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/master/vignettes/two-sample-z-test.Rmd"><code>vignettes/two-sample-z-test.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/two-sample-z-test.Rmd" class="external-link"><code>vignettes/two-sample-z-test.Rmd</code></a></small>
       <div class="hidden name"><code>two-sample-z-test.Rmd</code></div>
 
     </div>
@@ -117,9 +113,9 @@
     
     
 <p>In this vignette, we work through a two sample Z-test. If you haven’t seen a one-sample Z-test, we recommend you read <code><a href="../articles/one-sample-z-test.html">vignette("one-sample-z-test")</a></code> first.</p>
-<div id="problem-setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#problem-setup" class="anchor"></a>Problem setup</h2>
+<div class="section level2">
+<h2 id="problem-setup">Problem setup<a class="anchor" aria-label="anchor" href="#problem-setup"></a>
+</h2>
 <p>Let’s suppose that a student wants to figure out if biology professors or English professors know more memes. The student writes a meme quiz and springs it on 14 unsuspecting biology professors and 18 unsuspecting English professors during office hours.</p>
 <p>The biology professors get the following scores:</p>
 <p><span class="math display">\[
@@ -131,9 +127,9 @@
 \]</span></p>
 <p>We’ll assume that the population variance of the biology professor scores is <span class="math inline">\(\sigma^2_1 = 3\)</span> and the population variance of the English professor scores is <span class="math inline">\(\sigma^2_2 = 2\)</span>.</p>
 </div>
-<div id="assumption-checking" class="section level2">
-<h2 class="hasAnchor">
-<a href="#assumption-checking" class="anchor"></a>Assumption checking</h2>
+<div class="section level2">
+<h2 id="assumption-checking">Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"></a>
+</h2>
 <p>Before we can do a Z-test, we need to make check if we can reasonably treat the means of <em>each sample</em> as normally distributed. This happens is the case of either of following hold:</p>
 <ol style="list-style-type: decimal">
 <li>The data comes from a normal distribution.</li>
@@ -141,43 +137,43 @@
 </ol>
 <p>Since both of samples have less than 30 data points, we need to check if they are plausibly from normal distributions. We check the biology professor scores first using a normal quantile-quantile plot.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">biology</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span>
-<span class="va">english</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">12</span>, <span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">biology</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span>
+<span class="va">english</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">12</span>, <span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqnorm</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqline</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span></code></pre></div>
 <p><img src="two-sample-z-test_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Since the biology scores lies close the line <span class="math inline">\(y = x\)</span>, and has no notable systematic deviations from line, it’s safe to treat the sample as coming from a normal distribution. Honestly this quantile-quantile plot is so good it’s suspicious.</p>
 <p>Anyway, next we check the English scores</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqnorm</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqline</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span></code></pre></div>
 <p><img src="two-sample-z-test_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>And it seems fine as well. We can also create side-by-side boxplots of the data using the <code>ggplot2</code> package to get a nice comparison of the two groups. This requires a little bit of data manipulation:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="co"># make a data frame in long format for plotting</span>
-<span class="va">test_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">biology</span>, <span class="va">english</span><span class="op">)</span>,
-  department <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"biology"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"english"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span><span class="op">)</span>
+<span class="va">test_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">biology</span>, <span class="va">english</span><span class="op">)</span>,
+  department <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"biology"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span><span class="op">)</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"english"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">test_results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">department</span>, y <span class="op">=</span> <span class="va">score</span>, color <span class="op">=</span> <span class="va">department</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">department</span>, y <span class="op">=</span> <span class="va">score</span>, color <span class="op">=</span> <span class="va">department</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"qual"</span>, palette <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <p><img src="two-sample-z-test_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Based on eye-balling the data, we’d be pretty surprised if we rejected a null hypothesis of equal means between the two groups.</p>
 </div>
-<div id="null-hypothesis-and-test-statistic" class="section level2">
-<h2 class="hasAnchor">
-<a href="#null-hypothesis-and-test-statistic" class="anchor"></a>Null hypothesis and test statistic</h2>
+<div class="section level2">
+<h2 id="null-hypothesis-and-test-statistic">Null hypothesis and test statistic<a class="anchor" aria-label="anchor" href="#null-hypothesis-and-test-statistic"></a>
+</h2>
 <p>Let’s write the null hypothesis out (here we treat biology professors as group 1 and English professors as group 2):</p>
 <p><span class="math display">\[
   H_0: \mu_1 - \mu_2 = 0 \qquad H_A: \mu_1 - \mu_2 \neq 0
@@ -195,19 +191,19 @@
 <span class="va">sigma_sq_1</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="va">sigma_sq_2</span> <span class="op">&lt;-</span> <span class="fl">2</span>
 
-<span class="va">n_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span>
-<span class="va">n_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span>
+<span class="va">n_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span>
+<span class="va">n_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span>
 
 <span class="co"># calculate the z-statistic</span>
-<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span> <span class="op">-</span> <span class="va">delta_0</span><span class="op">)</span> <span class="op">/</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">sigma_sq_1</span> <span class="op">/</span> <span class="va">n_1</span> <span class="op">+</span> <span class="va">sigma_sq_2</span> <span class="op">/</span> <span class="va">n_2</span><span class="op">)</span>
+<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">biology</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">english</span><span class="op">)</span> <span class="op">-</span> <span class="va">delta_0</span><span class="op">)</span> <span class="op">/</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">sigma_sq_1</span> <span class="op">/</span> <span class="va">n_1</span> <span class="op">+</span> <span class="va">sigma_sq_2</span> <span class="op">/</span> <span class="va">n_2</span><span class="op">)</span>
 
 <span class="va">z_stat</span>
 <span class="co">#&gt; [1] -0.3756527</span></code></pre></div>
 </div>
-<div id="calculating-p-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#calculating-p-values" class="anchor"></a>Calculating p-values</h2>
+<div class="section level2">
+<h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
+</h2>
 <p>To calculate a two-sided p-value, we need to find</p>
 <p><span class="math display">\[
 \begin{align}
@@ -219,14 +215,14 @@
 \]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3">distributions3</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span>
 
 <span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Normal.html">Normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># make a standard normal r.v.</span>
 <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.376</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">0.376</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.7069169</span></code></pre></div>
 <p>Note that we saved <code>z_stat</code> above so we could have also done</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.7071751</span></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.71. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code>cdf(Z, -0.376)</code> and looking up <code>-0.376</code> on a Z-table.</p>
@@ -282,11 +278,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
+  <p></p>
+<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -294,6 +292,8 @@
 
   
 
+
+  
 
   </body>
 </html>

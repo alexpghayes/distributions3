@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions3</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +84,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/alexpghayes/distributions3/">
+  <a href="https://github.com/alexpghayes/distributions3/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +105,7 @@
       <h1 data-toc-skip>Paired tests</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/master/vignettes/paired-tests.Rmd"><code>vignettes/paired-tests.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/paired-tests.Rmd" class="external-link"><code>vignettes/paired-tests.Rmd</code></a></small>
       <div class="hidden name"><code>paired-tests.Rmd</code></div>
 
     </div>
@@ -117,9 +113,9 @@
     
     
 <p>This vignette will make most sense if you are familiar with one sample and two sample tests. If these are new to you, have a look at <code><a href="../articles/one-sample-z-test.html">vignette("one-sample-z-test")</a></code> and <code><a href="../articles/two-sample-z-test.html">vignette("two-sample-z-test")</a></code>.</p>
-<div id="problem-setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#problem-setup" class="anchor"></a>Problem setup</h2>
+<div class="section level2">
+<h2 id="problem-setup">Problem setup<a class="anchor" aria-label="anchor" href="#problem-setup"></a>
+</h2>
 <p>Suppose we’re interested in people’s happiness before and after discovering the #rstats Twitter community. We survey them get before and after happiness scores, using a happiness survey that goes from 0 to 100.</p>
 <p>The data looks like this</p>
 <table class="table">
@@ -182,21 +178,21 @@
 </tbody>
 </table>
 </div>
-<div id="working-with-the-differences" class="section level2">
-<h2 class="hasAnchor">
-<a href="#working-with-the-differences" class="anchor"></a>Working with the differences</h2>
+<div class="section level2">
+<h2 id="working-with-the-differences">Working with the differences<a class="anchor" aria-label="anchor" href="#working-with-the-differences"></a>
+</h2>
 <p>Crucially, since the before measurement and the after measurement are on the <em>same person</em>, we can subtract the before measurement from the after measurement and do a one sample test on these differences.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">88</span>, <span class="fl">73</span>, <span class="fl">35</span>, <span class="fl">21</span>, <span class="fl">28</span>, <span class="fl">56</span>, <span class="fl">50</span>, <span class="fl">73</span>, <span class="fl">93</span>, <span class="fl">55</span><span class="op">)</span>
-<span class="va">after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">78</span>, <span class="fl">56</span>, <span class="fl">28</span>, <span class="fl">26</span>, <span class="fl">50</span>, <span class="fl">39</span>, <span class="fl">67</span>, <span class="fl">98</span>, <span class="fl">63</span><span class="op">)</span> 
+<code class="sourceCode R"><span class="va">before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">88</span>, <span class="fl">73</span>, <span class="fl">35</span>, <span class="fl">21</span>, <span class="fl">28</span>, <span class="fl">56</span>, <span class="fl">50</span>, <span class="fl">73</span>, <span class="fl">93</span>, <span class="fl">55</span><span class="op">)</span>
+<span class="va">after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">80</span>, <span class="fl">78</span>, <span class="fl">56</span>, <span class="fl">28</span>, <span class="fl">26</span>, <span class="fl">50</span>, <span class="fl">39</span>, <span class="fl">67</span>, <span class="fl">98</span>, <span class="fl">63</span><span class="op">)</span> 
 
 <span class="va">diff</span> <span class="op">&lt;-</span> <span class="va">after</span> <span class="op">-</span> <span class="va">before</span>
 <span class="va">diff</span>
 <span class="co">#&gt;  [1]  -8   5  21   7  -2  -6 -11  -6   5   8</span></code></pre></div>
 </div>
-<div id="paired-tests-versus-two-sample-tests" class="section level2">
-<h2 class="hasAnchor">
-<a href="#paired-tests-versus-two-sample-tests" class="anchor"></a>Paired tests versus two sample tests</h2>
+<div class="section level2">
+<h2 id="paired-tests-versus-two-sample-tests">Paired tests versus two sample tests<a class="anchor" aria-label="anchor" href="#paired-tests-versus-two-sample-tests"></a>
+</h2>
 <p>One key question is: when should we use paired instead of two sample tests? Students typically struggle with this, and it’s worth spending some time thinking about this. In abstract terms, we should use paired tests when we have <em>two observations on the same experimental unit</em> and two sample tests when we have <em>two observations on different experimental units</em>.</p>
 <p>The difficulty here is that it takes some time to become comfortable with experimental units. I recommend memorizing</p>
 <p>Some examples where paired tests are appropriate:</p>
@@ -205,20 +201,20 @@
 </ul>
 <p>Some examples where you should use a two sample test:</p>
 <p>Also note that we</p>
-<p>twosample tests, and when should we use</p>
+<p>two sample tests, and when should we use</p>
 <p>why pair - power pair if you can memorize and analogize</p>
 </div>
-<div id="paired-z-test" class="section level2">
-<h2 class="hasAnchor">
-<a href="#paired-z-test" class="anchor"></a>Paired Z-test</h2>
+<div class="section level2">
+<h2 id="paired-z-test">Paired Z-test<a class="anchor" aria-label="anchor" href="#paired-z-test"></a>
+</h2>
 </div>
-<div id="paired-t-test" class="section level2">
-<h2 class="hasAnchor">
-<a href="#paired-t-test" class="anchor"></a>Paired T-test</h2>
+<div class="section level2">
+<h2 id="paired-t-test">Paired T-test<a class="anchor" aria-label="anchor" href="#paired-t-test"></a>
+</h2>
 </div>
-<div id="paired-sign-test" class="section level2">
-<h2 class="hasAnchor">
-<a href="#paired-sign-test" class="anchor"></a>Paired sign-test</h2>
+<div class="section level2">
+<h2 id="paired-sign-test">Paired sign-test<a class="anchor" aria-label="anchor" href="#paired-sign-test"></a>
+</h2>
 </div>
   </div>
 
@@ -233,11 +229,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
+  <p></p>
+<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -245,6 +243,8 @@
 
   
 
+
+  
 
   </body>
 </html>

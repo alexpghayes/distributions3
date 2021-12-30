@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions3</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -88,7 +84,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/alexpghayes/distributions3/">
+  <a href="https://github.com/alexpghayes/distributions3/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +105,7 @@
       <h1 data-toc-skip>Intro to hypothesis testing</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/master/vignettes/intro-to-hypothesis-testing.Rmd"><code>vignettes/intro-to-hypothesis-testing.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/intro-to-hypothesis-testing.Rmd" class="external-link"><code>vignettes/intro-to-hypothesis-testing.Rmd</code></a></small>
       <div class="hidden name"><code>intro-to-hypothesis-testing.Rmd</code></div>
 
     </div>
@@ -153,12 +149,12 @@
 \]</span></p>
 <p>This probability is called a <em>p-value</em>. Since it’s very small, we conclude that the null hypothesis is not realistic. In other words, the population mean is statistically distinguishable from 8 (whether or not it is practically distinguishable from 8 is entirely another matter).</p>
 <p>This is the just of hypothesis testing. Of course there’s a bunch of other associated nonsense that obscures the basic idea, which we’ll dive into next.</p>
-<div id="things-that-can-go-wrong" class="section level3">
-<h3 class="hasAnchor">
-<a href="#things-that-can-go-wrong" class="anchor"></a>Things that can go wrong</h3>
-<div id="false-positives" class="section level4">
-<h4 class="hasAnchor">
-<a href="#false-positives" class="anchor"></a>False positives</h4>
+<div class="section level3">
+<h3 id="things-that-can-go-wrong">Things that can go wrong<a class="anchor" aria-label="anchor" href="#things-that-can-go-wrong"></a>
+</h3>
+<div class="section level4">
+<h4 id="false-positives">False positives<a class="anchor" aria-label="anchor" href="#false-positives"></a>
+</h4>
 <p>We need to be concerned about rejecting the null hypothesis when the null hypothesis is true. This is called a <em>false positive</em> or a Type I error.</p>
 <p>If the null hypothesis is true, and we calculate a statistic like we did above, we still expect to see a value of p-value of <span class="math inline">\(9.6 \cdot 10^{-7}\)</span> about <span class="math inline">\(9.6 \cdot 10^{-5}\)</span> percent of the time. For small p-values this isn’t an issue, but let’s consider a different null hypothesis of <span class="math inline">\(\mu_0 = 3.9\)</span>. Now</p>
 <p><span class="math display">\[
@@ -177,9 +173,9 @@
   P(\text{reject} \; H_0 | H_0 \; \text{true}) = \alpha
 \]</span></p>
 </div>
-<div id="false-negatives" class="section level4">
-<h4 class="hasAnchor">
-<a href="#false-negatives" class="anchor"></a>False negatives</h4>
+<div class="section level4">
+<h4 id="false-negatives">False negatives<a class="anchor" aria-label="anchor" href="#false-negatives"></a>
+</h4>
 <p>On the other hand, we may also fail to reject the null hypothesis when the null hypothesis is in fact false. We might just not have enough data to reject the null, for example. We call this a <em>false negative</em> or a Type II error. We write this as</p>
 <p><span class="math display">\[
   \text{Power} = P(\text{fail to reject} \; H_0 | H_0 \; \text{false})
@@ -197,12 +193,12 @@
 <p>where <span class="math inline">\(\mu_A\)</span> is the true mean and <span class="math inline">\(\mu_0\)</span> is the proposed mean. We’ll do an exercise later that will help you see where this comes from.</p>
 </div>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div id="z-test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#z-test" class="anchor"></a>Z-test</h3>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="section level3">
+<h3 id="z-test">Z-test<a class="anchor" aria-label="anchor" href="#z-test"></a>
+</h3>
 <p>A company claims battery lifetimes are normally distributed with <span class="math inline">\(\mu = 40\)</span> and <span class="math inline">\(\sigma = 5\)</span> hours. We are curious if the claim about the mean is reasonable, and collect a random sample of 100 batteries. The sample mean is 39.8. What is the p-value of a Z-test for <span class="math inline">\(H_0 : \mu = 40\)</span>?</p>
 <p>We begin by calculating a Z-score</p>
 <p><span class="math display">\[
@@ -210,7 +206,7 @@
     = {39.8 - 40 \over {5 \over \sqrt 100}}
     = 0.4
 \]</span></p>
-<p>and then we calulate, using the fact that <span class="math inline">\(Z \sim \mathrm{Normal}(0, 1)\)</span>,</p>
+<p>and then we calculate, using the fact that <span class="math inline">\(Z \sim \mathrm{Normal}(0, 1)\)</span>,</p>
 <p><span class="math display">\[
   P(Z &lt; -0.4) + P(Z &gt; 0.4) \approx 0.69
 \]</span></p>
@@ -219,9 +215,9 @@
   P(Z &lt; -0.4) \approx 0.34
 \]</span></p>
 </div>
-<div id="power-for-z-test" class="section level3">
-<h3 class="hasAnchor">
-<a href="#power-for-z-test" class="anchor"></a>Power for Z-test</h3>
+<div class="section level3">
+<h3 id="power-for-z-test">Power for Z-test<a class="anchor" aria-label="anchor" href="#power-for-z-test"></a>
+</h3>
 <p>Suppose a powdered medicine is supposed to have a mean particle diameter of <span class="math inline">\(\mu = 15\)</span> micrometers, and the standard deviation of diameters stays steady around 1.8 micrometers. The company would like to have high power to detect mean thicknesses 0.2 micrometers away from 15. When <span class="math inline">\(n = 100\)</span>, what is the power of the test if the true <span class="math inline">\(\mu\)</span> is 15.2 micrometers. Assume the company is interested in controlling type I error at an <span class="math inline">\(\alpha = 0.05\)</span> level.</p>
 <p>We will reject the null when our Z score is less than <span class="math inline">\(z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2}\)</span>, or when the Z score is less than -1.96 or greater than 1.96. Recall that the Z score is <span class="math inline">\({\bar x - \mu_0 \over {\sigma \over \sqrt n}}\)</span>, which we can rearrange in terms of <span class="math inline">\(\bar x\)</span> to see that we will reject the null when <span class="math inline">\(\bar x &lt; 14.65\)</span> or <span class="math inline">\(\bar x &gt; 15.35\)</span>.</p>
 <p>Now we are interested in the probability of being in this rejection region <em>when the alternative hypothesis <span class="math inline">\(\mu_A = 15.2\)</span> is true</em>.</p>
@@ -249,11 +245,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
+  <p></p>
+<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -261,6 +259,8 @@
 
   
 
+
+  
 
   </body>
 </html>
