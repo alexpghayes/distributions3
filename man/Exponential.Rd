@@ -22,7 +22,7 @@ of machinery can run before needing repair.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions3}, where the math
+\url{https://alexpghayes.github.io/distributions3/}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be an Exponential random variable with
@@ -81,6 +81,7 @@ Other continuous distributions:
 \code{\link{Cauchy}()},
 \code{\link{ChiSquare}()},
 \code{\link{Erlang}()},
+\code{\link{FisherF}()},
 \code{\link{Frechet}()},
 \code{\link{GEV}()},
 \code{\link{GP}()},

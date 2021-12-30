@@ -26,7 +26,7 @@ It may be referred to as a type II extreme value distribution.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions3}, where the math
+\url{https://alexpghayes.github.io/distributions3/}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Frechet random variable with location
@@ -85,6 +85,7 @@ Other continuous distributions:
 \code{\link{ChiSquare}()},
 \code{\link{Erlang}()},
 \code{\link{Exponential}()},
+\code{\link{FisherF}()},
 \code{\link{GEV}()},
 \code{\link{GP}()},
 \code{\link{Gamma}()},

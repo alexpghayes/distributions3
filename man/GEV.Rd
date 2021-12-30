@@ -32,7 +32,7 @@ to model the maximum of a large number of random variables.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions3}, where the math
+\url{https://alexpghayes.github.io/distributions3/}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a GEV random variable with location
@@ -113,6 +113,7 @@ Other continuous distributions:
 \code{\link{ChiSquare}()},
 \code{\link{Erlang}()},
 \code{\link{Exponential}()},
+\code{\link{FisherF}()},
 \code{\link{Frechet}()},
 \code{\link{GP}()},
 \code{\link{Gamma}()},

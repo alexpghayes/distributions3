@@ -33,7 +33,7 @@ gaussian distribution.
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions3}, where the math
+\url{https://alexpghayes.github.io/distributions3/}, where the math
 will render with additional detail and much greater clarity.
 
 In the following, let \eqn{X} be a Normal random variable with mean
@@ -171,6 +171,7 @@ Other continuous distributions:
 \code{\link{ChiSquare}()},
 \code{\link{Erlang}()},
 \code{\link{Exponential}()},
+\code{\link{FisherF}()},
 \code{\link{Frechet}()},
 \code{\link{GEV}()},
 \code{\link{GP}()},

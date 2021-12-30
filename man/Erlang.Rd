@@ -48,6 +48,7 @@ Other continuous distributions:
 \code{\link{Cauchy}()},
 \code{\link{ChiSquare}()},
 \code{\link{Exponential}()},
+\code{\link{FisherF}()},
 \code{\link{Frechet}()},
 \code{\link{GEV}()},
 \code{\link{GP}()},
