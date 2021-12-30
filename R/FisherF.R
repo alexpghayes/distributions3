@@ -10,8 +10,6 @@
 #'
 #' @family continuous distributions
 #'
-#' TODO update details
-#'
 #' @details
 #'
 #'   We recommend reading this documentation on

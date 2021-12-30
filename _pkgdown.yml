@@ -28,6 +28,7 @@ reference:
       - "Categorical"
       - "Cauchy"
       - "ChiSquare"
+      - "Erlang"
       - "Exponential"
       - "FisherF"
       - "Frechet"
