@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
 
-\item{probs}{A vector of probabilites.}
+\item{probs}{A vector of probabilities.}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

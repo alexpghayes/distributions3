@@ -24,7 +24,7 @@ random <- function(x, n = 1L, ...) {
 
 #' Evaluate the probability density of a probability distribution
 #'
-#' For discrete distributions, the probabilty mass function. `pmf()`
+#' For discrete distributions, the probability mass function. `pmf()`
 #' is an alias.
 #'
 #' @inheritParams random
@@ -65,7 +65,7 @@ pmf <- function(d, x, ...) {
 
 #' Evaluate the probability density of a probability distribution
 #'
-#' For discrete distributions, the probabilty mass function.
+#' For discrete distributions, the probability mass function.
 #'
 #' @inheritParams random
 #'
@@ -106,7 +106,7 @@ cdf <- function(d, x, ...) {
 #'
 #' @return A numeric scalar
 #' @seealso \code{\link[base]{mean}}, \code{\link[stats]{quantile}},
-#' \code{\link{cdf}}, \code{\link{random}} 
+#' \code{\link{cdf}}, \code{\link{random}}
 #' @export
 #'
 variance <- function(x, ...) {

@@ -41,7 +41,7 @@
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
-#'   Too nasty, ommited.
+#'   Omitted for now.
 #'
 #'   **Moment generating function (m.g.f)**:
 #'
@@ -162,7 +162,7 @@ cdf.NegativeBinomial <- function(d, x, ...) {
 #' @inherit NegativeBinomial examples
 #' @inheritParams random.NegativeBinomial
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

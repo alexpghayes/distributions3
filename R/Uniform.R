@@ -123,7 +123,7 @@ cdf.Uniform <- function(d, x, ...) {
 #' @inherit Uniform examples
 #' @inheritParams random.Uniform
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

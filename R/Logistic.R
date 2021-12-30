@@ -169,7 +169,7 @@ cdf.Logistic <- function(d, x, ...) {
 #' @inherit Logistic examples
 #' @inheritParams random.Logistic
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

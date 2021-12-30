@@ -170,7 +170,7 @@ We begin by calculating a Z-score
     = 0.4
 \]
 
-and then we calulate, using the fact that $Z \sim \mathrm{Normal}(0, 1)$,
+and then we calculate, using the fact that $Z \sim \mathrm{Normal}(0, 1)$,
 
 \[
   P(Z < -0.4) + P(Z > 0.4) \approx 0.69

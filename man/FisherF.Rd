@@ -25,40 +25,7 @@ We recommend reading this documentation on
 \url{https://alexpghayes.github.io/distributions}, where the math
 will render with additional detail.
 
-In the following, let \eqn{X} be a Gamma random variable
-with parameters
-\code{shape} = \eqn{\alpha} and
-\code{rate} = \eqn{\beta}.
-
-\strong{Support}: \eqn{x \in (0, \infty)}
-
-\strong{Mean}: \eqn{\frac{\alpha}{\beta}}
-
-\strong{Variance}: \eqn{\frac{\alpha}{\beta^2}}
-
-\strong{Probability density function (p.m.f)}:
-
-\deqn{
-    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
-  }{
-    f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\beta x}
-  }
-
-\strong{Cumulative distribution function (c.d.f)}:
-
-\deqn{
-    f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
-  }{
-    f(x) = \frac{\Gamma(\alpha, \beta x)}{\Gamma{\alpha}}
-  }
-
-\strong{Moment generating function (m.g.f)}:
-
-\deqn{
-    E(e^{tX}) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
-  }{
-    E(e^(tX)) = \Big(\frac{\beta}{ \beta - t}\Big)^{\alpha}, \thinspace t < \beta
-  }
+TODO
 }
 \examples{
 

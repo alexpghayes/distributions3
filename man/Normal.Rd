@@ -21,7 +21,7 @@ square root, as this is a common source of errors.}
 A \code{Normal} object.
 }
 \description{
-The Normal distribution is ubiquituous in statistics, partially because
+The Normal distribution is ubiquitous in statistics, partially because
 of the central limit theorem, which states that sums of i.i.d. random
 variables eventually become Normal. Linear transformations of Normal
 random variables result in new random variables that are also Normal. If

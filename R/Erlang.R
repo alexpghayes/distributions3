@@ -118,7 +118,7 @@ cdf.Erlang <- function(d, x, ...) {
 #' @inherit Erlang examples
 #' @inheritParams random.Erlang
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #' @param interval Interval being used to search for the quantile using numerical root finding. Defaults to (0, 1e6)

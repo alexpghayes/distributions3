@@ -20,7 +20,7 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-For discrete distributions, the probabilty mass function.
+For discrete distributions, the probability mass function.
 }
 \examples{
 

@@ -185,7 +185,7 @@ cdf.Bernoulli <- function(d, x, ...) {
 #' @inherit Bernoulli examples
 #' @inheritParams random.Bernoulli
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

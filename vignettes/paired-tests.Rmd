@@ -59,7 +59,7 @@ Some examples where you should use a two sample test:
 
 Also note that we
 
-twosample tests, and when should we use 
+two sample tests, and when should we use 
 
 why pair - power
 pair if you can

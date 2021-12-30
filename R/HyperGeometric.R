@@ -200,7 +200,7 @@ cdf.HyperGeometric <- function(d, x, ...) {
 #' @inherit HyperGeometric examples
 #' @inheritParams random.HyperGeometric
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

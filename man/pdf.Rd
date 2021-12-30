@@ -26,7 +26,7 @@ catch mispellings or other possible errors.}
 A vector of probabilities, one for each element of \code{x}.
 }
 \description{
-For discrete distributions, the probabilty mass function. \code{pmf()}
+For discrete distributions, the probability mass function. \code{pmf()}
 is an alias.
 }
 \examples{

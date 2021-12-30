@@ -1,6 +1,6 @@
 #' Create a Normal distribution
 #'
-#' The Normal distribution is ubiquituous in statistics, partially because
+#' The Normal distribution is ubiquitous in statistics, partially because
 #' of the central limit theorem, which states that sums of i.i.d. random
 #' variables eventually become Normal. Linear transformations of Normal
 #' random variables result in new random variables that are also Normal. If
@@ -268,7 +268,7 @@ cdf.Normal <- function(d, x, ...) {
 #' @inherit Normal examples
 #' @inheritParams random.Normal
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'

@@ -45,7 +45,7 @@ success probability \code{p} = \eqn{p}.
 
 \strong{Cumulative distribution function (c.d.f)}:
 
-Too nasty, ommited.
+Omitted for now.
 
 \strong{Moment generating function (m.g.f)}:
 

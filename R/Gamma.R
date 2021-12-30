@@ -169,7 +169,7 @@ cdf.Gamma <- function(d, x, ...) {
 #' @inherit Gamma examples
 #' @inheritParams random.Gamma
 #'
-#' @param probs A vector of probabilites.
+#' @param probs A vector of probabilities.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
