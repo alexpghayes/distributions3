@@ -22,7 +22,7 @@ Create an F distribution
 }
 \details{
 We recommend reading this documentation on
-\url{https://alexpghayes.github.io/distributions}, where the math
+\url{https://alexpghayes.github.io/distributions3}, where the math
 will render with additional detail.
 
 TODO
