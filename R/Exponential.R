@@ -33,13 +33,13 @@
 #'   **Probability density function (p.d.f)**:
 #'
 #'   \deqn{
-#'     f(x) = \lambdae^{-\lambdax}
+#'     f(x) = \lambda e^{-\lambda x}
 #'   }
 #'
 #'   **Cumulative distribution function (c.d.f)**:
 #'
 #'   \deqn{
-#'     F(x) = 1 - e^{-\lambdax}
+#'     F(x) = 1 - e^{-\lambda x}
 #'   }
 #'
 #'   **Moment generating function (m.g.f)**:

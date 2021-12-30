@@ -37,13 +37,13 @@ rate parameter \code{rate} = \eqn{\lambda}.
 \strong{Probability density function (p.d.f)}:
 
 \deqn{
-    f(x) = \lambdae^{-\lambdax}
+    f(x) = \lambda e^{-\lambda x}
   }
 
 \strong{Cumulative distribution function (c.d.f)}:
 
 \deqn{
-    F(x) = 1 - e^{-\lambdax}
+    F(x) = 1 - e^{-\lambda x}
   }
 
 \strong{Moment generating function (m.g.f)}:
