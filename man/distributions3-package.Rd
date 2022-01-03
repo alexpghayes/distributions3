@@ -6,18 +6,13 @@
 \alias{distributions3-package}
 \title{distributions3: Probability Distributions as S3 Objects}
 \description{
-Tools to create and manipulate probability
-    distributions using S3.  Generics random(), pdf(), cdf() and
-    quantile() provide replacements for base R's r/d/p/q style functions.
-    Functions and arguments have been named carefully to minimize
-    confusion for students in intro stats courses. The documentation for
-    each distribution contains detailed mathematical notes.
+Tools to create and manipulate probability distributions using S3. Generics random(), pdf(), cdf() and quantile() provide replacements for base R's r/d/p/q style functions. Functions and arguments have been named carefully to minimize confusion for students in intro stats courses. The documentation for each distribution contains detailed mathematical notes.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/alexpghayes/distributions3}
-  \item \url{https://alexpghayes.github.io/distributions3}
+  \item \url{https://alexpghayes.github.io/distributions3/}
   \item Report bugs at \url{https://github.com/alexpghayes/distributions3/issues}
 }
 
