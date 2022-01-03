@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">distributions3</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.2.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -89,7 +85,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/alexpghayes/distributions3/">
+  <a href="https://github.com/alexpghayes/distributions3/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -110,7 +106,7 @@
       <h1 data-toc-skip>One sample Z-tests</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/master/vignettes/one-sample-z-test.Rmd"><code>vignettes/one-sample-z-test.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/one-sample-z-test.Rmd" class="external-link"><code>vignettes/one-sample-z-test.Rmd</code></a></small>
       <div class="hidden name"><code>one-sample-z-test.Rmd</code></div>
 
     </div>
@@ -118,18 +114,18 @@
     
     
 <p>In this vignette, we work through an example Z-test, and point out a number of points where you might get stuck along the way.</p>
-<div id="problem-setup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#problem-setup" class="anchor"></a>Problem setup</h2>
+<div class="section level2">
+<h2 id="problem-setup">Problem setup<a class="anchor" aria-label="anchor" href="#problem-setup"></a>
+</h2>
 <p>Let’s suppose that a student is interesting in estimating how many memes their professors know and love. So they go to class, and every time a professor uses a new meme, they write it down. After a year of classes, the student has recorded the following meme counts, where each count corresponds to a single class they took:</p>
 <p><span class="math display">\[
   3, 7, 11, 0, 7, 0, 4, 5, 6, 2
 \]</span></p>
 <p>The student talks to some other students who’ve done similar studies and determines that <span class="math inline">\(\sigma = 2\)</span> is a reasonable value for the standard deviation of this distribution.</p>
 </div>
-<div id="assumption-checking" class="section level2">
-<h2 class="hasAnchor">
-<a href="#assumption-checking" class="anchor"></a>Assumption checking</h2>
+<div class="section level2">
+<h2 id="assumption-checking">Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"></a>
+</h2>
 <p>Before we can do a Z-test, we need to make check if we can reasonably treat the mean of this sample as normally distributed. This happens is the case of either of following hold:</p>
 <ol style="list-style-type: decimal">
 <li>The data comes from a normal distribution.</li>
@@ -138,17 +134,17 @@
 <p>Since we have a small sample, we should check if the data comes from a normal distribution using a normal quantile-quantile plot.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">2</span><span class="op">)</span>
 
 <span class="co"># make the qqplot</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqline</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <p><img src="one-sample-z-test_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>Since the data lies close the line <span class="math inline">\(y = x\)</span>, and has no notable systematic deviations from line, it’s safe to treat the sample as coming from a normal distribution. We can proceed with our hypothesis test.</p>
 </div>
-<div id="null-hypothesis-and-test-statistic" class="section level2">
-<h2 class="hasAnchor">
-<a href="#null-hypothesis-and-test-statistic" class="anchor"></a>Null hypothesis and test statistic</h2>
+<div class="section level2">
+<h2 id="null-hypothesis-and-test-statistic">Null hypothesis and test statistic<a class="anchor" aria-label="anchor" href="#null-hypothesis-and-test-statistic"></a>
+</h2>
 <p>Let’s test the null hypothesis that, on average, professors know 3 memes. That is</p>
 <p><span class="math display">\[
   H_0: \mu = 3 \qquad H_A: \mu \neq 3
@@ -158,15 +154,15 @@
   Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} \sim \mathrm{Normal}(0, 1)
 \]</span></p>
 </div>
-<div id="calculating-p-values" class="section level2">
-<h2 class="hasAnchor">
-<a href="#calculating-p-values" class="anchor"></a>Calculating p-values</h2>
+<div class="section level2">
+<h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
+</h2>
 <p>In R this looks like:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 
 <span class="co"># calculate the z-statistic</span>
-<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+<span class="va">z_stat</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
 <span class="va">z_stat</span>
 <span class="co">#&gt; [1] 2.371708</span></code></pre></div>
 <p>To calculate a two-sided p-value, we need to find</p>
@@ -180,14 +176,14 @@
 \]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3">distributions3</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span>
 
 <span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Normal.html">Normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># make a standard normal r.v.</span>
 <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">2.37</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">2.37</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.01778809</span></code></pre></div>
 <p>Note that we saved <code>z_stat</code> above so we could have also done</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.01770607</span></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
 <p>So our p-value is about 0.0177. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code>cdf(Z, 2.37)</code> and looking up <code>2.37</code> on a Z-table.</p>
@@ -230,9 +226,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">2.37</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.991106</span></code></pre></div>
 </div>
-<div id="rejection-regions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rejection-regions" class="anchor"></a>Rejection regions</h2>
+<div class="section level2">
+<h2 id="rejection-regions">Rejection regions<a class="anchor" aria-label="anchor" href="#rejection-regions"></a>
+</h2>
 <p><strong>Preface</strong>: I am strongly opposed to make a dichotomous “reject/fail to reject” decision for hypothesis tests. If you do a hypothesis test, you should report the p-value, period. Picking an arbitrary <span class="math inline">\(\alpha\)</span> level rejection threshold and treating it as a gold standard is ridiculous, as evidenced by 60 years of statistical literature laden with warnings about hypothesis testing. That said, sometimes it can be useful to think about when you reject a hypothesis test.</p>
 <p>We can think about three different rejection regions for a Z-test:</p>
 <ol style="list-style-type: decimal">
@@ -281,13 +277,13 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 \]</span></p>
 <p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains all the values of <span class="math inline">\(\mu_0\)</span> that we cannot reject at the <span class="math inline">\(\alpha\)</span> level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either <span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
 </div>
-<div id="power-and-sample-size-calculations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#power-and-sample-size-calculations" class="anchor"></a>Power and sample size calculations</h2>
-<div id="formulas-for-power" class="section level3">
-<h3 class="hasAnchor">
-<a href="#formulas-for-power" class="anchor"></a>Formulas for power</h3>
-<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test has high power. Mathematically, this means that <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different ways: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as formualted above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
+<div class="section level2">
+<h2 id="power-and-sample-size-calculations">Power and sample size calculations<a class="anchor" aria-label="anchor" href="#power-and-sample-size-calculations"></a>
+</h2>
+<div class="section level3">
+<h3 id="formulas-for-power">Formulas for power<a class="anchor" aria-label="anchor" href="#formulas-for-power"></a>
+</h3>
+<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test has high power. Mathematically, this means that <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different ways: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as formulated above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
 <p>Let’s consider the case that <span class="math inline">\(H_0\)</span> is false, and in particular the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our test is <span class="math inline">\(P(\text{reject } H_0 | \mu = \mu_A)\)</span>. <a href="#rejection-regions">Recall</a> that we reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the power of our test when <span class="math inline">\(\mu = \mu_A\)</span> is</p>
 <p><span class="math display">\[
   P(\text{reject } H_0 \left | \mu = \mu_A \right .) =
@@ -317,16 +313,16 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 \]</span></p>
 <p>Let’s calculate this if <span class="math inline">\(\mu_A = 5\)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">power_lower</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.025</span><span class="op">)</span>
-<span class="va">power_upper</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">power_lower</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.025</span><span class="op">)</span>
+<span class="va">power_upper</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">power_lower</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">power_upper</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.8853791</span></code></pre></div>
 <p>This means that the probability that we reject the null hypothesis (<span class="math inline">\(H_0: \mu = 3\)</span>) if the true mean is <span class="math inline">\(5\)</span> is about 0.89.</p>
 </div>
-<div id="formulas-for-sample-size-calculations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#formulas-for-sample-size-calculations" class="anchor"></a>Formulas for sample size calculations</h3>
+<div class="section level3">
+<h3 id="formulas-for-sample-size-calculations">Formulas for sample size calculations<a class="anchor" aria-label="anchor" href="#formulas-for-sample-size-calculations"></a>
+</h3>
 <p>Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a one sample Z-test with <span class="math inline">\(H_0 : \mu = \mu_0\)</span>, you need</p>
 <p><span class="math display">\[
   n \approx \left(
@@ -364,9 +360,9 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
   \right)^2 = 41.99
 \]</span></p>
 <p>So to make sure that they reject the null hypothesis with a probability of 0.9 if the true value is 3, they would have to ask 53 professors.</p>
-<p>Below is this same calculation done in <code>R</code>. Remember, <span class="math inline">\(\beta = 1-\text{Power}\)</span>. Note the small descrepency. This is due to rounding error.</p>
+<p>Below is this same calculation done in <code>R</code>. Remember, <span class="math inline">\(\beta = 1-\text{Power}\)</span>. Note the small discrepancy. This is due to rounding error.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="fu"><a href="../reference/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.05</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/quantile.html">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
+<code class="sourceCode R"><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.05</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="co">#&gt; [1] 42.02969</span></code></pre></div>
 </div>
 </div>
@@ -383,11 +379,13 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 
 
       <footer><div class="copyright">
-  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
+  <p></p>
+<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -395,6 +393,8 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 
   
 
+
+  
 
   </body>
 </html>

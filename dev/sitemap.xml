@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/intro-to-hypothesis-testing.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-sign-tests.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-confidence-interval.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-test.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-confidence-interval.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test-for-proportion.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/paired-tests.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/articles/two-sample-z-test.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/authors.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/index.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/news/index.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/Bernoulli.html</loc>
@@ -148,9 +196,6 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.html</loc>
-  </url>
-  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/cdf.RevWeibull.html</loc>
   </url>
   <url>
@@ -164,6 +209,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/distributions3-package.html</loc>
@@ -197,6 +245,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/geom_auc.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/index.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/is_distribution.html</loc>
@@ -274,9 +325,6 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.html</loc>
-  </url>
-  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/pdf.RevWeibull.html</loc>
   </url>
   <url>
@@ -287,6 +335,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/plot.distribution.html</loc>
@@ -359,9 +410,6 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Poisson.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/quantile.RevWeibull.html</loc>
@@ -445,9 +493,6 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/random.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.html</loc>
-  </url>
-  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/random.RevWeibull.html</loc>
   </url>
   <url>
@@ -458,6 +503,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/random.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/random.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Bernoulli.html</loc>
@@ -535,9 +583,6 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/support.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.html</loc>
-  </url>
-  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/support.StudentsT.html</loc>
   </url>
   <url>
@@ -550,33 +595,9 @@
     <loc>https://alexpghayes.github.io/distributions3/reference/support.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/reference/support.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/reference/variance.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/intro-to-hypothesis-testing.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-sign-tests.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-confidence-interval.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-test.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-confidence-interval.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test-for-proportion.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/paired-tests.html</loc>
-  </url>
-  <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/two-sample-z-test.html</loc>
   </url>
 </urlset>
