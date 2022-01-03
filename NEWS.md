@@ -1,3 +1,5 @@
+# distributions3 (development version)
+
 # distributions3 0.1.2
 
 * Added a plotting generic for univariate distributions (@paulnorthrop, PR #56)
