@@ -1,8 +1,3 @@
-# distributions3 0.1.2.9000 (development version)
-To be released as distributions 0.1.3
-
-* No changes yet
-
 # distributions3 0.1.2
 
 * Added a plotting generic for univariate distributions (@paulnorthrop, PR #56)
