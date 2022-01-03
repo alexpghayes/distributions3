@@ -39,7 +39,7 @@ Description: Tools to create and manipulate probability
     each distribution contains detailed mathematical notes.
 License: MIT + file LICENSE
 URL: https://github.com/alexpghayes/distributions3,
-    https://alexpghayes.github.io/distributions3
+    https://alexpghayes.github.io/distributions3/
 BugReports: https://github.com/alexpghayes/distributions3/issues
 Imports: 
     ellipsis,
