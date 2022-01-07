@@ -87,7 +87,16 @@ test_that("vectorization of a HyperGeometric distribution work correctly", {
   expect_equal(cdf(d, 0.5), c(cdf(d1, 0.5), cdf(d2, 0.5)))
 
   expect_equal(quantile(d, 0.5), c(quantile(d1, 0.5), quantile(d2, 0.5)))
-  expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
+  expect_equal(
+    quantile(d, c(0.5, 0.5)),
+    matrix(
+      c(quantile(d1, c(0.5, 0.5)), quantile(d2, c(0.5, 0.5))),
+      nrow = 2,
+      ncol = 2,
+      byrow = TRUE,
+      dimnames = list(NULL, c("q_0.5", "q_0.5_1"))
+    )
+  )
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
     matrix(

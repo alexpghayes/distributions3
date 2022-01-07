@@ -12,6 +12,8 @@
 #'   catch mispellings or other possible errors.
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
+#' @return Random samples drawn from the distriubtion `x`.
+#'
 #' @examples
 #'
 #' X <- Normal()
@@ -36,7 +38,7 @@ random <- function(x, n = 1L, drop = TRUE, ...) {
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return Probabilities corresponding to the vector `x`.
 #'
 #' @examples
 #'
@@ -77,7 +79,7 @@ pmf <- function(d, x, ...) {
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return Probabilities corresponding to the vector `x`.
 #'
 #' @examples
 #'

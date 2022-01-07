@@ -82,7 +82,11 @@ kurtosis.Beta <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector containing values in `[0, 1]` of length `n`.
+#' @return Values in `[0, 1]`. In case of a single distribution object, a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns.
 #' @export
 #'
 random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
@@ -102,7 +106,11 @@ random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 pdf.Beta <- function(d, x, drop = TRUE, ...) {
@@ -130,7 +138,11 @@ log_pdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 cdf.Beta <- function(d, x, drop = TRUE, ...) {
@@ -151,7 +163,11 @@ cdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 quantile.Beta <- function(x, probs, drop = TRUE, ...) {

@@ -18,7 +18,11 @@ Unevaluated arguments will generate a warning to catch mispellings or other
 possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{probs}.
+In case of a single distribution object, a numeric
+vector of quantiles of length \code{probs} (if \code{drop = TRUE}, default)
+or a \code{data.frame} with \code{n} columns. In case of a vectorized distribution
+object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns, containing all possible combinations.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.

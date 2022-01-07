@@ -25,7 +25,7 @@ determine given the distribution \code{d}.}
 catch mispellings or other possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of \code{x}.
+Probabilities corresponding to the vector \code{x}.
 }
 \description{
 For discrete distributions, the probability mass function. \code{pmf()}

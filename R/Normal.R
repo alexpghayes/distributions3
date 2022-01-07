@@ -202,7 +202,11 @@ kurtosis.Normal <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns.
 #' @export
 #'
 #'
@@ -229,7 +233,11 @@ random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family Normal distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 pdf.Normal <- function(d, x, drop = TRUE, ...) {
@@ -259,7 +267,11 @@ log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Normal distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 cdf.Normal <- function(d, x, drop = TRUE, ...) {
@@ -288,7 +300,11 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 #' @family Normal distribution

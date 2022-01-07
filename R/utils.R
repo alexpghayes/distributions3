@@ -60,13 +60,16 @@ apply_dpqr <- function(d,
     ## set up a function that suitably expands 'at' (if necessary)
     ## and then evaluates it at the predicted parameters ('data')
   } else {
-    FUN4 <- function(at, d, ...) {
-      n <- NROW(d)
+    FUN2 <- function(at, d, ...) {
+      n <- length(d)
       if (!is.data.frame(at)) {
-        if (length(at) == 1L) at <- rep.int(as.vector(at), n) ## as vector (case 1)
-        if (length(at) != n) at <- rbind(at) ## as matrix (case 2)
+        if (length(at) == 1L) { # as vector (case 1)
+          at <- rep.int(as.vector(at), n)
+        } else { # as matrix (case 2)
+          at <- rbind(at)
+        }
       }
-      if (is.matrix(at) && NROW(at) == 1L) { ## case 2
+      if (is.matrix(at) && NROW(at) == 1L) { # case 2
         at <- matrix(rep(at, each = n), nrow = n)
         rv <- FUN(as.vector(at), d = d[rep(1L:n, ncol(at))], ...)
         rv <- matrix(rv, nrow = n)
@@ -87,14 +90,14 @@ apply_dpqr <- function(d,
             )
           }
         }
-      } else { ## case 1
+      } else { # case 1
         rv <- FUN(at, d = d, ...)
         names(rv) <- rownames(d)
       }
       return(rv)
     }
 
-    rval <- FUN4(at, d = d, ...)
+    rval <- FUN2(at, d = d, ...)
   }
 
   # -------------------------------------------------------------------
@@ -117,6 +120,14 @@ apply_dpqr <- function(d,
         )
       }
     }
+    if (ncol(rval) == 1L & is.null(colnames(rval))) {
+      colnames(rval) <-
+        c("random", "density", "logLik", "probability", "quantile")[match(
+          type_prefix,
+          c("r", "d", "l", "p", "q")
+        )]
+    }
+
     if (!inherits(rval, "data.frame")) rval <- as.data.frame(rval)
   }
 

@@ -17,7 +17,11 @@
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector of zeros and ones of length \code{n}.
+Values of zeros and ones. In case of a single distribution object, a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns. In case of a vectorized distribution
+object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns.
 }
 \description{
 Draw a random sample from a Bernoulli distribution

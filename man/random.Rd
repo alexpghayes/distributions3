@@ -18,6 +18,9 @@ integer. Defaults to \code{1L}.}
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
+\value{
+Random samples drawn from the distriubtion \code{x}.
+}
 \description{
 Draw a random sample from a probability distribution
 }

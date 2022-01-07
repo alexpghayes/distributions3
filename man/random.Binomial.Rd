@@ -17,8 +17,12 @@
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector containing values between \code{0} and \code{x$size}
-of length \code{n}.
+Integers containing values between \code{0} and \code{x$size}.
+In case of a single distribution object, a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns. In case of a vectorized distribution
+object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns.
 }
 \description{
 Draw a random sample from a Binomial distribution

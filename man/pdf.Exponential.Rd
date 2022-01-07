@@ -22,7 +22,11 @@ Unevaluated arguments will generate a warning to catch mispellings or other
 possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of \code{x}.
+In case of a single distribution object, a numeric
+vector of probabilities of length \code{x} (if \code{drop = TRUE}, default)
+or a \code{data.frame} with \code{n} columns. In case of a vectorized distribution
+object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
+with \code{n} columns, containing all possible combinations.
 }
 \description{
 Evaluate the probability density function of an Exponential distribution

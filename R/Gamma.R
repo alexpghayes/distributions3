@@ -114,7 +114,11 @@ kurtosis.Gamma <- function(x, ...) 6 / x$shape
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns.
 #' @export
 #'
 random.Gamma <- function(x, n = 1L, drop = TRUE, ...) {
@@ -134,7 +138,11 @@ random.Gamma <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 pdf.Gamma <- function(d, x, drop = TRUE, ...) {
@@ -162,7 +170,11 @@ log_pdf.Gamma <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 cdf.Gamma <- function(d, x, drop = TRUE, ...) {
@@ -183,7 +195,11 @@ cdf.Gamma <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, a numeric
+#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
+#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
+#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
+#'   with `n` columns, containing all possible combinations.
 #' @export
 #'
 quantile.Gamma <- function(x, probs, drop = TRUE, ...) {
