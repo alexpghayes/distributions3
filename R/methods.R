@@ -206,10 +206,10 @@ suff_stat <- function(d, x, ...) {
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @export
-support <- function(d, drop = TRUE){
-  if(!is_distribution(d))
+support <- function(d, drop = TRUE) {
+  if (!is_distribution(d)) {
     stop("d must be a supported distribution object")
+  }
 
   UseMethod("support")
 }
-

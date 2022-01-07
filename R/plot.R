@@ -81,7 +81,7 @@
 #' plot(X)
 #' plot(X, cdf = TRUE)
 #'
-#' G <- Gamma(c(1,3), 1:2)
+#' G <- Gamma(c(1, 3), 1:2)
 #' plot(G)
 #' plot(G, all = TRUE)
 #' plot(G, cdf = TRUE)
@@ -98,12 +98,16 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   # Extract the name of the distribution
   distn <- class(x)[1]
   # Supported distributions
-  discrete <- c("Bernoulli", "Binomial", "Categorical", "Geometric",
-                "HyperGeometric", "Multinomial", "NegativeBinomial", "Poisson")
-  continuous <-  c("Beta", "Cauchy", "ChiSquare", "Erlang", "Exponential",
-                   "Frechet", "FisherF", "GEV", "Gamma", "GP", "Gumbel",
-                   "Laplace", "LogNormal", "Logistic", "Normal", "StudentsT",
-                   "Tukey", "Uniform", "Weibull")
+  discrete <- c(
+    "Bernoulli", "Binomial", "Categorical", "Geometric",
+    "HyperGeometric", "Multinomial", "NegativeBinomial", "Poisson"
+  )
+  continuous <- c(
+    "Beta", "Cauchy", "ChiSquare", "Erlang", "Exponential",
+    "Frechet", "FisherF", "GEV", "Gamma", "GP", "Gumbel",
+    "Laplace", "LogNormal", "Logistic", "Normal", "StudentsT",
+    "Tukey", "Uniform", "Weibull"
+  )
   # Check that the distribution is recognised
   if (!(distn %in% c(discrete, continuous))) {
     stop("This distribution is not supported")
@@ -157,13 +161,14 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   user_args <- list(...)
   # If xlim is supplied then use it.
   # Otherwise, use default values (but no -Inf or Inf)
-  if (is.null(user_args[['xlim']])) {
+  if (is.null(user_args[["xlim"]])) {
     my_xlim <- quantile(x, matrix(c(0, 1), nrow = 1), drop = FALSE)
     my_xlim <- c(min(my_xlim[, 1]), max(my_xlim[, 2]))
     my_xlim <- ifelse(
-      is.finite(my_xlim), 
+      is.finite(my_xlim),
       my_xlim,
-      {tmp <- quantile(x, matrix(p / 100, nrow = 1), drop = FALSE)
+      {
+        tmp <- quantile(x, matrix(p / 100, nrow = 1), drop = FALSE)
         c(min(tmp[, 1]), max(tmp[, 2]))
       }
     )
@@ -205,36 +210,42 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
                                 pch = 16, col = 1:n_distns) {
     col <- rep_len(col, n_distns)
     yvals <- t(cdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
-    rval <- stats::approxfun(xvals, yvals[, 1], method = "constant",
-                             yleft = 0, yright = 1, f = 0, ties = "ordered")
+    rval <- stats::approxfun(xvals, yvals[, 1],
+      method = "constant",
+      yleft = 0, yright = 1, f = 0, ties = "ordered"
+    )
     class(rval) <- c("ecdf", "stepfun", class(rval))
-    plot(rval, ylim = ylim, xlab = xlab, ylab = ylab, axes = FALSE, lwd = lwd,
-         main = main, col = col[1], pch = pch, ...)
+    plot(rval,
+      ylim = ylim, xlab = xlab, ylab = ylab, axes = FALSE, lwd = lwd,
+      main = main, col = col[1], pch = pch, ...
+    )
     if (n_distns > 1) {
       for (i in 2:n_distns) {
-        rval <- stats::approxfun(xvals, yvals[, i], method = "constant",
-                                 yleft = 0, yright = 1, f = 0,
-                                 ties = "ordered")
+        rval <- stats::approxfun(xvals, yvals[, i],
+          method = "constant",
+          yleft = 0, yright = 1, f = 0,
+          ties = "ordered"
+        )
         class(rval) <- c("ecdf", "stepfun", class(rval))
         graphics::lines(rval, lwd = lwd, col = col[i], pch = pch, ...)
       }
       # Add a legend
-      if (is.null(legend_args[['legend']])) {
+      if (is.null(legend_args[["legend"]])) {
         legend_args$legend <- create_legend_text(xx, n_distns)
       }
-      if (is.null(legend_args[['title']])) {
+      if (is.null(legend_args[["title"]])) {
         legend_args$title <- paste0(par_names, collapse = ", ")
       }
-      if (is.null(legend_args[['col']])) {
+      if (is.null(legend_args[["col"]])) {
         legend_args$col <- col
       }
-      if (is.null(legend_args[['lwd']])) {
+      if (is.null(legend_args[["lwd"]])) {
         legend_args$lwd <- lwd
       }
-      if (is.null(legend_args[['lty']])) {
+      if (is.null(legend_args[["lty"]])) {
         legend_args$lty <- 1
       }
-      if (is.null(legend_args[['pch']])) {
+      if (is.null(legend_args[["pch"]])) {
         legend_args$pch <- pch
       }
       do.call(graphics::legend, legend_args)
@@ -247,23 +258,25 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
                                 lwd = 2, main = my_main, pch = 16,
                                 col = 1:n_distns) {
     yvals <- t(pdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
-    graphics::matplot(xvals, yvals, type = "p", xlab = xlab, ylab = ylab,
-                      axes = FALSE, lwd = lwd, main = main, pch = pch,
-                      col = col, ...)
+    graphics::matplot(xvals, yvals,
+      type = "p", xlab = xlab, ylab = ylab,
+      axes = FALSE, lwd = lwd, main = main, pch = pch,
+      col = col, ...
+    )
     graphics::axis(1, at = xvals)
     graphics::axis(2)
     # If n_distns > 1 then add a legend
     if (n_distns > 1) {
-      if (is.null(legend_args[['legend']])) {
+      if (is.null(legend_args[["legend"]])) {
         legend_args$legend <- create_legend_text(xx, n_distns)
       }
-      if (is.null(legend_args[['title']])) {
+      if (is.null(legend_args[["title"]])) {
         legend_args$title <- paste0(par_names, collapse = ", ")
       }
-      if (is.null(legend_args[['col']])) {
+      if (is.null(legend_args[["col"]])) {
         legend_args$col <- col
       }
-      if (is.null(legend_args[['pch']])) {
+      if (is.null(legend_args[["pch"]])) {
         legend_args$pch <- pch
       }
       do.call(graphics::legend, legend_args)
@@ -278,9 +291,11 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
     } else {
       yvals <- t(pdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
     }
-    
-    graphics::matplot(xvals, yvals, type = "l", xlab = xlab, ylab = ylab,
-                      axes = FALSE, lwd = lwd, lty = lty, main = main, ...)
+
+    graphics::matplot(xvals, yvals,
+      type = "l", xlab = xlab, ylab = ylab,
+      axes = FALSE, lwd = lwd, lty = lty, main = main, ...
+    )
     graphics::axis(1)
     graphics::axis(2)
     graphics::box(bty = "l")
@@ -289,30 +304,30 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
     }
     # If n_distns > 1 then add a legend
     if (n_distns > 1) {
-      if (is.null(legend_args[['legend']])) {
+      if (is.null(legend_args[["legend"]])) {
         legend_args$legend <- create_legend_text(xx, n_distns)
       }
-      if (is.null(legend_args[['title']])) {
+      if (is.null(legend_args[["title"]])) {
         legend_args$title <- paste0(par_names, collapse = ", ")
       }
-      if (is.null(legend_args[['col']])) {
+      if (is.null(legend_args[["col"]])) {
         legend_args$col <- col
       }
-      if (is.null(legend_args[['lwd']])) {
+      if (is.null(legend_args[["lwd"]])) {
         legend_args$lwd <- lwd
       }
-      if (is.null(legend_args[['lty']])) {
+      if (is.null(legend_args[["lty"]])) {
         legend_args$lty <- lty
       }
       do.call(graphics::legend, legend_args)
     }
   }
   # Start the legend. If legend$x hasn't been supplied then set defaults.
-  if (is.null(legend_args[['x']])) {
+  if (is.null(legend_args[["x"]])) {
     if (cdf) {
-      legend_args[['x']] <- "bottomright"
+      legend_args[["x"]] <- "bottomright"
     } else {
-      legend_args[['x']] <- "topright"
+      legend_args[["x"]] <- "topright"
     }
   }
   if (x_is_discrete) {
@@ -351,19 +366,18 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
 #' @examples
 #'
 #' N1 <- Normal()
-#' plot_cdf(N1) 
-#' 
+#' plot_cdf(N1)
+#'
 #' N2 <- Normal(0, c(1, 2))
 #' plot_cdf(N2)
 #'
 #' B1 <- Binomial(10, 0.2)
-#' plot_cdf(B1) 
-#' 
+#' plot_cdf(B1)
+#'
 #' B2 <- Binomial(10, c(0.2, 0.5))
 #' plot_cdf(B2)
 plot_cdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = NULL){
-
+                     plot_theme = NULL) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
   }
@@ -372,20 +386,23 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
   }
 
   ## get limits
-  if(is.null(limits))
+  if (is.null(limits)) {
     limits[1] <- min(support(d, drop = FALSE)[, 1])
     limits[2] <- max(support(d, drop = FALSE)[, 2])
+  }
 
-  if(limits[1] == -Inf){
+  if (limits[1] == -Inf) {
     limits[1] <- min(quantile(d, p = p))
   }
 
-  if(limits[2] == Inf){
+  if (limits[2] == Inf) {
     limits[2] <- max(quantile(d, p = 1 - p))
   }
 
-  if(class(d)[1] %in% c('Bernoulli', 'Binomial', 'Geometric', 'HyperGeometric',
-                        'NegativeBinomial', 'Poisson')){
+  if (class(d)[1] %in% c(
+    "Bernoulli", "Binomial", "Geometric", "HyperGeometric",
+    "NegativeBinomial", "Poisson"
+  )) {
 
     ## span x and compute cdf
     x <- seq(limits[1], limits[2], by = 1)
@@ -405,23 +422,26 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 
     ## actual plot
     out_plot <- ggplot2::ggplot(
-        data = plot_df,
-        ggplot2::aes_string(x = "x", y = "y")
-      ) +
+      data = plot_df,
+      ggplot2::aes_string(x = "x", y = "y")
+    ) +
       ggplot2::geom_bar(
-        stat = 'identity',
+        stat = "identity",
         width = 1,
         ggplot2::aes(
           color = I("black"),
-          fill = I("grey50"))
-        ) +
+          fill = I("grey50")
+        )
+      ) +
       ggplot2::facet_grid(group ~ .) +
       plot_theme()
   }
 
-  if(class(d)[1] %in% c('Beta', 'Cauchy', 'ChiSquare', 'Exponential',
-                        'FisherF', 'Gamma', 'Logistic', 'LogNormal',
-                        'Normal', 'StudentsT', 'Tukey', 'Uniform', 'Weibull')){
+  if (class(d)[1] %in% c(
+    "Beta", "Cauchy", "ChiSquare", "Exponential",
+    "FisherF", "Gamma", "Logistic", "LogNormal",
+    "Normal", "StudentsT", "Tukey", "Uniform", "Weibull"
+  )) {
 
     ## span x and compute cdf
     x <- seq(limits[1], limits[2], length.out = 5000)
@@ -441,16 +461,15 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 
     ## actual plot
     out_plot <- ggplot2::ggplot(
-        data = plot_df,
-        ggplot2::aes_string(x = "x", y = "y")
-      ) +
+      data = plot_df,
+      ggplot2::aes_string(x = "x", y = "y")
+    ) +
       ggplot2::geom_line() +
       ggplot2::facet_grid(group ~ .) +
       plot_theme()
   }
 
   return(out_plot)
-
 }
 
 
@@ -470,19 +489,18 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
 #' @examples
 #'
 #' N1 <- Normal()
-#' plot_pdf(N1) 
-#' 
+#' plot_pdf(N1)
+#'
 #' N2 <- Normal(0, c(1, 2))
 #' plot_pdf(N2)
 #'
 #' B1 <- Binomial(10, 0.2)
-#' plot_pdf(B1) 
-#' 
+#' plot_pdf(B1)
+#'
 #' B2 <- Binomial(10, c(0.2, 0.5))
 #' plot_pdf(B2)
 plot_pdf <- function(d, limits = NULL, p = 0.001,
-                     plot_theme = NULL){
-
+                     plot_theme = NULL) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop("the ggplot2 package is needed. Please install it.", call. = FALSE)
   }
@@ -491,20 +509,23 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
   }
 
   ## get limits
-  if(is.null(limits))
+  if (is.null(limits)) {
     limits[1] <- min(support(d, drop = FALSE)[, 1])
-    limits[2] <- max(support(d, drop = FALSE)[, 2])
+  }
+  limits[2] <- max(support(d, drop = FALSE)[, 2])
 
-  if(limits[1] == -Inf){
+  if (limits[1] == -Inf) {
     limits[1] <- min(quantile(d, p = p))
   }
 
-  if(limits[2] == Inf){
+  if (limits[2] == Inf) {
     limits[2] <- max(quantile(d, p = 1 - p))
   }
 
-  if(class(d)[1] %in% c('Bernoulli', 'Binomial', 'Geometric', 'HyperGeometric',
-                        'NegativeBinomial', 'Poisson')){
+  if (class(d)[1] %in% c(
+    "Bernoulli", "Binomial", "Geometric", "HyperGeometric",
+    "NegativeBinomial", "Poisson"
+  )) {
 
     ## span x and compute pdf
     x <- seq(limits[1], limits[2], by = 1)
@@ -524,23 +545,26 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
     ## actual plot
     out_plot <- ggplot2::ggplot(
-        data = plot_df,
-        ggplot2::aes_string(x = "x", y = "y")
-      ) +
+      data = plot_df,
+      ggplot2::aes_string(x = "x", y = "y")
+    ) +
       ggplot2::geom_bar(
-        stat = 'identity', 
+        stat = "identity",
         width = 1,
         ggplot2::aes(
           color = I("black"),
-          fill = I("grey50"))
-        ) +
+          fill = I("grey50")
+        )
+      ) +
       ggplot2::facet_grid(group ~ .) +
       plot_theme()
   }
 
-  if(class(d)[1] %in% c('Beta', 'Cauchy', 'ChiSquare', 'Exponential',
-                        'FisherF', 'Gamma', 'Logistic', 'LogNormal',
-                        'Normal', 'StudentsT', 'Tukey', 'Uniform', 'Weibull')){
+  if (class(d)[1] %in% c(
+    "Beta", "Cauchy", "ChiSquare", "Exponential",
+    "FisherF", "Gamma", "Logistic", "LogNormal",
+    "Normal", "StudentsT", "Tukey", "Uniform", "Weibull"
+  )) {
 
     ## span x and compute pdf
     x <- seq(limits[1], limits[2], length.out = 5000)
@@ -560,9 +584,9 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
     ## actual plot
     out_plot <- ggplot2::ggplot(
-        data = plot_df,
-        ggplot2::aes_string(x = "x", y = "y")
-      ) +
+      data = plot_df,
+      ggplot2::aes_string(x = "x", y = "y")
+    ) +
       ggplot2::geom_line() +
       ggplot2::facet_grid(group ~ .) +
       plot_theme()
@@ -570,8 +594,9 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
 
   ## save parameters for "stat_auc"
   out_plot$mapping$d <- class(d)[1]
-  for(i in seq_along(colnames(d)))
+  for (i in seq_along(colnames(d))) {
     out_plot$mapping[[paste0("param", i)]] <- rep(as.matrix(d)[, i], each = length(x))
+  }
 
   return(out_plot)
 }
@@ -591,7 +616,6 @@ stat_auc <- function(mapping = NULL,
                      annotate = FALSE,
                      digits = 3,
                      ...) {
-
   ggplot2::layer(
     geom = geom,
     stat = StatAuc,
@@ -617,7 +641,6 @@ stat_auc <- function(mapping = NULL,
 #' @usage NULL
 #' @export
 StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
-
   compute_group = function(data,
                            scales,
                            from = -Inf,
@@ -627,13 +650,14 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
 
 
     ## set data outside interval to zero
-    data[data$x < from | data$x > to, 'y'] <- 0
+    data[data$x < from | data$x > to, "y"] <- 0
 
     if (!isFALSE(annotate)) {
       ## compute auc for label based on original implementation
       n_params <- sum(grepl("param", names(data)))
       d <- do.call(eval(parse(text = paste0("function(...) ", data$d[1], "(...)"))),
-                   args = lapply(paste0("param", 1:n_params), function(x) data[[x]][1]))
+        args = lapply(paste0("param", 1:n_params), function(x) data[[x]][1])
+      )
 
       data$label <- paste0(
         "P(", from, "< X < ", to, ") = ",
@@ -645,7 +669,6 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
 
     return(data)
   },
-
   required_aes = c("x", "y")
 )
 
@@ -667,7 +690,7 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
 #' N1 <- Normal()
 #' plot_pdf(N1) + geom_auc(to = -0.645)
 #' plot_pdf(N1) + geom_auc(from = -0.645, to = 0.1, annotate = TRUE)
-#' 
+#'
 #' N2 <- Normal(0, c(1, 2))
 #' plot_pdf(N2) + geom_auc(to = 0)
 #' plot_pdf(N2) + geom_auc(from = -2, to = 2, annotate = TRUE)
@@ -683,7 +706,6 @@ geom_auc <- function(mapping = NULL,
                      annotate = FALSE,
                      digits = 3,
                      ...) {
-
   ggplot2::layer(
     data = data,
     mapping = mapping,
@@ -708,12 +730,11 @@ geom_auc <- function(mapping = NULL,
 #' @usage NULL
 #' @export
 GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
-
   required_aes = c("x", "y", "label"),
-
-  default_aes = ggplot2::aes(colour = NA, fill = "grey40", size = 0.5, linetype = 1,
-    alpha = NA),
-
+  default_aes = ggplot2::aes(
+    colour = NA, fill = "grey40", size = 0.5, linetype = 1,
+    alpha = NA
+  ),
   draw_panel = function(data,
                         panel_params,
                         coord,
@@ -723,11 +744,9 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
                         parse = FALSE,
                         check_overlab = FALSE,
                         annotate = FALSE) {
-
     outline.type <- match.arg(outline.type)
 
     if (!isFALSE(annotate)) {
-
       annotate <- if (isTRUE(annotate)) "black" else annotate[1]
 
       data_annotate <- data.frame(
@@ -747,27 +766,28 @@ GeomAuc <- ggplot2::ggproto("GeomAuc", ggplot2::GeomArea,
 
       grid::grobTree(
         ggplot2::GeomArea$draw_group(data,
-                                 panel_params,
-                                 coord,
-                                 na.rm = na.rm,
-                                 flipped_aes = flipped_aes,
-                                 outline.type = outline.type),
+          panel_params,
+          coord,
+          na.rm = na.rm,
+          flipped_aes = flipped_aes,
+          outline.type = outline.type
+        ),
         ggplot2::GeomText$draw_panel(data_annotate,
-                                     panel_params,
-                                     coord,
-                                     parse = parse,
-                                     na.rm = na.rm,
-                                     check_overlap = check_overlab)
+          panel_params,
+          coord,
+          parse = parse,
+          na.rm = na.rm,
+          check_overlap = check_overlab
+        )
       )
     } else {
-        ggplot2::GeomArea$draw_group(data,
-                                 panel_params,
-                                 coord,
-                                 na.rm = na.rm,
-                                 flipped_aes = flipped_aes,
-                                 outline.type = outline.type)
+      ggplot2::GeomArea$draw_group(data,
+        panel_params,
+        coord,
+        na.rm = na.rm,
+        flipped_aes = flipped_aes,
+        outline.type = outline.type
+      )
     }
-
   }
-
 )

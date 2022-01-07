@@ -104,7 +104,7 @@ X <- Poisson(2)
 plot(X)
 plot(X, cdf = TRUE)
 
-G <- Gamma(c(1,3), 1:2)
+G <- Gamma(c(1, 3), 1:2)
 plot(G)
 plot(G, all = TRUE)
 plot(G, cdf = TRUE)

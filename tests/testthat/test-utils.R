@@ -19,7 +19,7 @@ test_that("{methods}.dstribution work correctly", {
   expect_silent(n <- `names<-.distribution`(n, c("a", "b")))
   expect_named(n, c("a", "b"))
   expect_silent(names(n) <- NULL)
-  expect_equal(as.matrix.distribution(n), as.matrix(data.frame(mu = c(0, 10), sigma = c(1, 1)))) 
+  expect_equal(as.matrix.distribution(n), as.matrix(data.frame(mu = c(0, 10), sigma = c(1, 1))))
   df <- data.frame(n = 1:2)
   df$n <- n
   expect_equal(as.data.frame.distribution(n), df)
@@ -28,9 +28,8 @@ test_that("{methods}.dstribution work correctly", {
   expect_equal(
     capture_output(print(summary(n))),
     capture_output({
-    cat("Normal distribution: \n")
-    print(summary.data.frame(as.data.frame(as.matrix(n))))
+      cat("Normal distribution: \n")
+      print(summary.data.frame(as.data.frame(as.matrix(n))))
     })
   )
 })
-

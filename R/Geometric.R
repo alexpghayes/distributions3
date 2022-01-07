@@ -64,7 +64,6 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Geometric <- function(p = 0.5) {
   d <- data.frame(p = p)
   class(d) <- c("Geometric", "distribution")
@@ -121,8 +120,8 @@ random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dgeom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dgeom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Geometric distribution
@@ -151,8 +150,8 @@ log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pgeom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pgeom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Geometric distribution
@@ -172,8 +171,8 @@ cdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qgeom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qgeom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -230,7 +229,6 @@ suff_stat.Geometric <- function(d, x, ...) {
 #'
 #' @export
 support.Geometric <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

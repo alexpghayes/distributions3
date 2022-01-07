@@ -1,7 +1,7 @@
 # Compare: https://en.wikipedia.org/wiki/Erlang_distribution
 #
 # The Erlang distribution is a special case of the gamma distribution wherein
-# the shape (k) of the distribution is discretised. 
+# the shape (k) of the distribution is discretised.
 
 context("test-Erlang")
 e <- Erlang(k = 3, lambda = 0.5)
@@ -15,9 +15,10 @@ test_that("print.Erlang works", {
 })
 
 test_that("random.Erlang works correctly", {
-
-  set.seed(123); r1 <- random(e, 3)
-  set.seed(123); r2 <- rgamma(3, shape = 3, rate = 0.5)
+  set.seed(123)
+  r1 <- random(e, 3)
+  set.seed(123)
+  r2 <- rgamma(3, shape = 3, rate = 0.5)
   expect_equal(r1, r2)
 
   expect_length(random(e), 1)
@@ -27,7 +28,6 @@ test_that("random.Erlang works correctly", {
 })
 
 test_that("pdf.Erlang works correctly", {
-
   expect_equal(pdf(e, 0), dgamma(0, shape = 3, rate = 0.5))
   expect_equal(pdf(e, 1), dgamma(1, shape = 3, rate = 0.5))
 
@@ -37,7 +37,6 @@ test_that("pdf.Erlang works correctly", {
 })
 
 test_that("log_pdf.Erlang works correctly", {
-
   expect_equal(log_pdf(e, 0), log(dgamma(0, shape = 3, rate = 0.5)))
   expect_equal(log_pdf(e, 1), log(dgamma(1, shape = 3, rate = 0.5)))
 
@@ -47,7 +46,6 @@ test_that("log_pdf.Erlang works correctly", {
 })
 
 test_that("cdf.Erlang works correctly", {
-
   expect_equal(cdf(e, 0.3), pgamma(0.3, shape = 3, rate = 0.5))
   expect_equal(cdf(e, 1), pgamma(1, shape = 3, rate = 0.5))
 
@@ -58,7 +56,6 @@ test_that("cdf.Erlang works correctly", {
 })
 
 test_that("quantile.Erlang works correctly", {
-
   expect_equal(quantile(e, 0.3), qgamma(0.3, shape = 3, rate = 0.5))
   expect_equal(quantile(e, 1), qgamma(1, shape = 3, rate = 0.5))
 
@@ -76,8 +73,10 @@ test_that("vectorization of a Erlang distribution work correctly", {
   d1 <- d[1]
   d2 <- d[2]
 
-  set.seed(123); r1 <- random(d)
-  set.seed(123); r2 <- c(random(d1), random(d2))
+  set.seed(123)
+  r1 <- random(d)
+  set.seed(123)
+  r2 <- c(random(d1), random(d2))
   expect_equal(r1, r2)
 
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
@@ -108,4 +107,3 @@ test_that("vectorization of a Erlang distribution work correctly", {
     )
   )
 })
-

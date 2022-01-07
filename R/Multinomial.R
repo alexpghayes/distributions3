@@ -71,7 +71,6 @@
 #'
 #' # pdf(X, 2)
 #' # log_pdf(X, 2)
-#'
 Multinomial <- function(size, p) {
   # Ensure sum of probabilities is 1
   p <- p / sum(p)
@@ -82,7 +81,6 @@ Multinomial <- function(size, p) {
 
 #' @export
 print.Multinomial <- function(x, ...) {
-
   num_categories <- length(x$p)
 
   if (num_categories > 3) {
@@ -94,7 +92,6 @@ print.Multinomial <- function(x, ...) {
     p <- paste(round(x$p, 3), collapse = ", ")
   }
   cat(glue("Multinomial distribution (size = {x$size}, p = [{p}])"), "\n")
-
 }
 
 #' @export

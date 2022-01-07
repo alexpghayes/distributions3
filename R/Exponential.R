@@ -79,11 +79,11 @@ Exponential <- function(rate = 1) {
 #' @export
 mean.Exponential <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$rate ^ -1
+  x$rate^-1
 }
 
 #' @export
-variance.Exponential <- function(x, ...) x$rate ^ 2
+variance.Exponential <- function(x, ...) x$rate^2
 
 #' @export
 skewness.Exponential <- function(x, ...) rep.int(2, length(x))
@@ -117,8 +117,8 @@ random.Exponential <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dexp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dexp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -145,8 +145,8 @@ log_pdf.Exponential <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pexp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pexp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -166,8 +166,8 @@ cdf.Exponential <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qexp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qexp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -220,7 +220,7 @@ suff_stat.Exponential <- function(d, x, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Exponential <- function(d, drop = TRUE){
+support.Exponential <- function(d, drop = TRUE) {
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

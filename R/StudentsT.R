@@ -194,8 +194,8 @@ random.StudentsT <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dt}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dt}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family StudentsT distribution
@@ -224,8 +224,8 @@ log_pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pt}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pt}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family StudentsT distribution
@@ -256,8 +256,8 @@ cdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qt}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qt}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -281,7 +281,6 @@ quantile.StudentsT <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.StudentsT <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

@@ -16,6 +16,11 @@ is_distribution <- function(x) {
   inherits(x, "distribution")
 }
 
+
+# -------------------------------------------------------------------
+# HELPER FUNCTION FOR VECTORIZATION OF DISTRIBUTION OBJECTS
+# -------------------------------------------------------------------
+
 apply_dpqr <- function(d,
                        FUN,
                        at = NULL,
@@ -48,42 +53,41 @@ apply_dpqr <- function(d,
   # -------------------------------------------------------------------
   ## If 'at' is missing: prediction is just a transformation of the parameters
   if (attype == "none") {
-
     rval <- FUN(d, ...)
     if (is.null(dim(rval))) names(rval) <- rownames(d)
 
-  ## Otherwise 'at' is 'data':
-  ## set up a function that suitably expands 'at' (if necessary)
-  ## and then evaluates it at the predicted parameters ('data')
+    ## Otherwise 'at' is 'data':
+    ## set up a function that suitably expands 'at' (if necessary)
+    ## and then evaluates it at the predicted parameters ('data')
   } else {
     FUN4 <- function(at, d, ...) {
       n <- NROW(d)
       if (!is.data.frame(at)) {
-        if (length(at) == 1L) at <- rep.int(as.vector(at), n)  ## as vector (case 1)
-        if (length(at) != n) at <- rbind(at)  ## as matrix (case 2)
+        if (length(at) == 1L) at <- rep.int(as.vector(at), n) ## as vector (case 1)
+        if (length(at) != n) at <- rbind(at) ## as matrix (case 2)
       }
-      if (is.matrix(at) && NROW(at) == 1L) {  ## case 2
+      if (is.matrix(at) && NROW(at) == 1L) { ## case 2
         at <- matrix(rep(at, each = n), nrow = n)
         rv <- FUN(as.vector(at), d = d[rep(1L:n, ncol(at))], ...)
         rv <- matrix(rv, nrow = n)
 
         if (length(rv != 0L)) {
           rownames(rv) <- rownames(d)
-            if (all(at[1L, ] == 1L)) {
-              colnames(rv) <- paste(
-                type_prefix,
-                seq_along(at[1L, ]), 
-                sep = "_"
-              )
-            } else {
-              colnames(rv) <- paste(
-                type_prefix,
-                make_suffix(at[1L, ], digits = pmax(3L, getOption("digits") - 3L)),
-                sep = "_"
-              )
+          if (all(at[1L, ] == 1L)) {
+            colnames(rv) <- paste(
+              type_prefix,
+              seq_along(at[1L, ]),
+              sep = "_"
+            )
+          } else {
+            colnames(rv) <- paste(
+              type_prefix,
+              make_suffix(at[1L, ], digits = pmax(3L, getOption("digits") - 3L)),
+              sep = "_"
+            )
           }
         }
-      } else {  ## case 1
+      } else { ## case 1
         rv <- FUN(at, d = d, ...)
         names(rv) <- rownames(d)
       }
@@ -120,7 +124,9 @@ apply_dpqr <- function(d,
 }
 
 
-## Methods ---------------------------------------------------------------------
+# -------------------------------------------------------------------
+# METHODS FOR DISTRIBUTION OBJECTS
+# -------------------------------------------------------------------
 
 #' @export
 dim.distribution <- function(x) NULL
@@ -135,13 +141,13 @@ length.distribution <- function(x) length(unclass(x)[[1L]])
   x <- x[i, , drop = FALSE]
   class(x) <- cl
   return(x)
-} 
+}
 
 #' @export
 format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
   cl <- class(x)[1L]
   n <- names(x)
-  if(is.null(attr(x, "row.names"))) attr(x, "row.names") <- 1L:length(x)
+  if (is.null(attr(x, "row.names"))) attr(x, "row.names") <- 1L:length(x)
   class(x) <- "data.frame"
   f <- sprintf("%s distribution (%s)", cl, apply(rbind(apply(as.matrix(x), 2L, format, digits = digits, ...)), 1L, function(p) paste(names(x), "=", as.vector(p), collapse = ", ")))
   setNames(f, n)
@@ -156,7 +162,7 @@ print.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
 #' @export
 names.distribution <- function(x) {
   n <- attr(x, "row.names")
-  if(identical(n, seq_along(x))) NULL else n
+  if (identical(n, seq_along(x))) NULL else n
 }
 
 #' @export
@@ -231,18 +237,17 @@ summary.distribution <- function(object, ...) {
 make_suffix <- function(x, digits = 3) {
   rval <- sapply(x, format, digits = digits)
   nok <- duplicated(rval)
-  while(any(nok) && digits < 10) {
+  while (any(nok) && digits < 10) {
     digits <- digits + 1
     rval[nok] <- sapply(x[nok], format, digits = digits)
     nok <- duplicated(rval)
   }
   nok <- duplicated(rval) | duplicated(rval, fromLast = TRUE)
-  if(any(nok)) rval[nok] <- make.unique(rval[nok], sep = "_") 
+  if (any(nok)) rval[nok] <- make.unique(rval[nok], sep = "_")
   return(rval)
 }
 
 make_support <- function(min, max, drop = TRUE) {
   rval <- cbind(min = min, max = max)
-  if (drop && NROW(rval) == 1L) unname(rval[1L, ]) else rval 
+  if (drop && NROW(rval) == 1L) unname(rval[1L, ]) else rval
 }
-

@@ -44,5 +44,4 @@ quantile(X, 0.5)
 
 # same for quantiles. this also errors!
 # quantile(Y, 0.7)
-
 }

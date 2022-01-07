@@ -33,15 +33,14 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 Tukey <- function(nmeans, df, nranges) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(nmeans) == length(df) & length(nmeans) == length(nranges) |
-    sum(c(length(nmeans) == 1, length(df) == 1, length(nranges) == 1)) >= 2 |
-    length(nmeans) == length(df) & length(nranges) == 1 |
-    length(nmeans) == length(nranges) & length(df) == 1 |
-    length(df) == length(nranges) & length(nmeans) == 1
+      length(nmeans) == length(df) & length(nmeans) == length(nranges) |
+        sum(c(length(nmeans) == 1, length(df) == 1, length(nranges) == 1)) >= 2 |
+        length(nmeans) == length(df) & length(nranges) == 1 |
+        length(nmeans) == length(nranges) & length(df) == 1 |
+        length(df) == length(nranges) & length(nmeans) == 1
   )
 
   d <- data.frame(nmeans = nmeans, df = df, nranges = nranges)
@@ -57,8 +56,8 @@ Tukey <- function(nmeans, df, nranges) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{ptukey}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{ptukey}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Tukey distribution
@@ -78,8 +77,8 @@ cdf.Tukey <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qtukey}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qtukey}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -103,7 +102,6 @@ quantile.Tukey <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.Tukey <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

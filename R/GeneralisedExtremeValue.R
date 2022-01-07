@@ -105,11 +105,11 @@ GEV <- function(mu = 0, sigma = 1, xi = 0) {
 
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(mu) == length(sigma) & length(mu) == length(xi) |
-    sum(c(length(mu) == 1, length(sigma) == 1, length(xi) == 1)) >= 2 |
-    length(mu) == length(sigma) & length(xi) == 1 |
-    length(mu) == length(xi) & length(sigma) == 1 |
-    length(sigma) == length(xi) & length(mu) == 1
+      length(mu) == length(sigma) & length(mu) == length(xi) |
+        sum(c(length(mu) == 1, length(sigma) == 1, length(xi) == 1)) >= 2 |
+        length(mu) == length(sigma) & length(xi) == 1 |
+        length(mu) == length(xi) & length(sigma) == 1 |
+        length(sigma) == length(xi) & length(mu) == 1
   )
 
   d <- data.frame(mu = mu, sigma = sigma, xi = xi)
@@ -138,8 +138,8 @@ variance.GEV <- function(x, ...) {
   euler <- -digamma(1)
   ifelse(x$xi == 0,
     x$sigma^2 * pi^2 / 6,
-    ifelse(x$xi < 1/2,
-      x$sigma^2 * (g(x, 2) - g(x, 1)^2) / x$xi ^ 2,
+    ifelse(x$xi < 1 / 2,
+      x$sigma^2 * (g(x, 2) - g(x, 1)^2) / x$xi^2,
       Inf
     )
   )
@@ -149,14 +149,17 @@ variance.GEV <- function(x, ...) {
 skewness.GEV <- function(x, ...) {
   ifelse(x$xi == 1,
     # no useful zeta fn without adding a dependency
-    {zeta3 <- 1.202056903159594014596
-    12 * sqrt(6) * zeta3 / pi ^ 3},
-    ifelse(x$xi < 1/3,
-      {s <- sign(x$xi)
-      g1 <- g(x, 1)
-      g2 <- g(x, 2)
-      g3 <- g(x, 3)
-      s * (g3 - 3*g1*g2 + 2*g1^3) / (g2 - g1^2)^(3/2)
+    {
+      zeta3 <- 1.202056903159594014596
+      12 * sqrt(6) * zeta3 / pi^3
+    },
+    ifelse(x$xi < 1 / 3,
+      {
+        s <- sign(x$xi)
+        g1 <- g(x, 1)
+        g2 <- g(x, 2)
+        g3 <- g(x, 3)
+        s * (g3 - 3 * g1 * g2 + 2 * g1^3) / (g2 - g1^2)^(3 / 2)
       },
       Inf
     )
@@ -166,13 +169,14 @@ skewness.GEV <- function(x, ...) {
 #' @export
 kurtosis.GEV <- function(x, ...) {
   ifelse(x$xi == 0,
-    12/5,
-    ifelse(x$xi < 1/3,
-      {g1 <- g(x, 1)
-      g2 <- g(x, 2)
-      g3 <- g(x, 3)
-      g4 <- g(x, 4)
-      (g4 - 4*g3*g1 - 3*g2^2 + 12*g2*g1^2 - 6*g1^4) / (g2 - g1^2)^2
+    12 / 5,
+    ifelse(x$xi < 1 / 3,
+      {
+        g1 <- g(x, 1)
+        g2 <- g(x, 2)
+        g3 <- g(x, 3)
+        g4 <- g(x, 4)
+        (g4 - 4 * g3 * g1 - 3 * g2^2 + 12 * g2 * g1^2 - 6 * g1^4) / (g2 - g1^2)^2
       },
       Inf
     )
@@ -205,8 +209,8 @@ random.GEV <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -233,8 +237,8 @@ log_pdf.GEV <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -254,8 +258,8 @@ cdf.GEV <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.

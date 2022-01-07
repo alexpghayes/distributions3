@@ -156,11 +156,10 @@
 #' # note that the cdf() and quantile() functions are inverses
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
-#'
 Normal <- function(mu = 0, sigma = 1) {
   stopifnot(
-    "parameter lengths do not match (only scalars are allowed to be recycled)" = 
-    length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
   )
   d <- data.frame(mu = mu, sigma = sigma)
   class(d) <- c("Normal", "distribution")
@@ -175,7 +174,7 @@ mean.Normal <- function(x, ...) {
 
 #' @export
 variance.Normal <- function(x, ...) {
-  x$sigma ^ 2
+  x$sigma^2
 }
 
 #' @export
@@ -210,7 +209,7 @@ kurtosis.Normal <- function(x, ...) {
 random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
   FUN <- function(at, d) rnorm(n = length(d), mean = d$mu, sd = d$sigma)
   apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
-} 
+}
 
 #' Evaluate the probability mass function of a Normal distribution
 #'
@@ -224,8 +223,8 @@ random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dnorm}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Normal distribution
@@ -254,8 +253,8 @@ log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pnorm}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Normal distribution
@@ -285,8 +284,8 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qnorm}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -296,7 +295,7 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 quantile.Normal <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  
+
   FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
@@ -344,7 +343,6 @@ suff_stat.Normal <- function(d, x, ...) {
 #'
 #' @export
 support.Normal <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

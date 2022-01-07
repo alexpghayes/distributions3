@@ -73,9 +73,9 @@ test_that("{moments}.Uniform work correctly", {
   u <- Uniform()
 
   expect_equal(mean(u), 0.5)
-  expect_equal(variance(u), 1/12)
+  expect_equal(variance(u), 1 / 12)
   expect_equal(skewness(u), 0)
-  expect_equal(kurtosis(u), -6/5)
+  expect_equal(kurtosis(u), -6 / 5)
 })
 
 test_that("vectorization of a Uniform distribution work correctly", {
@@ -88,14 +88,16 @@ test_that("vectorization of a Uniform distribution work correctly", {
   expect_equal(skewness(d), c(skewness(d1), skewness(d2)))
   expect_equal(kurtosis(d), c(kurtosis(d1), kurtosis(d2)))
 
-  set.seed(123); r1 <- random(d)
-  set.seed(123); r2 <- c(random(d1), random(d2))
+  set.seed(123)
+  r1 <- random(d)
+  set.seed(123)
+  r2 <- c(random(d1), random(d2))
   expect_equal(r1, r2)
 
-  #set.seed(123); r3 <- random(d, 10)
-  #set.seed(123); r4 <- c(random(d1, 10), random(d2, 10))
-  #expect_equal(unname(r3[1, ]), r4[1:10])
-  #expect_equal(unname(r3[2, ]), r4[11:20])
+  # set.seed(123); r3 <- random(d, 10)
+  # set.seed(123); r4 <- c(random(d1, 10), random(d2, 10))
+  # expect_equal(unname(r3[1, ]), r4[1:10])
+  # expect_equal(unname(r3[2, ]), r4[11:20])
 
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
   expect_equal(log_pdf(d, 0), c(log_pdf(d1, 0), log_pdf(d2, 0)))
@@ -125,4 +127,3 @@ test_that("vectorization of a Uniform distribution work correctly", {
     )
   )
 })
-

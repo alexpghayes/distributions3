@@ -76,7 +76,7 @@
 Cauchy <- function(location = 0, scale = 1) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(location) == length(scale) | length(location) == 1 | length(scale) == 1
+      length(location) == length(scale) | length(location) == 1 | length(scale) == 1
   )
 
   d <- data.frame(location = location, scale = scale)
@@ -125,8 +125,8 @@ random.Cauchy <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dcauchy}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -153,8 +153,8 @@ log_pdf.Cauchy <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pcauchy}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -174,8 +174,8 @@ cdf.Cauchy <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qcauchy}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -204,4 +204,3 @@ support.Cauchy <- function(d, drop = TRUE) {
 
   make_support(min, max, drop = drop)
 }
-

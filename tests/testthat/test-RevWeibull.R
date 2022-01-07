@@ -39,7 +39,7 @@ test_that("random.RevWeibull works correctly", {
 test_that("pdf.RevWeibull works correctly", {
   p <- pvec[2:4]
   expect_equal(pdf(g3, x3), c(0, 0, exp(-1), 0, NA))
-  expect_equal(pdf(g3, quantile(g3, p)), (-log(p)) ^ (1 + xi3) * p)
+  expect_equal(pdf(g3, quantile(g3, p)), (-log(p))^(1 + xi3) * p)
   expect_length(pdf(g3, seq_len(0)), 0)
   expect_length(pdf(g3, seq_len(1)), 1)
   expect_length(pdf(g3, seq_len(10)), 10)
@@ -60,7 +60,7 @@ test_that("cdf.RevWeibull works correctly", {
 })
 
 test_that("quantile.RevWeibull works correctly", {
-  q3 <- ((-log(pvec[2:4])) ^ (-xi3) - 1) / xi3
+  q3 <- ((-log(pvec[2:4]))^(-xi3) - 1) / xi3
   expect_equal(quantile(g3, pvec), c(-Inf, q3, up, NA))
   expect_length(quantile(g3, seq_len(0)), 0)
   expect_length(quantile(g3, c(0, 1)), 2)
@@ -79,8 +79,10 @@ test_that("vectorization of a RevWeibull distribution work correctly", {
   expect_equal(mean(d), c(mean(d1), mean(d2)))
   expect_equal(variance(d), c(variance(d1), variance(d2)))
 
-  set.seed(123); r1 <- random(d)
-  set.seed(123); r2 <- c(random(d1), random(d2))
+  set.seed(123)
+  r1 <- random(d)
+  set.seed(123)
+  r2 <- c(random(d1), random(d2))
   expect_equal(r1, r2)
 
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
@@ -111,4 +113,3 @@ test_that("vectorization of a RevWeibull distribution work correctly", {
     )
   )
 })
-

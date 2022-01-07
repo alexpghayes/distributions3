@@ -98,11 +98,11 @@ GP <- function(mu = 0, sigma = 1, xi = 0) {
 
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(mu) == length(sigma) & length(mu) == length(xi) |
-    sum(c(length(mu) == 1, length(sigma) == 1, length(xi) == 1)) >= 2 |
-    length(mu) == length(sigma) & length(xi) == 1 |
-    length(mu) == length(xi) & length(sigma) == 1 |
-    length(sigma) == length(xi) & length(mu) == 1
+      length(mu) == length(sigma) & length(mu) == length(xi) |
+        sum(c(length(mu) == 1, length(sigma) == 1, length(xi) == 1)) >= 2 |
+        length(mu) == length(sigma) & length(xi) == 1 |
+        length(mu) == length(xi) & length(sigma) == 1 |
+        length(sigma) == length(xi) & length(mu) == 1
   )
 
   d <- data.frame(mu = mu, sigma = sigma, xi = xi)
@@ -128,8 +128,8 @@ variance.GP <- function(x, ...) {
   sigma <- x$sigma
   xi <- x$xi
 
-  ifelse(xi < 1/2,
-    sigma^2 / ((1 - xi)^2 - (1 - 2*xi)),
+  ifelse(xi < 1 / 2,
+    sigma^2 / ((1 - xi)^2 - (1 - 2 * xi)),
     Inf
   )
 }
@@ -138,8 +138,8 @@ variance.GP <- function(x, ...) {
 skewness.GP <- function(x, ...) {
   xi <- x$xi
 
-  ifelse(xi < 1/3,
-    2*(1 + xi) * sqrt(1 - 2*xi) / (1 - 3*xi),
+  ifelse(xi < 1 / 3,
+    2 * (1 + xi) * sqrt(1 - 2 * xi) / (1 - 3 * xi),
     Inf
   )
 }
@@ -148,10 +148,11 @@ skewness.GP <- function(x, ...) {
 kurtosis.GP <- function(x, ...) {
   xi <- x$xi
 
-  ifelse(xi < 1/4,
-    {k1 <- (1 - 2*xi) * (2*xi^2 + xi + 3)
-    k2 <- (1 - 3*xi) * (1 - 4*xi)
-    3 * k1 / k2 - 3
+  ifelse(xi < 1 / 4,
+    {
+      k1 <- (1 - 2 * xi) * (2 * xi^2 + xi + 3)
+      k2 <- (1 - 3 * xi) * (1 - 4 * xi)
+      3 * k1 / k2 - 3
     },
     Inf
   )
@@ -183,8 +184,8 @@ random.GP <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -211,8 +212,8 @@ log_pdf.GP <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -232,8 +233,8 @@ cdf.GP <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgp}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.

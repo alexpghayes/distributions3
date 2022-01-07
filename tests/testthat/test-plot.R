@@ -61,7 +61,7 @@ test_that("ggplot2 implementation works", {
   expect_silent(print(gg4))
 
   ## plot pdf of discrete distribution
-  gg5 <- plot_pdf(B1) 
+  gg5 <- plot_pdf(B1)
   expect_true(ggplot2::is.ggplot(gg5))
   expect_silent(print(gg5))
   gg6 <- plot_pdf(B2)
@@ -69,15 +69,15 @@ test_that("ggplot2 implementation works", {
   expect_silent(print(gg6))
 
   ## plot pdf of discrete distribution
-  gg7 <- plot_cdf(N1) 
+  gg7 <- plot_cdf(N1)
   expect_true(ggplot2::is.ggplot(gg7))
   expect_silent(print(gg7))
   gg8 <- plot_cdf(N2)
   expect_true(ggplot2::is.ggplot(gg8))
   expect_silent(print(gg8))
-  
+
   ## plot pdf of discrete distribution
-  gg9 <- plot_cdf(B1) 
+  gg9 <- plot_cdf(B1)
   expect_true(ggplot2::is.ggplot(gg9))
   expect_silent(print(gg9))
   gg10 <- plot_cdf(B2)

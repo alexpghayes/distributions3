@@ -38,14 +38,14 @@ test_that("support() works", {
 
   expect_equal(support(Logistic()), c(-Inf, Inf))
 
-  expect_equal(support(Bernoulli()), c(0,1))
+  expect_equal(support(Bernoulli()), c(0, 1))
 
-  expect_equal(support(Beta()), c(0,1))
+  expect_equal(support(Beta()), c(0, 1))
 
   expect_equal(support(FisherF(df1 = 2, df2 = 5)), c(0, Inf))
 
-  expect_equal(support(Uniform(0,1)), c(0,1))
-  expect_equal(support(Uniform(-14,12)), c(-14,12))
+  expect_equal(support(Uniform(0, 1)), c(0, 1))
+  expect_equal(support(Uniform(-14, 12)), c(-14, 12))
 
   expect_equal(support(Tukey(nmeans = 2, df = 17, nranges = 3)), c(0, Inf))
 
@@ -64,4 +64,3 @@ test_that("support() works", {
 
   expect_error(support(1))
 })
-

@@ -73,7 +73,7 @@
 Logistic <- function(location = 0, scale = 1) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(location) == length(scale) | length(location) == 1 | length(scale) == 1
+      length(location) == length(scale) | length(location) == 1 | length(scale) == 1
   )
 
   d <- data.frame(location = location, scale = scale)
@@ -128,8 +128,8 @@ random.Logistic <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dlogis}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dlogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Logistic distribution
@@ -157,8 +157,8 @@ log_pdf.Logistic <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{plogis}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{plogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family Logistic distribution
@@ -178,8 +178,8 @@ cdf.Logistic <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qlogis}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qlogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -202,7 +202,6 @@ quantile.Logistic <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.Logistic <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

@@ -50,19 +50,19 @@ test_that("random.GEV works correctly", {
 test_that("pdf.GEV works correctly", {
   p <- pvec[2:4]
   expect_equal(pdf(g1, x1), c(0, 0, exp(-1), 0, NA))
-  expect_equal(pdf(g1, quantile(g1, p)), (-log(p)) ^ (1 + xi1) * p)
+  expect_equal(pdf(g1, quantile(g1, p)), (-log(p))^(1 + xi1) * p)
   expect_length(pdf(g1, seq_len(0)), 0)
   expect_length(pdf(g1, seq_len(1)), 1)
   expect_length(pdf(g1, seq_len(10)), 10)
 
   expect_equal(pdf(g2, x2), c(0, exp(-1), 0, NA))
-  expect_equal(pdf(g2, quantile(g2, p)), (-log(p)) ^ (1 + xi2) * p)
+  expect_equal(pdf(g2, quantile(g2, p)), (-log(p))^(1 + xi2) * p)
   expect_length(pdf(g2, seq_len(0)), 0)
   expect_length(pdf(g2, seq_len(1)), 1)
   expect_length(pdf(g2, seq_len(10)), 10)
 
   expect_equal(pdf(g3, x3), c(0, 0, exp(-1), 0, NA))
-  expect_equal(pdf(g3, quantile(g3, p)), (-log(p)) ^ (1 + xi3) * p)
+  expect_equal(pdf(g3, quantile(g3, p)), (-log(p))^(1 + xi3) * p)
   expect_length(pdf(g3, seq_len(0)), 0)
   expect_length(pdf(g3, seq_len(1)), 1)
   expect_length(pdf(g3, seq_len(10)), 10)
@@ -103,7 +103,7 @@ test_that("cdf.GEV works correctly", {
 })
 
 test_that("quantile.GEV works correctly", {
-  q1 <- ((-log(pvec[2:4])) ^ (-xi1) - 1) / xi1
+  q1 <- ((-log(pvec[2:4]))^(-xi1) - 1) / xi1
   expect_equal(quantile(g1, pvec), c(low, q1, Inf, NA))
   expect_length(quantile(g1, seq_len(0)), 0)
   expect_length(quantile(g1, c(0, 1)), 2)
@@ -115,7 +115,7 @@ test_that("quantile.GEV works correctly", {
   expect_length(quantile(g2, c(0, 1)), 2)
   expect_length(quantile(g2, seq_len(10) / 10), 10)
 
-  q3 <- ((-log(pvec[2:4])) ^ (-xi3) - 1) / xi3
+  q3 <- ((-log(pvec[2:4]))^(-xi3) - 1) / xi3
   expect_equal(quantile(g3, pvec), c(-Inf, q3, up, NA))
   expect_length(quantile(g3, seq_len(0)), 0)
   expect_length(quantile(g3, c(0, 1)), 2)
@@ -138,8 +138,10 @@ test_that("vectorization of a GEV distribution work correctly", {
   expect_equal(skewness(d), c(skewness(d1), skewness(d2)))
   expect_equal(kurtosis(d), c(kurtosis(d1), kurtosis(d2)))
 
-  set.seed(123); r1 <- random(d)
-  set.seed(123); r2 <- c(random(d1), random(d2))
+  set.seed(123)
+  r1 <- random(d)
+  set.seed(123)
+  r2 <- c(random(d1), random(d2))
   expect_equal(r1, r2)
 
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))

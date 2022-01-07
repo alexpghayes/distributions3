@@ -71,23 +71,23 @@
 HyperGeometric <- function(m, n, k) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(m) == length(n) & length(m) == length(k) |
-    sum(c(length(m) == 1, length(n) == 1, length(k) == 1)) >= 2 |
-    length(m) == length(n) & length(k) == 1 |
-    length(m) == length(k) & length(n) == 1 |
-    length(n) == length(k) & length(m) == 1
+      length(m) == length(n) & length(m) == length(k) |
+        sum(c(length(m) == 1, length(n) == 1, length(k) == 1)) >= 2 |
+        length(m) == length(n) & length(k) == 1 |
+        length(m) == length(k) & length(n) == 1 |
+        length(n) == length(k) & length(m) == 1
   )
 
   d <- data.frame(m = m, n = n, k = k)
 
   idx <- which(d$k > d$n + d$m)
-  if (length(idx) == 1) { 
+  if (length(idx) == 1) {
     stop(
       glue::glue(
         "k ({d$k[idx]}) cannot be greater than m + n ({d$m[idx]} + {d$n[idx]} = {(d$m+d$n)[idx]})"
       )
     )
-  } else if (length(idx) >1 & length(idx) <= 3) { 
+  } else if (length(idx) > 1 & length(idx) <= 3) {
     stop(
       sprintf(
         "k {c(%s)} cannot be greater than m + n {c(%s) + c(%s) = c(%s)}",
@@ -99,7 +99,7 @@ HyperGeometric <- function(m, n, k) {
     )
   } else if (length(idx) > 3) {
     stop(glue::glue("no k is allowed to be greater than m + n"))
-  } 
+  }
 
   class(d) <- c("HyperGeometric", "distribution")
   d
@@ -184,8 +184,8 @@ random.HyperGeometric <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dhyper}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dhyper}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family HyperGeometric distribution
@@ -213,8 +213,8 @@ log_pdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{phyper}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{phyper}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family HyperGeometric distribution
@@ -234,8 +234,8 @@ cdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qhyper}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qhyper}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -259,11 +259,10 @@ quantile.HyperGeometric <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.HyperGeometric <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
-  min <- apply(cbind(0, d$k - d$n), 1, max) 
-  max <- apply(as.matrix(d)[, c("m", "k"), drop = FALSE], 1, min) 
+  min <- apply(cbind(0, d$k - d$n), 1, max)
+  max <- apply(as.matrix(d)[, c("m", "k"), drop = FALSE], 1, min)
 
   make_support(min, max, drop = drop)
 }

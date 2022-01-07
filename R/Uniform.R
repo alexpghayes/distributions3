@@ -31,11 +31,10 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Uniform <- function(a = 0, b = 1) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(a) == length(b) | length(a) == 1 | length(b) == 1
+      length(a) == length(b) | length(a) == 1 | length(b) == 1
   )
   d <- data.frame(a = a, b = b)
   class(d) <- c("Uniform", "distribution")
@@ -49,13 +48,13 @@ mean.Uniform <- function(x, ...) {
 }
 
 #' @export
-variance.Uniform <- function(x, ...) (1 / 12) * (x$b - x$a) ^ 2
+variance.Uniform <- function(x, ...) (1 / 12) * (x$b - x$a)^2
 
 #' @export
 skewness.Uniform <- function(x, ...) rep.int(0, length(x))
 
 #' @export
-kurtosis.Uniform <- function(x, ...) rep(-6/5, length(x))
+kurtosis.Uniform <- function(x, ...) rep(-6 / 5, length(x))
 
 #' Draw a random sample from a continuous Uniform distribution
 #'
@@ -73,7 +72,7 @@ kurtosis.Uniform <- function(x, ...) rep(-6/5, length(x))
 random.Uniform <- function(x, n = 1L, drop = TRUE, ...) {
   FUN <- function(at, d) {
     runif(
-      n = length(d), 
+      n = length(d),
       min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
       max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max)
     )
@@ -89,8 +88,8 @@ random.Uniform <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dunif}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dunif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -131,8 +130,8 @@ log_pdf.Uniform <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{punif}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{punif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -159,8 +158,8 @@ cdf.Uniform <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qunif}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qunif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -189,7 +188,6 @@ quantile.Uniform <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.Uniform <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

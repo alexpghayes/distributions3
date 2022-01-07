@@ -79,11 +79,11 @@ Frechet <- function(location = 0, scale = 1, shape = 1) {
   }
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(location) == length(scale) & length(location) == length(shape) |
-    sum(c(length(location) == 1, length(scale) == 1, length(shape) == 1)) >= 2 |
-    length(location) == length(scale) & length(shape) == 1 |
-    length(location) == length(shape) & length(scale) == 1 |
-    length(scale) == length(shape) & length(location) == 1
+      length(location) == length(scale) & length(location) == length(shape) |
+        sum(c(length(location) == 1, length(scale) == 1, length(shape) == 1)) >= 2 |
+        length(location) == length(scale) & length(shape) == 1 |
+        length(location) == length(shape) & length(scale) == 1 |
+        length(scale) == length(shape) & length(location) == 1
   )
 
   d <- data.frame(location = location, scale = scale, shape = shape)
@@ -98,7 +98,7 @@ mean.Frechet <- function(x, ...) {
   m <- x$location
   s <- x$scale
   ifelse(a > 1,
-    m + s * gamma(1 - 1/a),
+    m + s * gamma(1 - 1 / a),
     Inf
   )
 }
@@ -109,7 +109,7 @@ variance.Frechet <- function(x, ...) {
   m <- x$location
   s <- x$scale
   ifelse(a > 2,
-    s^2 * (gamma(1 - 2/a) - gamma(1 - 1/a)^2),
+    s^2 * (gamma(1 - 2 / a) - gamma(1 - 1 / a)^2),
     Inf
   )
 }
@@ -120,12 +120,14 @@ skewness.Frechet <- function(x, ...) {
   m <- x$location
   s <- x$scale
   ifelse(a > 3,
-    {g1 <- gamma(1 - 1/a)
-    g2 <- gamma(1 - 2/a)
-    g3 <- gamma(1 - 3/a)
-    a <- g3 - 3*g2 * g1 + 2 * g1^3
-    b <- (g2 - g1^2)^1.5
-    a / b},
+    {
+      g1 <- gamma(1 - 1 / a)
+      g2 <- gamma(1 - 2 / a)
+      g3 <- gamma(1 - 3 / a)
+      a <- g3 - 3 * g2 * g1 + 2 * g1^3
+      b <- (g2 - g1^2)^1.5
+      a / b
+    },
     Inf
   )
 }
@@ -136,13 +138,15 @@ kurtosis.Frechet <- function(x, ...) {
   m <- x$locations
   s <- x$scale
   ifelse(a > 4,
-    {g1 <- gamma(1 - 1/a)
-    g2 <- gamma(1 - 2/a)
-    g3 <- gamma(1 - 3/a)
-    g4 <- gamma(1 - 4/a)
-    a <- 4*g3 * g1 + 3 * g2^2
-    b <- (g2 - g1^2)^2
-    a / b - 6},
+    {
+      g1 <- gamma(1 - 1 / a)
+      g2 <- gamma(1 - 2 / a)
+      g3 <- gamma(1 - 3 / a)
+      g4 <- gamma(1 - 4 / a)
+      a <- 4 * g3 * g1 + 3 * g2^2
+      b <- (g2 - g1^2)^2
+      a / b - 6
+    },
     Inf
   )
 }
@@ -169,7 +173,6 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
     revdbayes::rgev(n = length(d), loc = loc, scale = scale, shape = shape)
   }
   apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
-
 }
 
 #' Evaluate the probability mass function of a Frechet distribution
@@ -180,8 +183,8 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -220,8 +223,8 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -229,7 +232,7 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'
 cdf.Frechet <- function(d, x, drop = TRUE, ...) {
   # Convert to the GEV parameterisation
-  FUN <-  function(at, d) {
+  FUN <- function(at, d) {
     loc <- d$location + d$scale
     scale <- d$scale / d$shape
     shape <- 1 / d$shape
@@ -247,8 +250,8 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.

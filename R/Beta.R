@@ -36,7 +36,7 @@
 Beta <- function(alpha = 1, beta = 1) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(alpha) == length(beta) | length(alpha) == 1 | length(beta) == 1
+      length(alpha) == length(beta) | length(alpha) == 1 | length(beta) == 1
   )
   d <- data.frame(alpha = alpha, beta = beta)
   class(d) <- c("Beta", "distribution")
@@ -53,7 +53,7 @@ mean.Beta <- function(x, ...) {
 variance.Beta <- function(x, ...) {
   a <- x$alpha
   b <- x$beta
-  (a * b) /  ((a + b)^2 * (a + b + 1))
+  (a * b) / ((a + b)^2 * (a + b + 1))
 }
 
 #' @export
@@ -98,8 +98,8 @@ random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dbeta}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dbeta}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -126,8 +126,8 @@ log_pdf.Beta <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pbeta}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pbeta}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -147,8 +147,8 @@ cdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qbeta}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qbeta}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -171,7 +171,6 @@ quantile.Beta <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.Beta <- function(d, drop = TRUE) {
-
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

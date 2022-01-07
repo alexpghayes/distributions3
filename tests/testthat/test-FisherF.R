@@ -81,8 +81,10 @@ test_that("vectorization of a FisherF distribution work correctly", {
   expect_equal(skewness(d), c(skewness(d1), skewness(d2)))
   expect_equal(kurtosis(d), c(kurtosis(d1), kurtosis(d2)))
 
-  set.seed(123); r1 <- random(d)
-  set.seed(123); r2 <- rf(2, df1 = c(5, 10), df2 = c(5, 10), ncp = 0)
+  set.seed(123)
+  r1 <- random(d)
+  set.seed(123)
+  r2 <- rf(2, df1 = c(5, 10), df2 = c(5, 10), ncp = 0)
   expect_equal(r1, r2)
 
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
@@ -113,4 +115,3 @@ test_that("vectorization of a FisherF distribution work correctly", {
     )
   )
 })
-

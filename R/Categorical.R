@@ -37,7 +37,6 @@
 #'
 #' # same for quantiles. this also errors!
 #' # quantile(Y, 0.7)
-#'
 Categorical <- function(outcomes, p = NULL) {
   if (!is.null(p) && length(outcomes) != length(p)) {
     stop("`outcomes` and `p` must be the same length.", call. = FALSE)

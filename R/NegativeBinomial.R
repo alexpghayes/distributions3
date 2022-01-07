@@ -68,7 +68,7 @@
 NegativeBinomial <- function(size, p = 0.5) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(size) == length(p) | length(size) == 1 | length(p) == 1
+      length(size) == length(p) | length(size) == 1 | length(p) == 1
   )
   d <- data.frame(size = size, p = p)
   class(d) <- c("NegativeBinomial", "distribution")
@@ -120,8 +120,8 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{dnbinom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{dnbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family NegativeBinomial distribution
@@ -151,8 +151,8 @@ log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pnbinom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pnbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @family NegativeBinomial distribution
@@ -172,8 +172,8 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qnbinom}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qnbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -196,8 +196,7 @@ quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.NegativeBinomial <- function(d, drop = TRUE){
-
+support.NegativeBinomial <- function(d, drop = TRUE) {
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

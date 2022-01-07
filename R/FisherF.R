@@ -38,11 +38,11 @@
 FisherF <- function(df1, df2, lambda = 0) {
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(df1) == length(df2) & length(df1) == length(lambda) | 
-    sum(c(length(df1) == 1, length(df2) == 1, length(lambda) == 1)) >= 2 |
-    length(df1) == length(df2) & length(lambda) == 1 | 
-    length(df1) == length(lambda) & length(df2) == 1 | 
-    length(df2) == length(lambda) & length(df1) == 1
+      length(df1) == length(df2) & length(df1) == length(lambda) |
+        sum(c(length(df1) == 1, length(df2) == 1, length(lambda) == 1)) >= 2 |
+        length(df1) == length(df2) & length(lambda) == 1 |
+        length(df1) == length(lambda) & length(df2) == 1 |
+        length(df2) == length(lambda) & length(df1) == 1
   )
   d <- data.frame(df1 = df1, df2 = df2, lambda = lambda)
   class(d) <- c("FisherF", "distribution")
@@ -57,8 +57,8 @@ mean.FisherF <- function(x, ...) {
 
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 2, 
-    d2 / (d2 - 2), 
+  ifelse(d2 > 2,
+    d2 / (d2 - 2),
     NaN
   )
 }
@@ -78,21 +78,25 @@ skewness.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
   ifelse(d2 > 6,
-    suppressWarnings({a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
-    b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
-    a / b}),
+    suppressWarnings({
+      a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
+      b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
+      a / b
+    }),
     NaN
-  ) 
+  )
 }
 
 #' @export
 kurtosis.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 8, 
-    {a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
-    b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
-    12 * a / b},
+  ifelse(d2 > 8,
+    {
+      a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
+      b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
+      12 * a / b
+    },
     NaN
   )
 }
@@ -123,8 +127,8 @@ random.FisherF <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{df}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{df}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -151,8 +155,8 @@ log_pdf.FisherF <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{pf}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{pf}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -172,8 +176,8 @@ cdf.FisherF <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[stats]{qf}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[stats]{qf}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
@@ -194,8 +198,7 @@ quantile.FisherF <- function(x, probs, drop = TRUE, ...) {
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.FisherF <- function(d, drop = TRUE){
-
+support.FisherF <- function(d, drop = TRUE) {
   stopifnot("d must be a supported distribution object" = is_distribution(d))
   stopifnot(is.logical(drop))
 

@@ -70,7 +70,7 @@ Gumbel <- function(mu = 0, sigma = 1) {
   }
   stopifnot(
     "parameter lengths do not match (only scalars are allowed to be recycled)" =
-    length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+      length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
   )
 
   d <- data.frame(mu = mu, sigma = sigma)
@@ -85,16 +85,16 @@ mean.Gumbel <- function(x, ...) {
 }
 
 #' @export
-variance.Gumbel <- function(x, ...) pi^(2/6) * x$sigma^2
+variance.Gumbel <- function(x, ...) pi^(2 / 6) * x$sigma^2
 
 #' @export
 skewness.Gumbel <- function(x, ...) {
-    zeta3 <- 1.20205690315959401459612
-    rep((12 * sqrt(6) * zeta3) / pi^3, length(x))
+  zeta3 <- 1.20205690315959401459612
+  rep((12 * sqrt(6) * zeta3) / pi^3, length(x))
 }
 
 #' @export
-kurtosis.Gumbel <- function(x, ...) rep(12/5, length(x))
+kurtosis.Gumbel <- function(x, ...) rep(12 / 5, length(x))
 
 #' Draw a random sample from a Gumbel distribution
 #'
@@ -122,8 +122,8 @@ random.Gumbel <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -150,8 +150,8 @@ log_pdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
@@ -171,8 +171,8 @@ cdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
-#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}. 
-#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
