@@ -1,5 +1,5 @@
 test_that("print.ChiSquare works", {
-  expect_output(print(ChiSquare(df = 1)), regexp = "Chi Square distribution")
+  expect_output(print(ChiSquare(df = 1)), regexp = "ChiSquare distribution")
 })
 
 test_that("random.ChiSquare work correctly", {

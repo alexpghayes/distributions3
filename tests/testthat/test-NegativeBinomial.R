@@ -1,7 +1,7 @@
 context("test-NegativeBinomial")
 
 test_that("print.NegativeBinomial works", {
-  expect_output(print(NegativeBinomial(1, 1)), regexp = "Negative Binomial distribution")
+  expect_output(print(NegativeBinomial(1, 1)), regexp = "NegativeBinomial distribution")
 })
 
 test_that("likelihood.NegativeBinomial and log_likelihood.NegativeBinomial work correctly", {
