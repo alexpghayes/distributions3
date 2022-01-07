@@ -6,7 +6,7 @@
 \alias{pmf}
 \title{Evaluate the probability density of a probability distribution}
 \usage{
-pdf(d, x, ...)
+pdf(d, x, drop = TRUE, ...)
 
 log_pdf(d, x, ...)
 
@@ -18,6 +18,8 @@ a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or
 
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution \code{d}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

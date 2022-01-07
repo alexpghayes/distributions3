@@ -20,3 +20,17 @@ interval, or \code{quantile(d, p)} and \code{quantile(d, 1 - p)} if lower and/or
 \description{
 A function to easily plot the CDF of a distribution using \code{ggplot2}. Requires \code{ggplot2} to be loaded.
 }
+\examples{
+
+N1 <- Normal()
+plot_cdf(N1) 
+
+N2 <- Normal(0, c(1, 2))
+plot_cdf(N2)
+
+B1 <- Binomial(10, 0.2)
+plot_cdf(B1) 
+
+B2 <- Binomial(10, c(0.2, 0.5))
+plot_cdf(B2)
+}

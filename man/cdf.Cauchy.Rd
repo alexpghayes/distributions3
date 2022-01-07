@@ -4,7 +4,7 @@
 \alias{cdf.Cauchy}
 \title{Evaluate the cumulative distribution function of a Cauchy distribution}
 \usage{
-\method{cdf}{Cauchy}(d, x, ...)
+\method{cdf}{Cauchy}(d, x, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{A \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
@@ -12,8 +12,11 @@
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{pcauchy}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of probabilities, one for each element of \code{x}.

@@ -71,14 +71,9 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Exponential <- function(rate = 1) {
-  d <- list(rate = rate)
+  d <- data.frame(rate = rate)
   class(d) <- c("Exponential", "distribution")
   d
-}
-
-#' @export
-print.Exponential <- function(x, ...) {
-  cat(glue("Exponential distribution (rate = {x$rate})"), "\n")
 }
 
 #' @export
@@ -91,10 +86,10 @@ mean.Exponential <- function(x, ...) {
 variance.Exponential <- function(x, ...) x$rate ^ 2
 
 #' @export
-skewness.Exponential <- function(x, ...) 2
+skewness.Exponential <- function(x, ...) rep.int(2, length(x))
 
 #' @export
-kurtosis.Exponential <- function(x, ...) 6
+kurtosis.Exponential <- function(x, ...) rep.int(6, length(x))
 
 #' Draw a random sample from an Exponential distribution
 #'
@@ -102,14 +97,16 @@ kurtosis.Exponential <- function(x, ...) 6
 #'
 #' @param x An `Exponential` object created by a call to [Exponential()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Exponential <- function(x, n = 1L, ...) {
-  rexp(n = n, rate = x$rate)
+random.Exponential <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rexp(n = length(d), rate = x$rate)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability density function of an Exponential distribution
@@ -119,21 +116,25 @@ random.Exponential <- function(x, n = 1L, ...) {
 #' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dexp}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Exponential <- function(d, x, ...) {
-  dexp(x = x, rate = d$rate)
+pdf.Exponential <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dexp(x = at, rate = d$rate, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Exponential
 #' @export
 #'
-log_pdf.Exponential <- function(d, x, ...) {
-  dexp(x = x, rate = d$rate, log = TRUE)
+log_pdf.Exponential <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dexp(x = at, rate = d$rate, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an Exponential distribution
@@ -143,14 +144,17 @@ log_pdf.Exponential <- function(d, x, ...) {
 #' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pexp}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Exponential <- function(d, x, ...) {
-  pexp(q = x, rate = d$rate)
+cdf.Exponential <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pexp(q = at, rate = d$rate, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of an Exponential distribution
@@ -161,15 +165,18 @@ cdf.Exponential <- function(d, x, ...) {
 #' @inheritParams random.Exponential
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qexp}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Exponential <- function(x, probs, ...) {
+quantile.Exponential <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qexp(p = probs, rate = x$rate)
+  FUN <- function(at, d) qexp(at, rate = x$rate, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Fit an Exponential distribution to data
@@ -208,14 +215,17 @@ suff_stat.Exponential <- function(d, x, ...) {
 #' Return the support of the Exponential distribution
 #'
 #' @param d An `Exponential` object created by a call to [Exponential()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Exponential <- function(d){
-  if(!is_distribution(d)){
-    message("d has to be a disitrubtion")
-    stop()
-  }
-  return(c(0, Inf))
+support.Exponential <- function(d, drop = TRUE){
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

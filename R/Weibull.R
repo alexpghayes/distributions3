@@ -58,14 +58,13 @@
 #' quantile(X, 0.7)
 #'
 Weibull <- function(shape, scale) {
-  d <- list(shape = shape, scale = scale)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+    length(shape) == length(scale) | length(shape) == 1 | length(scale) == 1
+  )
+  d <- data.frame(shape = shape, scale = scale)
   class(d) <- c("Weibull", "distribution")
   d
-}
-
-#' @export
-print.Weibull <- function(x, ...) {
-  cat(glue("Weibull distribution (shape = {x$shape}, scale = {x$scale})"), "\n")
 }
 
 #' @export
@@ -76,7 +75,7 @@ mean.Weibull <- function(x, ...) {
 
 #' @export
 variance.Weibull <- function(x, ...) {
-  x$scale^2 * gamma(1 + 2/x$shape) - mean(x)^2
+  x$scale^2 * gamma(1 + 2/x$shape) - unname(apply(as.matrix(x), 1, mean))^2
 }
 
 #' @export
@@ -102,6 +101,7 @@ kurtosis.Weibull <- function(x, ...) {
 #'
 #' @param x A `Weibull` object created by a call to [Weibull()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
@@ -110,8 +110,9 @@ kurtosis.Weibull <- function(x, ...) {
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.Weibull <- function(x, n = 1L, ...) {
-  rweibull(n = n, shape = x$shape, scale = x$scale)
+random.Weibull <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rweibull(n = length(d), shape = d$shape, scale = d$scale)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Weibull distribution
@@ -125,22 +126,26 @@ random.Weibull <- function(x, n = 1L, ...) {
 #' @param d A `Weibull` object created by a call to [Weibull()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dweibull}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Weibull distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Weibull <- function(d, x, ...) {
-  dweibull(x = x, shape = d$shape, scale = d$scale)
+pdf.Weibull <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dweibull(x = at, shape = d$shape, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Weibull
 #' @export
-log_pdf.Weibull <- function(d, x, ...) {
-  dweibull(x = x, shape = d$shape, scale = d$scale, log = TRUE)
+log_pdf.Weibull <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dweibull(x = at, shape = d$shape, scale = d$scale, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Weibull distribution
@@ -150,16 +155,19 @@ log_pdf.Weibull <- function(d, x, ...) {
 #' @param d A `Weibull` object created by a call to [Weibull()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pweibull}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Weibull distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Weibull <- function(d, x, ...) {
-  pweibull(q = x, shape = d$shape, scale = d$scale)
+cdf.Weibull <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pweibull(q = at, shape = d$shape, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a Weibull distribution
@@ -168,25 +176,39 @@ cdf.Weibull <- function(d, x, ...) {
 #' @inheritParams random.Weibull
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qweibull}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family Weibull distribution
 #'
-quantile.Weibull <- function(x, probs, ...) {
+quantile.Weibull <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qweibull(p = probs, shape = x$shape, scale = x$scale)
+  FUN <- function(at, d) qweibull(p = at, shape = x$shape, scale = x$scale, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 
 #' Return the support of the Weibull distribution
 #'
 #' @param d An `Weibull` object created by a call to [Weibull()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Weibull <- function(d) c(0, Inf)
+support.Weibull <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
+}
+

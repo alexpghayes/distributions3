@@ -4,10 +4,12 @@
 \alias{support.Bernoulli}
 \title{Return the support of the Bernoulli distribution}
 \usage{
-\method{support}{Bernoulli}(d)
+\method{support}{Bernoulli}(d, drop = TRUE)
 }
 \arguments{
 \item{d}{An \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

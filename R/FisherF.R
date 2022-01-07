@@ -36,62 +36,65 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 FisherF <- function(df1, df2, lambda = 0) {
-  d <- list(df1 = df1, df2 = df2, lambda = lambda)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+    length(df1) == length(df2) & length(df1) == length(lambda) | 
+    sum(c(length(df1) == 1, length(df2) == 1, length(lambda) == 1)) >= 2 |
+    length(df1) == length(df2) & length(lambda) == 1 | 
+    length(df1) == length(lambda) & length(df2) == 1 | 
+    length(df2) == length(lambda) & length(df1) == 1
+  )
+  d <- data.frame(df1 = df1, df2 = df2, lambda = lambda)
   class(d) <- c("FisherF", "distribution")
   d
 }
-
-#' @export
-print.FisherF <- function(x, ...) {
-  cat(glue("Fisher's F distribution (df1 = {x$df1}, df2 = {x$df2}, lambda = {x$lambda})"), "\n")
-}
-
 
 #' @export
 mean.FisherF <- function(x, ...) {
   ellipsis::check_dots_used()
   # The k-th moment of an F(df1, df2) distribution exists and
   # is finite only when 2k < d2
+
   d1 <- x$df1
   d2 <- x$df2
-  if (d2 > 2) d2 / (d2 - 2) else NaN
+  ifelse(d2 > 2, 
+    d2 / (d2 - 2), 
+    NaN
+  )
 }
 
 #' @export
 variance.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  if (d2 > 4) {
-    (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4))
-  } else {
+  ifelse(d2 > 4,
+    (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4)),
     NaN
-  }
+  )
 }
 
 #' @export
 skewness.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  if (d2 > 6) {
-    a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
+  ifelse(d2 > 6,
+    suppressWarnings({a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
     b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
-    a / b
-  } else {
+    a / b}),
     NaN
-  }
+  ) 
 }
 
 #' @export
 kurtosis.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  if (d2 > 8) {
-    a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
+  ifelse(d2 > 8, 
+    {a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
     b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
-    12 * a / b
-  } else {
+    12 * a / b},
     NaN
-  }
+  )
 }
 
 #' Draw a random sample from an F distribution
@@ -100,14 +103,16 @@ kurtosis.FisherF <- function(x, ...) {
 #'
 #' @param x A `FisherF` object created by a call to [FisherF()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.FisherF <- function(x, n = 1L, ...) {
-  rf(n = n, df1 = x$df1, df2 = x$df2, ncp = x$lambda)
+random.FisherF <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rf(n = length(d), df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of an F distribution
@@ -117,21 +122,25 @@ random.FisherF <- function(x, n = 1L, ...) {
 #' @param d A `FisherF` object created by a call to [FisherF()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{df}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.FisherF <- function(d, x, ...) {
-  df(x = x, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+pdf.FisherF <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) df(x = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.FisherF
 #' @export
 #'
-log_pdf.FisherF <- function(d, x, ...) {
-  df(x = x, df1 = d$df1, df2 = d$df2, ncp = d$lambda, log = TRUE)
+log_pdf.FisherF <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) df(x = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an F distribution
@@ -141,14 +150,17 @@ log_pdf.FisherF <- function(d, x, ...) {
 #' @param d A `FisherF` object created by a call to [FisherF()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pf}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.FisherF <- function(d, x, ...) {
-  pf(q = x, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+cdf.FisherF <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pf(q = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of an F distribution
@@ -159,24 +171,36 @@ cdf.FisherF <- function(d, x, ...) {
 #' @inheritParams random.FisherF
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qf}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.FisherF <- function(x, probs, ...) {
+quantile.FisherF <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qf(p = probs, df1 = x$df1, df2 = x$df2, ncp = x$lambda)
+
+  FUN <- function(at, d) qf(at, df1 = x$df1, df2 = x$df2, ncp = x$lambda, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Return the support of the FisherF distribution
 #'
 #' @param d An `FisherF` object created by a call to [FisherF()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.FisherF <- function(d){
-  return(c(0, Inf))
+support.FisherF <- function(d, drop = TRUE){
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

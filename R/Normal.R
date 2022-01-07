@@ -158,14 +158,13 @@
 #' quantile(X, cdf(X, 7))
 #'
 Normal <- function(mu = 0, sigma = 1) {
-  d <- list(mu = mu, sigma = sigma)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" = 
+    length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+  )
+  d <- data.frame(mu = mu, sigma = sigma)
   class(d) <- c("Normal", "distribution")
   d
-}
-
-#' @export
-print.Normal <- function(x, ...) {
-  cat(glue("Normal distribution (mu = {x$mu}, sigma = {x$sigma})"), "\n")
 }
 
 #' @export
@@ -175,13 +174,20 @@ mean.Normal <- function(x, ...) {
 }
 
 #' @export
-variance.Normal <- function(x, ...) x$sigma ^ 2
+variance.Normal <- function(x, ...) {
+  x$sigma ^ 2
+}
 
 #' @export
-skewness.Normal <- function(x, ...) 0
+skewness.Normal <- function(x, ...) {
+  rep.int(0, length(x))
+}
 
 #' @export
-kurtosis.Normal <- function(x, ...) 0
+kurtosis.Normal <- function(x, ...) {
+  rep.int(0, length(x))
+}
+
 
 #' Draw a random sample from a Normal distribution
 #'
@@ -193,6 +199,7 @@ kurtosis.Normal <- function(x, ...) 0
 #'
 #' @param x A `Normal` object created by a call to [Normal()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
@@ -200,9 +207,10 @@ kurtosis.Normal <- function(x, ...) 0
 #' @export
 #'
 #'
-random.Normal <- function(x, n = 1L, ...) {
-  rnorm(n = n, mean = x$mu, sd = x$sigma)
-}
+random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rnorm(n = length(d), mean = d$mu, sd = d$sigma)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+} 
 
 #' Evaluate the probability mass function of a Normal distribution
 #'
@@ -215,23 +223,27 @@ random.Normal <- function(x, n = 1L, ...) {
 #' @param d A `Normal` object created by a call to [Normal()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dnorm}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Normal distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Normal <- function(d, x, ...) {
-  dnorm(x = x, mean = d$mu, sd = d$sigma)
+pdf.Normal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Normal
 #' @export
 #'
-log_pdf.Normal <- function(d, x, ...) {
-  dnorm(x = x, mean = d$mu, sd = d$sigma, log = TRUE)
+log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Normal distribution
@@ -241,16 +253,19 @@ log_pdf.Normal <- function(d, x, ...) {
 #' @param d A `Normal` object created by a call to [Normal()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pnorm}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Normal distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Normal <- function(d, x, ...) {
-  pnorm(q = x, mean = d$mu, sd = d$sigma)
+cdf.Normal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pnorm(q = at, mean = d$mu, sd = d$sigma, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a Normal distribution
@@ -269,17 +284,21 @@ cdf.Normal <- function(d, x, ...) {
 #' @inheritParams random.Normal
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qnorm}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family Normal distribution
 #'
-quantile.Normal <- function(x, probs, ...) {
+quantile.Normal <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qnorm(p = probs, mean = x$mu, sd = x$sigma)
+  
+  FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Fit a Normal distribution to data
@@ -319,14 +338,18 @@ suff_stat.Normal <- function(d, x, ...) {
 #' Return the support of the Normal distribution
 #'
 #' @param d An `Normal` object created by a call to [Normal()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Normal <- function(d){
-  if(!is_distribution(d)){
-    message("d has to be a disitrubtion")
-    stop()
-  }
-  return(c(-Inf, Inf))
+support.Normal <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

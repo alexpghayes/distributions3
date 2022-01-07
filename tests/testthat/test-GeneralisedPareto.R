@@ -126,3 +126,36 @@ test_that("cdf.GP and quantile.GP are consistent", {
   expect_equal(cdf(g2, quantile(g2, pvec)), pvec)
   expect_equal(cdf(g3, quantile(g3, pvec)), pvec)
 })
+
+test_that("vectorization of a GP distribution work correctly", {
+  d <- GP(0, 1, c(0, 0.1))
+  d1 <- d[1]
+  d2 <- d[2]
+
+  expect_equal(mean(d), c(mean(d1), mean(d2)))
+  expect_equal(variance(d), c(variance(d1), variance(d2)))
+  expect_equal(skewness(d), c(skewness(d1), skewness(d2)))
+  expect_equal(kurtosis(d), c(kurtosis(d1), kurtosis(d2)))
+
+  set.seed(123); r1 <- random(d)
+  set.seed(123); r2 <- c(random(d1), random(d2))
+  expect_equal(r1, r2)
+
+  expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
+  expect_equal(log_pdf(d, 0), c(log_pdf(d1, 0), log_pdf(d2, 0)))
+  expect_equal(cdf(d, 0.5), c(cdf(d1, 0.5), cdf(d2, 0.5)))
+
+  expect_equal(quantile(d, 0.5), c(quantile(d1, 0.5), quantile(d2, 0.5)))
+  expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
+  expect_equal(
+    quantile(d, c(0.1, 0.5, 0.9)),
+    matrix(
+      c(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
+      nrow = 2,
+      ncol = 3,
+      byrow = TRUE,
+      dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
+    )
+  )
+})
+

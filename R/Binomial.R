@@ -91,14 +91,14 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Binomial <- function(size, p = 0.5) {
-  d <- list(size = size, p = p)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+    length(size) == length(p) | length(size) == 1 | length(p) == 1
+  )
+
+  d <- data.frame(size = size, p = p)
   class(d) <- c("Binomial", "distribution")
   d
-}
-
-#' @export
-print.Binomial <- function(x, ...) {
-  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"), "\n")
 }
 
 #' @export
@@ -132,6 +132,7 @@ kurtosis.Binomial <- function(x, ...) {
 #'
 #' @param x A `Binomial` object created by a call to [Binomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
@@ -139,8 +140,9 @@ kurtosis.Binomial <- function(x, ...) {
 #'   of length `n`.
 #' @export
 #'
-random.Binomial <- function(x, n = 1L, ...) {
-  rbinom(n = n, size = x$size, prob = x$p)
+random.Binomial <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rbinom(n = length(d), size = x$size, prob = x$p)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Binomial distribution
@@ -150,20 +152,24 @@ random.Binomial <- function(x, n = 1L, ...) {
 #' @param d A `Binomial` object created by a call to [Binomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dbinom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Binomial <- function(d, x, ...) {
-  dbinom(x = x, size = d$size, prob = d$p)
+pdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Binomial
 #' @export
-log_pdf.Binomial <- function(d, x, ...) {
-  dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
+log_pdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Binomial distribution
@@ -173,14 +179,17 @@ log_pdf.Binomial <- function(d, x, ...) {
 #' @param d A `Binomial` object created by a call to [Binomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pbinom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Binomial <- function(d, x, ...) {
-  pbinom(q = x, size = d$size, prob = d$p)
+cdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pbinom(q = at, size = d$size, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a Binomial distribution
@@ -191,15 +200,18 @@ cdf.Binomial <- function(d, x, ...) {
 #' @inheritParams random.Binomial
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Shoul the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qbinom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Binomial <- function(x, probs, ...) {
+quantile.Binomial <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qbinom(p = probs, size = x$size, prob = x$p)
+  FUN <- function(at, d) qbinom(at, size = x$size, prob = x$p, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Fit a Binomial distribution to data
@@ -242,9 +254,20 @@ suff_stat.Binomial <- function(d, x, ...) {
 #' Return the support of the Binomial distribution
 #'
 #' @param d An `Binomial` object created by a call to [Binomial()].
+#' @param drop logical. Shoul the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Binomial <- function(d) c(0, d$size)
+support.Binomial <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- d$size
+
+  make_support(min, max, drop = drop)
+}
+
 

@@ -4,7 +4,7 @@
 \alias{cdf.Binomial}
 \title{Evaluate the cumulative distribution function of a Binomial distribution}
 \usage{
-\method{cdf}{Binomial}(d, x, ...)
+\method{cdf}{Binomial}(d, x, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
@@ -12,8 +12,11 @@
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{pbinom}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of probabilities, one for each element of \code{x}.

@@ -4,10 +4,12 @@
 \alias{support.Weibull}
 \title{Return the support of the Weibull distribution}
 \usage{
-\method{support}{Weibull}(d)
+\method{support}{Weibull}(d, drop = TRUE)
 }
 \arguments{
 \item{d}{An \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

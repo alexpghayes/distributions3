@@ -100,9 +100,12 @@ Fill out area under the curve for a plotted PDF
 }
 \examples{
 
-X <- Normal()
+N1 <- Normal()
+plot_pdf(N1) + geom_auc(to = -0.645)
+plot_pdf(N1) + geom_auc(from = -0.645, to = 0.1, annotate = TRUE)
 
-plot_pdf(X) + geom_auc(to = -0.645)
-plot_pdf(X) + geom_auc(from = -0.645, to = 0.1, annotate = TRUE)
+N2 <- Normal(0, c(1, 2))
+plot_pdf(N2) + geom_auc(to = 0)
+plot_pdf(N2) + geom_auc(from = -2, to = 2, annotate = TRUE)
 }
 \keyword{datasets}

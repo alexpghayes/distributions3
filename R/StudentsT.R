@@ -113,39 +113,49 @@
 #' mean(x) + quantile(T, 0.12 / 2) * sd(x) / sqrt(nx)
 #' mean(x) + quantile(T, 1 - 0.12 / 2) * sd(x) / sqrt(nx)
 StudentsT <- function(df) {
-  d <- list(df = df)
+  d <- data.frame(df = df)
   class(d) <- c("StudentsT", "distribution")
   d
 }
 
 #' @export
-print.StudentsT <- function(x, ...) {
-  cat(glue("Student's T distribution (df = {x$df})"), "\n")
-}
-
-#' @export
 mean.StudentsT <- function(x, ...) {
   ellipsis::check_dots_used()
-  if (x$df > 1) 0 else NaN
+  ifelse(x$df > 1,
+    0,
+    NaN
+  )
 }
 
 #' @export
 variance.StudentsT <- function(x, ...) {
-  if (x$df > 2) x$df / (x$df - 2)
-  else if (x$df > 1) Inf
-  else NaN
+  ifelse(x$df > 2,
+    x$df / (x$df - 2),
+    ifelse(x$df > 1,
+      Inf,
+      NaN
+    )
+  )
 }
 
 #' @export
-skewness.StudentsT <- function(x, ...) if(x$df > 3) 0 else NaN
+skewness.StudentsT <- function(x, ...) {
+  ifelse(x$df > 3,
+    0,
+    NaN
+  )
+}
 
 #' @export
 kurtosis.StudentsT <- function(x, ...) {
-  if (x$df > 4) 6 / (x$df - 4)
-  else if (x$df > 2) Inf
-  else NaN
+  ifelse(x$df > 4,
+    6 / (x$df - 4),
+    ifelse(x$df > 2,
+      Inf,
+      NaN
+    )
+  )
 }
-
 
 #' Draw a random sample from a StudentsT distribution
 #'
@@ -157,6 +167,7 @@ kurtosis.StudentsT <- function(x, ...) {
 #'
 #' @param x A `StudentsT` object created by a call to [StudentsT()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
@@ -166,8 +177,9 @@ kurtosis.StudentsT <- function(x, ...) {
 #' @export
 #'
 #'
-random.StudentsT <- function(x, n = 1L, ...) {
-  rt(n = n, df = x$df)
+random.StudentsT <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rt(n = length(d), df = d$df)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of a StudentsT distribution
@@ -181,23 +193,27 @@ random.StudentsT <- function(x, n = 1L, ...) {
 #' @param d A `StudentsT` object created by a call to [StudentsT()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dt}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family StudentsT distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.StudentsT <- function(d, x, ...) {
-  dt(x = x, df = d$df)
+pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dt(x = at, df = d$df, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.StudentsT
 #' @export
 #'
-log_pdf.StudentsT <- function(d, x, ...) {
-  dt(x = x, df = d$df, log = TRUE)
+log_pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dt(x = at, df = d$df, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a StudentsT distribution
@@ -207,16 +223,19 @@ log_pdf.StudentsT <- function(d, x, ...) {
 #' @param d A `StudentsT` object created by a call to [StudentsT()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pt}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family StudentsT distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.StudentsT <- function(d, x, ...) {
-  pt(q = x, df = d$df)
+cdf.StudentsT <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pt(q = at, df = d$df, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a StudentsT distribution
@@ -236,27 +255,38 @@ cdf.StudentsT <- function(d, x, ...) {
 #' @inheritParams random.StudentsT
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qt}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family StudentsT distribution
 #'
-quantile.StudentsT <- function(x, probs, ...) {
+quantile.StudentsT <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qt(p = probs, df = x$df)
+  FUN <- function(at, d) qt(p = at, df = x$df, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 
 #' Return the support of the StudentsT distribution
 #'
 #' @param d An `StudentsT` object created by a call to [StudentsT()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.StudentsT <- function(d){
-  return(c(-Inf, Inf))
+support.StudentsT <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

@@ -33,14 +33,15 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Erlang <- function(k, lambda) {
-  d <- list(k = k, lambda = lambda)
+
+  stopifnot("'k' must be an integer"  = all(abs(k - as.integer(k)) == 0))
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+    length(k) == length(lambda) | length(k) == 1 | length(lambda) == 1
+  )
+  d <- data.frame(k = k, lambda = lambda)
   class(d) <- c("Erlang", "distribution")
   d
-}
-
-#' @export
-print.Erlang <- function(x, ...) {
-  cat(glue("Erlang distribution (k = {x$k}, lambda = {x$lambda})\n"))
 }
 
 #' Draw a random sample from an Erlang distribution
@@ -49,16 +50,16 @@ print.Erlang <- function(x, ...) {
 #'
 #' @param x An `Erlang` object created by a call to [Erlang()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Erlang <- function(x, n = 1L, ...) {
-  replicate(n = n, expr = {
-    -1 / x$lambda * log(prod(runif(n = x$k)))
-  })
+random.Erlang <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rgamma(n = length(d), shape = d$k, rate = d$lambda)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of an Erlang distribution
@@ -68,23 +69,25 @@ random.Erlang <- function(x, n = 1L, ...) {
 #' @param d An `Erlang` object created by a call to [Erlang()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dgamma}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Erlang <- function(d, x, ...) {
-  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
-  (d$lambda^d$k) * (x^(d$k - 1)) * exp(-d$lambda * x) / factorial(d$k - 1)
+pdf.Erlang <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgamma(x = at, shape = d$k, rate = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Erlang
 #' @export
 #'
-log_pdf.Erlang <- function(d, x, ...) {
-  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
-  d$k * log(d$lambda) + (d$k - 1) * log(x) - d$lambda * x - log(factorial(d$k - 1))
+log_pdf.Erlang <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgamma(x = at, shape = d$k, rate = d$lambda, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an Erlang distribution
@@ -94,21 +97,17 @@ log_pdf.Erlang <- function(d, x, ...) {
 #' @param d An `Erlang` object created by a call to [Erlang()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pgamma}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Erlang <- function(d, x, ...) {
-  if (any(x < 0)) stop("'x' must be non-negative", call. = FALSE)
-  internal <- Vectorize(FUN = function(d, x, ...) {
-    summation <- vector(mode = "numeric", length = d$k)
-    n <- 0:(d$k - 1)
-    summation <- 1 / factorial(n) * exp(-d$lambda * x) * (d$lambda * x)^n
-    return(1 - sum(summation))
-  }, vectorize.args = "x")
-  internal(d = d, x = x, ...)
+cdf.Erlang <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pgamma(q = at, shape = d$k, rate = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of an Erlang distribution
@@ -119,31 +118,37 @@ cdf.Erlang <- function(d, x, ...) {
 #' @inheritParams random.Erlang
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
-#' @param interval Interval being used to search for the quantile using numerical root finding. Defaults to (0, 1e6)
-#' @param tol Tolerance of the root finding algorithm. Defaults to `.Machine$double.eps`
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qgamma}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Erlang <- function(x, probs, ..., interval = c(0, 1e6), tol = .Machine$double.eps) {
+quantile.Erlang <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  if (any(probs < 0) | any(probs > 1)) stop("'probs' must be between 0 and 1.", call. = TRUE)
-  probs[probs == 1] <- (1 - .Machine$double.eps^0.25)
-  internal <- Vectorize(FUN = function(d, p, ..., interval, tol) {
-    qf <- function(x) cdf(d = d, x = x) - p
-    root <- stats::uniroot(qf, interval = interval, tol = tol, check.conv = TRUE)
-    return(root$root)
-  }, vectorize.args = "p")
-  internal(d = x, p = probs, ..., interval = interval, tol = tol)
+
+  FUN <- function(at, d) qgamma(p = at, shape = d$k, rate = d$lambda, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Return the support of the Erlang distribution
 #'
 #' @param d An `Erlang` object created by a call to [Erlang()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Erlang <- function(d) c(0, Inf)
+support.Erlang <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
+}

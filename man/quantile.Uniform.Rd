@@ -4,15 +4,18 @@
 \alias{quantile.Uniform}
 \title{Determine quantiles of a continuous Uniform  distribution}
 \usage{
-\method{quantile}{Uniform}(x, probs, ...)
+\method{quantile}{Uniform}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qunif}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of \code{probs}.

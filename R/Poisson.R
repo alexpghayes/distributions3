@@ -70,14 +70,9 @@
 #' quantile(X, cdf(X, 7))
 #'
 Poisson <- function(lambda) {
-  d <- list(lambda = lambda)
+  d <- data.frame(lambda = lambda)
   class(d) <- c("Poisson", "distribution")
   d
-}
-
-#' @export
-print.Poisson <- function(x, ...) {
-  cat(glue("Poisson distribution (lambda = {x$lambda})"), "\n")
 }
 
 #' @export
@@ -101,14 +96,16 @@ kurtosis.Poisson <- function(x, ...) 1 / x$lambda
 #'
 #' @param x A `Poisson` object created by a call to [Poisson()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @return A numeric vector of length `n`.
 #' @export
 #'
-random.Poisson <- function(x, n = 1L, ...) {
-  rpois(n = n, lambda = x$lambda)
+random.Poisson <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rpois(n = length(d), lambda = d$lambda)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Poisson distribution
@@ -118,21 +115,25 @@ random.Poisson <- function(x, n = 1L, ...) {
 #' @param d A `Poisson` object created by a call to [Poisson()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dpois}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Poisson <- function(d, x, ...) {
-  dpois(x = x, lambda = d$lambda)
+pdf.Poisson <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dpois(x = at, lambda = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Poisson
 #' @export
 #'
-log_pdf.Poisson <- function(d, x, ...) {
-  dpois(x = x, lambda = d$lambda, log = TRUE)
+log_pdf.Poisson <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dpois(x = at, lambda = d$lambda, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Poisson distribution
@@ -142,14 +143,17 @@ log_pdf.Poisson <- function(d, x, ...) {
 #' @param d A `Poisson` object created by a call to [Poisson()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{ppois}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Poisson <- function(d, x, ...) {
-  ppois(q = x, lambda = d$lambda)
+cdf.Poisson <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) ppois(q = at, lambda = d$lambda, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a Poisson distribution
@@ -160,15 +164,18 @@ cdf.Poisson <- function(d, x, ...) {
 #' @inheritParams random.Poisson
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qpois}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
-quantile.Poisson <- function(x, probs, ...) {
+quantile.Poisson <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qpois(p = probs, lambda = x$lambda)
+  FUN <- function(at, d) qpois(p = at, lambda = d$lambda, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Fit an Poisson distribution to data
@@ -208,14 +215,18 @@ suff_stat.Poisson <- function(d, x, ...) {
 #' Return the support of the Poisson distribution
 #'
 #' @param d An `Poisson` object created by a call to [Poisson()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Poisson <- function(d){
-  if(!is_distribution(d)){
-    message("d has to be a disitrubtion")
-    stop()
-  }
-  return(c(0, Inf))
+support.Poisson <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

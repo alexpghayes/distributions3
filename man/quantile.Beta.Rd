@@ -4,15 +4,18 @@
 \alias{quantile.Beta}
 \title{Determine quantiles of a Beta distribution}
 \usage{
-\method{quantile}{Beta}(x, probs, ...)
+\method{quantile}{Beta}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Beta} object created by a call to \code{\link[=Beta]{Beta()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qbeta}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of \code{probs}.

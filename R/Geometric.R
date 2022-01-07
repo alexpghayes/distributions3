@@ -66,14 +66,9 @@
 #' quantile(X, 0.7)
 #'
 Geometric <- function(p = 0.5) {
-  d <- list(p = p)
+  d <- data.frame(p = p)
   class(d) <- c("Geometric", "distribution")
   d
-}
-
-#' @export
-print.Geometric <- function(x, ...) {
-  cat(glue("Geometric distribution (p = {x$p})"), "\n")
 }
 
 #' @export
@@ -100,6 +95,7 @@ kurtosis.Geometric <- function(x, ...) 6 + (x$p^2 / (1 - x$p))
 #'
 #' @param x A `Geometric` object created by a call to [Geometric()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
@@ -108,8 +104,9 @@ kurtosis.Geometric <- function(x, ...) 6 + (x$p^2 / (1 - x$p))
 #' @return An integer vector of length `n`.
 #' @export
 #'
-random.Geometric <- function(x, n = 1L, ...) {
-  rgeom(n = n, prob = x$p)
+random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
+  FUN <- function(at, d) rgeom(n = length(d), prob = d$p)
+  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Geometric distribution
@@ -123,23 +120,27 @@ random.Geometric <- function(x, n = 1L, ...) {
 #' @param d A `Geometric` object created by a call to [Geometric()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dgeom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Geometric distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-pdf.Geometric <- function(d, x, ...) {
-  dgeom(x = x, prob = d$p)
+pdf.Geometric <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgeom(x = at, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
 }
 
 #' @rdname pdf.Geometric
 #' @export
 #'
-log_pdf.Geometric <- function(d, x, ...) {
-  dgeom(x = x, prob = d$p, log = TRUE)
+log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgeom(x = at, prob = d$p, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Geometric distribution
@@ -149,16 +150,19 @@ log_pdf.Geometric <- function(d, x, ...) {
 #' @param d A `Geometric` object created by a call to [Geometric()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pgeom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @family Geometric distribution
 #'
 #' @return A vector of probabilities, one for each element of `x`.
 #' @export
 #'
-cdf.Geometric <- function(d, x, ...) {
-  pgeom(q = x, prob = d$p)
+cdf.Geometric <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pgeom(q = at, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
 }
 
 #' Determine quantiles of a Geometric distribution
@@ -167,17 +171,20 @@ cdf.Geometric <- function(d, x, ...) {
 #' @inheritParams random.Geometric
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qgeom}}. 
+#'   Unevaluated arguments will generate a warning to catch mispellings or other 
+#'   possible errors.
 #'
 #' @return A vector of quantiles, one for each element of `probs`.
 #' @export
 #'
 #' @family Geometric distribution
 #'
-quantile.Geometric <- function(x, probs, ...) {
+quantile.Geometric <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qgeom(p = probs, prob = x$p)
+  FUN <- function(at, d) qgeom(p = at, prob = d$p, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
 }
 
 #' Fit a Geometric distribution to data
@@ -217,10 +224,18 @@ suff_stat.Geometric <- function(d, x, ...) {
 #' Return the support of the Geometric distribution
 #'
 #' @param d An `Geometric` object created by a call to [Geometric()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Geometric <- function(d){
-  c(0, Inf)
+support.Geometric <- function(d, drop = TRUE) {
+
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, drop = drop)
 }

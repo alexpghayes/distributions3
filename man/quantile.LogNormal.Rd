@@ -4,15 +4,18 @@
 \alias{quantile.LogNormal}
 \title{Determine quantiles of a LogNormal distribution}
 \usage{
-\method{quantile}{LogNormal}(x, probs, ...)
+\method{quantile}{LogNormal}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qlnorm}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of \code{probs}.

@@ -4,12 +4,14 @@
 \alias{random.FisherF}
 \title{Draw a random sample from an F distribution}
 \usage{
-\method{random}{FisherF}(x, n = 1L, ...)
+\method{random}{FisherF}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

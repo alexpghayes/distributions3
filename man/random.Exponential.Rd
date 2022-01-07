@@ -4,12 +4,14 @@
 \alias{random.Exponential}
 \title{Draw a random sample from an Exponential distribution}
 \usage{
-\method{random}{Exponential}(x, n = 1L, ...)
+\method{random}{Exponential}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{An \code{Exponential} object created by a call to \code{\link[=Exponential]{Exponential()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

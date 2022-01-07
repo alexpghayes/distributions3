@@ -107,19 +107,19 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   # Indicator of whether or not the distribution is discrete
   x_is_discrete <- distn %in% discrete
   # The number of parameters and their names
-  np <- length(x)
-  par_names <- names(x)
+  np <- length(colnames(x))
+  par_names <- colnames(x)
   # Expands the vector(s) of parameters to create a parameter combination for
   # each function to be plotted.
-  par_lengths <- sapply(x, length)
   if (all) {
-    n_distns <- prod(par_lengths)
-    xx <- as.list(expand.grid(x, KEEP.OUT.ATTRS = FALSE))
+    xx <- expand.grid(as.data.frame(as.matrix(x)), KEEP.OUT.ATTRS = FALSE)
+    xx <- unique(xx)
+    class(xx) <- class(x)
+    n_distns <- length(xx)
   } else {
-    n_distns <- max(par_lengths)
-    xx <- lapply(x, rep_len, n_distns)
+    xx <- x
+    n_distns <- length(xx)
   }
-  class(xx) <- class(x)
   # Create a title for the plot
   # If n_distns = 1 then place the parameter values in the title
   # If n_distns > 1 then place the parameter values in the legend
@@ -135,10 +135,10 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
     my_main <- paste0(distn, " (")
     if (np > 1) {
       for (i in 1:(np - 1)) {
-        my_main <- paste0(my_main, x[i], ", ")
+        my_main <- paste0(my_main, as.matrix(x)[i], ", ")
       }
     }
-    my_main <- paste0(my_main, x[np], ")")
+    my_main <- paste0(my_main, as.matrix(x)[np], ")")
   }
   if (cdf) {
     my_main <- paste(my_main, "c.d.f.")
@@ -154,9 +154,15 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   # If xlim is supplied then use it.
   # Otherwise, use default values (but no -Inf or Inf)
   if (is.null(user_args[['xlim']])) {
-    my_xlim <- quantile(x, rep(0:1, each = n_distns))
-    my_xlim <- ifelse(is.finite(my_xlim), my_xlim,
-                      quantile(x, rep(p / 100, each = n_distns)))
+    my_xlim <- quantile(x, matrix(c(0, 1), nrow = 1), drop = FALSE)
+    my_xlim <- c(min(my_xlim[, 1]), max(my_xlim[, 2]))
+    my_xlim <- ifelse(
+      is.finite(my_xlim), 
+      my_xlim,
+      {tmp <- quantile(x, matrix(p / 100, nrow = 1), drop = FALSE)
+        c(min(tmp[, 1]), max(tmp[, 2]))
+      }
+    )
     my_xlim <- range(my_xlim)
   } else {
     my_xlim <- user_args$xlim
@@ -194,20 +200,15 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
                                 ylab = my_ylab, lwd = 2, main = my_main,
                                 pch = 16, col = 1:n_distns) {
     col <- rep_len(col, n_distns)
-    probs <- matrix(NA, ncol = n_distns, nrow = length(xvals), byrow = TRUE)
-    for (i in 1:n_distns) {
-      new_xx <- lapply(xx, "[[", i)
-      class(new_xx) <- class(x)
-      probs[, i] <- cdf(new_xx, xvals)
-    }
-    rval <- stats::approxfun(xvals, probs[, 1], method = "constant",
+    yvals <- t(cdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
+    rval <- stats::approxfun(xvals, yvals[, 1], method = "constant",
                              yleft = 0, yright = 1, f = 0, ties = "ordered")
     class(rval) <- c("ecdf", "stepfun", class(rval))
     plot(rval, ylim = ylim, xlab = xlab, ylab = ylab, axes = FALSE, lwd = lwd,
          main = main, col = col[1], pch = pch, ...)
     if (n_distns > 1) {
       for (i in 2:n_distns) {
-        rval <- stats::approxfun(xvals, probs[, i], method = "constant",
+        rval <- stats::approxfun(xvals, yvals[, i], method = "constant",
                                  yleft = 0, yright = 1, f = 0,
                                  ties = "ordered")
         class(rval) <- c("ecdf", "stepfun", class(rval))
@@ -241,12 +242,7 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   discrete_pmf_plot <- function(x, xvals, ..., xlab = my_xlab, ylab = my_ylab,
                                 lwd = 2, main = my_main, pch = 16,
                                 col = 1:n_distns) {
-    yvals <- matrix(NA, ncol = n_distns, nrow = length(xvals), byrow = TRUE)
-    for (i in 1:n_distns) {
-      new_xx <- lapply(xx, "[[", i)
-      class(new_xx) <- class(x)
-      yvals[, i] <- pmf(new_xx, xvals)
-    }
+    yvals <- t(pdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
     graphics::matplot(xvals, yvals, type = "p", xlab = xlab, ylab = ylab,
                       axes = FALSE, lwd = lwd, main = main, pch = pch,
                       col = col, ...)
@@ -273,16 +269,12 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   continuous_plot <- function(x, xvals, ..., xlab = my_xlab, ylab = my_ylab,
                               lwd = 2, lty = 1, main = my_main,
                               col = 1:n_distns) {
-    yvals <- matrix(NA, ncol = n_distns, nrow = length(xvals), byrow = TRUE)
-    for (i in 1:n_distns) {
-      new_xx <- lapply(xx, "[[", i)
-      class(new_xx) <- class(x)
-      if (cdf) {
-        yvals[, i] <- cdf(new_xx, xvals)
-      } else {
-        yvals[, i] <- pdf(new_xx, xvals)
-      }
+    if (cdf) {
+      yvals <- t(cdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
+    } else {
+      yvals <- t(pdf(xx, matrix(xvals, nrow = 1), drop = FALSE))
     }
+    
     graphics::matplot(xvals, yvals, type = "l", xlab = xlab, ylab = ylab,
                       axes = FALSE, lwd = lwd, lty = lty, main = main, ...)
     graphics::axis(1)

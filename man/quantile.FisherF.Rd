@@ -4,15 +4,18 @@
 \alias{quantile.FisherF}
 \title{Determine quantiles of an F distribution}
 \usage{
-\method{quantile}{FisherF}(x, probs, ...)
+\method{quantile}{FisherF}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{FisherF} object created by a call to \code{\link[=FisherF]{FisherF()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qf}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
 A vector of quantiles, one for each element of \code{probs}.

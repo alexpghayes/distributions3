@@ -4,12 +4,14 @@
 \alias{random.Frechet}
 \title{Draw a random sample from a Frechet distribution}
 \usage{
-\method{random}{Frechet}(x, n = 1L, ...)
+\method{random}{Frechet}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}

@@ -4,10 +4,12 @@
 \alias{support.Normal}
 \title{Return the support of the Normal distribution}
 \usage{
-\method{support}{Normal}(d)
+\method{support}{Normal}(d, drop = TRUE)
 }
 \arguments{
 \item{d}{An \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
+
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.
