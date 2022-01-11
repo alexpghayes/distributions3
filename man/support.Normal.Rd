@@ -12,7 +12,10 @@
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
 }
 \value{
-A vector of length 2 with the minimum and maximum value of the support.
+In case of a single distribution object, a numeric vector of length 2
+with the minimum and maximum value of the support (if \code{drop = TRUE}, default)
+or a \code{matrix} with 2 columns. In case of a vectorized distribution object, a
+matrix with 2 columns containing all minima and maxima.
 }
 \description{
 Return the support of the Normal distribution

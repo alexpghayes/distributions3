@@ -23,112 +23,64 @@ is_distribution <- function(x) {
 
 apply_dpqr <- function(d,
                        FUN,
-                       at = NULL,
+                       at,
                        drop = TRUE,
-                       type_prefix = "x",
+                       type = NULL,
                        ...) {
 
-  # -------------------------------------------------------------------
-  # SANITY CHECKS
-  # -------------------------------------------------------------------
-  stopifnot(is_distribution(d))
-  stopifnot(is.function(FUN))
-  stopifnot(is.null(at) || is.numeric(at))
-  stopifnot(is.logical(drop))
-  stopifnot(is.character(type_prefix))
+  ## sanity checks
+  stopifnot(
+    is_distribution(d),
+    is.function(FUN),
+    is.numeric(at),
+    is.logical(drop),
+    is.character(type)
+  )
 
-  # -------------------------------------------------------------------
-  # SET UP PRELIMINARIES
-  # -------------------------------------------------------------------
-  ## * Is 'at' some kind of 'data'
-  ## * or missing altogether ('none')
-  attype <- if (is.null(at) || names(formals(FUN))[1L] == "d") {
-    "none"
+  ## basic properties
+  rnam <- names(d)
+  anam <- make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+  n <- length(d)
+  k <- length(at)
+
+  ## handle different types of "at"
+  if(k == 0L) {
+    return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
+  } else if(k == 1L) {
+    at <- rep.int(as.vector(at), n)
+  } else if(k == n && is.null(dim(at))) {
+    k <- 1L
   } else {
-    "data"
+    at <- as.vector(at)
+    k <- length(at)
   }
 
-  # -------------------------------------------------------------------
-  # PREPARE OUTPUT CONDITIONAL ON `attype`
-  # -------------------------------------------------------------------
-  ## If 'at' is missing: prediction is just a transformation of the parameters
-  if (attype == "none") {
-    rval <- FUN(d, ...)
-    if (is.null(dim(rval))) names(rval) <- rownames(d)
+  ## "at" labels
+  cnam <- paste(substr(type, 1L, 1L), if(all(at == 1L)) seq_len(k) else anam, sep = "_")
 
-    ## Otherwise 'at' is 'data':
-    ## set up a function that suitably expands 'at' (if necessary)
-    ## and then evaluates it at the predicted parameters ('data')
-  } else {
-    FUN2 <- function(at, d, ...) {
-      n <- length(d)
-      if (!is.data.frame(at)) {
-        if (length(at) == 1L) { # as vector (case 1)
-          at <- rep.int(as.vector(at), n)
-        } else { # as matrix (case 2)
-          at <- rbind(at)
-        }
-      }
-      if (is.matrix(at) && NROW(at) == 1L) { # case 2
-        at <- matrix(rep(at, each = n), nrow = n)
-        rv <- FUN(as.vector(at), d = d[rep(1L:n, ncol(at))], ...)
-        rv <- matrix(rv, nrow = n)
-
-        if (length(rv != 0L)) {
-          rownames(rv) <- rownames(d)
-          if (all(at[1L, ] == 1L)) {
-            colnames(rv) <- paste(
-              type_prefix,
-              seq_along(at[1L, ]),
-              sep = "_"
-            )
-          } else {
-            colnames(rv) <- paste(
-              type_prefix,
-              make_suffix(at[1L, ], digits = pmax(3L, getOption("digits") - 3L)),
-              sep = "_"
-            )
-          }
-        }
-      } else { # case 1
-        rv <- FUN(at, d = d, ...)
-        names(rv) <- rownames(d)
-      }
-      return(rv)
-    }
-
-    rval <- FUN2(at, d = d, ...)
+  ## handle zero-length distribution vector
+  if(n == 0L) {
+    return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
   }
 
-  # -------------------------------------------------------------------
-  # RETURN
-  # -------------------------------------------------------------------
-  ## return a data.frame (drop=FALSE) or should it be dropped
-  ## to a vector if possible (drop=TRUE): default = TRUE
-  if (drop) {
-    if (!is.null(dim(rval)) && NROW(rval) == 1L) {
-      rval <- unname(drop(rval))
-    }
+  ## call FUN
+  rval <- if(k == 1L) {
+    FUN(at, d = d, ...)
   } else {
-    if (is.null(dim(rval))) {
-      rval <- as.matrix(rval)
-      if (ncol(rval) == 1L) {
-        colnames(rval) <- paste(
-          type_prefix,
-          make_suffix(unique(at), digits = pmax(3L, getOption("digits") - 3L)),
-          sep = "_"
-        )
-      }
-    }
-    if (ncol(rval) == 1L & is.null(colnames(rval))) {
-      colnames(rval) <-
-        c("random", "density", "logLik", "probability", "quantile")[match(
-          type_prefix,
-          c("r", "d", "l", "p", "q")
-        )]
-    }
+    vapply(at, FUN, numeric(n), d = d, ...)
+  }
 
-    if (!inherits(rval, "data.frame")) rval <- as.data.frame(rval)
+  ## handle dimensions
+  if(k == 1L && drop) {
+    rval <- as.vector(rval)
+    names(rval) <- rnam
+  } else if (length(anam) > k) {
+    cnam <- type 
+    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
+  } else if (drop) {
+    rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
+  } else {
+    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
   }
 
   return(rval)
@@ -148,15 +100,18 @@ length.distribution <- function(x) length(unclass(x)[[1L]])
 #' @export
 `[.distribution` <- function(x, i) {
   cl <- class(x)
+  nm <- names(x)
   class(x) <- "data.frame"
   x <- x[i, , drop = FALSE]
   class(x) <- cl
+  if (is.null(nm)) attr(x, "row.names") <- seq_along(x)
   return(x)
 }
 
 #' @export
 format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
   cl <- class(x)[1L]
+  if (length(x) < 1L) return(character(0))
   n <- names(x)
   if (is.null(attr(x, "row.names"))) attr(x, "row.names") <- 1L:length(x)
   class(x) <- "data.frame"
@@ -166,7 +121,11 @@ format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
 
 #' @export
 print.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
-  print(format(x, digits = digits), ...)
+  if (length(x) < 1L) {
+    cat(sprintf("%s distribution of length zero\n", class(x)[1L]))
+  } else {
+    print(format(x, digits = digits), ...)
+  }
   invisible(x)
 }
 
@@ -258,7 +217,15 @@ make_suffix <- function(x, digits = 3) {
   return(rval)
 }
 
-make_support <- function(min, max, drop = TRUE) {
-  rval <- cbind(min = min, max = max)
-  if (drop && NROW(rval) == 1L) unname(rval[1L, ]) else rval
+make_support <- function(min, max, d, drop = TRUE) {
+  rval <- matrix(c(min, max), ncol = 2, dimnames = list(names(d), c("min", "max")))
+  if (drop && NROW(rval) == 1L) rval[1L, , drop = TRUE] else rval
+}
+
+make_positive_integer <- function(n) {
+  n <- if (length(n) > 1L) length(n) else suppressWarnings(try(as.integer(n), silent = TRUE))
+  if (inherits(n, "try-error") || is.na(n) || n < 0L) {
+    stop("Invalid arguments")
+  } 
+  n
 }

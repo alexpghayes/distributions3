@@ -169,22 +169,22 @@ Normal <- function(mu = 0, sigma = 1) {
 #' @export
 mean.Normal <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$mu
+  setNames(x$mu, names(x))
 }
 
 #' @export
 variance.Normal <- function(x, ...) {
-  x$sigma^2
+  setNames(x$sigma^2, names(x))
 }
 
 #' @export
 skewness.Normal <- function(x, ...) {
-  rep.int(0, length(x))
+  setNames(rep.int(0, length(x)), names(x))
 }
 
 #' @export
 kurtosis.Normal <- function(x, ...) {
-  rep.int(0, length(x))
+  setNames(rep.int(0, length(x)), names(x))
 }
 
 
@@ -202,17 +202,17 @@ kurtosis.Normal <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`). 
 #' @export
 #'
 #'
 random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) return(numeric(0L))
   FUN <- function(at, d) rnorm(n = length(d), mean = d$mu, sd = d$sigma)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Normal distribution
@@ -233,16 +233,15 @@ random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family Normal distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Normal <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Normal
@@ -250,7 +249,7 @@ pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Normal distribution
@@ -267,16 +266,15 @@ log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Normal distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Normal <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pnorm(q = at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Normal distribution
@@ -300,11 +298,11 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Normal distribution
@@ -313,7 +311,7 @@ quantile.Normal <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
 
   FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Normal distribution to data
@@ -355,7 +353,10 @@ suff_stat.Normal <- function(d, x, ...) {
 #' @param d An `Normal` object created by a call to [Normal()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return A vector of length 2 with the minimum and maximum value of the support.
+#' @return In case of a single distribution object, a numeric vector of length 2 
+#' with the minimum and maximum value of the support (if `drop = TRUE`, default)
+#' or a `matrix` with 2 columns. In case of a vectorized distribution object, a
+#' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
 support.Normal <- function(d, drop = TRUE) {
@@ -365,5 +366,5 @@ support.Normal <- function(d, drop = TRUE) {
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }
