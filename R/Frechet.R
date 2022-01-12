@@ -97,10 +97,11 @@ mean.Frechet <- function(x, ...) {
   a <- x$shape
   m <- x$location
   s <- x$scale
-  ifelse(a > 1,
+  rval <- ifelse(a > 1,
     m + s * gamma(1 - 1 / a),
     Inf
   )
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -108,10 +109,11 @@ variance.Frechet <- function(x, ...) {
   a <- x$shape
   m <- x$location
   s <- x$scale
-  ifelse(a > 2,
+  rval <- ifelse(a > 2,
     s^2 * (gamma(1 - 2 / a) - gamma(1 - 1 / a)^2),
     Inf
   )
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -119,7 +121,7 @@ skewness.Frechet <- function(x, ...) {
   a <- x$shape
   m <- x$location
   s <- x$scale
-  ifelse(a > 3,
+  rval <- ifelse(a > 3,
     {
       g1 <- gamma(1 - 1 / a)
       g2 <- gamma(1 - 2 / a)
@@ -130,6 +132,7 @@ skewness.Frechet <- function(x, ...) {
     },
     Inf
   )
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -137,7 +140,7 @@ kurtosis.Frechet <- function(x, ...) {
   a <- x$shape
   m <- x$locations
   s <- x$scale
-  ifelse(a > 4,
+  rval <- ifelse(a > 4,
     {
       g1 <- gamma(1 - 1 / a)
       g2 <- gamma(1 - 2 / a)
@@ -149,6 +152,7 @@ kurtosis.Frechet <- function(x, ...) {
     },
     Inf
   )
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Frechet distribution
@@ -161,14 +165,17 @@ kurtosis.Frechet <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- d$location + d$scale
@@ -176,7 +183,7 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::rgev(n = length(d), loc = loc, scale = scale, shape = shape)
   }
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Frechet distribution
@@ -191,11 +198,10 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Frechet <- function(d, x, drop = TRUE, ...) {
@@ -206,7 +212,7 @@ pdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Frechet
@@ -220,7 +226,7 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, log = TRUE)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Frechet distribution
@@ -235,11 +241,10 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Frechet <- function(d, x, drop = TRUE, ...) {
@@ -250,7 +255,7 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::pgev(q = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Frechet distribution
@@ -266,11 +271,11 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.Frechet <- function(x, probs, drop = TRUE, ...) {
@@ -282,5 +287,5 @@ quantile.Frechet <- function(x, probs, drop = TRUE, ...) {
     shape <- 1 / x$shape
     revdbayes::qgev(p = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }

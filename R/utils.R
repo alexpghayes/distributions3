@@ -44,11 +44,11 @@ apply_dpqr <- function(d,
   k <- length(at)
 
   ## handle different types of "at"
-  if(k == 0L) {
+  if (k == 0L) {
     return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
-  } else if(k == 1L) {
+  } else if (k == 1L) {
     at <- rep.int(as.vector(at), n)
-  } else if(k == n && is.null(dim(at))) {
+  } else if (k == n && is.null(dim(at))) {
     k <- 1L
   } else {
     at <- as.vector(at)
@@ -56,26 +56,26 @@ apply_dpqr <- function(d,
   }
 
   ## "at" labels
-  cnam <- paste(substr(type, 1L, 1L), if(all(at == 1L)) seq_len(k) else anam, sep = "_")
+  cnam <- paste(substr(type, 1L, 1L), if (all(at == 1L)) seq_len(k) else anam, sep = "_")
 
   ## handle zero-length distribution vector
-  if(n == 0L) {
+  if (n == 0L) {
     return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
   }
 
   ## call FUN
-  rval <- if(k == 1L) {
+  rval <- if (k == 1L) {
     FUN(at, d = d, ...)
   } else {
     vapply(at, FUN, numeric(n), d = d, ...)
   }
 
   ## handle dimensions
-  if(k == 1L && drop) {
+  if (k == 1L && drop) {
     rval <- as.vector(rval)
     names(rval) <- rnam
   } else if (length(anam) > k) {
-    cnam <- type 
+    cnam <- type
     rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
   } else if (drop) {
     rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
@@ -111,7 +111,9 @@ length.distribution <- function(x) length(unclass(x)[[1L]])
 #' @export
 format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
   cl <- class(x)[1L]
-  if (length(x) < 1L) return(character(0))
+  if (length(x) < 1L) {
+    return(character(0))
+  }
   n <- names(x)
   if (is.null(attr(x, "row.names"))) attr(x, "row.names") <- 1L:length(x)
   class(x) <- "data.frame"
@@ -226,6 +228,6 @@ make_positive_integer <- function(n) {
   n <- if (length(n) > 1L) length(n) else suppressWarnings(try(as.integer(n), silent = TRUE))
   if (inherits(n, "try-error") || is.na(n) || n < 0L) {
     stop("Invalid arguments")
-  } 
+  }
   n
 }

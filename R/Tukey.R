@@ -62,16 +62,15 @@ Tukey <- function(nmeans, df, nranges) {
 #'
 #' @family Tukey distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Tukey <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) ptukey(q = at, nmeans = d$nmeans, df = d$df, nranges = d$nranges, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Tukey distribution
@@ -85,11 +84,11 @@ cdf.Tukey <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Tukey distribution
@@ -97,7 +96,7 @@ cdf.Tukey <- function(d, x, drop = TRUE, ...) {
 quantile.Tukey <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qtukey(p = at, nmeans = x$nmeans, df = x$df, nranges = x$nranges, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
@@ -116,5 +115,5 @@ support.Tukey <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

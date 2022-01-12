@@ -124,30 +124,32 @@ g <- function(d, k) gamma(1 - k * d$xi)
 mean.GEV <- function(x, ...) {
   ellipsis::check_dots_used()
   euler <- -digamma(1)
-  ifelse(x$xi == 0,
+  rval <- ifelse(x$xi == 0,
     x$mu + x$sigma * euler,
     ifelse(x$xi < 1,
       x$mu + x$sigma * (gamma(1 - x$xi) - 1) / x$xi,
       Inf
     )
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.GEV <- function(x, ...) {
   euler <- -digamma(1)
-  ifelse(x$xi == 0,
+  rval <- ifelse(x$xi == 0,
     x$sigma^2 * pi^2 / 6,
     ifelse(x$xi < 1 / 2,
       x$sigma^2 * (g(x, 2) - g(x, 1)^2) / x$xi^2,
       Inf
     )
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.GEV <- function(x, ...) {
-  ifelse(x$xi == 1,
+  rval <- ifelse(x$xi == 1,
     # no useful zeta fn without adding a dependency
     {
       zeta3 <- 1.202056903159594014596
@@ -164,11 +166,12 @@ skewness.GEV <- function(x, ...) {
       Inf
     )
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.GEV <- function(x, ...) {
-  ifelse(x$xi == 0,
+  rval <- ifelse(x$xi == 0,
     12 / 5,
     ifelse(x$xi < 1 / 3,
       {
@@ -181,6 +184,7 @@ kurtosis.GEV <- function(x, ...) {
       Inf
     )
   )
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a GEV distribution
@@ -193,16 +197,18 @@ kurtosis.GEV <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.GEV <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) revdbayes::rgev(n = length(d), loc = d$mu, scale = d$sigma, shape = d$xi)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a GEV distribution
@@ -217,16 +223,15 @@ random.GEV <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.GEV <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) revdbayes::dgev(x = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.GEV
@@ -234,7 +239,7 @@ pdf.GEV <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.GEV <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) revdbayes::dgev(x = at, loc = d$mu, scale = d$sigma, shape = d$xi, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a GEV distribution
@@ -249,16 +254,15 @@ log_pdf.GEV <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.GEV <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) revdbayes::pgev(q = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a GEV distribution
@@ -274,15 +278,15 @@ cdf.GEV <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.GEV <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) revdbayes::qgev(p = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }

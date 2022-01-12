@@ -204,13 +204,14 @@ kurtosis.Normal <- function(x, ...) {
 #'
 #' @return In case of a single distribution object or `n = 1`, either a numeric
 #'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
-#'   (if `drop = FALSE`). 
+#'   (if `drop = FALSE`).
 #' @export
-#'
 #'
 random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
   n <- make_positive_integer(n)
-  if (n == 0L) return(numeric(0L))
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rnorm(n = length(d), mean = d$mu, sd = d$sigma)
   apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
@@ -353,7 +354,7 @@ suff_stat.Normal <- function(d, x, ...) {
 #' @param d An `Normal` object created by a call to [Normal()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return In case of a single distribution object, a numeric vector of length 2 
+#' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
 #' or a `matrix` with 2 columns. In case of a vectorized distribution object, a
 #' matrix with 2 columns containing all minima and maxima.

@@ -46,21 +46,24 @@ Beta <- function(alpha = 1, beta = 1) {
 #' @export
 mean.Beta <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$alpha / (x$alpha + x$beta)
+  rval <- x$alpha / (x$alpha + x$beta)
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.Beta <- function(x, ...) {
   a <- x$alpha
   b <- x$beta
-  (a * b) / ((a + b)^2 * (a + b + 1))
+  rval <- (a * b) / ((a + b)^2 * (a + b + 1))
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.Beta <- function(x, ...) {
   a <- x$alpha
   b <- x$beta
-  2 * (b - a) * sqrt(a + b + 1) / (a + b + 2) * sqrt(a * b)
+  rval <- 2 * (b - a) * sqrt(a + b + 1) / (a + b + 2) * sqrt(a * b)
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -69,7 +72,8 @@ kurtosis.Beta <- function(x, ...) {
   b <- x$beta
   num <- 6 * ((a - b)^2 * (a + b + 1) - (a * b) * (a + b + 2))
   denom <- a * b * (a + b + 2) * (a + b + 3)
-  num / denom
+  rval <- num / denom
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Beta distribution
@@ -82,16 +86,18 @@ kurtosis.Beta <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return Values in `[0, 1]`. In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return Values in `[0, 1]`. In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rbeta(n = length(d), shape1 = x$alpha, shape2 = x$beta)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Beta distribution
@@ -106,16 +112,15 @@ random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Beta <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbeta(x = at, shape1 = d$alpha, shape2 = d$beta, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Beta
@@ -123,7 +128,7 @@ pdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.Beta <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbeta(x = at, shape1 = d$alpha, shape2 = d$beta, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Beta distribution
@@ -138,16 +143,15 @@ log_pdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Beta <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pbeta(q = at, shape1 = d$alpha, shape2 = d$beta, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Beta distribution
@@ -163,18 +167,18 @@ cdf.Beta <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.Beta <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
 
   FUN <- function(at, d) qbeta(at, shape1 = x$alpha, shape2 = x$beta, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
@@ -193,5 +197,5 @@ support.Beta <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(1, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

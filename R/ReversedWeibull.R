@@ -98,12 +98,14 @@ RevWeibull <- function(location = 0, scale = 1, shape = 1) {
 #' @export
 mean.RevWeibull <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$location + x$scale * gamma(1 + 1 / x$shape)
+  rval <- x$location + x$scale * gamma(1 + 1 / x$shape)
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.RevWeibull <- function(x, ...) {
-  x$scale^2 * gamma(1 + 2 / x$shape) - gamma(1 + 1 / x$shape)^2
+  rval <- x$scale^2 * gamma(1 + 2 / x$shape) - gamma(1 + 1 / x$shape)^2
+  setNames(rval, names(x))
 }
 
 
@@ -117,14 +119,17 @@ variance.RevWeibull <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.RevWeibull <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- d$location - d$scale
@@ -132,7 +137,7 @@ random.RevWeibull <- function(x, n = 1L, drop = TRUE, ...) {
     shape <- -1 / d$shape
     revdbayes::rgev(n = length(d), loc = loc, scale = scale, shape = shape)
   }
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of an RevWeibull distribution
@@ -147,11 +152,10 @@ random.RevWeibull <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
@@ -162,7 +166,7 @@ pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
     shape <- -1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.RevWeibull
@@ -176,7 +180,7 @@ log_pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
     shape <- -1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, log = TRUE)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an RevWeibull distribution
@@ -191,11 +195,10 @@ log_pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
@@ -206,7 +209,7 @@ cdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
     shape <- -1 / d$shape
     revdbayes::pgev(q = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a RevWeibull distribution
@@ -222,11 +225,11 @@ cdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.RevWeibull <- function(x, probs, drop = TRUE, ...) {
@@ -239,7 +242,7 @@ quantile.RevWeibull <- function(x, probs, drop = TRUE, ...) {
     shape <- -1 / d$shape
     revdbayes::qgev(p = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Return the support of the RevWeibull distribution
@@ -257,5 +260,5 @@ support.RevWeibull <- function(d, drop = TRUE) {
   min <- rep(-Inf, length(d))
   max <- d$location
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

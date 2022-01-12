@@ -57,27 +57,29 @@ mean.FisherF <- function(x, ...) {
 
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 2,
+  rval <- ifelse(d2 > 2,
     d2 / (d2 - 2),
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 4,
+  rval <- ifelse(d2 > 4,
     (2 * d2^2 * (d1 + d2 - 2)) / (d1 * (d2 - 2)^2 * (d2 - 4)),
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 6,
+  rval <- ifelse(d2 > 6,
     suppressWarnings({
       a <- (2 * d1 + d2 - 2) * sqrt(8 * (d2 - 4))
       b <- (d2 - 6) * sqrt(d1 * (d1 + d2 - 2))
@@ -85,13 +87,14 @@ skewness.FisherF <- function(x, ...) {
     }),
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.FisherF <- function(x, ...) {
   d1 <- x$df1
   d2 <- x$df2
-  ifelse(d2 > 8,
+  rval <- ifelse(d2 > 8,
     {
       a <- d1 * (5 * d2 - 22) * (d1 + d2 - 2) + (d2 - 4) * (d2 - 2)^2
       b <- d1 * (d2 - 6) * (d2 - 8) * (d1 + d2 - 2)
@@ -99,6 +102,7 @@ kurtosis.FisherF <- function(x, ...) {
     },
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from an F distribution
@@ -111,16 +115,18 @@ kurtosis.FisherF <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.FisherF <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rf(n = length(d), df1 = d$df1, df2 = d$df2, ncp = d$lambda)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of an F distribution
@@ -135,16 +141,15 @@ random.FisherF <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.FisherF <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) df(x = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.FisherF
@@ -152,7 +157,7 @@ pdf.FisherF <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.FisherF <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) df(x = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an F distribution
@@ -167,16 +172,15 @@ log_pdf.FisherF <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.FisherF <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pf(q = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of an F distribution
@@ -192,18 +196,18 @@ cdf.FisherF <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.FisherF <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
 
   FUN <- function(at, d) qf(at, df1 = x$df1, df2 = x$df2, ncp = x$lambda, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Return the support of the FisherF distribution
@@ -221,5 +225,5 @@ support.FisherF <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

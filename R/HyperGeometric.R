@@ -116,7 +116,8 @@ mean.HyperGeometric <- function(x, ...) {
   # n number of draws
   n <- x$k
 
-  n * K / N
+  rval <- n * K / N
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -125,7 +126,8 @@ variance.HyperGeometric <- function(x, ...) {
   K <- x$m
   n <- x$k
 
-  (n * K * (N - K) * (N - n)) / (N^2 * (N - 1))
+  rval <- (n * K * (N - K) * (N - n)) / (N^2 * (N - 1))
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -136,7 +138,8 @@ skewness.HyperGeometric <- function(x, ...) {
 
   a <- (N - 2 * K) * (N - 1)^0.5 * (N - 2 * n)
   b <- (n * K * (N - K) * (N - n))^0.5 * (N - 2)
-  a / b
+  rval <- a / b
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -145,7 +148,8 @@ kurtosis.HyperGeometric <- function(x, ...) {
   K <- x$m
   n <- x$k
 
-  1 / (n * K * (N - K) * (N - n) * (N - 2) * (N - 3))
+  rval <- 1 / (n * K * (N - K) * (N - n) * (N - 2) * (N - 3))
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a HyperGeometric distribution
@@ -164,16 +168,18 @@ kurtosis.HyperGeometric <- function(x, ...) {
 #'
 #' @family HyperGeometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.HyperGeometric <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rhyper(nn = length(d), m = d$m, n = d$n, k = d$k)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a HyperGeometric distribution
@@ -194,23 +200,22 @@ random.HyperGeometric <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family HyperGeometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dhyper(x = at, m = d$m, n = d$n, k = d$k, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.HyperGeometric
 #' @export
 log_pdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dhyper(x = at, m = d$m, n = d$n, k = d$k, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a HyperGeometric distribution
@@ -227,16 +232,15 @@ log_pdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family HyperGeometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) phyper(q = at, m = d$m, n = d$n, k = d$k, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a HyperGeometric distribution
@@ -250,11 +254,11 @@ cdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family HyperGeometric distribution
@@ -262,7 +266,7 @@ cdf.HyperGeometric <- function(d, x, drop = TRUE, ...) {
 quantile.HyperGeometric <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qhyper(p = at, m = d$m, n = d$n, k = d$k, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
@@ -280,5 +284,5 @@ support.HyperGeometric <- function(d, drop = TRUE) {
   min <- apply(cbind(0, d$k - d$n), 1, max)
   max <- apply(as.matrix(d)[, c("m", "k"), drop = FALSE], 1, min)
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

@@ -69,12 +69,14 @@ Weibull <- function(shape, scale) {
 #' @export
 mean.Weibull <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$scale * gamma(1 + 1 / x$shape)
+  rval <- x$scale * gamma(1 + 1 / x$shape)
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.Weibull <- function(x, ...) {
-  x$scale^2 * gamma(1 + 2 / x$shape) - unname(apply(as.matrix(x), 1, mean))^2
+  rval <- x$scale^2 * gamma(1 + 2 / x$shape) - unname(apply(as.matrix(x), 1, mean))^2
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -82,7 +84,8 @@ skewness.Weibull <- function(x, ...) {
   mu <- mean(x)
   sigma <- sqrt(variance(x))
   r <- mu / sigma
-  gamma(1 + 3 / x$shape) * (x$scale / sigma)^3 - 3 * r - 3^r
+  rval <- gamma(1 + 3 / x$shape) * (x$scale / sigma)^3 - 3 * r - 3^r
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -91,7 +94,8 @@ kurtosis.Weibull <- function(x, ...) {
   sigma <- sqrt(variance(x))
   gamma <- skewness(x)
   r <- mu / sigma
-  (x$scale / sigma)^4 * gamma(1 + 4 / x$shape) - 4 * gamma * r - 6 * r^2 - r^4 - 3
+  rval <- (x$scale / sigma)^4 * gamma(1 + 4 / x$shape) - 4 * gamma * r - 6 * r^2 - r^4 - 3
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Weibull distribution
@@ -106,16 +110,18 @@ kurtosis.Weibull <- function(x, ...) {
 #'
 #' @family Weibull distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Weibull <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rweibull(n = length(d), shape = d$shape, scale = d$scale)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Weibull distribution
@@ -136,23 +142,22 @@ random.Weibull <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family Weibull distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Weibull <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dweibull(x = at, shape = d$shape, scale = d$scale, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Weibull
 #' @export
 log_pdf.Weibull <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dweibull(x = at, shape = d$shape, scale = d$scale, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Weibull distribution
@@ -169,16 +174,15 @@ log_pdf.Weibull <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Weibull distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Weibull <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pweibull(q = at, shape = d$shape, scale = d$scale, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Weibull distribution
@@ -192,11 +196,11 @@ cdf.Weibull <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Weibull distribution
@@ -204,7 +208,7 @@ cdf.Weibull <- function(d, x, drop = TRUE, ...) {
 quantile.Weibull <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qweibull(p = at, shape = x$shape, scale = x$scale, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
@@ -223,5 +227,5 @@ support.Weibull <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

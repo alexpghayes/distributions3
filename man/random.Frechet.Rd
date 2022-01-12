@@ -17,11 +17,9 @@
 catch mispellings or other possible errors.}
 }
 \value{
-In case of a single distribution object, a numeric
-vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{data.frame}
-with \code{n} columns. In case of a vectorized distribution
-object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
-with \code{n} columns.
+In case of a single distribution object or \code{n = 1}, either a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{matrix} with \code{n} columns
+(if \code{drop = FALSE}).
 }
 \description{
 Draw a random sample from a Frechet distribution

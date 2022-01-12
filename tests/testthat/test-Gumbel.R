@@ -26,22 +26,22 @@ test_that("random.Gumbel works correctly", {
 
 test_that("pdf.Gumbel works correctly", {
   p <- pvec[2:4]
-  expect_equal(pdf(g2, x2), c(0, exp(-1), 0, NA))
-  expect_equal(pdf(g2, quantile(g2, p)), (-log(p))^(1 + xi2) * p)
+  expect_equal(unname(pdf(g2, x2)), c(0, exp(-1), 0, NA))
+  expect_equal(unname(pdf(g2, quantile(g2, p))), (-log(p))^(1 + xi2) * p)
   expect_length(pdf(g2, seq_len(0)), 0)
   expect_length(pdf(g2, seq_len(1)), 1)
   expect_length(pdf(g2, seq_len(10)), 10)
 })
 
 test_that("log_pdf.Gumbel works correctly", {
-  expect_equal(log_pdf(g2, x2), c(-Inf, -1, -Inf, NA))
+  expect_equal(unname(log_pdf(g2, x2)), c(-Inf, -1, -Inf, NA))
   expect_length(log_pdf(g2, seq_len(0)), 0)
   expect_length(log_pdf(g2, seq_len(1)), 1)
   expect_length(log_pdf(g2, seq_len(10)), 10)
 })
 
 test_that("cdf.Gumbel works correctly", {
-  expect_equal(cdf(g2, x2), c(0, exp(-1), 1, NA))
+  expect_equal(unname(cdf(g2, x2)), c(0, exp(-1), 1, NA))
   expect_length(cdf(g2, seq_len(0)), 0)
   expect_length(cdf(g2, seq_len(1)), 1)
   expect_length(cdf(g2, seq_len(10)), 10)
@@ -49,14 +49,14 @@ test_that("cdf.Gumbel works correctly", {
 
 test_that("quantile.Gumbel works correctly", {
   q2 <- -log(-log(pvec[2:4]))
-  expect_equal(quantile(g2, pvec), c(-Inf, q2, Inf, NA))
+  expect_equal(unname(quantile(g2, pvec)), c(-Inf, q2, Inf, NA))
   expect_length(quantile(g2, seq_len(0)), 0)
   expect_length(quantile(g2, c(0, 1)), 2)
   expect_length(quantile(g2, seq_len(10) / 10), 10)
 })
 
 test_that("cdf.Gumbel and quantile.Gumbel are consistent", {
-  expect_equal(cdf(g2, quantile(g2, pvec)), pvec)
+  expect_equal(unname(cdf(g2, quantile(g2, pvec))), pvec)
 })
 
 test_that("vectorization of a Gumbel distribution work correctly", {
@@ -64,40 +64,53 @@ test_that("vectorization of a Gumbel distribution work correctly", {
   d1 <- d[1]
   d2 <- d[2]
 
+  ## moments
   expect_equal(mean(d), c(mean(d1), mean(d2)))
   expect_equal(variance(d), c(variance(d1), variance(d2)))
   expect_equal(skewness(d), c(skewness(d1), skewness(d2)))
   expect_equal(kurtosis(d), c(kurtosis(d1), kurtosis(d2)))
 
+  ## random
   set.seed(123)
   r1 <- random(d)
   set.seed(123)
   r2 <- c(random(d1), random(d2))
   expect_equal(r1, r2)
 
+  ## pdf, log_pdf, cdf
   expect_equal(pdf(d, 0), c(pdf(d1, 0), pdf(d2, 0)))
   expect_equal(log_pdf(d, 0), c(log_pdf(d1, 0), log_pdf(d2, 0)))
   expect_equal(cdf(d, 0.5), c(cdf(d1, 0.5), cdf(d2, 0.5)))
 
+  ## quantile
   expect_equal(quantile(d, 0.5), c(quantile(d1, 0.5), quantile(d2, 0.5)))
-  expect_equal(
-    quantile(d, c(0.5, 0.5)),
-    matrix(
-      c(quantile(d1, c(0.5, 0.5)), quantile(d2, c(0.5, 0.5))),
-      nrow = 2,
-      ncol = 2,
-      byrow = TRUE,
-      dimnames = list(NULL, c("q_0.5", "q_0.5_1"))
-    )
-  )
+  expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
-    matrix(
-      c(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
-      nrow = 2,
-      ncol = 3,
-      byrow = TRUE,
-      dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
-    )
+    rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9)))
   )
+})
+
+test_that("named return values for Normal distribution work correctly", {
+  d <- Normal(c(0, 10), c(1, 1))
+  names(d) <- LETTERS[1:length(d)]
+
+  expect_equal(names(mean(d)), LETTERS[1:length(d)])
+  expect_equal(names(variance(d)), LETTERS[1:length(d)])
+  expect_equal(names(skewness(d)), LETTERS[1:length(d)])
+  expect_equal(names(kurtosis(d)), LETTERS[1:length(d)])
+  expect_equal(names(random(d, 1)), LETTERS[1:length(d)])
+  expect_equal(rownames(random(d, 3)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, 0.5)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
+  expect_equal(rownames(pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, 0.5)), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
+  expect_equal(rownames(log_pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, 0.5)), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
+  expect_equal(rownames(cdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
+  expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
+  expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
 })

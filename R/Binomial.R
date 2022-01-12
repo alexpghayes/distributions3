@@ -104,18 +104,23 @@ Binomial <- function(size, p = 0.5) {
 #' @export
 mean.Binomial <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$size * x$p
+  rval <- x$size * x$p
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Binomial <- function(x, ...) x$size * x$p * (1 - x$p)
+variance.Binomial <- function(x, ...) {
+  rval <- x$size * x$p * (1 - x$p)
+  setNames(rval, names(x))
+}
 
 #' @export
 skewness.Binomial <- function(x, ...) {
   n <- x$size
   p <- x$p
   q <- 1 - x$p
-  (1 - (2 * p)) / sqrt(n * p * q)
+  rval <- (1 - (2 * p)) / sqrt(n * p * q)
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -123,7 +128,8 @@ kurtosis.Binomial <- function(x, ...) {
   n <- x$size
   p <- x$p
   q <- 1 - x$p
-  (1 - (6 * p * q)) / (n * p * q)
+  rval <- (1 - (6 * p * q)) / (n * p * q)
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Binomial distribution
@@ -137,16 +143,18 @@ kurtosis.Binomial <- function(x, ...) {
 #'   catch mispellings or other possible errors.
 #'
 #' @return Integers containing values between `0` and `x$size`.
-#' In case of a single distribution object, a numeric
-#' vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#' with `n` columns. In case of a vectorized distribution
-#' object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#' with `n` columns.
+#'   In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Binomial <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rbinom(n = length(d), size = x$size, prob = x$p)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Binomial distribution
@@ -161,23 +169,22 @@ random.Binomial <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Binomial <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Binomial
 #' @export
 log_pdf.Binomial <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Binomial distribution
@@ -192,16 +199,15 @@ log_pdf.Binomial <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Binomial <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pbinom(q = at, size = d$size, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Binomial distribution
@@ -217,17 +223,17 @@ cdf.Binomial <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.Binomial <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qbinom(at, size = x$size, prob = x$p, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Binomial distribution to data
@@ -282,5 +288,5 @@ support.Binomial <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- d$size
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

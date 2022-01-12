@@ -95,24 +95,29 @@ Bernoulli <- function(p = 0.5) {
 #' @export
 mean.Bernoulli <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$p
+  setNames(x$p, names(x))
 }
 
 #' @export
-variance.Bernoulli <- function(x, ...) x$p * (1 - x$p)
+variance.Bernoulli <- function(x, ...) {
+  rval <- x$p * (1 - x$p)
+  setNames(rval, names(x))
+}
 
 #' @export
 skewness.Bernoulli <- function(x, ...) {
   p <- x$p
   q <- 1 - x$p
-  (1 - (2 * p)) / sqrt(p * q)
+  rval <- (1 - (2 * p)) / sqrt(p * q)
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.Bernoulli <- function(x, ...) {
   p <- x$p
   q <- 1 - x$p
-  (1 - (6 * p * q)) / (p * q)
+  rval <- (1 - (6 * p * q)) / (p * q)
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Bernoulli distribution
@@ -125,16 +130,18 @@ kurtosis.Bernoulli <- function(x, ...) {
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return Values of zeros and ones. In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Bernoulli <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rbinom(n = length(d), size = 1, prob = x$p)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Bernoulli distribution
@@ -149,16 +156,15 @@ random.Bernoulli <- function(x, n = 1L, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbinom(x = at, size = 1, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Bernoulli
@@ -166,7 +172,7 @@ pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dbinom(x = at, size = 1, prob = d$p, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Bernoulli distribution
@@ -181,16 +187,15 @@ log_pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pbinom(q = at, size = 1, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Bernoulli distribution
@@ -206,18 +211,18 @@ cdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 quantile.Bernoulli <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
 
   FUN <- function(at, d) qbinom(at, size = 1, prob = x$p, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Bernoulli distribution to data
@@ -265,5 +270,5 @@ support.Bernoulli <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(1, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

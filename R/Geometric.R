@@ -73,16 +73,26 @@ Geometric <- function(p = 0.5) {
 #' @export
 mean.Geometric <- function(x, ...) {
   ellipsis::check_dots_used()
-  1 / x$p
+  rval <- 1 / x$p
+  setNames(rval, names(x))
 }
 #' @export
-variance.Geometric <- function(x, ...) (1 - x$p) / x$p^2
+variance.Geometric <- function(x, ...) {
+  rval <- (1 - x$p) / x$p^2
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Geometric <- function(x, ...) (2 - x$p) / sqrt(1 - x$p)
+skewness.Geometric <- function(x, ...) {
+  rval <- (2 - x$p) / sqrt(1 - x$p)
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Geometric <- function(x, ...) 6 + (x$p^2 / (1 - x$p))
+kurtosis.Geometric <- function(x, ...) {
+  rval <- 6 + (x$p^2 / (1 - x$p))
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a Geometric distribution
 #'
@@ -100,16 +110,18 @@ kurtosis.Geometric <- function(x, ...) 6 + (x$p^2 / (1 - x$p))
 #'
 #' @family Geometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rgeom(n = length(d), prob = d$p)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Geometric distribution
@@ -130,16 +142,15 @@ random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family Geometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Geometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dgeom(x = at, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Geometric
@@ -147,7 +158,7 @@ pdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dgeom(x = at, prob = d$p, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Geometric distribution
@@ -164,16 +175,15 @@ log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Geometric distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Geometric <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pgeom(q = at, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Geometric distribution
@@ -187,11 +197,11 @@ cdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Geometric distribution
@@ -199,7 +209,7 @@ cdf.Geometric <- function(d, x, drop = TRUE, ...) {
 quantile.Geometric <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qgeom(p = at, prob = d$p, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Geometric distribution to data
@@ -251,5 +261,5 @@ support.Geometric <- function(d, drop = TRUE) {
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

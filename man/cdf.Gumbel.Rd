@@ -19,11 +19,10 @@ Unevaluated arguments will generate a warning to catch mispellings or other
 possible errors.}
 }
 \value{
-In case of a single distribution object, a numeric
-vector of cumulative probabilities of length \code{x} (if \code{drop = TRUE}, default)
-or a \code{data.frame} with \code{n} columns. In case of a vectorized distribution
-object, either a matrix (if \code{drop = TRUE}, default) or a \code{data.frame}
-with \code{n} columns, containing all possible combinations.
+In case of a single distribution object, either a numeric
+vector of length \code{probs} (if \code{drop = TRUE}, default) or a \code{matrix} with
+\code{length(x)} columns (if \code{drop = FALSE}). In case of a vectorized distribution
+object, a matrix with \code{length(x)} columns containing all possible combinations.
 }
 \description{
 Evaluate the cumulative distribution function of a Gumbel distribution

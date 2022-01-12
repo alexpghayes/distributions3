@@ -84,17 +84,27 @@ Logistic <- function(location = 0, scale = 1) {
 #' @export
 mean.Logistic <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$location
+  rval <- x$location
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Logistic <- function(x, ...) x$scale^2 * pi^2 / 3
+variance.Logistic <- function(x, ...) {
+  rval <- x$scale^2 * pi^2 / 3
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Logistic <- function(x, ...) rep.int(0, length(x))
+skewness.Logistic <- function(x, ...) {
+  rval <- rep.int(0, length(x))
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Logistic <- function(x, ...) rep(6 / 5, length(x))
+kurtosis.Logistic <- function(x, ...) {
+  rval <- rep(6 / 5, length(x))
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a Logistic distribution
 #'
@@ -108,16 +118,18 @@ kurtosis.Logistic <- function(x, ...) rep(6 / 5, length(x))
 #'
 #' @family Logistic distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.Logistic <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rlogis(n = length(d), location = d$location, scale = d$scale)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Logistic distribution
@@ -138,23 +150,22 @@ random.Logistic <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family Logistic distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.Logistic <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dlogis(x = at, location = d$location, scale = d$scale, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Logistic
 #' @export
 log_pdf.Logistic <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dlogis(x = at, location = d$location, scale = d$scale, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Logistic distribution
@@ -171,16 +182,15 @@ log_pdf.Logistic <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Logistic distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.Logistic <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) plogis(q = at, location = d$location, scale = d$scale, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Logistic distribution
@@ -194,11 +204,11 @@ cdf.Logistic <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Logistic distribution
@@ -206,7 +216,7 @@ cdf.Logistic <- function(d, x, drop = TRUE, ...) {
 quantile.Logistic <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qlogis(p = at, location = d$location, scale = d$scale, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Return the support of the Logistic distribution
@@ -224,5 +234,5 @@ support.Logistic <- function(d, drop = TRUE) {
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }

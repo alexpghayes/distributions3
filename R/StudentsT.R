@@ -121,40 +121,44 @@ StudentsT <- function(df) {
 #' @export
 mean.StudentsT <- function(x, ...) {
   ellipsis::check_dots_used()
-  ifelse(x$df > 1,
+  rval <- ifelse(x$df > 1,
     0,
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.StudentsT <- function(x, ...) {
-  ifelse(x$df > 2,
+  rval <- ifelse(x$df > 2,
     x$df / (x$df - 2),
     ifelse(x$df > 1,
       Inf,
       NaN
     )
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.StudentsT <- function(x, ...) {
-  ifelse(x$df > 3,
+  rval <- ifelse(x$df > 3,
     0,
     NaN
   )
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.StudentsT <- function(x, ...) {
-  ifelse(x$df > 4,
+  rval <- ifelse(x$df > 4,
     6 / (x$df - 4),
     ifelse(x$df > 2,
       Inf,
       NaN
     )
   )
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a StudentsT distribution
@@ -173,16 +177,18 @@ kurtosis.StudentsT <- function(x, ...) {
 #'
 #' @family StudentsT distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of length `n` (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
 random.StudentsT <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
   FUN <- function(at, d) rt(n = length(d), df = d$df)
-  apply_dpqr(d = x, FUN = FUN, at = rep.int(1, n), type_prefix = "r", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a StudentsT distribution
@@ -203,16 +209,15 @@ random.StudentsT <- function(x, n = 1L, drop = TRUE, ...) {
 #'
 #' @family StudentsT distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dt(x = at, df = d$df, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "d", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.StudentsT
@@ -220,7 +225,7 @@ pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 #'
 log_pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) dt(x = at, df = d$df, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "l", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a StudentsT distribution
@@ -237,16 +242,15 @@ log_pdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family StudentsT distribution
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of cumulative probabilities of length `x` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
 cdf.StudentsT <- function(d, x, drop = TRUE, ...) {
   FUN <- function(at, d) pt(q = at, df = d$df, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type_prefix = "p", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a StudentsT distribution
@@ -271,11 +275,11 @@ cdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
 #'
-#' @return In case of a single distribution object, a numeric
-#'   vector of quantiles of length `probs` (if `drop = TRUE`, default)
-#'   or a `data.frame` with `n` columns. In case of a vectorized distribution
-#'   object, either a matrix (if `drop = TRUE`, default) or a `data.frame`
-#'   with `n` columns, containing all possible combinations.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family StudentsT distribution
@@ -283,7 +287,7 @@ cdf.StudentsT <- function(d, x, drop = TRUE, ...) {
 quantile.StudentsT <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   FUN <- function(at, d) qt(p = at, df = x$df, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type_prefix = "q", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
@@ -302,5 +306,5 @@ support.StudentsT <- function(d, drop = TRUE) {
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
 
-  make_support(min, max, drop = drop)
+  make_support(min, max, d, drop = drop)
 }
