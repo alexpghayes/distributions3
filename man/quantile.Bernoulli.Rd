@@ -4,18 +4,25 @@
 \alias{quantile.Bernoulli}
 \title{Determine quantiles of a Bernoulli distribution}
 \usage{
-\method{quantile}{Bernoulli}(x, probs, ...)
+\method{quantile}{Bernoulli}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Bernoulli} object created by a call to \code{\link[=Bernoulli]{Bernoulli()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qbinom}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{probs}.
+In case of a single distribution object, either a numeric
+vector of length \code{probs} (if \code{drop = TRUE}, default) or a \code{matrix} with
+\code{length(probs)} columns (if \code{drop = FALSE}). In case of a vectorized
+distribution object, a matrix with \code{length(probs)} columns containing all
+possible combinations.
 }
 \description{
 \code{quantile()} is the inverse of \code{cdf()}.
@@ -40,5 +47,4 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
-
 }

@@ -4,18 +4,22 @@
 \alias{random.Geometric}
 \title{Draw a random sample from a Geometric distribution}
 \usage{
-\method{random}{Geometric}(x, n = 1L, ...)
+\method{random}{Geometric}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector of length \code{n}.
+In case of a single distribution object or \code{n = 1}, either a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{matrix} with \code{n} columns
+(if \code{drop = FALSE}).
 }
 \description{
 Please see the documentation of \code{\link[=Geometric]{Geometric()}} for some properties
@@ -36,7 +40,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Geometric distribution: 

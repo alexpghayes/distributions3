@@ -4,18 +4,25 @@
 \alias{quantile.LogNormal}
 \title{Determine quantiles of a LogNormal distribution}
 \usage{
-\method{quantile}{LogNormal}(x, probs, ...)
+\method{quantile}{LogNormal}(x, probs, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{LogNormal} object created by a call to \code{\link[=LogNormal]{LogNormal()}}.}
 
 \item{probs}{A vector of probabilities.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{qlnorm}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
-A vector of quantiles, one for each element of \code{probs}.
+In case of a single distribution object, either a numeric
+vector of length \code{probs} (if \code{drop = TRUE}, default) or a \code{matrix} with
+\code{length(probs)} columns (if \code{drop = FALSE}). In case of a vectorized
+distribution object, a matrix with \code{length(probs)} columns containing all
+possible combinations.
 }
 \description{
 Determine quantiles of a LogNormal distribution
@@ -34,7 +41,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other LogNormal distribution: 

@@ -91,31 +91,36 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Binomial <- function(size, p = 0.5) {
-  d <- list(size = size, p = p)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(size) == length(p) | length(size) == 1 | length(p) == 1
+  )
+
+  d <- data.frame(size = size, p = p)
   class(d) <- c("Binomial", "distribution")
   d
 }
 
 #' @export
-print.Binomial <- function(x, ...) {
-  cat(glue("Binomial distribution (size = {x$size}, p = {x$p})"), "\n")
-}
-
-#' @export
 mean.Binomial <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$size * x$p
+  rval <- x$size * x$p
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Binomial <- function(x, ...) x$size * x$p * (1 - x$p)
+variance.Binomial <- function(x, ...) {
+  rval <- x$size * x$p * (1 - x$p)
+  setNames(rval, names(x))
+}
 
 #' @export
 skewness.Binomial <- function(x, ...) {
   n <- x$size
   p <- x$p
   q <- 1 - x$p
-  (1 - (2 * p)) / sqrt(n * p * q)
+  rval <- (1 - (2 * p)) / sqrt(n * p * q)
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -123,7 +128,8 @@ kurtosis.Binomial <- function(x, ...) {
   n <- x$size
   p <- x$p
   q <- 1 - x$p
-  (1 - (6 * p * q)) / (n * p * q)
+  rval <- (1 - (6 * p * q)) / (n * p * q)
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Binomial distribution
@@ -132,15 +138,23 @@ kurtosis.Binomial <- function(x, ...) {
 #'
 #' @param x A `Binomial` object created by a call to [Binomial()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return An integer vector containing values between `0` and `x$size`
-#'   of length `n`.
+#' @return Integers containing values between `0` and `x$size`.
+#'   In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.Binomial <- function(x, n = 1L, ...) {
-  rbinom(n = n, size = x$size, prob = x$p)
+random.Binomial <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rbinom(n = length(d), size = x$size, prob = x$p)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Binomial distribution
@@ -150,20 +164,27 @@ random.Binomial <- function(x, n = 1L, ...) {
 #' @param d A `Binomial` object created by a call to [Binomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Binomial <- function(d, x, ...) {
-  dbinom(x = x, size = d$size, prob = d$p)
+pdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Binomial
 #' @export
-log_pdf.Binomial <- function(d, x, ...) {
-  dbinom(x = x, size = d$size, prob = d$p, log = TRUE)
+log_pdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = d$size, prob = d$p, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Binomial distribution
@@ -173,14 +194,20 @@ log_pdf.Binomial <- function(d, x, ...) {
 #' @param d A `Binomial` object created by a call to [Binomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Binomial <- function(d, x, ...) {
-  pbinom(q = x, size = d$size, prob = d$p)
+cdf.Binomial <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pbinom(q = at, size = d$size, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Binomial distribution
@@ -191,15 +218,22 @@ cdf.Binomial <- function(d, x, ...) {
 #' @inheritParams random.Binomial
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Shoul the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.Binomial <- function(x, probs, ...) {
+quantile.Binomial <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qbinom(p = probs, size = x$size, prob = x$p)
+  FUN <- function(at, d) qbinom(at, size = x$size, prob = x$p, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Binomial distribution to data
@@ -242,9 +276,17 @@ suff_stat.Binomial <- function(d, x, ...) {
 #' Return the support of the Binomial distribution
 #'
 #' @param d An `Binomial` object created by a call to [Binomial()].
+#' @param drop logical. Shoul the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Binomial <- function(d) c(0, d$size)
+support.Binomial <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
 
+  min <- rep(0, length(d))
+  max <- d$size
+
+  make_support(min, max, d, drop = drop)
+}

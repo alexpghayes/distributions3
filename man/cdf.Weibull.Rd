@@ -4,7 +4,7 @@
 \alias{cdf.Weibull}
 \title{Evaluate the cumulative distribution function of a Weibull distribution}
 \usage{
-\method{cdf}{Weibull}(d, x, ...)
+\method{cdf}{Weibull}(d, x, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
@@ -12,11 +12,17 @@
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{pweibull}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of \code{x}.
+In case of a single distribution object, either a numeric
+vector of length \code{probs} (if \code{drop = TRUE}, default) or a \code{matrix} with
+\code{length(x)} columns (if \code{drop = FALSE}). In case of a vectorized distribution
+object, a matrix with \code{length(x)} columns containing all possible combinations.
 }
 \description{
 Evaluate the cumulative distribution function of a Weibull distribution
@@ -35,7 +41,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Weibull distribution: 

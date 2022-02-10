@@ -4,18 +4,22 @@
 \alias{random.Normal}
 \title{Draw a random sample from a Normal distribution}
 \usage{
-\method{random}{Normal}(x, n = 1L, ...)
+\method{random}{Normal}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-A numeric vector of length \code{n}.
+In case of a single distribution object or \code{n = 1}, either a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{matrix} with \code{n} columns
+(if \code{drop = FALSE}).
 }
 \description{
 Please see the documentation of \code{\link[=Normal]{Normal()}} for some properties
@@ -107,5 +111,4 @@ ks.test(ns, pgamma, shape = 8, rate = 3)
 # note that the cdf() and quantile() functions are inverses
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 7))
-
 }

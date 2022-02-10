@@ -92,17 +92,22 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 GP <- function(mu = 0, sigma = 1, xi = 0) {
-  if (sigma <= 0) {
+  if (any(sigma <= 0)) {
     stop("sigma must be positive")
   }
-  d <- list(mu = mu, sigma = sigma, xi = xi)
+
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(mu) == length(sigma) & length(mu) == length(xi) |
+        sum(c(length(mu) == 1, length(sigma) == 1, length(xi) == 1)) >= 2 |
+        length(mu) == length(sigma) & length(xi) == 1 |
+        length(mu) == length(xi) & length(sigma) == 1 |
+        length(sigma) == length(xi) & length(mu) == 1
+  )
+
+  d <- data.frame(mu = mu, sigma = sigma, xi = xi)
   class(d) <- c("GP", "distribution")
   d
-}
-
-#' @export
-print.GP <- function(x, ...) {
-  cat(glue("GP distribution (mu = {x$mu}, sigma = {x$sigma}, xi = {x$xi})\n"))
 }
 
 #' @export
@@ -112,8 +117,11 @@ mean.GP <- function(x, ...) {
   sigma <- x$sigma
   xi <- x$xi
 
-  if (xi < 1) mu + sigma / (1 - xi)
-  else Inf
+  rval <- ifelse(xi < 1,
+    mu + sigma / (1 - xi),
+    Inf
+  )
+  setNames(rval, names(x))
 }
 
 #' @export
@@ -121,29 +129,37 @@ variance.GP <- function(x, ...) {
   sigma <- x$sigma
   xi <- x$xi
 
-  if (xi < 1/2) sigma^2 / ((1 - xi)^2 - (1 - 2*xi))
-  else Inf
+  rval <- ifelse(xi < 1 / 2,
+    sigma^2 / ((1 - xi)^2 - (1 - 2 * xi)),
+    Inf
+  )
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.GP <- function(x, ...) {
   xi <- x$xi
 
-  if (xi < 1/3) 2*(1 + xi) * sqrt(1 - 2*xi) / (1 - 3*xi)
-  else Inf
+  rval <- ifelse(xi < 1 / 3,
+    2 * (1 + xi) * sqrt(1 - 2 * xi) / (1 - 3 * xi),
+    Inf
+  )
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.GP <- function(x, ...) {
   xi <- x$xi
 
-  if (xi < 1/4) {
-    k1 <- (1 - 2*xi) * (2*xi^2 + xi + 3)
-    k2 <- (1 - 3*xi) * (1 - 4*xi)
-    3 * k1 / k2 - 3
-  } else {
+  rval <- ifelse(xi < 1 / 4,
+    {
+      k1 <- (1 - 2 * xi) * (2 * xi^2 + xi + 3)
+      k2 <- (1 - 3 * xi) * (1 - 4 * xi)
+      3 * k1 / k2 - 3
+    },
     Inf
-  }
+  )
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a GP distribution
@@ -152,14 +168,22 @@ kurtosis.GP <- function(x, ...) {
 #'
 #' @param x A `GP` object created by a call to [GP()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.GP <- function(x, n = 1L, ...) {
-  revdbayes::rgp(n = n, loc = x$mu, scale = x$sigma, shape = x$xi)
+random.GP <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) revdbayes::rgp(n = length(d), loc = d$mu, scale = d$sigma, shape = d$xi)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a GP distribution
@@ -169,21 +193,28 @@ random.GP <- function(x, n = 1L, ...) {
 #' @param d A `GP` object created by a call to [GP()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.GP <- function(d, x, ...) {
-  revdbayes::dgp(x = x, loc = d$mu, scale = d$sigma, shape = d$xi)
+pdf.GP <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) revdbayes::dgp(x = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.GP
 #' @export
 #'
-log_pdf.GP <- function(d, x, ...) {
-  revdbayes::dgp(x = x, loc = d$mu, scale = d$sigma, shape = d$xi, log = TRUE)
+log_pdf.GP <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) revdbayes::dgp(x = at, loc = d$mu, scale = d$sigma, shape = d$xi, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a GP distribution
@@ -193,14 +224,20 @@ log_pdf.GP <- function(d, x, ...) {
 #' @param d A `GP` object created by a call to [GP()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.GP <- function(d, x, ...) {
-  revdbayes::pgp(q = x, loc = d$mu, scale = d$sigma, shape = d$xi)
+cdf.GP <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) revdbayes::pgp(q = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a GP distribution
@@ -211,13 +248,20 @@ cdf.GP <- function(d, x, ...) {
 #' @inheritParams random.GP
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgp}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.GP <- function(x, probs, ...) {
+quantile.GP <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  revdbayes::qgp(p = probs, loc = x$mu, scale = x$sigma, shape = x$xi)
+  FUN <- function(at, d) revdbayes::qgp(p = at, loc = d$mu, scale = d$sigma, shape = d$xi, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }

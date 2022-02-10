@@ -19,49 +19,48 @@ test_that("fit_mle() works", {
 })
 
 test_that("support() works", {
-  expect_equal(support(Normal()), c(-Inf, Inf))
+  expect_equal(unname(support(Normal())), c(-Inf, Inf))
 
-  expect_equal(support(Exponential()), c(0, Inf))
+  expect_equal(unname(support(Exponential())), c(0, Inf))
 
-  expect_equal(support(Binomial(size = 2)), c(0, 2))
-  expect_equal(support(Binomial(size = 12)), c(0, 12))
+  expect_equal(unname(support(Binomial(size = 2))), c(0, 2))
+  expect_equal(unname(support(Binomial(size = 12))), c(0, 12))
 
-  expect_equal(support(Gamma(1)), c(0, Inf))
+  expect_equal(unname(support(Gamma(1))), c(0, Inf))
 
-  expect_equal(support(LogNormal()), c(0, Inf))
+  expect_equal(unname(support(LogNormal())), c(0, Inf))
 
-  expect_equal(support(NegativeBinomial(size = 10)), c(0, Inf))
+  expect_equal(unname(support(NegativeBinomial(size = 10))), c(0, Inf))
 
-  expect_equal(support(Poisson(5)), c(0, Inf))
+  expect_equal(unname(support(Poisson(5))), c(0, Inf))
 
-  expect_equal(support(Weibull(shape = 1, scale = 4)), c(0, Inf))
+  expect_equal(unname(support(Weibull(shape = 1, scale = 4))), c(0, Inf))
 
-  expect_equal(support(Logistic()), c(-Inf, Inf))
+  expect_equal(unname(support(Logistic())), c(-Inf, Inf))
 
-  expect_equal(support(Bernoulli()), c(0,1))
+  expect_equal(unname(support(Bernoulli())), c(0, 1))
 
-  expect_equal(support(Beta()), c(0,1))
+  expect_equal(unname(support(Beta())), c(0, 1))
 
-  expect_equal(support(FisherF(df1 = 2, df2 = 5)), c(0, Inf))
+  expect_equal(unname(support(FisherF(df1 = 2, df2 = 5))), c(0, Inf))
 
-  expect_equal(support(Uniform(0,1)), c(0,1))
-  expect_equal(support(Uniform(-14,12)), c(-14,12))
+  expect_equal(unname(support(Uniform(0, 1))), c(0, 1))
+  expect_equal(unname(support(Uniform(-14, 12))), c(-14, 12))
 
-  expect_equal(support(Tukey(nmeans = 2, df = 17, nranges = 3)), c(0, Inf))
+  expect_equal(unname(support(Tukey(nmeans = 2, df = 17, nranges = 3))), c(0, Inf))
 
-  expect_equal(support(StudentsT(df = 2)), c(-Inf, Inf))
+  expect_equal(unname(support(StudentsT(df = 2))), c(-Inf, Inf))
 
-  expect_equal(support(HyperGeometric(m = 7, n = 4, k = 2)), c(0, 2))
-  expect_equal(support(HyperGeometric(m = 5, n = 1, k = 6)), c(5, 5))
+  expect_equal(unname(support(HyperGeometric(m = 7, n = 4, k = 2))), c(0, 2))
+  expect_equal(unname(support(HyperGeometric(m = 5, n = 1, k = 6))), c(5, 5))
 
-  expect_equal(support(Geometric()), c(0, Inf))
+  expect_equal(unname(support(Geometric())), c(0, Inf))
 
-  expect_equal(support(Geometric()), c(0, Inf))
+  expect_equal(unname(support(Geometric())), c(0, Inf))
 
-  expect_equal(support(Cauchy()), c(-Inf, Inf))
+  expect_equal(unname(support(Cauchy())), c(-Inf, Inf))
 
-  expect_equal(support(ChiSquare(df = 2)), c(0, Inf))
+  expect_equal(unname(support(ChiSquare(df = 2))), c(0, Inf))
 
   expect_error(support(1))
 })
-

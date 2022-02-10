@@ -59,16 +59,14 @@
 #'
 #' cdf(X, 4)
 #' quantile(X, 0.7)
-#'
 LogNormal <- function(log_mu = 0, log_sigma = 1) {
-  d <- list(log_mu = log_mu, log_sigma = log_sigma)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(log_mu) == length(log_sigma) | length(log_mu) == 1 | length(log_sigma) == 1
+  )
+  d <- data.frame(log_mu = log_mu, log_sigma = log_sigma)
   class(d) <- c("LogNormal", "distribution")
   d
-}
-
-#' @export
-print.LogNormal <- function(x, ...) {
-  cat(glue("Lognormal distribution (log_mu = {x$log_mu}, log_sigma = {x$log_sigma})"), "\n")
 }
 
 #' @export
@@ -76,28 +74,32 @@ mean.LogNormal <- function(x, ...) {
   ellipsis::check_dots_used()
   mu <- x$log_mu
   sigma <- x$log_sigma
-  exp(mu + sigma^2 / 2)
+  rval <- exp(mu + sigma^2 / 2)
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.LogNormal <- function(x, ...) {
   mu <- x$log_mu
   sigma <- x$log_sigma
-  (exp(sigma^2) - 1) * exp(2 * mu + sigma^2)
+  rval <- (exp(sigma^2) - 1) * exp(2 * mu + sigma^2)
+  setNames(rval, names(x))
 }
 
 #' @export
 skewness.LogNormal <- function(x, ...) {
   mu <- x$log_mu
   sigma <- x$log_sigma
-  (exp(sigma^2) + 2) * sqrt(exp(sigma^2) - 1)
+  rval <- (exp(sigma^2) + 2) * sqrt(exp(sigma^2) - 1)
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.LogNormal <- function(x, ...) {
   mu <- x$log_mu
   sigma <- x$log_sigma
-  exp(4 * sigma^2) + 2 * exp(3 * sigma^2) + 3 * exp(2 * sigma^2) - 6
+  rval <- exp(4 * sigma^2) + 2 * exp(3 * sigma^2) + 3 * exp(2 * sigma^2) - 6
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a LogNormal distribution
@@ -106,16 +108,24 @@ kurtosis.LogNormal <- function(x, ...) {
 #'
 #' @param x A `LogNormal` object created by a call to [LogNormal()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @family LogNormal distribution
 #'
-#' @return An integer vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.LogNormal <- function(x, n = 1L, ...) {
-  rlnorm(n = n, meanlog = x$log_mu, sdlog = x$log_sigma)
+random.LogNormal <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rlnorm(n = at, meanlog = d$log_mu, sdlog = d$log_sigma)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a LogNormal distribution
@@ -129,22 +139,29 @@ random.LogNormal <- function(x, n = 1L, ...) {
 #' @param d A `LogNormal` object created by a call to [LogNormal()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dlnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
 #' @family LogNormal distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.LogNormal <- function(d, x, ...) {
-  dlnorm(x = x, meanlog = d$log_mu, sdlog = d$log_sigma)
+pdf.LogNormal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dlnorm(x = at, meanlog = d$log_mu, sdlog = d$log_sigma, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.LogNormal
 #' @export
-log_pdf.LogNormal <- function(d, x, ...) {
-  dlnorm(x = x, meanlog = d$log_mu, sdlog = d$log_sigma, log = TRUE)
+log_pdf.LogNormal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dlnorm(x = at, meanlog = d$log_mu, sdlog = d$log_sigma, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a LogNormal distribution
@@ -154,16 +171,22 @@ log_pdf.LogNormal <- function(d, x, ...) {
 #' @param d A `LogNormal` object created by a call to [LogNormal()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{plnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
 #' @family LogNormal distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.LogNormal <- function(d, x, ...) {
-  plnorm(q = x, meanlog = d$log_mu, sdlog = d$log_sigma)
+cdf.LogNormal <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) plnorm(q = at, meanlog = d$log_mu, sdlog = d$log_sigma, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a LogNormal distribution
@@ -172,17 +195,24 @@ cdf.LogNormal <- function(d, x, ...) {
 #' @inheritParams random.LogNormal
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qlnorm}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family LogNormal distribution
 #'
-quantile.LogNormal <- function(x, probs, ...) {
+quantile.LogNormal <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qlnorm(p = probs, meanlog = x$log_mu, sdlog = x$log_sigma)
+  FUN <- function(at, d) qlnorm(p = at, meanlog = d$log_mu, sdlog = d$log_sigma, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Log Normal distribution to data
@@ -223,14 +253,17 @@ suff_stat.LogNormal <- function(d, x, ...) {
 #' Return the support of the LogNormal distribution
 #'
 #' @param d An `LogNormal` object created by a call to [LogNormal()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.LogNormal <- function(d){
-  if(!is_distribution(d)){
-    message("d has to be a disitrubtion")
-    stop()
-  }
-  return(c(0, Inf))
+support.LogNormal <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
 }

@@ -75,32 +75,37 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
 RevWeibull <- function(location = 0, scale = 1, shape = 1) {
-  if (scale <= 0) {
+  if (any(scale <= 0)) {
     stop("scale must be positive")
   }
-  if (shape <= 0) {
+  if (any(shape <= 0)) {
     stop("shape must be positive")
   }
-  d <- list(location = location, scale = scale, shape = shape)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(location) == length(scale) & length(location) == length(shape) |
+        sum(c(length(location) == 1, length(scale) == 1, length(shape) == 1)) >= 2 |
+        length(location) == length(scale) & length(shape) == 1 |
+        length(location) == length(shape) & length(scale) == 1 |
+        length(scale) == length(shape) & length(location) == 1
+  )
+
+  d <- data.frame(location = location, scale = scale, shape = shape)
   class(d) <- c("RevWeibull", "distribution")
   d
 }
 
 #' @export
-print.RevWeibull <- function(x, ...) {
-  cat(glue("RevWeibull distribution (location = {x$location},
-           scale = {x$scale}, shape = {x$shape})\n"))
-}
-
-#' @export
 mean.RevWeibull <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$location + x$scale * gamma(1 + 1/x$shape)
+  rval <- x$location + x$scale * gamma(1 + 1 / x$shape)
+  setNames(rval, names(x))
 }
 
 #' @export
 variance.RevWeibull <- function(x, ...) {
-  x$scale^2 * gamma(1 + 2/x$shape) - gamma(1 + 1/x$shape)^2
+  rval <- x$scale^2 * gamma(1 + 2 / x$shape) - gamma(1 + 1 / x$shape)^2
+  setNames(rval, names(x))
 }
 
 
@@ -110,18 +115,29 @@ variance.RevWeibull <- function(x, ...) {
 #'
 #' @param x A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.RevWeibull <- function(x, n = 1L, ...) {
+random.RevWeibull <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+
   # Convert to the GEV parameterisation
-  loc <- x$location - x$scale
-  scale <- x$scale / x$shape
-  shape <- -1 / x$shape
-  revdbayes::rgev(n = n, loc = loc, scale = scale, shape = shape)
+  FUN <- function(at, d) {
+    loc <- d$location - d$scale
+    scale <- d$scale / d$shape
+    shape <- -1 / d$shape
+    revdbayes::rgev(n = length(d), loc = loc, scale = scale, shape = shape)
+  }
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of an RevWeibull distribution
@@ -131,29 +147,40 @@ random.RevWeibull <- function(x, n = 1L, ...) {
 #' @param d A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.RevWeibull <- function(d, x, ...) {
+pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location - d$scale
-  scale <- d$scale / d$shape
-  shape <- -1 / d$shape
-  revdbayes::dgev(x = x, loc = loc, scale = scale, shape = shape)
+  FUN <- function(at, d) {
+    loc <- d$location - d$scale
+    scale <- d$scale / d$shape
+    shape <- -1 / d$shape
+    revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, ...)
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.RevWeibull
 #' @export
 #'
-log_pdf.RevWeibull <- function(d, x, ...) {
+log_pdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location - d$scale
-  scale <- d$scale / d$shape
-  shape <- -1 / d$shape
-  revdbayes::dgev(x = x, loc = loc, scale = scale, shape = shape, log = TRUE)
+  FUN <- function(at, d) {
+    loc <- d$location - d$scale
+    scale <- d$scale / d$shape
+    shape <- -1 / d$shape
+    revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, log = TRUE)
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of an RevWeibull distribution
@@ -163,18 +190,26 @@ log_pdf.RevWeibull <- function(d, x, ...) {
 #' @param d A `RevWeibull` object created by a call to [RevWeibull()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.RevWeibull <- function(d, x, ...) {
+cdf.RevWeibull <- function(d, x, drop = TRUE, ...) {
   # Convert to the GEV parameterisation
-  loc <- d$location - d$scale
-  scale <- d$scale / d$shape
-  shape <- -1 / d$shape
-  revdbayes::pgev(q = x, loc = loc, scale = scale, shape = shape)
+  FUN <- function(at, d) {
+    loc <- d$location - d$scale
+    scale <- d$scale / d$shape
+    shape <- -1 / d$shape
+    revdbayes::pgev(q = at, loc = loc, scale = scale, shape = shape, ...)
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a RevWeibull distribution
@@ -185,21 +220,45 @@ cdf.RevWeibull <- function(d, x, ...) {
 #' @inheritParams random.RevWeibull
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.RevWeibull <- function(x, probs, ...) {
+quantile.RevWeibull <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
+
   # Convert to the GEV parameterisation
-  loc <- x$location - x$scale
-  scale <- x$scale / x$shape
-  shape <- -1 / x$shape
-  revdbayes::qgev(p = probs, loc = loc, scale = scale, shape = shape)
+  FUN <- function(at, d) {
+    loc <- d$location - d$scale
+    scale <- d$scale / d$shape
+    shape <- -1 / d$shape
+    revdbayes::qgev(p = at, loc = loc, scale = scale, shape = shape, ...)
+  }
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
-
+#' Return the support of the RevWeibull distribution
+#'
+#' @param d An `RevWeibull` object created by a call to [RevWeibull()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#'
+#' @return A vector of length 2 with the minimum and maximum value of the support.
+#'
 #' @export
-support.RevWeibull <- function(d) c(-Inf, d$location)
+support.RevWeibull <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(-Inf, length(d))
+  max <- d$location
+
+  make_support(min, max, d, drop = drop)
+}

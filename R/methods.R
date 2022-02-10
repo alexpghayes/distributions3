@@ -10,6 +10,9 @@
 #'   integer. Defaults to `1L`.
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#'
+#' @return Random samples drawn from the distriubtion `x`.
 #'
 #' @examples
 #'
@@ -17,7 +20,7 @@
 #'
 #' random(X, 10)
 #' @export
-random <- function(x, n = 1L, ...) {
+random <- function(x, n = 1L, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   UseMethod("random")
 }
@@ -33,8 +36,9 @@ random <- function(x, n = 1L, ...) {
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return Probabilities corresponding to the vector `x`.
 #'
 #' @examples
 #'
@@ -45,7 +49,7 @@ random <- function(x, n = 1L, ...) {
 #'
 #' log_pdf(X, c(1, 2, 3, 4, 5))
 #' @export
-pdf <- function(d, x, ...) {
+pdf <- function(d, x, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   UseMethod("pdf")
 }
@@ -73,8 +77,9 @@ pmf <- function(d, x, ...) {
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return Probabilities corresponding to the vector `x`.
 #'
 #' @examples
 #'
@@ -82,7 +87,7 @@ pmf <- function(d, x, ...) {
 #'
 #' cdf(X, c(1, 2, 3, 4, 5))
 #' @export
-cdf <- function(d, x, ...) {
+cdf <- function(d, x, drop = TRUE, ...) {
   ellipsis::check_dots_used()
   UseMethod("cdf")
 }
@@ -200,12 +205,13 @@ suff_stat <- function(d, x, ...) {
 #' @param d A probability distribution object such as those created by
 #'   a call to [Bernoulli()], [Beta()], or [Binomial()].
 #' @return A vector with two elements indicating the range of the support.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @export
-support <- function(d){
-  if(!is_distribution(d))
+support <- function(d, drop = TRUE) {
+  if (!is_distribution(d)) {
     stop("d must be a supported distribution object")
+  }
 
   UseMethod("support")
 }
-

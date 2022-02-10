@@ -74,30 +74,40 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Cauchy <- function(location = 0, scale = 1) {
-  d <- list(location = location, scale = scale)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(location) == length(scale) | length(location) == 1 | length(scale) == 1
+  )
+
+  d <- data.frame(location = location, scale = scale)
   class(d) <- c("Cauchy", "distribution")
   d
 }
 
 #' @export
-print.Cauchy <- function(x, ...) {
-  cat(glue("Cauchy distribution (location = {x$location}, scale = {x$scale})"), "\n")
-}
-
-#' @export
 mean.Cauchy <- function(x, ...) {
   ellipsis::check_dots_used()
-  NaN
+  rval <- rep(NaN, length(x))
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Cauchy <- function(x, ...) NaN
+variance.Cauchy <- function(x, ...) {
+  rval <- rep(NaN, length(x))
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Cauchy <- function(x, ...) NaN
+skewness.Cauchy <- function(x, ...) {
+  rval <- rep(NaN, length(x))
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Cauchy <- function(x, ...) NaN
+kurtosis.Cauchy <- function(x, ...) {
+  rval <- rep(NaN, length(x))
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a Cauchy distribution
 #'
@@ -105,14 +115,22 @@ kurtosis.Cauchy <- function(x, ...) NaN
 #'
 #' @param x A `Cauchy` object created by a call to [Cauchy()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.Cauchy <- function(x, n = 1L, ...) {
-  rcauchy(n = n, location = x$location, scale = x$scale)
+random.Cauchy <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rcauchy(n = length(d), location = x$location, scale = x$scale)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Cauchy distribution
@@ -122,21 +140,28 @@ random.Cauchy <- function(x, n = 1L, ...) {
 #' @param d A `Cauchy` object created by a call to [Cauchy()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Cauchy <- function(d, x, ...) {
-  dcauchy(x = x, location = d$location, scale = d$scale)
+pdf.Cauchy <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dcauchy(x = at, location = d$location, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Cauchy
 #' @export
 #'
-log_pdf.Cauchy <- function(d, x, ...) {
-  dcauchy(x = x, location = d$location, scale = d$scale, log = TRUE)
+log_pdf.Cauchy <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dcauchy(x = at, location = d$location, scale = d$scale, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Cauchy distribution
@@ -146,14 +171,20 @@ log_pdf.Cauchy <- function(d, x, ...) {
 #' @param d A `Cauchy` object created by a call to [Cauchy()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Cauchy <- function(d, x, ...) {
-  pcauchy(q = x, location = d$location, scale = d$scale)
+cdf.Cauchy <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pcauchy(q = at, location = d$location, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Cauchy distribution
@@ -164,25 +195,38 @@ cdf.Cauchy <- function(d, x, ...) {
 #' @inheritParams random.Cauchy
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qcauchy}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.Cauchy <- function(x, probs, ...) {
+quantile.Cauchy <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qcauchy(p = probs, location = x$location, scale = x$scale)
+  FUN <- function(at, d) qcauchy(at, location = x$location, scale = x$scale, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Return the support of the Cauchy distribution
 #'
 #' @param d An `Cauchy` object created by a call to [Cauchy()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Cauchy <- function(d){
-  c(-Inf, Inf)
-}
+support.Cauchy <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
 
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
+}

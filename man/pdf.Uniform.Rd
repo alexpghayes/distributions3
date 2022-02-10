@@ -5,9 +5,9 @@
 \alias{log_pdf.Uniform}
 \title{Evaluate the probability mass function of a continuous Uniform distribution}
 \usage{
-\method{pdf}{Uniform}(d, x, ...)
+\method{pdf}{Uniform}(d, x, drop = TRUE, ...)
 
-\method{log_pdf}{Uniform}(d, x, ...)
+\method{log_pdf}{Uniform}(d, x, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
@@ -15,11 +15,17 @@
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution \code{d}.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.}
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments to be passed to \code{\link[stats]{dunif}}.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.}
 }
 \value{
-A vector of probabilities, one for each element of \code{x}.
+In case of a single distribution object, either a numeric
+vector of length \code{probs} (if \code{drop = TRUE}, default) or a \code{matrix} with
+\code{length(x)} columns (if \code{drop = FALSE}). In case of a vectorized distribution
+object, a matrix with \code{length(x)} columns containing all possible combinations.
 }
 \description{
 Evaluate the probability mass function of a continuous Uniform distribution
@@ -41,5 +47,4 @@ quantile(X, 0.7)
 
 cdf(X, quantile(X, 0.7))
 quantile(X, cdf(X, 0.7))
-
 }

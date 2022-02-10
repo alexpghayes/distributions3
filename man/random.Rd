@@ -4,7 +4,7 @@
 \alias{random}
 \title{Draw a random sample from a probability distribution}
 \usage{
-random(x, n = 1L, ...)
+random(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A probability distribution object such as those created by
@@ -13,8 +13,13 @@ a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or
 \item{n}{The number of samples to draw. Should be a positive
 integer. Defaults to \code{1L}.}
 
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
+}
+\value{
+Random samples drawn from the distriubtion \code{x}.
 }
 \description{
 Draw a random sample from a probability distribution

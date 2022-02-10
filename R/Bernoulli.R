@@ -86,39 +86,38 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Bernoulli <- function(p = 0.5) {
-  d <- list(p = p)
+  d <- data.frame(p = p)
   class(d) <- c("Bernoulli", "distribution")
   d
 }
 
 #' @export
-print.Bernoulli <- function(x, ...) {
-  cat(glue("Bernoulli distribution (p = {x$p})"), "\n")
-}
-
-#' @export
 mean.Bernoulli <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$p
+  setNames(x$p, names(x))
 }
 
 #' @export
-variance.Bernoulli <- function(x, ...) x$p * (1 - x$p)
+variance.Bernoulli <- function(x, ...) {
+  rval <- x$p * (1 - x$p)
+  setNames(rval, names(x))
+}
 
 #' @export
 skewness.Bernoulli <- function(x, ...) {
   p <- x$p
   q <- 1 - x$p
-  (1 - (2 * p)) / sqrt(p * q)
+  rval <- (1 - (2 * p)) / sqrt(p * q)
+  setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.Bernoulli <- function(x, ...) {
   p <- x$p
   q <- 1 - x$p
-  (1 - (6 * p * q)) / (p * q)
+  rval <- (1 - (6 * p * q)) / (p * q)
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Bernoulli distribution
@@ -127,14 +126,22 @@ kurtosis.Bernoulli <- function(x, ...) {
 #'
 #' @param x A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return An integer vector of zeros and ones of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.Bernoulli <- function(x, n = 1L, ...) {
-  rbinom(n = n, size = 1, prob = x$p)
+random.Bernoulli <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rbinom(n = length(d), size = 1, prob = x$p)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Bernoulli distribution
@@ -144,21 +151,28 @@ random.Bernoulli <- function(x, n = 1L, ...) {
 #' @param d A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Bernoulli <- function(d, x, ...) {
-  dbinom(x = x, size = 1, prob = d$p)
+pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = 1, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Bernoulli
 #' @export
 #'
-log_pdf.Bernoulli <- function(d, x, ...) {
-  dbinom(x = x, size = 1, prob = d$p, log = TRUE)
+log_pdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dbinom(x = at, size = 1, prob = d$p, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Bernoulli distribution
@@ -168,14 +182,20 @@ log_pdf.Bernoulli <- function(d, x, ...) {
 #' @param d A `Bernoulli` object created by a call to [Bernoulli()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Bernoulli <- function(d, x, ...) {
-  pbinom(q = x, size = 1, prob = d$p)
+cdf.Bernoulli <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pbinom(q = at, size = 1, prob = d$p, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Bernoulli distribution
@@ -186,15 +206,23 @@ cdf.Bernoulli <- function(d, x, ...) {
 #' @inheritParams random.Bernoulli
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qbinom}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.Bernoulli <- function(x, probs, ...) {
+quantile.Bernoulli <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qbinom(p = probs, size = 1, prob = x$p)
+
+  FUN <- function(at, d) qbinom(at, size = 1, prob = x$p, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Bernoulli distribution to data
@@ -230,12 +258,17 @@ suff_stat.Bernoulli <- function(d, x, ...) {
 #' Return the support of the Bernoulli distribution
 #'
 #' @param d An `Bernoulli` object created by a call to [Bernoulli()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Bernoulli <- function(d){
-  return(c(0, 1))
+support.Bernoulli <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(1, length(d))
+
+  make_support(min, max, d, drop = drop)
 }
-
-

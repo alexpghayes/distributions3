@@ -4,18 +4,22 @@
 \alias{random.Weibull}
 \title{Draw a random sample from a Weibull distribution}
 \usage{
-\method{random}{Weibull}(x, n = 1L, ...)
+\method{random}{Weibull}(x, n = 1L, drop = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{Weibull} object created by a call to \code{\link[=Weibull]{Weibull()}}.}
 
 \item{n}{The number of samples to draw. Defaults to \code{1L}.}
 
+\item{drop}{logical. Should the result be simplified to a vector if possible?}
+
 \item{...}{Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-An integer vector of length \code{n}.
+In case of a single distribution object or \code{n = 1}, either a numeric
+vector of length \code{n} (if \code{drop = TRUE}, default) or a \code{matrix} with \code{n} columns
+(if \code{drop = FALSE}).
 }
 \description{
 Draw a random sample from a Weibull distribution
@@ -34,7 +38,6 @@ log_pdf(X, 2)
 
 cdf(X, 4)
 quantile(X, 0.7)
-
 }
 \seealso{
 Other Weibull distribution: 

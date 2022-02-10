@@ -31,33 +31,40 @@
 #'
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 0.7))
-#'
 Uniform <- function(a = 0, b = 1) {
-  d <- list(a = a, b = b)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(a) == length(b) | length(a) == 1 | length(b) == 1
+  )
+  d <- data.frame(a = a, b = b)
   class(d) <- c("Uniform", "distribution")
   d
 }
 
 #' @export
-print.Uniform <- function(x, ...) {
-  if (x$a > x$b) names(x) <- c("b", "a")
-  cat(glue("Continuous Uniform distribution (a = {x$a}, b = {x$b})"), "\n")
-}
-
-#' @export
 mean.Uniform <- function(x, ...) {
   ellipsis::check_dots_used()
-  (x$a + x$b) / 2
+  rval <- (x$a + x$b) / 2
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Uniform <- function(x, ...) (1 / 12) * (x$b - x$a) ^ 2
+variance.Uniform <- function(x, ...) {
+  rval <- (1 / 12) * (x$b - x$a)^2
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Uniform <- function(x, ...) 0
+skewness.Uniform <- function(x, ...) {
+  rval <- rep.int(0, length(x))
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Uniform <- function(x, ...) -6/5
+kurtosis.Uniform <- function(x, ...) {
+  rval <- rep(-6 / 5, length(x))
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a continuous Uniform distribution
 #'
@@ -65,14 +72,28 @@ kurtosis.Uniform <- function(x, ...) -6/5
 #'
 #' @param x A `Uniform` object created by a call to [Uniform()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector containing values in `[a, b]` of length `n`.
+#' @return Values in `[a, b]`. In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.Uniform <- function(x, n = 1L, ...) {
-  runif(n = n, min = min(x$a, x$b), max = max(x$a, x$b))
+random.Uniform <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) {
+    runif(
+      n = length(d),
+      min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
+      max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max)
+    )
+  }
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a continuous Uniform distribution
@@ -82,21 +103,42 @@ random.Uniform <- function(x, n = 1L, ...) {
 #' @param d A `Uniform` object created by a call to [Uniform()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dunif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Uniform <- function(d, x, ...) {
-  dunif(x = x, min = min(d$a, d$b), max = max(d$a, d$b))
+pdf.Uniform <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) {
+    dunif(
+      x = at,
+      min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
+      max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max),
+      ...
+    )
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Uniform
 #' @export
 #'
-log_pdf.Uniform <- function(d, x, ...) {
-  dunif(x = x, min = min(d$a, d$b), max = max(d$a, d$b), log = TRUE)
+log_pdf.Uniform <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) {
+    dunif(
+      x = at,
+      min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
+      max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max),
+      log = TRUE
+    )
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a continuous Uniform distribution
@@ -106,14 +148,27 @@ log_pdf.Uniform <- function(d, x, ...) {
 #' @param d A `Uniform` object created by a call to [Uniform()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{punif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Uniform <- function(d, x, ...) {
-  punif(q = x, min = min(d$a, d$b), max = max(d$a, d$b))
+cdf.Uniform <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) {
+    punif(
+      q = at,
+      min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
+      max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max),
+      ...
+    )
+  }
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a continuous Uniform  distribution
@@ -124,23 +179,46 @@ cdf.Uniform <- function(d, x, ...) {
 #' @inheritParams random.Uniform
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qunif}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.Uniform <- function(x, probs, ...) {
+quantile.Uniform <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qunif(p = probs, min = min(x$a, x$b), max = max(x$a, x$b))
+  FUN <- function(at, d) {
+    qunif(
+      p = at,
+      min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
+      max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max),
+      ...
+    )
+  }
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
 #' Return the support of the Uniform distribution
 #'
 #' @param d An `Uniform` object created by a call to [Uniform()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Uniform <- function(d) c(d$a, d$b)
+support.Uniform <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- d$a
+  max <- d$b
+
+  make_support(min, max, d, drop = drop)
+}

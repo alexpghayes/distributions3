@@ -94,31 +94,36 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 ChiSquare <- function(df) {
-  d <- list(df = df)
+  d <- data.frame(df = df)
   class(d) <- c("ChiSquare", "distribution")
   d
 }
 
 #' @export
-print.ChiSquare <- function(x, ...) {
-  cat(glue("Chi Square distribution (df = {x$df})"), "\n")
-}
-
-#' @export
 mean.ChiSquare <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$df
+  rval <- x$df
+  setNames(rval, names(x))
 }
 
 
 #' @export
-variance.ChiSquare <- function(x, ...) x$df * 2
+variance.ChiSquare <- function(x, ...) {
+  rval <- x$df * 2
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.ChiSquare <- function(x, ...) sqrt(8 / x$df)
+skewness.ChiSquare <- function(x, ...) {
+  rval <- sqrt(8 / x$df)
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.ChiSquare <- function(x, ...) 12 / x$df
+kurtosis.ChiSquare <- function(x, ...) {
+  rval <- 12 / x$df
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a chi square distribution
 #'
@@ -126,14 +131,22 @@ kurtosis.ChiSquare <- function(x, ...) 12 / x$df
 #'
 #' @param x A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.ChiSquare <- function(x, n = 1L, ...) {
-  rchisq(n = n, df = x$df)
+random.ChiSquare <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rchisq(n = length(d), df = x$df)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a chi square distribution
@@ -143,21 +156,28 @@ random.ChiSquare <- function(x, n = 1L, ...) {
 #' @param d A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dchisq}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.ChiSquare <- function(d, x, ...) {
-  dchisq(x = x, df = d$df)
+pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dchisq(x = at, df = d$df, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.ChiSquare
 #' @export
 #'
-log_pdf.ChiSquare <- function(d, x, ...) {
-  dchisq(x = x, df = d$df, log = TRUE)
+log_pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dchisq(x = at, df = d$df, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a chi square distribution
@@ -167,14 +187,20 @@ log_pdf.ChiSquare <- function(d, x, ...) {
 #' @param d A `ChiSquare` object created by a call to [ChiSquare()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pchisq}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.ChiSquare <- function(d, x, ...) {
-  pchisq(q = x, df = d$df)
+cdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pchisq(q = at, df = d$df, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a chi square distribution
@@ -185,30 +211,43 @@ cdf.ChiSquare <- function(d, x, ...) {
 #' @inheritParams random.ChiSquare
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qchisq}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.ChiSquare <- function(x, probs, ...) {
+quantile.ChiSquare <- function(x, probs, drop = TRUE, ...) {
 
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
 
   ellipsis::check_dots_used()
-  qchisq(p = probs, df = x$df)
+  FUN <- function(at, d) qchisq(at, df = x$df, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 
 #' Return the support of the ChiSquare distribution
 #'
 #' @param d An `ChiSquare` object created by a call to [ChiSquare()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.ChiSquare <- function(d){
-  c(0, Inf)
-}
+support.ChiSquare <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
 
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
+}

@@ -71,32 +71,40 @@
 #' cdf(X, 4)
 #' quantile(X, 0.7)
 Logistic <- function(location = 0, scale = 1) {
-  d <- list(location = location, scale = scale)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(location) == length(scale) | length(location) == 1 | length(scale) == 1
+  )
+
+  d <- data.frame(location = location, scale = scale)
   class(d) <- c("Logistic", "distribution")
   d
 }
 
 #' @export
-print.Logistic <- function(x, ...) {
-  cat(
-    glue("Logistic distribution (location = {x$location}, scale = {x$scale})", "\n")
-  )
-}
-
-#' @export
 mean.Logistic <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$location
+  rval <- x$location
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Logistic <- function(x, ...) x$scale^2 * pi^2 / 3
+variance.Logistic <- function(x, ...) {
+  rval <- x$scale^2 * pi^2 / 3
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Logistic <- function(x, ...) 0
+skewness.Logistic <- function(x, ...) {
+  rval <- rep.int(0, length(x))
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Logistic <- function(x, ...) 6 / 5
+kurtosis.Logistic <- function(x, ...) {
+  rval <- rep(6 / 5, length(x))
+  setNames(rval, names(x))
+}
 
 #' Draw a random sample from a Logistic distribution
 #'
@@ -104,16 +112,24 @@ kurtosis.Logistic <- function(x, ...) 6 / 5
 #'
 #' @param x A `Logistic` object created by a call to [Logistic()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
 #' @family Logistic distribution
 #'
-#' @return An integer vector of length `n`.
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #' @export
 #'
-random.Logistic <- function(x, n = 1L, ...) {
-  rlogis(n = n, location = x$location, scale = x$scale)
+random.Logistic <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rlogis(n = length(d), location = d$location, scale = d$scale)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Logistic distribution
@@ -127,22 +143,29 @@ random.Logistic <- function(x, n = 1L, ...) {
 #' @param d A `Logistic` object created by a call to [Logistic()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dlogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
 #' @family Logistic distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Logistic <- function(d, x, ...) {
-  dlogis(x = x, location = d$location, scale = d$scale)
+pdf.Logistic <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dlogis(x = at, location = d$location, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Logistic
 #' @export
-log_pdf.Logistic <- function(d, x, ...) {
-  dlogis(x = x, location = d$location, scale = d$scale, log = TRUE)
+log_pdf.Logistic <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dlogis(x = at, location = d$location, scale = d$scale, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Logistic distribution
@@ -152,16 +175,22 @@ log_pdf.Logistic <- function(d, x, ...) {
 #' @param d A `Logistic` object created by a call to [Logistic()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{plogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
 #' @family Logistic distribution
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Logistic <- function(d, x, ...) {
-  plogis(q = x, location = d$location, scale = d$scale)
+cdf.Logistic <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) plogis(q = at, location = d$location, scale = d$scale, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Logistic distribution
@@ -170,30 +199,40 @@ cdf.Logistic <- function(d, x, ...) {
 #' @inheritParams random.Logistic
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qlogis}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
 #' @family Logistic distribution
 #'
-quantile.Logistic <- function(x, probs, ...) {
+quantile.Logistic <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qlogis(p = probs, location = x$location, scale = x$scale)
+  FUN <- function(at, d) qlogis(p = at, location = d$location, scale = d$scale, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Return the support of the Logistic distribution
 #'
 #' @param d An `Logistic` object created by a call to [Logistic()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Logistic <- function(d){
-  if(!is_distribution(d)){
-    message("d has to be a disitrubtion")
-    stop()
-  }
-  return(c(-Inf, Inf))
+support.Logistic <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
 }

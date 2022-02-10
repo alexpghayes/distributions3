@@ -80,30 +80,38 @@
 #' cdf(X, quantile(X, 0.7))
 #' quantile(X, cdf(X, 7))
 Gamma <- function(shape, rate = 1) {
-  d <- list(shape = shape, rate = rate)
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(shape) == length(rate) | length(shape) == 1 | length(rate) == 1
+  )
+  d <- data.frame(shape = shape, rate = rate)
   class(d) <- c("Gamma", "distribution")
   d
 }
 
 #' @export
-print.Gamma <- function(x, ...) {
-  cat(glue("Gamma distribution (shape = {x$shape}, rate = {x$rate})"), "\n")
-}
-
-#' @export
 mean.Gamma <- function(x, ...) {
   ellipsis::check_dots_used()
-  x$shape / x$rate
+  rval <- x$shape / x$rate
+  setNames(rval, names(x))
 }
 
 #' @export
-variance.Gamma <- function(x, ...) x$shape / x$rate^2
+variance.Gamma <- function(x, ...) {
+  rval <- x$shape / x$rate^2
+  setNames(rval, names(x))
+}
 
 #' @export
-skewness.Gamma <- function(x, ...) 2 / sqrt(x$shape)
+skewness.Gamma <- function(x, ...) {
+  rval <- 2 / sqrt(x$shape)
+  setNames(rval, names(x))
+}
 
 #' @export
-kurtosis.Gamma <- function(x, ...) 6 / x$shape
+kurtosis.Gamma <- function(x, ...) {
+  rval <- 6 / x$shape
+}
 
 #' Draw a random sample from a Gamma distribution
 #'
@@ -111,14 +119,22 @@ kurtosis.Gamma <- function(x, ...) 6 / x$shape
 #'
 #' @param x A `Gamma` object created by a call to [Gamma()].
 #' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #' @param ... Unused. Unevaluated arguments will generate a warning to
 #'   catch mispellings or other possible errors.
 #'
-#' @return A numeric vector of length `n`.
 #' @export
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
 #'
-random.Gamma <- function(x, n = 1L, ...) {
-  rgamma(n = n, shape = x$shape, rate = x$rate)
+random.Gamma <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rgamma(n = length(d), shape = x$shape, rate = x$rate)
+  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Gamma distribution
@@ -128,21 +144,28 @@ random.Gamma <- function(x, n = 1L, ...) {
 #' @param d A `Gamma` object created by a call to [Gamma()].
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{dgamma}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Gamma <- function(d, x, ...) {
-  dgamma(x = x, shape = d$shape, rate = d$rate)
+pdf.Gamma <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgamma(x = at, shape = d$shape, rate = d$rate, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
 #' @rdname pdf.Gamma
 #' @export
 #'
-log_pdf.Gamma <- function(d, x, ...) {
-  dgamma(x = x, shape = d$shape, rate = d$rate, log = TRUE)
+log_pdf.Gamma <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dgamma(x = at, shape = d$shape, rate = d$rate, log = TRUE)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
 #' Evaluate the cumulative distribution function of a Gamma distribution
@@ -152,14 +175,20 @@ log_pdf.Gamma <- function(d, x, ...) {
 #' @param d A `Gamma` object created by a call to [Gamma()].
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{pgamma}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of probabilities, one for each element of `x`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(x)` columns (if `drop = FALSE`). In case of a vectorized distribution
+#'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Gamma <- function(d, x, ...) {
-  pgamma(q = x, shape = d$shape, rate = d$rate)
+cdf.Gamma <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) pgamma(q = at, shape = d$shape, rate = d$rate, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
 #' Determine quantiles of a Gamma distribution
@@ -170,15 +199,23 @@ cdf.Gamma <- function(d, x, ...) {
 #' @inheritParams random.Gamma
 #'
 #' @param probs A vector of probabilities.
-#' @param ... Unused. Unevaluated arguments will generate a warning to
-#'   catch mispellings or other possible errors.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Arguments to be passed to \code{\link[stats]{qgamma}}.
+#'   Unevaluated arguments will generate a warning to catch mispellings or other
+#'   possible errors.
 #'
-#' @return A vector of quantiles, one for each element of `probs`.
+#' @return In case of a single distribution object, either a numeric
+#'   vector of length `probs` (if `drop = TRUE`, default) or a `matrix` with
+#'   `length(probs)` columns (if `drop = FALSE`). In case of a vectorized
+#'   distribution object, a matrix with `length(probs)` columns containing all
+#'   possible combinations.
 #' @export
 #'
-quantile.Gamma <- function(x, probs, ...) {
+quantile.Gamma <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  qgamma(p = probs, shape = x$shape, rate = x$rate)
+
+  FUN <- function(at, d) qgamma(at, shape = x$shape, rate = x$rate, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 
 #' Fit a Gamma distribution to data
@@ -210,8 +247,17 @@ suff_stat.Gamma <- function(d, x, ...) {
 #' Return the support of the Gamma distribution
 #'
 #' @param d An `Gamma` object created by a call to [Gamma()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Gamma <- function(d) c(0, Inf)
+support.Gamma <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(0, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
+}
