@@ -145,11 +145,13 @@ It corresponds to a sum of \(k\) independent exponential variables with mean
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">Erlang</span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Erlang distribution (k = 5, lambda = 2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Erlang distribution (k = 5, lambda = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2.6290709 6.5928809 0.8851218 3.1279162 1.9834490 3.6187867 4.4790126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.6835867 3.5586337 4.8770382</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_1      r_2      r_3      r_4      r_5      r_6      r_7      r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4.727510 3.628168 1.512156 4.771854 2.257310 3.645070 5.083710 2.509344 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_9     r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.093361 2.021506 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3907336</span>
@@ -179,7 +181,7 @@ It corresponds to a sum of \(k\) independent exponential variables with mean
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

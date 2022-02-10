@@ -89,7 +89,7 @@ is an alias.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pdf</span><span class="op">(</span><span class="va">d</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pdf</span><span class="op">(</span><span class="va">d</span>, <span class="va">x</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="fu">log_pdf</span><span class="op">(</span><span class="va">d</span>, <span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
 
@@ -104,13 +104,15 @@ a call to <code><a href="Bernoulli.html">Bernoulli()</a></code>, <code><a href="
 <dt>x</dt>
 <dd><p>A vector of elements whose probabilities you would like to
 determine given the distribution <code>d</code>.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
 <dd><p>Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of probabilities, one for each element of <code>x</code>.</p>
+    <p>Probabilities corresponding to the vector <code>x</code>.</p>
     </div>
 
     <div id="ref-examples">
@@ -119,12 +121,15 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="Normal.html">Normal</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">pdf</span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.419707e-01 5.399097e-02 4.431848e-03 1.338302e-04 1.486720e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          d_1          d_2          d_3          d_4          d_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2.419707e-01 5.399097e-02 4.431848e-03 1.338302e-04 1.486720e-06 </span>
 <span class="r-in"><span class="fu">pmf</span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.419707e-01 5.399097e-02 4.431848e-03 1.338302e-04 1.486720e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          d_1          d_2          d_3          d_4          d_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2.419707e-01 5.399097e-02 4.431848e-03 1.338302e-04 1.486720e-06 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">log_pdf</span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  -1.418939  -2.918939  -5.418939  -8.918939 -13.418939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        l_1        l_2        l_3        l_4        l_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.418939  -2.918939  -5.418939  -8.918939 -13.418939 </span>
 </code></pre></div>
     </div>
   </div>
@@ -139,7 +144,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

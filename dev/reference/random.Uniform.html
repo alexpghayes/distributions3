@@ -88,7 +88,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Uniform</span>
-<span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,13 +97,17 @@
 <dd><p>A <code>Uniform</code> object created by a call to <code><a href="Uniform.html">Uniform()</a></code>.</p></dd>
 <dt>n</dt>
 <dd><p>The number of samples to draw. Defaults to <code>1L</code>.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
 <dd><p>Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric vector containing values in <code>[a, b]</code> of length <code>n</code>.</p>
+    <p>Values in <code>[a, b]</code>. In case of a single distribution object or <code>n = 1</code>, either a numeric
+vector of length <code>n</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with <code>n</code> columns
+(if <code>drop = FALSE</code>).</p>
     </div>
 
     <div id="ref-examples">
@@ -113,11 +117,13 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="Uniform.html">Uniform</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Continuous Uniform distribution (a = 1, b = 2) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Uniform distribution (a = 1, b = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.971750 1.083758 1.873870 1.329231 1.222276 1.401648 1.072499 1.002450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 1.137094 1.191909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_1      r_2      r_3      r_4      r_5      r_6      r_7      r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.971750 1.083758 1.873870 1.329231 1.222276 1.401648 1.072499 1.002450 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_9     r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.137094 1.191909 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.7</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -133,7 +139,6 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -148,7 +153,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

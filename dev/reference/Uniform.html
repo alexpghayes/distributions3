@@ -136,11 +136,13 @@ order of the parameters is inverted. Defaults to <code>1</code>.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">Uniform</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Continuous Uniform distribution (a = 1, b = 2) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Uniform distribution (a = 1, b = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.971750 1.083758 1.873870 1.329231 1.222276 1.401648 1.072499 1.002450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 1.137094 1.191909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_1      r_2      r_3      r_4      r_5      r_6      r_7      r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.971750 1.083758 1.873870 1.329231 1.222276 1.401648 1.072499 1.002450 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_9     r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.137094 1.191909 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.7</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -156,7 +158,6 @@ order of the parameters is inverted. Defaults to <code>1</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -171,7 +172,7 @@ order of the parameters is inverted. Defaults to <code>1</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

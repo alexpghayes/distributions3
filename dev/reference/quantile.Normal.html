@@ -94,7 +94,7 @@ showing to how calculate p-values and confidence intervals.
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Normal</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,13 +103,20 @@ showing to how calculate p-values and confidence intervals.
 <dd><p>A <code>Normal</code> object created by a call to <code><a href="Normal.html">Normal()</a></code>.</p></dd>
 <dt>probs</dt>
 <dd><p>A vector of probabilities.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
-<dd><p>Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.</p></dd>
+<dd><p>Arguments to be passed to <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></code>.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of quantiles, one for each element of <code>probs</code>.</p>
+    <p>In case of a single distribution object, either a numeric
+vector of length <code>probs</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with
+<code>length(probs)</code> columns (if <code>drop = FALSE</code>). In case of a vectorized
+distribution object, a matrix with <code>length(probs)</code> columns containing all
+possible combinations.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -133,7 +140,7 @@ showing to how calculate p-values and confidence intervals.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="Normal.html">Normal</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Normal distribution (mu = 5, sigma = 2) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Normal distribution (mu = 5, sigma = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
@@ -145,8 +152,10 @@ showing to how calculate p-values and confidence intervals.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 8.814325 7.289754 3.470939 2.085135 2.813062 5.590482 5.013772 7.314822</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] 9.269276 5.475689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_1      r_2      r_3      r_4      r_5      r_6      r_7      r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8.814325 7.289754 3.470939 2.085135 2.813062 5.590482 5.013772 7.314822 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_9     r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9.269276 5.475689 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0647588</span>
@@ -249,7 +258,6 @@ showing to how calculate p-values and confidence intervals.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -264,7 +272,7 @@ showing to how calculate p-values and confidence intervals.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

@@ -88,7 +88,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for LogNormal</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,13 +97,20 @@
 <dd><p>A <code>LogNormal</code> object created by a call to <code><a href="LogNormal.html">LogNormal()</a></code>.</p></dd>
 <dt>probs</dt>
 <dd><p>A vector of probabilities.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
-<dd><p>Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.</p></dd>
+<dd><p>Arguments to be passed to <code><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">qlnorm</a></code>.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of quantiles, one for each element of <code>probs</code>.</p>
+    <p>In case of a single distribution object, either a numeric
+vector of length <code>probs</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with
+<code>length(probs)</code> columns (if <code>drop = FALSE</code>). In case of a vectorized
+distribution object, a matrix with <code>length(probs)</code> columns containing all
+possible combinations.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -121,11 +128,13 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="LogNormal.html">LogNormal</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Lognormal distribution (log_mu = 0.3, log_sigma = 2) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "LogNormal distribution (log_mu = 0.3, log_sigma = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 61.21089083 13.32648994  0.29256703  0.07317767  0.15153514  2.43630473</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  1.36857751 13.66478070 96.47421603  2.17208867</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         r_1         r_2         r_3         r_4         r_5         r_6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61.21089083 13.32648994  0.29256703  0.07317767  0.15153514  2.43630473 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         r_7         r_8         r_9        r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.36857751 13.66478070 96.47421603  2.17208867 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09782712</span>
@@ -136,7 +145,6 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7064858</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.7</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.852803</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </div>
@@ -151,7 +159,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

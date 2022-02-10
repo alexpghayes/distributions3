@@ -88,7 +88,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Cauchy</span>
-<span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">1L</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,13 +97,17 @@
 <dd><p>A <code>Cauchy</code> object created by a call to <code><a href="Cauchy.html">Cauchy()</a></code>.</p></dd>
 <dt>n</dt>
 <dd><p>The number of samples to draw. Defaults to <code>1L</code>.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
 <dd><p>Unused. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric vector of length <code>n</code>.</p>
+    <p>In case of a single distribution object or <code>n = 1</code>, either a numeric
+vector of length <code>n</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with <code>n</code> columns
+(if <code>drop = FALSE</code>).</p>
     </div>
 
     <div id="ref-examples">
@@ -113,7 +117,7 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="Cauchy.html">Cauchy</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0.2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cauchy distribution (location = 10, scale = 0.2) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Cauchy distribution (location = 10, scale = 0.2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NaN</span>
@@ -125,8 +129,10 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NaN</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  9.982203 10.053876  9.916324 10.336325 10.167877 10.626557 10.046357</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 10.001540 10.091892 10.137681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       r_1       r_2       r_3       r_4       r_5       r_6       r_7       r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9.982203 10.053876  9.916324 10.336325 10.167877 10.626557 10.046357 10.001540 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       r_9      r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10.091892 10.137681 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0009940971</span>
@@ -156,7 +162,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

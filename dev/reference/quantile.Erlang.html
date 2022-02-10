@@ -88,7 +88,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Erlang</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, <span class="va">...</span>, interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1e+06</span><span class="op">)</span>, tol <span class="op">=</span> <span class="va">.Machine</span><span class="op">$</span><span class="va">double.eps</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,17 +97,20 @@
 <dd><p>An <code>Erlang</code> object created by a call to <code><a href="Erlang.html">Erlang()</a></code>.</p></dd>
 <dt>probs</dt>
 <dd><p>A vector of probabilities.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
-<dd><p>Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.</p></dd>
-<dt>interval</dt>
-<dd><p>Interval being used to search for the quantile using numerical root finding. Defaults to (0, 1e6)</p></dd>
-<dt>tol</dt>
-<dd><p>Tolerance of the root finding algorithm. Defaults to <code>.Machine$double.eps</code></p></dd>
+<dd><p>Arguments to be passed to <code><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">qgamma</a></code>.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of quantiles, one for each element of <code>probs</code>.</p>
+    <p>In case of a single distribution object, either a numeric
+vector of length <code>probs</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with
+<code>length(probs)</code> columns (if <code>drop = FALSE</code>). In case of a vectorized
+distribution object, a matrix with <code>length(probs)</code> columns containing all
+possible combinations.</p>
     </div>
 
     <div id="ref-examples">
@@ -117,11 +120,13 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="Erlang.html">Erlang</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Erlang distribution (k = 5, lambda = 2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Erlang distribution (k = 5, lambda = 2)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2.6290709 6.5928809 0.8851218 3.1279162 1.9834490 3.6187867 4.4790126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 1.6835867 3.5586337 4.8770382</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_1      r_2      r_3      r_4      r_5      r_6      r_7      r_8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4.727510 3.628168 1.512156 4.771854 2.257310 3.645070 5.083710 2.509344 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      r_9     r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.093361 2.021506 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3907336</span>
@@ -151,7 +156,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

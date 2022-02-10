@@ -88,17 +88,22 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for Normal</span>
-<span class="fu"><a href="support.html">support</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="support.html">support</a></span><span class="op">(</span><span class="va">d</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>d</dt>
 <dd><p>An <code>Normal</code> object created by a call to <code><a href="Normal.html">Normal()</a></code>.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of length 2 with the minimum and maximum value of the support.</p>
+    <p>In case of a single distribution object, a numeric vector of length 2
+with the minimum and maximum value of the support (if <code>drop = TRUE</code>, default)
+or a <code>matrix</code> with 2 columns. In case of a vectorized distribution object, a
+matrix with 2 columns containing all minima and maxima.</p>
     </div>
 
   </div>
@@ -113,7 +118,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

@@ -88,7 +88,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for ChiSquare</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">probs</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -97,13 +97,20 @@
 <dd><p>A <code>ChiSquare</code> object created by a call to <code><a href="ChiSquare.html">ChiSquare()</a></code>.</p></dd>
 <dt>probs</dt>
 <dd><p>A vector of probabilities.</p></dd>
+<dt>drop</dt>
+<dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
 <dt>...</dt>
-<dd><p>Unused. Unevaluated arguments will generate a warning to
-catch mispellings or other possible errors.</p></dd>
+<dd><p>Arguments to be passed to <code><a href="https://rdrr.io/r/stats/Chisquare.html" class="external-link">qchisq</a></code>.
+Unevaluated arguments will generate a warning to catch mispellings or other
+possible errors.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A vector of quantiles, one for each element of <code>probs</code>.</p>
+    <p>In case of a single distribution object, either a numeric
+vector of length <code>probs</code> (if <code>drop = TRUE</code>, default) or a <code>matrix</code> with
+<code>length(probs)</code> columns (if <code>drop = FALSE</code>). In case of a vectorized
+distribution object, a matrix with <code>length(probs)</code> columns containing all
+possible combinations.</p>
     </div>
 
     <div id="ref-examples">
@@ -113,7 +120,7 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="ChiSquare.html">ChiSquare</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">X</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chi Square distribution (df = 5) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ChiSquare distribution (df = 5)"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
@@ -125,8 +132,10 @@ catch mispellings or other possible errors.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.4</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="random.html">random</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 11.2129049  7.8935724  2.1298341  5.2084236  5.4563211  3.6636712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 10.9823299  0.7858347  4.8748588  1.7938110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        r_1        r_2        r_3        r_4        r_5        r_6        r_7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11.2129049  7.8935724  2.1298341  5.2084236  5.4563211  3.6636712 10.9823299 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        r_8        r_9       r_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7858347  4.8748588  1.7938110 </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1383692</span>
@@ -156,7 +165,7 @@ catch mispellings or other possible errors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
