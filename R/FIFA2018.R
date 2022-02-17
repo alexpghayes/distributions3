@@ -57,8 +57,9 @@
 #' ## observed relative frequencies of goals in all matches
 #' obsrvd <- prop.table(table(FIFA2018$goals))
 #'
-#' ## expected probabilities assuming a simple Poisson model
-#' ## with constant average number of goals across all teams/matches
+#' ## expected probabilities assuming a simple Poisson model,
+#' ## using the average number of goals across all teams/matches
+#' ## as the point estimate for the mean (lambda) of the distribution
 #' p_const <- Poisson(lambda = mean(FIFA2018$goals))
 #' p_const
 #' expctd <- pdf(p_const, 0:6)
