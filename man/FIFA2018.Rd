@@ -53,10 +53,11 @@ ability difference which is a reasonable assumption in this data set.
 data("FIFA2018", package = "distributions3")
 
 ## observed relative frequencies of goals in all matches
-obsrvd <- proportions(table(FIFA2018$goals))
+obsrvd <- prop.table(table(FIFA2018$goals))
 
-## expected probabilities assuming a simple Poisson model
-## with constant average number of goals across all teams/matches
+## expected probabilities assuming a simple Poisson model,
+## using the average number of goals across all teams/matches
+## as the point estimate for the mean (lambda) of the distribution
 p_const <- Poisson(lambda = mean(FIFA2018$goals))
 p_const
 expctd <- pdf(p_const, 0:6)
