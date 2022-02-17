@@ -55,7 +55,7 @@
 #' data("FIFA2018", package = "distributions3")
 #'
 #' ## observed relative frequencies of goals in all matches
-#' obsrvd <- proportions(table(FIFA2018$goals))
+#' obsrvd <- prop.table(table(FIFA2018$goals))
 #'
 #' ## expected probabilities assuming a simple Poisson model
 #' ## with constant average number of goals across all teams/matches
