@@ -179,7 +179,7 @@ plot.distribution <- function(x, cdf = FALSE, p = c(0.1, 99.9), len = 1000,
   # Set x and y axis labels. If the variable name is a single upper case letter
   # then use that name in the labels.  Otherwise, use the generic x and
   # P(X = x) or f(x).
-  variable_name <- substitute(x)
+  variable_name <- deparse(substitute(x))
   if (length(variable_name) == 1 && nchar(variable_name) == 1 && toupper(variable_name) == variable_name) {
     my_xlab <- tolower(substitute(x))
     if (cdf) {
