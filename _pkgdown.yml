@@ -1,10 +1,9 @@
 url: https://alexpghayes.github.io/distributions3
 
-destination: docs
-
 development:
   mode: auto
 
 template:
+  bootstrap: 5
   params:
-    bootswatch: paper
+    bootswatch: flatly
