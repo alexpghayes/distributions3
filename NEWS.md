@@ -1,5 +1,7 @@
 # distributions3 (development version)
 
+- New vignette on Poisson GLMs by Achim Zeileis (#74)
+
 # distributions3 0.1.2
 
 * Added a plotting generic for univariate distributions (@paulnorthrop, PR #56)
