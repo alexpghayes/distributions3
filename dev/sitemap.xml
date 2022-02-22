@@ -1,612 +1,612 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/CONTRIBUTING.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/LICENSE-text.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/LICENSE.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/index.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/intro-to-hypothesis-testing.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/intro-to-hypothesis-testing.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-sign-tests.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-sign-tests.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-confidence-interval.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-t-confidence-interval.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-t-test.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-t-test.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-confidence-interval.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-z-confidence-interval.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test-for-proportion.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-z-test-for-proportion.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/one-sample-z-test.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/one-sample-z-test.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/paired-tests.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/paired-tests.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/articles/two-sample-z-test.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/articles/two-sample-z-test.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/authors.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/index.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/news/index.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Categorical.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Categorical.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/FIFA2018.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/FIFA2018.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Frechet.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Frechet.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/GEV.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/GEV.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/GP.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/GP.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Gumbel.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Gumbel.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Multinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Multinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Tukey.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Tukey.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Categorical.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Categorical.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Frechet.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Frechet.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.GEV.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.GEV.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.GP.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.GP.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Gumbel.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Gumbel.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Tukey.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Tukey.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/cdf.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/distributions3-package.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/distributions3-package.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/fit_mle.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/fit_mle.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/geom_auc.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/geom_auc.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/index.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/is_distribution.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/is_distribution.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/likelihood.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/likelihood.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/log_likelihood.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/log_likelihood.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Categorical.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Categorical.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Frechet.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Frechet.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.GEV.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.GEV.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.GP.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.GP.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Gumbel.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Gumbel.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Multinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Multinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/pdf.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/plot.distribution.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/plot.distribution.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/plot_cdf.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/plot_cdf.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/plot_pdf.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/plot_pdf.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Categorical.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Categorical.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Frechet.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Frechet.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.GEV.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.GEV.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.GP.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.GP.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Gumbel.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Gumbel.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Tukey.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Tukey.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/quantile.Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Categorical.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Categorical.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Frechet.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Frechet.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.GEV.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.GEV.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.GP.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.GP.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Gumbel.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Gumbel.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Multinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Multinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/random.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/suff_stat.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Bernoulli.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Bernoulli.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Beta.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Beta.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Binomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Binomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Cauchy.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Cauchy.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.ChiSquare.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ChiSquare.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Erlang.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Erlang.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Exponential.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Exponential.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.FisherF.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.FisherF.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Gamma.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Gamma.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Geometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Geometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.HyperGeometric.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HyperGeometric.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.LogNormal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.LogNormal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Logistic.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Logistic.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.NegativeBinomial.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.NegativeBinomial.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Normal.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Normal.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Poisson.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Poisson.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.RevWeibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.RevWeibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.StudentsT.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.StudentsT.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Tukey.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Tukey.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Uniform.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Uniform.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.Weibull.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Weibull.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/support.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/reference/variance.html</loc>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/variance.html</loc>
   </url>
 </urlset>
