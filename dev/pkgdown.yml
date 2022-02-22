@@ -10,8 +10,9 @@ articles:
   one-sample-z-test-for-proportion: one-sample-z-test-for-proportion.html
   one-sample-z-test: one-sample-z-test.html
   paired-tests: paired-tests.html
+  poisson: poisson.html
   two-sample-z-test: two-sample-z-test.html
-last_built: 2022-02-22T01:15Z
+last_built: 2022-02-22T17:02Z
 urls:
   reference: https://alexpghayes.github.io/distributions3/reference
   article: https://alexpghayes.github.io/distributions3/articles
