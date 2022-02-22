@@ -116,8 +116,8 @@ from the observations $y_i$ ($i = 1, \dots, 128$). The corresponding
 table of observed relative frequencies is:
 
 ```{r}
-obsrvd <- prop.table(table(FIFA2018$goals))
-obsrvd
+observed <- prop.table(table(FIFA2018$goals))
+observed
 ```
 
 (Note that in recent versions of R using `proportions()` rather than `prop.table()`
@@ -152,8 +152,8 @@ $0, 1, \dots, 6$ goals for this Poisson distribution can be extracted using
 the `pdf()` method. A comparison with the observed empirical frequencies yields
 
 ```{r}
-expctd <- pdf(p_const, 0:6)
-cbind("observed" = obsrvd, "expected" = expctd)
+expected <- pdf(p_const, 0:6)
+cbind(observed, expected)
 ```
 
 By and large, all observed and expected frequencies are rather close.
@@ -179,8 +179,8 @@ the expected number of goals per team/match $\lambda_i$ to the linear predictor
 $x_i^\top \beta$ with regressor vector $x_i^\top = (1, \mathtt{difference}_i)$
 and corresponding coefficient vector $\beta$ using a log-link:
 $\log(\lambda_i) = x_i^\top \beta$. The maximum likelihood estimator $\hat \beta$
-with corresponding inference, predictions, residuals, etc. can be obtained in R
-using the `glm()` function with `family = poisson`:
+with corresponding inference, predictions, residuals, etc. can be obtained
+using the `glm()` function from base R with `family = poisson`:
 
 ```{r}
 m <- glm(goals ~ difference, data = FIFA2018, family = poisson)
@@ -191,16 +191,24 @@ Both parameters can be interpreted. First, the intercept
 corresponds to the expected log-goals per team in a match of two equally strong teams,
 i.e., with zero difference in log-abilities. The corresponding prediction for the
 number of goals can either be obtained manually from the extracted `coef()`
-or equivalently using the `predict()` function:
+by applying `exp()` (as the inverse of the log-link).
 
 ```{r}
 lambda_zero <- exp(coef(m)[1])
 lambda_zero
+```
+
+Or equivalently the `predict()` function can be used with `type = "response"`
+in order to get the expected $\hat \lambda_i$ (rather than just the linear
+predictor $x_i^\top \hat \beta$ that is predicted by default).
+
+```{r}
 predict(m, newdata = data.frame(difference = 0), type = "response")
 ```
 
 As above, we can also set up a `Poisson()` distribution object and obtain the
-associated expected probability distribution for zero to six goals:
+associated expected probability distribution for zero to six goals in
+a mathc of two equally strong teams:
 
 ```{r}
 p_zero <- Poisson(lambda = lambda_zero)
@@ -215,17 +223,22 @@ number of goals increases approximately by $`r round(coef(m)[2], digits = 3)`$
 percent.
 
 This yields a different predicted Poisson distribution for each team/match
-in the tournament. We can easily set up the vector of all $128$ `Poisson()`
+in the tournament. We can set up the vector of all $128$ `Poisson()`
 distribution objects by extracting the vector of all fitted point estimates
 $(\hat \lambda_1, \dots, \hat \lambda_{128})^\top$:
 
 ```{r}
 p_reg <- Poisson(lambda = fitted(m))
+length(p_reg)
 head(p_reg)
 ```
 
+Note that specific elements from the vector `p_reg` of Poisson distributions
+can be extracted as usual, e.g., with an index like `p_reg[i]` or using the
+`head()` and `tail()` functions etc.
+
 As an illustration, the following goal distributions could be expected for the
-final that France won 4-2 against Croatia:
+FIFA World Cup final (in the last two rows of the data) that France won 4-2 against Croatia:
 
 ```{r}
 tail(FIFA2018, 2)
@@ -234,7 +247,7 @@ p_final
 pdf(p_final, 0:6)
 ```
 
-Clearly, France was expected to score more goals than Croatia
+This shows that France was expected to score more goals than Croatia
 but both teams scored more goals than expected, albeit not unlikely many.
 
 
@@ -243,7 +256,7 @@ but both teams scored more goals than expected, albeit not unlikely many.
 Assuming independence of the number of goals scored, we can obtain
 the table of possible match results (after normal time) by multiplying
 the marginal probabilities (again only up to six goals). In R this be done
-easily using the `outer()` function which by default performs a multiplication
+using the `outer()` function which by default performs a multiplication
 of its arguments.
 
 ```{r}
@@ -274,14 +287,14 @@ Next, we update the expected frequencies table by averaging across the expectati
 per team/match from the regression model.
 
 ```{r}
-expctd <- pdf(p_reg, 0:6)
-head(expctd)
-expctd <- colMeans(expctd)
-cbind("observed" = obsrvd, "expected" = expctd)
+expected <- pdf(p_reg, 0:6)
+head(expected)
+expected <- colMeans(expected)
+cbind(observed, expected)
 ```
 
 As before, observed and expected frequencies are reasonably close, emphasizing that
-the model has a good marginal fit for this data. To bring out the deviations graphically
+the model has a good marginal fit for this data. To bring out the discrepancies graphically
 we show the frequencies on a square root scale using a so-called _hanging rootogram_
 [@Kleiber+Zeileis:2016]. The gray bars represent the square-root of the observed
 frequencies "hanging" from the square-root of the expected frequencies in the red line.
@@ -290,9 +303,9 @@ which is reasonably close to zero.
 
 ```{r, echo=-1, fig.height=4.5, fig.width=5, out.width="60%"}
 par(mar = c(4, 4, 1, 1))
-bp <- barplot(sqrt(obsrvd), offset = sqrt(expctd) - sqrt(obsrvd),
+bp <- barplot(sqrt(observed), offset = sqrt(expected) - sqrt(observed),
   xlab = "Goals", ylab = "sqrt(Frequency)")
-lines(bp, sqrt(expctd), type = "o", pch = 19, lwd = 2, col = 2)
+lines(bp, sqrt(expected), type = "o", pch = 19, lwd = 2, col = 2)
 abline(h = 0, lty = 2)
 ```
 
@@ -322,7 +335,7 @@ as the sum of the log-densities per observation:
 \]
 
 For solving the first-order condition analytically below we need the score function, i.e.,
-the derivative of the log-likelihood with respect to the paramter $\lambda$. The derivative
+the derivative of the log-likelihood with respect to the parameter $\lambda$. The derivative
 of the sum is simply the sum of the derivatives:
 
 \[
@@ -349,7 +362,7 @@ This can be solved as follows:
 
 Thus, the maximum likelihood estimator is simply the empirical mean $\hat \lambda = \bar y.$
 
-Unfortunately, when the paramter $\lambda$ is not constant but depends on a linear predictor
+Unfortunately, when the parameter $\lambda$ is not constant but depends on a linear predictor
 through a log link $\log(\lambda_i) = x_i^\top \beta$, the corresponding log-likelihood of the
 regression coefficients $\beta$ can not be maximized as easily. There is no closed-form
 solution for the maximum likelihood estimator $\hat \beta$ which is why the `glm()` function
