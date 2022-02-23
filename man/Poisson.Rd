@@ -80,8 +80,10 @@ Other discrete distributions:
 \code{\link{Binomial}()},
 \code{\link{Categorical}()},
 \code{\link{Geometric}()},
+\code{\link{HurdlePoisson}()},
 \code{\link{HyperGeometric}()},
 \code{\link{Multinomial}()},
-\code{\link{NegativeBinomial}()}
+\code{\link{NegativeBinomial}()},
+\code{\link{ZIPoisson}()}
 }
 \concept{discrete distributions}
