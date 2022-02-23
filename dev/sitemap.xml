@@ -103,6 +103,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/HyperGeometric.html</loc>
   </url>
   <url>
@@ -137,6 +140,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ZIPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Bernoulli.html</loc>
@@ -184,6 +190,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.HyperGeometric.html</loc>
   </url>
   <url>
@@ -215,6 +224,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ZIPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.html</loc>
@@ -251,6 +263,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/geom_auc.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/hpois.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/index.html</loc>
@@ -310,6 +325,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.HyperGeometric.html</loc>
   </url>
   <url>
@@ -341,6 +359,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ZIPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.html</loc>
@@ -400,6 +421,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.HyperGeometric.html</loc>
   </url>
   <url>
@@ -431,6 +455,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ZIPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Bernoulli.html</loc>
@@ -478,6 +505,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.HyperGeometric.html</loc>
   </url>
   <url>
@@ -509,6 +539,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Weibull.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ZIPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.html</loc>
@@ -571,6 +604,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Geometric.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HurdlePoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HyperGeometric.html</loc>
   </url>
   <url>
@@ -604,9 +640,15 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ZIPoisson.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/variance.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/zipois.html</loc>
   </url>
 </urlset>
