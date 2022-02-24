@@ -88,12 +88,16 @@
 NegativeBinomial <- function(size, p = 0.5, mu = size) {
   if(!missing(mu) && !missing(p)) stop("only one of the parameters 'p' or 'mu' must be specified")
   if(missing(mu)) {
+    stopifnot("parameter 'size' must always be positive" = all(size > 0))
+    stopifnot("parameter 'p' must always be in [0, 1]" = all(p >= 0 & p <= 1))
     stopifnot(
       "parameter lengths do not match (only scalars are allowed to be recycled)" =
         length(size) == length(p) | length(size) == 1L | length(p) == 1L
     )
     d <- data.frame(size = size, p = p)
   } else {
+    stopifnot("parameter 'mu' must always be non-negative" = all(mu >= 0))
+    stopifnot("parameter 'size' must always be positive" = all(size > 0))
     stopifnot(
       "parameter lengths do not match (only scalars are allowed to be recycled)" =
         length(size) == length(mu) | length(size) == 1L | length(mu) == 1L
