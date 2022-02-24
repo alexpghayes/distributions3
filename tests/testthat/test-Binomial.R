@@ -87,7 +87,7 @@ test_that("quantile.Bernoulli work correctly", {
 })
 
 test_that("vectorization of a Binomial distribution work correctly", {
-  d <- Binomial(c(0, 10), c(1, 1))
+  d <- Binomial(c(0, 10), c(0.2, 0.7))
   d1 <- d[1]
   d2 <- d[2]
 
@@ -131,8 +131,8 @@ test_that("vectorization of a Binomial distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Binomial distribution work correctly", {
+  d <- Binomial(c(0, 5, 10), c(0.2, 0.3, 0.7))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

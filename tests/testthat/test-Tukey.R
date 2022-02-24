@@ -4,7 +4,7 @@ test_that("print.Tukey works", {
   expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey distribution")
 })
 
-test_that("vectorization of a Normal distribution work correctly", {
+test_that("vectorization of a Tukey distribution work correctly", {
   d <- Tukey(c(3L, 4L), 16L, 2L)
   d1 <- d[1]
   d2 <- d[2]
@@ -34,8 +34,8 @@ test_that("vectorization of a Normal distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Tukey distribution work correctly", {
+  d <- Tukey(c(3L, 4L), 16L, 2L)
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(cdf(d, 0.5)), LETTERS[1:length(d)])
