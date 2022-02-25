@@ -117,7 +117,7 @@ test_that("vectorization of a StudentsT distribution work correctly", {
 })
 
 test_that("named return values for StudentsT distribution work correctly", {
-  d <- StudentsT(c(1, 3, 10))
+  d <- StudentsT(c(3, 10))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

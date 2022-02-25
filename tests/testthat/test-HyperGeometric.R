@@ -112,7 +112,7 @@ test_that("vectorization of a HyperGeometric distribution work correctly", {
 })
 
 test_that("named return values for HyperGeometric distribution work correctly", {
-  d <- HyperGeometric(4, c(2, 3), 1)
+  d <- HyperGeometric(6, c(5, 7), 5)
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
@@ -121,15 +121,15 @@ test_that("named return values for HyperGeometric distribution work correctly", 
   expect_equal(names(kurtosis(d)), LETTERS[1:length(d)])
   expect_equal(names(random(d, 1)), LETTERS[1:length(d)])
   expect_equal(rownames(random(d, 3)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(log_pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
-  expect_equal(names(cdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(cdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(cdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, 2)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, c(2, 4))), LETTERS[1:length(d)])
+  expect_equal(rownames(pdf(d, c(2, 4, 5))), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, 2)), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, c(2, 4))), LETTERS[1:length(d)])
+  expect_equal(rownames(log_pdf(d, c(2, 4, 5))), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, 2)), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, c(2, 4))), LETTERS[1:length(d)])
+  expect_equal(rownames(cdf(d, c(2, 4, 5))), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
   expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])

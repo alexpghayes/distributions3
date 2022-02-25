@@ -123,7 +123,7 @@ test_that("vectorization of a Exponential distribution work correctly", {
 })
 
 test_that("named return values for Exponential distribution work correctly", {
-  d <- Exponential(c(2, 5, 10))
+  d <- Exponential(c(2, 10))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

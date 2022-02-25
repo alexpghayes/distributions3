@@ -132,7 +132,7 @@ test_that("vectorization of a Binomial distribution work correctly", {
 })
 
 test_that("named return values for Binomial distribution work correctly", {
-  d <- Binomial(c(0, 5, 10), c(0.2, 0.3, 0.7))
+  d <- Binomial(c(5, 10), c(0.2, 0.7))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
@@ -141,15 +141,15 @@ test_that("named return values for Binomial distribution work correctly", {
   expect_equal(names(kurtosis(d)), LETTERS[1:length(d)])
   expect_equal(names(random(d, 1)), LETTERS[1:length(d)])
   expect_equal(rownames(random(d, 3)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(log_pdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
-  expect_equal(names(cdf(d, 0.5)), LETTERS[1:length(d)])
-  expect_equal(names(cdf(d, c(0.5, 0.7))), LETTERS[1:length(d)])
-  expect_equal(rownames(cdf(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, 0)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, c(0, 1))), LETTERS[1:length(d)])
+  expect_equal(rownames(pdf(d, c(0, 1, 5))), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, 0)), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, c(0, 1))), LETTERS[1:length(d)])
+  expect_equal(rownames(log_pdf(d, c(0, 1, 5))), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, 5)), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, c(0, 5))), LETTERS[1:length(d)])
+  expect_equal(rownames(cdf(d, c(0, 5, 9))), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
   expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])

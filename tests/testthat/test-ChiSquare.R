@@ -114,7 +114,7 @@ test_that("vectorization of a ChiSquare distribution work correctly", {
 })
 
 test_that("named return values for ChiSquare distribution work correctly", {
-  d <- ChiSquare(c(3, 5, 10))
+  d <- ChiSquare(c(3, 10))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

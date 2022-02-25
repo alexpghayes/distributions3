@@ -117,7 +117,7 @@ test_that("vectorization of a Beta distribution work correctly", {
 })
 
 test_that("named return values for Beta distribution work correctly", {
-  d <- Beta(c(1, 1, 1), c(2, 3, 5))
+  d <- Beta(c(1, 1), c(3, 5))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
