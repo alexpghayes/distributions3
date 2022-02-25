@@ -5,72 +5,111 @@ test_that("print.NegativeBinomial works", {
 })
 
 test_that("likelihood.NegativeBinomial and log_likelihood.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
-  x <- c(1, 1, 0)
+  X <- NegativeBinomial(size = 5, p = 0.1)
+  x <- c(1, 5, 0)
 
-  expect_equal(likelihood(cau, 1), dnbinom(1, 1, 1))
-  expect_equal(likelihood(cau, x), dnbinom(1, 1, 1) * dnbinom(1, 1, 1) * dnbinom(0, 1, 1))
+  expect_equal(likelihood(X, 1), dnbinom(1, 5, 0.1))
+  expect_equal(likelihood(X, x), dnbinom(1, 5, 0.1) * dnbinom(5, 5, 0.1) * dnbinom(0, 5, 0.1))
 
-  expect_equal(log_likelihood(cau, 1), log(dnbinom(1, 1, 1)))
-  expect_equal(log_likelihood(cau, x), log(dnbinom(1, 1, 1) * dnbinom(1, 1, 1) * dnbinom(0, 1, 1)))
+  expect_equal(log_likelihood(X, 1), log(dnbinom(1, 5, 0.1)))
+  expect_equal(log_likelihood(X, x), log(dnbinom(1, 5, 0.1) * dnbinom(5, 5, 0.1) * dnbinom(0, 5, 0.1)))
+
+  ## alternative parameterization
+  Y <- NegativeBinomial(mu = 45, size = 5)
+  expect_equal(likelihood(X, 1), likelihood(Y, 1))
+  expect_equal(likelihood(X, x), likelihood(Y, x))
+  expect_equal(log_likelihood(X, 1), log_likelihood(Y, 1))
+  expect_equal(log_likelihood(X, x), log_likelihood(Y, x))
 })
 
 test_that("random.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
+  X <- NegativeBinomial(size = 5, p = 0.1)
 
-  expect_length(random(cau), 1)
-  expect_length(random(cau, 100), 100)
-  expect_length(random(cau, 0), 0)
-  expect_error(random(cau, -2))
+  expect_length(random(X), 1)
+  expect_length(random(X, 100), 100)
+  expect_length(random(X, 0), 0)
+  expect_error(random(X, -2))
+
+  Y <- NegativeBinomial(mu = 45, size = 5)
+
+  expect_equal({set.seed(0); random(X)}, {set.seed(0); random(Y)})
+  expect_equal({set.seed(0); random(X, 100)}, {set.seed(0); random(Y, 100)})
+  expect_equal({set.seed(0); random(X, 0)}, {set.seed(0); random(Y, 0)})
+  expect_error(random(Y, -2))
 })
 
 test_that("pdf.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
+  X <- NegativeBinomial(size = 5, p = 0.1)
 
-  expect_equal(pdf(cau, 0), dnbinom(0, 0, 1))
-  expect_equal(pdf(cau, 1), dnbinom(1, 0, 1))
+  expect_equal(pdf(X, 0), dnbinom(0, 5, 0.1))
+  expect_equal(pdf(X, 1), dnbinom(1, 5, 0.1))
 
-  expect_length(pdf(cau, seq_len(0)), 0)
-  expect_length(pdf(cau, seq_len(1)), 1)
-  expect_length(pdf(cau, seq_len(10)), 10)
+  expect_length(pdf(X, seq_len(0)), 0)
+  expect_length(pdf(X, seq_len(1)), 1)
+  expect_length(pdf(X, seq_len(10)), 10)
+
+  Y <- NegativeBinomial(mu = 45, size = 5)
+  expect_equal(pdf(X, 0), pdf(Y, 0))
+  expect_equal(pdf(X, 1), pdf(Y, 1))
+  expect_equal(pdf(X, seq_len(0)), pdf(Y, seq_len(0)))
+  expect_equal(pdf(X, seq_len(1)), pdf(Y, seq_len(1)))
+  expect_equal(pdf(X, seq_len(10)), pdf(Y, seq_len(10)))
 })
 
 test_that("log_pdf.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
+  X <- NegativeBinomial(size = 5, p = 0.1)
 
-  expect_equal(log_pdf(cau, 0), log(dnbinom(0, 0, 1)))
-  expect_equal(log_pdf(cau, 1), log(dnbinom(1, 0, 1)))
+  expect_equal(log_pdf(X, 0), log(dnbinom(0, 5, 0.1)))
+  expect_equal(log_pdf(X, 1), log(dnbinom(1, 5, 0.1)))
 
-  expect_length(log_pdf(cau, seq_len(0)), 0)
-  expect_length(log_pdf(cau, seq_len(1)), 1)
-  expect_length(log_pdf(cau, seq_len(10)), 10)
+  expect_length(log_pdf(X, seq_len(0)), 0)
+  expect_length(log_pdf(X, seq_len(1)), 1)
+  expect_length(log_pdf(X, seq_len(10)), 10)
+
+  Y <- NegativeBinomial(mu = 45, size = 5)
+  expect_equal(log_pdf(X, 0), log_pdf(Y, 0))
+  expect_equal(log_pdf(X, 1), log_pdf(Y, 1))
+  expect_equal(log_pdf(X, seq_len(0)), log_pdf(Y, seq_len(0)))
+  expect_equal(log_pdf(X, seq_len(1)), log_pdf(Y, seq_len(1)))
+  expect_equal(log_pdf(X, seq_len(10)), log_pdf(Y, seq_len(10)))
 })
 
 test_that("cdf.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
+  X <- NegativeBinomial(size = 5, p = 0.1)
 
-  expect_equal(cdf(cau, 0), pnbinom(0, 0, 1))
-  expect_equal(cdf(cau, 1), pnbinom(1, 0, 1))
+  expect_equal(cdf(X, 0), pnbinom(0, 5, 0.1))
+  expect_equal(cdf(X, 1), pnbinom(1, 5, 0.1))
 
+  expect_length(cdf(X, seq_len(0)), 0)
+  expect_length(cdf(X, seq_len(1)), 1)
+  expect_length(cdf(X, seq_len(10)), 10)
 
-  expect_length(cdf(cau, seq_len(0)), 0)
-  expect_length(cdf(cau, seq_len(1)), 1)
-  expect_length(cdf(cau, seq_len(10)), 10)
+  Y <- NegativeBinomial(mu = 45, size = 5)
+  expect_equal(cdf(X, 0), cdf(Y, 0))
+  expect_equal(cdf(X, 1), cdf(Y, 1))
+  expect_equal(cdf(X, seq_len(0)), cdf(Y, seq_len(0)))
+  expect_equal(cdf(X, seq_len(1)), cdf(Y, seq_len(1)))
+  expect_equal(cdf(X, seq_len(10)), cdf(Y, seq_len(10)))
 })
 
 test_that("quantile.NegativeBinomial work correctly", {
-  cau <- NegativeBinomial(1, 1)
+  X <- NegativeBinomial(size = 5, p = 0.1)
 
-  expect_equal(quantile(cau, 0), qnbinom(0, 0, 1))
-  expect_equal(quantile(cau, 1), qnbinom(1, 0, 1))
+  expect_equal(quantile(X, 0), qnbinom(0, 5, 0.1))
+  expect_equal(quantile(X, 1), qnbinom(1, 5, 0.1))
 
+  expect_length(quantile(X, seq_len(0)), 0)
+  expect_length(quantile(X, c(0, 1)), 2)
 
-  expect_length(quantile(cau, seq_len(0)), 0)
-  expect_length(quantile(cau, c(0, 1)), 2)
+  Y <- NegativeBinomial(mu = 45, size = 5)
+  expect_equal(quantile(X, 0), quantile(Y, 0))
+  expect_equal(quantile(X, 1), quantile(Y, 1))
+  expect_equal(quantile(X, seq_len(0)), quantile(Y, seq_len(0)))
+  expect_equal(quantile(X, c(0, 1)), quantile(Y, c(0, 1)))
 })
 
 test_that("vectorization of a NegativeBinomial distribution work correctly", {
-  d <- NegativeBinomial(1, c(0.3, 1))
+  d <- NegativeBinomial(size = c(5, 3), p = c(0.1, 0.2))
   d1 <- d[1]
   d2 <- d[2]
 
@@ -112,10 +151,49 @@ test_that("vectorization of a NegativeBinomial distribution work correctly", {
   expect_true(is.numeric(support(d1, drop = FALSE)))
   expect_null(dim(support(d1)))
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
+
+  a <- NegativeBinomial(mu = c(45, 12), size = c(5, 3))
+  expect_equal(mean(d), mean(a))
+  expect_equal(variance(d), variance(a))
+  expect_equal(skewness(d), skewness(a))
+  expect_equal(kurtosis(d), kurtosis(a))
+  expect_equal({set.seed(0); random(d)}, {set.seed(0); random(a)})
+  expect_equal(pdf(d, 0), pdf(a, 0))
+  expect_equal(log_pdf(d, 0), log_pdf(a, 0))
+  expect_equal(cdf(d, 0.5), cdf(a, 0.5))
+  expect_equal(quantile(d, 0.5), quantile(a, 0.5))
+  expect_equal(quantile(d, c(0.5, 0.5)), quantile(a, 0.5))
+  expect_equal(quantile(d, c(0.1, 0.5, 0.9)), quantile(a, c(0.1, 0.5, 0.9)))
+  expect_equal(support(d), support(a))
 })
 
 test_that("named return values for NegativeBinomial distribution work correctly", {
-  d <- NegativeBinomial(1, c(0.3, 0.7))
+  d <- NegativeBinomial(size = 1, p = c(0.3, 0.7))
+  names(d) <- LETTERS[1:length(d)]
+
+  expect_equal(names(mean(d)), LETTERS[1:length(d)])
+  expect_equal(names(variance(d)), LETTERS[1:length(d)])
+  expect_equal(names(skewness(d)), LETTERS[1:length(d)])
+  expect_equal(names(kurtosis(d)), LETTERS[1:length(d)])
+  expect_equal(names(random(d, 1)), LETTERS[1:length(d)])
+  expect_equal(rownames(random(d, 3)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, 5)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, c(5, 7))), LETTERS[1:length(d)])
+  expect_equal(rownames(pdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, 5)), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, c(5, 7))), LETTERS[1:length(d)])
+  expect_equal(rownames(log_pdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, 5)), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, c(5, 7))), LETTERS[1:length(d)])
+  expect_equal(rownames(cdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
+  expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
+  expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
+  expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(support(d[1])), c("min", "max"))
+  expect_equal(colnames(support(d)), c("min", "max"))
+  expect_equal(rownames(support(d)), LETTERS[1:length(d)])
+
+  d <- NegativeBinomial(mu = c(1, 5), size = c(3, 10))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
