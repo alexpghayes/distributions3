@@ -32,16 +32,22 @@ Determine quantiles of a NegativeBinomial distribution
 
 set.seed(27)
 
-X <- NegativeBinomial(10, 0.3)
+X <- NegativeBinomial(size = 5, p = 0.1)
 X
 
 random(X, 10)
 
-pdf(X, 2)
-log_pdf(X, 2)
+pdf(X, 50)
+log_pdf(X, 50)
 
-cdf(X, 4)
+cdf(X, 50)
 quantile(X, 0.7)
+
+## alternative parameterization of X
+Y <- NegativeBinomial(mu = 45, size = 5)
+Y
+cdf(Y, 50)
+quantile(Y, 0.7)
 }
 \seealso{
 Other NegativeBinomial distribution: 

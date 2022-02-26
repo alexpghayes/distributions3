@@ -70,7 +70,7 @@ test_that("quantile.Gamma work correctly", {
 })
 
 test_that("vectorization of a Gamma distribution work correctly", {
-  d <- Gamma(c(0, 10), c(1, 1))
+  d <- Gamma(c(2, 10), c(5, 5))
   d1 <- d[1]
   d2 <- d[2]
 
@@ -114,8 +114,8 @@ test_that("vectorization of a Gamma distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Gamma distribution work correctly", {
+  d <- Gamma(c(2, 10), c(5, 5))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
