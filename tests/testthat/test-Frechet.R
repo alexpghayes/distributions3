@@ -103,8 +103,8 @@ test_that("vectorization of a Frechet distribution work correctly", {
   )
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Frechet distribution work correctly", {
+  d <- Frechet(c(-10, -5), c(10, 5), c(10, 5))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

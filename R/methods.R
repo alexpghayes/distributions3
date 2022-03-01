@@ -195,6 +195,7 @@ fit_mle <- function(d, x, ...) {
 #' @inheritParams fit_mle
 #'
 #' @return a named list of sufficient statistics
+#' @export
 suff_stat <- function(d, x, ...) {
   ellipsis::check_dots_used()
   UseMethod("suff_stat")

@@ -159,8 +159,8 @@ test_that("vectorization of a GP distribution work correctly", {
   )
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for GP distribution work correctly", {
+  d <- GP(0, 1, c(0, 0.1))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

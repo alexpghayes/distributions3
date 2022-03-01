@@ -107,8 +107,8 @@ test_that("vectorization of a Erlang distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Erlang distribution work correctly", {
+  d <- Erlang(3, c(0.5, 0.8))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(random(d, 1)), LETTERS[1:length(d)])

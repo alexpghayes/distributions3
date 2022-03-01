@@ -114,8 +114,8 @@ test_that("vectorization of a Logistic distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Logistic distribution work correctly", {
+  d <- Logistic(c(0, 2), c(1, 4))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

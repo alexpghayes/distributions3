@@ -1,14 +1,16 @@
-#' Create a Negative Binomial distribution
+#' Create a negative binomial distribution
 #'
 #' A generalization of the geometric distribution. It is the number
-#' of successes in a sequence of i.i.d. Bernoulli trials before
-#' a specified number (\eqn{r}) of failures occurs.
+#' of failures in a sequence of i.i.d. Bernoulli trials before
+#' a specified target number (\eqn{r}) of successes occurs.
 #'
 #'
-#' @param size The number of failures (an integer greater than \eqn{0})
+#' @param size The target number of successes (greater than \eqn{0})
 #'   until the experiment is stopped. Denoted \eqn{r} below.
 #' @param p The success probability for a given trial. `p` can be any
 #'   value in `[0, 1]`, and defaults to `0.5`.
+#' @param mu Alternative parameterization via the non-negative mean
+#'   of the distribution (instead of the probability `p`), defaults to `size`.
 #'
 #' @return A `NegativeBinomial` object.
 #' @export
@@ -21,56 +23,87 @@
 #'   <https://alexpghayes.github.io/distributions3/>, where the math
 #'   will render with additional detail and much greater clarity.
 #'
-#'   In the following, let \eqn{X} be a Negative Binomial random variable with
+#'   In the following, let \eqn{X} be a negative binomial random variable with
 #'   success probability `p` = \eqn{p}.
-#'
 #'
 #'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}
 #'
-#'   **Mean**: \eqn{\frac{p r}{1-p}}
+#'   **Mean**: \eqn{\frac{(1 - p) r}{p} = \mu}
 #'
-#'   **Variance**: \eqn{\frac{pr}{(1-p)^2}}
+#'   **Variance**: \eqn{\frac{(1 - p) r}{p^2}}
 #'
-#'   **Probability mass function (p.m.f)**:
+#'   **Probability mass function (p.m.f.)**:
 #'
 #'   \deqn{
-#'      f(k) = {k + r - 1 \choose k} \cdot (1-p)^r p^k
+#'      f(k) = {k + r - 1 \choose k} \cdot p^r (1-p)^k
 #'   }{
-#'      f(k) = (k+r-1)!/(k!(r-1)!) (1-p)^r p^k
+#'      f(k) = (k+r-1)!/(k!(r-1)!) p^r (1-p)^k
 #'   }
 #'
-#'   **Cumulative distribution function (c.d.f)**:
+#'   **Cumulative distribution function (c.d.f.)**:
 #'
 #'   Omitted for now.
 #'
-#'   **Moment generating function (m.g.f)**:
+#'   **Moment generating function (m.g.f.)**:
 #'
 #'   \deqn{
-#'      \left(\frac{1-p}{1-pe^t}\right)^r, t < -\log p
+#'      \left(\frac{p}{1 - (1 -p) e^t}\right)^r, t < -\log (1-p)
 #'   }{
-#'      \frac{(1-p)^r}{(1-pe^t)^r}, t < -\log p
+#'      \frac{p^r}{(1 - (1-p) e^t)^r}, t < -\log (1-p)
 #'   }
+#'
+#'  **Alternative parameterization**: Sometimes, especially when used in
+#'  regression models, the negative binomial distribution is parameterized
+#'  by its mean \eqn{\mu} (as listed above) plus the size parameter \eqn{r}.
+#'  This implies a success probability of \eqn{p = r/(r + \mu)}. This can
+#'  also be seen as a generalization of the Poisson distribution where the
+#'  assumption of equidispersion (i.e., variance equal to mean) is relaxed.
+#'  The negative binomial distribution is overdispersed (i.e., variance greater than mean)
+#'  and its variance can also be written as \eqn{\mu + 1/r \mu^2}. The Poisson
+#'  distribution is then obtained as \eqn{r} goes to infinity. Note that in this
+#'  view it is natural to also allow for non-integer \eqn{r} parameters.
+#'  The factorials in the equations above are then expressed in terms of the
+#'  gamma function.
 #'
 #' @examples
 #'
 #' set.seed(27)
 #'
-#' X <- NegativeBinomial(10, 0.3)
+#' X <- NegativeBinomial(size = 5, p = 0.1)
 #' X
 #'
 #' random(X, 10)
 #'
-#' pdf(X, 2)
-#' log_pdf(X, 2)
+#' pdf(X, 50)
+#' log_pdf(X, 50)
 #'
-#' cdf(X, 4)
+#' cdf(X, 50)
 #' quantile(X, 0.7)
-NegativeBinomial <- function(size, p = 0.5) {
-  stopifnot(
-    "parameter lengths do not match (only scalars are allowed to be recycled)" =
-      length(size) == length(p) | length(size) == 1 | length(p) == 1
-  )
-  d <- data.frame(size = size, p = p)
+#'
+#' ## alternative parameterization of X
+#' Y <- NegativeBinomial(mu = 45, size = 5)
+#' Y
+#' cdf(Y, 50)
+#' quantile(Y, 0.7)
+NegativeBinomial <- function(size, p = 0.5, mu = size) {
+  if(!missing(mu) && !missing(p)) stop("only one of the parameters 'p' or 'mu' must be specified")
+  if(missing(mu)) {
+    stopifnot("parameter 'size' must always be positive" = all(size > 0))
+    stopifnot("parameter 'p' must always be in [0, 1]" = all(p >= 0 & p <= 1))
+    stopifnot(
+      "parameter lengths do not match (only scalars are allowed to be recycled)" =
+        length(size) == length(p) | length(size) == 1L | length(p) == 1L
+    )
+    d <- data.frame(size = size, p = p)
+  } else {
+    stopifnot("parameter 'mu' must always be non-negative" = all(mu >= 0))
+    stopifnot("parameter 'size' must always be positive" = all(size > 0))
+    stopifnot(
+      "parameter lengths do not match (only scalars are allowed to be recycled)" =
+        length(size) == length(mu) | length(size) == 1L | length(mu) == 1L
+    )
+    d <- data.frame(mu = mu, size = size)
+  }
   class(d) <- c("NegativeBinomial", "distribution")
   d
 }
@@ -78,25 +111,35 @@ NegativeBinomial <- function(size, p = 0.5) {
 #' @export
 mean.NegativeBinomial <- function(x, ...) {
   ellipsis::check_dots_used()
-  rval <- x$p * x$size / (1 - x$p)
+  rval <- if("mu" %in% names(unclass(x))) {
+    x$mu
+  } else {
+    x$size * (1 - x$p) / x$p
+  }
   setNames(rval, names(x))
 }
 
 #' @export
 variance.NegativeBinomial <- function(x, ...) {
-  rval <- (x$p * x$size) / (1 - x$p)^2
+  rval <- if("mu" %in% names(unclass(x))) {
+    x$mu + 1/x$size * x$mu^2
+  } else {
+    x$size * (1 - x$p)/ x$p^2
+  }
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.NegativeBinomial <- function(x, ...) {
-  rval <- (1 + x$p) / sqrt(x$p * x$size)
+  if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
+  rval <- (2 - x$p) / sqrt((1 - x$p) * x$size)
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.NegativeBinomial <- function(x, ...) {
-  rval <- 6 / x$size + (1 - x$p)^2 / x$size * x$p
+  if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
+  rval <- 6 / x$size + x$p^2 / x$size * (1 - x$p)
   setNames(rval, names(x))
 }
 
@@ -123,7 +166,11 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rnbinom(n = at, size = d$size, prob = d$p)
+  FUN <- if("mu" %in% names(unclass(x))) {
+    function(at, d) rnbinom(n = at, mu = d$mu, size = d$size)
+  } else {
+    function(at, d) rnbinom(n = at, size = d$size, prob = d$p)
+  }
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -149,7 +196,11 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
 #' @export
 #'
 pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
-  FUN <- function(at, d) dnbinom(x = at, size = d$size, prob = d$p, ...)
+  FUN <- if("mu" %in% names(unclass(d))) {
+    function(at, d) dnbinom(x = at, mu = d$mu, size = d$size, ...)
+  } else {
+    function(at, d) dnbinom(x = at, size = d$size, prob = d$p, ...)
+  }
   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
 }
 
@@ -157,7 +208,11 @@ pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
-  FUN <- function(at, d) dnbinom(x = at, size = d$size, prob = d$p, log = TRUE)
+  FUN <- if("mu" %in% names(unclass(d))) {
+    function(at, d) dnbinom(x = at, mu = d$mu, size = d$size, log = TRUE)
+  } else {
+    function(at, d) dnbinom(x = at, size = d$size, prob = d$p, log = TRUE)
+  }
   apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
 }
 
@@ -183,7 +238,11 @@ log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
-  FUN <- function(at, d) pnbinom(q = at, size = d$size, prob = d$p, ...)
+  FUN <- if("mu" %in% names(unclass(d))) {
+    function(at, d) pnbinom(q = at, mu = d$mu, size = d$size, ...)
+  } else {
+    function(at, d) pnbinom(q = at, size = d$size, prob = d$p, ...)
+  }
   apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
 }
 
@@ -209,7 +268,11 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #'
 quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
   ellipsis::check_dots_used()
-  FUN <- function(at, d) qnbinom(p = at, size = x$size, prob = x$p, ...)
+  FUN <- if("mu" %in% names(unclass(x))) {
+    function(at, d) qnbinom(p = at, mu = x$mu, size = x$size, ...)
+  } else {
+    function(at, d) qnbinom(p = at, size = x$size, prob = x$p, ...)
+  }
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
 

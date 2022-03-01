@@ -123,8 +123,8 @@ test_that("vectorization of a Uniform distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Uniform distribution work correctly", {
+  d <- Uniform(c(0, 10), c(1, 20))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

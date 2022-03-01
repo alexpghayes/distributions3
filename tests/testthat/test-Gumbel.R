@@ -91,8 +91,8 @@ test_that("vectorization of a Gumbel distribution work correctly", {
   )
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for Gumbel distribution work correctly", {
+  d <- Gumbel(0, c(0.5, 1))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
