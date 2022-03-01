@@ -45,10 +45,10 @@ apply_dpqr <- function(d,
   k <- if (type == "random") as.numeric(at) else length(at)
 
   ## make names (not needed for random numbers)
-  anam <- if(type == "random") NULL else make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+  anam <- if (type == "random") NULL else make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
 
   ## handle different types of "at"
-  if(type != "random") {
+  if (type != "random") {
     if (k == 0L) {
       return(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL)))
     } else if (k == 1L) {
