@@ -44,8 +44,14 @@ apply_dpqr <- function(d,
   n <- length(d)
   k <- if (type == "random") as.numeric(at) else length(at)
 
-  ## make names (not needed for random numbers)
-  anam <- if (type == "random") NULL else make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+  ## "at" names (if not dropped)
+  anam <- if ((k == 1L || n == 1L) && drop) {
+    NULL
+  } else if(type == "random") {
+    seq_len(k)
+  } else {
+    make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+  }
 
   ## handle different types of "at"
   if (type != "random") {
@@ -61,8 +67,14 @@ apply_dpqr <- function(d,
     }
   }
 
-  ## "at" labels
-  cnam <- paste(substr(type, 1L, 1L), if (type == "random") seq_len(k) else anam, sep = "_")
+  ## columns names (if not dropped)
+  cnam <- if ((k == 1L || n == 1L) && drop) {
+    NULL
+  } else if (length(anam) > k) {
+    type
+  } else {
+    paste(substr(type, 1L, 1L), anam, sep = "_")
+  }
 
   ## handle zero-length distribution vector
   if (n == 0L) return(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam)))
@@ -86,13 +98,11 @@ apply_dpqr <- function(d,
   if (k == 1L && drop) {
     rval <- as.vector(rval)
     names(rval) <- rnam
-  } else if (length(anam) > k) {
-    cnam <- type
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
-  } else if (drop) {
-    rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
+  } else if (n == 1L && drop) {
+    rval <- as.vector(rval)
   } else {
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
+    dim(rval) <- c(n, k)
+    dimnames(rval) <- list(rnam, cnam)
   }
 
   return(rval)
