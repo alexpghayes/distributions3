@@ -39,51 +39,95 @@ apply_dpqr <- function(d,
 
   ## basic properties
   rnam <- names(d)
-  anam <- make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
   n <- length(d)
   k <- length(at)
 
-  ## handle different types of "at"
-  if (k == 0L) {
-    return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
-  } else if (k == 1L) {
-    at <- rep.int(as.vector(at), n)
-  } else if (k == n && is.null(dim(at))) {
-    k <- 1L
+  if (type == "random") {
+
+    ## handle different types of "at"
+    if (k == 0L) {
+      return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
+    } else {
+      at <- as.vector(at)
+    } 
+
+    ## "at" labels
+    cnam <- paste(substr(type, 1L, 1L), seq_len(unique(at)), sep = "_")
+ 
+    ## handle zero-length distribution vector
+    if (n == 0L) {
+      return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
+    }
+
+    ## call FUN
+    rval <- if (length(d) == 1L) {
+      FUN(at, d = d, ...)
+    } else {
+      vapply(seq_along(d), function(idx) FUN(at, d[idx], ...), numeric(at))
+    }
+
+    ## handle dimensions
+    if (unique(at) == 1L && drop) {
+      rval <- as.vector(rval)
+      names(rval) <- rnam
+    } else if (drop) {
+      rval <- drop(
+        matrix(rval, nrow = n, ncol = unique(at), dimnames = list(rnam, cnam), 
+          byrow = TRUE)
+      )
+    } else {
+      rval <- matrix(rval, nrow = n, ncol = unique(at), dimnames = list(rnam, cnam), byrow = TRUE)
+    }
+
+    return(rval)
+
   } else {
-    at <- as.vector(at)
-    k <- length(at)
+  
+    ## make names
+    anam <- make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+
+    ## handle different types of "at"
+    if (k == 0L) {
+      return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
+    } else if (k == 1L) {
+      at <- rep.int(as.vector(at), n)
+    } else if (k == n && is.null(dim(at))) {
+      k <- 1L
+    } else {
+      at <- as.vector(at)
+      k <- length(at)
+    }
+
+    ## "at" labels
+    cnam <- paste(substr(type, 1L, 1L), if (all(at == 1L)) seq_len(k) else anam, sep = "_")
+
+    ## handle zero-length distribution vector
+    if (n == 0L) {
+      return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
+    }
+
+    ## call FUN
+    rval <- if (k == 1L) {
+      FUN(at, d = d, ...)
+    } else {
+      vapply(at, FUN, numeric(n), d = d, ...)
+    }
+
+    ## handle dimensions
+    if (k == 1L && drop) {
+      rval <- as.vector(rval)
+      names(rval) <- rnam
+    } else if (length(anam) > k) {
+      cnam <- type
+      rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
+    } else if (drop) {
+      rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
+    } else {
+      rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
+    }
+
+    return(rval)
   }
-
-  ## "at" labels
-  cnam <- paste(substr(type, 1L, 1L), if (all(at == 1L)) seq_len(k) else anam, sep = "_")
-
-  ## handle zero-length distribution vector
-  if (n == 0L) {
-    return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
-  }
-
-  ## call FUN
-  rval <- if (k == 1L) {
-    FUN(at, d = d, ...)
-  } else {
-    vapply(at, FUN, numeric(n), d = d, ...)
-  }
-
-  ## handle dimensions
-  if (k == 1L && drop) {
-    rval <- as.vector(rval)
-    names(rval) <- rnam
-  } else if (length(anam) > k) {
-    cnam <- type
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
-  } else if (drop) {
-    rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
-  } else {
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
-  }
-
-  return(rval)
 }
 
 
@@ -207,11 +251,11 @@ summary.distribution <- function(object, ...) {
 }
 
 make_suffix <- function(x, digits = 3) {
-  rval <- sapply(x, format, digits = digits)
+  rval <- format(x, digits = digits, trim = TRUE, drop0trailing = TRUE)
   nok <- duplicated(rval)
   while (any(nok) && digits < 10) {
     digits <- digits + 1
-    rval[nok] <- sapply(x[nok], format, digits = digits)
+    rval[nok] <- format(x[nok], digits = digits, trim = TRUE, drop0trailing = TRUE)
     nok <- duplicated(rval)
   }
   nok <- duplicated(rval) | duplicated(rval, fromLast = TRUE)
