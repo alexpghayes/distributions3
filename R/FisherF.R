@@ -125,8 +125,8 @@ random.FisherF <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rf(n = length(d), df1 = d$df1, df2 = d$df2, ncp = d$lambda)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rf(n = at, df1 = d$df1, df2 = d$df2, ncp = d$lambda)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of an F distribution

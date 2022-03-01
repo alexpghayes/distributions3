@@ -119,8 +119,8 @@ random.Poisson <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rpois(n = length(d), lambda = d$lambda)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rpois(n = at, lambda = d$lambda)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Poisson distribution

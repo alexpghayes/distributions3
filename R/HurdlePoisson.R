@@ -239,8 +239,8 @@ kurtosis.HurdlePoisson <- function(x, ...) {
 random.HurdlePoisson <- function(x, n = 1L, drop = TRUE, ...) {
   n <- make_positive_integer(n)
   if (n == 0L) return(numeric(0L))
-  FUN <- function(at, d) rhpois(n = length(d), lambda = d$lambda, pi = d$pi)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rhpois(n = at, lambda = d$lambda, pi = d$pi)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a hurdle Poisson distribution

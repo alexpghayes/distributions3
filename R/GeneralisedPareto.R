@@ -182,8 +182,8 @@ random.GP <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) revdbayes::rgp(n = length(d), loc = d$mu, scale = d$sigma, shape = d$xi)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) revdbayes::rgp(n = at, loc = d$mu, scale = d$sigma, shape = d$xi)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a GP distribution

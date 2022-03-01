@@ -125,7 +125,7 @@ random.LogNormal <- function(x, n = 1L, drop = TRUE, ...) {
     return(numeric(0L))
   }
   FUN <- function(at, d) rlnorm(n = at, meanlog = d$log_mu, sdlog = d$log_sigma)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a LogNormal distribution

@@ -129,8 +129,8 @@ random.Cauchy <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rcauchy(n = length(d), location = x$location, scale = x$scale)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rcauchy(n = at, location = x$location, scale = x$scale)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Cauchy distribution

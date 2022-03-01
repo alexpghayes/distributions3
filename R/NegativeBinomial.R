@@ -123,8 +123,8 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rnbinom(n = length(d), size = d$size, prob = d$p)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rnbinom(n = at, size = d$size, prob = d$p)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a NegativeBinomial distribution

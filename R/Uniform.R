@@ -88,12 +88,12 @@ random.Uniform <- function(x, n = 1L, drop = TRUE, ...) {
   }
   FUN <- function(at, d) {
     runif(
-      n = length(d),
+      n = at,
       min = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, min),
       max = apply(as.matrix(d)[, c("a", "b"), drop = FALSE], 1, max)
     )
   }
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a continuous Uniform distribution
