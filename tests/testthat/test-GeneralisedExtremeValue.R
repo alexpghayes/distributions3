@@ -160,8 +160,8 @@ test_that("vectorization of a GEV distribution work correctly", {
   )
 })
 
-test_that("named return values for Normal distribution work correctly", {
-  d <- Normal(c(0, 10), c(1, 1))
+test_that("named return values for GEV distribution work correctly", {
+  d <- GEV(0, 1, c(0.1, 0))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])

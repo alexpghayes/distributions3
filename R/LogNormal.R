@@ -124,7 +124,7 @@ random.LogNormal <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rlnorm(n = at, meanlog = d$log_mu, sdlog = d$log_sigma)
+  FUN <- function(at, d) rlnorm(n = length(d), meanlog = d$log_mu, sdlog = d$log_sigma)
   apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
 }
 

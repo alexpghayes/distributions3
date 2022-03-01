@@ -111,6 +111,7 @@ skewness.Gamma <- function(x, ...) {
 #' @export
 kurtosis.Gamma <- function(x, ...) {
   rval <- 6 / x$shape
+  setNames(rval, names(x))
 }
 
 #' Draw a random sample from a Gamma distribution
