@@ -21,6 +21,19 @@ is_distribution <- function(x) {
 # HELPER FUNCTION FOR VECTORIZATION OF DISTRIBUTION OBJECTS
 # -------------------------------------------------------------------
 
+#' Helper Function for Vectorization of Distribution Objects
+#'
+#' @param d A `distributions3` object.
+#' @param FUN Function to be computed. Function should be of type \code{FUN(at, d)}, see details below.
+#' @param at Specification of values at which `FUN` should be
+#' evaluated, typically a numeric vector but possibly also a matrix or data
+#' frame.
+#' @param drop logical. Should the result be simplified to an unnamed vector if possible?
+#' @param type Character string used for naming, typically on of \code{"density"}, \code{"logLik"},
+#' \code{"probability"}, \code{"quantile"}, and \code{"random"}. Beware \code{"random"} is processed internally as a special case.
+#' @param ... Arguments to be passed to  \code{FUN()}.
+#'
+#' @export
 apply_dpqr <- function(d,
                        FUN,
                        at,
@@ -241,11 +254,22 @@ make_suffix <- function(x, digits = 3) {
   return(rval)
 }
 
+#' Helper Function to Return Support for `distributions3` objectfor `distributions3` object
+#' 
+#' @param min,max Numeric vectors. Minima and Maxima supports of a `distributions3` object.
+#' @param d A `distributions3` object.
+#' @param drop logical. Should the result be simplified to an unnamed vector if possible?
+#'
+#' @export
 make_support <- function(min, max, d, drop = TRUE) {
   rval <- matrix(c(min, max), ncol = 2, dimnames = list(names(d), c("min", "max")))
   if (drop && NROW(rval) == 1L) rval[1L, , drop = TRUE] else rval
 }
 
+#' Helper Function to Make a Positive Integer
+#' 
+#' @param n numeric. Typically number of observations for computing random draws. If `length(n) > 1`, the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`.
+#' @export
 make_positive_integer <- function(n) {
   n <- if (length(n) > 1L) length(n) else suppressWarnings(try(as.integer(n), silent = TRUE))
   if (inherits(n, "try-error") || is.na(n) || n < 0L) {

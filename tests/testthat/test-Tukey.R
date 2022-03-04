@@ -17,7 +17,10 @@ test_that("vectorization of a Tukey distribution work correctly", {
   expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
-    rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9)))
+    matrix(
+      rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
+      ncol = 3, dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
+    )
   )
 
   ## support

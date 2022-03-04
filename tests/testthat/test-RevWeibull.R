@@ -32,8 +32,14 @@ pvec <- c(0, 0.25, 0.5, 0.75, 1, NA)
 test_that("random.RevWeibull works correctly", {
   expect_length(random(g3), 1)
   expect_length(random(g3, 100), 100)
+  expect_length(random(g3[-1], 1), 0)
   expect_length(random(g3, 0), 0)
   expect_error(random(g3, -2))
+ 
+  # consistent with base R, using the `length` as number of samples to draw
+  expect_length(random(g3, c(1, 2, 3)), 3)
+  expect_length(random(g3, cbind(1, 2, 3)), 3)
+  expect_length(random(g3, rbind(1, 2, 3)), 3)
 })
 
 test_that("pdf.RevWeibull works correctly", {
@@ -97,7 +103,10 @@ test_that("vectorization of a RevWeibull distribution work correctly", {
   expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
-    rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9)))
+    matrix(
+      rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
+      ncol = 3, dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
+    )
   )
 
   ## support
