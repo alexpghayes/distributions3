@@ -2,9 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{apply_dpqr}
 \alias{apply_dpqr}
-\title{Helper Function for Vectorization of Distribution Objects}
+\alias{make_support}
+\alias{make_positive_integer}
+\title{Utilities for \code{distributions3} objects}
 \usage{
 apply_dpqr(d, FUN, at, drop = TRUE, type = NULL, ...)
+
+make_support(min, max, d, drop = TRUE)
+
+make_positive_integer(n)
 }
 \arguments{
 \item{d}{A \code{distributions3} object.}
@@ -20,8 +26,14 @@ frame.}
 \item{type}{Character string used for naming, typically on of \code{"density"}, \code{"logLik"},
 \code{"probability"}, \code{"quantile"}, and \code{"random"}. Beware \code{"random"} is processed internally as a special case.}
 
-\item{...}{Arguments to be passed to  \code{FUN()}.}
+\item{...}{Arguments to be passed to  \code{FUN}.}
+
+\item{min, max}{Numeric vectors. Minima and Maxima supports of a \code{distributions3} object.}
+
+\item{n}{numeric. Typically number of observations for computing random draws. If \code{length(n) > 1}, the length is taken to be the number required (consistent with base R as, e.g., for \code{rnorm()}.}
 }
 \description{
-Helper Function for Vectorization of Distribution Objects
+Various utility functions to implement vectorized \code{distributions3} objects.
+These are used in the computation of moments and quantiles, in the random
+generation of draws, and for returning the support for \code{distributions3} objcts.
 }
