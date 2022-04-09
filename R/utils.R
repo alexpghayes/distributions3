@@ -23,23 +23,30 @@ is_distribution <- function(x) {
 
 #' Utilities for `distributions3` objects
 #' 
-#' Various utility functions to implement vectorized `distributions3` objects.
-#' These are used in the computation of moments and quantiles, in the random
-#' generation of draws, and for returning the support for `distributions3` objcts.
+#' Various utility functions to implement methods for distributions with a
+#' unified workflow, in particular to facilitate working with vectorized
+#' `distributions3` objects.
+#' These are particularly useful in the computation of densities, probabilities, quantiles,
+#' and random samples when classical d/p/q/r functions are readily available for
+#' the distribution of interest.
 #'
 #' @param d A `distributions3` object.
-#' @param FUN Function to be computed. Function should be of type \code{FUN(at, d)}, see details below.
-#' @param at Specification of values at which `FUN` should be
-#' evaluated, typically a numeric vector but possibly also a matrix or data
+#' @param FUN Function to be computed. Function should be of type \code{FUN(at, d)}, where
+#' \code{at} is the argument at which the function should be evaluated (e.g., a quantile,
+#' probability, or sample size) and \code{d} is a \code{distributions3} object.
+#' @param at Specification of values at which `FUN` should be evaluated, typically a
+#' numeric vector (e.g., of quantiles, probabilities, etc.) but possibly also a matrix or data
 #' frame.
-#' @param drop logical. Should the result be simplified to an unnamed vector if possible?
-#' @param type Character string used for naming, typically on of \code{"density"}, \code{"logLik"},
-#' \code{"probability"}, \code{"quantile"}, and \code{"random"}. Beware \code{"random"} is processed internally as a special case.
+#' @param drop logical. Should the result be simplified to a vector if possible (by
+#' dropping the dimension attribute)? If \code{FALSE} a matrix is always returned.
+#' @param type Character string used for naming, typically one of \code{"density"}, \code{"logLik"},
+#' \code{"probability"}, \code{"quantile"}, and \code{"random"}. Note that the \code{"random"}
+#' case is processed differently internally in order to vectorize the random number
+#' generation more efficiently.
 #' @param ... Arguments to be passed to  \code{FUN}.
-#' @param min,max Numeric vectors. Minima and Maxima supports of a `distributions3` object.
-#' @param d A `distributions3` object.
-#' @param drop logical. Should the result be simplified to an unnamed vector if possible?
-#' @param n numeric. Typically number of observations for computing random draws. If `length(n) > 1`, the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`.
+#' @param min,max Numeric vectors. Minima and maxima of the supports of a `distributions3` object.
+#' @param n numeric. Number of observations for computing random draws. If `length(n) > 1`,
+#' the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`).
 #'
 #' @export
 apply_dpqr <- function(d,
