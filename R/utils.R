@@ -48,6 +48,64 @@ is_distribution <- function(x) {
 #' @param n numeric. Number of observations for computing random draws. If `length(n) > 1`,
 #' the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`).
 #'
+#' @examples
+#'
+#' ## Illustration of implementing a custom "Normal2" distribution using the provided utility functions
+#' 
+#' ## Setting up the distribution
+#' Normal2 <- function(mu = 0, sigma = 1) {
+#'   stopifnot(
+#'     "parameter lengths do not match (only scalars are allowed to be recycled)" =
+#'       length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+#'   )
+#'   d <- data.frame(mu = mu, sigma = sigma)
+#'   class(d) <- c("Normal2", "distribution")
+#'   d
+#' }
+#' 
+#' ## Generic for computing the 1st moment of a probability distribution
+#' ## (similar for `variance`, `skewness`, and `kurtosis`)
+#' mean.Normal2 <- function(x, ...) {
+#'   ellipsis::check_dots_used()
+#'   setNames(x$mu, names(x))
+#' }
+#' 
+#' ## Generic for drawing a random sample from a probability distribution
+#' random.Normal2 <- function(x, n = 1L, drop = TRUE, ...) {
+#'   n <- make_positive_integer(n)
+#'   if (n == 0L) {
+#'     return(numeric(0L))
+#'   }
+#'   FUN <- function(at, d) rnorm(n = at, mean = d$mu, sd = d$sigma)
+#'   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
+#' }
+#' 
+#' ## Generic for evaluating the probability density of a probability distribution
+#' ## (similar for `log_pdf` and `cdf`)
+#' pdf.Normal2 <- function(d, x, drop = TRUE, ...) {
+#'   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
+#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+#' }
+#' 
+#' ## Generic for determining the quantiles of a probability distribution
+#' quantile.Normal2 <- function(x, probs, drop = TRUE, ...) {
+#'   ellipsis::check_dots_used()
+#' 
+#'   FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
+#'   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+#' }
+#' 
+#' ## Generic fo returning the support of a distribution
+#' support.Normal2 <- function(d, drop = TRUE) {
+#'   stopifnot("d must be a supported distribution object" = is_distribution(d))
+#'   stopifnot(is.logical(drop))
+#' 
+#'   min <- rep(-Inf, length(d))
+#'   max <- rep(Inf, length(d))
+#' 
+#'   make_support(min, max, d, drop = drop)
+#' }
+#' 
 #' @export
 apply_dpqr <- function(d,
                        FUN,

@@ -15,25 +15,93 @@ make_positive_integer(n)
 \arguments{
 \item{d}{A \code{distributions3} object.}
 
-\item{FUN}{Function to be computed. Function should be of type \code{FUN(at, d)}, see details below.}
+\item{FUN}{Function to be computed. Function should be of type \code{FUN(at, d)}, where
+\code{at} is the argument at which the function should be evaluated (e.g., a quantile,
+probability, or sample size) and \code{d} is a \code{distributions3} object.}
 
-\item{at}{Specification of values at which \code{FUN} should be
-evaluated, typically a numeric vector but possibly also a matrix or data
+\item{at}{Specification of values at which \code{FUN} should be evaluated, typically a
+numeric vector (e.g., of quantiles, probabilities, etc.) but possibly also a matrix or data
 frame.}
 
-\item{drop}{logical. Should the result be simplified to an unnamed vector if possible?}
+\item{drop}{logical. Should the result be simplified to a vector if possible (by
+dropping the dimension attribute)? If \code{FALSE} a matrix is always returned.}
 
-\item{type}{Character string used for naming, typically on of \code{"density"}, \code{"logLik"},
-\code{"probability"}, \code{"quantile"}, and \code{"random"}. Beware \code{"random"} is processed internally as a special case.}
+\item{type}{Character string used for naming, typically one of \code{"density"}, \code{"logLik"},
+\code{"probability"}, \code{"quantile"}, and \code{"random"}. Note that the \code{"random"}
+case is processed differently internally in order to vectorize the random number
+generation more efficiently.}
 
 \item{...}{Arguments to be passed to  \code{FUN}.}
 
-\item{min, max}{Numeric vectors. Minima and Maxima supports of a \code{distributions3} object.}
+\item{min, max}{Numeric vectors. Minima and maxima of the supports of a \code{distributions3} object.}
 
-\item{n}{numeric. Typically number of observations for computing random draws. If \code{length(n) > 1}, the length is taken to be the number required (consistent with base R as, e.g., for \code{rnorm()}.}
+\item{n}{numeric. Number of observations for computing random draws. If \code{length(n) > 1},
+the length is taken to be the number required (consistent with base R as, e.g., for \code{rnorm()}).}
 }
 \description{
-Various utility functions to implement vectorized \code{distributions3} objects.
-These are used in the computation of moments and quantiles, in the random
-generation of draws, and for returning the support for \code{distributions3} objcts.
+Various utility functions to implement methods for distributions with a
+unified workflow, in particular to facilitate working with vectorized
+\code{distributions3} objects.
+These are particularly useful in the computation of densities, probabilities, quantiles,
+and random samples when classical d/p/q/r functions are readily available for
+the distribution of interest.
+}
+\examples{
+
+## Illustration of implementing a custom "Normal2" distribution using the provided utility functions
+
+## Setting up the distribution
+Normal2 <- function(mu = 0, sigma = 1) {
+  stopifnot(
+    "parameter lengths do not match (only scalars are allowed to be recycled)" =
+      length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+  )
+  d <- data.frame(mu = mu, sigma = sigma)
+  class(d) <- c("Normal2", "distribution")
+  d
+}
+
+## Generic for computing the 1st moment of a probability distribution
+## (similar for `variance`, `skewness`, and `kurtosis`)
+mean.Normal2 <- function(x, ...) {
+  ellipsis::check_dots_used()
+  setNames(x$mu, names(x))
+}
+
+## Generic for drawing a random sample from a probability distribution
+random.Normal2 <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) {
+    return(numeric(0L))
+  }
+  FUN <- function(at, d) rnorm(n = at, mean = d$mu, sd = d$sigma)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
+}
+
+## Generic for evaluating the probability density of a probability distribution
+## (similar for `log_pdf` and `cdf`)
+pdf.Normal2 <- function(d, x, drop = TRUE, ...) {
+  FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+}
+
+## Generic for determining the quantiles of a probability distribution
+quantile.Normal2 <- function(x, probs, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
+
+  FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+}
+
+## Generic fo returning the support of a distribution
+support.Normal2 <- function(d, drop = TRUE) {
+  stopifnot("d must be a supported distribution object" = is_distribution(d))
+  stopifnot(is.logical(drop))
+
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+
+  make_support(min, max, d, drop = drop)
+}
+
 }
