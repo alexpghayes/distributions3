@@ -50,53 +50,47 @@ is_distribution <- function(x) {
 #'
 #' @examples
 #'
-#' ## Illustration of implementing a custom "Normal2" distribution using the provided utility functions
 #' 
-#' ## Setting up the distribution
-#' Normal2 <- function(mu = 0, sigma = 1) {
+#' ## Implementing a new distribution based on the provided utility functions
+#' ## Illustration: Gaussian distribution
+#' ## Note: Gaussian() is really just a copy of Normal() with a different class/distribution name
+#' 
+#' 
+#' ## Generator function for the distribution object.
+#' Gaussian <- function(mu = 0, sigma = 1) {
 #'   stopifnot(
 #'     "parameter lengths do not match (only scalars are allowed to be recycled)" =
 #'       length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
 #'   )
 #'   d <- data.frame(mu = mu, sigma = sigma)
-#'   class(d) <- c("Normal2", "distribution")
+#'   class(d) <- c("Gaussian", "distribution")
 #'   d
 #' }
 #' 
-#' ## Generic for computing the 1st moment of a probability distribution
-#' ## (similar for `variance`, `skewness`, and `kurtosis`)
-#' mean.Normal2 <- function(x, ...) {
+#' ## Set up a vector Y containing four Gaussian distributions:
+#' Y <- Gaussian(mu = 1:4, sigma = c(1, 1, 2, 2))
+#' Y
+#' 
+#' ## Extract the underlying parameters:
+#' as.matrix(Y)
+#' 
+#' 
+#' ## Extractor functions for moments of the distribution include
+#' ## mean(), variance(), skewness(), kurtosis().
+#' ## These can be typically be defined as functions of the list of parameters.
+#' mean.Gaussian <- function(x, ...) {
 #'   ellipsis::check_dots_used()
 #'   setNames(x$mu, names(x))
 #' }
+#' ## Analogously for other moments, see distributions3:::variance.Normal etc.
 #' 
-#' ## Generic for drawing a random sample from a probability distribution
-#' random.Normal2 <- function(x, n = 1L, drop = TRUE, ...) {
-#'   n <- make_positive_integer(n)
-#'   if (n == 0L) {
-#'     return(numeric(0L))
-#'   }
-#'   FUN <- function(at, d) rnorm(n = at, mean = d$mu, sd = d$sigma)
-#'   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
-#' }
+#' mean(Y)
 #' 
-#' ## Generic for evaluating the probability density of a probability distribution
-#' ## (similar for `log_pdf` and `cdf`)
-#' pdf.Normal2 <- function(d, x, drop = TRUE, ...) {
-#'   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
-#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
-#' }
 #' 
-#' ## Generic for determining the quantiles of a probability distribution
-#' quantile.Normal2 <- function(x, probs, drop = TRUE, ...) {
-#'   ellipsis::check_dots_used()
-#' 
-#'   FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
-#'   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
-#' }
-#' 
-#' ## Generic fo returning the support of a distribution
-#' support.Normal2 <- function(d, drop = TRUE) {
+#' ## The support() method should return a matrix of "min" and "max" for the
+#' ## distribution. The make_support() function helps to set the right names and
+#' ## dimension.
+#' support.Gaussian <- function(d, drop = TRUE) {
 #'   stopifnot("d must be a supported distribution object" = is_distribution(d))
 #'   stopifnot(is.logical(drop))
 #' 
@@ -105,6 +99,51 @@ is_distribution <- function(x) {
 #' 
 #'   make_support(min, max, d, drop = drop)
 #' }
+#' 
+#' support(Y)
+#' 
+#' 
+#' ## Evaluating certain functions associated with the distribution, e.g.,
+#' ## pdf(), log_pdf(), cdf() quantile(), random(), etc. The apply_dpqr()
+#' ## function helps to call the typical d/p/q/r functions (like dnorm,
+#' ## pnorm, etc.) and set suitable names and dimension.
+#' pdf.Gaussian <- function(d, x, drop = TRUE, ...) {
+#'   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
+#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+#' }
+#' 
+#' ## Evaluate all densities at the same argument (returns vector):
+#' pdf(Y, 0)
+#' 
+#' ## Evaluate all densities at several arguments (returns matrix):
+#' pdf(Y, c(0, 5))
+#' 
+#' ## Evaluate each density at a different argument (returns vector):
+#' pdf(Y, 4:1)
+#' 
+#' 
+#' ## Drawing random() samples also uses apply_dpqr() with the argument
+#' ## n assured to be a positive integer.
+#' random.Gaussian <- function(x, n = 1L, drop = TRUE, ...) {
+#'   n <- make_positive_integer(n)
+#'   if (n == 0L) {
+#'     return(numeric(0L))
+#'   }
+#'   FUN <- function(at, d) rnorm(n = at, mean = d$mu, sd = d$sigma)
+#'   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
+#' }
+#' 
+#' ## One random sample for each distribution (returns vector):
+#' random(Y, 1)
+#' 
+#' ## Several random samples for each distribution (returns matrix):
+#' random(Y, 3)
+#' 
+#' 
+#' ## For further analogous methods see the "Normal" distribution provided
+#' ## in distributions3.
+#' methods(class = "Normal")
+#' 
 #' 
 #' @export
 apply_dpqr <- function(d,
