@@ -133,8 +133,8 @@ test_that("apply_dpqr() applied to 'random' works", {
       drop(random(N_named[1], 2))
     }
   )
-  expect_equal(names(random(N[1], 2)), c("r_1", "r_2"))
-  expect_equal(names(random(N_named[1], 2)), c("r_1", "r_2"))
+  expect_null(names(random(N[1], 2)))
+  expect_null(names(random(N_named[1], 2)))
 
   ## length(d) = 1, n > 1, drop = FALSE
   expect_true(is.numeric(random(N[1], 2, drop = FALSE)))
@@ -300,8 +300,8 @@ test_that("apply_dpqr() applied to 'pdf', 'log_pdf' and 'cdf' works", {
   expect_equal(pdf(N[1], rbind(c(0.2, 0.5))), pdf(N[1], c(0.2, 0.5)))
   expect_equal(pdf(N, c(0.2, 0.5)), drop(pdf(N, c(0.2, 0.5))))
   expect_equal(pdf(N_named, c(0.2, 0.5)), drop(pdf(N_named, c(0.2, 0.5))))
-  expect_equal(names(pdf(N[1], c(0.2, 0.5))), c("d_0.2", "d_0.5"))
-  expect_equal(names(pdf(N_named[1], c(0.2, 0.5))), c("d_0.2", "d_0.5"))
+  expect_null(names(pdf(N[1], c(0.2, 0.5))))
+  expect_null(names(pdf(N_named[1], c(0.2, 0.5))))
 
   ## length(d) = 1, at > 1, drop = FALSE
   expect_true(is.numeric(pdf(N[1], c(0.2, 0.5), drop = FALSE)))
@@ -317,8 +317,20 @@ test_that("apply_dpqr() applied to 'pdf', 'log_pdf' and 'cdf' works", {
   expect_true(is.numeric(pdf(N[1:2], c(0.2, 0.5))))
   expect_null(dim(pdf(N[1:2], c(0.2, 0.5))))
   expect_length(pdf(N[1:2], c(0.2, 0.5)), 2)
-  expect_equal(pdf(N[1:2], cbind(c(0.2, 0.5))), rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))))
-  expect_equal(pdf(N[1:2], rbind(c(0.2, 0.5))), rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))))
+  expect_equal(
+    pdf(N[1:2], cbind(c(0.2, 0.5))), 
+    matrix(
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
+    )
+  )
+  expect_equal(
+    pdf(N[1:2], rbind(c(0.2, 0.5))), 
+    matrix(
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
+    )
+  )
   expect_equal(pdf(N, c(0.2, 0.5)), drop(pdf(N, c(0.2, 0.5))))
   expect_equal(pdf(N_named, c(0.2, 0.5)), drop(pdf(N_named, c(0.2, 0.5))))
   expect_null(names(pdf(N[1:2], c(0.2, 0.5))))
@@ -327,8 +339,20 @@ test_that("apply_dpqr() applied to 'pdf', 'log_pdf' and 'cdf' works", {
   ## length(d) = at > 1, drop = FALSE
   expect_true(is.numeric(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)))
   expect_equal(dim(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)), c(2L, 1L))
-  expect_equal(pdf(N[1:2], cbind(c(0.2, 0.5)), drop = FALSE), rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))))
-  expect_equal(pdf(N[1:2], rbind(c(0.2, 0.5)), drop = FALSE), rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))))
+  expect_equal(
+    pdf(N[1:2], cbind(c(0.2, 0.5)), drop = FALSE), 
+    matrix(
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
+    )
+  )
+  expect_equal(
+    pdf(N[1:2], rbind(c(0.2, 0.5)), drop = FALSE), 
+    matrix(
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
+    )
+  )
   expect_equal(colnames(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)), "density")
   expect_null(rownames(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)))
   expect_equal(colnames(pdf(N_named[1:2], c(0.2, 0.5), drop = FALSE)), "density")

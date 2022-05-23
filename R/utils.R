@@ -21,6 +21,131 @@ is_distribution <- function(x) {
 # HELPER FUNCTION FOR VECTORIZATION OF DISTRIBUTION OBJECTS
 # -------------------------------------------------------------------
 
+#' Utilities for `distributions3` objects
+#' 
+#' Various utility functions to implement methods for distributions with a
+#' unified workflow, in particular to facilitate working with vectorized
+#' `distributions3` objects.
+#' These are particularly useful in the computation of densities, probabilities, quantiles,
+#' and random samples when classical d/p/q/r functions are readily available for
+#' the distribution of interest.
+#'
+#' @param d A `distributions3` object.
+#' @param FUN Function to be computed. Function should be of type \code{FUN(at, d)}, where
+#' \code{at} is the argument at which the function should be evaluated (e.g., a quantile,
+#' probability, or sample size) and \code{d} is a \code{distributions3} object.
+#' @param at Specification of values at which `FUN` should be evaluated, typically a
+#' numeric vector (e.g., of quantiles, probabilities, etc.) but possibly also a matrix or data
+#' frame.
+#' @param drop logical. Should the result be simplified to a vector if possible (by
+#' dropping the dimension attribute)? If \code{FALSE} a matrix is always returned.
+#' @param type Character string used for naming, typically one of \code{"density"}, \code{"logLik"},
+#' \code{"probability"}, \code{"quantile"}, and \code{"random"}. Note that the \code{"random"}
+#' case is processed differently internally in order to vectorize the random number
+#' generation more efficiently.
+#' @param ... Arguments to be passed to  \code{FUN}.
+#' @param min,max Numeric vectors. Minima and maxima of the supports of a `distributions3` object.
+#' @param n numeric. Number of observations for computing random draws. If `length(n) > 1`,
+#' the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`).
+#'
+#' @examples
+#'
+#' 
+#' ## Implementing a new distribution based on the provided utility functions
+#' ## Illustration: Gaussian distribution
+#' ## Note: Gaussian() is really just a copy of Normal() with a different class/distribution name
+#' 
+#' 
+#' ## Generator function for the distribution object.
+#' Gaussian <- function(mu = 0, sigma = 1) {
+#'   stopifnot(
+#'     "parameter lengths do not match (only scalars are allowed to be recycled)" =
+#'       length(mu) == length(sigma) | length(mu) == 1 | length(sigma) == 1
+#'   )
+#'   d <- data.frame(mu = mu, sigma = sigma)
+#'   class(d) <- c("Gaussian", "distribution")
+#'   d
+#' }
+#' 
+#' ## Set up a vector Y containing four Gaussian distributions:
+#' Y <- Gaussian(mu = 1:4, sigma = c(1, 1, 2, 2))
+#' Y
+#' 
+#' ## Extract the underlying parameters:
+#' as.matrix(Y)
+#' 
+#' 
+#' ## Extractor functions for moments of the distribution include
+#' ## mean(), variance(), skewness(), kurtosis().
+#' ## These can be typically be defined as functions of the list of parameters.
+#' mean.Gaussian <- function(x, ...) {
+#'   ellipsis::check_dots_used()
+#'   setNames(x$mu, names(x))
+#' }
+#' ## Analogously for other moments, see distributions3:::variance.Normal etc.
+#' 
+#' mean(Y)
+#' 
+#' 
+#' ## The support() method should return a matrix of "min" and "max" for the
+#' ## distribution. The make_support() function helps to set the right names and
+#' ## dimension.
+#' support.Gaussian <- function(d, drop = TRUE) {
+#'   stopifnot("d must be a supported distribution object" = is_distribution(d))
+#'   stopifnot(is.logical(drop))
+#' 
+#'   min <- rep(-Inf, length(d))
+#'   max <- rep(Inf, length(d))
+#' 
+#'   make_support(min, max, d, drop = drop)
+#' }
+#' 
+#' support(Y)
+#' 
+#' 
+#' ## Evaluating certain functions associated with the distribution, e.g.,
+#' ## pdf(), log_pdf(), cdf() quantile(), random(), etc. The apply_dpqr()
+#' ## function helps to call the typical d/p/q/r functions (like dnorm,
+#' ## pnorm, etc.) and set suitable names and dimension.
+#' pdf.Gaussian <- function(d, x, drop = TRUE, ...) {
+#'   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
+#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+#' }
+#' 
+#' ## Evaluate all densities at the same argument (returns vector):
+#' pdf(Y, 0)
+#' 
+#' ## Evaluate all densities at several arguments (returns matrix):
+#' pdf(Y, c(0, 5))
+#' 
+#' ## Evaluate each density at a different argument (returns vector):
+#' pdf(Y, 4:1)
+#' 
+#' 
+#' ## Drawing random() samples also uses apply_dpqr() with the argument
+#' ## n assured to be a positive integer.
+#' random.Gaussian <- function(x, n = 1L, drop = TRUE, ...) {
+#'   n <- make_positive_integer(n)
+#'   if (n == 0L) {
+#'     return(numeric(0L))
+#'   }
+#'   FUN <- function(at, d) rnorm(n = at, mean = d$mu, sd = d$sigma)
+#'   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
+#' }
+#' 
+#' ## One random sample for each distribution (returns vector):
+#' random(Y, 1)
+#' 
+#' ## Several random samples for each distribution (returns matrix):
+#' random(Y, 3)
+#' 
+#' 
+#' ## For further analogous methods see the "Normal" distribution provided
+#' ## in distributions3.
+#' methods(class = "Normal")
+#' 
+#' 
+#' @export
 apply_dpqr <- function(d,
                        FUN,
                        at,
@@ -37,50 +162,72 @@ apply_dpqr <- function(d,
     is.character(type)
   )
 
-  ## basic properties
+  ## basic properties:
+  ## rows n = number of distributions
+  ## columns k = number of arguments at || number of random replications
   rnam <- names(d)
-  anam <- make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
   n <- length(d)
-  k <- length(at)
+  k <- if (type == "random") as.numeric(at) else length(at)
+
+  ## "at" names (if not dropped)
+  anam <- if ((k == 1L || n == 1L) && drop) {
+    NULL
+  } else if(type == "random") {
+    seq_len(k)
+  } else {
+    make_suffix(at, digits = pmax(3L, getOption("digits") - 3L))
+  }
 
   ## handle different types of "at"
-  if (k == 0L) {
-    return(as.data.frame(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL))))
-  } else if (k == 1L) {
-    at <- rep.int(as.vector(at), n)
-  } else if (k == n && is.null(dim(at))) {
-    k <- 1L
-  } else {
-    at <- as.vector(at)
-    k <- length(at)
+  if (type != "random") {
+    if (k == 0L) {
+      return(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL)))
+    } else if (k == 1L) {
+      at <- rep.int(as.vector(at), n)
+    } else if (k == n && is.null(dim(at))) {
+      k <- 1L
+    } else {
+      at <- as.vector(at)
+      k <- length(at)
+    }
   }
 
-  ## "at" labels
-  cnam <- paste(substr(type, 1L, 1L), if (all(at == 1L)) seq_len(k) else anam, sep = "_")
+  ## columns names (if not dropped)
+  cnam <- if ((k == 1L || n == 1L) && drop) {
+    NULL
+  } else if (length(anam) > k) {
+    type
+  } else {
+    paste(substr(type, 1L, 1L), anam, sep = "_")
+  }
 
   ## handle zero-length distribution vector
-  if (n == 0L) {
-    return(as.data.frame(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam))))
-  }
+  if (n == 0L) return(matrix(numeric(0L), nrow = 0L, ncol = k, dimnames = list(NULL, cnam)))
 
   ## call FUN
-  rval <- if (k == 1L) {
-    FUN(at, d = d, ...)
+  if(type == "random") {
+    rval <- if (n == 1L) {
+      FUN(at, d = d, ...)
+    } else {
+      replicate(at, FUN(n, d = d))
+    }
   } else {
-    vapply(at, FUN, numeric(n), d = d, ...)
+    rval <- if (k == 1L) {
+      FUN(at, d = d, ...)
+    } else {
+      vapply(at, FUN, numeric(n), d = d, ...)
+    }
   }
 
   ## handle dimensions
   if (k == 1L && drop) {
     rval <- as.vector(rval)
     names(rval) <- rnam
-  } else if (length(anam) > k) {
-    cnam <- type
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
-  } else if (drop) {
-    rval <- drop(matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam)))
+  } else if (n == 1L && drop) {
+    rval <- as.vector(rval)
   } else {
-    rval <- matrix(rval, nrow = n, ncol = k, dimnames = list(rnam, cnam))
+    dim(rval) <- c(n, k)
+    dimnames(rval) <- list(rnam, cnam)
   }
 
   return(rval)
@@ -207,11 +354,11 @@ summary.distribution <- function(object, ...) {
 }
 
 make_suffix <- function(x, digits = 3) {
-  rval <- sapply(x, format, digits = digits)
+  rval <- format(x, digits = digits, trim = TRUE, drop0trailing = TRUE)
   nok <- duplicated(rval)
   while (any(nok) && digits < 10) {
     digits <- digits + 1
-    rval[nok] <- sapply(x[nok], format, digits = digits)
+    rval[nok] <- format(x[nok], digits = digits, trim = TRUE, drop0trailing = TRUE)
     nok <- duplicated(rval)
   }
   nok <- duplicated(rval) | duplicated(rval, fromLast = TRUE)
@@ -219,11 +366,15 @@ make_suffix <- function(x, digits = 3) {
   return(rval)
 }
 
+#' @rdname apply_dpqr
+#' @export
 make_support <- function(min, max, d, drop = TRUE) {
   rval <- matrix(c(min, max), ncol = 2, dimnames = list(names(d), c("min", "max")))
   if (drop && NROW(rval) == 1L) rval[1L, , drop = TRUE] else rval
 }
 
+#' @rdname apply_dpqr
+#' @export
 make_positive_integer <- function(n) {
   n <- if (length(n) > 1L) length(n) else suppressWarnings(try(as.integer(n), silent = TRUE))
   if (inherits(n, "try-error") || is.na(n) || n < 0L) {

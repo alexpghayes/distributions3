@@ -9,8 +9,14 @@ test_that("random.ZIPoisson work correctly", {
 
   expect_length(random(p), 1)
   expect_length(random(p, 100), 100)
+  expect_length(random(p[-1], 1), 0)
   expect_length(random(p, 0), 0)
   expect_error(random(p, -2))
+ 
+  # consistent with base R, using the `length` as number of samples to draw
+  expect_length(random(p, c(1, 2, 3)), 3)
+  expect_length(random(p, cbind(1, 2, 3)), 3)
+  expect_length(random(p, rbind(1, 2, 3)), 3)
 })
 
 test_that("pdf.ZIPoisson work correctly", {
@@ -85,7 +91,10 @@ test_that("vectorization of a ZIPoisson distribution work correctly", {
   expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
-    rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9)))
+    matrix(
+      rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
+      ncol = 3, dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
+    )
   )
 
   ## support

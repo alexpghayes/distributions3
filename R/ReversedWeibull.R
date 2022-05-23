@@ -135,9 +135,9 @@ random.RevWeibull <- function(x, n = 1L, drop = TRUE, ...) {
     loc <- d$location - d$scale
     scale <- d$scale / d$shape
     shape <- -1 / d$shape
-    revdbayes::rgev(n = length(d), loc = loc, scale = scale, shape = shape)
+    revdbayes::rgev(n = at, loc = loc, scale = scale, shape = shape)
   }
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of an RevWeibull distribution

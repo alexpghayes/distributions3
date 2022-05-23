@@ -14,13 +14,22 @@ test_that("random.Categorical", {
 
   expect_length(random(X), 1)
   expect_length(random(X, 100), 100)
+  # expect_length(random(X[-c(1, 2, 3, 4, 5, 6)], 1), 0)
   expect_length(random(X, 0), 0)
   expect_error(random(X, -2))
-
   expect_length(random(Y), 1)
   expect_length(random(Y, 100), 100)
+  # expect_length(random(Y[-c(1, 2, 3)], 1), 0)
   expect_length(random(Y, 0), 0)
   expect_error(random(Y, -2))
+
+  # consistent with base R, using the `length` as number of samples to draw
+  # expect_length(random(X, c(1, 2, 3)), 3)
+  # expect_length(random(X, cbind(1, 2, 3)), 3)
+  # expect_length(random(X, rbind(1, 2, 3)), 3)
+  # expect_length(random(Y, c(1, 2, 3)), 3)
+  # expect_length(random(Y, cbind(1, 2, 3)), 3)
+  # expect_length(random(Y, rbind(1, 2, 3)), 3)
 })
 
 

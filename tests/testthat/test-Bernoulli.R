@@ -35,8 +35,14 @@ test_that("random.Bernoulli work correctly", {
 
   expect_length(random(b), 1)
   expect_length(random(b, 100), 100)
+  expect_length(random(b[-1], 1), 0)
   expect_length(random(b, 0), 0)
   expect_error(random(b, -2))
+
+  # consistent with base R, using the `length` as number of samples to draw
+  expect_length(random(b, c(1, 2, 3)), 3)
+  expect_length(random(b, cbind(1, 2, 3)), 3)
+  expect_length(random(b, rbind(1, 2, 3)), 3)
 })
 
 test_that("pdf.Bernoulli work correctly", {
@@ -113,7 +119,10 @@ test_that("vectorization of a Bernoulli distribution work correctly", {
   expect_equal(quantile(d, c(0.5, 0.5)), c(quantile(d1, 0.5), quantile(d2, 0.5)))
   expect_equal(
     quantile(d, c(0.1, 0.5, 0.9)),
-    rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9)))
+    matrix(
+      rbind(quantile(d1, c(0.1, 0.5, 0.9)), quantile(d2, c(0.1, 0.5, 0.9))),
+      ncol = 3, dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
+    )
   )
 
   ## support

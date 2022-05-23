@@ -96,8 +96,8 @@ random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rbeta(n = length(d), shape1 = x$alpha, shape2 = x$beta)
-  apply_dpqr(d = x, FUN = FUN, at = matrix(1, ncol = n), type = "random", drop = drop)
+  FUN <- function(at, d) rbeta(n = at, shape1 = x$alpha, shape2 = x$beta)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
 #' Evaluate the probability mass function of a Beta distribution
