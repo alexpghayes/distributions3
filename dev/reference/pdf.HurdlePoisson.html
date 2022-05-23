@@ -104,18 +104,13 @@ object, a matrix with <code>length(x)</code> columns containing all possible com
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## standard functions</span></span>
 <span class="r-in"><span class="fu"><a href="pdf.html">pdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         d_0         d_1         d_2         d_3         d_4         d_5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.250000000 0.167672793 0.209590992 0.174659160 0.109161975 0.054580987 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         d_6         d_7         d_8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.022742078 0.008122171 0.002538178 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.250000000 0.167672793 0.209590992 0.174659160 0.109161975 0.054580987</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] 0.022742078 0.008122171 0.002538178</span>
 <span class="r-in"><span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       p_0       p_1       p_2       p_3       p_4       p_5       p_6       p_7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.2500000 0.4176728 0.6272638 0.8019229 0.9110849 0.9656659 0.9884080 0.9965302 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       p_8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.9990683 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2500000 0.4176728 0.6272638 0.8019229 0.9110849 0.9656659 0.9884080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8] 0.9965302 0.9990683</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    q_0 q_0.75 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      0      3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 3</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## cdf() and quantile() are inverses for each other</span></span>
 <span class="r-in"><span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">X</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span></span>
@@ -143,7 +138,7 @@ object, a matrix with <code>length(x)</code> columns containing all possible com
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
