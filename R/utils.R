@@ -256,7 +256,7 @@ length.distribution <- function(x) length(unclass(x)[[1L]])
 }
 
 #' @export
-format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
+format.distribution <- function(x, digits = pmax(3L, getOption("digits") - 3L), ...) {
   cl <- class(x)[1L]
   if (length(x) < 1L) {
     return(character(0))
@@ -269,7 +269,7 @@ format.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
 }
 
 #' @export
-print.distribution <- function(x, digits = getOption("digits") - 3L, ...) {
+print.distribution <- function(x, digits = pmax(3L, getOption("digits") - 3L), ...) {
   if (length(x) < 1L) {
     cat(sprintf("%s distribution of length zero\n", class(x)[1L]))
   } else {
@@ -353,11 +353,11 @@ summary.distribution <- function(object, ...) {
   summary(object, ...)
 }
 
-make_suffix <- function(x, digits = 3) {
+make_suffix <- function(x, digits = 3L) {
   rval <- format(x, digits = digits, trim = TRUE, drop0trailing = TRUE)
   nok <- duplicated(rval)
-  while (any(nok) && digits < 10) {
-    digits <- digits + 1
+  while (any(nok) && digits < 10L) {
+    digits <- digits + 1L
     rval[nok] <- format(x[nok], digits = digits, trim = TRUE, drop0trailing = TRUE)
     nok <- duplicated(rval)
   }
