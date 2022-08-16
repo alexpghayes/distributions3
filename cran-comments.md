@@ -1,11 +1,14 @@
-Minor maintenance update
+Minor update
 
 ## Test environments
 
-* local ubuntu install, R 4.1.2
-* ubuntu 18.04 (on Github Actions), R devel, 4.1.2, 4.0.5, 3.6.3, 3.5.3
-* windows (on Github Actions), R 4.1.2, 3.6.3
-* macOS (on Github Actions), R 4.1.2
+* local ubuntu install, R 4.2.0
+* ubuntu 18.04 (on Github Actions), R devel, 4.2, 4.1, 4.0, 3.6
+* windows (on Github Actions), R 4.2, 3.6
+* macOS (on Github Actions), R 4.2
+
+Was unable to run revdep checks for one reverse dependency `imaginator`, but this release
+features only bugfixes and new functionality.
 
 ## R CMD check results
 

@@ -56,9 +56,10 @@ library(distributions3)
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 1 0 0 0 0 0 0 0 0
+#>  [1] 0 0 0 0 0 1 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
+
 cdf(X, 0)
 #> [1] 0.9
 quantile(X, 0.5)
@@ -90,8 +91,7 @@ distribution related functionality see the [CRAN Task
 View](https://cran.r-project.org/view=Distributions).
 
 -   [`distributional`](https://cran.r-project.org/package=distributional)
-    provides distribution objects as vectorized S3 objects, and is more
-    actively developed that `distributions3`
+    provides distribution objects as vectorized S3 objects
 -   [`distr6`](https://cran.r-project.org/package=distr6) builds on
     `distr`, but uses R6 objects
 -   [`distr`](https://cran.r-project.org/package=distr) is quite similar
