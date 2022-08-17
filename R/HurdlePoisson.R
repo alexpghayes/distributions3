@@ -205,7 +205,7 @@ skewness.HurdlePoisson <- function(x, ...) {
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
-  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
+  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3
   setNames(rval, names(x))
 }
 
