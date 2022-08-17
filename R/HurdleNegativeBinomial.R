@@ -20,7 +20,8 @@
 #' @param p vector of probabilities.
 #' @param n number of random values to return.
 #' @param mu vector of (non-negative) negative binomial location parameters.
-#' @param theta vector of (non-negative) negative binomial overdispersion parameters.
+#' @param theta,size vector of (non-negative) negative binomial overdispersion parameters.
+#' Only \code{theta} or, equivalently, \code{size} may be specified.
 #' @param pi vector of zero-hurdle probabilities in the unit interval.
 #' @param log,log.p logical indicating whether probabilities p are given as log(p).
 #' @param lower.tail logical indicating whether probabilities are \eqn{P[X \le x]} (lower tail) or \eqn{P[X > x]} (upper tail).
@@ -53,7 +54,7 @@ dhnbinom <- function(x, mu, theta, size, pi, log = FALSE) {
   if(log) rval else exp(rval)
 }
 
-#' @importFrom stats dpois ppois
+#' @importFrom stats dnbinom pnbinom
 #' @rdname hnbinom
 #' @export
 phnbinom <- function(q, mu, theta, size, pi, lower.tail = TRUE, log.p = FALSE) {
@@ -70,7 +71,6 @@ phnbinom <- function(q, mu, theta, size, pi, lower.tail = TRUE, log.p = FALSE) {
   if(log.p) log(rval) else rval
 }
 
-#' @importFrom stats dpois ppois qpois
 #' @rdname hnbinom
 #' @export
 qhnbinom <- function(p, mu, theta, size, pi, lower.tail = TRUE, log.p = FALSE) {
@@ -97,7 +97,7 @@ rhnbinom <- function(n, mu, theta, size, pi) {
 #' Create a hurdle negative binomial distribution
 #'
 #' Hurdle negative binomial distributions are frequently used to model counts
-#' with many zero observations.
+#' with overdispersion and many zero observations.
 #'
 #' @param mu Location parameter of the negative binomial component of the distribution.
 #'   Can be any positive number.
@@ -116,37 +116,44 @@ rhnbinom <- function(n, mu, theta, size, pi) {
 #'   <https://alexpghayes.github.io/distributions3/>, where the math
 #'   will render with additional detail.
 #'
-#'   In the following, let \eqn{X} be a hurdle negative binomial random variable with parameter
-#'   `mu` = \eqn{\mu}.
+#'   In the following, let \eqn{X} be a hurdle negative binomial random variable with parameters
+#'   `mu` = \eqn{\mu} and `theta` = \eqn{\theta}.
 #'
 #'   **Support**: \eqn{\{0, 1, 2, 3, ...\}}{{0, 1, 2, 3, ...}}
 #'
 #'   **Mean**: 
 #'   \deqn{
-#'     \mu \cdot \frac{\pi}{1 - e^{-\mu}}
+#'     \mu \cdot \frac{\pi}{1 - f(0; \mu, \theta)}
 #'   }{
-#'     \mu \cdot \pi/(1 - e^{-\mu})
+#'     \mu \cdot \pi/(1 - f(0; \mu, \theta))
 #'   }
 #'
-#'   **Variance**: \eqn{m \cdot (\mu + 1 - m)}, where \eqn{m} is the mean above.
+#'   where \eqn{f(k; \mu, \theta)} is the p.m.f. of the \code{\link{NegativeBinomial}}
+#'   distribution.
+#'
+#'   **Variance**:
+#'   \deqn{
+#'     m \cdot \left(1 + \left(1 - \frac{\pi}{1 - f(0; \mu, \theta)}\right) \cdot \mu \right)
+#'   }{
+#'     m \cdot (1 + (1 - \pi/(1 - f(0; \mu, \theta))) \cdot \mu)
+#'   }
+#'
+#'   where \eqn{m} is the mean above.
 #'
 #'   **Probability mass function (p.m.f.)**: \eqn{P(X = 0) = 1 - \pi} and for \eqn{k > 0}
 #'
 #'   \deqn{
-#'     P(X = k) = \pi \cdot \frac{f(k; \mu)}{1 - f(0; \mu)}
+#'     P(X = k) = \pi \cdot \frac{f(k; \mu, \theta)}{1 - f(0; \mu, \theta)}
 #'   }{
-#'     P(X = k) = \pi \cdot f(k; \mu)/(1 - f(0; \mu))
+#'     P(X = k) = \pi \cdot f(k; \mu, \theta)/(1 - f(0; \mu, \theta))
 #'   }
-#'
-#'   where \eqn{f(k; \mu)} is the p.m.f. of the \code{\link{NegativeBinomial}}
-#'   distribution.
 #'
 #'   **Cumulative distribution function (c.d.f.)**: \eqn{P(X \le 0) = 1 - \pi} and for \eqn{k > 0}
 #'
 #'   \deqn{
-#'     P(X = k) = 1 - \pi + \pi \cdot \frac{F(k; \mu)}{1 - F(0; \mu)}
+#'     P(X = k) = 1 - \pi + \pi \cdot \frac{F(k; \mu, \theta)}{1 - F(0; \mu, \theta)}
 #'   }{
-#'     P(X = k) = 1 - \pi + \pi \cdot F(k; \mu)/(1 - F(0; \mu))
+#'     P(X = k) = 1 - \pi + \pi \cdot F(k; \mu, \theta)/(1 - F(0; \mu, \theta))
 #'   }
 #'
 #'   where \eqn{F(k; \mu)} is the c.d.f. of the \code{\link{NegativeBinomial}} distribution.
@@ -189,7 +196,7 @@ HurdleNegativeBinomial <- function(mu, theta, pi) {
 #' @export
 mean.HurdleNegativeBinomial <- function(x, ...) {
   ellipsis::check_dots_used()
-  rval <- x$mu * x$pi / pnbinom(0, size = x$theta, mu = x$mu, lower.tail = FALSE),
+  rval <- x$mu * x$pi / pnbinom(0, size = x$theta, mu = x$mu, lower.tail = FALSE)
   setNames(rval, names(x))
 }
 
