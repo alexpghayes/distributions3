@@ -82,11 +82,14 @@ Other discrete distributions:
 \code{\link{Binomial}()},
 \code{\link{Categorical}()},
 \code{\link{Geometric}()},
+\code{\link{HurdleNegativeBinomial}()},
 \code{\link{HurdlePoisson}()},
 \code{\link{HyperGeometric}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
-\code{\link{ZIPoisson}()}
+\code{\link{ZIPoisson}()},
+\code{\link{ZTNegativeBinomial}()},
+\code{\link{ZTPoisson}()}
 }
 \concept{discrete distributions}
 \concept{multivariate distributions}

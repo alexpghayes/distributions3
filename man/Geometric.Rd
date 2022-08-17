@@ -75,11 +75,14 @@ Other discrete distributions:
 \code{\link{Bernoulli}()},
 \code{\link{Binomial}()},
 \code{\link{Categorical}()},
+\code{\link{HurdleNegativeBinomial}()},
 \code{\link{HurdlePoisson}()},
 \code{\link{HyperGeometric}()},
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
-\code{\link{ZIPoisson}()}
+\code{\link{ZIPoisson}()},
+\code{\link{ZTNegativeBinomial}()},
+\code{\link{ZTPoisson}()}
 }
 \concept{discrete distributions}
