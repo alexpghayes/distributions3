@@ -61,11 +61,7 @@ where \eqn{F(k; \lambda)} is the c.d.f. of the \code{\link{Poisson}} distributio
 
 \strong{Moment generating function (m.g.f.)}:
 
-\deqn{
-    E(e^{tX}) = \frac{\pi}{1 - e^{-\lambda}} \cdot e^{\lambda (e^t - 1)}
-  }{
-    E(e^(tX)) = \pi/(1 - e^{-\lambda}) \cdot e^(\lambda (e^t - 1))
-  }
+Omitted for now.
 }
 \examples{
 ## set up a hurdle Poisson distribution
@@ -100,6 +96,7 @@ Other discrete distributions:
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
+\code{\link{ZINegativeBinomial}()},
 \code{\link{ZIPoisson}()},
 \code{\link{ZTNegativeBinomial}()},
 \code{\link{ZTPoisson}()}

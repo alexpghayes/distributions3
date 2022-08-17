@@ -2,12 +2,12 @@
 #' 
 #' Density, distribution function, quantile function, and random
 #' generation for the zero-hurdle negative binomial distribution with
-#' parameters \code{mu}, \code{theta}, and \code{pi}.
+#' parameters \code{mu}, \code{theta} (or \code{size}), and \code{pi}.
 #'
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{hnbinom} functions for the
 #' hurdle negative binomial distribution call the corresponding \code{nbinom}
-#' functions for the negative binomial distribution frame base R internally.
+#' functions for the negative binomial distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qhnbinom} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -33,12 +33,12 @@
 #' @examples
 #' ## theoretical probabilities for a hurdle negative binomial distribution
 #' x <- 0:8
-#' p <- dhnbinom(x, mu = 2.5, pi = 0.75)
+#' p <- dhnbinom(x, mu = 2.5, theta = 1, pi = 0.75)
 #' plot(x, p, type = "h", lwd = 2)
 #' 
 #' ## corresponding empirical frequencies from a simulated sample
 #' set.seed(0)
-#' y <- rhnbinom(500, mu = 2.5, pi = 0.75)
+#' y <- rhnbinom(500, mu = 2.5, theta = 1, pi = 0.75)
 #' hist(y, breaks = -1:max(y) + 0.5)
 #'
 #' @importFrom stats dnbinom pnbinom
@@ -123,19 +123,18 @@ rhnbinom <- function(n, mu, theta, size, pi) {
 #'
 #'   **Mean**: 
 #'   \deqn{
-#'     \mu \cdot \frac{\pi}{1 - f(0; \mu, \theta)}
+#'     \mu \cdot \frac{\pi}{1 - F(0; \mu, \theta)}
 #'   }{
-#'     \mu \cdot \pi/(1 - f(0; \mu, \theta))
+#'     \mu \cdot \pi/(1 - F(0; \mu, \theta))
 #'   }
 #'
-#'   where \eqn{f(k; \mu, \theta)} is the p.m.f. of the \code{\link{NegativeBinomial}}
-#'   distribution.
+#'   where \eqn{F(k; \mu)} is the c.d.f. of the \code{\link{NegativeBinomial}} distribution.
 #'
 #'   **Variance**:
 #'   \deqn{
-#'     m \cdot \left(1 + \left(1 - \frac{\pi}{1 - f(0; \mu, \theta)}\right) \cdot \mu \right)
+#'     m \cdot \left(1 + \frac{\mu}{\theta} + \mu - m \right)
 #'   }{
-#'     m \cdot (1 + (1 - \pi/(1 - f(0; \mu, \theta))) \cdot \mu)
+#'     m \cdot (1 + \mu/\theta + \mu - m)
 #'   }
 #'
 #'   where \eqn{m} is the mean above.
@@ -143,10 +142,13 @@ rhnbinom <- function(n, mu, theta, size, pi) {
 #'   **Probability mass function (p.m.f.)**: \eqn{P(X = 0) = 1 - \pi} and for \eqn{k > 0}
 #'
 #'   \deqn{
-#'     P(X = k) = \pi \cdot \frac{f(k; \mu, \theta)}{1 - f(0; \mu, \theta)}
+#'     P(X = k) = \pi \cdot \frac{f(k; \mu, \theta)}{1 - F(0; \mu, \theta)}
 #'   }{
-#'     P(X = k) = \pi \cdot f(k; \mu, \theta)/(1 - f(0; \mu, \theta))
+#'     P(X = k) = \pi \cdot f(k; \mu, \theta)/(1 - F(0; \mu, \theta))
 #'   }
+#'
+#'   where \eqn{f(k; \mu, \theta)} is the p.m.f. of the \code{\link{NegativeBinomial}}
+#'   distribution.
 #'
 #'   **Cumulative distribution function (c.d.f.)**: \eqn{P(X \le 0) = 1 - \pi} and for \eqn{k > 0}
 #'
@@ -156,15 +158,9 @@ rhnbinom <- function(n, mu, theta, size, pi) {
 #'     P(X = k) = 1 - \pi + \pi \cdot F(k; \mu, \theta)/(1 - F(0; \mu, \theta))
 #'   }
 #'
-#'   where \eqn{F(k; \mu)} is the c.d.f. of the \code{\link{NegativeBinomial}} distribution.
-#'
 #'   **Moment generating function (m.g.f.)**:
 #'
-#'   \deqn{
-#'     E(e^{tX}) = \frac{\pi}{1 - e^{-\mu}} \cdot e^{\mu (e^t - 1)}
-#'   }{
-#'     E(e^(tX)) = \pi/(1 - e^{-\mu}) \cdot e^(\mu (e^t - 1))
-#'   }
+#'   Omitted for now.
 #'
 #' @examples
 #' ## set up a hurdle negative binomial distribution
@@ -202,6 +198,7 @@ mean.HurdleNegativeBinomial <- function(x, ...) {
 
 #' @export
 variance.HurdleNegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- x$mu * x$pi / pnbinom(0, size = x$theta, mu = x$mu, lower.tail = FALSE)
   rval <- m * (1 + x$mu/x$theta + x$mu - m)
   setNames(rval, names(x))
@@ -209,20 +206,24 @@ variance.HurdleNegativeBinomial <- function(x, ...) {
 
 #' @export
 skewness.HurdleNegativeBinomial <- function(x, ...) {
-  ##FIXME
-  f <- x$pi / (1 - exp(-x$mu))
+  stop("not implemented yet")
+  ellipsis::check_dots_used()
+  f <- x$pi / pnbinom(0, size = x$theta, mu = x$mu, lower.tail = FALSE)
   m <- x$mu * f
-  s <- sqrt(m * (x$mu + 1 - m))
+  s <- sqrt(m * (1 + x$mu/x$theta + x$mu - m))
+  ## FIXME: E[X^3] would be needed here
   rval <- (f * (x$mu + 3 * x$mu^2 + x$mu^3) - 3 * m * s^2 - m^3) / s^3  
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.HurdleNegativeBinomial <- function(x, ...) {
-  ##FIXME
+  stop("not implemented yet")
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$mu))
   m <- x$mu * f
   s2 <- m * (x$mu + 1 - m)
+  ## FIXME: E[X^4] would be needed here
   rval <- ( f * (x$mu + 7 * x$mu^2 + 6 * x$mu^3 + x$mu^4)
              - 4 * m * f * (x$mu + 3 * x$mu^2 + x$mu^3)
              + 6 * m^2 * f * (x$mu + x$mu^2)
@@ -327,7 +328,6 @@ cdf.HurdleNegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.HurdleNegativeBinomial <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qhnbinom(p = at, mu = d$mu, theta = d$theta, pi = d$pi, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -341,12 +341,8 @@ quantile.HurdleNegativeBinomial <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.HurdleNegativeBinomial <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 

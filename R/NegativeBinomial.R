@@ -121,6 +121,7 @@ mean.NegativeBinomial <- function(x, ...) {
 
 #' @export
 variance.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- if("mu" %in% names(unclass(x))) {
     x$mu + 1/x$size * x$mu^2
   } else {
@@ -131,6 +132,7 @@ variance.NegativeBinomial <- function(x, ...) {
 
 #' @export
 skewness.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
   rval <- (2 - x$p) / sqrt((1 - x$p) * x$size)
   setNames(rval, names(x))
@@ -138,6 +140,7 @@ skewness.NegativeBinomial <- function(x, ...) {
 
 #' @export
 kurtosis.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
   rval <- 6 / x$size + x$p^2 / x$size * (1 - x$p)
   setNames(rval, names(x))
@@ -267,7 +270,6 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @family NegativeBinomial distribution
 #'
 quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- if("mu" %in% names(unclass(x))) {
     function(at, d) qnbinom(p = at, mu = x$mu, size = x$size, ...)
   } else {
@@ -286,11 +288,7 @@ quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.NegativeBinomial <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }

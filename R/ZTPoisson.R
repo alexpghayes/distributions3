@@ -11,7 +11,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{ztpois} functions for the
 #' zero-truncated Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' @aliases dztpois pztpois qztpois rztpois
 #'
@@ -171,23 +171,22 @@ ZTPoisson <- function(lambda) {
 #' @export
 mean.ZTPoisson <- function(x, ...) {
   ellipsis::check_dots_used()
-  setNames(.mean_ztpois(x$lambda), names(x))
-}
-
-.mean_ztpois <- function(lambda) {
   m <- lambda/ppois(0, lambda = lambda, lower.tail = FALSE)
   m[lambda <= 0] <- 1
-  return(m)
+  setNames(m, names(x))
 }
 
 #' @export
 variance.ZTPoisson <- function(x, ...) {
-  m <- .mean_ztpois(x$lambda)
+  ellipsis::check_dots_used()
+  m <- lambda/ppois(0, lambda = lambda, lower.tail = FALSE)
+  m[lambda <= 0] <- 1
   setNames(m * (1 + x$lambda - m), names(x))
 }
 
 #' @export
 skewness.ZTPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- 1 / ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
@@ -198,6 +197,7 @@ skewness.ZTPoisson <- function(x, ...) {
 
 #' @export
 kurtosis.ZTPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- 1 / ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -306,7 +306,6 @@ cdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.ZTPoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qztpois(p = at, lambda = d$lambda, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -320,12 +319,8 @@ quantile.ZTPoisson <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.ZTPoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(1, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 

@@ -43,7 +43,7 @@ a Poisson variable Y conditional on Y being greater than zero.
 All functions follow the usual conventions of d/p/q/r functions
 in base R. In particular, all four \code{ztpois} functions for the
 zero-truncated Poisson distribution call the corresponding \code{pois}
-functions for the Poisson distribution frame base R internally.
+functions for the Poisson distribution from base R internally.
 }
 \examples{
 ## theoretical probabilities for a zero-truncated Poisson distribution

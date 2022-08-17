@@ -62,11 +62,7 @@ distribution.
 
 \strong{Moment generating function (m.g.f.)}:
 
-\deqn{
-    E(e^{tX}) = \frac{1}{1 - F(0; \mu, \theta)} \cdot e^{\mu (e^t - 1)}
-  }{
-    E(e^(tX)) = 1/(1 - F(0; \mu, \theta)) \cdot e^(\mu (e^t - 1))
-  }
+Omitted for now.
 }
 \examples{
 ## set up a zero-truncated negative binomial distribution
@@ -102,6 +98,7 @@ Other discrete distributions:
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
+\code{\link{ZINegativeBinomial}()},
 \code{\link{ZIPoisson}()},
 \code{\link{ZTPoisson}()}
 }

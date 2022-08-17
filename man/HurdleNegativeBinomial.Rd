@@ -34,19 +34,18 @@ In the following, let \eqn{X} be a hurdle negative binomial random variable with
 
 \strong{Mean}:
 \deqn{
-    \mu \cdot \frac{\pi}{1 - f(0; \mu, \theta)}
+    \mu \cdot \frac{\pi}{1 - F(0; \mu, \theta)}
   }{
-    \mu \cdot \pi/(1 - f(0; \mu, \theta))
+    \mu \cdot \pi/(1 - F(0; \mu, \theta))
   }
 
-where \eqn{f(k; \mu, \theta)} is the p.m.f. of the \code{\link{NegativeBinomial}}
-distribution.
+where \eqn{F(k; \mu)} is the c.d.f. of the \code{\link{NegativeBinomial}} distribution.
 
 \strong{Variance}:
 \deqn{
-    m \cdot \left(1 + \left(1 - \frac{\pi}{1 - f(0; \mu, \theta)}\right) \cdot \mu \right)
+    m \cdot \left(1 + \frac{\mu}{\theta} + \mu - m \right)
   }{
-    m \cdot (1 + (1 - \pi/(1 - f(0; \mu, \theta))) \cdot \mu)
+    m \cdot (1 + \mu/\theta + \mu - m)
   }
 
 where \eqn{m} is the mean above.
@@ -54,10 +53,13 @@ where \eqn{m} is the mean above.
 \strong{Probability mass function (p.m.f.)}: \eqn{P(X = 0) = 1 - \pi} and for \eqn{k > 0}
 
 \deqn{
-    P(X = k) = \pi \cdot \frac{f(k; \mu, \theta)}{1 - f(0; \mu, \theta)}
+    P(X = k) = \pi \cdot \frac{f(k; \mu, \theta)}{1 - F(0; \mu, \theta)}
   }{
-    P(X = k) = \pi \cdot f(k; \mu, \theta)/(1 - f(0; \mu, \theta))
+    P(X = k) = \pi \cdot f(k; \mu, \theta)/(1 - F(0; \mu, \theta))
   }
+
+where \eqn{f(k; \mu, \theta)} is the p.m.f. of the \code{\link{NegativeBinomial}}
+distribution.
 
 \strong{Cumulative distribution function (c.d.f.)}: \eqn{P(X \le 0) = 1 - \pi} and for \eqn{k > 0}
 
@@ -67,15 +69,9 @@ where \eqn{m} is the mean above.
     P(X = k) = 1 - \pi + \pi \cdot F(k; \mu, \theta)/(1 - F(0; \mu, \theta))
   }
 
-where \eqn{F(k; \mu)} is the c.d.f. of the \code{\link{NegativeBinomial}} distribution.
-
 \strong{Moment generating function (m.g.f.)}:
 
-\deqn{
-    E(e^{tX}) = \frac{\pi}{1 - e^{-\mu}} \cdot e^{\mu (e^t - 1)}
-  }{
-    E(e^(tX)) = \pi/(1 - e^{-\mu}) \cdot e^(\mu (e^t - 1))
-  }
+Omitted for now.
 }
 \examples{
 ## set up a hurdle negative binomial distribution
@@ -110,6 +106,7 @@ Other discrete distributions:
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
+\code{\link{ZINegativeBinomial}()},
 \code{\link{ZIPoisson}()},
 \code{\link{ZTNegativeBinomial}()},
 \code{\link{ZTPoisson}()}

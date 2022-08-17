@@ -2,7 +2,7 @@
 #' 
 #' Density, distribution function, quantile function, and random
 #' generation for the zero-truncated negative binomial distribution with
-#' parameter \code{mu}.
+#' parameters \code{mu} and \code{theta} (or \code{size}).
 #'
 #' The negative binomial distribution left-truncated at zero (or zero-truncated
 #' negative binomial for short) is the distribution obtained, when considering
@@ -11,7 +11,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{ztnbinom} functions for the
 #' zero-truncated negative binomial distribution call the corresponding \code{nbinom}
-#' functions for the negative binomial distribution frame base R internally.
+#' functions for the negative binomial distribution from base R internally.
 #'
 #' @aliases dztnbinom pztnbinom qztnbinom rztnbinom
 #'
@@ -147,11 +147,7 @@ rztnbinom <- function(n, mu, theta, size) {
 #'
 #'   **Moment generating function (m.g.f.)**:
 #'
-#'   \deqn{
-#'     E(e^{tX}) = \frac{1}{1 - F(0; \mu, \theta)} \cdot e^{\mu (e^t - 1)}
-#'   }{
-#'     E(e^(tX)) = 1/(1 - F(0; \mu, \theta)) \cdot e^(\mu (e^t - 1))
-#'   }
+#'   Omitted for now.
 #'
 #' @examples
 #' ## set up a zero-truncated negative binomial distribution
@@ -190,6 +186,7 @@ mean.ZTNegativeBinomial <- function(x, ...) {
 
 #' @export
 variance.ZTNegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- x$mu / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m[x$mu <= 0] <- 1
   v <- m * (x$mu/x$theta + x$mu + 1 - m)
@@ -198,24 +195,30 @@ variance.ZTNegativeBinomial <- function(x, ...) {
 
 #' @export
 skewness.ZTNegativeBinomial <- function(x, ...) {
+  stop("not implemented yet")
+  ellipsis::check_dots_used()
   f <- 1 / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m <- x$mu * f
   s <- sqrt(m * (x$mu/x$theta + x$mu + 1 - m))
+  ## FIXME: E[X^3] would be needed here
   rval <- (f * (x$mu + 3 * x$mu^2 + x$mu^3) - 3 * m * s^2 - m^3) / s^3
-  rval[mu <= 0] <- NaN
+  rval[x$mu <= 0] <- NaN
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.ZTNegativeBinomial <- function(x, ...) {
+  stop("not implemented yet")
+  ellipsis::check_dots_used()
   f <- 1 / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m <- x$mu * f
   s2 <- m * (x$mu/x$theta + x$mu + 1 - m)
+  ## FIXME: E[X^4] would be needed here
   rval <- ( f * (x$mu + 7 * x$mu^2 + 6 * x$mu^3 + x$mu^4)
              - 4 * m * f * (x$mu + 3 * x$mu^2 + x$mu^3)
              + 6 * m^2 * f * (x$mu + x$mu^2)
              - 3 * m^4 ) / s2^2 - 3
-  rval[mu <= 0] <- NaN
+  rval[x$mu <= 0] <- NaN
   setNames(rval, names(x))
 }
 
@@ -316,7 +319,6 @@ cdf.ZTNegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.ZTNegativeBinomial <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qztnbinom(p = at, mu = d$mu, theta = d$theta, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -330,12 +332,8 @@ quantile.ZTNegativeBinomial <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.ZTNegativeBinomial <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(1, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 

@@ -7,7 +7,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{hpois} functions for the
 #' hurdle Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qhpois} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -153,11 +153,7 @@ rhpois <- function(n, lambda, pi) {
 #'
 #'   **Moment generating function (m.g.f.)**:
 #'
-#'   \deqn{
-#'     E(e^{tX}) = \frac{\pi}{1 - e^{-\lambda}} \cdot e^{\lambda (e^t - 1)}
-#'   }{
-#'     E(e^(tX)) = \pi/(1 - e^{-\lambda}) \cdot e^(\lambda (e^t - 1))
-#'   }
+#'   Omitted for now.
 #'
 #' @examples
 #' ## set up a hurdle Poisson distribution
@@ -195,6 +191,7 @@ mean.HurdlePoisson <- function(x, ...) {
 
 #' @export
 variance.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- x$lambda * x$pi / (1 - exp(-x$lambda))
   rval <- m * (x$lambda + 1 - m)
   setNames(rval, names(x))
@@ -202,6 +199,7 @@ variance.HurdlePoisson <- function(x, ...) {
 
 #' @export
 skewness.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
@@ -211,6 +209,7 @@ skewness.HurdlePoisson <- function(x, ...) {
 
 #' @export
 kurtosis.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -318,7 +317,6 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qhpois(p = at, lambda = d$lambda, pi = d$pi, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -332,12 +330,8 @@ quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.HurdlePoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 

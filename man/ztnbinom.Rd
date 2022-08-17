@@ -36,7 +36,7 @@ Only \code{theta} or, equivalently, \code{size} may be specified.}
 \description{
 Density, distribution function, quantile function, and random
 generation for the zero-truncated negative binomial distribution with
-parameter \code{mu}.
+parameters \code{mu} and \code{theta} (or \code{size}).
 }
 \details{
 The negative binomial distribution left-truncated at zero (or zero-truncated
@@ -46,7 +46,7 @@ a negative binomial variable Y conditional on Y being greater than zero.
 All functions follow the usual conventions of d/p/q/r functions
 in base R. In particular, all four \code{ztnbinom} functions for the
 zero-truncated negative binomial distribution call the corresponding \code{nbinom}
-functions for the negative binomial distribution frame base R internally.
+functions for the negative binomial distribution from base R internally.
 }
 \examples{
 ## theoretical probabilities for a zero-truncated negative binomial distribution

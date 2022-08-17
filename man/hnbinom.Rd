@@ -38,13 +38,13 @@ Only \code{theta} or, equivalently, \code{size} may be specified.}
 \description{
 Density, distribution function, quantile function, and random
 generation for the zero-hurdle negative binomial distribution with
-parameters \code{mu}, \code{theta}, and \code{pi}.
+parameters \code{mu}, \code{theta} (or \code{size}), and \code{pi}.
 }
 \details{
 All functions follow the usual conventions of d/p/q/r functions
 in base R. In particular, all four \code{hnbinom} functions for the
 hurdle negative binomial distribution call the corresponding \code{nbinom}
-functions for the negative binomial distribution frame base R internally.
+functions for the negative binomial distribution from base R internally.
 
 Note, however, that the precision of \code{qhnbinom} for very large
 probabilities (close to 1) is limited because the probabilities
@@ -53,12 +53,12 @@ are internally handled in levels and not in logs (even if \code{log.p = TRUE}).
 \examples{
 ## theoretical probabilities for a hurdle negative binomial distribution
 x <- 0:8
-p <- dhnbinom(x, mu = 2.5, pi = 0.75)
+p <- dhnbinom(x, mu = 2.5, theta = 1, pi = 0.75)
 plot(x, p, type = "h", lwd = 2)
 
 ## corresponding empirical frequencies from a simulated sample
 set.seed(0)
-y <- rhnbinom(500, mu = 2.5, pi = 0.75)
+y <- rhnbinom(500, mu = 2.5, theta = 1, pi = 0.75)
 hist(y, breaks = -1:max(y) + 0.5)
 
 }
