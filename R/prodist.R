@@ -9,7 +9,11 @@
 #' predicted probability \code{distribution} objects. Currently, methods are
 #' provided for objects fitted by \code{\link[stats]{lm}},
 #' \code{\link[stats]{glm}}, and \code{\link[stats]{arima}} in base R as
-#' well as \code{glm.nb} from the \pkg{MASS} package. All methods essentially
+#' well as \code{glm.nb} from the \pkg{MASS} package and
+#' \code{hurdle}/\code{zeroinfl}/\code{zerotrunc} from the \pkg{pscl} or
+#' \pkg{countreg} packages.
+#' 
+#' All methods essentially
 #' proceed in two steps: First, the standard \code{\link[stats]{predict}}
 #' method for these model objects is used to compute fitted (in-sample, default)
 #' or predicted (out-of-sample) distribution parameters. Typically, this includes
@@ -17,7 +21,7 @@
 #' Second, the \code{distributions} objects are set up using the generator
 #' functions from \pkg{distributions3}.
 #' 
-#' @aliases prodist.lm prodist.glm prodist.negbin prodist.Arima
+#' @aliases prodist.lm prodist.glm prodist.negbin prodist.Arima prodist.hurdle prodist.zeroinfl prodist.zerotrunc
 #' 
 #' @param object A model object.
 #' @param ... Arguments passed on to methods, typically for calling the
@@ -161,7 +165,40 @@ prodist.Arima <- function(object, ...) {
   Normal(mu = setNames(as.numeric(p$pred), n), sigma = as.numeric(p$se))
 }
 
+#' @export
+prodist.hurdle <- function(object, ...) {
+  dist <- object$dist$count
+  mu <- predict(object, type = "count", ...)
+  pi <- 1 - predict(object, type = "prob", at = 0:1, ...)[, 1L]
+  switch(dist,
+    "poisson"   = HurdlePoisson(lambda = mu, pi = pi),
+    "geometric" = HurdleNegativeBinomial(mu = mu, theta = 1, pi = pi),
+    "negbin"    = HurdleNegativeBinomial(mu = mu, theta = as.numeric(object$theta["count"]), pi = pi)
+  )
+}
 
+#' @export
+prodist.zeroinfl <- function(object, ...) {
+  dist <- object$dist
+  mu <- predict(object, type = "count", ...)
+  pi <- predict(object, type = "zero", ...)
+  switch(dist,
+    "poisson"   = ZIPoisson(lambda = mu, pi = pi),
+    "geometric" = ZINegativeBinomial(mu = mu, theta = 1, pi = pi),
+    "negbin"    = ZINegativeBinomial(mu = mu, theta = as.numeric(object$theta), pi = pi)
+  )
+}
+
+#' @export
+prodist.zerotrunc <- function(object, ...) {
+  dist <- object$dist
+  mu <- predict(object, type = "count", ...)
+  switch(dist,
+    "poisson"   = ZTPoisson(lambda = mu),
+    "geometric" = ZTNegativeBinomial(mu = mu, theta = 1),
+    "negbin"    = ZTNegativeBinomial(mu = mu, theta = as.numeric(object$theta))
+  )
+}
 
 ## Further examples requiring other packages ---------------
 ## 
@@ -174,6 +211,16 @@ prodist.Arima <- function(object, ...) {
 ## cns_logit <- glm(cbind(CNS, NoCNS) ~ Water + Work, data = cns, family = binomial)
 ## logLik(cns_logit)
 ## log_likelihood(prodist(cns_logit), cns$CNS)
+## 
+## library("pscl")
+## data("bioChemists", package = "pscl")
+## art_hnb <- hurdle(art ~ . | ., data = bioChemists, dist = "negbin")
+## logLik(art_hnb)
+## log_likelihood(prodist(art_hnb), bioChemists$art)
+## all.equal(
+##   pdf(prodist(art_hnb), 0:10),
+##   predict(art_hnb, type = "prob", at = 0:10),
+##   check.attributes = FALSE)
 ## 
 ## data("SwissLabor", package = "AER")
 ## swiss_logit <- glm(participation ~ . + I(age^2), data = SwissLabor, family = binomial)

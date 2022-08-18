@@ -6,6 +6,9 @@
 \alias{prodist.glm}
 \alias{prodist.negbin}
 \alias{prodist.Arima}
+\alias{prodist.hurdle}
+\alias{prodist.zeroinfl}
+\alias{prodist.zerotrunc}
 \title{Extracting fitted or predicted probability distributions from models}
 \usage{
 prodist(object, ...)
@@ -32,7 +35,11 @@ series model objects, the function \code{prodist} extracts fitted or
 predicted probability \code{distribution} objects. Currently, methods are
 provided for objects fitted by \code{\link[stats]{lm}},
 \code{\link[stats]{glm}}, and \code{\link[stats]{arima}} in base R as
-well as \code{glm.nb} from the \pkg{MASS} package. All methods essentially
+well as \code{glm.nb} from the \pkg{MASS} package and
+\code{hurdle}/\code{zeroinfl}/\code{zerotrunc} from the \pkg{pscl} or
+\pkg{countreg} packages.
+
+All methods essentially
 proceed in two steps: First, the standard \code{\link[stats]{predict}}
 method for these model objects is used to compute fitted (in-sample, default)
 or predicted (out-of-sample) distribution parameters. Typically, this includes
