@@ -103,6 +103,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/HurdlePoisson.html</loc>
   </url>
   <url>
@@ -142,7 +145,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/apply_dpqr.html</loc>
@@ -193,6 +205,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.HurdlePoisson.html</loc>
   </url>
   <url>
@@ -229,7 +244,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.html</loc>
@@ -266,6 +290,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/geom_auc.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/hnbinom.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/hpois.html</loc>
@@ -328,6 +355,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.HurdlePoisson.html</loc>
   </url>
   <url>
@@ -364,7 +394,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.html</loc>
@@ -427,6 +466,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.HurdlePoisson.html</loc>
   </url>
   <url>
@@ -463,7 +505,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Bernoulli.html</loc>
@@ -511,6 +562,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Gumbel.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.HurdlePoisson.html</loc>
   </url>
   <url>
@@ -547,7 +601,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.html</loc>
@@ -610,6 +673,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Geometric.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HurdleNegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HurdlePoisson.html</loc>
   </url>
   <url>
@@ -646,7 +712,16 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Weibull.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ZINegativeBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ZIPoisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ZTNegativeBinomial.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.ZTPoisson.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.html</loc>
@@ -655,6 +730,15 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/variance.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/zinbinom.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/zipois.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ztnbinom.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/ztpois.html</loc>
   </url>
 </urlset>
