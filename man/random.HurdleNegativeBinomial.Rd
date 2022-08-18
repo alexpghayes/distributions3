@@ -26,16 +26,15 @@ Draw a random sample from a hurdle negative binomial distribution
 }
 \examples{
 ## set up a hurdle negative binomial distribution
-X <- HurdleNegativeBinomial(mu = 2.5, pi = 0.75)
+X <- HurdleNegativeBinomial(mu = 2.5, theta = 1, pi = 0.75)
 X
 
 ## standard functions
 pdf(X, 0:8)
 cdf(X, 0:8)
-quantile(X, seq(0, 1, by = 0.75))
+quantile(X, seq(0, 1, by = 0.25))
 
 ## cdf() and quantile() are inverses for each other
-cdf(X, quantile(X, 0.3))
 quantile(X, cdf(X, 3))
 
 ## density visualization

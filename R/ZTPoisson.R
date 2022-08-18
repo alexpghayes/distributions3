@@ -152,7 +152,6 @@ rztpois <- function(n, lambda) {
 #' quantile(X, seq(0, 1, by = 0.25))
 #'
 #' ## cdf() and quantile() are inverses for each other
-#' cdf(X, quantile(X, 0.3))
 #' quantile(X, cdf(X, 3))
 #'
 #' ## density visualization
@@ -171,16 +170,16 @@ ZTPoisson <- function(lambda) {
 #' @export
 mean.ZTPoisson <- function(x, ...) {
   ellipsis::check_dots_used()
-  m <- lambda/ppois(0, lambda = lambda, lower.tail = FALSE)
-  m[lambda <= 0] <- 1
+  m <- x$lambda/ppois(0, lambda = x$lambda, lower.tail = FALSE)
+  m[x$lambda <= 0] <- 1
   setNames(m, names(x))
 }
 
 #' @export
 variance.ZTPoisson <- function(x, ...) {
   ellipsis::check_dots_used()
-  m <- lambda/ppois(0, lambda = lambda, lower.tail = FALSE)
-  m[lambda <= 0] <- 1
+  m <- x$lambda/ppois(0, lambda = x$lambda, lower.tail = FALSE)
+  m[x$lambda <= 0] <- 1
   setNames(m * (1 + x$lambda - m), names(x))
 }
 

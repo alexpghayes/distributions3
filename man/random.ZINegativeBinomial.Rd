@@ -35,7 +35,6 @@ cdf(X, 0:8)
 quantile(X, seq(0, 1, by = 0.25))
 
 ## cdf() and quantile() are inverses for each other
-cdf(X, quantile(X, 0.3))
 quantile(X, cdf(X, 3))
 
 ## density visualization
