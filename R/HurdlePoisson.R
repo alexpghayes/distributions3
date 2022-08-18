@@ -7,7 +7,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{hpois} functions for the
 #' hurdle Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qhpois} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -153,11 +153,7 @@ rhpois <- function(n, lambda, pi) {
 #'
 #'   **Moment generating function (m.g.f.)**:
 #'
-#'   \deqn{
-#'     E(e^{tX}) = \frac{\pi}{1 - e^{-\lambda}} \cdot e^{\lambda (e^t - 1)}
-#'   }{
-#'     E(e^(tX)) = \pi/(1 - e^{-\lambda}) \cdot e^(\lambda (e^t - 1))
-#'   }
+#'   Omitted for now.
 #'
 #' @examples
 #' ## set up a hurdle Poisson distribution
@@ -167,10 +163,9 @@ rhpois <- function(n, lambda, pi) {
 #' ## standard functions
 #' pdf(X, 0:8)
 #' cdf(X, 0:8)
-#' quantile(X, seq(0, 1, by = 0.75))
+#' quantile(X, seq(0, 1, by = 0.25))
 #'
 #' ## cdf() and quantile() are inverses for each other
-#' cdf(X, quantile(X, 0.3))
 #' quantile(X, cdf(X, 3))
 #'
 #' ## density visualization
@@ -195,6 +190,7 @@ mean.HurdlePoisson <- function(x, ...) {
 
 #' @export
 variance.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- x$lambda * x$pi / (1 - exp(-x$lambda))
   rval <- m * (x$lambda + 1 - m)
   setNames(rval, names(x))
@@ -202,15 +198,17 @@ variance.HurdlePoisson <- function(x, ...) {
 
 #' @export
 skewness.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
-  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
+  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -318,7 +316,6 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qhpois(p = at, lambda = d$lambda, pi = d$pi, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -332,12 +329,8 @@ quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.HurdlePoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 

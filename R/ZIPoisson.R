@@ -7,7 +7,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{zipois} functions for the
 #' zero-inflated Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qzipois} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -152,7 +152,6 @@ rzipois <- function(n, lambda, pi) {
 #' quantile(X, seq(0, 1, by = 0.25))
 #'
 #' ## cdf() and quantile() are inverses for each other
-#' cdf(X, quantile(X, 0.3))
 #' quantile(X, cdf(X, 3))
 #'
 #' ## density visualization
@@ -177,12 +176,14 @@ mean.ZIPoisson <- function(x, ...) {
 
 #' @export
 variance.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- (1 - x$pi) * x$lambda * (1 + x$pi * x$lambda)
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- (1 - x$pi) * x$lambda
   s <- sqrt(m * (1 + x$pi * x$lambda))
   rval <- ((1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
@@ -191,6 +192,7 @@ skewness.ZIPoisson <- function(x, ...) {
 
 #' @export
 kurtosis.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- ( (1 + 7 * x$lambda + 6 * x$lambda^2 + x$lambda^3)
              - 4 * (1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3)
              + 6 * (1 - x$pi)^2 * (x$lambda^2 + x$lambda^3)
@@ -298,7 +300,6 @@ cdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.ZIPoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qzipois(p = at, lambda = d$lambda, pi = d$pi, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -312,12 +313,8 @@ quantile.ZIPoisson <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.ZIPoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 
