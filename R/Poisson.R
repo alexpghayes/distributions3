@@ -83,18 +83,21 @@ mean.Poisson <- function(x, ...) {
 
 #' @export
 variance.Poisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- x$lambda
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.Poisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- 1 / sqrt(x$lambda)
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.Poisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- 1 / x$lambda
   setNames(rval, names(x))
 }
@@ -198,7 +201,6 @@ cdf.Poisson <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 quantile.Poisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qpois(p = at, lambda = d$lambda, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
 }
@@ -246,11 +248,7 @@ suff_stat.Poisson <- function(d, x, ...) {
 #'
 #' @export
 support.Poisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }

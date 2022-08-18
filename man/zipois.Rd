@@ -41,7 +41,7 @@ parameters \code{lambda} and \code{pi}.
 All functions follow the usual conventions of d/p/q/r functions
 in base R. In particular, all four \code{zipois} functions for the
 zero-inflated Poisson distribution call the corresponding \code{pois}
-functions for the Poisson distribution frame base R internally.
+functions for the Poisson distribution from base R internally.
 
 Note, however, that the precision of \code{qzipois} for very large
 probabilities (close to 1) is limited because the probabilities

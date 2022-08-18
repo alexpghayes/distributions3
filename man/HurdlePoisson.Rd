@@ -61,11 +61,7 @@ where \eqn{F(k; \lambda)} is the c.d.f. of the \code{\link{Poisson}} distributio
 
 \strong{Moment generating function (m.g.f.)}:
 
-\deqn{
-    E(e^{tX}) = \frac{\pi}{1 - e^{-\lambda}} \cdot e^{\lambda (e^t - 1)}
-  }{
-    E(e^(tX)) = \pi/(1 - e^{-\lambda}) \cdot e^(\lambda (e^t - 1))
-  }
+Omitted for now.
 }
 \examples{
 ## set up a hurdle Poisson distribution
@@ -75,10 +71,9 @@ X
 ## standard functions
 pdf(X, 0:8)
 cdf(X, 0:8)
-quantile(X, seq(0, 1, by = 0.75))
+quantile(X, seq(0, 1, by = 0.25))
 
 ## cdf() and quantile() are inverses for each other
-cdf(X, quantile(X, 0.3))
 quantile(X, cdf(X, 3))
 
 ## density visualization
@@ -95,10 +90,14 @@ Other discrete distributions:
 \code{\link{Binomial}()},
 \code{\link{Categorical}()},
 \code{\link{Geometric}()},
+\code{\link{HurdleNegativeBinomial}()},
 \code{\link{HyperGeometric}()},
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
-\code{\link{ZIPoisson}()}
+\code{\link{ZINegativeBinomial}()},
+\code{\link{ZIPoisson}()},
+\code{\link{ZTNegativeBinomial}()},
+\code{\link{ZTPoisson}()}
 }
 \concept{discrete distributions}
