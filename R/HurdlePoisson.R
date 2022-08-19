@@ -249,6 +249,12 @@ random.HurdlePoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{dhpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -259,17 +265,17 @@ random.HurdlePoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+pdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dhpois(x = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.HurdlePoisson
 #' @export
 #'
-log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dhpois(x = at, lambda = d$lambda, pi = d$pi, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a hurdle Poisson distribution
@@ -280,6 +286,12 @@ log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{phpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -290,9 +302,9 @@ log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+cdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) phpois(q = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a hurdle Poisson distribution
@@ -304,6 +316,12 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{qhpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -315,9 +333,9 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
+quantile.HurdlePoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qhpois(p = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Return the support of the hurdle Poisson distribution

@@ -157,6 +157,12 @@ random.ChiSquare <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{dchisq}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -167,17 +173,17 @@ random.ChiSquare <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+pdf.ChiSquare <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dchisq(x = at, df = d$df, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.ChiSquare
 #' @export
 #'
-log_pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+log_pdf.ChiSquare <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dchisq(x = at, df = d$df, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a chi square distribution
@@ -188,6 +194,12 @@ log_pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{pchisq}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -198,9 +210,9 @@ log_pdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
+cdf.ChiSquare <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) pchisq(q = at, df = d$df, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a chi square distribution
@@ -212,6 +224,12 @@ cdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{qchisq}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -223,14 +241,11 @@ cdf.ChiSquare <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.ChiSquare <- function(x, probs, drop = TRUE, ...) {
-
+quantile.ChiSquare <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
-
-  ellipsis::check_dots_used()
   FUN <- function(at, d) qchisq(at, df = x$df, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 
@@ -243,11 +258,7 @@ quantile.ChiSquare <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @export
 support.ChiSquare <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }

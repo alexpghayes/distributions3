@@ -5,9 +5,9 @@
 \alias{log_pdf.ZTNegativeBinomial}
 \title{Evaluate the probability mass function of a zero-truncated negative binomial distribution}
 \usage{
-\method{pdf}{ZTNegativeBinomial}(d, x, drop = TRUE, ...)
+\method{pdf}{ZTNegativeBinomial}(d, x, drop = TRUE, elementwise = NULL, ...)
 
-\method{log_pdf}{ZTNegativeBinomial}(d, x, drop = TRUE, ...)
+\method{log_pdf}{ZTNegativeBinomial}(d, x, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{d}{A \code{ZTNegativeBinomial} object created by a call to \code{\link[=ZTNegativeBinomial]{ZTNegativeBinomial()}}.}
@@ -16,6 +16,13 @@
 determine given the distribution \code{d}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{d} be evaluated
+at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{d} and \code{x} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link{dztnbinom}}.
 Unevaluated arguments will generate a warning to catch mispellings or other

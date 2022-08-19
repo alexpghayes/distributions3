@@ -4,7 +4,7 @@
 \alias{cdf.Uniform}
 \title{Evaluate the cumulative distribution function of a continuous Uniform distribution}
 \usage{
-\method{cdf}{Uniform}(d, x, drop = TRUE, ...)
+\method{cdf}{Uniform}(d, x, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{d}{A \code{Uniform} object created by a call to \code{\link[=Uniform]{Uniform()}}.}
@@ -13,6 +13,13 @@
 like to determine given the distribution \code{d}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{d} be evaluated
+at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{d} and \code{x} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link[stats]{punif}}.
 Unevaluated arguments will generate a warning to catch mispellings or other
