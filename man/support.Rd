@@ -4,17 +4,28 @@
 \alias{support}
 \title{Return the support of a distribution}
 \usage{
-support(d, drop = TRUE)
+support(d, drop = TRUE, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{d}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
-A vector with two elements indicating the range of the support.
+A vector (or matrix) with two elements (or columns) indicating the
+range (minimum and maximum) of the support.
 }
 \description{
-Return the support of a distribution
+Generic function for computing the support interval (minimum and maximum)
+for a given probability distribution object.
+}
+\examples{
+X <- Normal()
+support(X)
+Y <- Uniform(-1, 1:3)
+support(Y)
 }

@@ -2,31 +2,32 @@
 % Please edit documentation in R/methods.R
 \name{cdf}
 \alias{cdf}
-\title{Evaluate the probability density of a probability distribution}
+\title{Evaluate the cumulative distribution function of a probability distribution}
 \usage{
 cdf(d, x, drop = TRUE, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{d}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
 \item{x}{A vector of elements whose cumulative probabilities you would
 like to determine given the distribution \code{d}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
 Probabilities corresponding to the vector \code{x}.
 }
 \description{
-For discrete distributions, the probability mass function.
+Generic function for computing probabilities from distribution objects based
+on the cumulative distribution function (CDF).
 }
 \examples{
-
+## distribution object
 X <- Normal()
-
+## probabilities from CDF
 cdf(X, c(1, 2, 3, 4, 5))
 }

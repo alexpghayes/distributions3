@@ -2,28 +2,35 @@
 % Please edit documentation in R/methods.R
 \name{log_likelihood}
 \alias{log_likelihood}
-\title{Compute the log-likelihood of a probability distribution given data}
+\alias{likelihood}
+\title{Compute the (log-)likelihood of a probability distribution given data}
 \usage{
 log_likelihood(d, x, ...)
+
+likelihood(d, x, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{d}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
 \item{x}{A vector of data to compute the likelihood.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
-the log-likelihood
+Numeric value of the (log-)likelihood.
 }
 \description{
-Compute the log-likelihood of a probability distribution given data
+Functions for computing the (log-)likelihood based on a distribution
+object and observed data. The log-likelihood is computed as the sum of
+log-density contributions and the likelihood by taking the exponential thereof.
 }
 \examples{
-
+## distribution object
 X <- Normal()
-
+## sum of log_pdf() contributions
 log_likelihood(X, c(-1, 0, 0, 0, 3))
+## exp of log_likelihood()
+likelihood(X, c(-1, 0, 0, 0, 3))
 }

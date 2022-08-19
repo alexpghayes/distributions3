@@ -2,31 +2,50 @@
 % Please edit documentation in R/methods.R
 \name{random}
 \alias{random}
+\alias{simulate.distribution}
 \title{Draw a random sample from a probability distribution}
 \usage{
 random(x, n = 1L, drop = TRUE, ...)
+
+\method{simulate}{distribution}(object, nsim = 1L, seed = NULL, ...)
 }
 \arguments{
-\item{x}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{x, object}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
-\item{n}{The number of samples to draw. Should be a positive
+\item{n, nsim}{The number of samples to draw. Should be a positive
 integer. Defaults to \code{1L}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
+
+\item{seed}{An optional random seed that is to be set using \code{\link{set.seed}}
+prior to drawing the random sample. The previous random seed from the global
+environment (if any) is restored afterwards.}
 }
 \value{
 Random samples drawn from the distriubtion \code{x}.
 }
 \description{
-Draw a random sample from a probability distribution
+Generic function for drawing random samples from distribution objects.
+}
+\details{
+\code{random} is a new generic for drawing random samples from
+the S3 \code{distribution} objects provided in this package, such as
+\code{\link{Normal}} or \code{\link{Binomial}} etc. The respective
+methods typically call the "r" function for the corresponding
+distribution functions provided in base R such as \code{rnorm},
+\code{rbinom} etc.
+
+In addition to the new \code{random} generic there is also a
+\code{\link{simulate}} method for distribution objects which simply
+calls the \code{random} method internally.
 }
 \examples{
-
+## distribution object
 X <- Normal()
-
+## 10 random samples
 random(X, 10)
 }
