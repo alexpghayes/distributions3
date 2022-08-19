@@ -4,12 +4,14 @@
 \alias{support.GEV}
 \title{Return the support of a GEV distribution}
 \usage{
-\method{support}{GEV}(d, drop = TRUE)
+\method{support}{GEV}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{GEV} object created by a call to \code{\link[=GEV]{GEV()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 In case of a single distribution object, a numeric vector of length 2

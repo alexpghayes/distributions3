@@ -259,11 +259,13 @@ suff_stat.Exponential <- function(d, x, ...) {
 #'
 #' @param d An `Exponential` object created by a call to [Exponential()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Exponential <- function(d, drop = TRUE) {
+support.Exponential <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)

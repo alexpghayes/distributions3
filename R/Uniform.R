@@ -226,11 +226,13 @@ quantile.Uniform <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @param d An `Uniform` object created by a call to [Uniform()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Uniform <- function(d, drop = TRUE) {
+support.Uniform <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- d$a
   max <- d$b
   make_support(min, max, d, drop = drop)

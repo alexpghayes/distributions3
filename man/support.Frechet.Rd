@@ -4,12 +4,14 @@
 \alias{support.Frechet}
 \title{Return the support of the Frechet distribution}
 \usage{
-\method{support}{Frechet}(d, drop = TRUE)
+\method{support}{Frechet}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 In case of a single distribution object, a numeric vector of length 2

@@ -4,12 +4,14 @@
 \alias{support.Geometric}
 \title{Return the support of the Geometric distribution}
 \usage{
-\method{support}{Geometric}(d, drop = TRUE)
+\method{support}{Geometric}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Geometric} object created by a call to \code{\link[=Geometric]{Geometric()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

@@ -294,11 +294,13 @@ suff_stat.Binomial <- function(d, x, ...) {
 #'
 #' @param d An `Binomial` object created by a call to [Binomial()].
 #' @param drop logical. Shoul the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Binomial <- function(d, drop = TRUE) {
+support.Binomial <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- d$size
   make_support(min, max, d, drop = drop)

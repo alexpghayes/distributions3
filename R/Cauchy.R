@@ -234,11 +234,13 @@ quantile.Cauchy <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @param d An `Cauchy` object created by a call to [Cauchy()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Cauchy <- function(d, drop = TRUE) {
+support.Cauchy <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)

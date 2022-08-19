@@ -369,6 +369,7 @@ suff_stat.Normal <- function(d, x, ...) {
 #'
 #' @param d An `Normal` object created by a call to [Normal()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
@@ -376,7 +377,8 @@ suff_stat.Normal <- function(d, x, ...) {
 #' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
-support.Normal <- function(d, drop = TRUE) {
+support.Normal <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)

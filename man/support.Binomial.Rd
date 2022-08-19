@@ -4,12 +4,14 @@
 \alias{support.Binomial}
 \title{Return the support of the Binomial distribution}
 \usage{
-\method{support}{Binomial}(d, drop = TRUE)
+\method{support}{Binomial}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
 
 \item{drop}{logical. Shoul the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

@@ -4,12 +4,14 @@
 \alias{support.GP}
 \title{Return the support of the GP distribution}
 \usage{
-\method{support}{GP}(d, drop = TRUE)
+\method{support}{GP}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{GP} object created by a call to \code{\link[=GP]{GP()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 In case of a single distribution object, a numeric vector of length 2

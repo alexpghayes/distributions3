@@ -287,6 +287,7 @@ quantile.GP <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @param d An `GP` object created by a call to [GP()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
@@ -294,7 +295,8 @@ quantile.GP <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
-support.GP <- function(d, drop = TRUE) {
+support.GP <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- d$mu
   max <- rep(Inf, length(d))
   max[d$xi < 0] <- d$mu[d$xi < 0] - d$sigma[d$xi < 0]/d$xi[d$xi < 0]

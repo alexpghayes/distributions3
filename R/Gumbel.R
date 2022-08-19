@@ -229,6 +229,7 @@ quantile.Gumbel <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @param d An `Gumbel` object created by a call to [Gumbel()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
@@ -236,7 +237,8 @@ quantile.Gumbel <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
-support.Gumbel <- function(d, drop = TRUE) {
+support.Gumbel <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)

@@ -312,6 +312,7 @@ quantile.GEV <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @param d An `GEV` object created by a call to [GEV()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
@@ -319,7 +320,8 @@ quantile.GEV <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
-support.GEV <- function(d, drop = TRUE) {
+support.GEV <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(-Inf, length(d))
   min[d$xi > 0] <- d$mu[d$xi > 0] - d$sigma[d$xi > 0]/d$xi[d$xi > 0]
   max <- rep(Inf, length(d))

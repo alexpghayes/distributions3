@@ -93,7 +93,7 @@ mean(Y)
 ## The support() method should return a matrix of "min" and "max" for the
 ## distribution. The make_support() function helps to set the right names and
 ## dimension.
-support.Gaussian <- function(d, drop = TRUE) {
+support.Gaussian <- function(d, drop = TRUE, ...) {
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
