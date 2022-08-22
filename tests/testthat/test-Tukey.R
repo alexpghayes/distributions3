@@ -4,6 +4,21 @@ test_that("print.Tukey works", {
   expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey distribution")
 })
 
+test_that("random.Tukey work correctly", {
+  d <- Tukey(4, 16, 2)
+
+  expect_length(random(d), 1)
+  expect_length(random(d, 100), 100)
+  expect_length(random(d[-1], 1), 0)
+  expect_length(random(d, 0), 0)
+  expect_error(random(d, -2))
+ 
+  # consistent with base R, using the `length` as number of samples to draw
+  expect_length(random(d, c(1, 2, 3)), 3)
+  expect_length(random(d, cbind(1, 2, 3)), 3)
+  expect_length(random(d, rbind(1, 2, 3)), 3)
+})
+
 test_that("vectorization of a Tukey distribution work correctly", {
   d <- Tukey(c(3L, 4L), 16L, 2L)
   d1 <- d[1]

@@ -13,17 +13,20 @@ skewness(x, ...)
 kurtosis(x, ...)
 }
 \arguments{
-\item{x}{An object. The package provides methods for probability
-distribution objects, e.g., those created by \code{\link[=Normal]{Normal()}} or \code{\link[=Beta]{Beta()}} etc.}
+\item{x}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
-\item{...}{Further arguments passed to or from other methods. Unevaluated
-arguments will generate a warning to catch mispellings or other possible
-errors.}
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
+catch mispellings or other possible errors.}
 }
 \value{
-A numeric scalar
+Numeric vector with the values of the moments.
 }
 \description{
+Generic functions for computing moments (variance, skewness, excess kurtosis)
+from probability distributions.
+}
+\details{
 The functions \code{variance}, \code{skewness}, and \code{kurtosis} are new
 generic functions for computing moments of probability distributions such as
 those provided in this package. Additionally, the probability distributions

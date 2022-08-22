@@ -4,12 +4,14 @@
 \alias{support.ZINegativeBinomial}
 \title{Return the support of the zero-inflated negative binomial distribution}
 \usage{
-\method{support}{ZINegativeBinomial}(d, drop = TRUE)
+\method{support}{ZINegativeBinomial}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{ZINegativeBinomial} object created by a call to \code{\link[=ZINegativeBinomial]{ZINegativeBinomial()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

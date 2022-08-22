@@ -4,12 +4,14 @@
 \alias{support.Logistic}
 \title{Return the support of the Logistic distribution}
 \usage{
-\method{support}{Logistic}(d, drop = TRUE)
+\method{support}{Logistic}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Logistic} object created by a call to \code{\link[=Logistic]{Logistic()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

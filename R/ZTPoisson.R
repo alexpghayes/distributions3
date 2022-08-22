@@ -238,6 +238,12 @@ random.ZTPoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{dztpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -248,17 +254,17 @@ random.ZTPoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
+pdf.ZTPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dztpois(x = at, lambda = d$lambda, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.ZTPoisson
 #' @export
 #'
-log_pdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
+log_pdf.ZTPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dztpois(x = at, lambda = d$lambda, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a zero-truncated Poisson distribution
@@ -269,6 +275,12 @@ log_pdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{pztpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -279,9 +291,9 @@ log_pdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
+cdf.ZTPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) pztpois(q = at, lambda = d$lambda, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a zero-truncated Poisson distribution
@@ -293,6 +305,12 @@ cdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{qztpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -304,20 +322,22 @@ cdf.ZTPoisson <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.ZTPoisson <- function(x, probs, drop = TRUE, ...) {
+quantile.ZTPoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qztpois(p = at, lambda = d$lambda, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Return the support of the zero-truncated Poisson distribution
 #'
 #' @param d An `ZTPoisson` object created by a call to [ZTPoisson()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.ZTPoisson <- function(d, drop = TRUE) {
+support.ZTPoisson <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(1, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)

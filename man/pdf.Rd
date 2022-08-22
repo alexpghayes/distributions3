@@ -13,30 +13,39 @@ log_pdf(d, x, ...)
 pmf(d, x, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{d}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
 \item{x}{A vector of elements whose probabilities you would like to
 determine given the distribution \code{d}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
 Probabilities corresponding to the vector \code{x}.
 }
 \description{
-For discrete distributions, the probability mass function. \code{pmf()}
-is an alias.
+Generic function for computing probability density function (PDF)
+contributions based on a distribution object and observed data.
+}
+\details{
+The generic function \code{pdf()} computes the probability density,
+both for continuous and discrete distributions. \code{pmf()} (for the
+probability mass function) is an alias that just calls \code{pdf()} internally.
+For computing log-density contributions (e.g., to a log-likelihood)
+either \code{pdf(..., log = TRUE)} can be used or the generic function
+\code{log_pdf()}.
 }
 \examples{
-
+## distribution object
 X <- Normal()
-
+## probability density
 pdf(X, c(1, 2, 3, 4, 5))
 pmf(X, c(1, 2, 3, 4, 5))
-
+## log-density
+pdf(X, c(1, 2, 3, 4, 5), log = TRUE)
 log_pdf(X, c(1, 2, 3, 4, 5))
 }

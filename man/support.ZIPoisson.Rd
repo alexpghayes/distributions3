@@ -4,12 +4,14 @@
 \alias{support.ZIPoisson}
 \title{Return the support of the zero-inflated Poisson distribution}
 \usage{
-\method{support}{ZIPoisson}(d, drop = TRUE)
+\method{support}{ZIPoisson}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{ZIPoisson} object created by a call to \code{\link[=ZIPoisson]{ZIPoisson()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

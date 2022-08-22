@@ -4,12 +4,14 @@
 \alias{support.Cauchy}
 \title{Return the support of the Cauchy distribution}
 \usage{
-\method{support}{Cauchy}(d, drop = TRUE)
+\method{support}{Cauchy}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Cauchy} object created by a call to \code{\link[=Cauchy]{Cauchy()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.
