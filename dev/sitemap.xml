@@ -304,9 +304,6 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/is_distribution.html</loc>
   </url>
   <url>
-    <loc>https://alexpghayes.github.io/distributions3/dev/reference/likelihood.html</loc>
-  </url>
-  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/log_likelihood.html</loc>
   </url>
   <url>
@@ -595,6 +592,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.StudentsT.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Tukey.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Uniform.html</loc>
   </url>
   <url>
@@ -667,10 +667,22 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.FisherF.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Frechet.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.GEV.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.GP.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Gamma.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Geometric.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Gumbel.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.HurdleNegativeBinomial.html</loc>

@@ -67,7 +67,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for GEV</span></span>
-<span><span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">d</span>, <span class="va">x</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="cdf.html">cdf</a></span><span class="op">(</span><span class="va">d</span>, <span class="va">x</span>, drop <span class="op">=</span> <span class="cn">TRUE</span>, elementwise <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -83,6 +83,15 @@ like to determine given the distribution <code>d</code>.</p></dd>
 
 <dt>drop</dt>
 <dd><p>logical. Should the result be simplified to a vector if possible?</p></dd>
+
+
+<dt>elementwise</dt>
+<dd><p>logical. Should each distribution in <code>d</code> be evaluated
+at all elements of <code>x</code> (<code>elementwise = FALSE</code>, yielding a matrix)?
+Or, if <code>d</code> and <code>x</code> have the same length, should the evaluation be
+done element by element (<code>elementwise = TRUE</code>, yielding a vector)? The
+default of <code>NULL</code> means that <code>elementwise = TRUE</code> is used if the
+lengths match and otherwise <code>elementwise = FALSE</code> is used.</p></dd>
 
 
 <dt>...</dt>
