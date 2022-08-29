@@ -237,3 +237,15 @@ support.Uniform <- function(d, drop = TRUE, ...) {
   max <- d$b
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.Uniform <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Uniform <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}

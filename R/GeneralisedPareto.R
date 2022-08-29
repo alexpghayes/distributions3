@@ -302,3 +302,15 @@ support.GP <- function(d, drop = TRUE, ...) {
   max[d$xi < 0] <- d$mu[d$xi < 0] - d$sigma[d$xi < 0]/d$xi[d$xi < 0]
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.GP <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.GP <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}

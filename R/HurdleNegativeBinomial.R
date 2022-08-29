@@ -365,4 +365,16 @@ support.HurdleNegativeBinomial <- function(d, drop = TRUE, ...) {
   make_support(min, max, d, drop = drop)
 }
 
+#' @exportS3Method
+is_discrete.HurdleNegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.HurdleNegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
 ## FIXME: currently no fit_mle.HurdleNegativeBinomial and suff_stat.HurdleNegativeBinomial

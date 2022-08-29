@@ -276,3 +276,15 @@ support.RevWeibull <- function(d, drop = TRUE, ...) {
   max <- d$location
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.RevWeibull <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.RevWeibull <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}

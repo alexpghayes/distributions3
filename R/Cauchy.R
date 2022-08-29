@@ -245,3 +245,15 @@ support.Cauchy <- function(d, drop = TRUE, ...) {
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.Cauchy <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Cauchy <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}

@@ -187,3 +187,15 @@ quantile.Categorical <- function(x, probs, ...) {
 
   Vectorize(function(k) x$outcomes[min(which(full_cdf >= k))])(probs)
 }
+
+#' @exportS3Method
+is_discrete.Categorical <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Categorical <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}

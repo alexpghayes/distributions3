@@ -243,3 +243,15 @@ support.Gumbel <- function(d, drop = TRUE, ...) {
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.Gumbel <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Gumbel <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
