@@ -111,6 +111,20 @@ test_that("vectorization of a Weibull distribution work correctly", {
     )
   )
 
+  ## elementwise
+  expect_equal(
+    pdf(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(pdf(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+  expect_equal(
+    cdf(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(cdf(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+  expect_equal(
+    quantile(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(quantile(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+
   ## support
   expect_equal(
     support(d),
