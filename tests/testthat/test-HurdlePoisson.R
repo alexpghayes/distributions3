@@ -105,6 +105,8 @@ test_that("vectorization of a HurdlePoisson distribution work correctly", {
       ncol = 2, dimnames = list(names(d), c("min", "max"))
     )
   )
+  expect_true(all(is_discrete(d)))
+  expect_true(!any(is_continuous(d)))
   expect_true(is.numeric(support(d1)))
   expect_true(is.numeric(support(d1, drop = FALSE)))
   expect_null(dim(support(d1)))
