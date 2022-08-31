@@ -213,3 +213,15 @@ support.Beta <- function(d, drop = TRUE, ...) {
   max <- rep(1, length(d))
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.Beta <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Beta <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}

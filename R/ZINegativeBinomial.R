@@ -349,4 +349,16 @@ support.ZINegativeBinomial <- function(d, drop = TRUE, ...) {
   make_support(min, max, d, drop = drop)
 }
 
+#' @exportS3Method
+is_discrete.ZINegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.ZINegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
 ## FIXME: currently no fit_mle.ZINegativeBinomial and suff_stat.ZINegativeBinomial

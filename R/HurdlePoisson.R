@@ -354,4 +354,16 @@ support.HurdlePoisson <- function(d, drop = TRUE, ...) {
   make_support(min, max, d, drop = drop)
 }
 
+#' @exportS3Method
+is_discrete.HurdlePoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.HurdlePoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
 ## FIXME: currently no fit_mle.HurdlePoisson and suff_stat.HurdlePoisson

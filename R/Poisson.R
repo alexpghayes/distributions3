@@ -272,3 +272,15 @@ support.Poisson <- function(d, drop = TRUE, ...) {
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.Poisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Poisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}

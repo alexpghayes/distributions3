@@ -302,3 +302,15 @@ support.HyperGeometric <- function(d, drop = TRUE, ...) {
   max <- apply(as.matrix(d)[, c("m", "k"), drop = FALSE], 1, min)
   make_support(min, max, d, drop = drop)
 }
+
+#' @exportS3Method
+is_discrete.HyperGeometric <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.HyperGeometric <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}

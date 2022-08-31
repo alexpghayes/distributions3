@@ -97,6 +97,20 @@ test_that("vectorization of a ZIPoisson distribution work correctly", {
     )
   )
 
+  ## elementwise
+  expect_equal(
+    pdf(d, c(0, 1), elementwise = TRUE),
+    diag(pdf(d, c(0, 1), elementwise = FALSE))
+  )
+  expect_equal(
+    cdf(d, c(0, 1), elementwise = TRUE),
+    diag(cdf(d, c(0, 1), elementwise = FALSE))
+  )
+  expect_equal(
+    quantile(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(quantile(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+
   ## support
   expect_equal(
     support(d),
@@ -105,6 +119,8 @@ test_that("vectorization of a ZIPoisson distribution work correctly", {
       ncol = 2, dimnames = list(names(d), c("min", "max"))
     )
   )
+  expect_true(all(is_discrete(d)))
+  expect_true(!any(is_continuous(d)))
   expect_true(is.numeric(support(d1)))
   expect_true(is.numeric(support(d1, drop = FALSE)))
   expect_null(dim(support(d1)))
