@@ -73,11 +73,8 @@ the plot.
 
 ## Contributing
 
-`distributions3` is not under active development, but is fairly stable
-and used by several academics for teaching intro stat courses. We are
-happy to review PRs contributing bug fixes. If you are interested in
-more actively maintaining and developing `distributions3`, please reach
-out on Github!
+If you are interested in contributing to `distributions3`, please reach
+out on Github! We are happy to review PRs contributing bug fixes.
 
 Please note that `distributions3` is released with a [Contributor Code
 of
