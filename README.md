@@ -51,7 +51,7 @@ devtools::install_github("alexpghayes/distributions3")
 The basic usage of `distributions3` looks like:
 
 ``` r
-library(distributions3)
+library("distributions3")
 
 X <- Bernoulli(0.1)
 
