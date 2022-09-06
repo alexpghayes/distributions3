@@ -20,6 +20,11 @@
 #' the mean plus further parameters describing scale, dispersion, shape, etc.).
 #' Second, the \code{distributions} objects are set up using the generator
 #' functions from \pkg{distributions3}.
+#'
+#' Note that these probability distributions only reflect the random variation in
+#' the dependent variable based on the model employed (and its associated
+#' distributional assumpation for the dependent variable). This does not capture
+#' the uncertainty in the parameter estimates.
 #' 
 #' For both linear regression models and generalized linear models, estimated
 #' by \code{lm} and \code{glm} respectively, there is some ambiguity as to which
@@ -27,9 +32,9 @@
 #' \code{\link[stats]{logLik}} methods use the maximum-likelihood (ML) estimate
 #' implicitly, the \code{summary} methods report an estimate that is standardized
 #' with the residual degrees of freedom, n - k (rather than the number of
-#' observations, n, only). The \code{prodist} methods for these objects follow
+#' observations, n). The \code{prodist} methods for these objects follow
 #' the \code{logLik} method by default but the \code{summary} behavior can be
-#' mimicked by setting the \code{sigma} and \code{dispersion} arguments
+#' mimicked by setting the \code{sigma} or \code{dispersion} arguments
 #' accordingly.
 #' 
 #' @aliases prodist.lm prodist.glm prodist.negbin prodist.Arima prodist.hurdle prodist.zeroinfl prodist.zerotrunc
