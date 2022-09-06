@@ -12,6 +12,10 @@
 \title{Extracting fitted or predicted probability distributions from models}
 \usage{
 prodist(object, ...)
+
+\method{prodist}{lm}(object, ..., sigma = "ML")
+
+\method{prodist}{glm}(object, ..., dispersion = NULL)
 }
 \arguments{
 \item{object}{A model object.}
@@ -20,6 +24,21 @@ prodist(object, ...)
 underlying \code{\link[stats]{predict}} methods, e.g., \code{newdata} for
 \code{\link[stats]{lm}} or \code{\link[stats]{glm}} objects or \code{n.ahead}
 for \code{\link[stats]{arima}} objects.}
+
+\item{sigma}{character or numeric or \code{NULL}. Specification of the standard
+deviation \code{sigma} to be used for the \code{\link{Normal}} distribution in the
+\code{lm} method. The default \code{"ML"} (or equivalently \code{"MLE"} or \code{NULL})
+uses the maximum likelihood estimate based on the residual sum of squares divided
+by the number of observations, n. Alternatively, \code{sigma = "OLS"} uses the
+least-squares estimate (divided by the residual degrees of freedom, n - k). Finally,
+a concrete numeric value can also be specified in \code{sigma}.}
+
+\item{dispersion}{character or numeric or \code{NULL}. Specification of the
+dispersion parameter in the \code{glm} method. The default \code{NULL}
+(or equivalently \code{"deviance"}) is to use the \code{\link[stats]{deviance}}
+divided by the number of observations, n. Alternatively, \code{dispersion = "Chisquared"}
+uses the Chi-squared statistic divided by the residual degrees of freedom, n - k.
+Finally, a concrete numeric value can also be specified in \code{dispersion}.}
 }
 \value{
 An object inheriting from \code{distribution}.
@@ -46,6 +65,17 @@ or predicted (out-of-sample) distribution parameters. Typically, this includes
 the mean plus further parameters describing scale, dispersion, shape, etc.).
 Second, the \code{distributions} objects are set up using the generator
 functions from \pkg{distributions3}.
+
+For both linear regression models and generalized linear models, estimated
+by \code{lm} and \code{glm} respectively, there is some ambiguity as to which
+estimate for the dispersion parameter of the model is to be used. While the
+\code{\link[stats]{logLik}} methods use the maximum-likelihood (ML) estimate
+implicitly, the \code{summary} methods report an estimate that is standardized
+with the residual degrees of freedom, n - k (rather than the number of
+observations, n, only). The \code{prodist} methods for these objects follow
+the \code{logLik} method by default but the \code{summary} behavior can be
+mimicked by setting the \code{sigma} and \code{dispersion} arguments
+accordingly.
 }
 \examples{
 

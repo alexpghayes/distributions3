@@ -33,6 +33,11 @@
   reported by the `summary()` method. Now the default is to use the maximum-likelihood estimate
   instead (divided by the number of observations, n) which is consistent with the `logLik()`
   method. The previous behavior can be obtained by specifying `sigma = "OLS"` (#91).
+- Similarly to the `lm` method the `glm` method `prodist(..., dispersion = NULL)` now, by
+  default, uses the `dispersion` estimate that matches the `logLik()` output. This is based
+  on the deviance divided by the number of observations, n. Alternatively,
+  `dispersion = "Chisquared"` uses the estimate employed in the `summary()` method,
+  based on the Chi-squared statistic divided by the residual degrees of freedom, n - k.
 - Small improvements in methods for various distribution objects: Added `support()` method
   for GEV-based distributions (`GEV()`, `GP()`, `Gumbel()`, `Frechet()`). Added a
   `random()` method for the `Tukey()` distribution (using the inversion method).
