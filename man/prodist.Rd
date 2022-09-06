@@ -83,7 +83,6 @@ mimicked by setting the \code{sigma} or \code{dispersion} arguments
 accordingly.
 }
 \examples{
-
 ## Model: Linear regression
 ## Fit: lm
 ## Data: 1920s cars data
@@ -96,6 +95,13 @@ reg <- lm(dist ~ speed, data = cars)
 pd <- prodist(reg)
 head(pd)
 
+## Extract log-likelihood from model object
+logLik(reg)
+
+## Replicate log-likelihood via distributions object
+sum(log_pdf(pd, cars$dist))
+log_likelihood(pd, cars$dist)
+
 ## Compute corresponding medians and 90\% interval
 qd <- quantile(pd, c(0.05, 0.5, 0.95))
 head(qd)
@@ -103,6 +109,13 @@ head(qd)
 ## Visualize observations with predicted quantiles
 plot(dist ~ speed, data = cars)
 matplot(cars$speed, qd, add = TRUE, type = "l", col = 2, lty = 1)
+
+## Sigma estimated by maximum-likelihood estimate (default, used in logLik)
+## vs. least-squares estimate (used in summary)
+nd <- data.frame(speed = 50)
+prodist(reg, newdata = nd, sigma = "ML")
+prodist(reg, newdata = nd, sigma = "OLS")
+summary(reg)$sigma
 
 
 ## Model: Poisson generalized linear model

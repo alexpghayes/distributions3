@@ -66,7 +66,6 @@
 #' @keywords distribution
 #' 
 #' @examples
-#' 
 #' ## Model: Linear regression
 #' ## Fit: lm
 #' ## Data: 1920s cars data
@@ -79,6 +78,13 @@
 #' pd <- prodist(reg)
 #' head(pd)
 #' 
+#' ## Extract log-likelihood from model object
+#' logLik(reg)
+#' 
+#' ## Replicate log-likelihood via distributions object
+#' sum(log_pdf(pd, cars$dist))
+#' log_likelihood(pd, cars$dist)
+#'
 #' ## Compute corresponding medians and 90% interval
 #' qd <- quantile(pd, c(0.05, 0.5, 0.95))
 #' head(qd)
@@ -86,6 +92,13 @@
 #' ## Visualize observations with predicted quantiles
 #' plot(dist ~ speed, data = cars)
 #' matplot(cars$speed, qd, add = TRUE, type = "l", col = 2, lty = 1)
+#' 
+#' ## Sigma estimated by maximum-likelihood estimate (default, used in logLik)
+#' ## vs. least-squares estimate (used in summary)
+#' nd <- data.frame(speed = 50)
+#' prodist(reg, newdata = nd, sigma = "ML")
+#' prodist(reg, newdata = nd, sigma = "OLS")
+#' summary(reg)$sigma
 #' 
 #' 
 #' ## Model: Poisson generalized linear model
@@ -144,7 +157,7 @@ prodist.lm <- function(object, ..., sigma = "ML") {
   ## estimated sigma
   if(is.null(sigma)) sigma <- "ML"
   if(is.character(sigma)) {
-    sigma <- match.arg(toupper(sigma), c("mle", "ols"))
+    sigma <- match.arg(toupper(sigma), c("MLE", "OLS"))
     wts <- if(is.null(object$weights)) 1 else object$weights
     sigma <- switch(sigma,
       "MLE" = sqrt(sum(wts * residuals(object)^2)/nobs(object)),
@@ -165,6 +178,7 @@ prodist.glm <- function(object, ..., dispersion = NULL) {
   ## dispersion parameter phi
   if(is.null(dispersion)) {
     phi <- NULL
+    dispersion <- "deviance"
   } else if(is.character(dispersion)) {
     phi <- NULL
     dispersion <- match.arg(gsub("-", "", tolower(dispersion), fixed = TRUE), c("deviance", "chisquared"))
