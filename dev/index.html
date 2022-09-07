@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Tools to create and manipulate probability distributions
-    using S3.  Generics random(), pdf(), cdf() and quantile() provide
-    replacements for base R's r/d/p/q style functions.  Functions and
+    using S3.  Generics pdf(), cdf(), quantile(), and random() provide
+    replacements for base R's d/p/q/r style functions.  Functions and
     arguments have been named carefully to minimize confusion for students
     in intro stats courses. The documentation for each distribution
     contains detailed mathematical notes.">
@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Probability Distributions as S3 Objects">
 <meta property="og:description" content="Tools to create and manipulate probability distributions
-    using S3.  Generics random(), pdf(), cdf() and quantile() provide
-    replacements for base R's r/d/p/q style functions.  Functions and
+    using S3.  Generics pdf(), cdf(), quantile(), and random() provide
+    replacements for base R's d/p/q/r style functions.  Functions and
     arguments have been named carefully to minimize confusion for students
     in intro stats courses. The documentation for each distribution
     contains detailed mathematical notes.">
@@ -122,7 +122,7 @@
 </h2>
 <p>The basic usage of <code>distributions3</code> looks like:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/alexpghayes/distributions3" class="external-link">"distributions3"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/Bernoulli.html">Bernoulli</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
@@ -140,7 +140,7 @@
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
-<p><code>distributions3</code> is not under active development, but is fairly stable and used by several academics for teaching intro stat courses. We are happy to review PRs contributing bug fixes. If you are interested in more actively maintaining and developing <code>distributions3</code>, please reach out on Github!</p>
+<p>If you are interested in contributing to <code>distributions3</code>, please reach out on Github! We are happy to review PRs contributing bug fixes.</p>
 <p>Please note that <code>distributions3</code> is released with a <a href="https://alexpghayes.github.io/distributions3/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div class="section level2">
