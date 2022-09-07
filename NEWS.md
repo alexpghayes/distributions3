@@ -1,3 +1,5 @@
+# distributions3 (development version)
+
 # distributions3 0.2.1
 
 - New generics `is_discrete()` and `is_continous()` with methods for all distribution objects
