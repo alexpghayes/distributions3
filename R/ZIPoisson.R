@@ -7,7 +7,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{zipois} functions for the
 #' zero-inflated Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qzipois} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -152,7 +152,6 @@ rzipois <- function(n, lambda, pi) {
 #' quantile(X, seq(0, 1, by = 0.25))
 #'
 #' ## cdf() and quantile() are inverses for each other
-#' cdf(X, quantile(X, 0.3))
 #' quantile(X, cdf(X, 3))
 #'
 #' ## density visualization
@@ -177,12 +176,14 @@ mean.ZIPoisson <- function(x, ...) {
 
 #' @export
 variance.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- (1 - x$pi) * x$lambda * (1 + x$pi * x$lambda)
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- (1 - x$pi) * x$lambda
   s <- sqrt(m * (1 + x$pi * x$lambda))
   rval <- ((1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
@@ -191,6 +192,7 @@ skewness.ZIPoisson <- function(x, ...) {
 
 #' @export
 kurtosis.ZIPoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- ( (1 + 7 * x$lambda + 6 * x$lambda^2 + x$lambda^3)
              - 4 * (1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3)
              + 6 * (1 - x$pi)^2 * (x$lambda^2 + x$lambda^3)
@@ -231,6 +233,12 @@ random.ZIPoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{dzipois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -241,17 +249,17 @@ random.ZIPoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
+pdf.ZIPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dzipois(x = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.ZIPoisson
 #' @export
 #'
-log_pdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
+log_pdf.ZIPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dzipois(x = at, lambda = d$lambda, pi = d$pi, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a zero-inflated Poisson distribution
@@ -262,6 +270,12 @@ log_pdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{pzipois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -272,9 +286,9 @@ log_pdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
+cdf.ZIPoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) pzipois(q = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a zero-inflated Poisson distribution
@@ -286,6 +300,12 @@ cdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{qzipois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -297,28 +317,37 @@ cdf.ZIPoisson <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.ZIPoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.ZIPoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qzipois(p = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Return the support of the zero-inflated Poisson distribution
 #'
 #' @param d An `ZIPoisson` object created by a call to [ZIPoisson()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.ZIPoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.ZIPoisson <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.ZIPoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.ZIPoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 ## FIXME: currently no fit_mle.ZIPoisson and suff_stat.ZIPoisson

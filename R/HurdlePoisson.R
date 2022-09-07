@@ -7,7 +7,7 @@
 #' All functions follow the usual conventions of d/p/q/r functions
 #' in base R. In particular, all four \code{hpois} functions for the
 #' hurdle Poisson distribution call the corresponding \code{pois}
-#' functions for the Poisson distribution frame base R internally.
+#' functions for the Poisson distribution from base R internally.
 #'
 #' Note, however, that the precision of \code{qhpois} for very large
 #' probabilities (close to 1) is limited because the probabilities 
@@ -153,11 +153,7 @@ rhpois <- function(n, lambda, pi) {
 #'
 #'   **Moment generating function (m.g.f.)**:
 #'
-#'   \deqn{
-#'     E(e^{tX}) = \frac{\pi}{1 - e^{-\lambda}} \cdot e^{\lambda (e^t - 1)}
-#'   }{
-#'     E(e^(tX)) = \pi/(1 - e^{-\lambda}) \cdot e^(\lambda (e^t - 1))
-#'   }
+#'   Omitted for now.
 #'
 #' @examples
 #' ## set up a hurdle Poisson distribution
@@ -167,10 +163,9 @@ rhpois <- function(n, lambda, pi) {
 #' ## standard functions
 #' pdf(X, 0:8)
 #' cdf(X, 0:8)
-#' quantile(X, seq(0, 1, by = 0.75))
+#' quantile(X, seq(0, 1, by = 0.25))
 #'
 #' ## cdf() and quantile() are inverses for each other
-#' cdf(X, quantile(X, 0.3))
 #' quantile(X, cdf(X, 3))
 #'
 #' ## density visualization
@@ -195,6 +190,7 @@ mean.HurdlePoisson <- function(x, ...) {
 
 #' @export
 variance.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   m <- x$lambda * x$pi / (1 - exp(-x$lambda))
   rval <- m * (x$lambda + 1 - m)
   setNames(rval, names(x))
@@ -202,15 +198,17 @@ variance.HurdlePoisson <- function(x, ...) {
 
 #' @export
 skewness.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
-  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
+  rval <- (f * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.HurdlePoisson <- function(x, ...) {
+  ellipsis::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -251,6 +249,12 @@ random.HurdlePoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{dhpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -261,17 +265,17 @@ random.HurdlePoisson <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+pdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dhpois(x = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.HurdlePoisson
 #' @export
 #'
-log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dhpois(x = at, lambda = d$lambda, pi = d$pi, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a hurdle Poisson distribution
@@ -282,6 +286,12 @@ log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{phpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -292,9 +302,9 @@ log_pdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
+cdf.HurdlePoisson <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) phpois(q = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a hurdle Poisson distribution
@@ -306,6 +316,12 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link{qhpois}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -317,28 +333,37 @@ cdf.HurdlePoisson <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.HurdlePoisson <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.HurdlePoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qhpois(p = at, lambda = d$lambda, pi = d$pi, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Return the support of the hurdle Poisson distribution
 #'
 #' @param d An `HurdlePoisson` object created by a call to [HurdlePoisson()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.HurdlePoisson <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.HurdlePoisson <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.HurdlePoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.HurdlePoisson <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 ## FIXME: currently no fit_mle.HurdlePoisson and suff_stat.HurdlePoisson

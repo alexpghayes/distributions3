@@ -6,7 +6,7 @@
 \alias{make_positive_integer}
 \title{Utilities for \code{distributions3} objects}
 \usage{
-apply_dpqr(d, FUN, at, drop = TRUE, type = NULL, ...)
+apply_dpqr(d, FUN, at, elementwise = NULL, drop = TRUE, type = NULL, ...)
 
 make_support(min, max, d, drop = TRUE)
 
@@ -22,6 +22,13 @@ probability, or sample size) and \code{d} is a \code{distributions3} object.}
 \item{at}{Specification of values at which \code{FUN} should be evaluated, typically a
 numeric vector (e.g., of quantiles, probabilities, etc.) but possibly also a matrix or data
 frame.}
+
+\item{elementwise}{logical. Should each element of \code{d} only be evaluated at the
+corresponding element of \code{at} (\code{elementwise = TRUE}) or at all elements
+in \code{at} (\code{elementwise = FALSE}). Elementwise evaluation is only possible
+if the length of \code{d} and \code{at} is the same and in that case a vector of
+the same length is returned. Otherwise a matrix is returned. The default is to use
+\code{elementwise = TRUE} if possible, and otherwise \code{elementwise = FALSE}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible (by
 dropping the dimension attribute)? If \code{FALSE} a matrix is always returned.}
@@ -47,8 +54,6 @@ and random samples when classical d/p/q/r functions are readily available for
 the distribution of interest.
 }
 \examples{
-
-
 ## Implementing a new distribution based on the provided utility functions
 ## Illustration: Gaussian distribution
 ## Note: Gaussian() is really just a copy of Normal() with a different class/distribution name
@@ -88,13 +93,9 @@ mean(Y)
 ## The support() method should return a matrix of "min" and "max" for the
 ## distribution. The make_support() function helps to set the right names and
 ## dimension.
-support.Gaussian <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.Gaussian <- function(d, drop = TRUE, ...) {
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
 }
 
@@ -105,9 +106,9 @@ support(Y)
 ## pdf(), log_pdf(), cdf() quantile(), random(), etc. The apply_dpqr()
 ## function helps to call the typical d/p/q/r functions (like dnorm,
 ## pnorm, etc.) and set suitable names and dimension.
-pdf.Gaussian <- function(d, x, drop = TRUE, ...) {
+pdf.Gaussian <- function(d, x, elementwise = NULL, drop = TRUE, ...) {
   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", elementwise = elementwise, drop = drop)
 }
 
 ## Evaluate all densities at the same argument (returns vector):
@@ -119,6 +120,10 @@ pdf(Y, c(0, 5))
 ## Evaluate each density at a different argument (returns vector):
 pdf(Y, 4:1)
 
+## Force evaluation of each density at a different argument (returns vector)
+## or at all arguments (returns matrix):
+pdf(Y, 4:1, elementwise = TRUE)
+pdf(Y, 4:1, elementwise = FALSE)
 
 ## Drawing random() samples also uses apply_dpqr() with the argument
 ## n assured to be a positive integer.
@@ -141,6 +146,5 @@ random(Y, 3)
 ## For further analogous methods see the "Normal" distribution provided
 ## in distributions3.
 methods(class = "Normal")
-
 
 }

@@ -228,6 +228,12 @@ random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{dnorm}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -240,17 +246,17 @@ random.Normal <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Normal <- function(d, x, drop = TRUE, ...) {
+pdf.Normal <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.Normal
 #' @export
 #'
-log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
+log_pdf.Normal <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a Normal distribution
@@ -261,6 +267,12 @@ log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{pnorm}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -273,9 +285,9 @@ log_pdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Normal <- function(d, x, drop = TRUE, ...) {
+cdf.Normal <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) pnorm(q = at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a Normal distribution
@@ -295,6 +307,12 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{qnorm}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -308,11 +326,9 @@ cdf.Normal <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Normal distribution
 #'
-quantile.Normal <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
-
+quantile.Normal <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qnorm(at, mean = d$mu, sd = d$sigma, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Fit a Normal distribution to data
@@ -353,6 +369,7 @@ suff_stat.Normal <- function(d, x, ...) {
 #'
 #' @param d An `Normal` object created by a call to [Normal()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return In case of a single distribution object, a numeric vector of length 2
 #' with the minimum and maximum value of the support (if `drop = TRUE`, default)
@@ -360,12 +377,21 @@ suff_stat.Normal <- function(d, x, ...) {
 #' matrix with 2 columns containing all minima and maxima.
 #'
 #' @export
-support.Normal <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.Normal <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.Normal <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Normal <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
 }

@@ -136,6 +136,12 @@ random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{dgeom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -148,17 +154,17 @@ random.Geometric <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Geometric <- function(d, x, drop = TRUE, ...) {
+pdf.Geometric <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dgeom(x = at, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.Geometric
 #' @export
 #'
-log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
+log_pdf.Geometric <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) dgeom(x = at, prob = d$p, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a Geometric distribution
@@ -169,6 +175,12 @@ log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{pgeom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -181,9 +193,9 @@ log_pdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Geometric <- function(d, x, drop = TRUE, ...) {
+cdf.Geometric <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) pgeom(q = at, prob = d$p, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a Geometric distribution
@@ -193,6 +205,12 @@ cdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{qgeom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -206,10 +224,9 @@ cdf.Geometric <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Geometric distribution
 #'
-quantile.Geometric <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.Geometric <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qgeom(p = at, prob = d$p, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 #' Fit a Geometric distribution to data
@@ -250,16 +267,27 @@ suff_stat.Geometric <- function(d, x, ...) {
 #'
 #' @param d An `Geometric` object created by a call to [Geometric()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Geometric <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.Geometric <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+
+#' @exportS3Method
+is_discrete.Geometric <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Geometric <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
 }

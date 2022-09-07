@@ -4,7 +4,7 @@
 \alias{quantile.ZIPoisson}
 \title{Determine quantiles of a zero-inflated Poisson distribution}
 \usage{
-\method{quantile}{ZIPoisson}(x, probs, drop = TRUE, ...)
+\method{quantile}{ZIPoisson}(x, probs, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{ZIPoisson} object created by a call to \code{\link[=ZIPoisson]{ZIPoisson()}}.}
@@ -12,6 +12,13 @@
 \item{probs}{A vector of probabilities.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{x} be evaluated
+at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link{qzipois}}.
 Unevaluated arguments will generate a warning to catch mispellings or other
@@ -38,7 +45,6 @@ cdf(X, 0:8)
 quantile(X, seq(0, 1, by = 0.25))
 
 ## cdf() and quantile() are inverses for each other
-cdf(X, quantile(X, 0.3))
 quantile(X, cdf(X, 3))
 
 ## density visualization

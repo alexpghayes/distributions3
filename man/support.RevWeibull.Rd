@@ -4,12 +4,14 @@
 \alias{support.RevWeibull}
 \title{Return the support of the RevWeibull distribution}
 \usage{
-\method{support}{RevWeibull}(d, drop = TRUE)
+\method{support}{RevWeibull}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{RevWeibull} object created by a call to \code{\link[=RevWeibull]{RevWeibull()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

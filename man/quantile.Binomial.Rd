@@ -4,7 +4,7 @@
 \alias{quantile.Binomial}
 \title{Determine quantiles of a Binomial distribution}
 \usage{
-\method{quantile}{Binomial}(x, probs, drop = TRUE, ...)
+\method{quantile}{Binomial}(x, probs, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{Binomial} object created by a call to \code{\link[=Binomial]{Binomial()}}.}
@@ -12,6 +12,13 @@
 \item{probs}{A vector of probabilities.}
 
 \item{drop}{logical. Shoul the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{x} be evaluated
+at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link[stats]{qbinom}}.
 Unevaluated arguments will generate a warning to catch mispellings or other

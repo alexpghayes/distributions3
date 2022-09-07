@@ -4,12 +4,14 @@
 \alias{support.Normal}
 \title{Return the support of the Normal distribution}
 \usage{
-\method{support}{Normal}(d, drop = TRUE)
+\method{support}{Normal}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Normal} object created by a call to \code{\link[=Normal]{Normal()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 In case of a single distribution object, a numeric vector of length 2

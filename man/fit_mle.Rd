@@ -7,12 +7,12 @@
 fit_mle(d, x, ...)
 }
 \arguments{
-\item{d}{A probability distribution object such as those created by
-a call to \code{\link[=Bernoulli]{Bernoulli()}}, \code{\link[=Beta]{Beta()}}, or \code{\link[=Binomial]{Binomial()}}.}
+\item{d}{An object. The package provides methods for distribution
+objects such as those from \code{\link[=Normal]{Normal()}} or \code{\link[=Binomial]{Binomial()}} etc.}
 
 \item{x}{A vector of data to compute the likelihood.}
 
-\item{...}{Unused. Unevaluated arguments will generate a warning to
+\item{...}{Arguments passed to methods. Unevaluated arguments will generate a warning to
 catch mispellings or other possible errors.}
 }
 \value{
@@ -20,11 +20,10 @@ A distribution (the same kind as \code{d}) where the parameters
 are the MLE estimates based on \code{x}.
 }
 \description{
-Approximates an empirical distribution with a theoretical one
+Generic function for fitting maximum-likelihood estimates (MLEs) of
+a distribution based on empirical data.
 }
 \examples{
-
 X <- Normal()
-
 fit_mle(X, c(-1, 0, 0, 0, 3))
 }

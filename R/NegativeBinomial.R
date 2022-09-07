@@ -121,6 +121,7 @@ mean.NegativeBinomial <- function(x, ...) {
 
 #' @export
 variance.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   rval <- if("mu" %in% names(unclass(x))) {
     x$mu + 1/x$size * x$mu^2
   } else {
@@ -131,6 +132,7 @@ variance.NegativeBinomial <- function(x, ...) {
 
 #' @export
 skewness.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
   rval <- (2 - x$p) / sqrt((1 - x$p) * x$size)
   setNames(rval, names(x))
@@ -138,6 +140,7 @@ skewness.NegativeBinomial <- function(x, ...) {
 
 #' @export
 kurtosis.NegativeBinomial <- function(x, ...) {
+  ellipsis::check_dots_used()
   if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
   rval <- 6 / x$size + x$p^2 / x$size * (1 - x$p)
   setNames(rval, names(x))
@@ -183,6 +186,12 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{dnbinom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -195,25 +204,25 @@ random.NegativeBinomial <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
+pdf.NegativeBinomial <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- if("mu" %in% names(unclass(d))) {
     function(at, d) dnbinom(x = at, mu = d$mu, size = d$size, ...)
   } else {
     function(at, d) dnbinom(x = at, size = d$size, prob = d$p, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.NegativeBinomial
 #' @export
 #'
-log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
+log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- if("mu" %in% names(unclass(d))) {
     function(at, d) dnbinom(x = at, mu = d$mu, size = d$size, log = TRUE)
   } else {
     function(at, d) dnbinom(x = at, size = d$size, prob = d$p, log = TRUE)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a negative binomial distribution
@@ -225,6 +234,12 @@ log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{pnbinom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -237,13 +252,13 @@ log_pdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
+cdf.NegativeBinomial <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- if("mu" %in% names(unclass(d))) {
     function(at, d) pnbinom(q = at, mu = d$mu, size = d$size, ...)
   } else {
     function(at, d) pnbinom(q = at, size = d$size, prob = d$p, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a NegativeBinomial distribution
@@ -253,6 +268,12 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{qnbinom}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -266,14 +287,13 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family NegativeBinomial distribution
 #'
-quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.NegativeBinomial <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- if("mu" %in% names(unclass(x))) {
     function(at, d) qnbinom(p = at, mu = x$mu, size = x$size, ...)
   } else {
     function(at, d) qnbinom(p = at, size = x$size, prob = x$p, ...)
   }
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 
@@ -281,16 +301,26 @@ quantile.NegativeBinomial <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @param d An `NegativeBinomial` object created by a call to [NegativeBinomial()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.NegativeBinomial <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.NegativeBinomial <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.NegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.NegativeBinomial <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
 }

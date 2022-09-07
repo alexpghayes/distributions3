@@ -179,6 +179,35 @@ test_that("vectorization of a GEV distribution work correctly", {
       ncol = 3, dimnames = list(NULL, c("q_0.1", "q_0.5", "q_0.9"))
     )
   )
+
+  ## elementwise
+  expect_equal(
+    pdf(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(pdf(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+  expect_equal(
+    cdf(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(cdf(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+  expect_equal(
+    quantile(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(quantile(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+
+  ## support
+  expect_equal(
+    support(d),
+    matrix(
+      c(support(d1)[1], support(d2)[1], support(d1)[2], support(d2)[2]),
+      ncol = 2, dimnames = list(names(d), c("min", "max"))
+    )
+  )
+  expect_true(!any(is_discrete(d)))
+  expect_true(all(is_continuous(d)))
+  expect_true(is.numeric(support(d1)))
+  expect_true(is.numeric(support(d1, drop = FALSE)))
+  expect_null(dim(support(d1)))
+  expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
 test_that("named return values for GEV distribution work correctly", {
@@ -203,4 +232,7 @@ test_that("named return values for GEV distribution work correctly", {
   expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
   expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])
+  expect_equal(names(support(d[1])), c("min", "max"))
+  expect_equal(colnames(support(d)), c("min", "max"))
+  expect_equal(rownames(support(d)), LETTERS[1:length(d)])
 })

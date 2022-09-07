@@ -4,12 +4,14 @@
 \alias{support.Tukey}
 \title{Return the support of the Tukey distribution}
 \usage{
-\method{support}{Tukey}(d, drop = TRUE)
+\method{support}{Tukey}(d, drop = TRUE, ...)
 }
 \arguments{
 \item{d}{An \code{Tukey} object created by a call to \code{\link[=Tukey]{Tukey()}}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{...}{Currently not used.}
 }
 \value{
 A vector of length 2 with the minimum and maximum value of the support.

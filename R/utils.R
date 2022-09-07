@@ -37,6 +37,12 @@ is_distribution <- function(x) {
 #' @param at Specification of values at which `FUN` should be evaluated, typically a
 #' numeric vector (e.g., of quantiles, probabilities, etc.) but possibly also a matrix or data
 #' frame.
+#' @param elementwise logical. Should each element of \code{d} only be evaluated at the
+#' corresponding element of \code{at} (\code{elementwise = TRUE}) or at all elements
+#' in \code{at} (\code{elementwise = FALSE}). Elementwise evaluation is only possible
+#' if the length of \code{d} and \code{at} is the same and in that case a vector of
+#' the same length is returned. Otherwise a matrix is returned. The default is to use
+#' \code{elementwise = TRUE} if possible, and otherwise \code{elementwise = FALSE}.
 #' @param drop logical. Should the result be simplified to a vector if possible (by
 #' dropping the dimension attribute)? If \code{FALSE} a matrix is always returned.
 #' @param type Character string used for naming, typically one of \code{"density"}, \code{"logLik"},
@@ -49,8 +55,6 @@ is_distribution <- function(x) {
 #' the length is taken to be the number required (consistent with base R as, e.g., for `rnorm()`).
 #'
 #' @examples
-#'
-#' 
 #' ## Implementing a new distribution based on the provided utility functions
 #' ## Illustration: Gaussian distribution
 #' ## Note: Gaussian() is really just a copy of Normal() with a different class/distribution name
@@ -90,13 +94,9 @@ is_distribution <- function(x) {
 #' ## The support() method should return a matrix of "min" and "max" for the
 #' ## distribution. The make_support() function helps to set the right names and
 #' ## dimension.
-#' support.Gaussian <- function(d, drop = TRUE) {
-#'   stopifnot("d must be a supported distribution object" = is_distribution(d))
-#'   stopifnot(is.logical(drop))
-#' 
+#' support.Gaussian <- function(d, drop = TRUE, ...) {
 #'   min <- rep(-Inf, length(d))
 #'   max <- rep(Inf, length(d))
-#' 
 #'   make_support(min, max, d, drop = drop)
 #' }
 #' 
@@ -107,9 +107,9 @@ is_distribution <- function(x) {
 #' ## pdf(), log_pdf(), cdf() quantile(), random(), etc. The apply_dpqr()
 #' ## function helps to call the typical d/p/q/r functions (like dnorm,
 #' ## pnorm, etc.) and set suitable names and dimension.
-#' pdf.Gaussian <- function(d, x, drop = TRUE, ...) {
+#' pdf.Gaussian <- function(d, x, elementwise = NULL, drop = TRUE, ...) {
 #'   FUN <- function(at, d) dnorm(x = at, mean = d$mu, sd = d$sigma, ...)
-#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+#'   apply_dpqr(d = d, FUN = FUN, at = x, type = "density", elementwise = elementwise, drop = drop)
 #' }
 #' 
 #' ## Evaluate all densities at the same argument (returns vector):
@@ -121,6 +121,10 @@ is_distribution <- function(x) {
 #' ## Evaluate each density at a different argument (returns vector):
 #' pdf(Y, 4:1)
 #' 
+#' ## Force evaluation of each density at a different argument (returns vector)
+#' ## or at all arguments (returns matrix):
+#' pdf(Y, 4:1, elementwise = TRUE)
+#' pdf(Y, 4:1, elementwise = FALSE)
 #' 
 #' ## Drawing random() samples also uses apply_dpqr() with the argument
 #' ## n assured to be a positive integer.
@@ -144,11 +148,11 @@ is_distribution <- function(x) {
 #' ## in distributions3.
 #' methods(class = "Normal")
 #' 
-#' 
 #' @export
 apply_dpqr <- function(d,
                        FUN,
                        at,
+                       elementwise = NULL,
                        drop = TRUE,
                        type = NULL,
                        ...) {
@@ -158,6 +162,7 @@ apply_dpqr <- function(d,
     is_distribution(d),
     is.function(FUN),
     is.numeric(at),
+    is.null(elementwise) || is.logical(elementwise),
     is.logical(drop),
     is.character(type)
   )
@@ -168,6 +173,22 @@ apply_dpqr <- function(d,
   rnam <- names(d)
   n <- length(d)
   k <- if (type == "random") as.numeric(at) else length(at)
+
+  ## determine the dimension of the return value:
+  ## * elementwise = FALSE: n x k matrix,
+  ##   corresponding to all combinations of 'd' and 'at'
+  ## * elementwise = TRUE: n vector,
+  ##   corresponding to combinations of each element in 'd' with only the corresponding element in 'at'
+  ##   only possible if n = k
+  ## * elementwise = NULL: guess the type (default),
+  ##   only use TRUE if n = k > 1, and FALSE otherwise
+  if(is.null(elementwise)) elementwise <- type != "random" && k > 1L && k == n && is.null(dim(at))
+  if(elementwise && k > 1L && k != n) stop(
+    sprintf("lengths of distributions and arguments do not match: %s != %s", n, k))
+  if(type == "random" && elementwise) {
+    warning('elementwise = TRUE is not available for type = "random"')
+    elementwise <- FALSE
+  }
 
   ## "at" names (if not dropped)
   anam <- if ((k == 1L || n == 1L) && drop) {
@@ -184,7 +205,7 @@ apply_dpqr <- function(d,
       return(matrix(numeric(0L), nrow = n, ncol = 0L, dimnames = list(rnam, NULL)))
     } else if (k == 1L) {
       at <- rep.int(as.vector(at), n)
-    } else if (k == n && is.null(dim(at))) {
+    } else if (elementwise) {
       k <- 1L
     } else {
       at <- as.vector(at)

@@ -4,7 +4,7 @@
 \alias{quantile.Frechet}
 \title{Determine quantiles of a Frechet distribution}
 \usage{
-\method{quantile}{Frechet}(x, probs, drop = TRUE, ...)
+\method{quantile}{Frechet}(x, probs, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{Frechet} object created by a call to \code{\link[=Frechet]{Frechet()}}.}
@@ -12,6 +12,13 @@
 \item{probs}{A vector of probabilities.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{x} be evaluated
+at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link[revdbayes]{qgev}}.
 Unevaluated arguments will generate a warning to catch mispellings or other

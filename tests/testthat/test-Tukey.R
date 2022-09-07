@@ -4,6 +4,21 @@ test_that("print.Tukey works", {
   expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey distribution")
 })
 
+test_that("random.Tukey work correctly", {
+  d <- Tukey(4, 16, 2)
+
+  expect_length(random(d), 1)
+  expect_length(random(d, 100), 100)
+  expect_length(random(d[-1], 1), 0)
+  expect_length(random(d, 0), 0)
+  expect_error(random(d, -2))
+ 
+  # consistent with base R, using the `length` as number of samples to draw
+  expect_length(random(d, c(1, 2, 3)), 3)
+  expect_length(random(d, cbind(1, 2, 3)), 3)
+  expect_length(random(d, rbind(1, 2, 3)), 3)
+})
+
 test_that("vectorization of a Tukey distribution work correctly", {
   d <- Tukey(c(3L, 4L), 16L, 2L)
   d1 <- d[1]
@@ -23,6 +38,16 @@ test_that("vectorization of a Tukey distribution work correctly", {
     )
   )
 
+  ## elementwise
+  expect_equal(
+    cdf(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(cdf(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+  expect_equal(
+    quantile(d, c(0.25, 0.75), elementwise = TRUE),
+    diag(quantile(d, c(0.25, 0.75), elementwise = FALSE))
+  )
+
   ## support
   expect_equal(
     support(d),
@@ -31,6 +56,8 @@ test_that("vectorization of a Tukey distribution work correctly", {
       ncol = 2, dimnames = list(names(d), c("min", "max"))
     )
   )
+  expect_true(!any(is_discrete(d)))
+  expect_true(all(is_continuous(d)))
   expect_true(is.numeric(support(d1)))
   expect_true(is.numeric(support(d1, drop = FALSE)))
   expect_null(dim(support(d1)))

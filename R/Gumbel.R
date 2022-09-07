@@ -136,6 +136,12 @@ random.Gumbel <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -146,17 +152,17 @@ random.Gumbel <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Gumbel <- function(d, x, drop = TRUE, ...) {
+pdf.Gumbel <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) revdbayes::dgev(x = at, loc = d$mu, scale = d$sigma, shape = 0, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.Gumbel
 #' @export
 #'
-log_pdf.Gumbel <- function(d, x, drop = TRUE, ...) {
+log_pdf.Gumbel <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) revdbayes::dgev(x = at, loc = d$mu, scale = d$sigma, shape = 0, log = TRUE)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a Gumbel distribution
@@ -167,6 +173,12 @@ log_pdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -177,9 +189,9 @@ log_pdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Gumbel <- function(d, x, drop = TRUE, ...) {
+cdf.Gumbel <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) revdbayes::pgev(q = at, loc = d$mu, scale = d$sigma, shape = 0, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a Gumbel distribution
@@ -191,6 +203,12 @@ cdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -202,8 +220,38 @@ cdf.Gumbel <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.Gumbel <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.Gumbel <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) revdbayes::qgev(p = at, loc = d$mu, scale = d$sigma, shape = 0, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
+}
+
+#' Return the support of the Gumbel distribution
+#'
+#' @param d An `Gumbel` object created by a call to [Gumbel()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
+#'
+#' @return In case of a single distribution object, a numeric vector of length 2
+#' with the minimum and maximum value of the support (if `drop = TRUE`, default)
+#' or a `matrix` with 2 columns. In case of a vectorized distribution object, a
+#' matrix with 2 columns containing all minima and maxima.
+#'
+#' @export
+support.Gumbel <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
+  min <- rep(-Inf, length(d))
+  max <- rep(Inf, length(d))
+  make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.Gumbel <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Gumbel <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
 }

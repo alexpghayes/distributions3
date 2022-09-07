@@ -48,6 +48,30 @@ Tukey <- function(nmeans, df, nranges) {
   d
 }
 
+#' Draw a random sample from a Tukey distribution
+#'
+#' @inherit Tukey examples
+#'
+#' @param x A `Tukey` object created by a call to [Tukey()].
+#' @param n The number of samples to draw. Defaults to `1L`.
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Unused. Unevaluated arguments will generate a warning to
+#'   catch mispellings or other possible errors.
+#'
+#' @return In case of a single distribution object or `n = 1`, either a numeric
+#'   vector of length `n` (if `drop = TRUE`, default) or a `matrix` with `n` columns
+#'   (if `drop = FALSE`).
+#' @export
+#'
+random.Tukey <- function(x, n = 1L, drop = TRUE, ...) {
+  n <- make_positive_integer(n)
+  if (n == 0L) return(numeric(0L))
+  rtukey <- function(n, nmeans, df, nranges = 1) qtukey(runif(n), nmeans = nmeans, df = df, nranges = nranges)
+  FUN <- function(at, d) rtukey(n = at, nmeans = d$nmeans, df = d$df, nranges = d$nranges)
+  apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
+}
+
+
 #' Evaluate the cumulative distribution function of a Tukey distribution
 #'
 #' @inherit Tukey examples
@@ -56,6 +80,12 @@ Tukey <- function(nmeans, df, nranges) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{ptukey}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -68,9 +98,9 @@ Tukey <- function(nmeans, df, nranges) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Tukey <- function(d, x, drop = TRUE, ...) {
+cdf.Tukey <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) ptukey(q = at, nmeans = d$nmeans, df = d$df, nranges = d$nranges, ...)
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a Tukey distribution
@@ -80,6 +110,12 @@ cdf.Tukey <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[stats]{qtukey}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -93,10 +129,9 @@ cdf.Tukey <- function(d, x, drop = TRUE, ...) {
 #'
 #' @family Tukey distribution
 #'
-quantile.Tukey <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.Tukey <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- function(at, d) qtukey(p = at, nmeans = x$nmeans, df = x$df, nranges = x$nranges, ...)
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
 
@@ -104,16 +139,26 @@ quantile.Tukey <- function(x, probs, drop = TRUE, ...) {
 #'
 #' @param d An `Tukey` object created by a call to [Tukey()].
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
 #'
 #' @return A vector of length 2 with the minimum and maximum value of the support.
 #'
 #' @export
-support.Tukey <- function(d, drop = TRUE) {
-  stopifnot("d must be a supported distribution object" = is_distribution(d))
-  stopifnot(is.logical(drop))
-
+support.Tukey <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
-
   make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.Tukey <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Tukey <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
 }

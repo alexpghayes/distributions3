@@ -194,6 +194,12 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
 #' @param x A vector of elements whose probabilities you would like to
 #'   determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{dgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -204,7 +210,7 @@ random.Frechet <- function(x, n = 1L, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-pdf.Frechet <- function(d, x, drop = TRUE, ...) {
+pdf.Frechet <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- d$location + d$scale
@@ -212,13 +218,13 @@ pdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "density", drop = drop, elementwise = elementwise)
 }
 
 #' @rdname pdf.Frechet
 #' @export
 #'
-log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
+log_pdf.Frechet <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- d$location + d$scale
@@ -226,7 +232,7 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::dgev(x = at, loc = loc, scale = scale, shape = shape, log = TRUE)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "logLik", drop = drop, elementwise = elementwise)
 }
 
 #' Evaluate the cumulative distribution function of a Frechet distribution
@@ -237,6 +243,12 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #' @param x A vector of elements whose cumulative probabilities you would
 #'   like to determine given the distribution `d`.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{d} be evaluated
+#'   at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{d} and \code{x} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{pgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -247,7 +259,7 @@ log_pdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'   object, a matrix with `length(x)` columns containing all possible combinations.
 #' @export
 #'
-cdf.Frechet <- function(d, x, drop = TRUE, ...) {
+cdf.Frechet <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- d$location + d$scale
@@ -255,7 +267,7 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
     shape <- 1 / d$shape
     revdbayes::pgev(q = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop)
+  apply_dpqr(d = d, FUN = FUN, at = x, type = "probability", drop = drop, elementwise = elementwise)
 }
 
 #' Determine quantiles of a Frechet distribution
@@ -267,6 +279,12 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'
 #' @param probs A vector of probabilities.
 #' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param elementwise logical. Should each distribution in \code{x} be evaluated
+#'   at all elements of \code{probs} (\code{elementwise = FALSE}, yielding a matrix)?
+#'   Or, if \code{x} and \code{probs} have the same length, should the evaluation be
+#'   done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+#'   default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+#'   lengths match and otherwise \code{elementwise = FALSE} is used.
 #' @param ... Arguments to be passed to \code{\link[revdbayes]{qgev}}.
 #'   Unevaluated arguments will generate a warning to catch mispellings or other
 #'   possible errors.
@@ -278,8 +296,7 @@ cdf.Frechet <- function(d, x, drop = TRUE, ...) {
 #'   possible combinations.
 #' @export
 #'
-quantile.Frechet <- function(x, probs, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+quantile.Frechet <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   # Convert to the GEV parameterisation
   FUN <- function(at, d) {
     loc <- x$location + x$scale
@@ -287,5 +304,36 @@ quantile.Frechet <- function(x, probs, drop = TRUE, ...) {
     shape <- 1 / x$shape
     revdbayes::qgev(p = at, loc = loc, scale = scale, shape = shape, ...)
   }
-  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop)
+  apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
+}
+
+#' Return the support of the Frechet distribution
+#'
+#' @param d An `Frechet` object created by a call to [Frechet()].
+#' @param drop logical. Should the result be simplified to a vector if possible?
+#' @param ... Currently not used.
+#'
+#' @return In case of a single distribution object, a numeric vector of length 2
+#' with the minimum and maximum value of the support (if `drop = TRUE`, default)
+#' or a `matrix` with 2 columns. In case of a vectorized distribution object, a
+#' matrix with 2 columns containing all minima and maxima.
+#'
+#' @export
+support.Frechet <- function(d, drop = TRUE, ...) {
+  ellipsis::check_dots_used()
+  min <- d$location
+  max <- rep(Inf, length(d))
+  make_support(min, max, d, drop = drop)
+}
+
+#' @exportS3Method
+is_discrete.Frechet <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(FALSE, length(d)), names(d))
+}
+
+#' @exportS3Method
+is_continuous.Frechet <- function(d, ...) {
+  ellipsis::check_dots_used()
+  setNames(rep.int(TRUE, length(d)), names(d))
 }

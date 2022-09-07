@@ -6,9 +6,16 @@
 \alias{prodist.glm}
 \alias{prodist.negbin}
 \alias{prodist.Arima}
+\alias{prodist.hurdle}
+\alias{prodist.zeroinfl}
+\alias{prodist.zerotrunc}
 \title{Extracting fitted or predicted probability distributions from models}
 \usage{
 prodist(object, ...)
+
+\method{prodist}{lm}(object, ..., sigma = "ML")
+
+\method{prodist}{glm}(object, ..., dispersion = NULL)
 }
 \arguments{
 \item{object}{A model object.}
@@ -17,6 +24,21 @@ prodist(object, ...)
 underlying \code{\link[stats]{predict}} methods, e.g., \code{newdata} for
 \code{\link[stats]{lm}} or \code{\link[stats]{glm}} objects or \code{n.ahead}
 for \code{\link[stats]{arima}} objects.}
+
+\item{sigma}{character or numeric or \code{NULL}. Specification of the standard
+deviation \code{sigma} to be used for the \code{\link{Normal}} distribution in the
+\code{lm} method. The default \code{"ML"} (or equivalently \code{"MLE"} or \code{NULL})
+uses the maximum likelihood estimate based on the residual sum of squares divided
+by the number of observations, n. Alternatively, \code{sigma = "OLS"} uses the
+least-squares estimate (divided by the residual degrees of freedom, n - k). Finally,
+a concrete numeric value can also be specified in \code{sigma}.}
+
+\item{dispersion}{character or numeric or \code{NULL}. Specification of the
+dispersion parameter in the \code{glm} method. The default \code{NULL}
+(or equivalently \code{"deviance"}) is to use the \code{\link[stats]{deviance}}
+divided by the number of observations, n. Alternatively, \code{dispersion = "Chisquared"}
+uses the Chi-squared statistic divided by the residual degrees of freedom, n - k.
+Finally, a concrete numeric value can also be specified in \code{dispersion}.}
 }
 \value{
 An object inheriting from \code{distribution}.
@@ -32,16 +54,35 @@ series model objects, the function \code{prodist} extracts fitted or
 predicted probability \code{distribution} objects. Currently, methods are
 provided for objects fitted by \code{\link[stats]{lm}},
 \code{\link[stats]{glm}}, and \code{\link[stats]{arima}} in base R as
-well as \code{glm.nb} from the \pkg{MASS} package. All methods essentially
+well as \code{glm.nb} from the \pkg{MASS} package and
+\code{hurdle}/\code{zeroinfl}/\code{zerotrunc} from the \pkg{pscl} or
+\pkg{countreg} packages.
+
+All methods essentially
 proceed in two steps: First, the standard \code{\link[stats]{predict}}
 method for these model objects is used to compute fitted (in-sample, default)
 or predicted (out-of-sample) distribution parameters. Typically, this includes
 the mean plus further parameters describing scale, dispersion, shape, etc.).
 Second, the \code{distributions} objects are set up using the generator
 functions from \pkg{distributions3}.
+
+Note that these probability distributions only reflect the random variation in
+the dependent variable based on the model employed (and its associated
+distributional assumpation for the dependent variable). This does not capture
+the uncertainty in the parameter estimates.
+
+For both linear regression models and generalized linear models, estimated
+by \code{lm} and \code{glm} respectively, there is some ambiguity as to which
+estimate for the dispersion parameter of the model is to be used. While the
+\code{\link[stats]{logLik}} methods use the maximum-likelihood (ML) estimate
+implicitly, the \code{summary} methods report an estimate that is standardized
+with the residual degrees of freedom, n - k (rather than the number of
+observations, n). The \code{prodist} methods for these objects follow
+the \code{logLik} method by default but the \code{summary} behavior can be
+mimicked by setting the \code{sigma} or \code{dispersion} arguments
+accordingly.
 }
 \examples{
-
 ## Model: Linear regression
 ## Fit: lm
 ## Data: 1920s cars data
@@ -54,6 +95,13 @@ reg <- lm(dist ~ speed, data = cars)
 pd <- prodist(reg)
 head(pd)
 
+## Extract log-likelihood from model object
+logLik(reg)
+
+## Replicate log-likelihood via distributions object
+sum(log_pdf(pd, cars$dist))
+log_likelihood(pd, cars$dist)
+
 ## Compute corresponding medians and 90\% interval
 qd <- quantile(pd, c(0.05, 0.5, 0.95))
 head(qd)
@@ -61,6 +109,13 @@ head(qd)
 ## Visualize observations with predicted quantiles
 plot(dist ~ speed, data = cars)
 matplot(cars$speed, qd, add = TRUE, type = "l", col = 2, lty = 1)
+
+## Sigma estimated by maximum-likelihood estimate (default, used in logLik)
+## vs. least-squares estimate (used in summary)
+nd <- data.frame(speed = 50)
+prodist(reg, newdata = nd, sigma = "ML")
+prodist(reg, newdata = nd, sigma = "OLS")
+summary(reg)$sigma
 
 
 ## Model: Poisson generalized linear model

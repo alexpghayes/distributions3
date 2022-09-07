@@ -5,9 +5,9 @@
 \alias{log_pdf.HurdlePoisson}
 \title{Evaluate the probability mass function of a hurdle Poisson distribution}
 \usage{
-\method{pdf}{HurdlePoisson}(d, x, drop = TRUE, ...)
+\method{pdf}{HurdlePoisson}(d, x, drop = TRUE, elementwise = NULL, ...)
 
-\method{log_pdf}{HurdlePoisson}(d, x, drop = TRUE, ...)
+\method{log_pdf}{HurdlePoisson}(d, x, drop = TRUE, elementwise = NULL, ...)
 }
 \arguments{
 \item{d}{A \code{HurdlePoisson} object created by a call to \code{\link[=HurdlePoisson]{HurdlePoisson()}}.}
@@ -16,6 +16,13 @@
 determine given the distribution \code{d}.}
 
 \item{drop}{logical. Should the result be simplified to a vector if possible?}
+
+\item{elementwise}{logical. Should each distribution in \code{d} be evaluated
+at all elements of \code{x} (\code{elementwise = FALSE}, yielding a matrix)?
+Or, if \code{d} and \code{x} have the same length, should the evaluation be
+done element by element (\code{elementwise = TRUE}, yielding a vector)? The
+default of \code{NULL} means that \code{elementwise = TRUE} is used if the
+lengths match and otherwise \code{elementwise = FALSE} is used.}
 
 \item{...}{Arguments to be passed to \code{\link{dhpois}}.
 Unevaluated arguments will generate a warning to catch mispellings or other
@@ -38,10 +45,9 @@ X
 ## standard functions
 pdf(X, 0:8)
 cdf(X, 0:8)
-quantile(X, seq(0, 1, by = 0.75))
+quantile(X, seq(0, 1, by = 0.25))
 
 ## cdf() and quantile() are inverses for each other
-cdf(X, quantile(X, 0.3))
 quantile(X, cdf(X, 3))
 
 ## density visualization
