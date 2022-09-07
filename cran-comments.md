@@ -2,7 +2,7 @@ Minor update
 
 ## Test environments
 
-* local ubuntu install, R 4.2.0
+* local ubuntu install, R 4.2.1
 * ubuntu 18.04 (on Github Actions), R devel, 4.2, 4.1, 4.0, 3.6
 * windows (on Github Actions), R 4.2, 3.6
 * macOS (on Github Actions), R 4.2
