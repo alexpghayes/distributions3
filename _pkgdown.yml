@@ -7,3 +7,337 @@ template:
   bootstrap: 5
   params:
     bootswatch: flatly
+  opengraph:
+    twitter:
+      creator: "@alexpghayes"
+      card: summary
+
+reference:
+  - title: "Generic functions for S3 distribution objects"
+    contents: 
+      - pdf
+      - cdf
+      - random
+      - variance
+      - skewness
+      - kurtosis
+      - support
+      - is_continuous
+      - is_discrete
+      - suff_stat
+      - fit_mle
+      - is_distribution
+      - prodist
+  - title: "Utilities, tools, and data"
+    contents: 
+      - apply_dpqr
+      - make_support
+      - make_positive_integer
+      - likelihood
+      - log_likelihood
+      - FIFA2018
+  - title: "Visualization infrastructure"
+    contents: 
+      - plot.distribution
+      - plot_cdf
+      - plot_pdf
+      - geom_auc
+  - title: "Bernoulli distribution"
+    contents:
+      - Bernoulli
+      - cdf.Bernoulli
+      - fit_mle.Bernoulli
+      - pdf.Bernoulli
+      - quantile.Bernoulli
+      - random.Bernoulli
+      - suff_stat.Bernoulli
+      - support.Bernoulli
+  - title: "Beta distribution"
+    contents:
+      - Beta
+      - cdf.Beta
+      - pdf.Beta
+      - quantile.Beta
+      - random.Beta
+      - support.Beta
+  - title: "Binomial distribution"
+    contents:
+      - Binomial
+      - cdf.Binomial
+      - fit_mle.Binomial
+      - pdf.Binomial
+      - quantile.Binomial
+      - random.Binomial
+      - suff_stat.Binomial
+      - support.Binomial
+  - title: "Categorical distribution"
+    contents:
+      - Categorical
+      - cdf.Categorical
+      - pdf.Categorical
+      - quantile.Categorical
+      - random.Categorical
+  - title: "Cauchy distribution"
+    contents:
+      - Cauchy
+      - cdf.Cauchy
+      - pdf.Cauchy
+      - quantile.Cauchy
+      - random.Cauchy
+      - support.Cauchy
+  - title: "Chi-square distribution"
+    contents:
+      - ChiSquare
+      - cdf.ChiSquare
+      - pdf.ChiSquare
+      - quantile.ChiSquare
+      - random.ChiSquare
+      - support.ChiSquare
+  - title: "Erlang distribution"
+    contents:
+      - Erlang
+      - cdf.Erlang
+      - pdf.Erlang
+      - quantile.Erlang
+      - random.Erlang
+      - support.Erlang
+  - title: "Exponential distribution"
+    contents:
+      - Exponential
+      - cdf.Exponential
+      - fit_mle.Exponential
+      - pdf.Exponential
+      - quantile.Exponential
+      - random.Exponential
+      - suff_stat.Exponential
+      - support.Exponential
+  - title: "Fisher F distribution"
+    contents:
+      - FisherF
+      - cdf.FisherF
+      - pdf.FisherF
+      - quantile.FisherF
+      - random.FisherF
+      - support.FisherF
+  - title: "Frechet distribution"
+    contents:
+      - Frechet
+      - cdf.Frechet
+      - pdf.Frechet
+      - quantile.Frechet
+      - random.Frechet
+      - support.Frechet
+  - title: "Generalized extreme value (GEV) distribution"
+    contents:
+      - GEV
+      - cdf.GEV
+      - pdf.GEV
+      - quantile.GEV
+      - random.GEV
+      - support.GEV
+  - title: "Generalized Pareto (GP) distribution"
+    contents:
+      - GP
+      - cdf.GP
+      - pdf.GP
+      - quantile.GP
+      - random.GP
+      - support.GP
+  - title: "Gamma distribution"
+    contents:
+      - Gamma
+      - cdf.Gamma
+      - fit_mle.Gamma
+      - pdf.Gamma
+      - quantile.Gamma
+      - random.Gamma
+      - suff_stat.Gamma
+      - support.Gamma
+  - title: "Geometric distribution"
+    contents:
+      - Geometric
+      - cdf.Geometric
+      - fit_mle.Geometric
+      - pdf.Geometric
+      - quantile.Geometric
+      - random.Geometric
+      - suff_stat.Geometric
+      - support.Geometric
+  - title: "Gumbel distribution"
+    contents:
+      - Gumbel
+      - cdf.Gumbel
+      - pdf.Gumbel
+      - quantile.Gumbel
+      - random.Gumbel
+      - support.Gumbel
+  - title: "Hurdle negative binomial distribution"
+    contents:
+      - dhnbinom
+      - phnbinom
+      - qhnbinom
+      - rhnbinom
+      - HurdleNegativeBinomial
+      - cdf.HurdleNegativeBinomial
+      - pdf.HurdleNegativeBinomial
+      - quantile.HurdleNegativeBinomial
+      - random.HurdleNegativeBinomial
+      - support.HurdleNegativeBinomial
+  - title: "Hurdle Poisson distribution"
+    contents:
+      - dhpois
+      - phpois
+      - qhpois
+      - rhpois
+      - HurdlePoisson
+      - cdf.HurdlePoisson
+      - pdf.HurdlePoisson
+      - quantile.HurdlePoisson
+      - random.HurdlePoisson
+      - support.HurdlePoisson
+  - title: "Hypergeometric distribution"
+    contents:
+      - HyperGeometric
+      - cdf.HyperGeometric
+      - pdf.HyperGeometric
+      - quantile.HyperGeometric
+      - random.HyperGeometric
+      - support.HyperGeometric
+  - title: "Log-normal distribution"
+    contents:
+      - LogNormal
+      - cdf.LogNormal
+      - fit_mle.LogNormal
+      - pdf.LogNormal
+      - quantile.LogNormal
+      - random.LogNormal
+      - suff_stat.LogNormal
+      - support.LogNormal
+  - title: "Logistic distribution"
+    contents:
+      - Logistic
+      - cdf.Logistic
+      - pdf.Logistic
+      - quantile.Logistic
+      - random.Logistic
+      - support.Logistic
+  - title: "Multinomial distribution"
+    contents:
+      - Multinomial
+      - pdf.Multinomial
+      - random.Multinomial
+  - title: "Negative binomial distribution"
+    contents:
+      - NegativeBinomial
+      - cdf.NegativeBinomial
+      - pdf.NegativeBinomial
+      - quantile.NegativeBinomial
+      - random.NegativeBinomial
+      - support.NegativeBinomial
+  - title: "Normal distribution"
+    contents:
+      - Normal
+      - cdf.Normal
+      - fit_mle.Normal
+      - pdf.Normal
+      - quantile.Normal
+      - random.Normal
+      - suff_stat.Normal
+      - support.Normal
+  - title: "Poisson distribution"
+    contents:
+      - Poisson
+      - cdf.Poisson
+      - fit_mle.Poisson
+      - pdf.Poisson
+      - quantile.Poisson
+      - random.Poisson
+      - suff_stat.Poisson
+      - support.Poisson
+  - title: "Reversed Weibull distribution"
+    contents:
+      - RevWeibull
+      - cdf.RevWeibull
+      - pdf.RevWeibull
+      - quantile.RevWeibull
+      - random.RevWeibull
+      - support.RevWeibull
+  - title: "Student's T distribution"
+    contents:
+      - StudentsT
+      - cdf.StudentsT
+      - pdf.StudentsT
+      - quantile.StudentsT
+      - random.StudentsT
+      - support.StudentsT
+  - title: "Tukey distribution"
+    contents:
+      - Tukey
+      - cdf.Tukey
+      - quantile.Tukey
+      - random.Tukey
+      - support.Tukey
+  - title: "Uniform distribution"
+    contents:
+      - Uniform
+      - cdf.Uniform
+      - pdf.Uniform
+      - quantile.Uniform
+      - random.Uniform
+      - support.Uniform
+  - title: "Weibull distribution"
+    contents:
+      - Weibull
+      - cdf.Weibull
+      - pdf.Weibull
+      - quantile.Weibull
+      - random.Weibull
+      - support.Weibull
+  - title: "Zero-inflated negative binomial distribution"
+    contents:
+      - dzinbinom
+      - pzinbinom
+      - qzinbinom
+      - rzinbinom
+      - ZINegativeBinomial
+      - cdf.ZINegativeBinomial
+      - pdf.ZINegativeBinomial
+      - quantile.ZINegativeBinomial
+      - random.ZINegativeBinomial
+      - support.ZINegativeBinomial
+  - title: "Zero-inflated Poisson distribution"
+    contents:
+      - dzipois
+      - pzipois
+      - qzipois
+      - rzipois
+      - ZIPoisson
+      - cdf.ZIPoisson
+      - pdf.ZIPoisson
+      - quantile.ZIPoisson
+      - random.ZIPoisson
+      - support.ZIPoisson
+  - title: "Zero-truncated negative binomial distribution"
+    contents:
+      - dztnbinom
+      - pztnbinom
+      - qztnbinom
+      - rztnbinom
+      - ZTNegativeBinomial
+      - cdf.ZTNegativeBinomial
+      - pdf.ZTNegativeBinomial
+      - quantile.ZTNegativeBinomial
+      - random.ZTNegativeBinomial
+      - support.ZTNegativeBinomial
+  - title: "Zero-truncated Poisson distribution"
+    contents:
+      - dztpois
+      - pztpois
+      - qztpois
+      - rztpois
+      - ZTPoisson
+      - cdf.ZTPoisson
+      - pdf.ZTPoisson
+      - quantile.ZTPoisson
+      - random.ZTPoisson
+      - support.ZTPoisson
