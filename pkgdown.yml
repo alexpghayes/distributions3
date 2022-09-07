@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 2.0.1
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   intro-to-hypothesis-testing: intro-to-hypothesis-testing.html
@@ -10,8 +10,9 @@ articles:
   one-sample-z-test-for-proportion: one-sample-z-test-for-proportion.html
   one-sample-z-test: one-sample-z-test.html
   paired-tests: paired-tests.html
+  poisson: poisson.html
   two-sample-z-test: two-sample-z-test.html
-last_built: 2022-01-03T17:45Z
+last_built: 2022-09-07T03:51Z
 urls:
   reference: https://alexpghayes.github.io/distributions3/reference
   article: https://alexpghayes.github.io/distributions3/articles
