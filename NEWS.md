@@ -1,7 +1,7 @@
 # distributions3 (development version)
 
 - Fixed errors in notation of cumulative distribution function in the documentation of
-  `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #95).
+  `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #96).
 
 
 # distributions3 0.2.1
