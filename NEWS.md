@@ -1,5 +1,9 @@
 # distributions3 (development version)
 
+- Fixed errors in notation of cumulative distribution function in the documentation of
+  `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #95).
+
+
 # distributions3 0.2.1
 
 - New generics `is_discrete()` and `is_continous()` with methods for all distribution objects
