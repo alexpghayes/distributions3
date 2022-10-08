@@ -144,9 +144,9 @@ rhpois <- function(n, lambda, pi) {
 #'   **Cumulative distribution function (c.d.f.)**: \eqn{P(X \le 0) = 1 - \pi} and for \eqn{k > 0}
 #'
 #'   \deqn{
-#'     P(X = k) = 1 - \pi + \pi \cdot \frac{F(k; \lambda)}{1 - F(0; \lambda)}
+#'     P(X \le k) = 1 - \pi + \pi \cdot \frac{F(k; \lambda) - F(0; \lambda)}{1 - F(0; \lambda)}
 #'   }{
-#'     P(X = k) = 1 - \pi + \pi \cdot F(k; \lambda)/(1 - F(0; \lambda))
+#'     P(X \le k) = 1 - \pi + \pi \cdot (F(k; \lambda) - F(0; \lambda))/(1 - F(0; \lambda))
 #'   }
 #'
 #'   where \eqn{F(k; \lambda)} is the c.d.f. of the \code{\link{Poisson}} distribution.
