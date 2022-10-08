@@ -64,9 +64,9 @@ distribution.
 \strong{Cumulative distribution function (c.d.f.)}: \eqn{P(X \le 0) = 1 - \pi} and for \eqn{k > 0}
 
 \deqn{
-    P(X = k) = 1 - \pi + \pi \cdot \frac{F(k; \mu, \theta)}{1 - F(0; \mu, \theta)}
+    P(X \le k) = 1 - \pi + \pi \cdot \frac{F(k; \mu, \theta) - F(0; \mu, \theta)}{1 - F(0; \mu, \theta)}
   }{
-    P(X = k) = 1 - \pi + \pi \cdot F(k; \mu, \theta)/(1 - F(0; \mu, \theta))
+    P(X \le k) = 1 - \pi + \pi \cdot (F(k; \mu, \theta) - F(0; \mu, \theta))/(1 - F(0; \mu, \theta))
   }
 
 \strong{Moment generating function (m.g.f.)}:
