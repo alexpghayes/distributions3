@@ -48,7 +48,8 @@ dztnbinom <- function(x, mu, theta, size, log = FALSE) {
   if(!missing(size)) theta <- size
   rval <- dnbinom(x, mu = mu, size = theta, log = TRUE) - pnbinom(0, mu = mu, size = theta, lower.tail = FALSE, log.p = TRUE)
   rval[x < 1] <- -Inf
-  rval[mu <= 0] <- 0
+  rval[mu <= 0] <- -Inf
+  rval[(mu <= 0) & (x == 1)] <- 0
   if(log) rval else exp(rval)
 }
 
