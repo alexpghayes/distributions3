@@ -44,7 +44,8 @@
 dztpois <- function(x, lambda, log = FALSE) {
   rval <- dpois(x, lambda, log = TRUE) - ppois(0, lambda, lower.tail = FALSE, log.p = TRUE)
   rval[x < 1] <- -Inf
-  rval[lambda <= 0] <- 0
+  rval[lambda <= 0] <- -Inf
+  rval[(lambda <= 0) & (x == 1)] <- 0
   if(log) rval else exp(rval)
 }
 
