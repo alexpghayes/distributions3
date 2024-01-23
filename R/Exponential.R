@@ -24,11 +24,11 @@
 #'   In the following, let \eqn{X} be an Exponential random variable with
 #'   rate parameter `rate` = \eqn{\lambda}.
 #'
-#'   **Support**: {x in [0, \eqn{\infty})}
+#'   **Support**: \eqn{x \in (0, \infty)}
 #'
-#'   **Mean**: 1 / \eqn{\lambda}
+#'   **Mean**: \eqn{\frac{1}{\lambda}}
 #'
-#'   **Variance**: 1 / \eqn{\lambda^2}
+#'   **Variance**: \eqn{\frac{1}{\lambda^2}}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
