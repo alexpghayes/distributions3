@@ -129,7 +129,7 @@ random.Cauchy <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rcauchy(n = at, location = x$location, scale = x$scale)
+  FUN <- function(at, d) rcauchy(n = at, location = d$location, scale = d$scale)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -226,7 +226,7 @@ cdf.Cauchy <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Cauchy <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qcauchy(at, location = x$location, scale = x$scale, ...)
+  FUN <- function(at, d) qcauchy(at, location = d$location, scale = d$scale, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

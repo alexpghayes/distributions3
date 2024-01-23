@@ -153,7 +153,7 @@ random.Binomial <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rbinom(n = at, size = x$size, prob = x$p)
+  FUN <- function(at, d) rbinom(n = at, size = d$size, prob = d$p)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -249,7 +249,7 @@ cdf.Binomial <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Binomial <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qbinom(at, size = x$size, prob = x$p, ...)
+  FUN <- function(at, d) qbinom(at, size = d$size, prob = d$p, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

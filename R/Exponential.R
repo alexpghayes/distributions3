@@ -121,7 +121,7 @@ random.Exponential <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rexp(n = at, rate = x$rate)
+  FUN <- function(at, d) rexp(n = at, rate = d$rate)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -218,7 +218,7 @@ cdf.Exponential <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Exponential <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qexp(at, rate = x$rate, ...)
+  FUN <- function(at, d) qexp(at, rate = d$rate, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

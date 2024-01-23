@@ -222,7 +222,7 @@ cdf.FisherF <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.FisherF <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qf(at, df1 = x$df1, df2 = x$df2, ncp = x$lambda, ...)
+  FUN <- function(at, d) qf(at, df1 = d$df1, df2 = d$df2, ncp = d$lambda, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

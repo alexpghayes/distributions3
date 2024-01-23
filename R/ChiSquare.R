@@ -145,7 +145,7 @@ random.ChiSquare <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rchisq(n = at, df = x$df)
+  FUN <- function(at, d) rchisq(n = at, df = d$df)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -244,7 +244,7 @@ cdf.ChiSquare <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 quantile.ChiSquare <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   # TODO: in the documentation, more information on return and
   # how quantiles are calculated
-  FUN <- function(at, d) qchisq(at, df = x$df, ...)
+  FUN <- function(at, d) qchisq(at, df = d$df, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

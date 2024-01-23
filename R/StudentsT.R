@@ -303,7 +303,7 @@ cdf.StudentsT <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @family StudentsT distribution
 #'
 quantile.StudentsT <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qt(p = at, df = x$df, ...)
+  FUN <- function(at, d) qt(p = at, df = d$df, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
