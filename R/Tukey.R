@@ -130,7 +130,7 @@ cdf.Tukey <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @family Tukey distribution
 #'
 quantile.Tukey <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qtukey(p = at, nmeans = x$nmeans, df = x$df, nranges = x$nranges, ...)
+  FUN <- function(at, d) qtukey(p = at, nmeans = d$nmeans, df = d$df, nranges = d$nranges, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

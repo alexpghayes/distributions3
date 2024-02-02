@@ -134,7 +134,7 @@ random.Gamma <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rgamma(n = at, shape = x$shape, rate = x$rate)
+  FUN <- function(at, d) rgamma(n = at, shape = d$shape, rate = d$rate)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -231,7 +231,7 @@ cdf.Gamma <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Gamma <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qgamma(at, shape = x$shape, rate = x$rate, ...)
+  FUN <- function(at, d) qgamma(at, shape = d$shape, rate = d$rate, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

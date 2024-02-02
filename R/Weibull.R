@@ -224,7 +224,7 @@ cdf.Weibull <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @family Weibull distribution
 #'
 quantile.Weibull <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qweibull(p = at, shape = x$shape, scale = x$scale, ...)
+  FUN <- function(at, d) qweibull(p = at, shape = d$shape, scale = d$scale, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

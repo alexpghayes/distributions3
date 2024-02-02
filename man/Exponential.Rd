@@ -28,11 +28,11 @@ will render with additional detail and much greater clarity.
 In the following, let \eqn{X} be an Exponential random variable with
 rate parameter \code{rate} = \eqn{\lambda}.
 
-\strong{Support}: {x in [0, \eqn{\infty})}
+\strong{Support}: \eqn{x \in (0, \infty)}
 
-\strong{Mean}: 1 / \eqn{\lambda}
+\strong{Mean}: \eqn{\frac{1}{\lambda}}
 
-\strong{Variance}: 1 / \eqn{\lambda^2}
+\strong{Variance}: \eqn{\frac{1}{\lambda^2}}
 
 \strong{Probability density function (p.d.f)}:
 

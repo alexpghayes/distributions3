@@ -289,9 +289,9 @@ cdf.NegativeBinomial <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #'
 quantile.NegativeBinomial <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
   FUN <- if("mu" %in% names(unclass(x))) {
-    function(at, d) qnbinom(p = at, mu = x$mu, size = x$size, ...)
+    function(at, d) qnbinom(p = at, mu = d$mu, size = d$size, ...)
   } else {
-    function(at, d) qnbinom(p = at, size = x$size, prob = x$p, ...)
+    function(at, d) qnbinom(p = at, size = d$size, prob = d$p, ...)
   }
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }

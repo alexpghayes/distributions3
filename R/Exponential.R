@@ -24,11 +24,11 @@
 #'   In the following, let \eqn{X} be an Exponential random variable with
 #'   rate parameter `rate` = \eqn{\lambda}.
 #'
-#'   **Support**: {x in [0, \eqn{\infty})}
+#'   **Support**: \eqn{x \in (0, \infty)}
 #'
-#'   **Mean**: 1 / \eqn{\lambda}
+#'   **Mean**: \eqn{\frac{1}{\lambda}}
 #'
-#'   **Variance**: 1 / \eqn{\lambda^2}
+#'   **Variance**: \eqn{\frac{1}{\lambda^2}}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
@@ -121,7 +121,7 @@ random.Exponential <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rexp(n = at, rate = x$rate)
+  FUN <- function(at, d) rexp(n = at, rate = d$rate)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -218,7 +218,7 @@ cdf.Exponential <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Exponential <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qexp(at, rate = x$rate, ...)
+  FUN <- function(at, d) qexp(at, rate = d$rate, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

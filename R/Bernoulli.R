@@ -140,7 +140,7 @@ random.Bernoulli <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rbinom(n = at, size = 1, prob = x$p)
+  FUN <- function(at, d) rbinom(n = at, size = 1, prob = d$p)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -237,7 +237,7 @@ cdf.Bernoulli <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Bernoulli <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qbinom(at, size = 1, prob = x$p, ...)
+  FUN <- function(at, d) qbinom(at, size = 1, prob = d$p, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 

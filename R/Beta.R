@@ -96,7 +96,7 @@ random.Beta <- function(x, n = 1L, drop = TRUE, ...) {
   if (n == 0L) {
     return(numeric(0L))
   }
-  FUN <- function(at, d) rbeta(n = at, shape1 = x$alpha, shape2 = x$beta)
+  FUN <- function(at, d) rbeta(n = at, shape1 = d$alpha, shape2 = d$beta)
   apply_dpqr(d = x, FUN = FUN, at = n, type = "random", drop = drop)
 }
 
@@ -193,7 +193,7 @@ cdf.Beta <- function(d, x, drop = TRUE, elementwise = NULL, ...) {
 #' @export
 #'
 quantile.Beta <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
-  FUN <- function(at, d) qbeta(at, shape1 = x$alpha, shape2 = x$beta, ...)
+  FUN <- function(at, d) qbeta(at, shape1 = d$alpha, shape2 = d$beta, ...)
   apply_dpqr(d = x, FUN = FUN, at = probs, type = "quantile", drop = drop, elementwise = elementwise)
 }
 
