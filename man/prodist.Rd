@@ -9,6 +9,7 @@
 \alias{prodist.hurdle}
 \alias{prodist.zeroinfl}
 \alias{prodist.zerotrunc}
+\alias{prodist.distribution}
 \title{Extracting fitted or predicted probability distributions from models}
 \usage{
 prodist(object, ...)
@@ -16,6 +17,8 @@ prodist(object, ...)
 \method{prodist}{lm}(object, ..., sigma = "ML")
 
 \method{prodist}{glm}(object, ..., dispersion = NULL)
+
+\method{prodist}{distribution}(object, ...)
 }
 \arguments{
 \item{object}{A model object.}

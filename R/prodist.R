@@ -286,6 +286,10 @@ prodist.zerotrunc <- function(object, ...) {
   )
 }
 
+#' @rdname prodist
+#' @export
+prodist.distribution <- function(object, ...) object
+
 ## Further examples requiring other packages ---------------
 ## 
 ## library("MASS")
