@@ -28,7 +28,10 @@
 #'   prior to drawing the random sample. The previous random seed from the global
 #'   environment (if any) is restored afterwards.
 #'
-#' @return Random samples drawn from the distriubtion `x`.
+#' @return Random samples drawn from the distriubtion `x`. The \code{random}
+#' methods typically return either a matrix or, if possible, a vector. The
+#' \code{simulate} method always returns a data frame (with an attribute
+#' \code{"seed"} containing the \code{.Random.seed} from before the simulation).
 #'
 #' @examples
 #' ## distribution object
@@ -46,14 +49,20 @@ random <- function(x, n = 1L, drop = TRUE, ...) {
 #' @export
 simulate.distribution <- function(object, nsim = 1L, seed = NULL, ...) {
   ## set seed if provided but restore previous original seed afterwards
-  if (!is.null(seed)) {
-    if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
-      oseed <- get(".Random.seed", envir = .GlobalEnv)
-      on.exit(assign(".Random.seed", oseed, envir = .GlobalEnv))
-    }
+  if (!exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) runif(1)
+  if (is.null(seed)){
+    RNGstate <- get(".Random.seed", envir = .GlobalEnv)
+  } else {
+    R.seed <- get(".Random.seed", envir = .GlobalEnv)
     set.seed(seed)
+    RNGstate <- structure(seed, kind = as.list(RNGkind()))
+    on.exit(assign(".Random.seed", R.seed, envir = .GlobalEnv))
   }
-  random(x = object, n = nsim, ...)
+
+  val <- as.data.frame(random(object, n = nsim, drop = FALSE, ...))
+  rownames(val) <- names(object)
+  attr(val, "seed") <- RNGstate
+  return(val)
 }
 
 #' Evaluate the probability density of a probability distribution
