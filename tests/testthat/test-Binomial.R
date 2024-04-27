@@ -55,7 +55,7 @@ test_that("random.Binomial work correctly", {
 })
 
 
-test_that("pdf.Bernoulli work correctly", {
+test_that("pdf.Binomial work correctly", {
   b <- Binomial(size = 2, p = 0.1)
 
   expect_equal(pdf(b, 0), 0.9^2)
@@ -69,7 +69,7 @@ test_that("pdf.Bernoulli work correctly", {
   expect_length(pdf(b, seq_len(10)), 10)
 })
 
-test_that("cdf.Bernoulli work correctly", {
+test_that("cdf.Binomial work correctly", {
   b <- Binomial(size = 2, p = 0.1)
 
   expect_equal(cdf(b, 0), 0.9^2)
@@ -81,7 +81,7 @@ test_that("cdf.Bernoulli work correctly", {
   expect_length(cdf(b, seq_len(10)), 10)
 })
 
-test_that("quantile.Bernoulli work correctly", {
+test_that("quantile.Binomial work correctly", {
   b <- Binomial(size = 2, p = 0.1)
 
   expect_equal(quantile(b, 0), 0)
