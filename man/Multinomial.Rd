@@ -87,6 +87,7 @@ Other discrete distributions:
 \code{\link{HyperGeometric}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
+\code{\link{PoissonBinomial}()},
 \code{\link{ZINegativeBinomial}()},
 \code{\link{ZIPoisson}()},
 \code{\link{ZTNegativeBinomial}()},

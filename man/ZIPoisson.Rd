@@ -96,6 +96,7 @@ Other discrete distributions:
 \code{\link{Multinomial}()},
 \code{\link{NegativeBinomial}()},
 \code{\link{Poisson}()},
+\code{\link{PoissonBinomial}()},
 \code{\link{ZINegativeBinomial}()},
 \code{\link{ZTNegativeBinomial}()},
 \code{\link{ZTPoisson}()}
