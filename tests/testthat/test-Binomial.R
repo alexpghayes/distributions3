@@ -1,7 +1,7 @@
 context("test-Binomial")
 
 test_that("print.Binomial works", {
-  expect_output(print(Binomial(1)), regexp = "Binomial distribution")
+  expect_output(print(Binomial(1)), regexp = "Binomial")
 })
 
 test_that("fit_mle.Binomial works correctly", {

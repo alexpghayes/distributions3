@@ -5,7 +5,7 @@ test_that("HyperGeometric works as intended when k > n + m", {
 })
 
 test_that("print.HyperGeometric works", {
-  expect_output(print(HyperGeometric(1, 1, 1)), regexp = "HyperGeometric distribution")
+  expect_output(print(HyperGeometric(1, 1, 1)), regexp = "HyperGeometric")
 })
 
 

@@ -1,7 +1,7 @@
 context("test-FisherF")
 
 test_that("print.FisherF works", {
-  expect_output(print(FisherF(1, 1)), regexp = "FisherF distribution")
+  expect_output(print(FisherF(1, 1)), regexp = "FisherF")
 })
 
 test_that("likelihood.FisherF and log_likelihood.FisherF work correctly", {

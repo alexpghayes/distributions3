@@ -11,7 +11,7 @@ test_that("Erlang constructor works", {
 })
 
 test_that("print.Erlang works", {
-  expect_output(print(e), regexp = "Erlang distribution")
+  expect_output(print(e), regexp = "Erlang")
 })
 
 test_that("random.Erlang works correctly", {

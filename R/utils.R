@@ -285,7 +285,7 @@ format.distribution <- function(x, digits = pmax(3L, getOption("digits") - 3L), 
   n <- names(x)
   if (is.null(attr(x, "row.names"))) attr(x, "row.names") <- 1L:length(x)
   class(x) <- "data.frame"
-  f <- sprintf("%s distribution (%s)", cl, apply(rbind(apply(as.matrix(x), 2L, format, digits = digits, ...)), 1L, function(p) paste(names(x), "=", as.vector(p), collapse = ", ")))
+  f <- sprintf("%s(%s)", cl, apply(rbind(apply(as.matrix(x), 2L, format, digits = digits, ...)), 1L, function(p) paste(names(x), "=", as.vector(p), collapse = ", ")))
   setNames(f, n)
 }
 

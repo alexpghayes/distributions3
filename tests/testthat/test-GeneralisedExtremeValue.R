@@ -1,7 +1,7 @@
 context("test-GEV")
 
 test_that("print.GEV works", {
-  expect_output(print(GEV()), regexp = "GEV distribution")
+  expect_output(print(GEV()), regexp = "GEV")
 })
 
 ## Example distributions

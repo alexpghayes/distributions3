@@ -1,7 +1,7 @@
 context("test-ZIPoisson")
 
 test_that("print.ZIPoisson works", {
-  expect_output(print(ZIPoisson(1, 0.2)), regexp = "ZIPoisson distribution")
+  expect_output(print(ZIPoisson(1, 0.2)), regexp = "ZIPoisson")
 })
 
 test_that("random.ZIPoisson work correctly", {

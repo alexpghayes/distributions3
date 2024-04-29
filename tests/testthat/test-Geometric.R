@@ -1,7 +1,7 @@
 context("test-Geometric")
 
 test_that("print.Geometric works", {
-  expect_output(print(Geometric()), regexp = "Geometric distribution")
+  expect_output(print(Geometric()), regexp = "Geometric")
 })
 
 test_that("likelihood.Geometric and log_likelihood.Geometric work correctly", {

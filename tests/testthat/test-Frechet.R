@@ -1,7 +1,7 @@
 context("test-Frechet")
 
 test_that("print.Frechet works", {
-  expect_output(print(Frechet()), regexp = "Frechet distribution")
+  expect_output(print(Frechet()), regexp = "Frechet")
 })
 
 ## Example distributions

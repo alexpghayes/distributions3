@@ -1,7 +1,7 @@
 context("test-ZTPoisson")
 
 test_that("print.ZTPoisson works", {
-  expect_output(print(ZTPoisson(1)), regexp = "ZTPoisson distribution")
+  expect_output(print(ZTPoisson(1)), regexp = "ZTPoisson")
 })
 
 test_that("random.ZTPoisson work correctly", {

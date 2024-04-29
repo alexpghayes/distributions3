@@ -1,7 +1,7 @@
 context("test-HurdlePoisson")
 
 test_that("print.HurdlePoisson works", {
-  expect_output(print(HurdlePoisson(1, 0.7)), regexp = "HurdlePoisson distribution")
+  expect_output(print(HurdlePoisson(1, 0.7)), regexp = "HurdlePoisson")
 })
 
 test_that("random.HurdlePoisson work correctly", {

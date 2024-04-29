@@ -8,8 +8,8 @@ test_that("fit_mle.Exponential works correctly", {
   expect_true(is.numeric(fit_mle(Exponential(), rexp(100))$rate))
 })
 
-test_that("print.Beta works", {
-  expect_output(print(Exponential()), regexp = "Exponential distribution")
+test_that("print.Exponential works", {
+  expect_output(print(Exponential()), regexp = "Exponential")
 })
 
 test_that("random.Exponential work correctly", {

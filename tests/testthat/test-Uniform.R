@@ -1,7 +1,7 @@
 context("test-Uniform")
 
 test_that("print.Uniform works", {
-  expect_output(print(Uniform(1, 1)), regexp = "Uniform distribution")
+  expect_output(print(Uniform(1, 1)), regexp = "Uniform")
 })
 
 test_that("likelihood.Uniform and log_likelihood.Uniform work correctly", {

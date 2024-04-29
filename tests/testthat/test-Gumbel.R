@@ -1,7 +1,7 @@
 context("test-Gumbel")
 
 test_that("print.Gumbel works", {
-  expect_output(print(Gumbel()), regexp = "Gumbel distribution")
+  expect_output(print(Gumbel()), regexp = "Gumbel")
 })
 
 ## Example distribution (from test-GeneralisedExtremeValue.R)

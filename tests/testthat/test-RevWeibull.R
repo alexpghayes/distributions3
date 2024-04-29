@@ -1,7 +1,7 @@
 context("test-RevWeibull")
 
 test_that("print.RevWeibull works", {
-  expect_output(print(RevWeibull()), regexp = "RevWeibull distribution")
+  expect_output(print(RevWeibull()), regexp = "RevWeibull")
 })
 
 ## Example distributions

@@ -1,7 +1,7 @@
 context("test-GP")
 
 test_that("print.GP works", {
-  expect_output(print(GP()), regexp = "GP distribution")
+  expect_output(print(GP()), regexp = "GP")
 })
 
 ## Example distributions

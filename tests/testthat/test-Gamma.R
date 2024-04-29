@@ -1,7 +1,7 @@
 context("test-Gamma")
 
 test_that("print.Gamma works", {
-  expect_output(print(Gamma(1, 1)), regexp = "Gamma distribution")
+  expect_output(print(Gamma(1, 1)), regexp = "Gamma")
 })
 
 test_that("likelihood.Gamma and log_likelihood.Gamma work correctly", {

@@ -127,7 +127,7 @@ format.PoissonBinomial <- function(x, digits = pmax(3L, getOption("digits") - 3L
   } else {
     dots <- NULL
   }
-  f <- sprintf("%s distribution (%s)", cl, apply(
+  f <- sprintf("%s(%s)", cl, apply(
     rbind(apply(as.matrix(x), 2L, format, digits = digits, ...)), 1L, function(p)
     paste(c(paste(names(x), "=", as.vector(p)), dots), collapse = ", ")))
   setNames(f, n)
