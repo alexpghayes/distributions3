@@ -1,7 +1,7 @@
 context("test-Weibull")
 
 test_that("print.Weibull works", {
-  expect_output(print(Weibull(1, 1)), regexp = "Weibull distribution")
+  expect_output(print(Weibull(1, 1)), regexp = "Weibull")
 })
 
 test_that("likelihood.Weibull and log_likelihood.Weibull work correctly", {

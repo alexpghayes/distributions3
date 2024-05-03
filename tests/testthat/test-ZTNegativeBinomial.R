@@ -1,7 +1,7 @@
 context("test-ZTNegativeBinomial")
 
 test_that("print.ZTNegativeBinomial works", {
-  expect_output(print(ZTNegativeBinomial(1, 1)), regexp = "ZTNegativeBinomial distribution")
+  expect_output(print(ZTNegativeBinomial(1, 1)), regexp = "ZTNegativeBinomial")
 })
 
 test_that("random.ZTNegativeBinomial work correctly", {

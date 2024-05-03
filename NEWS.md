@@ -1,7 +1,28 @@
 # distributions3 (development version)
 
+- New `PoissonBinomial()` distribution, a generalization of the binomial distribution. The Poisson
+  binomial is characterized by n independent Bernoulli trials but with potentially different
+  success probabilities. The `d`/`p`/`q`/`r` functions employ the efficient implementation from
+  the [PoissonBinomial](https://CRAN.R-project.org/package=PoissonBinomial) package, if available.
+  In case it is not available, fallback computation based on a normal approximation are provided
+  - with a warning, by default (#100).
+- The `prodist()` methods for various count regression objects now distinguish between computations
+  for the classic [pscl](https://CRAN.R-project.org/package=pscl) package and the newer
+  [countreg](https://R-Forge.R-project.org/projects/countreg/) package (currently on R-Forge, soon
+  to be released to CRAN).
+- The `simulate()` method for `distribution` objects is now better aligned with `simulate.lm()`
+  in base R: It now always returns a `data.frame` with `seed` attribute.
+- New `simulate()` default method which leverages `prodist()` and subsequently uses the
+  `simulate()` method for `distribution` objects.
+- New `prodist()` methods for `distribution` objects which just returns the unmodified
+  `distribution` object itself.
+- The `format()` method - and hence the `print()` method - for `distribution` objects has been
+  simplified. For example, now `Normal(mu = 0, sigma = 1)` is used instead of
+  `Normal distribution (mu = 0, sigma = 1)` in order to yield a more compact output, especially
+  for vectors of distributions (#101).
 - Fixed errors in notation of cumulative distribution function in the documentation of
   `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #96).
+- Further small improvements in methods and manual pages.
 
 
 # distributions3 0.2.1

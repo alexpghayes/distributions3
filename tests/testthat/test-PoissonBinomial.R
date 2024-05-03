@@ -1,82 +1,74 @@
-context("test-Geometric")
+context("test-PoissonBinomial")
 
-test_that("print.Geometric works", {
-  expect_output(print(Geometric()), regexp = "Geometric")
+test_that("print.PoissonBinomial works", {
+  expect_output(print(PoissonBinomial(0.5, 0.3, 0.8)), regexp = "PoissonBinomial")
 })
 
-test_that("likelihood.Geometric and log_likelihood.Geometric work correctly", {
-  cau <- Geometric()
+test_that("likelihood.PoissonBinomial and log_likelihood.PoissonBinomial work correctly", {
+  pb <- PoissonBinomial(0.5, 0.3, 0.8)
   x <- c(1, 1, 0)
 
-  expect_equal(likelihood(cau, 1), dgeom(1, 0.5))
-  expect_equal(likelihood(cau, x), dgeom(1, 0.5) * dgeom(1, 0.5) * dgeom(0, 0.5))
+  expect_equal(likelihood(pb, 1), pdf(pb, 1))
+  expect_equal(likelihood(pb, x), prod(pdf(pb, x)))
 
-  expect_equal(log_likelihood(cau, 1), log(dgeom(1, 0.5)))
-  expect_equal(log_likelihood(cau, x), log(dgeom(1, 0.5) * dgeom(1, 0.5) * dgeom(0, 0.5)))
+  expect_equal(log_likelihood(pb, 1), pdf(pb, 1, log = TRUE))
+  expect_equal(log_likelihood(pb, x), sum(pdf(pb, x, log = TRUE)))
 })
 
-test_that("random.Geometric work correctly", {
-  cau <- Geometric()
+test_that("random.PoissonBinomial work correctly", {
+  pb <- PoissonBinomial(0.5, 0.3, 0.8)
 
-  expect_length(random(cau), 1)
-  expect_length(random(cau, 100), 100)
-  expect_length(random(cau[-1], 1), 0)
-  expect_length(random(cau, 0), 0)
-  expect_error(random(cau, -2))
- 
+  expect_length(random(pb), 1)
+  expect_length(random(pb, 100), 100)
+  expect_length(random(pb[-1], 1), 0)
+  expect_length(random(pb, 0), 0)
+  expect_error(random(pb, -2))
+
   # consistent with base R, using the `length` as number of samples to draw
-  expect_length(random(cau, c(1, 2, 3)), 3)
-  expect_length(random(cau, cbind(1, 2, 3)), 3)
-  expect_length(random(cau, rbind(1, 2, 3)), 3)
+  expect_length(random(pb, c(1, 2, 3)), 3)
+  expect_length(random(pb, cbind(1, 2, 3)), 3)
+  expect_length(random(pb, rbind(1, 2, 3)), 3)
 })
 
-test_that("pdf.Geometric work correctly", {
-  cau <- Geometric()
 
-  expect_equal(pdf(cau, 0), dgeom(0, 0.5))
-  expect_equal(pdf(cau, 1), dgeom(1, 0.5))
+test_that("pdf.PoissonBinomial work correctly", {
+  pb <- PoissonBinomial(0.5, 0.3, 0.8)
 
-  expect_length(pdf(cau, seq_len(0)), 0)
-  expect_length(pdf(cau, seq_len(1)), 1)
-  expect_length(pdf(cau, seq_len(10)), 10)
+  expect_equal(pdf(pb, 0), prod(1 - as.matrix(pb)))
+  expect_equal(pdf(pb, -12), 0)
+
+  expect_warning(pdf(pb, 0.5))
+
+  expect_length(pdf(pb, seq_len(0)), 0)
+  expect_length(pdf(pb, seq_len(1)), 1)
+  expect_length(pdf(pb, seq_len(10)), 10)
 })
 
-test_that("log_pdf.Geometric work correctly", {
-  cau <- Geometric()
+test_that("cdf.PoissonBinomial work correctly", {
+  pb <- PoissonBinomial(0.5, 0.3, 0.8)
 
-  expect_equal(log_pdf(cau, 0), log(dgeom(0, 0.5)))
-  expect_equal(log_pdf(cau, 1), log(dgeom(1, 0.5)))
+  expect_equal(cdf(pb, 0), prod(1 - as.matrix(pb)))
+  expect_equal(cdf(pb, 3), 1)
 
-  expect_length(log_pdf(cau, seq_len(0)), 0)
-  expect_length(log_pdf(cau, seq_len(1)), 1)
-  expect_length(log_pdf(cau, seq_len(10)), 10)
+
+  expect_length(cdf(pb, seq_len(0)), 0)
+  expect_length(cdf(pb, seq_len(1)), 1)
+  expect_length(cdf(pb, seq_len(10)), 10)
 })
 
-test_that("cdf.Geometric work correctly", {
-  cau <- Geometric()
+test_that("quantile.PoissonBinomial work correctly", {
+  pb <- PoissonBinomial(0.5, 0.3, 0.8)
 
-  expect_equal(cdf(cau, 0), pgeom(0, 0.5))
-  expect_equal(cdf(cau, 1), pgeom(1, 0.5))
+  expect_equal(quantile(pb, 0), 0)
+  expect_equal(quantile(pb, 1), 3)
 
 
-  expect_length(cdf(cau, seq_len(0)), 0)
-  expect_length(cdf(cau, seq_len(1)), 1)
-  expect_length(cdf(cau, seq_len(10)), 10)
+  expect_length(quantile(pb, seq_len(0)), 0)
+  expect_length(quantile(pb, c(0, 1)), 2)
 })
 
-test_that("quantile.Geometric work correctly", {
-  cau <- Geometric()
-
-  expect_equal(quantile(cau, 0), qgeom(0, 0.5))
-  expect_equal(quantile(cau, 1), qgeom(1, 0.5))
-
-
-  expect_length(quantile(cau, seq_len(0)), 0)
-  expect_length(quantile(cau, c(0, 1)), 2)
-})
-
-test_that("vectorization of a Geometric distribution work correctly", {
-  d <- Geometric(c(0.1, 0.5))
+test_that("vectorization of a PoissonBinomial distribution work correctly", {
+  d <- PoissonBinomial(c(0.5, 0.1), c(0.3, 0.9), c(0.8, 0.6))
   d1 <- d[1]
   d2 <- d[2]
 
@@ -139,8 +131,8 @@ test_that("vectorization of a Geometric distribution work correctly", {
   expect_equal(dim(support(d1, drop = FALSE)), c(1L, 2L))
 })
 
-test_that("named return values for Geometric distribution work correctly", {
-  d <- Geometric(c(0.1, 0.7))
+test_that("named return values for PoissonBinomial distribution work correctly", {
+  d <- PoissonBinomial(c(0.5, 0.1), c(0.3, 0.9), c(0.8, 0.6))
   names(d) <- LETTERS[1:length(d)]
 
   expect_equal(names(mean(d)), LETTERS[1:length(d)])
@@ -149,15 +141,15 @@ test_that("named return values for Geometric distribution work correctly", {
   expect_equal(names(kurtosis(d)), LETTERS[1:length(d)])
   expect_equal(names(random(d, 1)), LETTERS[1:length(d)])
   expect_equal(rownames(random(d, 3)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, 5)), LETTERS[1:length(d)])
-  expect_equal(names(pdf(d, c(5, 7))), LETTERS[1:length(d)])
-  expect_equal(rownames(pdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, 5)), LETTERS[1:length(d)])
-  expect_equal(names(log_pdf(d, c(5, 7))), LETTERS[1:length(d)])
-  expect_equal(rownames(log_pdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, 0)), LETTERS[1:length(d)])
+  expect_equal(names(pdf(d, c(0, 1))), LETTERS[1:length(d)])
+  expect_equal(rownames(pdf(d, c(0, 1, 5))), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, 0)), LETTERS[1:length(d)])
+  expect_equal(names(log_pdf(d, c(0, 1))), LETTERS[1:length(d)])
+  expect_equal(rownames(log_pdf(d, c(0, 1, 5))), LETTERS[1:length(d)])
   expect_equal(names(cdf(d, 5)), LETTERS[1:length(d)])
-  expect_equal(names(cdf(d, c(5, 7))), LETTERS[1:length(d)])
-  expect_equal(rownames(cdf(d, c(5, 7, 9))), LETTERS[1:length(d)])
+  expect_equal(names(cdf(d, c(0, 5))), LETTERS[1:length(d)])
+  expect_equal(rownames(cdf(d, c(0, 5, 9))), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, 0.5)), LETTERS[1:length(d)])
   expect_equal(names(quantile(d, c(0.5, 0.7))), LETTERS[1:length(d)])
   expect_equal(rownames(quantile(d, c(0.5, 0.7, 0.9))), LETTERS[1:length(d)])

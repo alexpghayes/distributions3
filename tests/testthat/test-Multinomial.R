@@ -1,7 +1,7 @@
 context("test-Multinomial")
 
 test_that("print.Multinomial works", {
-  expect_output(print(Multinomial(1, 0.5)), regexp = "Multinomial distribution")
+  expect_output(print(Multinomial(1, 0.5)), regexp = "Multinomial")
 })
 
 test_that("likelihood.Multinomial and log_likelihood.Multinomial work correctly", {

@@ -1,7 +1,7 @@
 context("test-Cauchy")
 
 test_that("print.Cauchy works", {
-  expect_output(print(Cauchy(1, 1)), regexp = "Cauchy distribution")
+  expect_output(print(Cauchy(1, 1)), regexp = "Cauchy")
 })
 
 test_that("likelihood.Cauchy and log_likelihood.Cauchy work correctly", {

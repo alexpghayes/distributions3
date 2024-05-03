@@ -1,7 +1,7 @@
 context("test-Bernoulli")
 
 test_that("print.Bernoulli works", {
-  expect_output(print(Bernoulli()), regexp = "Bernoulli distribution")
+  expect_output(print(Bernoulli()), regexp = "Bernoulli")
 })
 
 test_that("fit_mle.Bernoulli works correctly", {

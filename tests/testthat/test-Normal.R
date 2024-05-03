@@ -1,7 +1,7 @@
 context("test-Normal")
 
 test_that("print.Normal works", {
-  expect_output(print(Normal()), regexp = "Normal distribution")
+  expect_output(print(Normal()), regexp = "Normal")
 })
 
 test_that("suff_stat.Normal works correctly", {

@@ -1,7 +1,7 @@
 context("test-HurdleNegativeBinomial")
 
 test_that("print.HurdleNegativeBinomial works", {
-  expect_output(print(HurdleNegativeBinomial(1, 1, 0.7)), regexp = "HurdleNegativeBinomial distribution")
+  expect_output(print(HurdleNegativeBinomial(1, 1, 0.7)), regexp = "HurdleNegativeBinomial")
 })
 
 test_that("random.HurdleNegativeBinomial work correctly", {

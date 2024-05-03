@@ -26,7 +26,10 @@ prior to drawing the random sample. The previous random seed from the global
 environment (if any) is restored afterwards.}
 }
 \value{
-Random samples drawn from the distriubtion \code{x}.
+Random samples drawn from the distriubtion \code{x}. The \code{random}
+methods typically return either a matrix or, if possible, a vector. The
+\code{simulate} method always returns a data frame (with an attribute
+\code{"seed"} containing the \code{.Random.seed} from before the simulation).
 }
 \description{
 Generic function for drawing random samples from distribution objects.

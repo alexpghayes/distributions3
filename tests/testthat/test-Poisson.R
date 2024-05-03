@@ -1,7 +1,7 @@
 context("test-Poisson")
 
 test_that("print.Poisson works", {
-  expect_output(print(Poisson(1)), regexp = "Poisson distribution")
+  expect_output(print(Poisson(1)), regexp = "Poisson")
 })
 
 test_that("suff_stat.Poisson works correctly", {

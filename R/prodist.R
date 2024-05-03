@@ -232,28 +232,47 @@ prodist.Arima <- function(object, ...) {
   Normal(mu = setNames(as.numeric(p$pred), n), sigma = as.numeric(p$se))
 }
 
+
+## is countreg loaded (after pscl)?
+.use_countreg <- function() {
+  flavor <- c("pscl", "countreg")
+  flavor <- setNames(match(flavor, .packages()), flavor)
+  flavor <- names(sort(flavor))[1L]
+  identical(flavor, "countreg")
+}
+
 #' @export
 prodist.hurdle <- function(object, ...) {
-  dist <- object$dist$count
-  mu <- predict(object, type = "count", ...)
-  pi <- 1 - predict(object, type = "prob", at = 0:1, ...)[, 1L]
-  switch(dist,
-    "poisson"   = HurdlePoisson(lambda = mu, pi = pi),
-    "geometric" = HurdleNegativeBinomial(mu = mu, theta = 1, pi = pi),
-    "negbin"    = HurdleNegativeBinomial(mu = mu, theta = as.numeric(object$theta["count"]), pi = pi)
-  )
+  if(.use_countreg()) {
+    dist <- predict(object, type = "distribution", ...)
+  } else {
+    dist <- object$dist$count
+    mu <- predict(object, type = "count", ...)
+    pi <- 1 - predict(object, type = "prob", at = 0:1, ...)[, 1L]
+    dist <- switch(dist,
+      "poisson"   = HurdlePoisson(lambda = mu, pi = pi),
+      "geometric" = HurdleNegativeBinomial(mu = mu, theta = 1, pi = pi),
+      "negbin"    = HurdleNegativeBinomial(mu = mu, theta = as.numeric(object$theta["count"]), pi = pi)
+    )
+  }
+  return(dist)
 }
 
 #' @export
 prodist.zeroinfl <- function(object, ...) {
-  dist <- object$dist
-  mu <- predict(object, type = "count", ...)
-  pi <- predict(object, type = "zero", ...)
-  switch(dist,
-    "poisson"   = ZIPoisson(lambda = mu, pi = pi),
-    "geometric" = ZINegativeBinomial(mu = mu, theta = 1, pi = pi),
-    "negbin"    = ZINegativeBinomial(mu = mu, theta = as.numeric(object$theta), pi = pi)
-  )
+  if(.use_countreg()) {
+    dist <- predict(object, type = "distribution", ...)
+  } else {
+    dist <- object$dist
+    mu <- predict(object, type = "count", ...)
+    pi <- predict(object, type = "zero", ...)
+    dist <- switch(dist,
+      "poisson"   = ZIPoisson(lambda = mu, pi = pi),
+      "geometric" = ZINegativeBinomial(mu = mu, theta = 1, pi = pi),
+      "negbin"    = ZINegativeBinomial(mu = mu, theta = as.numeric(object$theta), pi = pi)
+    )
+  }
+  return(dist)
 }
 
 #' @export
@@ -266,6 +285,10 @@ prodist.zerotrunc <- function(object, ...) {
     "negbin"    = ZTNegativeBinomial(mu = mu, theta = as.numeric(object$theta))
   )
 }
+
+#' @rdname prodist
+#' @export
+prodist.distribution <- function(object, ...) object
 
 ## Further examples requiring other packages ---------------
 ## 

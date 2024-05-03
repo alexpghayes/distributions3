@@ -1,7 +1,7 @@
 context("test-Tukey")
 
 test_that("print.Tukey works", {
-  expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey distribution")
+  expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey")
 })
 
 test_that("random.Tukey work correctly", {

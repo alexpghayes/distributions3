@@ -1,7 +1,7 @@
 context("test-Beta")
 
 test_that("print.Beta works", {
-  expect_output(print(Beta()), regexp = "Beta distribution")
+  expect_output(print(Beta()), regexp = "Beta")
 })
 
 test_that("random.Beta work correctly", {

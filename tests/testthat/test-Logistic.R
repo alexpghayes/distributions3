@@ -1,7 +1,7 @@
 context("test-Logistic")
 
 test_that("print.Logistic works", {
-  expect_output(print(Logistic(1, 1)), regexp = "Logistic distribution")
+  expect_output(print(Logistic(1, 1)), regexp = "Logistic")
 })
 
 test_that("likelihood.Logistic and log_likelihood.Logistic work correctly", {
