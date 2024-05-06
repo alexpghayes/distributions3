@@ -28,7 +28,7 @@ reference:
       - fit_mle
       - is_distribution
       - prodist
-      - simulate
+      - simulate.default
   - title: "Utilities, tools, and data"
     contents:
       - apply_dpqr
