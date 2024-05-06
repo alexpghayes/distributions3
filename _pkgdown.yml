@@ -14,7 +14,7 @@ template:
 
 reference:
   - title: "Generic functions for S3 distribution objects"
-    contents: 
+    contents:
       - pdf
       - cdf
       - random
@@ -28,8 +28,9 @@ reference:
       - fit_mle
       - is_distribution
       - prodist
+      - simulate
   - title: "Utilities, tools, and data"
-    contents: 
+    contents:
       - apply_dpqr
       - make_support
       - make_positive_integer
@@ -37,7 +38,7 @@ reference:
       - log_likelihood
       - FIFA2018
   - title: "Visualization infrastructure"
-    contents: 
+    contents:
       - plot.distribution
       - plot_cdf
       - plot_pdf
@@ -254,6 +255,14 @@ reference:
       - random.Poisson
       - suff_stat.Poisson
       - support.Poisson
+  - title: "PoissonBinomial distribution"
+    contents:
+      - PoissonBinomial
+      - cdf.PoissonBinomial
+      - pdf.PoissonBinomial
+      - quantile.PoissonBinomial
+      - random.PoissonBinomial
+      - support.PoissonBinomial
   - title: "Reversed Weibull distribution"
     contents:
       - RevWeibull
