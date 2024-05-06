@@ -8,10 +8,10 @@
 <meta name="description" content="distributions3">
 <title>Intro to hypothesis testing • distributions3</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Intro to hypothesis testing">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Intro to hypothesis testing">
 <meta property="og:description" content="distributions3">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@alexpghayes">
@@ -26,7 +26,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary" data-bs-theme="dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
@@ -81,7 +81,8 @@
 
 
 
-<script src="intro-to-hypothesis-testing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Intro to hypothesis testing</h1>
             
@@ -92,51 +93,91 @@
 
     
     
-<p>Hypothesis testing is all about answering the question: for a parameter <span class="math inline">\(\theta\)</span>, is a parameter value of <span class="math inline">\(\theta_0\)</span> consistent with the data in our observed sample?</p>
+<p>Hypothesis testing is all about answering the question: for a
+parameter <span class="math inline">\(\theta\)</span>, is a parameter
+value of <span class="math inline">\(\theta_0\)</span> consistent with
+the data in our observed sample?</p>
 <p>We call this is the <em>null hypothesis</em> and write</p>
 <p><span class="math display">\[
   H_0 : \theta = \theta_0
 \]</span></p>
 <p>where this means that true (population) value of a parameter <span class="math inline">\(\theta\)</span> is equal to some value <span class="math inline">\(\theta_0\)</span>.</p>
-<p>What do we do next? We <em>assume</em> that <span class="math inline">\(\theta = \theta_0\)</span> in the population, and then check if this assumption is compatible with our observed data. The population with <span class="math inline">\(\theta = \theta_0\)</span> corresponds to a probability distribution, which we call the <em>null distribution</em>.</p>
-<p>Let’s make this concrete. Suppose that we observe data <span class="math inline">\(2, 3, 7\)</span> and we know that our data comes from a normal distribution with known variance <span class="math inline">\(\sigma^2 = 2\)</span>. Realistically, we won’t know <span class="math inline">\(\sigma^2\)</span>, or that our data is normal, but we’ll work with these assumptions for now and relax them later.</p>
-<p>Let’s suppose we’re interested in the population mean. Let’s guess that the population mean is 8. In this case we would write the null hypothesis as <span class="math inline">\(H_0 : \mu = 8\)</span>. This is a ridiculous guess for the population mean given our data, but it’ll illustrate our point. Our null distribution is then <span class="math inline">\(\mathrm{Normal}(8, 2)\)</span>.</p>
-<p>Now that we have a null distribution, we need to dream up a <em>test statistic</em>. In this class, you’ll always be given a test statistic. For now we’ll use the T statistic.</p>
+<p>What do we do next? We <em>assume</em> that <span class="math inline">\(\theta = \theta_0\)</span> in the population, and
+then check if this assumption is compatible with our observed data. The
+population with <span class="math inline">\(\theta = \theta_0\)</span>
+corresponds to a probability distribution, which we call the <em>null
+distribution</em>.</p>
+<p>Let’s make this concrete. Suppose that we observe data <span class="math inline">\(2, 3, 7\)</span> and we know that our data comes
+from a normal distribution with known variance <span class="math inline">\(\sigma^2 = 2\)</span>. Realistically, we won’t
+know <span class="math inline">\(\sigma^2\)</span>, or that our data is
+normal, but we’ll work with these assumptions for now and relax them
+later.</p>
+<p>Let’s suppose we’re interested in the population mean. Let’s guess
+that the population mean is 8. In this case we would write the null
+hypothesis as <span class="math inline">\(H_0 : \mu = 8\)</span>. This
+is a ridiculous guess for the population mean given our data, but it’ll
+illustrate our point. Our null distribution is then <span class="math inline">\(\mathrm{Normal}(8, 2)\)</span>.</p>
+<p>Now that we have a null distribution, we need to dream up a <em>test
+statistic</em>. In this class, you’ll always be given a test statistic.
+For now we’ll use the T statistic.</p>
 <p><span class="math display">\[
   Z = {\bar x - \mu_0 \over \mathrm{se}\left(\bar x \right)}
     = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
     = {4 \over \sqrt \frac 23}
     \approx 4.9
 \]</span></p>
-<p>Recall: a <em>statistic</em> <span class="math inline">\(T(X)\)</span> is a function from a random sample into the real line. Since statistics are functions of random samples, they are themselves random variables.</p>
+<p>Recall: a <em>statistic</em> <span class="math inline">\(T(X)\)</span> is a function from a random sample
+into the real line. Since statistics are functions of random samples,
+they are themselves random variables.</p>
 <p>Test statistics are chosen to have two important properties:</p>
 <ol style="list-style-type: decimal">
-<li>They need to relate to the population parameter we’re interested in measuring</li>
+<li>They need to relate to the population parameter we’re interested in
+measuring</li>
 <li>We need to know their sampling distributions</li>
 </ol>
-<p>Sampling distributions you say! Why do test statistics have sampling distributions? Because we’re just taking a function of a random sample.</p>
+<p>Sampling distributions you say! Why do test statistics have sampling
+distributions? Because we’re just taking a function of a random
+sample.</p>
 <p>For this example, we know that</p>
 <p><span class="math display">\[
   Z \sim \mathrm{Normal}(0, 1)
 \]</span></p>
-<p>and now we ask how probable is this statistic <em>given that we have assumed that null distribution is true</em>.</p>
-<p>The idea is that if this number is very small, then our null distribution can’t be correct: we shouldn’t observe highly unlikely statistics. This means that hypothesis testing is a form of <em>falsification testing</em>.</p>
+<p>and now we ask how probable is this statistic <em>given that we have
+assumed that null distribution is true</em>.</p>
+<p>The idea is that if this number is very small, then our null
+distribution can’t be correct: we shouldn’t observe highly unlikely
+statistics. This means that hypothesis testing is a form of
+<em>falsification testing</em>.</p>
 <p><img src="intro-to-hypothesis-testing_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>For the example above, we are interested in the probability of observing a more extreme test statistic given the null distribution, which in this case is:</p>
+<p>For the example above, we are interested in the probability of
+observing a more extreme test statistic given the null distribution,
+which in this case is:</p>
 <p><span class="math display">\[
-  P(|Z| &gt; 4.9) = P(Z &lt; -4.9) + P(Z &gt; 4.9) 
+  P(|Z| &gt; 4.9) = P(Z &lt; -4.9) + P(Z &gt; 4.9)
                \approx 9.6 \cdot 10^{-7}
 \]</span></p>
-<p>This probability is called a <em>p-value</em>. Since it’s very small, we conclude that the null hypothesis is not realistic. In other words, the population mean is statistically distinguishable from 8 (whether or not it is practically distinguishable from 8 is entirely another matter).</p>
-<p>This is the just of hypothesis testing. Of course there’s a bunch of other associated nonsense that obscures the basic idea, which we’ll dive into next.</p>
+<p>This probability is called a <em>p-value</em>. Since it’s very small,
+we conclude that the null hypothesis is not realistic. In other words,
+the population mean is statistically distinguishable from 8 (whether or
+not it is practically distinguishable from 8 is entirely another
+matter).</p>
+<p>This is the just of hypothesis testing. Of course there’s a bunch of
+other associated nonsense that obscures the basic idea, which we’ll dive
+into next.</p>
 <div class="section level3">
 <h3 id="things-that-can-go-wrong">Things that can go wrong<a class="anchor" aria-label="anchor" href="#things-that-can-go-wrong"></a>
 </h3>
 <div class="section level4">
 <h4 id="false-positives">False positives<a class="anchor" aria-label="anchor" href="#false-positives"></a>
 </h4>
-<p>We need to be concerned about rejecting the null hypothesis when the null hypothesis is true. This is called a <em>false positive</em> or a Type I error.</p>
-<p>If the null hypothesis is true, and we calculate a statistic like we did above, we still expect to see a value of p-value of <span class="math inline">\(9.6 \cdot 10^{-7}\)</span> about <span class="math inline">\(9.6 \cdot 10^{-5}\)</span> percent of the time. For small p-values this isn’t an issue, but let’s consider a different null hypothesis of <span class="math inline">\(\mu_0 = 3.9\)</span>. Now</p>
+<p>We need to be concerned about rejecting the null hypothesis when the
+null hypothesis is true. This is called a <em>false positive</em> or a
+Type I error.</p>
+<p>If the null hypothesis is true, and we calculate a statistic like we
+did above, we still expect to see a value of p-value of <span class="math inline">\(9.6 \cdot 10^{-7}\)</span> about <span class="math inline">\(9.6 \cdot 10^{-5}\)</span> percent of the time.
+For small p-values this isn’t an issue, but let’s consider a different
+null hypothesis of <span class="math inline">\(\mu_0 = 3.9\)</span>.
+Now</p>
 <p><span class="math display">\[
   Z = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
     = {4 - 3.9 \over \sqrt \frac 23}
@@ -147,8 +188,17 @@
   P(|Z| &gt; 0.12) = P(Z &lt; -0.12) + P(Z &gt; 0.12)
                 \approx 0.9
 \]</span></p>
-<p>and we see that this is quite probable! We should definitely not reject the null hypothesis!</p>
-<p>This leads us to a new question: when <em>should</em> we reject the null hypothesis? A standard choice is to set an acceptable probability for a false positive <span class="math inline">\(\alpha\)</span>. One arbitrary but common choice is to set <span class="math inline">\(\alpha = 0.05\)</span>, which means we are okay with a <span class="math inline">\({1 \over 20}\)</span> chance of a false positive. We should then reject the null hypothesis when the p-value is less than <span class="math inline">\(\alpha\)</span>. This is often called “rejecting the null hypothesis at significance level <span class="math inline">\(\alpha\)</span>”. More formally, we might write</p>
+<p>and we see that this is quite probable! We should definitely not
+reject the null hypothesis!</p>
+<p>This leads us to a new question: when <em>should</em> we reject the
+null hypothesis? A standard choice is to set an acceptable probability
+for a false positive <span class="math inline">\(\alpha\)</span>. One
+arbitrary but common choice is to set <span class="math inline">\(\alpha
+= 0.05\)</span>, which means we are okay with a <span class="math inline">\({1 \over 20}\)</span> chance of a false positive.
+We should then reject the null hypothesis when the p-value is less than
+<span class="math inline">\(\alpha\)</span>. This is often called
+“rejecting the null hypothesis at significance level <span class="math inline">\(\alpha\)</span>”. More formally, we might
+write</p>
 <p><span class="math display">\[
   P(\text{reject} \; H_0 | H_0 \; \text{true}) = \alpha
 \]</span></p>
@@ -156,12 +206,16 @@
 <div class="section level4">
 <h4 id="false-negatives">False negatives<a class="anchor" aria-label="anchor" href="#false-negatives"></a>
 </h4>
-<p>On the other hand, we may also fail to reject the null hypothesis when the null hypothesis is in fact false. We might just not have enough data to reject the null, for example. We call this a <em>false negative</em> or a Type II error. We write this as</p>
+<p>On the other hand, we may also fail to reject the null hypothesis
+when the null hypothesis is in fact false. We might just not have enough
+data to reject the null, for example. We call this a <em>false
+negative</em> or a Type II error. We write this as</p>
 <p><span class="math display">\[
   \text{Power} = P(\text{fail to reject} \; H_0 | H_0 \; \text{false})
                = 1 - \beta
 \]</span></p>
-<p>To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a one sample Z-test, you need</p>
+<p>To achieve a power of <span class="math inline">\(1 - \beta\)</span>
+for a one sample Z-test, you need</p>
 <p><span class="math display">\[
   n \approx \left(
     {
@@ -170,7 +224,9 @@
     }
   \right)^2
 \]</span></p>
-<p>where <span class="math inline">\(\mu_A\)</span> is the true mean and <span class="math inline">\(\mu_0\)</span> is the proposed mean. We’ll do an exercise later that will help you see where this comes from.</p>
+<p>where <span class="math inline">\(\mu_A\)</span> is the true mean and
+<span class="math inline">\(\mu_0\)</span> is the proposed mean. We’ll
+do an exercise later that will help you see where this comes from.</p>
 </div>
 </div>
 <div class="section level2">
@@ -179,7 +235,11 @@
 <div class="section level3">
 <h3 id="z-test">Z-test<a class="anchor" aria-label="anchor" href="#z-test"></a>
 </h3>
-<p>A company claims battery lifetimes are normally distributed with <span class="math inline">\(\mu = 40\)</span> and <span class="math inline">\(\sigma = 5\)</span> hours. We are curious if the claim about the mean is reasonable, and collect a random sample of 100 batteries. The sample mean is 39.8. What is the p-value of a Z-test for <span class="math inline">\(H_0 : \mu = 40\)</span>?</p>
+<p>A company claims battery lifetimes are normally distributed with
+<span class="math inline">\(\mu = 40\)</span> and <span class="math inline">\(\sigma = 5\)</span> hours. We are curious if the
+claim about the mean is reasonable, and collect a random sample of 100
+batteries. The sample mean is 39.8. What is the p-value of a Z-test for
+<span class="math inline">\(H_0 : \mu = 40\)</span>?</p>
 <p>We begin by calculating a Z-score</p>
 <p><span class="math display">\[
   Z = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
@@ -190,7 +250,9 @@
 <p><span class="math display">\[
   P(Z &lt; -0.4) + P(Z &gt; 0.4) \approx 0.69
 \]</span></p>
-<p>we might also be interested in a <em>one-sided</em> test, where <span class="math inline">\(H_A : \mu &lt; 40\)</span>. In this case the p-value is only the case when <span class="math inline">\(Z &lt; -0.4\)</span>, and the p-value is</p>
+<p>we might also be interested in a <em>one-sided</em> test, where <span class="math inline">\(H_A : \mu &lt; 40\)</span>. In this case the
+p-value is only the case when <span class="math inline">\(Z &lt;
+-0.4\)</span>, and the p-value is</p>
 <p><span class="math display">\[
   P(Z &lt; -0.4) \approx 0.34
 \]</span></p>
@@ -198,14 +260,28 @@
 <div class="section level3">
 <h3 id="power-for-z-test">Power for Z-test<a class="anchor" aria-label="anchor" href="#power-for-z-test"></a>
 </h3>
-<p>Suppose a powdered medicine is supposed to have a mean particle diameter of <span class="math inline">\(\mu = 15\)</span> micrometers, and the standard deviation of diameters stays steady around 1.8 micrometers. The company would like to have high power to detect mean thicknesses 0.2 micrometers away from 15. When <span class="math inline">\(n = 100\)</span>, what is the power of the test if the true <span class="math inline">\(\mu\)</span> is 15.2 micrometers. Assume the company is interested in controlling type I error at an <span class="math inline">\(\alpha = 0.05\)</span> level.</p>
-<p>We will reject the null when our Z score is less than <span class="math inline">\(z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2}\)</span>, or when the Z score is less than -1.96 or greater than 1.96. Recall that the Z score is <span class="math inline">\({\bar x - \mu_0 \over {\sigma \over \sqrt n}}\)</span>, which we can rearrange in terms of <span class="math inline">\(\bar x\)</span> to see that we will reject the null when <span class="math inline">\(\bar x &lt; 14.65\)</span> or <span class="math inline">\(\bar x &gt; 15.35\)</span>.</p>
-<p>Now we are interested in the probability of being in this rejection region <em>when the alternative hypothesis <span class="math inline">\(\mu_A = 15.2\)</span> is true</em>.</p>
+<p>Suppose a powdered medicine is supposed to have a mean particle
+diameter of <span class="math inline">\(\mu = 15\)</span> micrometers,
+and the standard deviation of diameters stays steady around 1.8
+micrometers. The company would like to have high power to detect mean
+thicknesses 0.2 micrometers away from 15. When <span class="math inline">\(n = 100\)</span>, what is the power of the test if
+the true <span class="math inline">\(\mu\)</span> is 15.2 micrometers.
+Assume the company is interested in controlling type I error at an <span class="math inline">\(\alpha = 0.05\)</span> level.</p>
+<p>We will reject the null when our Z score is less than <span class="math inline">\(z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2}\)</span>, or when the Z score
+is less than -1.96 or greater than 1.96. Recall that the Z score is
+<span class="math inline">\({\bar x - \mu_0 \over {\sigma \over \sqrt
+n}}\)</span>, which we can rearrange in terms of <span class="math inline">\(\bar x\)</span> to see that we will reject the
+null when <span class="math inline">\(\bar x &lt; 14.65\)</span> or
+<span class="math inline">\(\bar x &gt; 15.35\)</span>.</p>
+<p>Now we are interested in the probability of being in this rejection
+region <em>when the alternative hypothesis <span class="math inline">\(\mu_A = 15.2\)</span> is true</em>.</p>
 <!-- this is magical why are we interested in this -->
 <p><span class="math display">\[
   P(\bar x &gt; 15.35 | \mu = 15.2) + P(\bar x &lt; 14.65 | \mu = 15.2)
 \]</span></p>
-<p>and we know that <span class="math inline">\(\bar x \sim \mathrm{Normal} \left(15.2, 1.8 / \sqrt{100}\right)\)</span> so this equals</p>
+<p>and we know that <span class="math inline">\(\bar x \sim
+\mathrm{Normal} \left(15.2, 1.8 / \sqrt{100}\right)\)</span> so this
+equals</p>
 <p><span class="math display">\[
   0.001 + 0.198 \approx 0.199
 \]</span></p>
@@ -219,13 +295,11 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>

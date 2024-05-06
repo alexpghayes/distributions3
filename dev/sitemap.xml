@@ -130,6 +130,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/Poisson.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/PoissonBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/RevWeibull.html</loc>
   </url>
   <url>
@@ -227,6 +230,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.Poisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.PoissonBinomial.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/cdf.RevWeibull.html</loc>
@@ -382,6 +388,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.Poisson.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.PoissonBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/pdf.RevWeibull.html</loc>
   </url>
   <url>
@@ -490,6 +499,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.Poisson.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.PoissonBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/quantile.RevWeibull.html</loc>
   </url>
   <url>
@@ -589,6 +601,9 @@
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.Poisson.html</loc>
   </url>
   <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.PoissonBinomial.html</loc>
+  </url>
+  <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.RevWeibull.html</loc>
   </url>
   <url>
@@ -617,6 +632,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/random.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/simulate.default.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/suff_stat.Bernoulli.html</loc>
@@ -710,6 +728,9 @@
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.Poisson.html</loc>
+  </url>
+  <url>
+    <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.PoissonBinomial.html</loc>
   </url>
   <url>
     <loc>https://alexpghayes.github.io/distributions3/dev/reference/support.RevWeibull.html</loc>

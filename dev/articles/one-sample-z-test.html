@@ -8,10 +8,10 @@
 <meta name="description" content="distributions3">
 <title>One sample Z-tests • distributions3</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="One sample Z-tests">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="One sample Z-tests">
 <meta property="og:description" content="distributions3">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@alexpghayes">
@@ -26,7 +26,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary" data-bs-theme="dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
@@ -81,7 +81,8 @@
 
 
 
-<script src="one-sample-z-test_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>One sample Z-tests</h1>
             
@@ -92,25 +93,36 @@
 
     
     
-<p>In this vignette, we work through an example Z-test, and point out a number of points where you might get stuck along the way.</p>
+<p>In this vignette, we work through an example Z-test, and point out a
+number of points where you might get stuck along the way.</p>
 <div class="section level2">
 <h2 id="problem-setup">Problem setup<a class="anchor" aria-label="anchor" href="#problem-setup"></a>
 </h2>
-<p>Let’s suppose that a student is interesting in estimating how many memes their professors know and love. So they go to class, and every time a professor uses a new meme, they write it down. After a year of classes, the student has recorded the following meme counts, where each count corresponds to a single class they took:</p>
+<p>Let’s suppose that a student is interesting in estimating how many
+memes their professors know and love. So they go to class, and every
+time a professor uses a new meme, they write it down. After a year of
+classes, the student has recorded the following meme counts, where each
+count corresponds to a single class they took:</p>
 <p><span class="math display">\[
   3, 7, 11, 0, 7, 0, 4, 5, 6, 2
 \]</span></p>
-<p>The student talks to some other students who’ve done similar studies and determines that <span class="math inline">\(\sigma = 2\)</span> is a reasonable value for the standard deviation of this distribution.</p>
+<p>The student talks to some other students who’ve done similar studies
+and determines that <span class="math inline">\(\sigma = 2\)</span> is a
+reasonable value for the standard deviation of this distribution.</p>
 </div>
 <div class="section level2">
 <h2 id="assumption-checking">Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"></a>
 </h2>
-<p>Before we can do a Z-test, we need to make check if we can reasonably treat the mean of this sample as normally distributed. This happens is the case of either of following hold:</p>
+<p>Before we can do a Z-test, we need to make check if we can reasonably
+treat the mean of this sample as normally distributed. This happens is
+the case of either of following hold:</p>
 <ol style="list-style-type: decimal">
 <li>The data comes from a normal distribution.</li>
-<li>We have lots of data. How much? Many textbooks use 30 data points as a rule of thumb.</li>
+<li>We have lots of data. How much? Many textbooks use 30 data points as
+a rule of thumb.</li>
 </ol>
-<p>Since we have a small sample, we should check if the data comes from a normal distribution using a normal quantile-quantile plot.</p>
+<p>Since we have a small sample, we should check if the data comes from
+a normal distribution using a normal quantile-quantile plot.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># read in the data</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">11</span>, <span class="fl">0</span>, <span class="fl">7</span>, <span class="fl">0</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">2</span><span class="op">)</span></span>
@@ -119,18 +131,24 @@
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqline</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="one-sample-z-test_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>Since the data lies close the line <span class="math inline">\(y = x\)</span>, and has no notable systematic deviations from line, it’s safe to treat the sample as coming from a normal distribution. We can proceed with our hypothesis test.</p>
+<p>Since the data lies close the line <span class="math inline">\(y =
+x\)</span>, and has no notable systematic deviations from line, it’s
+safe to treat the sample as coming from a normal distribution. We can
+proceed with our hypothesis test.</p>
 </div>
 <div class="section level2">
 <h2 id="null-hypothesis-and-test-statistic">Null hypothesis and test statistic<a class="anchor" aria-label="anchor" href="#null-hypothesis-and-test-statistic"></a>
 </h2>
-<p>Let’s test the null hypothesis that, on average, professors know 3 memes. That is</p>
+<p>Let’s test the null hypothesis that, on average, professors know 3
+memes. That is</p>
 <p><span class="math display">\[
   H_0: \mu = 3 \qquad H_A: \mu \neq 3
 \]</span></p>
-<p>First we need to calculate our Z-statistic. Let’s do this with R. Remember that the Z-statistic is defined as</p>
+<p>First we need to calculate our Z-statistic. Let’s do this with R.
+Remember that the Z-statistic is defined as</p>
 <p><span class="math display">\[
-  Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} \sim \mathrm{Normal}(0, 1)
+  Z = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} \sim \mathrm{Normal}(0,
+1)
 \]</span></p>
 </div>
 <div class="section level2">
@@ -160,13 +178,19 @@
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Normal.html">Normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># make a standard normal r.v.</span></span>
 <span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">2.37</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">2.37</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.01778809</span></span></code></pre></div>
-<p>Note that we saved <code>z_stat</code> above so we could have also done</p>
+<p>Note that we saved <code>z_stat</code> above so we could have also
+done</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.01770607</span></span></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
-<p>So our p-value is about 0.0177. You should verify this with a Z-table. Note that you should get the <em>same</em> value from <code>cdf(Z, 2.37)</code> and looking up <code>2.37</code> on a Z-table.</p>
-<p>You may also have seen a different formula for the p-value of a two-sided Z-test, which makes use of the fact that the normal distribution is symmetric:</p>
+<p>So our p-value is about 0.0177. You should verify this with a
+Z-table. Note that you should get the <em>same</em> value from
+<code>cdf(Z, 2.37)</code> and looking up <code>2.37</code> on a
+Z-table.</p>
+<p>You may also have seen a different formula for the p-value of a
+two-sided Z-test, which makes use of the fact that the normal
+distribution is symmetric:</p>
 <p><span class="math display">\[
 \begin{align}
   P(|Z| \ge |2.37|)
@@ -178,7 +202,8 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">2.37</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.01778809</span></span></code></pre></div>
-<p>Finally, sometimes we are interest in one sided Z-tests. For the test</p>
+<p>Finally, sometimes we are interest in one sided Z-tests. For the
+test</p>
 <p><span class="math display">\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
@@ -208,28 +233,45 @@
 <div class="section level2">
 <h2 id="rejection-regions">Rejection regions<a class="anchor" aria-label="anchor" href="#rejection-regions"></a>
 </h2>
-<p><strong>Preface</strong>: I am strongly opposed to make a dichotomous “reject/fail to reject” decision for hypothesis tests. If you do a hypothesis test, you should report the p-value, period. Picking an arbitrary <span class="math inline">\(\alpha\)</span> level rejection threshold and treating it as a gold standard is ridiculous, as evidenced by 60 years of statistical literature laden with warnings about hypothesis testing. That said, sometimes it can be useful to think about when you reject a hypothesis test.</p>
-<p>We can think about three different rejection regions for a Z-test:</p>
+<p><strong>Preface</strong>: I am strongly opposed to make a dichotomous
+“reject/fail to reject” decision for hypothesis tests. If you do a
+hypothesis test, you should report the p-value, period. Picking an
+arbitrary <span class="math inline">\(\alpha\)</span> level rejection
+threshold and treating it as a gold standard is ridiculous, as evidenced
+by 60 years of statistical literature laden with warnings about
+hypothesis testing. That said, sometimes it can be useful to think about
+when you reject a hypothesis test.</p>
+<p>We can think about three different rejection regions for a
+Z-test:</p>
 <ol style="list-style-type: decimal">
 <li>The rejection region in terms of the p-value</li>
 <li>The rejection region in terms of the test statistic</li>
 <li>The rejection region in terms of the sample mean</li>
 </ol>
-<p>For a given <span class="math inline">\(\alpha\)</span> level threshold, all of these rejection regions are equivalent. We’ll start by thinking about the rejection of a two-sided test. That is</p>
+<p>For a given <span class="math inline">\(\alpha\)</span> level
+threshold, all of these rejection regions are equivalent. We’ll start by
+thinking about the rejection of a two-sided test. That is</p>
 <p><span class="math display">\[
 \begin{align}
 H_0 : \mu = \mu_0 \qquad H_A : \mu \neq \mu_0
 \end{align}
 \]</span></p>
-<p>We then calculate a test statistic <span class="math inline">\(Z_\text{obs}\)</span>, and a p-value <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|)\)</span> and reject when <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha\)</span>. This defines our first rejection region. Using our observation from before, this is exactly equivalent to rejecting when</p>
+<p>We then calculate a test statistic <span class="math inline">\(Z_\text{obs}\)</span>, and a p-value <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|)\)</span> and reject
+when <span class="math inline">\(P(|Z| &gt; |Z_\text{obs}|) &lt;
+\alpha\)</span>. This defines our first rejection region. Using our
+observation from before, this is exactly equivalent to rejecting
+when</p>
 <p><span class="math display">\[
 \begin{align}
-P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha 
-&amp; \Longleftrightarrow 2 \cdot P(Z &lt; -|Z_\text{obs}|) &lt; \alpha \\
+P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
+&amp; \Longleftrightarrow 2 \cdot P(Z &lt; -|Z_\text{obs}|) &lt; \alpha
+\\
 &amp; \Longleftrightarrow P(Z &lt; -|Z_\text{obs}|) &lt; \alpha / 2
 \end{align}
 \]</span></p>
-<p>and this last statement is exactly the same as when <span class="math inline">\(Z_\text{obs} &lt; z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2} &lt; Z_\text{obs}\)</span>. This is our second region region, in terms of the test statistic. Finally, recall that</p>
+<p>and this last statement is exactly the same as when <span class="math inline">\(Z_\text{obs} &lt; z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2} &lt; Z_\text{obs}\)</span>.
+This is our second region region, in terms of the test statistic.
+Finally, recall that</p>
 <p><span class="math display">\[
   Z_\text{obs} = \frac{\bar x - \mu_0}{\sigma / \sqrt{n}}
 \]</span></p>
@@ -237,14 +279,16 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 <p><span class="math display">\[
 \begin{align}
 \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &gt; z_{1 - \alpha / 2}
-&amp; \Longleftrightarrow \bar x &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}
+&amp; \Longleftrightarrow \bar x &gt; \mu_0 + z_{1 - \alpha / 2}
+\frac{\sigma}{\sqrt n}
 \end{align}
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
 \begin{align}
 \frac{\bar x - \mu_0}{\sigma / \sqrt{n}} &lt; z_{\alpha / 2}
-&amp; \Longleftrightarrow \bar x &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}
+&amp; \Longleftrightarrow \bar x &lt; \mu_0 + z_{\alpha / 2}
+\frac{\sigma}{\sqrt n}
 \end{align}
 \]</span></p>
 <p>You can also think about this in terms of <span class="math inline">\(\mu_0\)</span>. We will reject the test when <span class="math inline">\(\mu_0\)</span> is not in</p>
@@ -254,7 +298,12 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
   \bar x + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right)
 \end{align}
 \]</span></p>
-<p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains all the values of <span class="math inline">\(\mu_0\)</span> that we cannot reject at the <span class="math inline">\(\alpha\)</span> level. You can perform a similar calculation for a one sided test, resulting in a one-sided confidence bound, where one end of the interval is either <span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
+<p>which you may recognize as the confidence interval for <span class="math inline">\(\mu\)</span>! So the confidence interval contains
+all the values of <span class="math inline">\(\mu_0\)</span> that we
+cannot reject at the <span class="math inline">\(\alpha\)</span> level.
+You can perform a similar calculation for a one sided test, resulting in
+a one-sided confidence bound, where one end of the interval is either
+<span class="math inline">\(\infty\)</span> or <span class="math inline">\(-\infty\)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="power-and-sample-size-calculations">Power and sample size calculations<a class="anchor" aria-label="anchor" href="#power-and-sample-size-calculations"></a>
@@ -262,8 +311,24 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 <div class="section level3">
 <h3 id="formulas-for-power">Formulas for power<a class="anchor" aria-label="anchor" href="#formulas-for-power"></a>
 </h3>
-<p>We want to make sure that we actually reject our null hypothesis in the case that it is false. That is, we would like to make sure that our test has high power. Mathematically, this means that <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different ways: it could be that the true <span class="math inline">\(\mu\)</span> is <span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as formulated above is not really possible. However, we can calculate power for specific versions of “<span class="math inline">\(H_0\)</span> is false”.</p>
-<p>Let’s consider the case that <span class="math inline">\(H_0\)</span> is false, and in particular the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our test is <span class="math inline">\(P(\text{reject } H_0 | \mu = \mu_A)\)</span>. <a href="#rejection-regions">Recall</a> that we reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the power of our test when <span class="math inline">\(\mu = \mu_A\)</span> is</p>
+<p>We want to make sure that we actually reject our null hypothesis in
+the case that it is false. That is, we would like to make sure that our
+test has high power. Mathematically, this means that <span class="math inline">\(P(\text{reject } H_0 | H_0 \text{ is
+false})\)</span>. The problem here is that <span class="math inline">\(H_0\)</span> can be wrong in many different ways:
+it could be that the true <span class="math inline">\(\mu\)</span> is
+<span class="math inline">\(2\)</span>, it could be <span class="math inline">\(7\)</span>, it could be <span class="math inline">\(4.26\)</span>. So to calculate power as formulated
+above is not really possible. However, we can calculate power for
+specific versions of “<span class="math inline">\(H_0\)</span> is
+false”.</p>
+<p>Let’s consider the case that <span class="math inline">\(H_0\)</span>
+is false, and in particular the true value of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\mu_A\)</span>. In this case, the power of our
+test is <span class="math inline">\(P(\text{reject } H_0 | \mu =
+\mu_A)\)</span>. <a href="#rejection-regions">Recall</a> that we reject
+<span class="math inline">\(H_0\)</span> when <span class="math inline">\(\bar{x} &gt; \mu_0 + z_{1 - \alpha / 2}
+\frac{\sigma}{\sqrt n}\)</span> or <span class="math inline">\(\bar{x}
+&lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n}\)</span>, so the
+power of our test when <span class="math inline">\(\mu = \mu_A\)</span>
+is</p>
 <p><span class="math display">\[
   P(\text{reject } H_0 \left | \mu = \mu_A \right .) =
   P\left( \left . \bar x &gt; \mu_0 + z_{1 - \alpha / 2}
@@ -271,38 +336,58 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
   \mu_A \right) + P\left( \left . \bar x &lt; \mu_0 + z_{\alpha / 2}
     \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right).
 \]</span></p>
-<p>Remember that <span class="math inline">\(\bar X \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>. This means that, given <span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal} \left(\mu, \frac{\sigma^2}{n} \right)\)</span>, which let’s us calculate the probabilities we need to find the power:</p>
+<p>Remember that <span class="math inline">\(\bar X \sim \mathrm{Normal}
+\left(\mu, \frac{\sigma^2}{n} \right)\)</span>. This means that, given
+<span class="math inline">\(\mu = \mu_A\)</span>, <span class="math inline">\(\bar{x} \sim \mathrm{Normal} \left(\mu,
+\frac{\sigma^2}{n} \right)\)</span>, which let’s us calculate the
+probabilities we need to find the power:</p>
 <p><span class="math display">\[
 \begin{align}
-  P\left( \left . \bar{x} &gt; \mu_0 + z_{1 - \alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right)
-  &amp;= P\left( \frac{\bar{x} - \mu_A}{\sigma/\sqrt{n}} &gt; \frac{\mu_0 + z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} - \mu_A}{\sigma/\sqrt{n}} \right) \\
-  &amp;= P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right),
+  P\left( \left . \bar{x} &gt; \mu_0 + z_{1 - \alpha / 2}
+\frac{\sigma}{\sqrt n} \right | \mu = \mu_A \right)
+  &amp;= P\left( \frac{\bar{x} - \mu_A}{\sigma/\sqrt{n}} &gt;
+\frac{\mu_0 + z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} -
+\mu_A}{\sigma/\sqrt{n}} \right) \\
+  &amp;= P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} +
+z_{1-\alpha/2} \right),
 \end{align}
 \]</span></p>
 <p>and similarly</p>
 <p><span class="math display">\[
-  P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2} \frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+  P\left( \left . \bar{x} &lt; \mu_0 + z_{\alpha / 2}
+\frac{\sigma}{\sqrt n} \right | \mu = \mu_A\right) = P\left( Z &lt;
+\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
 \]</span></p>
 <p>So, the power of our test, <em>if the true population mean is <span class="math inline">\(\mu_A\)</span></em>, is</p>
 <p><span class="math display">\[
 \begin{align}
-  \text{Power} &amp;= P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
-  &amp;= \left[1 - P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right)\right] + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
+  \text{Power} &amp;= P\left( Z &gt; \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt;
+\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right) \\
+  &amp;= \left[1 - P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}}
++ z_{1-\alpha/2} \right)\right] + P\left( Z &lt; \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right)
 \end{align}
 \]</span></p>
-<p>Let’s calculate this if <span class="math inline">\(\mu_A = 5\)</span>.</p>
+<p>Let’s calculate this if <span class="math inline">\(\mu_A =
+5\)</span>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">power_lower</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.025</span><span class="op">)</span></span>
 <span><span class="va">power_upper</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">5</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.025</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">power_lower</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">power_upper</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.8853791</span></span></code></pre></div>
-<p>This means that the probability that we reject the null hypothesis (<span class="math inline">\(H_0: \mu = 3\)</span>) if the true mean is <span class="math inline">\(5\)</span> is about 0.89.</p>
+<p>This means that the probability that we reject the null hypothesis
+(<span class="math inline">\(H_0: \mu = 3\)</span>) if the true mean is
+<span class="math inline">\(5\)</span> is about 0.89.</p>
 </div>
 <div class="section level3">
 <h3 id="formulas-for-sample-size-calculations">Formulas for sample size calculations<a class="anchor" aria-label="anchor" href="#formulas-for-sample-size-calculations"></a>
 </h3>
-<p>Often times researchers like to go in the other direction: aim for a specific level of power, and calculate how many observations are needed to reach that level. To achieve a power of <span class="math inline">\(1 - \beta\)</span> for a one sample Z-test with <span class="math inline">\(H_0 : \mu = \mu_0\)</span>, you need</p>
+<p>Often times researchers like to go in the other direction: aim for a
+specific level of power, and calculate how many observations are needed
+to reach that level. To achieve a power of <span class="math inline">\(1
+- \beta\)</span> for a one sample Z-test with <span class="math inline">\(H_0 : \mu = \mu_0\)</span>, you need</p>
 <p><span class="math display">\[
   n \approx \left(
     {
@@ -311,35 +396,67 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
     }
   \right)^2
 \]</span></p>
-<p>samples. If <span class="math inline">\(n\)</span> is not an integer, round up. Often, the denominator is thought of as the detectable difference. So, the question becomes how many samples are required to have sufficient power to detect a difference of some particular size.</p>
-<p>This equation is simply a rewrite of the equation presented above for power. Recall, the power for a two sided test is</p>
+<p>samples. If <span class="math inline">\(n\)</span> is not an integer,
+round up. Often, the denominator is thought of as the detectable
+difference. So, the question becomes how many samples are required to
+have sufficient power to detect a difference of some particular
+size.</p>
+<p>This equation is simply a rewrite of the equation presented above for
+power. Recall, the power for a two sided test is</p>
 <p><span class="math display">\[
-\text{Power} = P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
+\text{Power} = P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} +
+z_{1-\alpha/2} \right) + P\left( Z &lt; \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{\alpha/2} \right).
 \]</span></p>
-<p>Usually, only one of these terms is contributing while the other is very close to zero. Let’s say the first term is the one clearly different from zero. To determine the sample size, we want to determine <span class="math inline">\(n\)</span> such that <span class="math inline">\(P\left( Z &gt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta\)</span>. Or, similarly, <span class="math inline">\(P\left( Z &lt; \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta\)</span>. I.e. we need <span class="math inline">\(\frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} = z_{\beta}\)</span>.</p>
+<p>Usually, only one of these terms is contributing while the other is
+very close to zero. Let’s say the first term is the one clearly
+different from zero. To determine the sample size, we want to determine
+<span class="math inline">\(n\)</span> such that <span class="math inline">\(P\left( Z &gt; \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = 1-\beta\)</span>. Or,
+similarly, <span class="math inline">\(P\left( Z &lt; \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} \right) = \beta\)</span>. I.e.
+we need <span class="math inline">\(\frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} = z_{\beta}\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
- z_{\beta} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} &amp; \Longleftrightarrow z_{\beta} - z_{1-\alpha/2} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} \\
-  &amp; \Longleftrightarrow \sigma (z_{\beta} - z_{1-\alpha/2}) = (\mu_0-\mu_A)\sqrt{n} \\
- &amp; \Longleftrightarrow \frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A} = \sqrt{n} \\
- &amp; \Longleftrightarrow \left(\frac{\sigma (z_{\beta} - z_{1-\alpha/2})}{\mu_0-\mu_A}\right)^2 = n
+z_{\beta} = \frac{\mu_0 - \mu_A}{\sigma/\sqrt{n}} + z_{1-\alpha/2} &amp;
+\Longleftrightarrow z_{\beta} - z_{1-\alpha/2} = \frac{\mu_0 -
+\mu_A}{\sigma/\sqrt{n}} \\
+  &amp; \Longleftrightarrow \sigma (z_{\beta} - z_{1-\alpha/2}) =
+(\mu_0-\mu_A)\sqrt{n} \\
+&amp; \Longleftrightarrow \frac{\sigma (z_{\beta} -
+z_{1-\alpha/2})}{\mu_0-\mu_A} = \sqrt{n} \\
+&amp; \Longleftrightarrow \left(\frac{\sigma (z_{\beta} -
+z_{1-\alpha/2})}{\mu_0-\mu_A}\right)^2 = n
 \end{align}
 \]</span></p>
-<p>Since <span class="math inline">\(z_{1-\alpha/2} = -z_{\alpha/2}\)</span>, we have the equation above:</p>
+<p>Since <span class="math inline">\(z_{1-\alpha/2} =
+-z_{\alpha/2}\)</span>, we have the equation above:</p>
 <p><span class="math display">\[
-  \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 = n.
+  \left(\frac{\sigma (z_{\beta} + z_{\alpha/2})}{\mu_0-\mu_A}\right)^2 =
+n.
 \]</span></p>
-<p>As an example, say the student prior to the experiment had determined that they wanted to test if the number of memes their professors know and love is 2. They want to make sure their sample size is large enough so that they are likely to reject the null hypothesis if the true number is 3. They determine that they want a probability of 0.9 of rejecting the null if the true number is 3. So, a sample size calculation looks like this:</p>
+<p>As an example, say the student prior to the experiment had determined
+that they wanted to test if the number of memes their professors know
+and love is 2. They want to make sure their sample size is large enough
+so that they are likely to reject the null hypothesis if the true number
+is 3. They determine that they want a probability of 0.9 of rejecting
+the null if the true number is 3. So, a sample size calculation looks
+like this:</p>
 <p><span class="math display">\[
   n \approx \left(
     {
-      2 \cdot (1.96 + 1.28) \over 
+      2 \cdot (1.96 + 1.28) \over
       2-3
     }
   \right)^2 = 41.99
 \]</span></p>
-<p>So to make sure that they reject the null hypothesis with a probability of 0.9 if the true value is 3, they would have to ask 53 professors.</p>
-<p>Below is this same calculation done in <code>R</code>. Remember, <span class="math inline">\(\beta = 1-\text{Power}\)</span>. Note the small discrepancy. This is due to rounding error.</p>
+<p>So to make sure that they reject the null hypothesis with a
+probability of 0.9 if the true value is 3, they would have to ask 53
+professors.</p>
+<p>Below is this same calculation done in <code>R</code>. Remember,
+<span class="math inline">\(\beta = 1-\text{Power}\)</span>. Note the
+small discrepancy. This is due to rounding error.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">0.05</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="co">#&gt; [1] 42.02969</span></span></code></pre></div>
@@ -352,13 +469,11 @@ P(|Z| &gt; |Z_\text{obs}|) &lt; \alpha
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>
