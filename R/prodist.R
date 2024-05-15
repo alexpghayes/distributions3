@@ -200,12 +200,19 @@ prodist.glm <- function(object, ..., dispersion = NULL) {
     size <- if("newdata" %in% names(list(...))) 1L else object$prior.weights
   }
   
+  ## special case: MASS::negative.binomial()
+  if(startsWith(object$family$family, "Negative Binomial")) {
+    object$family$family <- "negative.binomial"
+    phi <- environment(object$family$variance)$.Theta
+  }
+  
   ## set up distributions object (if possible)
   switch(object$family$family,
     "gaussian" = Normal(mu = mu, sigma = sqrt(phi)),
     "poisson" = Poisson(lambda = mu),
     "binomial" = Binomial(size = size, p = mu),
     "Gamma" = distributions3::Gamma(shape = 1/phi, rate = 1/(phi * mu)),
+    "negative.binomial" = NegativeBinomial(mu = mu, size = phi),
     "inverse.gaussian" = stop("inverse Gaussian distributions3 object not implemented yet"), ## FIXME: could use SuppDists for this
     "quasi" = stop("quasi family is not associated with a full probability distribution"),
     "quasibinomial" = stop("quasi-Poisson family is not associated with a full probability distribution"),

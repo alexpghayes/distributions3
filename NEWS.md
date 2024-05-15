@@ -22,6 +22,8 @@
   for vectors of distributions (#101).
 - Fixed errors in notation of cumulative distribution function in the documentation of
   `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #96).
+- The `prodist()` method for `glm` objects can now also handle `family` specifications from
+  `MASS::negative.binomial(theta)` with fixed `theta` (reported by Christian Kleiber).
 - Further small improvements in methods and manual pages.
 
 
