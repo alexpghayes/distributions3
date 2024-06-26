@@ -1,5 +1,3 @@
-context("test-simulate")
-
 test_that("simulate() methods work and return equivalent results", {
   ## Poisson GLM for FIFA 2018 goals data
   data("FIFA2018", package = "distributions3")

@@ -1,5 +1,3 @@
-context("test-Gumbel")
-
 test_that("print.Gumbel works", {
   expect_output(print(Gumbel()), regexp = "Gumbel")
 })
@@ -23,7 +21,7 @@ test_that("random.Gumbel works correctly", {
   expect_length(random(g2[-1], 1), 0)
   expect_length(random(g2, 0), 0)
   expect_error(random(g2, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g2, c(1, 2, 3)), 3)
   expect_length(random(g2, cbind(1, 2, 3)), 3)

@@ -1,5 +1,3 @@
-context("test-utils")
-
 test_that("is_distribution() works", {
   expect_true(is_distribution(Normal()))
   expect_false(is_distribution(123))
@@ -318,16 +316,16 @@ test_that("apply_dpqr() applied to 'pdf', 'log_pdf' and 'cdf' works", {
   expect_null(dim(pdf(N[1:2], c(0.2, 0.5))))
   expect_length(pdf(N[1:2], c(0.2, 0.5)), 2)
   expect_equal(
-    pdf(N[1:2], cbind(c(0.2, 0.5))), 
+    pdf(N[1:2], cbind(c(0.2, 0.5))),
     matrix(
-      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))),
       ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
     )
   )
   expect_equal(
-    pdf(N[1:2], rbind(c(0.2, 0.5))), 
+    pdf(N[1:2], rbind(c(0.2, 0.5))),
     matrix(
-      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))),
       ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
     )
   )
@@ -340,16 +338,16 @@ test_that("apply_dpqr() applied to 'pdf', 'log_pdf' and 'cdf' works", {
   expect_true(is.numeric(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)))
   expect_equal(dim(pdf(N[1:2], c(0.2, 0.5), drop = FALSE)), c(2L, 1L))
   expect_equal(
-    pdf(N[1:2], cbind(c(0.2, 0.5)), drop = FALSE), 
+    pdf(N[1:2], cbind(c(0.2, 0.5)), drop = FALSE),
     matrix(
-      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))),
       ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
     )
   )
   expect_equal(
-    pdf(N[1:2], rbind(c(0.2, 0.5)), drop = FALSE), 
+    pdf(N[1:2], rbind(c(0.2, 0.5)), drop = FALSE),
     matrix(
-      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))), 
+      rbind(pdf(N[1], c(0.2, 0.5)), pdf(N[2], c(0.2, 0.5))),
       ncol = 2, dimnames = list(NULL, c("d_0.2", "d_0.5"))
     )
   )

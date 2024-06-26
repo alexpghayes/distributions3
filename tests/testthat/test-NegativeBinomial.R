@@ -1,5 +1,3 @@
-context("test-NegativeBinomial")
-
 test_that("print.NegativeBinomial works", {
   expect_output(print(NegativeBinomial(1, 1)), regexp = "NegativeBinomial")
 })
@@ -30,7 +28,7 @@ test_that("random.NegativeBinomial work correctly", {
   expect_length(random(X[-1], 1), 0)
   expect_length(random(X, 0), 0)
   expect_error(random(X, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(X, c(1, 2, 3)), 3)
   expect_length(random(X, cbind(1, 2, 3)), 3)

@@ -1,5 +1,3 @@
-context("test-GEV")
-
 test_that("print.GEV works", {
   expect_output(print(GEV()), regexp = "GEV")
 })
@@ -36,7 +34,7 @@ test_that("random.GEV works correctly", {
   expect_length(random(g1[-1], 1), 0)
   expect_length(random(g1, 0), 0)
   expect_error(random(g1, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g1, c(1, 2, 3)), 3)
   expect_length(random(g1, cbind(1, 2, 3)), 3)
@@ -47,7 +45,7 @@ test_that("random.GEV works correctly", {
   expect_length(random(g2[-1], 1), 0)
   expect_length(random(g2, 0), 0)
   expect_error(random(g2, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g2, c(1, 2, 3)), 3)
   expect_length(random(g2, cbind(1, 2, 3)), 3)
@@ -58,7 +56,7 @@ test_that("random.GEV works correctly", {
   expect_length(random(g3[-1], 1), 0)
   expect_length(random(g3, 0), 0)
   expect_error(random(g3, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g3, c(1, 2, 3)), 3)
   expect_length(random(g3, cbind(1, 2, 3)), 3)

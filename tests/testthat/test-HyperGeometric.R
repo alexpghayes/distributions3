@@ -1,5 +1,3 @@
-context("test-HyperGeometric")
-
 test_that("HyperGeometric works as intended when k > n + m", {
   expect_error(HyperGeometric(1, 1, 3))
 })
@@ -28,7 +26,7 @@ test_that("random.HyperGeometric work correctly", {
   expect_length(random(h[-1], 1), 0)
   expect_length(random(h, 0), 0)
   expect_error(random(h, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(h, c(1, 2, 3)), 3)
   expect_length(random(h, cbind(1, 2, 3)), 3)

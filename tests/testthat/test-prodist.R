@@ -1,5 +1,3 @@
-context("test-prodist")
-
 ## simulate data
 set.seed(0)
 d <- data.frame(x = runif(10, -1, 1))

@@ -1,5 +1,3 @@
-context("test-Beta")
-
 test_that("print.Beta works", {
   expect_output(print(Beta()), regexp = "Beta")
 })

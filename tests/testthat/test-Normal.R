@@ -1,5 +1,3 @@
-context("test-Normal")
-
 test_that("print.Normal works", {
   expect_output(print(Normal()), regexp = "Normal")
 })
@@ -23,7 +21,7 @@ test_that("random.Normal work correctly", {
   expect_length(random(n[-1], 1), 0)
   expect_length(random(n, 0), 0)
   expect_error(random(n, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(n, c(1, 2, 3)), 3)
   expect_length(random(n, cbind(1, 2, 3)), 3)

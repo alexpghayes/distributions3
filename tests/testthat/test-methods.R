@@ -1,5 +1,3 @@
-context("test-methods")
-
 test_that("pmf() works", {
   N <- Normal()
   B <- Bernoulli()

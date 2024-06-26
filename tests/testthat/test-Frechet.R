@@ -1,5 +1,3 @@
-context("test-Frechet")
-
 test_that("print.Frechet works", {
   expect_output(print(Frechet()), regexp = "Frechet")
 })
@@ -35,7 +33,7 @@ test_that("random.Frechet works correctly", {
   expect_length(random(g1[-1], 1), 0)
   expect_length(random(g1, 0), 0)
   expect_error(random(g1, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g1, c(1, 2, 3)), 3)
   expect_length(random(g1, cbind(1, 2, 3)), 3)

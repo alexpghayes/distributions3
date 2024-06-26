@@ -1,5 +1,3 @@
-context("test-Bernoulli")
-
 test_that("print.Bernoulli works", {
   expect_output(print(Bernoulli()), regexp = "Bernoulli")
 })

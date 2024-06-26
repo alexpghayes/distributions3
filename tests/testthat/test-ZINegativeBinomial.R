@@ -1,5 +1,3 @@
-context("test-ZINegativeBinomial")
-
 test_that("print.ZINegativeBinomial works", {
   expect_output(print(ZINegativeBinomial(1, 1, 0.3)), regexp = "ZINegativeBinomial")
 })
@@ -12,7 +10,7 @@ test_that("random.ZINegativeBinomial work correctly", {
   expect_length(random(p[-1], 1), 0)
   expect_length(random(p, 0), 0)
   expect_error(random(p, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(p, c(1, 2, 3)), 3)
   expect_length(random(p, cbind(1, 2, 3)), 3)
