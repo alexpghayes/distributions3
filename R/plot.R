@@ -423,7 +423,7 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
     ## actual plot
     out_plot <- ggplot2::ggplot(
       data = plot_df,
-      ggplot2::aes_string(x = "x", y = "y")
+      ggplot2::aes(x = .data$x, y = .data$y)
     ) +
       ggplot2::geom_bar(
         stat = "identity",
@@ -462,7 +462,7 @@ plot_cdf <- function(d, limits = NULL, p = 0.001,
     ## actual plot
     out_plot <- ggplot2::ggplot(
       data = plot_df,
-      ggplot2::aes_string(x = "x", y = "y")
+      ggplot2::aes(x = .data$x, y = .data$y)
     ) +
       ggplot2::geom_line() +
       ggplot2::facet_grid(group ~ .) +
@@ -546,7 +546,7 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
     ## actual plot
     out_plot <- ggplot2::ggplot(
       data = plot_df,
-      ggplot2::aes_string(x = "x", y = "y")
+      ggplot2::aes(x = .data$x, y = .data$y)
     ) +
       ggplot2::geom_bar(
         stat = "identity",
@@ -585,7 +585,7 @@ plot_pdf <- function(d, limits = NULL, p = 0.001,
     ## actual plot
     out_plot <- ggplot2::ggplot(
       data = plot_df,
-      ggplot2::aes_string(x = "x", y = "y")
+      ggplot2::aes(x = .data$x, y = .data$y)
     ) +
       ggplot2::geom_line() +
       ggplot2::facet_grid(group ~ .) +
