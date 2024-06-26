@@ -78,7 +78,7 @@ Exponential <- function(rate = 1) {
 
 #' @export
 mean.Exponential <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$rate^-1
   setNames(rval, names(x))
 }
@@ -265,7 +265,7 @@ suff_stat.Exponential <- function(d, x, ...) {
 #'
 #' @export
 support.Exponential <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -273,12 +273,12 @@ support.Exponential <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Exponential <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Exponential <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

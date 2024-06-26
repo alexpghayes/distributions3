@@ -101,7 +101,7 @@ ChiSquare <- function(df) {
 
 #' @export
 mean.ChiSquare <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$df
   setNames(rval, names(x))
 }
@@ -259,7 +259,7 @@ quantile.ChiSquare <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.ChiSquare <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -267,12 +267,12 @@ support.ChiSquare <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.ChiSquare <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.ChiSquare <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

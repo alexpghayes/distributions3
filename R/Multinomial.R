@@ -96,7 +96,7 @@ print.Multinomial <- function(x, ...) {
 
 #' @export
 mean.Multinomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   x$size * x$p
 }
 
@@ -152,12 +152,12 @@ log_pdf.Multinomial <- function(d, x, ...) {
 
 #' @exportS3Method
 is_discrete.Multinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Multinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

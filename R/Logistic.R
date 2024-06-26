@@ -83,7 +83,7 @@ Logistic <- function(location = 0, scale = 1) {
 
 #' @export
 mean.Logistic <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$location
   setNames(rval, names(x))
 }
@@ -246,7 +246,7 @@ quantile.Logistic <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.Logistic <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -254,12 +254,12 @@ support.Logistic <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Logistic <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Logistic <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

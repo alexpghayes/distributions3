@@ -168,7 +168,7 @@ Normal <- function(mu = 0, sigma = 1) {
 
 #' @export
 mean.Normal <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(x$mu, names(x))
 }
 
@@ -378,7 +378,7 @@ suff_stat.Normal <- function(d, x, ...) {
 #'
 #' @export
 support.Normal <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -386,12 +386,12 @@ support.Normal <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Normal <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Normal <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

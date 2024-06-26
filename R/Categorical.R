@@ -167,7 +167,7 @@ cdf.Categorical <- function(d, x, ...) {
 #' @export
 #'
 quantile.Categorical <- function(x, probs, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   if (!is.numeric(x$outcomes)) {
     stop(
       "The sample space of `x` must be numeric to evaluate quantiles.",
@@ -190,12 +190,12 @@ quantile.Categorical <- function(x, probs, ...) {
 
 #' @exportS3Method
 is_discrete.Categorical <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Categorical <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

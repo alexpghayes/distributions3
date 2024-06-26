@@ -82,7 +82,7 @@ as.matrix(Y)
 ## mean(), variance(), skewness(), kurtosis().
 ## These can be typically be defined as functions of the list of parameters.
 mean.Gaussian <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(x$mu, names(x))
 }
 ## Analogously for other moments, see distributions3:::variance.Normal etc.

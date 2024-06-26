@@ -429,7 +429,7 @@ quantile.PoissonBinomial <- function(x, probs, drop = TRUE, elementwise = NULL, 
 #'
 #' @export
 support.PoissonBinomial <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep.int(0L, length(d))
   p <- d
   class(p) <- "data.frame"
@@ -440,12 +440,12 @@ support.PoissonBinomial <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.PoissonBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.PoissonBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

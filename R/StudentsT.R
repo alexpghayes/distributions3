@@ -120,7 +120,7 @@ StudentsT <- function(df) {
 
 #' @export
 mean.StudentsT <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- ifelse(x$df > 1,
     0,
     NaN
@@ -318,7 +318,7 @@ quantile.StudentsT <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.StudentsT <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -326,12 +326,12 @@ support.StudentsT <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.StudentsT <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.StudentsT <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

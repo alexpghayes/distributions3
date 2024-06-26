@@ -51,7 +51,7 @@ FisherF <- function(df1, df2, lambda = 0) {
 
 #' @export
 mean.FisherF <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   # The k-th moment of an F(df1, df2) distribution exists and
   # is finite only when 2k < d2
 
@@ -236,7 +236,7 @@ quantile.FisherF <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.FisherF <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -244,12 +244,12 @@ support.FisherF <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.FisherF <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.FisherF <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

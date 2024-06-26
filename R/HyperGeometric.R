@@ -107,7 +107,7 @@ HyperGeometric <- function(m, n, k) {
 
 #' @export
 mean.HyperGeometric <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   # Reformulating to match Wikipedia
   # N is the population size
   N <- x$n + x$m
@@ -297,7 +297,7 @@ quantile.HyperGeometric <- function(x, probs, drop = TRUE, elementwise = NULL, .
 #'
 #' @export
 support.HyperGeometric <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- apply(cbind(0, d$k - d$n), 1, max)
   max <- apply(as.matrix(d)[, c("m", "k"), drop = FALSE], 1, min)
   make_support(min, max, d, drop = drop)
@@ -305,12 +305,12 @@ support.HyperGeometric <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.HyperGeometric <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.HyperGeometric <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

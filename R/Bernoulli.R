@@ -94,7 +94,7 @@ Bernoulli <- function(p = 0.5) {
 
 #' @export
 mean.Bernoulli <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(x$p, names(x))
 }
 
@@ -281,7 +281,7 @@ suff_stat.Bernoulli <- function(d, x, ...) {
 #'
 #' @export
 support.Bernoulli <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(1, length(d))
   make_support(min, max, d, drop = drop)
@@ -289,12 +289,12 @@ support.Bernoulli <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Bernoulli <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Bernoulli <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

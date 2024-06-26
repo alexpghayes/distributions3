@@ -1,5 +1,5 @@
 # things to sort out with the generics
-#  - can i get stats::generics() to use ellipsis::check_dots_used()?
+#  - can i get stats::generics() to use rlang::check_dots_used()?
 #  - pdf() conflict with grDevices::pdf()
 
 #' Draw a random sample from a probability distribution
@@ -40,7 +40,7 @@
 #' random(X, 10)
 #' @export
 random <- function(x, n = 1L, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("random")
 }
 
@@ -98,14 +98,14 @@ simulate.distribution <- function(object, nsim = 1L, seed = NULL, ...) {
 #' log_pdf(X, c(1, 2, 3, 4, 5))
 #' @export
 pdf <- function(d, x, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("pdf")
 }
 
 #' @rdname pdf
 #' @export
 log_pdf <- function(d, x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("log_pdf")
 }
 
@@ -137,7 +137,7 @@ pmf <- function(d, x, ...) {
 #' cdf(X, c(1, 2, 3, 4, 5))
 #' @export
 cdf <- function(d, x, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("cdf")
 }
 
@@ -166,21 +166,21 @@ cdf <- function(d, x, drop = TRUE, ...) {
 #' @export
 #'
 variance <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("variance")
 }
 
 #' @rdname variance
 #' @export
 skewness <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("skewness")
 }
 
 #' @rdname variance
 #' @export
 kurtosis <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("kurtosis")
 }
 
@@ -232,7 +232,7 @@ likelihood <- function(d, x, ...) {
 #' fit_mle(X, c(-1, 0, 0, 0, 3))
 #' @export
 fit_mle <- function(d, x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("fit_mle")
 }
 
@@ -250,7 +250,7 @@ fit_mle <- function(d, x, ...) {
 #' suff_stat(X, c(-1, 0, 0, 0, 3))
 #' @export
 suff_stat <- function(d, x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   UseMethod("suff_stat")
 }
 
