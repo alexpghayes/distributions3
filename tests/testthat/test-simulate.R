@@ -21,7 +21,7 @@ test_that("simulate() methods work and return equivalent results", {
   g_manual <- as.data.frame(replicate(3, rpois(nobs(m), fitted(m))))
 
   ## same results
-  expect_equivalent(g_glm, g_default)
+  expect_equal(g_glm, g_default, ignore_attr = TRUE)
   expect_identical(g_default, g_distribution)
-  expect_equivalent(g_glm, g_manual)
+  expect_equal(g_glm, g_manual, ignore_attr = TRUE)
 })

@@ -31,7 +31,6 @@ Imports:
     glue,
     rlang
 Suggests: 
-    covr,
     cowplot,
     knitr,
     PoissonBinomial,
