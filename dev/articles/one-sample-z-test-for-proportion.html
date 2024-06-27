@@ -192,14 +192,15 @@ Z-statistic for proportion is</p>
 <span><span class="co">#&gt;     Gamma</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:grDevices':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     pdf</span></span>
-<span></span>
+<span><span class="co">#&gt;     pdf</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Normal.html">Normal</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>  <span class="co"># make a standard normal r.v.</span></span>
 <span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1.46</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">1.46</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1442901</span></span></code></pre></div>
 <p>Note that we saved <code>z_stat</code> above so we could have also
 done</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">z_stat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1441523</span></span></code></pre></div>
 <p>which is slightly more accurate since there is no rounding error.</p>
@@ -218,7 +219,7 @@ distribution is symmetric:</p>
 \end{align}
 \]</span></p>
 <p>Using this formula we get the same result:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">1.46</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1442901</span></span></code></pre></div>
 </div>
@@ -237,7 +238,7 @@ test</p>
   P(Z &gt; 1.46)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1.46</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.07214504</span></span></code></pre></div>
 <p>For the test</p>
@@ -249,7 +250,7 @@ test</p>
   P(Z &lt; 1.46)
 \]</span></p>
 <p>which we calculate with</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1.46</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.927855</span></span></code></pre></div>
 </div>

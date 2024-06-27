@@ -130,18 +130,24 @@ simulate random samples.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/alexpghayes/distributions3" class="external-link">"distributions3"</a></span><span class="op">)</span></span>
 <span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
-<span><span class="co">## [1] "Poisson(lambda = 1.5)"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
-<span><span class="co">## [1] 1.5</span></span>
-<span><span class="fu"><a href="../reference/variance.html">variance</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
-<span><span class="co">## [1] 1.5</span></span>
-<span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">## [1] 0.22313016 0.33469524 0.25102143 0.12551072 0.04706652 0.01411996</span></span>
-<span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">## [1] 0.2231302 0.5578254 0.8088468 0.9343575 0.9814241 0.9955440</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">## [1] 0 1 3</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">## [1] "Poisson(lambda = 1.5)"</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
+<span><span class="co">## [1] 1.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/variance.html">variance</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
+<span><span class="co">## [1] 1.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">## [1] 0.22313016 0.33469524 0.25102143 0.12551072 0.04706652 0.01411996</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co">## [1] 0.2231302 0.5578254 0.8088468 0.9343575 0.9814241 0.9955440</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">## [1] 0 1 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/random.html">random</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">## [1] 3 1 1 2 3</span></span></code></pre></div>
 <p>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method the distribution can also be
@@ -149,7 +155,7 @@ visualized which we use here to show how the probabilities for the
 counts <span class="math inline">\(0, 1, \dots, 15\)</span> change when
 the parameter is <span class="math inline">\(\lambda = 0.5, 2, 5,
 10\)</span>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">0.5</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span>,   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">5</span><span class="op">)</span>,   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
@@ -175,7 +181,7 @@ meta-information for the matches (an ID, team name abbreviations, type
 of match, group vs. knockout stage) as well as some further covariates
 that we will revisit later in this document. The data looks like
 this:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"FIFA2018"</span>, package <span class="op">=</span> <span class="st">"distributions3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">)</span></span>
 <span><span class="co">##   goals team match type stage logability difference</span></span>
@@ -187,7 +193,7 @@ this:</p>
 <span><span class="co">## 6     1  EGY     3    A group -0.2066409 -0.3597142</span></span></code></pre></div>
 <p>For now, we will focus on the <code>goals</code> variable only. A
 brief summary yields</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span></span>
 <span><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
 <span><span class="co">##   0.000   0.000   1.000   1.297   2.000   6.000</span></span></code></pre></div>
@@ -195,7 +201,7 @@ brief summary yields</p>
 <span class="math inline">\(\bar y = 1.297\)</span> from the
 observations <span class="math inline">\(y_i\)</span> (<span class="math inline">\(i = 1, \dots, 128\)</span>). The corresponding
 table of observed relative frequencies is:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">observed</span></span>
 <span><span class="co">## </span></span>
@@ -219,7 +225,7 @@ Poisson distribution for the number of goals. To do so, we obtain a
 point estimate of the Poisson parameter by using the empirical mean
 <span class="math inline">\(\hat \lambda = \bar y = 1.297\)</span> and
 set up the corresponding distribution object:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_const</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p_const</span></span>
 <span><span class="co">## [1] "Poisson(lambda = 1.297)"</span></span></code></pre></div>
@@ -229,7 +235,7 @@ to the maximum likelihood estimation for this distribution.</p>
 counts of <span class="math inline">\(0, 1, \dots, 6\)</span> goals for
 this Poisson distribution can be extracted using the <code><a href="../reference/pdf.html">pdf()</a></code>
 method. A comparison with the observed empirical frequencies yields</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_const</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">observed</span>, <span class="va">expected</span><span class="op">)</span></span>
 <span><span class="co">##    observed    expected</span></span>
@@ -268,7 +274,7 @@ maximum likelihood estimator <span class="math inline">\(\hat
 \beta\)</span> with corresponding inference, predictions, residuals,
 etc. can be obtained using the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function from base R
 with <code>family = poisson</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">goals</span> <span class="op">~</span> <span class="va">difference</span>, data <span class="op">=</span> <span class="va">FIFA2018</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
@@ -295,7 +301,7 @@ teams, i.e., with zero difference in log-abilities. The corresponding
 prediction for the number of goals can either be obtained manually from
 the extracted <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code> by applying <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp()</a></code> (as the
 inverse of the log-link).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda_zero</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">lambda_zero</span></span>
 <span><span class="co">## (Intercept) </span></span>
@@ -304,14 +310,14 @@ inverse of the log-link).</p>
 <code>type = "response"</code> in order to get the expected <span class="math inline">\(\hat \lambda_i\)</span> (rather than just the
 linear predictor <span class="math inline">\(x_i^\top \hat
 \beta\)</span> that is predicted by default).</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>difference <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="co">##       1 </span></span>
 <span><span class="co">## 1.23704</span></span></code></pre></div>
 <p>As above, we can also set up a <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution
 object and obtain the associated expected probability distribution for
 zero to six goals in a mathc of two equally strong teams:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_zero</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda_zero</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_zero</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">## [1] 0.290242139 0.359041061 0.222074031 0.091571467 0.028319386 0.007006441</span></span>
@@ -326,11 +332,12 @@ expected number of goals increases approximately by <span class="math inline">\(
 team/match in the tournament. We can set up the vector of all <span class="math inline">\(128\)</span> <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution
 objects by extracting the vector of all fitted point estimates <span class="math inline">\((\hat \lambda_1, \dots, \hat
 \lambda_{128})^\top\)</span>:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
-<span><span class="co">## [1] 128</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
+<span><span class="co">## [1] 128</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
 <span><span class="co">##                          1                          2 </span></span>
 <span><span class="co">## "Poisson(lambda = 1.7680)" "Poisson(lambda = 0.8655)" </span></span>
 <span><span class="co">##                          3                          4 </span></span>
@@ -344,16 +351,18 @@ like <code>p_reg[i]</code> or using the <code><a href="https://rdrr.io/r/utils/h
 <p>As an illustration, the following goal distributions could be
 expected for the FIFA World Cup final (in the last two rows of the data)
 that France won 4-2 against Croatia:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">FIFA2018</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">##     goals team match  type    stage logability difference</span></span>
 <span><span class="co">## 127     4  FRA    64 Final knockout  0.8865638  0.6289619</span></span>
-<span><span class="co">## 128     2  CRO    64 Final knockout  0.2576019 -0.6289619</span></span>
-<span><span class="va">p_final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">p_reg</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">## 128     2  CRO    64 Final knockout  0.2576019 -0.6289619</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p_final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">p_reg</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">p_final</span></span>
 <span><span class="co">##                        127                        128 </span></span>
-<span><span class="co">## "Poisson(lambda = 1.6044)" "Poisson(lambda = 0.9538)"</span></span>
-<span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">## "Poisson(lambda = 1.6044)" "Poisson(lambda = 0.9538)"</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">##           d_0       d_1       d_2        d_3        d_4         d_5</span></span>
 <span><span class="co">## 127 0.2010078 0.3224993 0.2587107 0.13835949 0.05549639 0.017807808</span></span>
 <span><span class="co">## 128 0.3852791 0.3674743 0.1752462 0.05571586 0.01328527 0.002534265</span></span>
@@ -372,7 +381,7 @@ the table of possible match results (after normal time) by multiplying
 the marginal probabilities (again only up to six goals). In R this be
 done using the <code><a href="https://rdrr.io/r/base/outer.html" class="external-link">outer()</a></code> function which by default performs a
 multiplication of its arguments.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html" class="external-link">outer</a></span><span class="op">(</span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">res</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">##       [,1]  [,2] [,3] [,4] [,5] [,6] [,7]</span></span>
@@ -391,19 +400,21 @@ percent.</p>
 aggregating the probabilities for winning (lower triangular matrix), a
 draw (diagonal), or losing (upper triangular matrix). In R these can be
 computed as:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France wins</span></span>
-<span><span class="co">## [1] 0.5245018</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span>           <span class="co">## draw</span></span>
-<span><span class="co">## [1] 0.2497855</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">upper.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France loses</span></span>
+<span><span class="co">## [1] 0.5245018</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span>           <span class="co">## draw</span></span>
+<span><span class="co">## [1] 0.2497855</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">upper.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France loses</span></span>
 <span><span class="co">## [1] 0.2242939</span></span></code></pre></div>
 <p>Note that these probabilities do not sum up to <span class="math inline">\(1\)</span> because we only considered up to six
 goals per team but more goals can actually occur with a small
 probability.</p>
 <p>Next, we update the expected frequencies table by averaging across
 the expectations per team/match from the regression model.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_reg</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span></span>
 <span><span class="co">##         d_0       d_1       d_2        d_3         d_4         d_5          d_6</span></span>
@@ -412,8 +423,9 @@ the expectations per team/match from the regression model.</p>
 <span><span class="co">## 3 0.3571261 0.3677207 0.1893148 0.06497703 0.016726166 0.003444474 0.0005911098</span></span>
 <span><span class="co">## 4 0.2262357 0.3362265 0.2498462 0.12377196 0.045986787 0.013668909 0.0033857384</span></span>
 <span><span class="co">## 5 0.2380213 0.3416546 0.2452047 0.11732187 0.042100811 0.012086260 0.0028914265</span></span>
-<span><span class="co">## 6 0.3443506 0.3671104 0.1956873 0.06954039 0.018534163 0.003951835 0.0007021718</span></span>
-<span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span></span>
+<span><span class="co">## 6 0.3443506 0.3671104 0.1956873 0.06954039 0.018534163 0.003951835 0.0007021718</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">colMeans</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">observed</span>, <span class="va">expected</span><span class="op">)</span></span>
 <span><span class="co">##    observed    expected</span></span>
 <span><span class="co">## 0 0.2578125 0.294374450</span></span>
@@ -432,7 +444,7 @@ observed frequencies “hanging” from the square-root of the expected
 frequencies in the red line. The offset around the x-axis thus shows the
 difference between the two frequencies which is reasonably close to
 zero.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span>, offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Goals"</span>, ylab <span class="op">=</span> <span class="st">"sqrt(Frequency)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">bp</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"o"</span>, pch <span class="op">=</span> <span class="fl">19</span>, lwd <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
