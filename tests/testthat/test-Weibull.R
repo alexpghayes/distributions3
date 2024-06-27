@@ -1,5 +1,3 @@
-context("test-Weibull")
-
 test_that("print.Weibull works", {
   expect_output(print(Weibull(1, 1)), regexp = "Weibull")
 })
@@ -23,7 +21,7 @@ test_that("random.Weibull work correctly", {
   expect_length(random(w[-1], 1), 0)
   expect_length(random(w, 0), 0)
   expect_error(random(w, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(w, c(1, 2, 3)), 3)
   expect_length(random(w, cbind(1, 2, 3)), 3)

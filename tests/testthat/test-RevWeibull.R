@@ -1,5 +1,3 @@
-context("test-RevWeibull")
-
 test_that("print.RevWeibull works", {
   expect_output(print(RevWeibull()), regexp = "RevWeibull")
 })
@@ -35,7 +33,7 @@ test_that("random.RevWeibull works correctly", {
   expect_length(random(g3[-1], 1), 0)
   expect_length(random(g3, 0), 0)
   expect_error(random(g3, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(g3, c(1, 2, 3)), 3)
   expect_length(random(g3, cbind(1, 2, 3)), 3)

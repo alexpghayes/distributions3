@@ -45,7 +45,7 @@ Beta <- function(alpha = 1, beta = 1) {
 
 #' @export
 mean.Beta <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$alpha / (x$alpha + x$beta)
   setNames(rval, names(x))
 }
@@ -208,7 +208,7 @@ quantile.Beta <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.Beta <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(1, length(d))
   make_support(min, max, d, drop = drop)
@@ -216,12 +216,12 @@ support.Beta <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Beta <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Beta <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

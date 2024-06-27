@@ -1,5 +1,3 @@
-context("test-FisherF")
-
 test_that("print.FisherF works", {
   expect_output(print(FisherF(1, 1)), regexp = "FisherF")
 })
@@ -23,7 +21,7 @@ test_that("random.FisherF work correctly", {
   expect_length(random(s[-1], 1), 0)
   expect_length(random(s, 0), 0)
   expect_error(random(s, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(s, c(1, 2, 3)), 3)
   expect_length(random(s, cbind(1, 2, 3)), 3)

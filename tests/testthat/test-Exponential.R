@@ -1,5 +1,3 @@
-context("test-Exponential")
-
 test_that("fit_mle.Exponential works correctly", {
   expect_equal(fit_mle(Exponential(), 1), Exponential(1))
 
@@ -20,7 +18,7 @@ test_that("random.Exponential work correctly", {
   expect_length(random(e[-1], 1), 0)
   expect_length(random(e, 0), 0)
   expect_error(random(e, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(e, c(1, 2, 3)), 3)
   expect_length(random(e, cbind(1, 2, 3)), 3)

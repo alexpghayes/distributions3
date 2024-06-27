@@ -2,8 +2,6 @@
 #
 # The Erlang distribution is a special case of the gamma distribution wherein
 # the shape (k) of the distribution is discretised.
-
-context("test-Erlang")
 e <- Erlang(k = 3, lambda = 0.5)
 
 test_that("Erlang constructor works", {
@@ -26,7 +24,7 @@ test_that("random.Erlang works correctly", {
   expect_length(random(e[-1], 1), 0)
   expect_length(random(e, 0), 0)
   expect_error(random(e, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(e, c(1, 2, 3)), 3)
   expect_length(random(e, cbind(1, 2, 3)), 3)

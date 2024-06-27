@@ -122,7 +122,7 @@ g <- function(d, k) gamma(1 - k * d$xi)
 
 #' @export
 mean.GEV <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   euler <- -digamma(1)
   rval <- ifelse(x$xi == 0,
     x$mu + x$sigma * euler,
@@ -321,7 +321,7 @@ quantile.GEV <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.GEV <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   min[d$xi > 0] <- d$mu[d$xi > 0] - d$sigma[d$xi > 0]/d$xi[d$xi > 0]
   max <- rep(Inf, length(d))
@@ -331,12 +331,12 @@ support.GEV <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.GEV <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.GEV <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

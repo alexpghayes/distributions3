@@ -76,28 +76,28 @@ Poisson <- function(lambda) {
 
 #' @export
 mean.Poisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$lambda
   setNames(rval, names(x))
 }
 
 #' @export
 variance.Poisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$lambda
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.Poisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- 1 / sqrt(x$lambda)
   setNames(rval, names(x))
 }
 
 #' @export
 kurtosis.Poisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- 1 / x$lambda
   setNames(rval, names(x))
 }
@@ -267,7 +267,7 @@ suff_stat.Poisson <- function(d, x, ...) {
 #'
 #' @export
 support.Poisson <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -275,12 +275,12 @@ support.Poisson <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Poisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Poisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

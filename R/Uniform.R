@@ -43,7 +43,7 @@ Uniform <- function(a = 0, b = 1) {
 
 #' @export
 mean.Uniform <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- (x$a + x$b) / 2
   setNames(rval, names(x))
 }
@@ -232,7 +232,7 @@ quantile.Uniform <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.Uniform <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- d$a
   max <- d$b
   make_support(min, max, d, drop = drop)
@@ -240,12 +240,12 @@ support.Uniform <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Uniform <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Uniform <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

@@ -112,7 +112,7 @@ GP <- function(mu = 0, sigma = 1, xi = 0) {
 
 #' @export
 mean.GP <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   mu <- x$mu
   sigma <- x$sigma
   xi <- x$xi
@@ -296,7 +296,7 @@ quantile.GP <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.GP <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- d$mu
   max <- rep(Inf, length(d))
   max[d$xi < 0] <- d$mu[d$xi < 0] - d$sigma[d$xi < 0]/d$xi[d$xi < 0]
@@ -305,12 +305,12 @@ support.GP <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.GP <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.GP <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

@@ -71,7 +71,7 @@ LogNormal <- function(log_mu = 0, log_sigma = 1) {
 
 #' @export
 mean.LogNormal <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   mu <- x$log_mu
   sigma <- x$log_sigma
   rval <- exp(mu + sigma^2 / 2)
@@ -277,7 +277,7 @@ suff_stat.LogNormal <- function(d, x, ...) {
 #'
 #' @export
 support.LogNormal <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -285,12 +285,12 @@ support.LogNormal <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.LogNormal <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.LogNormal <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

@@ -176,14 +176,14 @@ ZINegativeBinomial <- function(mu, theta, pi) {
 
 #' @export
 mean.ZINegativeBinomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- (1 - x$pi) * x$mu
   setNames(rval, names(x))
 }
 
 #' @export
 variance.ZINegativeBinomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- (1 - x$pi) * x$mu * (1 + (x$pi + 1/x$theta) * x$mu)
   setNames(rval, names(x))
 }
@@ -191,7 +191,7 @@ variance.ZINegativeBinomial <- function(x, ...) {
 #' @export
 skewness.ZINegativeBinomial <- function(x, ...) {
   stop("not yet implemented")
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   ## FIXME: skewness of ZIPoisson
   m <- (1 - x$pi) * x$mu
   s <- sqrt(m * (1 + x$pi * x$mu))
@@ -202,7 +202,7 @@ skewness.ZINegativeBinomial <- function(x, ...) {
 #' @export
 kurtosis.ZINegativeBinomial <- function(x, ...) {
   stop("not yet implemented")
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   ## FIXME: kurtosis of ZIPoisson
   rval <- ( (1 + 7 * x$mu + 6 * x$mu^2 + x$mu^3)
              - 4 * (1 - x$pi) * (x$mu + 3 * x$mu^2 + x$mu^3)
@@ -343,7 +343,7 @@ quantile.ZINegativeBinomial <- function(x, probs, drop = TRUE, elementwise = NUL
 #'
 #' @export
 support.ZINegativeBinomial <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -351,13 +351,13 @@ support.ZINegativeBinomial <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.ZINegativeBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.ZINegativeBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 

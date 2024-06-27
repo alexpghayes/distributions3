@@ -169,21 +169,21 @@ ZIPoisson <- function(lambda, pi) {
 
 #' @export
 mean.ZIPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- (1 - x$pi) * x$lambda
   setNames(rval, names(x))
 }
 
 #' @export
 variance.ZIPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- (1 - x$pi) * x$lambda * (1 + x$pi * x$lambda)
   setNames(rval, names(x))
 }
 
 #' @export
 skewness.ZIPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- (1 - x$pi) * x$lambda
   s <- sqrt(m * (1 + x$pi * x$lambda))
   rval <- ((1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3) - 3 * m * s^2 - m^3) / s^3  
@@ -192,7 +192,7 @@ skewness.ZIPoisson <- function(x, ...) {
 
 #' @export
 kurtosis.ZIPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- ( (1 + 7 * x$lambda + 6 * x$lambda^2 + x$lambda^3)
              - 4 * (1 - x$pi) * (x$lambda + 3 * x$lambda^2 + x$lambda^3)
              + 6 * (1 - x$pi)^2 * (x$lambda^2 + x$lambda^3)
@@ -332,7 +332,7 @@ quantile.ZIPoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.ZIPoisson <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -340,13 +340,13 @@ support.ZIPoisson <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.ZIPoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.ZIPoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 

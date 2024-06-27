@@ -91,7 +91,7 @@ Gamma <- function(shape, rate = 1) {
 
 #' @export
 mean.Gamma <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$shape / x$rate
   setNames(rval, names(x))
 }
@@ -271,7 +271,7 @@ suff_stat.Gamma <- function(d, x, ...) {
 #'
 #' @export
 support.Gamma <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -279,12 +279,12 @@ support.Gamma <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Gamma <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Gamma <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

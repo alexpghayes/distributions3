@@ -1,5 +1,3 @@
-context("test-Categorical")
-
 test_that("print.Categorical", {
   X <- Categorical(1:6)
   Y <- Categorical(LETTERS[1:3], p = c(0.1, 0.2, 0.7))

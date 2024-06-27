@@ -1,5 +1,3 @@
-context("test-PlotDistribution")
-
 test_that("Error thrown for incorrect input to plot.distribution", {
   expect_error(plot.distribution(1))
 })

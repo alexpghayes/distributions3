@@ -170,7 +170,7 @@ ZTPoisson <- function(lambda) {
 
 #' @export
 mean.ZTPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- x$lambda/ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m[x$lambda <= 0] <- 1
   setNames(m, names(x))
@@ -178,7 +178,7 @@ mean.ZTPoisson <- function(x, ...) {
 
 #' @export
 variance.ZTPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- x$lambda/ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m[x$lambda <= 0] <- 1
   setNames(m * (1 + x$lambda - m), names(x))
@@ -186,7 +186,7 @@ variance.ZTPoisson <- function(x, ...) {
 
 #' @export
 skewness.ZTPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- 1 / ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
@@ -197,7 +197,7 @@ skewness.ZTPoisson <- function(x, ...) {
 
 #' @export
 kurtosis.ZTPoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- 1 / ppois(0, lambda = x$lambda, lower.tail = FALSE)
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -338,7 +338,7 @@ quantile.ZTPoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.ZTPoisson <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(1, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -346,13 +346,13 @@ support.ZTPoisson <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.ZTPoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.ZTPoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 

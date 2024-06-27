@@ -86,7 +86,7 @@ Cauchy <- function(location = 0, scale = 1) {
 
 #' @export
 mean.Cauchy <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- rep(NaN, length(x))
   setNames(rval, names(x))
 }
@@ -240,7 +240,7 @@ quantile.Cauchy <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.Cauchy <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -248,12 +248,12 @@ support.Cauchy <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Cauchy <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Cauchy <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

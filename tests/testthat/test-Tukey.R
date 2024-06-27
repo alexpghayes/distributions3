@@ -1,5 +1,3 @@
-context("test-Tukey")
-
 test_that("print.Tukey works", {
   expect_output(print(Tukey(1, 2, 2)), regexp = "Tukey")
 })
@@ -12,7 +10,7 @@ test_that("random.Tukey work correctly", {
   expect_length(random(d[-1], 1), 0)
   expect_length(random(d, 0), 0)
   expect_error(random(d, -2))
- 
+
   # consistent with base R, using the `length` as number of samples to draw
   expect_length(random(d, c(1, 2, 3)), 3)
   expect_length(random(d, cbind(1, 2, 3)), 3)

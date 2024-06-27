@@ -93,7 +93,7 @@ Frechet <- function(location = 0, scale = 1, shape = 1) {
 
 #' @export
 mean.Frechet <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   a <- x$shape
   m <- x$location
   s <- x$scale
@@ -320,7 +320,7 @@ quantile.Frechet <- function(x, probs, drop = TRUE, elementwise = NULL, ...) {
 #'
 #' @export
 support.Frechet <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- d$location
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -328,12 +328,12 @@ support.Frechet <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Frechet <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Frechet <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

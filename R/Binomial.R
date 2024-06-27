@@ -103,7 +103,7 @@ Binomial <- function(size, p = 0.5) {
 
 #' @export
 mean.Binomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$size * x$p
   setNames(rval, names(x))
 }
@@ -300,7 +300,7 @@ suff_stat.Binomial <- function(d, x, ...) {
 #'
 #' @export
 support.Binomial <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- d$size
   make_support(min, max, d, drop = drop)
@@ -308,12 +308,12 @@ support.Binomial <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Binomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Binomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

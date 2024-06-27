@@ -97,7 +97,7 @@ RevWeibull <- function(location = 0, scale = 1, shape = 1) {
 
 #' @export
 mean.RevWeibull <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$location + x$scale * gamma(1 + 1 / x$shape)
   setNames(rval, names(x))
 }
@@ -271,7 +271,7 @@ quantile.RevWeibull <- function(x, probs, drop = TRUE, elementwise = NULL, ...) 
 #'
 #' @export
 support.RevWeibull <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(-Inf, length(d))
   max <- d$location
   make_support(min, max, d, drop = drop)
@@ -279,12 +279,12 @@ support.RevWeibull <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.RevWeibull <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.RevWeibull <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }

@@ -178,7 +178,7 @@ ZTNegativeBinomial <- function(mu, theta) {
 
 #' @export
 mean.ZTNegativeBinomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- x$mu / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m[x$mu <= 0] <- 1
   setNames(m, names(x))
@@ -186,7 +186,7 @@ mean.ZTNegativeBinomial <- function(x, ...) {
 
 #' @export
 variance.ZTNegativeBinomial <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- x$mu / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m[x$mu <= 0] <- 1
   v <- m * (x$mu/x$theta + x$mu + 1 - m)
@@ -196,7 +196,7 @@ variance.ZTNegativeBinomial <- function(x, ...) {
 #' @export
 skewness.ZTNegativeBinomial <- function(x, ...) {
   stop("not implemented yet")
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- 1 / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m <- x$mu * f
   s <- sqrt(m * (x$mu/x$theta + x$mu + 1 - m))
@@ -209,7 +209,7 @@ skewness.ZTNegativeBinomial <- function(x, ...) {
 #' @export
 kurtosis.ZTNegativeBinomial <- function(x, ...) {
   stop("not implemented yet")
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- 1 / pnbinom(0, mu = x$mu, size = x$theta, lower.tail = FALSE)
   m <- x$mu * f
   s2 <- m * (x$mu/x$theta + x$mu + 1 - m)
@@ -351,7 +351,7 @@ quantile.ZTNegativeBinomial <- function(x, probs, drop = TRUE, elementwise = NUL
 #'
 #' @export
 support.ZTNegativeBinomial <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(1, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -359,13 +359,13 @@ support.ZTNegativeBinomial <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.ZTNegativeBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.ZTNegativeBinomial <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 

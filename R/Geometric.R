@@ -72,7 +72,7 @@ Geometric <- function(p = 0.5) {
 
 #' @export
 mean.Geometric <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- 1 / x$p
   setNames(rval, names(x))
 }
@@ -273,7 +273,7 @@ suff_stat.Geometric <- function(d, x, ...) {
 #'
 #' @export
 support.Geometric <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -282,12 +282,12 @@ support.Geometric <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.Geometric <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.Geometric <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }

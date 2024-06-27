@@ -183,14 +183,14 @@ HurdlePoisson <- function(lambda, pi) {
 
 #' @export
 mean.HurdlePoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   rval <- x$lambda * x$pi / (1 - exp(-x$lambda))
   setNames(rval, names(x))
 }
 
 #' @export
 variance.HurdlePoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   m <- x$lambda * x$pi / (1 - exp(-x$lambda))
   rval <- m * (x$lambda + 1 - m)
   setNames(rval, names(x))
@@ -198,7 +198,7 @@ variance.HurdlePoisson <- function(x, ...) {
 
 #' @export
 skewness.HurdlePoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s <- sqrt(m * (x$lambda + 1 - m))
@@ -208,7 +208,7 @@ skewness.HurdlePoisson <- function(x, ...) {
 
 #' @export
 kurtosis.HurdlePoisson <- function(x, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   f <- x$pi / (1 - exp(-x$lambda))
   m <- x$lambda * f
   s2 <- m * (x$lambda + 1 - m)
@@ -348,7 +348,7 @@ quantile.HurdlePoisson <- function(x, probs, drop = TRUE, elementwise = NULL, ..
 #'
 #' @export
 support.HurdlePoisson <- function(d, drop = TRUE, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   min <- rep(0, length(d))
   max <- rep(Inf, length(d))
   make_support(min, max, d, drop = drop)
@@ -356,13 +356,13 @@ support.HurdlePoisson <- function(d, drop = TRUE, ...) {
 
 #' @exportS3Method
 is_discrete.HurdlePoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(TRUE, length(d)), names(d))
 }
 
 #' @exportS3Method
 is_continuous.HurdlePoisson <- function(d, ...) {
-  ellipsis::check_dots_used()
+  rlang::check_dots_used()
   setNames(rep.int(FALSE, length(d)), names(d))
 }
 
