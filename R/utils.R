@@ -290,6 +290,19 @@ format.distribution <- function(x, digits = pmax(3L, getOption("digits") - 3L), 
 }
 
 #' @export
+as.character.distribution <- function(x, digits = 15L, drop0trailing = TRUE, ...) {
+  y <- format(x, digits = digits, drop0trailing = drop0trailing, ...)
+  if (!is.null(names(y))) names(y) <- NULL
+  return(y)
+}
+
+#' @export
+duplicated.distribution <- function(x, incomparables = FALSE, ...) {
+  class(x) <- "data.frame"
+  duplicated(x, incomparables = incomparables, ...)
+}
+
+#' @export
 print.distribution <- function(x, digits = pmax(3L, getOption("digits") - 3L), ...) {
   if (length(x) < 1L) {
     cat(sprintf("%s distribution of length zero\n", class(x)[1L]))

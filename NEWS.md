@@ -20,10 +20,18 @@
   simplified. For example, now `Normal(mu = 0, sigma = 1)` is used instead of
   `Normal distribution (mu = 0, sigma = 1)` in order to yield a more compact output, especially
   for vectors of distributions (#101).
+- Added an `as.character()` method which essentially calls `format(..., digits = 15, drop0trailing = TRUE)`.
+  This mimics the behavior and precision of base R for real vectors. Note that this enables
+  using `match()` for distribution objects.
+- Added a `duplicated()` method which relies on the corresponding method for the `data.frame`
+  of parameters in a distribution.
 - Fixed errors in notation of cumulative distribution function in the documentation of
   `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #96).
 - The `prodist()` method for `glm` objects can now also handle `family` specifications from
   `MASS::negative.binomial(theta)` with fixed `theta` (reported by Christian Kleiber).
+- Replace `ellipsis` dependency by `rlang` as the former will be
+  [deprecated/archived](https://rlang.r-lib.org/news/index.html#argument-intake-1-0-0)
+  (by @olivroy in #105).
 - Further small improvements in methods and manual pages.
 
 
