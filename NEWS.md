@@ -25,6 +25,8 @@
   using `match()` for distribution objects.
 - Added a `duplicated()` method which relies on the corresponding method for the `data.frame`
   of parameters in a distribution.
+- Enabled the inclusion of `distribution` vectors as columns in `tibble` data objects, see
+  `?vec_proxy.distribution` for further details and a practical example.
 - Fixed errors in notation of cumulative distribution function in the documentation of
   `HurdlePoisson()` and `HurdleNegativeBinomial()` (by @dkwhu in #94 and #96).
 - The `prodist()` method for `glm` objects can now also handle `family` specifications from
