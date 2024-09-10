@@ -43,6 +43,8 @@
 #' nt <- tibble(difference = -1:1)
 #' nt$dist <- prodist(m, newdata = nt)
 #' nt
+#'
+#' @keywords internal
 
 #' @rdname vec_proxy.distribution
 #' @exportS3Method vctrs::vec_proxy distribution

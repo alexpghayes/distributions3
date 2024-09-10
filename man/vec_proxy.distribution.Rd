@@ -57,4 +57,6 @@ library("tibble")
 nt <- tibble(difference = -1:1)
 nt$dist <- prodist(m, newdata = nt)
 nt
+
 }
+\keyword{internal}
