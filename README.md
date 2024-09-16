@@ -7,9 +7,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
-[![R-CMD-check](https://github.com/alexpghayes/distributions3/workflows/R-CMD-check/badge.svg)](https://github.com/alexpghayes/distributions3/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=main)
+[![R-CMD-check](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `distributions3`, inspired by the [eponynmous Julia
@@ -25,11 +25,11 @@ generic function interface to probability distributions.
 
 The main generics are:
 
--   `random()`: Draw samples from a distribution.
--   `pdf()`: Evaluate the probability density (or mass) at a point.
--   `cdf()`: Evaluate the cumulative probability up to a point.
--   `quantile()`: Determine the quantile for a given probability.
-    Inverse of `cdf()`.
+- `random()`: Draw samples from a distribution.
+- `pdf()`: Evaluate the probability density (or mass) at a point.
+- `cdf()`: Evaluate the cumulative probability up to a point.
+- `quantile()`: Determine the quantile for a given probability. Inverse
+  of `cdf()`.
 
 ## Installation
 
@@ -56,7 +56,7 @@ library("distributions3")
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
+#>  [1] 0 0 0 0 0 0 1 1 0 0
 pdf(X, 1)
 #> [1] 0.1
 
@@ -87,13 +87,13 @@ For a comprehensive overview of the many packages providing various
 distribution related functionality see the [CRAN Task
 View](https://cran.r-project.org/view=Distributions).
 
--   [`distributional`](https://cran.r-project.org/package=distributional)
-    provides distribution objects as vectorized S3 objects
--   [`distr6`](https://cran.r-project.org/package=distr6) builds on
-    `distr`, but uses R6 objects
--   [`distr`](https://cran.r-project.org/package=distr) is quite similar
-    to `distributions`, but uses S4 objects and is less focused on
-    documentation.
--   [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
-    provides extensive functionality for fitting various distributions
-    but does not treat distributions themselves as objects
+- [`distributional`](https://cran.r-project.org/package=distributional)
+  provides distribution objects as vectorized S3 objects
+- [`distr6`](https://cran.r-project.org/package=distr6) builds on
+  `distr`, but uses R6 objects
+- [`distr`](https://cran.r-project.org/package=distr) is quite similar
+  to `distributions`, but uses S4 objects and is less focused on
+  documentation.
+- [`fitdistrplus`](https://cran.r-project.org/package=fitdistrplus)
+  provides extensive functionality for fitting various distributions but
+  does not treat distributions themselves as objects

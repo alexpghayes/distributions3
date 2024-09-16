@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/distributions3)](https://cran.r-project.org/package=distributions3)
-[![R-CMD-check](https://github.com/alexpghayes/distributions3/workflows/R-CMD-check/badge.svg)](https://github.com/alexpghayes/distributions3/actions)
 [![Codecov test coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/alexpghayes/distributions3?branch=main)
 [![R-CMD-check](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
