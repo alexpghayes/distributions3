@@ -1,3 +1,5 @@
+# distributions3 (development version)
+
 # distributions3 0.2.2
 
 - New `PoissonBinomial()` distribution, a generalization of the binomial distribution. The Poisson
