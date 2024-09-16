@@ -7,6 +7,10 @@ Minor update
 * windows (on Github Actions), R release
 * macOS (on Github Actions), R release
 
+## Revdepchecks
+
+Failed to check one reverse dependency `imaginator`. Otherwise did not detect any new issues.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
