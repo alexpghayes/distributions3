@@ -5,104 +5,121 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="distributions3">
 <title>The Poisson distribution: From basic probability theory to regression models • distributions3</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Poisson distribution: From basic probability theory to regression models">
-<meta property="og:description" content="distributions3">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Poisson distribution: From basic probability theory to regression models">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.2</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a>
-    <a class="dropdown-item" href="../articles/one-sample-sign-tests.html">One sample sign tests</a>
-    <a class="dropdown-item" href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a>
-    <a class="dropdown-item" href="../articles/one-sample-t-test.html">One sample T-tests</a>
-    <a class="dropdown-item" href="../articles/one-sample-z-confidence-interval.html">Z confidence interval for a mean</a>
-    <a class="dropdown-item" href="../articles/one-sample-z-test-for-proportion.html">One sample Z-tests for a proportion</a>
-    <a class="dropdown-item" href="../articles/one-sample-z-test.html">One sample Z-tests</a>
-    <a class="dropdown-item" href="../articles/paired-tests.html">Paired tests</a>
-    <a class="dropdown-item" href="../articles/poisson.html">The Poisson distribution: From basic probability theory to regression models</a>
-    <a class="dropdown-item" href="../articles/two-sample-z-test.html">Two sample Z-tests</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/intro-to-hypothesis-testing.html">Intro to hypothesis testing</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-sign-tests.html">One sample sign tests</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-t-confidence-interval.html">T confidence interval for a mean</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-t-test.html">One sample T-tests</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-z-confidence-interval.html">Z confidence interval for a mean</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-z-test-for-proportion.html">One sample Z-tests for a proportion</a></li>
+    <li><a class="dropdown-item" href="../articles/one-sample-z-test.html">One sample Z-tests</a></li>
+    <li><a class="dropdown-item" href="../articles/paired-tests.html">Paired tests</a></li>
+    <li><a class="dropdown-item" href="../articles/poisson.html">The Poisson distribution: From basic probability theory to regression models</a></li>
+    <li><a class="dropdown-item" href="../articles/two-sample-z-test.html">Two sample Z-tests</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/alexpghayes/distributions3/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/alexpghayes/distributions3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
 
 
-<script src="poisson_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>The Poisson distribution: From basic probability theory to regression models</h1>
+
+      <h1>The Poisson distribution: From basic probability theory to regression models</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/HEAD/vignettes/poisson.Rmd" class="external-link"><code>vignettes/poisson.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alexpghayes/distributions3/blob/main/vignettes/poisson.Rmd" class="external-link"><code>vignettes/poisson.Rmd</code></a></small>
       <div class="d-none name"><code>poisson.Rmd</code></div>
     </div>
 
     
     
-<p>This vignette provides a brief introduction to the Poisson distribution for modeling count data along with a short case study about the goals scored at the 2018 FIFA World Cup. It is intended as an illustrative introduction that can be used as self-study material or as a class room exercise in a course covering GLMs.</p>
+<p>This vignette provides a brief introduction to the Poisson
+distribution for modeling count data along with a short case study about
+the goals scored at the 2018 FIFA World Cup. It is intended as an
+illustrative introduction that can be used as self-study material or as
+a class room exercise in a course covering GLMs.</p>
 <div class="section level2">
 <h2 id="the-poisson-distribution">The Poisson distribution<a class="anchor" aria-label="anchor" href="#the-poisson-distribution"></a>
 </h2>
-<p>The classic basic probability distribution employed for modeling count data is the Poisson distribution. Its probability mass function <span class="math inline">\(f(y; \lambda)\)</span> yields the probability for a random variable <span class="math inline">\(Y\)</span> to take a count <span class="math inline">\(y \in \{0, 1, 2, \dots\}\)</span> based on the distribution parameter <span class="math inline">\(\lambda &gt; 0\)</span>:</p>
-<p><span class="math display">\[
+<p>The classic basic probability distribution employed for modeling
+count data is the Poisson distribution. Its probability mass function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(y; \lambda)</annotation></semantics></math>
+yields the probability for a random variable
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+to take a count
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>…</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">y \in \{0, 1, 2, \dots\}</annotation></semantics></math>
+based on the distribution parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda &gt; 0</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Pr</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mi>λ</mi><mi>y</mi></msup></mrow><mrow><mi>y</mi><mi>!</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \text{Pr}(Y = y) = f(y; \lambda) = \frac{\exp\left(-\lambda\right) \cdot \lambda^y}{y!}.
-\]</span></p>
-<p>The Poisson distribution has many distinctive features, e.g., both its expectation and variance are equal and given by the parameter <span class="math inline">\(\lambda\)</span>. Thus, <span class="math inline">\(\text{E}(Y) = \lambda\)</span> and <span class="math inline">\(\text{Var}(Y) = \lambda\)</span>. Moreover, the Poisson distribution is related to other basic probability distributions. Namely, it can be obtained as the limit of the binomial distribution when the number of attempts is high and the success probability low. Or the Poisson distribution can be approximated by a normal distribution when <span class="math inline">\(\lambda\)</span> is large. See <span class="citation">Wikipedia (<a href="#ref-Wiki+Poisson" role="doc-biblioref">2022</a>)</span> for further properties and references.</p>
-<p>In the <code>distributions3</code> package Poisson distribution objects can be generated with the <code><a href="../reference/Poisson.html">Poisson()</a></code> function. Subsequently, the object can be handled like other distribution objects in <code>distributions3</code>: print; extract mean and variance; evaluate density, cumulative distribution, or quantile function; or simulate random samples.</p>
+</annotation></semantics></math></p>
+<p>The Poisson distribution has many distinctive features, e.g., both
+its expectation and variance are equal and given by the parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
+Thus,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">E</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\text{E}(Y) = \lambda</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\text{Var}(Y) = \lambda</annotation></semantics></math>.
+Moreover, the Poisson distribution is related to other basic probability
+distributions. Namely, it can be obtained as the limit of the binomial
+distribution when the number of attempts is high and the success
+probability low. Or the Poisson distribution can be approximated by a
+normal distribution when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
+is large. See <span class="citation">Wikipedia (<a href="#ref-Wiki+Poisson">2022</a>)</span> for further properties and
+references.</p>
+<p>In the <code>distributions3</code> package Poisson distribution
+objects can be generated with the <code><a href="../reference/Poisson.html">Poisson()</a></code> function.
+Subsequently, the object can be handled like other distribution objects
+in <code>distributions3</code>: print; extract mean and variance;
+evaluate density, cumulative distribution, or quantile function; or
+simulate random samples.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/alexpghayes/distributions3" class="external-link">"distributions3"</a></span><span class="op">)</span></span>
 <span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
-<span><span class="co">## [1] "Poisson distribution (lambda = 1.5)"</span></span>
+<span><span class="co">## [1] "Poisson(lambda = 1.5)"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
 <span><span class="co">## [1] 1.5</span></span>
 <span><span class="fu"><a href="../reference/variance.html">variance</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span>
@@ -116,20 +133,38 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/random.html">random</a></span><span class="op">(</span><span class="va">Y</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">## [1] 3 1 1 2 3</span></span></code></pre></div>
-<p>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method the distribution can also be visualized which we use here to show how the probabilities for the counts <span class="math inline">\(0, 1, \dots, 15\)</span> change when the parameter is <span class="math inline">\(\lambda = 0.5, 2, 5, 10\)</span>.</p>
+<p>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method the distribution can also be
+visualized which we use here to show how the probabilities for the
+counts
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">0, 1, \dots, 15</annotation></semantics></math>
+change when the parameter is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.5</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.5, 2, 5, 10</annotation></semantics></math>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">0.5</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span>,   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">5</span><span class="op">)</span>,   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">10</span><span class="op">)</span>,  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="poisson_files/figure-html/unnamed-chunk-3-1.png" width="100%"></p>
-<p>In this vignette we will illustrate how this infrastructure can be leveraged to obtain predicted probabilities for the number of goals in soccer matches from the 2018 FIFA World Cup.</p>
+<p>In this vignette we will illustrate how this infrastructure can be
+leveraged to obtain predicted probabilities for the number of goals in
+soccer matches from the 2018 FIFA World Cup.</p>
 </div>
 <div class="section level2">
 <h2 id="goals-in-the-2018-fifa-world-cup">Goals in the 2018 FIFA World Cup<a class="anchor" aria-label="anchor" href="#goals-in-the-2018-fifa-world-cup"></a>
 </h2>
-<p>To investigate the number of goals scored per match in the 2018 FIFA World Cup, the <code>FIFA2018</code> data set provides two rows, one for each team, for each of the 64 matches during the tournament. In the following, we treat the goals scored by the two teams in the same match as independent which is a realistic assumption for this particular data set. We just remark briefly that there are also bivariate generalizations of the Poisson distribution that would allow for correlated observations but which are not considered here.</p>
-<p>In addition to the goals, the data set provides some basic meta-information for the matches (an ID, team name abbreviations, type of match, group vs. knockout stage) as well as some further covariates that we will revisit later in this document. The data looks like this:</p>
+<p>To investigate the number of goals scored per match in the 2018 FIFA
+World Cup, the <code>FIFA2018</code> data set provides two rows, one for
+each team, for each of the 64 matches during the tournament. In the
+following, we treat the goals scored by the two teams in the same match
+as independent which is a realistic assumption for this particular data
+set. We just remark briefly that there are also bivariate
+generalizations of the Poisson distribution that would allow for
+correlated observations but which are not considered here.</p>
+<p>In addition to the goals, the data set provides some basic
+meta-information for the matches (an ID, team name abbreviations, type
+of match, group vs. knockout stage) as well as some further covariates
+that we will revisit later in this document. The data looks like
+this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"FIFA2018"</span>, package <span class="op">=</span> <span class="st">"distributions3"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">)</span></span>
@@ -140,31 +175,58 @@
 <span><span class="co">## 4     1  URU     2    A group  0.2371671  0.4438080</span></span>
 <span><span class="co">## 5     3  RUS     3    A group  0.1530732  0.3597142</span></span>
 <span><span class="co">## 6     1  EGY     3    A group -0.2066409 -0.3597142</span></span></code></pre></div>
-<p>For now, we will focus on the <code>goals</code> variable only. A brief summary yields</p>
+<p>For now, we will focus on the <code>goals</code> variable only. A
+brief summary yields</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span></span>
 <span><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
 <span><span class="co">##   0.000   0.000   1.000   1.297   2.000   6.000</span></span></code></pre></div>
-<p>showing that the teams scored between <span class="math inline">\(0\)</span> and <span class="math inline">\(6\)</span> goals per match with an average of <span class="math inline">\(\bar y = 1.297\)</span> from the observations <span class="math inline">\(y_i\)</span> (<span class="math inline">\(i = 1, \dots, 128\)</span>). The corresponding table of observed relative frequencies is:</p>
+<p>showing that the teams scored between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>6</mn><annotation encoding="application/x-tex">6</annotation></semantics></math>
+goals per match with an average of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>1.297</mn></mrow><annotation encoding="application/x-tex">\bar y = 1.297</annotation></semantics></math>
+from the observations
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>i</mi></msub><annotation encoding="application/x-tex">y_i</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">i = 1, \dots, 128</annotation></semantics></math>).
+The corresponding table of observed relative frequencies is:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">observed</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##         0         1         2         3         4         5         6 </span></span>
 <span><span class="co">## 0.2578125 0.3750000 0.2500000 0.0781250 0.0156250 0.0156250 0.0078125</span></span></code></pre></div>
-<p>(Note that in recent versions of R using <code><a href="https://rdrr.io/r/base/proportions.html" class="external-link">proportions()</a></code> rather than <code><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table()</a></code> is recommended.)</p>
-<p>This confirms that goals are relatively rare events in a soccer game with each team scoring zero to two goals per match in almost 90 percent of the matches. Below we show that this observed frequency distribution can be approximated very well by a Poisson distribution which can subsequently be used to obtain predicted probabilities for the goals scored in a match.</p>
+<p>(Note that in recent versions of R using <code><a href="https://rdrr.io/r/base/proportions.html" class="external-link">proportions()</a></code>
+rather than <code><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table()</a></code> is recommended.)</p>
+<p>This confirms that goals are relatively rare events in a soccer game
+with each team scoring zero to two goals per match in almost 90 percent
+of the matches. Below we show that this observed frequency distribution
+can be approximated very well by a Poisson distribution which can
+subsequently be used to obtain predicted probabilities for the goals
+scored in a match.</p>
 </div>
 <div class="section level2">
 <h2 id="basic-fitted-distribution">Basic fitted distribution<a class="anchor" aria-label="anchor" href="#basic-fitted-distribution"></a>
 </h2>
-<p>In a first step, we simply assume that goals are scored with a constant mean over all teams and matches and hence just fit a single Poisson distribution for the number of goals. To do so, we obtain a point estimate of the Poisson parameter by using the empirical mean <span class="math inline">\(\hat \lambda = \bar y = 1.297\)</span> and set up the corresponding distribution object:</p>
+<p>In a first step, we simply assume that goals are scored with a
+constant mean over all teams and matches and hence just fit a single
+Poisson distribution for the number of goals. To do so, we obtain a
+point estimate of the Poisson parameter by using the empirical mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>1.297</mn></mrow><annotation encoding="application/x-tex">\hat \lambda = \bar y = 1.297</annotation></semantics></math>
+and set up the corresponding distribution object:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_const</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p_const</span></span>
-<span><span class="co">## [1] "Poisson distribution (lambda = 1.297)"</span></span></code></pre></div>
-<p>In the technical details below we show that this actually corresponds to the maximum likelihood estimation for this distribution.</p>
-<p>As already illustrated above, the expected probabilities of observing counts of <span class="math inline">\(0, 1, \dots, 6\)</span> goals for this Poisson distribution can be extracted using the <code><a href="../reference/pdf.html">pdf()</a></code> method. A comparison with the observed empirical frequencies yields</p>
+<span><span class="co">## [1] "Poisson(lambda = 1.297)"</span></span></code></pre></div>
+<p>In the technical details below we show that this actually corresponds
+to the maximum likelihood estimation for this distribution.</p>
+<p>As already illustrated above, the expected probabilities of observing
+counts of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">0, 1, \dots, 6</annotation></semantics></math>
+goals for this Poisson distribution can be extracted using the
+<code><a href="../reference/pdf.html">pdf()</a></code> method. A comparison with the observed empirical
+frequencies yields</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_const</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">observed</span>, <span class="va">expected</span><span class="op">)</span></span>
@@ -176,23 +238,47 @@
 <span><span class="co">## 4 0.0156250 0.032222229</span></span>
 <span><span class="co">## 5 0.0156250 0.008357641</span></span>
 <span><span class="co">## 6 0.0078125 0.001806469</span></span></code></pre></div>
-<p>By and large, all observed and expected frequencies are rather close. However, it is not reasonable that all teams score goals with the same probabilities, which would imply that winning or losing could just be attributed to “luck” or “random variation” alone. Therefore, while a certain level of randomness will certainly remain, we should also consider that there are stronger and weaker teams in the tournament.</p>
+<p>By and large, all observed and expected frequencies are rather close.
+However, it is not reasonable that all teams score goals with the same
+probabilities, which would imply that winning or losing could just be
+attributed to “luck” or “random variation” alone. Therefore, while a
+certain level of randomness will certainly remain, we should also
+consider that there are stronger and weaker teams in the tournament.</p>
 </div>
 <div class="section level2">
 <h2 id="poisson-regression-and-probabilistic-forecasting">Poisson regression and probabilistic forecasting<a class="anchor" aria-label="anchor" href="#poisson-regression-and-probabilistic-forecasting"></a>
 </h2>
-<p>To account for different expected performances from the teams in the 2018 FIFA World Cup, the <code>FIFA2018</code> data provides an estimated <code>logability</code> for each team. These have been estimated by <span class="citation">Zeileis, Leitner, and Hornik (<a href="#ref-Zeileis+Leitner+Hornik:2018" role="doc-biblioref">2018</a>)</span> prior to the start of the tournament (2018-05-20) based on quoted odds from 26 online bookmakers using the bookmaker consensus model of <span class="citation">Leitner, Zeileis, and Hornik (<a href="#ref-Leitner+Zeileis+Hornik:2010" role="doc-biblioref">2010</a>)</span>. The <code>difference</code> in <code>logability</code> between a team and its opponent is a useful predictor for the number of <code>goals</code> scored.</p>
-<p>Consequently, we fit a generalized linear model (GLM) to the data that links the expected number of goals per team/match <span class="math inline">\(\lambda_i\)</span> to the linear predictor <span class="math inline">\(x_i^\top \beta\)</span> with regressor vector <span class="math inline">\(x_i^\top = (1, \mathtt{difference}_i)\)</span> and corresponding coefficient vector <span class="math inline">\(\beta\)</span> using a log-link: <span class="math inline">\(\log(\lambda_i) = x_i^\top \beta\)</span>. The maximum likelihood estimator <span class="math inline">\(\hat \beta\)</span> with corresponding inference, predictions, residuals, etc. can be obtained using the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function from base R with <code>family = poisson</code>:</p>
+<p>To account for different expected performances from the teams in the
+2018 FIFA World Cup, the <code>FIFA2018</code> data provides an
+estimated <code>logability</code> for each team. These have been
+estimated by <span class="citation">Zeileis, Leitner, and Hornik (<a href="#ref-Zeileis+Leitner+Hornik:2018">2018</a>)</span> prior to the
+start of the tournament (2018-05-20) based on quoted odds from 26 online
+bookmakers using the bookmaker consensus model of <span class="citation">Leitner, Zeileis, and Hornik (<a href="#ref-Leitner+Zeileis+Hornik:2010">2010</a>)</span>. The
+<code>difference</code> in <code>logability</code> between a team and
+its opponent is a useful predictor for the number of <code>goals</code>
+scored.</p>
+<p>Consequently, we fit a generalized linear model (GLM) to the data
+that links the expected number of goals per team/match
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\lambda_i</annotation></semantics></math>
+to the linear predictor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">x_i^\top \beta</annotation></semantics></math>
+with regressor vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><msub><mrow><mi>𝚍</mi><mi>𝚒</mi><mi>𝚏</mi><mi>𝚏</mi><mi>𝚎</mi><mi>𝚛</mi><mi>𝚎</mi><mi>𝚗</mi><mi>𝚌</mi><mi>𝚎</mi></mrow><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x_i^\top = (1, \mathtt{difference}_i)</annotation></semantics></math>
+and corresponding coefficient vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+using a log-link:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">\log(\lambda_i) = x_i^\top \beta</annotation></semantics></math>.
+The maximum likelihood estimator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>β</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat \beta</annotation></semantics></math>
+with corresponding inference, predictions, residuals, etc. can be
+obtained using the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function from base R with
+<code>family = poisson</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">goals</span> <span class="op">~</span> <span class="va">difference</span>, data <span class="op">=</span> <span class="va">FIFA2018</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
 <span><span class="co">## glm(formula = goals ~ difference, family = poisson, data = FIFA2018)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Deviance Residuals: </span></span>
-<span><span class="co">##     Min       1Q   Median       3Q      Max  </span></span>
-<span><span class="co">## -2.1437  -1.1546  -0.1746   0.5278   2.3273  </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
@@ -208,44 +294,68 @@
 <span><span class="co">## AIC: 359.39</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
-<p>Both parameters can be interpreted. First, the intercept corresponds to the expected log-goals per team in a match of two equally strong teams, i.e., with zero difference in log-abilities. The corresponding prediction for the number of goals can either be obtained manually from the extracted <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code> by applying <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp()</a></code> (as the inverse of the log-link).</p>
+<p>Both parameters can be interpreted. First, the intercept corresponds
+to the expected log-goals per team in a match of two equally strong
+teams, i.e., with zero difference in log-abilities. The corresponding
+prediction for the number of goals can either be obtained manually from
+the extracted <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code> by applying <code><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp()</a></code> (as the
+inverse of the log-link).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lambda_zero</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">lambda_zero</span></span>
 <span><span class="co">## (Intercept) </span></span>
 <span><span class="co">##     1.23704</span></span></code></pre></div>
-<p>Or equivalently the <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> function can be used with <code>type = "response"</code> in order to get the expected <span class="math inline">\(\hat \lambda_i\)</span> (rather than just the linear predictor <span class="math inline">\(x_i^\top \hat \beta\)</span> that is predicted by default).</p>
+<p>Or equivalently the <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> function can be used with
+<code>type = "response"</code> in order to get the expected
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\hat \lambda_i</annotation></semantics></math>
+(rather than just the linear predictor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mover><mi>β</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">x_i^\top \hat \beta</annotation></semantics></math>
+that is predicted by default).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>difference <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="co">##       1 </span></span>
 <span><span class="co">## 1.23704</span></span></code></pre></div>
-<p>As above, we can also set up a <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution object and obtain the associated expected probability distribution for zero to six goals in a mathc of two equally strong teams:</p>
+<p>As above, we can also set up a <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution
+object and obtain the associated expected probability distribution for
+zero to six goals in a mathc of two equally strong teams:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_zero</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="va">lambda_zero</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_zero</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">## [1] 0.290242139 0.359041061 0.222074031 0.091571467 0.028319386 0.007006441</span></span>
 <span><span class="co">## [7] 0.001444541</span></span></code></pre></div>
-<p>Second, the slope of <span class="math inline">\(0.413\)</span> can be interpreted as an ability elasticity of the number of goals scored. This is because the difference of the log-abilities can also be understood as the log of the ability ratio. Thus, when the ability ratio increases by <span class="math inline">\(1\)</span> percent, the expected number of goals increases approximately by <span class="math inline">\(0.413\)</span> percent.</p>
-<p>This yields a different predicted Poisson distribution for each team/match in the tournament. We can set up the vector of all <span class="math inline">\(128\)</span> <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution objects by extracting the vector of all fitted point estimates <span class="math inline">\((\hat \lambda_1, \dots, \hat \lambda_{128})^\top\)</span>:</p>
+<p>Second, the slope of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.413</mn><annotation encoding="application/x-tex">0.413</annotation></semantics></math>
+can be interpreted as an ability elasticity of the number of goals
+scored. This is because the difference of the log-abilities can also be
+understood as the log of the ability ratio. Thus, when the ability ratio
+increases by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+percent, the expected number of goals increases approximately by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.413</mn><annotation encoding="application/x-tex">0.413</annotation></semantics></math>
+percent.</p>
+<p>This yields a different predicted Poisson distribution for each
+team/match in the tournament. We can set up the vector of all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>128</mn><annotation encoding="application/x-tex">128</annotation></semantics></math><code><a href="../reference/Poisson.html">Poisson()</a></code> distribution objects by extracting the vector of
+all fitted point estimates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mn>128</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><annotation encoding="application/x-tex">(\hat \lambda_1, \dots, \hat \lambda_{128})^\top</annotation></semantics></math>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
 <span><span class="co">## [1] 128</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
-<span><span class="co">##                                        1 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.7680)" </span></span>
-<span><span class="co">##                                        2 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 0.8655)" </span></span>
-<span><span class="co">##                                        3 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.0297)" </span></span>
-<span><span class="co">##                                        4 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.4862)" </span></span>
-<span><span class="co">##                                        5 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.4354)" </span></span>
-<span><span class="co">##                                        6 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.0661)"</span></span></code></pre></div>
-<p>Note that specific elements from the vector <code>p_reg</code> of Poisson distributions can be extracted as usual, e.g., with an index like <code>p_reg[i]</code> or using the <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> functions etc.</p>
-<p>As an illustration, the following goal distributions could be expected for the FIFA World Cup final (in the last two rows of the data) that France won 4-2 against Croatia:</p>
+<span><span class="co">##                          1                          2 </span></span>
+<span><span class="co">## "Poisson(lambda = 1.7680)" "Poisson(lambda = 0.8655)" </span></span>
+<span><span class="co">##                          3                          4 </span></span>
+<span><span class="co">## "Poisson(lambda = 1.0297)" "Poisson(lambda = 1.4862)" </span></span>
+<span><span class="co">##                          5                          6 </span></span>
+<span><span class="co">## "Poisson(lambda = 1.4354)" "Poisson(lambda = 1.0661)"</span></span></code></pre></div>
+<p>Note that specific elements from the vector <code>p_reg</code> of
+Poisson distributions can be extracted as usual, e.g., with an index
+like <code>p_reg[i]</code> or using the <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> and
+<code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> functions etc.</p>
+<p>As an illustration, the following goal distributions could be
+expected for the FIFA World Cup final (in the last two rows of the data)
+that France won 4-2 against Croatia:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">FIFA2018</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">##     goals team match  type    stage logability difference</span></span>
@@ -253,10 +363,8 @@
 <span><span class="co">## 128     2  CRO    64 Final knockout  0.2576019 -0.6289619</span></span>
 <span><span class="va">p_final</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">p_reg</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">p_final</span></span>
-<span><span class="co">##                                      127 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 1.6044)" </span></span>
-<span><span class="co">##                                      128 </span></span>
-<span><span class="co">## "Poisson distribution (lambda = 0.9538)"</span></span>
+<span><span class="co">##                        127                        128 </span></span>
+<span><span class="co">## "Poisson(lambda = 1.6044)" "Poisson(lambda = 0.9538)"</span></span>
 <span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">##           d_0       d_1       d_2        d_3        d_4         d_5</span></span>
 <span><span class="co">## 127 0.2010078 0.3224993 0.2587107 0.13835949 0.05549639 0.017807808</span></span>
@@ -264,12 +372,18 @@
 <span><span class="co">##              d_6</span></span>
 <span><span class="co">## 127 0.0047618419</span></span>
 <span><span class="co">## 128 0.0004028582</span></span></code></pre></div>
-<p>This shows that France was expected to score more goals than Croatia but both teams scored more goals than expected, albeit not unlikely many.</p>
+<p>This shows that France was expected to score more goals than Croatia
+but both teams scored more goals than expected, albeit not unlikely
+many.</p>
 </div>
 <div class="section level2">
 <h2 id="further-details-and-extensions">Further details and extensions<a class="anchor" aria-label="anchor" href="#further-details-and-extensions"></a>
 </h2>
-<p>Assuming independence of the number of goals scored, we can obtain the table of possible match results (after normal time) by multiplying the marginal probabilities (again only up to six goals). In R this be done using the <code><a href="https://rdrr.io/r/base/outer.html" class="external-link">outer()</a></code> function which by default performs a multiplication of its arguments.</p>
+<p>Assuming independence of the number of goals scored, we can obtain
+the table of possible match results (after normal time) by multiplying
+the marginal probabilities (again only up to six goals). In R this be
+done using the <code><a href="https://rdrr.io/r/base/outer.html" class="external-link">outer()</a></code> function which by default performs a
+multiplication of its arguments.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html" class="external-link">outer</a></span><span class="op">(</span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_final</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">res</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
@@ -281,8 +395,16 @@
 <span><span class="co">## [5,]  2.14  2.04 0.97 0.31 0.07 0.01 0.00</span></span>
 <span><span class="co">## [6,]  0.69  0.65 0.31 0.10 0.02 0.00 0.00</span></span>
 <span><span class="co">## [7,]  0.18  0.17 0.08 0.03 0.01 0.00 0.00</span></span></code></pre></div>
-<p>For example, we can see from this table that the expected probability for France winning against Croatia 1-0 is <span class="math inline">\(12.43\)</span> percent while the probability that France loses 0-1 is only <span class="math inline">\(7.39\)</span> percent.</p>
-<p>The advantage of France can also be brought out more clearly by aggregating the probabilities for winning (lower triangular matrix), a draw (diagonal), or losing (upper triangular matrix). In R these can be computed as:</p>
+<p>For example, we can see from this table that the expected probability
+for France winning against Croatia 1-0 is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>12.43</mn><annotation encoding="application/x-tex">12.43</annotation></semantics></math>
+percent while the probability that France loses 0-1 is only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>7.39</mn><annotation encoding="application/x-tex">7.39</annotation></semantics></math>
+percent.</p>
+<p>The advantage of France can also be brought out more clearly by
+aggregating the probabilities for winning (lower triangular matrix), a
+draw (diagonal), or losing (upper triangular matrix). In R these can be
+computed as:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">lower.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France wins</span></span>
 <span><span class="co">## [1] 0.5245018</span></span>
@@ -290,8 +412,12 @@
 <span><span class="co">## [1] 0.2497855</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">upper.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France loses</span></span>
 <span><span class="co">## [1] 0.2242939</span></span></code></pre></div>
-<p>Note that these probabilities do not sum up to <span class="math inline">\(1\)</span> because we only considered up to six goals per team but more goals can actually occur with a small probability.</p>
-<p>Next, we update the expected frequencies table by averaging across the expectations per team/match from the regression model.</p>
+<p>Note that these probabilities do not sum up to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+because we only considered up to six goals per team but more goals can
+actually occur with a small probability.</p>
+<p>Next, we update the expected frequencies table by averaging across
+the expectations per team/match from the regression model.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_reg</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span></span>
@@ -312,26 +438,59 @@
 <span><span class="co">## 4 0.0156250 0.036594546</span></span>
 <span><span class="co">## 5 0.0156250 0.011726654</span></span>
 <span><span class="co">## 6 0.0078125 0.003332718</span></span></code></pre></div>
-<p>As before, observed and expected frequencies are reasonably close, emphasizing that the model has a good marginal fit for this data. To bring out the discrepancies graphically we show the frequencies on a square root scale using a so-called <em>hanging rootogram</em> <span class="citation">(Kleiber and Zeileis <a href="#ref-Kleiber+Zeileis:2016" role="doc-biblioref">2016</a>)</span>. The gray bars represent the square-root of the observed frequencies “hanging” from the square-root of the expected frequencies in the red line. The offset around the x-axis thus shows the difference between the two frequencies which is reasonably close to zero.</p>
+<p>As before, observed and expected frequencies are reasonably close,
+emphasizing that the model has a good marginal fit for this data. To
+bring out the discrepancies graphically we show the frequencies on a
+square root scale using a so-called <em>hanging rootogram</em> <span class="citation">(<a href="#ref-Kleiber+Zeileis:2016">Kleiber and
+Zeileis 2016</a>)</span>. The gray bars represent the square-root of the
+observed frequencies “hanging” from the square-root of the expected
+frequencies in the red line. The offset around the x-axis thus shows the
+difference between the two frequencies which is reasonably close to
+zero.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span>, offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">observed</span><span class="op">)</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Goals"</span>, ylab <span class="op">=</span> <span class="st">"sqrt(Frequency)"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">bp</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">expected</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"o"</span>, pch <span class="op">=</span> <span class="fl">19</span>, lwd <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="poisson_files/figure-html/unnamed-chunk-18-1.png" width="60%"></p>
-<p>Finally, we want to point out that while the log-abilities (and thus their differences) had been obtained based on bookmakers odds prior to the tournament, the calibration of the intercept and slope coefficients was done “in-sample”. This means that we have used the data from the tournament itself for estimating the GLM and the evaluation above can only be made <em>ex post</em>. Alternatively, one could have used previous FIFA World Cups for calibrating the coefficients so that probabilistic forecasts for the outcome of all matches (and thus the entire tournament) could have been obtained <em>ex ante</em>. This is the approach used by <span class="citation">Groll et al. (<a href="#ref-Groll+Ley+Schauberger:2019" role="doc-biblioref">2019</a>)</span> and <span class="citation">Groll et al. (<a href="#ref-Groll+Hvattum+Ley:2021" role="doc-biblioref">2021</a>)</span> who additionally added further explanatory variables and used flexible machine learning regression techniques rather than a simple Poisson GLM.</p>
+<p>Finally, we want to point out that while the log-abilities (and thus
+their differences) had been obtained based on bookmakers odds prior to
+the tournament, the calibration of the intercept and slope coefficients
+was done “in-sample”. This means that we have used the data from the
+tournament itself for estimating the GLM and the evaluation above can
+only be made <em>ex post</em>. Alternatively, one could have used
+previous FIFA World Cups for calibrating the coefficients so that
+probabilistic forecasts for the outcome of all matches (and thus the
+entire tournament) could have been obtained <em>ex ante</em>. This is
+the approach used by <span class="citation">Groll et al. (<a href="#ref-Groll+Ley+Schauberger:2019">2019</a>)</span> and <span class="citation">Groll et al. (<a href="#ref-Groll+Hvattum+Ley:2021">2021</a>)</span> who additionally
+added further explanatory variables and used flexible machine learning
+regression techniques rather than a simple Poisson GLM.</p>
 </div>
 <div class="section level2">
-<h2 id="technical-details-maximum-likelihood-estimation-of-lambda">Technical details: Maximum likelihood estimation of <span class="math inline">\(\lambda\)</span><a class="anchor" aria-label="anchor" href="#technical-details-maximum-likelihood-estimation-of-lambda"></a>
+<h2 id="technical-details-maximum-likelihood-estimation-of-lambda">Technical details: Maximum likelihood estimation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#technical-details-maximum-likelihood-estimation-of-lambda"></a>
 </h2>
-<p>Fitting a single Poisson distribution with constant <span class="math inline">\(\lambda\)</span> to <span class="math inline">\(n\)</span> independent observations <span class="math inline">\(y_1, \dots, y_n\)</span> using maximum likelihood estimation can be done analytically using basic algebra. First, we set up the log-likelihood function <span class="math inline">\(\ell\)</span> as the sum of the log-densities per observation:</p>
-<p><span class="math display">\[
+<p>Fitting a single Poisson distribution with constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+independent observations
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">y_1, \dots, y_n</annotation></semantics></math>
+using maximum likelihood estimation can be done analytically using basic
+algebra. First, we set up the log-likelihood function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>ℓ</mo><annotation encoding="application/x-tex">\ell</annotation></semantics></math>
+as the sum of the log-densities per observation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mo>ℓ</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo>log</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{align*}
   \ell(\lambda; y_1, \dots, y_n) &amp; = \sum_{i = 1}^n \log f(y_i; \lambda) \\
 \end{align*}
-\]</span></p>
-<p>For solving the first-order condition analytically below we need the score function, i.e., the derivative of the log-likelihood with respect to the parameter <span class="math inline">\(\lambda\)</span>. The derivative of the sum is simply the sum of the derivatives:</p>
-<p><span class="math display">\[
+</annotation></semantics></math></p>
+<p>For solving the first-order condition analytically below we need the
+score function, i.e., the derivative of the log-likelihood with respect
+to the parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
+The derivative of the sum is simply the sum of the derivatives:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msup><mo>ℓ</mo><mi>′</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">{</mo><mo>log</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>′</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mi>λ</mi><mo>+</mo><msub><mi>y</mi><mi>i</mi></msub><mo>⋅</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mi>!</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>′</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mn>1</mn><mo>+</mo><msub><mi>y</mi><mi>i</mi></msub><mo>⋅</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><mo stretchy="true" form="postfix">}</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mo>−</mo><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{align*}
 \ell^\prime(\lambda; y_1, \dots, y_n)
     &amp; = \sum_{i = 1}^n \left\{ \log f(y_i; \lambda) \right\}^\prime \\
@@ -339,65 +498,96 @@
     &amp; = \sum_{i = 1}^n \left\{ -1 + y_i \cdot \frac{1}{\lambda} \right\} \\
     &amp; = -n + \frac{1}{\lambda} \sum_{i = 1}^n y_i
 \end{align*}
-\]</span></p>
-<p>The first-order condition for maximizing the log-likelihood sets its derivative to zero. This can be solved as follows:</p>
-<p><span class="math display">\[
+</annotation></semantics></math></p>
+<p>The first-order condition for maximizing the log-likelihood sets its
+derivative to zero. This can be solved as follows:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msup><mo>ℓ</mo><mi>′</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mo>−</mo><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>n</mi><mo>⋅</mo><mi>λ</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>λ</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{align*}
   \ell^\prime(\lambda; y_1, \dots, y_n) &amp; = 0 \\
   -n + \frac{1}{\lambda} \sum_{i = 1}^n y_i &amp; = 0 \\
   n \cdot \lambda &amp; = \sum_{i = 1}^n y_i \\
   \lambda &amp; = \frac{1}{n} \sum_{i = 1}^n y_i = \bar y
 \end{align*}
-\]</span></p>
-<p>Thus, the maximum likelihood estimator is simply the empirical mean <span class="math inline">\(\hat \lambda = \bar y.\)</span></p>
-<p>Unfortunately, when the parameter <span class="math inline">\(\lambda\)</span> is not constant but depends on a linear predictor through a log link <span class="math inline">\(\log(\lambda_i) = x_i^\top \beta\)</span>, the corresponding log-likelihood of the regression coefficients <span class="math inline">\(\beta\)</span> can not be maximized as easily. There is no closed-form solution for the maximum likelihood estimator <span class="math inline">\(\hat \beta\)</span> which is why the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function employs an iterative numerical algorithm (so-called iteratively weighted least squares) for fitting the model.</p>
+</annotation></semantics></math></p>
+<p>Thus, the maximum likelihood estimator is simply the empirical mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mi>.</mi></mrow><annotation encoding="application/x-tex">\hat \lambda = \bar y.</annotation></semantics></math></p>
+<p>Unfortunately, when the parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
+is not constant but depends on a linear predictor through a log link
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">\log(\lambda_i) = x_i^\top \beta</annotation></semantics></math>,
+the corresponding log-likelihood of the regression coefficients
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+can not be maximized as easily. There is no closed-form solution for the
+maximum likelihood estimator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>β</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat \beta</annotation></semantics></math>
+which is why the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function employs an iterative
+numerical algorithm (so-called iteratively weighted least squares) for
+fitting the model.</p>
 </div>
 <div class="section level2 unnumbered">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references">
-<div id="ref-Groll+Hvattum+Ley:2021">
-<p>Groll, Andreas, Lars Magnus Hvattum, Christophe Ley, Franziska Popp, Gunther Schauberger, Hans Van Eetvelde, and Achim Zeileis. 2021. “Hybrid Machine Learning Forecasts for the UEFA EURO 2020.” ArXiv 2106.05799. arXiv.org E-Print Archive. <a href="https://arxiv.org/abs/2106.05799" class="external-link">https://arxiv.org/abs/2106.05799</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Groll+Hvattum+Ley:2021" class="csl-entry">
+Groll, Andreas, Lars Magnus Hvattum, Christophe Ley, Franziska Popp,
+Gunther Schauberger, Hans Van Eetvelde, and Achim Zeileis. 2021.
+<span>“Hybrid Machine Learning Forecasts for the <span>UEFA</span>
+<span>EURO</span> 2020.”</span> arXiv 2106.05799. arXiv.org E-Print
+Archive. <a href="https://arxiv.org/abs/2106.05799" class="external-link">https://arxiv.org/abs/2106.05799</a>.
 </div>
-<div id="ref-Groll+Ley+Schauberger:2019">
-<p>Groll, Andreas, Christophe Ley, Gunther Schauberger, and Hans Van Eetvelde. 2019. “A Hybrid Random Forest to Predict Soccer Matches in International Tournaments.” <em>Journal of Quantitative Analysis in Sports</em> 15 (4): 271–87. <a href="https://doi.org/10.1515/jqas-2018-0060" class="external-link">https://doi.org/10.1515/jqas-2018-0060</a>.</p>
+<div id="ref-Groll+Ley+Schauberger:2019" class="csl-entry">
+Groll, Andreas, Christophe Ley, Gunther Schauberger, and Hans Van
+Eetvelde. 2019. <span>“A Hybrid Random Forest to Predict Soccer Matches
+in International Tournaments.”</span> <em>Journal of Quantitative
+Analysis in Sports</em> 15 (4): 271–87. <a href="https://doi.org/10.1515/jqas-2018-0060" class="external-link">https://doi.org/10.1515/jqas-2018-0060</a>.
 </div>
-<div id="ref-Kleiber+Zeileis:2016">
-<p>Kleiber, Christian, and Achim Zeileis. 2016. “Visualizing Count Data Regressions Using Rootograms.” <em>The American Statistician</em> 70 (3): 296–303. <a href="https://doi.org/10.1080/00031305.2016.1173590" class="external-link">https://doi.org/10.1080/00031305.2016.1173590</a>.</p>
+<div id="ref-Kleiber+Zeileis:2016" class="csl-entry">
+Kleiber, Christian, and Achim Zeileis. 2016. <span>“Visualizing Count
+Data Regressions Using Rootograms.”</span> <em>The American
+Statistician</em> 70 (3): 296–303. <a href="https://doi.org/10.1080/00031305.2016.1173590" class="external-link">https://doi.org/10.1080/00031305.2016.1173590</a>.
 </div>
-<div id="ref-Leitner+Zeileis+Hornik:2010">
-<p>Leitner, Christoph, Achim Zeileis, and Kurt Hornik. 2010. “Forecasting Sports Tournaments by Ratings of (Prob)abilities: A Comparison for the EURO 2008.” <em>International Journal of Forecasting</em> 26 (3): 471–81. <a href="https://doi.org/10.1016/j.ijforecast.2009.10.001" class="external-link">https://doi.org/10.1016/j.ijforecast.2009.10.001</a>.</p>
+<div id="ref-Leitner+Zeileis+Hornik:2010" class="csl-entry">
+Leitner, Christoph, Achim Zeileis, and Kurt Hornik. 2010.
+<span>“Forecasting Sports Tournaments by Ratings of (Prob)abilities: A
+Comparison for the <span>EURO</span> 2008.”</span> <em>International
+Journal of Forecasting</em> 26 (3): 471–81. <a href="https://doi.org/10.1016/j.ijforecast.2009.10.001" class="external-link">https://doi.org/10.1016/j.ijforecast.2009.10.001</a>.
 </div>
-<div id="ref-Wiki+Poisson">
-<p>Wikipedia. 2022. “Poisson Distribution — Wikipedia, the Free Encyclopedia.” URL <a href="https://en.wikipedia.org/wiki/Poisson_distribution" class="external-link">https://en.wikipedia.org/wiki/Poisson_distribution</a>, accessed 2022-02-21.</p>
+<div id="ref-Wiki+Poisson" class="csl-entry">
+Wikipedia. 2022. <span>“<span>P</span>oisson Distribution —
+<span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
+<a href="https://en.wikipedia.org/wiki/Poisson_distribution" class="external-link uri">https://en.wikipedia.org/wiki/Poisson_distribution</a>,
+accessed 2022-02-21.
 </div>
-<div id="ref-Zeileis+Leitner+Hornik:2018">
-<p>Zeileis, Achim, Christoph Leitner, and Kurt Hornik. 2018. “Probabilistic Forecasts for the 2018 FIFA World Cup Based on the Bookmaker Consensus Model.” Working Paper 2018-09. Working Papers in Economics; Statistics, Research Platform Empirical; Experimental Economics, Universität Innsbruck. <a href="https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09" class="external-link">https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09</a>.</p>
+<div id="ref-Zeileis+Leitner+Hornik:2018" class="csl-entry">
+Zeileis, Achim, Christoph Leitner, and Kurt Hornik. 2018.
+<span>“Probabilistic Forecasts for the 2018 <span>FIFA</span>
+<span>W</span>orld <span>C</span>up Based on the Bookmaker Consensus
+Model.”</span> Working Paper 2018-09. Working Papers in Economics;
+Statistics, Research Platform Empirical; Experimental Economics,
+Universität Innsbruck. <a href="https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09" class="external-link">https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09</a>.
 </div>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
+  <p>Developed by Alex Hayes, Ralph Moller-Trane, Daniel Jordan, Paul Northrop, Moritz N. Lang, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
