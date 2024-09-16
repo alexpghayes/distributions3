@@ -5,9 +5,9 @@
 \alias{vec_restore.distribution}
 \title{Methods for including distributions as vctrs in tibbles}
 \usage{
-\method{vec_proxy}{distribution}(x, ...)
+vec_proxy.distribution(x, ...)
 
-\method{vec_restore}{distribution}(x, to, ...)
+vec_restore.distribution(x, to, ...)
 }
 \arguments{
 \item{x, to}{Objects inheriting from \code{distribution}.}
