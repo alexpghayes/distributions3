@@ -6,8 +6,8 @@
   binomial is characterized by n independent Bernoulli trials but with potentially different
   success probabilities. The `d`/`p`/`q`/`r` functions employ the efficient implementation from
   the [PoissonBinomial](https://CRAN.R-project.org/package=PoissonBinomial) package, if available.
-  In case it is not available, fallback computation based on a normal approximation are provided
-  - with a warning, by default (#100).
+  In case it is not available, fallback computation based on a normal approximation are provided - with
+  a warning, by default (#100).
 - The `prodist()` methods for various count regression objects now distinguish between computations
   for the classic [pscl](https://CRAN.R-project.org/package=pscl) package and the newer
   [countreg](https://R-Forge.R-project.org/projects/countreg/) package (currently on R-Forge, soon
