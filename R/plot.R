@@ -664,7 +664,7 @@ StatAuc <- ggplot2::ggproto("StatAuc", ggplot2::Stat,
         round(cdf(d, to) - cdf(d, from), digits = digits)
       )
     } else {
-      data$label <- NA
+      data$label <- ""
     }
 
     return(data)
