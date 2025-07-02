@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>The Poisson distribution: From basic probability theory to regression models • distributions3</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Poisson distribution: From basic probability theory to regression models">
 <meta name="robots" content="noindex">
 </head>
@@ -85,30 +91,22 @@ a class room exercise in a course covering GLMs.</p>
 </h2>
 <p>The classic basic probability distribution employed for modeling
 count data is the Poisson distribution. Its probability mass function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(y; \lambda)</annotation></semantics></math>
-yields the probability for a random variable
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
-to take a count
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>…</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">y \in \{0, 1, 2, \dots\}</annotation></semantics></math>
-based on the distribution parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda &gt; 0</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Pr</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo>=</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>y</mi><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mo>exp</mo><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mi>λ</mi><mi>y</mi></msup></mrow><mrow><mi>y</mi><mi>!</mi></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
-\text{Pr}(Y = y) = f(y; \lambda) = \frac{\exp\left(-\lambda\right) \cdot \lambda^y}{y!}.
-</annotation></semantics></math></p>
+<span class="math inline">\(f(y; \lambda)\)</span> yields the
+probability for a random variable <span class="math inline">\(Y\)</span>
+to take a count <span class="math inline">\(y \in \{0, 1, 2,
+\dots\}\)</span> based on the distribution parameter <span class="math inline">\(\lambda &gt; 0\)</span>:</p>
+<p><span class="math display">\[
+\text{Pr}(Y = y) = f(y; \lambda) = \frac{\exp\left(-\lambda\right) \cdot
+\lambda^y}{y!}.
+\]</span></p>
 <p>The Poisson distribution has many distinctive features, e.g., both
-its expectation and variance are equal and given by the parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
-Thus,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">E</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\text{E}(Y) = \lambda</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Var</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>Y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\text{Var}(Y) = \lambda</annotation></semantics></math>.
-Moreover, the Poisson distribution is related to other basic probability
+its expectation and variance are equal and given by the parameter <span class="math inline">\(\lambda\)</span>. Thus, <span class="math inline">\(\text{E}(Y) = \lambda\)</span> and <span class="math inline">\(\text{Var}(Y) = \lambda\)</span>. Moreover, the
+Poisson distribution is related to other basic probability
 distributions. Namely, it can be obtained as the limit of the binomial
 distribution when the number of attempts is high and the success
 probability low. Or the Poisson distribution can be approximated by a
-normal distribution when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
-is large. See <span class="citation">Wikipedia (<a href="#ref-Wiki+Poisson">2022</a>)</span> for further properties and
+normal distribution when <span class="math inline">\(\lambda\)</span> is
+large. See <span class="citation">Wikipedia (<a href="#ref-Wiki+Poisson">2022</a>)</span> for further properties and
 references.</p>
 <p>In the <code>distributions3</code> package Poisson distribution
 objects can be generated with the <code><a href="../reference/Poisson.html">Poisson()</a></code> function.
@@ -136,10 +134,9 @@ simulate random samples.</p>
 <span><span class="co">## [1] 3 1 1 2 3</span></span></code></pre></div>
 <p>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method the distribution can also be
 visualized which we use here to show how the probabilities for the
-counts
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">0, 1, \dots, 15</annotation></semantics></math>
-change when the parameter is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.5</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.5, 2, 5, 10</annotation></semantics></math>.</p>
+counts <span class="math inline">\(0, 1, \dots, 15\)</span> change when
+the parameter is <span class="math inline">\(\lambda = 0.5, 2, 5,
+10\)</span>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span>, main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">0.5</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">lambda</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span>,   xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span>
@@ -182,16 +179,10 @@ brief summary yields</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span></span>
 <span><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
 <span><span class="co">##   0.000   0.000   1.000   1.297   2.000   6.000</span></span></code></pre></div>
-<p>showing that the teams scored between
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>6</mn><annotation encoding="application/x-tex">6</annotation></semantics></math>
-goals per match with an average of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>1.297</mn></mrow><annotation encoding="application/x-tex">\bar y = 1.297</annotation></semantics></math>
-from the observations
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>i</mi></msub><annotation encoding="application/x-tex">y_i</annotation></semantics></math>
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>128</mn></mrow><annotation encoding="application/x-tex">i = 1, \dots, 128</annotation></semantics></math>).
-The corresponding table of observed relative frequencies is:</p>
+<p>showing that the teams scored between <span class="math inline">\(0\)</span> and <span class="math inline">\(6\)</span> goals per match with an average of
+<span class="math inline">\(\bar y = 1.297\)</span> from the
+observations <span class="math inline">\(y_i\)</span> (<span class="math inline">\(i = 1, \dots, 128\)</span>). The corresponding
+table of observed relative frequencies is:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proportions.html" class="external-link">prop.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">observed</span></span>
@@ -214,8 +205,8 @@ scored in a match.</p>
 constant mean over all teams and matches and hence just fit a single
 Poisson distribution for the number of goals. To do so, we obtain a
 point estimate of the Poisson parameter by using the empirical mean
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>1.297</mn></mrow><annotation encoding="application/x-tex">\hat \lambda = \bar y = 1.297</annotation></semantics></math>
-and set up the corresponding distribution object:</p>
+<span class="math inline">\(\hat \lambda = \bar y = 1.297\)</span> and
+set up the corresponding distribution object:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_const</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">FIFA2018</span><span class="op">$</span><span class="va">goals</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p_const</span></span>
@@ -223,11 +214,9 @@ and set up the corresponding distribution object:</p>
 <p>In the technical details below we show that this actually corresponds
 to the maximum likelihood estimation for this distribution.</p>
 <p>As already illustrated above, the expected probabilities of observing
-counts of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">0, 1, \dots, 6</annotation></semantics></math>
-goals for this Poisson distribution can be extracted using the
-<code><a href="../reference/pdf.html">pdf()</a></code> method. A comparison with the observed empirical
-frequencies yields</p>
+counts of <span class="math inline">\(0, 1, \dots, 6\)</span> goals for
+this Poisson distribution can be extracted using the <code><a href="../reference/pdf.html">pdf()</a></code>
+method. A comparison with the observed empirical frequencies yields</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_const</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">observed</span>, <span class="va">expected</span><span class="op">)</span></span>
@@ -259,21 +248,14 @@ bookmakers using the bookmaker consensus model of <span class="citation">Leitner
 its opponent is a useful predictor for the number of <code>goals</code>
 scored.</p>
 <p>Consequently, we fit a generalized linear model (GLM) to the data
-that links the expected number of goals per team/match
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\lambda_i</annotation></semantics></math>
-to the linear predictor
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">x_i^\top \beta</annotation></semantics></math>
-with regressor vector
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><msub><mrow><mi>𝚍</mi><mi>𝚒</mi><mi>𝚏</mi><mi>𝚏</mi><mi>𝚎</mi><mi>𝚛</mi><mi>𝚎</mi><mi>𝚗</mi><mi>𝚌</mi><mi>𝚎</mi></mrow><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x_i^\top = (1, \mathtt{difference}_i)</annotation></semantics></math>
-and corresponding coefficient vector
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-using a log-link:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">\log(\lambda_i) = x_i^\top \beta</annotation></semantics></math>.
-The maximum likelihood estimator
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>β</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat \beta</annotation></semantics></math>
-with corresponding inference, predictions, residuals, etc. can be
-obtained using the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function from base R with
-<code>family = poisson</code>:</p>
+that links the expected number of goals per team/match <span class="math inline">\(\lambda_i\)</span> to the linear predictor <span class="math inline">\(x_i^\top \beta\)</span> with regressor vector
+<span class="math inline">\(x_i^\top = (1,
+\mathtt{difference}_i)\)</span> and corresponding coefficient vector
+<span class="math inline">\(\beta\)</span> using a log-link: <span class="math inline">\(\log(\lambda_i) = x_i^\top \beta\)</span>. The
+maximum likelihood estimator <span class="math inline">\(\hat
+\beta\)</span> with corresponding inference, predictions, residuals,
+etc. can be obtained using the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function from base R
+with <code>family = poisson</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">goals</span> <span class="op">~</span> <span class="va">difference</span>, data <span class="op">=</span> <span class="va">FIFA2018</span>, family <span class="op">=</span> <span class="va">poisson</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
@@ -307,11 +289,9 @@ inverse of the log-link).</p>
 <span><span class="co">## (Intercept) </span></span>
 <span><span class="co">##     1.23704</span></span></code></pre></div>
 <p>Or equivalently the <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> function can be used with
-<code>type = "response"</code> in order to get the expected
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\hat \lambda_i</annotation></semantics></math>
-(rather than just the linear predictor
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mover><mi>β</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">x_i^\top \hat \beta</annotation></semantics></math>
-that is predicted by default).</p>
+<code>type = "response"</code> in order to get the expected <span class="math inline">\(\hat \lambda_i\)</span> (rather than just the
+linear predictor <span class="math inline">\(x_i^\top \hat
+\beta\)</span> that is predicted by default).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>difference <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span>
 <span><span class="co">##       1 </span></span>
@@ -324,21 +304,16 @@ zero to six goals in a mathc of two equally strong teams:</p>
 <span><span class="fu"><a href="../reference/pdf.html">pdf</a></span><span class="op">(</span><span class="va">p_zero</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">## [1] 0.290242139 0.359041061 0.222074031 0.091571467 0.028319386 0.007006441</span></span>
 <span><span class="co">## [7] 0.001444541</span></span></code></pre></div>
-<p>Second, the slope of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.413</mn><annotation encoding="application/x-tex">0.413</annotation></semantics></math>
-can be interpreted as an ability elasticity of the number of goals
-scored. This is because the difference of the log-abilities can also be
+<p>Second, the slope of <span class="math inline">\(0.413\)</span> can
+be interpreted as an ability elasticity of the number of goals scored.
+This is because the difference of the log-abilities can also be
 understood as the log of the ability ratio. Thus, when the ability ratio
-increases by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-percent, the expected number of goals increases approximately by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.413</mn><annotation encoding="application/x-tex">0.413</annotation></semantics></math>
-percent.</p>
+increases by <span class="math inline">\(1\)</span> percent, the
+expected number of goals increases approximately by <span class="math inline">\(0.413\)</span> percent.</p>
 <p>This yields a different predicted Poisson distribution for each
-team/match in the tournament. We can set up the vector of all
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>128</mn><annotation encoding="application/x-tex">128</annotation></semantics></math><code><a href="../reference/Poisson.html">Poisson()</a></code> distribution objects by extracting the vector of
-all fitted point estimates
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mn>128</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>⊤</mi></msup><annotation encoding="application/x-tex">(\hat \lambda_1, \dots, \hat \lambda_{128})^\top</annotation></semantics></math>:</p>
+team/match in the tournament. We can set up the vector of all <span class="math inline">\(128\)</span> <code><a href="../reference/Poisson.html">Poisson()</a></code> distribution
+objects by extracting the vector of all fitted point estimates <span class="math inline">\((\hat \lambda_1, \dots, \hat
+\lambda_{128})^\top\)</span>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Poisson.html">Poisson</a></span><span class="op">(</span>lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">p_reg</span><span class="op">)</span></span>
@@ -397,10 +372,8 @@ multiplication of its arguments.</p>
 <span><span class="co">## [6,]  0.69  0.65 0.31 0.10 0.02 0.00 0.00</span></span>
 <span><span class="co">## [7,]  0.18  0.17 0.08 0.03 0.01 0.00 0.00</span></span></code></pre></div>
 <p>For example, we can see from this table that the expected probability
-for France winning against Croatia 1-0 is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>12.43</mn><annotation encoding="application/x-tex">12.43</annotation></semantics></math>
-percent while the probability that France loses 0-1 is only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>7.39</mn><annotation encoding="application/x-tex">7.39</annotation></semantics></math>
+for France winning against Croatia 1-0 is <span class="math inline">\(12.43\)</span> percent while the probability that
+France loses 0-1 is only <span class="math inline">\(7.39\)</span>
 percent.</p>
 <p>The advantage of France can also be brought out more clearly by
 aggregating the probabilities for winning (lower triangular matrix), a
@@ -413,10 +386,9 @@ computed as:</p>
 <span><span class="co">## [1] 0.2497855</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">res</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html" class="external-link">upper.tri</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="co">## France loses</span></span>
 <span><span class="co">## [1] 0.2242939</span></span></code></pre></div>
-<p>Note that these probabilities do not sum up to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
-because we only considered up to six goals per team but more goals can
-actually occur with a small probability.</p>
+<p>Note that these probabilities do not sum up to <span class="math inline">\(1\)</span> because we only considered up to six
+goals per team but more goals can actually occur with a small
+probability.</p>
 <p>Next, we update the expected frequencies table by averaging across
 the expectations per team/match from the regression model.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -468,62 +440,54 @@ added further explanatory variables and used flexible machine learning
 regression techniques rather than a simple Poisson GLM.</p>
 </div>
 <div class="section level2">
-<h2 id="technical-details-maximum-likelihood-estimation-of-lambda">Technical details: Maximum likelihood estimation of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#technical-details-maximum-likelihood-estimation-of-lambda"></a>
+<h2 id="technical-details-maximum-likelihood-estimation-of-lambda">Technical details: Maximum likelihood estimation of <span class="math inline">\(\lambda\)</span><a class="anchor" aria-label="anchor" href="#technical-details-maximum-likelihood-estimation-of-lambda"></a>
 </h2>
-<p>Fitting a single Poisson distribution with constant
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-independent observations
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">y_1, \dots, y_n</annotation></semantics></math>
-using maximum likelihood estimation can be done analytically using basic
-algebra. First, we set up the log-likelihood function
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>ℓ</mo><annotation encoding="application/x-tex">\ell</annotation></semantics></math>
+<p>Fitting a single Poisson distribution with constant <span class="math inline">\(\lambda\)</span> to <span class="math inline">\(n\)</span> independent observations <span class="math inline">\(y_1, \dots, y_n\)</span> using maximum likelihood
+estimation can be done analytically using basic algebra. First, we set
+up the log-likelihood function <span class="math inline">\(\ell\)</span>
 as the sum of the log-densities per observation:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mo>ℓ</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo>log</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align*}
-  \ell(\lambda; y_1, \dots, y_n) &amp; = \sum_{i = 1}^n \log f(y_i; \lambda) \\
+  \ell(\lambda; y_1, \dots, y_n) &amp; = \sum_{i = 1}^n \log f(y_i;
+\lambda) \\
 \end{align*}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>For solving the first-order condition analytically below we need the
 score function, i.e., the derivative of the log-likelihood with respect
-to the parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
-The derivative of the sum is simply the sum of the derivatives:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msup><mo>ℓ</mo><mi>′</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">{</mo><mo>log</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mo>;</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>′</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mi>λ</mi><mo>+</mo><msub><mi>y</mi><mi>i</mi></msub><mo>⋅</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>i</mi></msub><mi>!</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>′</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo stretchy="true" form="prefix">{</mo><mo>−</mo><mn>1</mn><mo>+</mo><msub><mi>y</mi><mi>i</mi></msub><mo>⋅</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><mo stretchy="true" form="postfix">}</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mo>−</mo><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">
+to the parameter <span class="math inline">\(\lambda\)</span>. The
+derivative of the sum is simply the sum of the derivatives:</p>
+<p><span class="math display">\[
 \begin{align*}
 \ell^\prime(\lambda; y_1, \dots, y_n)
-    &amp; = \sum_{i = 1}^n \left\{ \log f(y_i; \lambda) \right\}^\prime \\
-    &amp; = \sum_{i = 1}^n \left\{ -\lambda + y_i \cdot \log(\lambda) - \log(y_i!) \right\}^\prime \\
-    &amp; = \sum_{i = 1}^n \left\{ -1 + y_i \cdot \frac{1}{\lambda} \right\} \\
+    &amp; = \sum_{i = 1}^n \left\{ \log f(y_i; \lambda) \right\}^\prime
+\\
+    &amp; = \sum_{i = 1}^n \left\{ -\lambda + y_i \cdot \log(\lambda) -
+\log(y_i!) \right\}^\prime \\
+    &amp; = \sum_{i = 1}^n \left\{ -1 + y_i \cdot \frac{1}{\lambda}
+\right\} \\
     &amp; = -n + \frac{1}{\lambda} \sum_{i = 1}^n y_i
 \end{align*}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>The first-order condition for maximizing the log-likelihood sets its
 derivative to zero. This can be solved as follows:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msup><mo>ℓ</mo><mi>′</mi></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>;</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mo>−</mo><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>λ</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>n</mi><mo>⋅</mo><mi>λ</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>λ</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>y</mi><mi>i</mi></msub><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align*}
   \ell^\prime(\lambda; y_1, \dots, y_n) &amp; = 0 \\
   -n + \frac{1}{\lambda} \sum_{i = 1}^n y_i &amp; = 0 \\
   n \cdot \lambda &amp; = \sum_{i = 1}^n y_i \\
   \lambda &amp; = \frac{1}{n} \sum_{i = 1}^n y_i = \bar y
 \end{align*}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Thus, the maximum likelihood estimator is simply the empirical mean
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>λ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>y</mi><mo accent="true">‾</mo></mover><mi>.</mi></mrow><annotation encoding="application/x-tex">\hat \lambda = \bar y.</annotation></semantics></math></p>
-<p>Unfortunately, when the parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
-is not constant but depends on a linear predictor through a log link
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>λ</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msubsup><mi>x</mi><mi>i</mi><mi>⊤</mi></msubsup><mi>β</mi></mrow><annotation encoding="application/x-tex">\log(\lambda_i) = x_i^\top \beta</annotation></semantics></math>,
-the corresponding log-likelihood of the regression coefficients
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-can not be maximized as easily. There is no closed-form solution for the
-maximum likelihood estimator
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>β</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat \beta</annotation></semantics></math>
-which is why the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function employs an iterative
-numerical algorithm (so-called iteratively weighted least squares) for
-fitting the model.</p>
+<span class="math inline">\(\hat \lambda = \bar y.\)</span></p>
+<p>Unfortunately, when the parameter <span class="math inline">\(\lambda\)</span> is not constant but depends on a
+linear predictor through a log link <span class="math inline">\(\log(\lambda_i) = x_i^\top \beta\)</span>, the
+corresponding log-likelihood of the regression coefficients <span class="math inline">\(\beta\)</span> can not be maximized as easily.
+There is no closed-form solution for the maximum likelihood estimator
+<span class="math inline">\(\hat \beta\)</span> which is why the
+<code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function employs an iterative numerical algorithm
+(so-called iteratively weighted least squares) for fitting the
+model.</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -580,7 +544,7 @@ Universität Innsbruck. <a href="https://EconPapers.RePEc.org/RePEc:inn:wpaper:2
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>One sample Z-tests for a proportion • distributions3</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="One sample Z-tests for a proportion">
 <meta name="robots" content="noindex">
 </head>
@@ -87,20 +93,17 @@ go to office hours and ask each professor and it turns out 17 out of 62
 professors in their department watch Game of Thrones. Several of the
 faculty think Game of Thrones is a board game.</p>
 <p>We can imagine that the data is a bunch of zeros and ones, where the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>i</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">i^{th}</annotation></semantics></math>
-data point,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mi>i</mi></msub><annotation encoding="application/x-tex">x_i</annotation></semantics></math>
-is one if professor
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
-watches Game of Thrones, and zero otherwise. So the full dataset might
-look something like:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<span class="math inline">\(i^{th}\)</span> data point, <span class="math inline">\(x_i\)</span> is one if professor <span class="math inline">\(i\)</span> watches Game of Thrones, and zero
+otherwise. So the full dataset might look something like:</p>
+<p><span class="math display">\[
 \begin{align}
-  &amp; 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1,     \\
-  &amp; 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0,  \\
+  &amp; 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
+1,     \\
+  &amp; 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1,
+0,  \\
   &amp; 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>But it is much easier to just remember that there are 17 ones and 45
 zeros.</p>
 </div>
@@ -116,23 +119,16 @@ but for a proportion, we do something slightly different. When data is
 binary, like we have here, the central limit theorem kicks in slower
 than usual. The standard thing to check is whether</p>
 <ul>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>⋅</mo><mi>π</mi><mo>&gt;</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">n \cdot \pi &gt; 5</annotation></semantics></math></li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>⋅</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>π</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&gt;</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">n \cdot (1 - \pi) &gt; 5</annotation></semantics></math></li>
+<li><span class="math inline">\(n \cdot \pi &gt; 5\)</span></li>
+<li><span class="math inline">\(n \cdot (1 - \pi) &gt; 5\)</span></li>
 </ul>
-<p>Where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the sample size (62 in our case) and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math>
-is the sample average. Note that some textbooks might use
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
-rather than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math>.
-In our case we have
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>π</mi><mo>=</mo><mn>17</mn><mi>/</mi><mn>62</mn></mrow><annotation encoding="application/x-tex">\pi = 17 / 62</annotation></semantics></math>,
-and</p>
+<p>Where <span class="math inline">\(n\)</span> is the sample size (62
+in our case) and <span class="math inline">\(\pi\)</span> is the sample
+average. Note that some textbooks might use <span class="math inline">\(p\)</span> rather than <span class="math inline">\(\pi\)</span>. In our case we have <span class="math inline">\(\pi = 17 / 62\)</span>, and</p>
 <ul>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>62</mn><mo>⋅</mo><mn>17</mn><mi>/</mi><mn>62</mn><mo>=</mo><mn>17</mn></mrow><annotation encoding="application/x-tex">62 \cdot 17 / 62 = 17</annotation></semantics></math></li>
-<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>62</mn><mo>⋅</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mn>17</mn><mi>/</mi><mn>62</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>45</mn></mrow><annotation encoding="application/x-tex">62 \cdot (1 - 17 / 62) = 45</annotation></semantics></math></li>
+<li><span class="math inline">\(62 \cdot 17 / 62 = 17\)</span></li>
+<li><span class="math inline">\(62 \cdot (1 - 17 / 62) =
+45\)</span></li>
 </ul>
 <p>So we’re good to go.</p>
 </div>
@@ -142,15 +138,15 @@ and</p>
 <p>Let’s test the null hypothesis that, on average, twenty percent of
 professors what Game of Thrones. The corresponding null hypothesis
 is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>π</mi><mo>=</mo><mn>0.2</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>π</mi><mo>≠</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: \pi = 0.2 \qquad H_A: \pi \neq 0.2
-</annotation></semantics></math></p>
+\]</span></p>
 <p>First we need to calculate our Z-statistic. Remember that the
 Z-statistic for proportion is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>=</mo><mfrac><mrow><mi>π</mi><mo>−</mo><msub><mi>π</mi><mn>0</mn></msub></mrow><msqrt><mfrac><mrow><msub><mi>π</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>π</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac></msqrt></mfrac><mo>∼</mo><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   Z = \frac{\pi - \pi_0}{\sqrt{\frac{\pi_0 (1 - \pi_0)}{n}}} \sim
     \mathrm{Normal}(0, 1)
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
@@ -166,14 +162,14 @@ Z-statistic for proportion is</p>
 <span><span class="va">z_stat</span></span>
 <span><span class="co">#&gt; [1] 1.460501</span></span></code></pre></div>
 <p>To calculate a two-sided p-value, we need to find</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>≥</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.46</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>≥</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>≤</mo><mo>−</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>1</mn><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>≤</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>≤</mo><mo>−</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>1</mn><mo>−</mo><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   P(|Z| \ge |1.46|)
   &amp;= P(Z \ge 1.46) + P(Z \le -1.46) \\
   &amp;= 1 - P(Z \le 1.46) + P(Z \le -1.46) \\
   &amp;= 1 - \Phi(1.46) + \Phi(-1.46)
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>To do this we need to c.d.f. of a standard normal</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span></span>
@@ -202,13 +198,13 @@ Z-table.</p>
 <p>You may also have seen a different formula for the p-value of a
 two-sided Z-test, which makes use of the fact that the normal
 distribution is symmetric:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>≥</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.46</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>2</mn><mo>⋅</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>≤</mo><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.46</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="right" style="text-align: right"><mo>=</mo><mn>2</mn><mo>⋅</mo><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>−</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   P(|Z| \ge |1.46|)
   &amp;= 2 \cdot P(Z \le -|1.46|)
   &amp;= 2 \cdot \Phi(-1.46)
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="op">-</span><span class="fl">1.46</span><span class="op">)</span></span>
@@ -219,27 +215,27 @@ distribution is symmetric:</p>
 </h2>
 <p>Finally, sometimes we are interest in one sided Z-tests. For the
 test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>π</mi><mo>≤</mo><mn>0.2</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>π</mi><mo>&gt;</mo><mn>0.2</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   H_0: \pi \le 0.2 \qquad H_A: \pi &gt; 0.2
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&gt;</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(Z &gt; 1.46)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1.46</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.07214504</span></span></code></pre></div>
 <p>For the test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>π</mi><mo>≥</mo><mn>0.2</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>π</mi><mo>&lt;</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: \pi \ge 0.2 \qquad H_A: \pi &lt; 0.2
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mn>1.46</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(Z &lt; 1.46)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">Z</span>, <span class="fl">1.46</span><span class="op">)</span></span>
@@ -256,7 +252,7 @@ test</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

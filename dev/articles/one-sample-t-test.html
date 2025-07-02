@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>One sample T-tests • distributions3</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="One sample T-tests">
 <meta name="robots" content="noindex">
 </head>
@@ -86,16 +92,15 @@ memes their professors know and love. So they go to class, and every
 time a professor uses a new meme, they write it down. After a year of
 classes, the student has recorded the following meme counts, where each
 count corresponds to a single class they took:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>11</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>6</mn><mo>,</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   3, 7, 11, 0, 7, 0, 4, 5, 6, 2
-</annotation></semantics></math></p>
+\]</span></p>
 <p><strong>Note</strong>: For a Z-test, we need to know the population
-standard deviation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>.
-With T-tests, this is unnecessary, and we estimate the standard
-deviation from the data. This results in some additional uncertainty in
-our test statistic, which is reflected in the heavier tails of the T
-distribution compared to the normal distribution.</p>
+standard deviation <span class="math inline">\(\sigma\)</span>. With
+T-tests, this is unnecessary, and we estimate the standard deviation
+from the data. This results in some additional uncertainty in our test
+statistic, which is reflected in the heavier tails of the T distribution
+compared to the normal distribution.</p>
 </div>
 <div class="section level2">
 <h2 id="assumption-checking">Assumption checking<a class="anchor" aria-label="anchor" href="#assumption-checking"></a>
@@ -118,36 +123,30 @@ normal distribution using a normal quantile-quantile plot.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqnorm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html" class="external-link">qqline</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="one-sample-t-test_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<p>Since the data lies close the line
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y = x</annotation></semantics></math>,
-and has no notable systematic deviations from line, it’s safe to treat
-the sample as coming from a normal distribution. We can proceed with our
-hypothesis test.</p>
+<p>Since the data lies close the line <span class="math inline">\(y =
+x\)</span>, and has no notable systematic deviations from line, it’s
+safe to treat the sample as coming from a normal distribution. We can
+proceed with our hypothesis test.</p>
 </div>
 <div class="section level2">
 <h2 id="null-hypothesis-and-test-statistic">Null hypothesis and test statistic<a class="anchor" aria-label="anchor" href="#null-hypothesis-and-test-statistic"></a>
 </h2>
 <p>Let’s test the null hypothesis that, on average, professors know 3
 memes. That is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>=</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>≠</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: \mu = 3 \qquad H_A: \mu \neq 3
-</annotation></semantics></math></p>
+\]</span></p>
 <p>First we need to calculate our T-statistic. Let’s use do this with R.
 Remember that the T-statistic is defined as</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>=</mo><mfrac><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>−</mo><msub><mi>μ</mi><mn>0</mn></msub></mrow><mrow><mi>s</mi><mi>/</mi><msqrt><mi>n</mi></msqrt></mrow></mfrac><mo>∼</mo><msub><mi>t</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   T = \frac{\bar x - \mu_0}{s / \sqrt{n}} \sim t_{n-1}
-</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\bar x = \frac 1n \sum_{i=1}^n x_i</annotation></semantics></math>
-is the sample mean,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mu_0</annotation></semantics></math>
-is our proposed value for the population mean,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><msqrt><mrow><mfrac><mn>1</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar x)^2}</annotation></semantics></math>
-is the sample standard deviation, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is the sample size. This test statistic then has a T distribution with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
-degrees of freedom.</p>
+\]</span></p>
+<p>where <span class="math inline">\(\bar x = \frac 1n \sum_{i=1}^n
+x_i\)</span> is the sample mean, <span class="math inline">\(\mu_0\)</span> is our proposed value for the
+population mean, <span class="math inline">\(s = \sqrt{\frac{1}{n-1}
+\sum_{i=1}^n (x_i - \bar x)^2}\)</span> is the sample standard
+deviation, and <span class="math inline">\(n\)</span> is the sample
+size. This test statistic then has a T distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.</p>
 </div>
 <div class="section level2">
 <h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
@@ -162,16 +161,14 @@ degrees of freedom.</p>
 <span><span class="co">#&gt; [1] 1.378916</span></span></code></pre></div>
 <p>Since the sample size is 10, to calculate a two-sided p-value, we
 need to find</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>t</mi><mn>9</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>≥</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.38</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>≥</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>≤</mo><mo>−</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>1</mn><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>≤</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>≤</mo><mo>−</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   P(|t_9| \ge |1.38|)
   &amp;= P(t_9 \ge 1.38) + P(t_9 \le -1.38) \\
   &amp;= 1 - P(t_9 \le 1.38) + P(t_9 \le -1.38) \\
 \end{align}
-</annotation></semantics></math></p>
-<p>To do this we need to c.d.f. of a
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>9</mn></msub><annotation encoding="application/x-tex">t_9</annotation></semantics></math>
-distribution.</p>
+\]</span></p>
+<p>To do this we need to c.d.f. of a <span class="math inline">\(t_9\)</span> distribution.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span></span>
 <span></span>
@@ -191,39 +188,39 @@ T-table.</p>
 <p>You may also have seen a different formula for the p-value of a
 two-sided T-test, which makes use of the fact that the T distribution is
 symmetric:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>t</mi><mn>9</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>≥</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.38</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>2</mn><mo>⋅</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>≤</mo><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mn>1.38</mn><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   P(|t_9| \ge |1.38|)
   &amp;= 2 \cdot P(t_9 \le -|1.38|)
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Using this formula we get the same result:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">T_9</span>, <span class="op">-</span><span class="fl">1.38</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.2008985</span></span></code></pre></div>
 <p>Finally, sometimes we are interest in one sided T-tests. For the
 test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>≤</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>&gt;</mo><mn>3</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>&gt;</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(t_9 &gt; 1.38)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">T_9</span>, <span class="fl">1.38</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.1004493</span></span></code></pre></div>
 <p>For the test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>≥</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: \mu \ge 3 \qquad H_A: \mu &lt; 3
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>9</mn></msub><mo>&lt;</mo><mn>1.38</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(t_9 &lt; 1.38)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">T_9</span>, <span class="fl">1.38</span><span class="op">)</span></span>
@@ -254,9 +251,8 @@ data. We tell <code><a href="https://rdrr.io/r/stats/t.test.html" class="externa
 <span><span class="co">#&gt; mean of x </span></span>
 <span><span class="co">#&gt;       4.5</span></span></code></pre></div>
 <p>If we don’t specify <code>mu</code>, <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> assumes
-that we want to test the hypothesis
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">H_0 : \mu = 0</annotation></semantics></math>.
-This looks like</p>
+that we want to test the hypothesis <span class="math inline">\(H_0 :
+\mu = 0\)</span>. This looks like</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -272,11 +268,11 @@ This looks like</p>
 <span><span class="co">#&gt;       4.5</span></span></code></pre></div>
 <p>We can also get one-sided p-values from <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> by
 specifying the alternative hypothesis. For the test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>≤</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>&gt;</mo><mn>3</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   H_0: \mu \le 3 \qquad H_A: \mu &gt; 3
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>we would use</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu <span class="op">=</span> <span class="fl">3</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
@@ -292,9 +288,9 @@ specifying the alternative hypothesis. For the test</p>
 <span><span class="co">#&gt; mean of x </span></span>
 <span><span class="co">#&gt;       4.5</span></span></code></pre></div>
 <p>For the test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>≥</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: \mu \ge 3 \qquad H_A: \mu &lt; 3
-</annotation></semantics></math></p>
+\]</span></p>
 <p>we would use</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu <span class="op">=</span> <span class="fl">3</span>, alternative <span class="op">=</span> <span class="st">"less"</span><span class="op">)</span></span>
@@ -323,7 +319,7 @@ earlier.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
