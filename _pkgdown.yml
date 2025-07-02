@@ -11,6 +11,7 @@ template:
     twitter:
       creator: "@alexpghayes"
       card: summary
+  math-rendering: "mathjax"
 
 reference:
   - title: "Generic functions for S3 distribution objects"
