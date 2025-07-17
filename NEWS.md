@@ -1,5 +1,7 @@
 # distributions3 (development version)
 
+- Updates to plotting functions for compatibility with an upcoming version of `ggplot2` (#111)
+
 # distributions3 0.2.2
 
 - New `PoissonBinomial()` distribution, a generalization of the binomial distribution. The Poisson
