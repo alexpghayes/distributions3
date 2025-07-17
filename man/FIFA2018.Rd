@@ -111,6 +111,6 @@ Zeileis A, Leitner C, Hornik K (2018).
 Probabilistic Forecasts for the 2018 FIFA World Cup Based on the Bookmaker Consensus Model.
 Working Paper 2018-09, Working Papers in Economics and Statistics,
 Research Platform Empirical and Experimental Economics, University of Innsbruck.
-\url{https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09}
+\url{https://econpapers.repec.org/RePEc:inn:wpaper:2018-09}
 }
 \keyword{datasets}

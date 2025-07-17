@@ -13,7 +13,7 @@
 #' the bookmaker consensus model of Leitner et al. (2010). The difference in
 #' log-ability between a team and its opponent is a useful predictor for the
 #' number of goals scored.
-#' 
+#'
 #' To model the data a basic Poisson regression model provides a good fit.
 #' This treats the number of goals by the two teams as independent given the
 #' ability difference which is a reasonable assumption in this data set.
@@ -47,8 +47,8 @@
 #' Zeileis A, Leitner C, Hornik K (2018).
 #'   Probabilistic Forecasts for the 2018 FIFA World Cup Based on the Bookmaker Consensus Model.
 #'   Working Paper 2018-09, Working Papers in Economics and Statistics,
-#'   Research Platform Empirical and Experimental Economics, University of Innsbruck. 
-#'   \url{https://EconPapers.RePEc.org/RePEc:inn:wpaper:2018-09}
+#'   Research Platform Empirical and Experimental Economics, University of Innsbruck.
+#'   \url{https://econpapers.repec.org/RePEc:inn:wpaper:2018-09}
 #'
 #' @examples
 #' ## load data
@@ -63,7 +63,7 @@
 #' p_const <- Poisson(lambda = mean(FIFA2018$goals))
 #' p_const
 #' expctd <- pdf(p_const, 0:6)
-#' 
+#'
 #' ## comparison: observed vs. expected frequencies
 #' ## frequencies for 3 and 4 goals are slightly overfitted
 #' ## while 5 and 6 goals are slightly underfitted
