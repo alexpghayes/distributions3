@@ -4,12 +4,12 @@ Minor update
 
 * local ubuntu install, R 4.4.1
 * ubuntu (on Github Actions), R release, devel, 4.3, 4.2, 4.1, 4.0
-* windows (on Github Actions), R release
+* windows (on Github Actions), R release, 4.1
 * macOS (on Github Actions), R release
 
 ## Revdepchecks
 
-Failed to check one reverse dependency `imaginator`. Otherwise did not detect any new issues.
+Did not detect any new issues.
 
 ## R CMD check results
 
