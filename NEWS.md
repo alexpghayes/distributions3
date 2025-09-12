@@ -1,6 +1,6 @@
 # distributions3 0.2.3
 
-- Updates to plotting functions for compatibility with an upcoming version of `ggplot2` (#111)
+- Updates to plotting functions for compatibility new version of `ggplot2` (#111)
 
 # distributions3 0.2.2
 
