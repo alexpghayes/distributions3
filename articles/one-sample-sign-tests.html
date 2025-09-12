@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>One sample sign tests • distributions3</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="One sample sign tests">
 </head>
 <body>
@@ -20,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,10 +90,10 @@ In these circumstances a sign test is appropriate.</p>
 <p>For example, suppose you wander around Times Square and ask strangers
 for their salaries. Incomes are typically very skewed, and you might get
 a sample like:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>8478</mn><mo>,</mo><mn>21564</mn><mo>,</mo><mn>36562</mn><mo>,</mo><mn>176602</mn><mo>,</mo><mn>9395</mn><mo>,</mo><mn>18320</mn><mo>,</mo><mn>50000</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>40298</mn><mo>,</mo><mn>39</mn><mo>,</mo><mn>10780</mn><mo>,</mo><mn>2268583</mn><mo>,</mo><mn>3404930</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   8478, 21564, 36562, 176602, 9395, 18320, 50000,
     2, 40298, 39, 10780, 2268583, 3404930
-</annotation></semantics></math></p>
+\]</span></p>
 <p>If we look at a QQ plot, we see there are massive outliers:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">incomes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8478</span>, <span class="fl">21564</span>, <span class="fl">36562</span>, <span class="fl">176602</span>, <span class="fl">9395</span>, <span class="fl">18320</span>, <span class="fl">50000</span>, <span class="fl">2</span>, <span class="fl">40298</span>, <span class="fl">39</span>, <span class="fl">10780</span>, <span class="fl">2268583</span>, <span class="fl">3404930</span><span class="op">)</span></span>
@@ -105,28 +111,23 @@ inference (as a consequence, it has been low power).</p>
 equals some hypothesized value. Let’s test whether our data is
 consistent with median of 50,000, which is close-ish to the median
 income in the U.S. if memory serves. That is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>=</mo><mn>50</mn><mo>,</mo><mn>000</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>≠</mo><mn>50</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: m = 50,000 \qquad H_A: \mu \neq 50,000
-</annotation></semantics></math></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
-stands for the population median. The test statistic is then</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mn>1</mn><mrow><mo stretchy="true" form="prefix">(</mo><mn>50</mn><mo>,</mo><mn>000</mn><mo>,</mo><mi>∞</mi><mo stretchy="true" form="postfix">)</mo></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>∼</mo><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>,</mo><mn>0.5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
-  B = \sum_{i=1}^n 1_{(50, 000, \infty)} (x_i) \sim \mathrm{Binomial}(N, 0.5)
-</annotation></semantics></math></p>
-<p>Here
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-is the number of data points observed that are strictly greater than the
-median, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
-is sample size <strong>after exact ties</strong> with the median have
-been removed. Forgetting to remove exact ties is a very frequent mistake
-when students do this test in classes I TA.</p>
-<p>If we sort the data we can see that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">B = 3</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">N = 12</annotation></semantics></math>
-in our case:</p>
+\]</span></p>
+<p>where <span class="math inline">\(m\)</span> stands for the
+population median. The test statistic is then</p>
+<p><span class="math display">\[
+  B = \sum_{i=1}^n 1_{(50, 000, \infty)} (x_i) \sim \mathrm{Binomial}(N,
+0.5)
+\]</span></p>
+<p>Here <span class="math inline">\(B\)</span> is the number of data
+points observed that are strictly greater than the median, and <span class="math inline">\(N\)</span> is sample size <strong>after exact
+ties</strong> with the median have been removed. Forgetting to remove
+exact ties is a very frequent mistake when students do this test in
+classes I TA.</p>
+<p>If we sort the data we can see that <span class="math inline">\(B =
+3\)</span> and <span class="math inline">\(N = 12\)</span> in our
+case:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">incomes</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1]       2      39    8478    9395   10780   18320   21564   36562   40298</span></span>
@@ -145,12 +146,12 @@ in our case:</p>
 <h2 id="calculating-p-values">Calculating p-values<a class="anchor" aria-label="anchor" href="#calculating-p-values"></a>
 </h2>
 <p>To calculate a two-sided p-value, we need to find</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mo>⋅</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≥</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≤</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>2</mn><mo>⋅</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≤</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≤</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   2 \cdot \min(P(B \ge 3), P(B \le 3)) =
   2 \cdot \min(1 - P(B \le 2), P(B \le 3))
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>To do this we need to c.d.f. of a binomial random variable:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/alexpghayes/distributions3" class="external-link">distributions3</a></span><span class="op">)</span></span>
@@ -162,39 +163,39 @@ in our case:</p>
 rather tedious and there aren’t great shortcuts for small samples. If
 you got a question like this on an exam, you’d want to use the binomial
 p.m.f. repeatedly, like this:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≤</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>=</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>=</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>=</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mn>12</mn><mn>0</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>0.5</mn><mn>0</mn></msup><msup><mn>0.5</mn><mn>12</mn></msup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mn>12</mn><mn>1</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>0.5</mn><mn>1</mn></msup><msup><mn>0.5</mn><mn>11</mn></msup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mn>12</mn><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>0.5</mn><mn>2</mn></msup><msup><mn>0.5</mn><mn>10</mn></msup><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac linethickness="0"><mn>12</mn><mn>3</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>0.5</mn><mn>3</mn></msup><msup><mn>0.5</mn><mn>9</mn></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
 P(B \le 3)
 &amp;= P(B = 0) + P(B = 1) + P(B = 2) + P(B = 3) \\
-&amp;= \binom{12}{0} 0.5^0 0.5^12 + 
+&amp;= \binom{12}{0} 0.5^0 0.5^12 +
   \binom{12}{1} 0.5^1 0.5^11 +
   \binom{12}{2} 0.5^2 0.5^10 +
   \binom{12}{3} 0.5^3 0.5^9
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Finally, sometimes we are interest in one sided sign tests. For the
 test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>≤</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>m</mi><mo>&gt;</mo><mn>3</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \begin{align}
   H_0: m \le 3 \qquad H_A: m &gt; 3
 \end{align}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>&gt;</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>≤</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(B &gt; 3) = 1 - P(B \le 2)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">b</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9807129</span></span></code></pre></div>
 <p>For the test</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>≥</mo><mn>3</mn><mspace width="2.0em"></mspace><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>m</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0: m \ge 3 \qquad H_A: m &lt; 3
-</annotation></semantics></math></p>
+\]</span></p>
 <p>the p-value is given by</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo>&lt;</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(B &lt; 3)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>which we calculate with</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cdf.html">cdf</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">b</span><span class="op">)</span></span>
@@ -204,14 +205,10 @@ test</p>
 <h2 id="using-the-binom-test-function">Using the binom.test() function<a class="anchor" aria-label="anchor" href="#using-the-binom-test-function"></a>
 </h2>
 <p>To verify results we can use the <code><a href="https://rdrr.io/r/stats/binom.test.html" class="external-link">binom.test()</a></code> from base
-R. The <code>x</code> argument gets the value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
-<code>n</code> the value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>,
-and <code>p = 0.5</code> for a test of the median.</p>
-<p>That is, for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">H_0 : m = 3</annotation></semantics></math>
-we would use</p>
+R. The <code>x</code> argument gets the value of <span class="math inline">\(B\)</span>, <code>n</code> the value of <span class="math inline">\(N\)</span>, and <code>p = 0.5</code> for a test of
+the median.</p>
+<p>That is, for <span class="math inline">\(H_0 : m = 3\)</span> we
+would use</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html" class="external-link">binom.test</a></span><span class="op">(</span><span class="fl">3</span>, n <span class="op">=</span> <span class="fl">12</span>, p <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -225,8 +222,7 @@ we would use</p>
 <span><span class="co">#&gt; sample estimates:</span></span>
 <span><span class="co">#&gt; probability of success </span></span>
 <span><span class="co">#&gt;                   0.25</span></span></code></pre></div>
-<p>For
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>≤</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">H_0 : m \le 3</annotation></semantics></math></p>
+<p>For <span class="math inline">\(H_0 : m \le 3\)</span></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html" class="external-link">binom.test</a></span><span class="op">(</span><span class="fl">3</span>, n <span class="op">=</span> <span class="fl">12</span>, p <span class="op">=</span> <span class="fl">0.5</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -240,8 +236,7 @@ we would use</p>
 <span><span class="co">#&gt; sample estimates:</span></span>
 <span><span class="co">#&gt; probability of success </span></span>
 <span><span class="co">#&gt;                   0.25</span></span></code></pre></div>
-<p>For
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>m</mi><mo>≥</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">H_0 : m \ge 3</annotation></semantics></math></p>
+<p>For <span class="math inline">\(H_0 : m \ge 3\)</span></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html" class="external-link">binom.test</a></span><span class="op">(</span><span class="fl">3</span>, n <span class="op">=</span> <span class="fl">12</span>, p <span class="op">=</span> <span class="fl">0.5</span>, alternative <span class="op">=</span> <span class="st">"less"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -269,7 +264,7 @@ reassuring.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

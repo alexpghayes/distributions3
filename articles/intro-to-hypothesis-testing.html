@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Intro to hypothesis testing • distributions3</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Intro to hypothesis testing">
 </head>
 <body>
@@ -20,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,56 +81,41 @@
     
     
 <p>Hypothesis testing is all about answering the question: for a
-parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>,
-is a parameter value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\theta_0</annotation></semantics></math>
-consistent with the data in our observed sample?</p>
+parameter <span class="math inline">\(\theta\)</span>, is a parameter
+value of <span class="math inline">\(\theta_0\)</span> consistent with
+the data in our observed sample?</p>
 <p>We call this is the <em>null hypothesis</em> and write</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>θ</mi><mo>=</mo><msub><mi>θ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   H_0 : \theta = \theta_0
-</annotation></semantics></math></p>
-<p>where this means that true (population) value of a parameter
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>
-is equal to some value
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>θ</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\theta_0</annotation></semantics></math>.</p>
-<p>What do we do next? We <em>assume</em> that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><msub><mi>θ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\theta = \theta_0</annotation></semantics></math>
-in the population, and then check if this assumption is compatible with
-our observed data. The population with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><msub><mi>θ</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\theta = \theta_0</annotation></semantics></math>
+\]</span></p>
+<p>where this means that true (population) value of a parameter <span class="math inline">\(\theta\)</span> is equal to some value <span class="math inline">\(\theta_0\)</span>.</p>
+<p>What do we do next? We <em>assume</em> that <span class="math inline">\(\theta = \theta_0\)</span> in the population, and
+then check if this assumption is compatible with our observed data. The
+population with <span class="math inline">\(\theta = \theta_0\)</span>
 corresponds to a probability distribution, which we call the <em>null
 distribution</em>.</p>
-<p>Let’s make this concrete. Suppose that we observe data
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">2, 3, 7</annotation></semantics></math>
-and we know that our data comes from a normal distribution with known
-variance
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\sigma^2 = 2</annotation></semantics></math>.
-Realistically, we won’t know
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>σ</mi><mn>2</mn></msup><annotation encoding="application/x-tex">\sigma^2</annotation></semantics></math>,
-or that our data is normal, but we’ll work with these assumptions for
-now and relax them later.</p>
+<p>Let’s make this concrete. Suppose that we observe data <span class="math inline">\(2, 3, 7\)</span> and we know that our data comes
+from a normal distribution with known variance <span class="math inline">\(\sigma^2 = 2\)</span>. Realistically, we won’t
+know <span class="math inline">\(\sigma^2\)</span>, or that our data is
+normal, but we’ll work with these assumptions for now and relax them
+later.</p>
 <p>Let’s suppose we’re interested in the population mean. Let’s guess
 that the population mean is 8. In this case we would write the null
-hypothesis as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">H_0 : \mu = 8</annotation></semantics></math>.
-This is a ridiculous guess for the population mean given our data, but
-it’ll illustrate our point. Our null distribution is then
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>8</mn><mo>,</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{Normal}(8, 2)</annotation></semantics></math>.</p>
+hypothesis as <span class="math inline">\(H_0 : \mu = 8\)</span>. This
+is a ridiculous guess for the population mean given our data, but it’ll
+illustrate our point. Our null distribution is then <span class="math inline">\(\mathrm{Normal}(8, 2)\)</span>.</p>
 <p>Now that we have a null distribution, we need to dream up a <em>test
 statistic</em>. In this class, you’ll always be given a test statistic.
 For now we’ll use the T statistic.</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
   Z = {\bar x - \mu_0 \over \mathrm{se}\left(\bar x \right)}
     = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
     = {4 \over \sqrt \frac 23}
     \approx 4.9
-$$</span></p>
-<p>Recall: a <em>statistic</em>
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T(X)</annotation></semantics></math>
-is a function from a random sample into the real line. Since statistics
-are functions of random samples, they are themselves random
-variables.</p>
+\]</span></p>
+<p>Recall: a <em>statistic</em> <span class="math inline">\(T(X)\)</span> is a function from a random sample
+into the real line. Since statistics are functions of random samples,
+they are themselves random variables.</p>
 <p>Test statistics are chosen to have two important properties:</p>
 <ol style="list-style-type: decimal">
 <li>They need to relate to the population parameter we’re interested in
@@ -135,9 +126,9 @@ measuring</li>
 distributions? Because we’re just taking a function of a random
 sample.</p>
 <p>For this example, we know that</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>∼</mo><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   Z \sim \mathrm{Normal}(0, 1)
-</annotation></semantics></math></p>
+\]</span></p>
 <p>and now we ask how probable is this statistic <em>given that we have
 assumed that null distribution is true</em>.</p>
 <p>The idea is that if this number is very small, then our null
@@ -148,10 +139,10 @@ statistics. This means that hypothesis testing is a form of
 <p>For the example above, we are interested in the probability of
 observing a more extreme test statistic given the null distribution,
 which in this case is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>4.9</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mn>4.9</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&gt;</mo><mn>4.9</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mn>9.6</mn><mo>⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
-  P(|Z| &gt; 4.9) = P(Z &lt; -4.9) + P(Z &gt; 4.9) 
+<p><span class="math display">\[
+  P(|Z| &gt; 4.9) = P(Z &lt; -4.9) + P(Z &gt; 4.9)
                \approx 9.6 \cdot 10^{-7}
-</annotation></semantics></math></p>
+\]</span></p>
 <p>This probability is called a <em>p-value</em>. Since it’s very small,
 we conclude that the null hypothesis is not realistic. In other words,
 the population mean is statistically distinguishable from 8 (whether or
@@ -170,43 +161,34 @@ into next.</p>
 null hypothesis is true. This is called a <em>false positive</em> or a
 Type I error.</p>
 <p>If the null hypothesis is true, and we calculate a statistic like we
-did above, we still expect to see a value of p-value of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9.6</mn><mo>⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup></mrow><annotation encoding="application/x-tex">9.6 \cdot 10^{-7}</annotation></semantics></math>
-about
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9.6</mn><mo>⋅</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>5</mn></mrow></msup></mrow><annotation encoding="application/x-tex">9.6 \cdot 10^{-5}</annotation></semantics></math>
-percent of the time. For small p-values this isn’t an issue, but let’s
-consider a different null hypothesis of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mn>0</mn></msub><mo>=</mo><mn>3.9</mn></mrow><annotation encoding="application/x-tex">\mu_0 = 3.9</annotation></semantics></math>.
+did above, we still expect to see a value of p-value of <span class="math inline">\(9.6 \cdot 10^{-7}\)</span> about <span class="math inline">\(9.6 \cdot 10^{-5}\)</span> percent of the time.
+For small p-values this isn’t an issue, but let’s consider a different
+null hypothesis of <span class="math inline">\(\mu_0 = 3.9\)</span>.
 Now</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
   Z = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
     = {4 - 3.9 \over \sqrt \frac 23}
     \approx 0.12
-$$</span></p>
+\]</span></p>
 <p>and our corresponding p-value is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>Z</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>&gt;</mo><mn>0.12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mn>0.12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&gt;</mo><mn>0.12</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mn>0.9</mn></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(|Z| &gt; 0.12) = P(Z &lt; -0.12) + P(Z &gt; 0.12)
                 \approx 0.9
-</annotation></semantics></math></p>
+\]</span></p>
 <p>and we see that this is quite probable! We should definitely not
 reject the null hypothesis!</p>
 <p>This leads us to a new question: when <em>should</em> we reject the
 null hypothesis? A standard choice is to set an acceptable probability
-for a false positive
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>.
-One arbitrary but common choice is to set
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha = 0.05</annotation></semantics></math>,
-which means we are okay with a <span class="math inline">${1 \over
-20}$</span> chance of a false positive. We should then reject the null
-hypothesis when the p-value is less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>.
-This is often called “rejecting the null hypothesis at significance
-level
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>”.
-More formally, we might write</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">reject</mtext><mspace width="0.278em"></mspace><msub><mi>H</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>H</mi><mn>0</mn></msub><mspace width="0.278em"></mspace><mtext mathvariant="normal">true</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">
+for a false positive <span class="math inline">\(\alpha\)</span>. One
+arbitrary but common choice is to set <span class="math inline">\(\alpha
+= 0.05\)</span>, which means we are okay with a <span class="math inline">\({1 \over 20}\)</span> chance of a false positive.
+We should then reject the null hypothesis when the p-value is less than
+<span class="math inline">\(\alpha\)</span>. This is often called
+“rejecting the null hypothesis at significance level <span class="math inline">\(\alpha\)</span>”. More formally, we might
+write</p>
+<p><span class="math display">\[
   P(\text{reject} \; H_0 | H_0 \; \text{true}) = \alpha
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level4">
 <h4 id="false-negatives">False negatives<a class="anchor" aria-label="anchor" href="#false-negatives"></a>
@@ -215,27 +197,23 @@ More formally, we might write</p>
 when the null hypothesis is in fact false. We might just not have enough
 data to reject the null, for example. We call this a <em>false
 negative</em> or a Type II error. We write this as</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Power</mtext><mo>=</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="normal">fail to reject</mtext><mspace width="0.278em"></mspace><msub><mi>H</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>H</mi><mn>0</mn></msub><mspace width="0.278em"></mspace><mtext mathvariant="normal">false</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   \text{Power} = P(\text{fail to reject} \; H_0 | H_0 \; \text{false})
                = 1 - \beta
-</annotation></semantics></math></p>
-<p>To achieve a power of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">1 - \beta</annotation></semantics></math>
+\]</span></p>
+<p>To achieve a power of <span class="math inline">\(1 - \beta\)</span>
 for a one sample Z-test, you need</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
   n \approx \left(
     {
       \sigma \cdot (z_{\alpha / 2} + z_\beta) \over
       \mu_0 - \mu_A
     }
   \right)^2
-$$</span></p>
-<p>where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>A</mi></msub><annotation encoding="application/x-tex">\mu_A</annotation></semantics></math>
-is the true mean and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mu_0</annotation></semantics></math>
-is the proposed mean. We’ll do an exercise later that will help you see
-where this comes from.</p>
+\]</span></p>
+<p>where <span class="math inline">\(\mu_A\)</span> is the true mean and
+<span class="math inline">\(\mu_0\)</span> is the proposed mean. We’ll
+do an exercise later that will help you see where this comes from.</p>
 </div>
 </div>
 <div class="section level2">
@@ -245,75 +223,55 @@ where this comes from.</p>
 <h3 id="z-test">Z-test<a class="anchor" aria-label="anchor" href="#z-test"></a>
 </h3>
 <p>A company claims battery lifetimes are normally distributed with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">\mu = 40</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">\sigma = 5</annotation></semantics></math>
-hours. We are curious if the claim about the mean is reasonable, and
-collect a random sample of 100 batteries. The sample mean is 39.8. What
-is the p-value of a Z-test for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mn>0</mn></msub><mo>:</mo><mi>μ</mi><mo>=</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">H_0 : \mu = 40</annotation></semantics></math>?</p>
+<span class="math inline">\(\mu = 40\)</span> and <span class="math inline">\(\sigma = 5\)</span> hours. We are curious if the
+claim about the mean is reasonable, and collect a random sample of 100
+batteries. The sample mean is 39.8. What is the p-value of a Z-test for
+<span class="math inline">\(H_0 : \mu = 40\)</span>?</p>
 <p>We begin by calculating a Z-score</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
   Z = {\bar x - \mu_0 \over {\sigma \over \sqrt n}}
     = {39.8 - 40 \over {5 \over \sqrt 100}}
     = 0.4
-$$</span></p>
-<p>and then we calculate, using the fact that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>∼</mo><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z \sim \mathrm{Normal}(0, 1)</annotation></semantics></math>,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mn>0.4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&gt;</mo><mn>0.4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mn>0.69</mn></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>and then we calculate, using the fact that <span class="math inline">\(Z \sim \mathrm{Normal}(0, 1)\)</span>,</p>
+<p><span class="math display">\[
   P(Z &lt; -0.4) + P(Z &gt; 0.4) \approx 0.69
-</annotation></semantics></math></p>
-<p>we might also be interested in a <em>one-sided</em> test, where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>A</mi></msub><mo>:</mo><mi>μ</mi><mo>&lt;</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">H_A : \mu &lt; 40</annotation></semantics></math>.
-In this case the p-value is only the case when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mn>0.4</mn></mrow><annotation encoding="application/x-tex">Z &lt; -0.4</annotation></semantics></math>,
-and the p-value is</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mn>0.4</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>≈</mo><mn>0.34</mn></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>we might also be interested in a <em>one-sided</em> test, where <span class="math inline">\(H_A : \mu &lt; 40\)</span>. In this case the
+p-value is only the case when <span class="math inline">\(Z &lt;
+-0.4\)</span>, and the p-value is</p>
+<p><span class="math display">\[
   P(Z &lt; -0.4) \approx 0.34
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level3">
 <h3 id="power-for-z-test">Power for Z-test<a class="anchor" aria-label="anchor" href="#power-for-z-test"></a>
 </h3>
 <p>Suppose a powdered medicine is supposed to have a mean particle
-diameter of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mn>15</mn></mrow><annotation encoding="application/x-tex">\mu = 15</annotation></semantics></math>
-micrometers, and the standard deviation of diameters stays steady around
-1.8 micrometers. The company would like to have high power to detect
-mean thicknesses 0.2 micrometers away from 15. When
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">n = 100</annotation></semantics></math>,
-what is the power of the test if the true
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>
-is 15.2 micrometers. Assume the company is interested in controlling
-type I error at an
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha = 0.05</annotation></semantics></math>
-level.</p>
-<p>We will reject the null when our Z score is less than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mrow><mi>α</mi><mi>/</mi><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">z_{\alpha / 2}</annotation></semantics></math>
-or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>z</mi><mrow><mn>1</mn><mo>−</mo><mi>α</mi><mi>/</mi><mn>2</mn></mrow></msub><annotation encoding="application/x-tex">z_{1 - \alpha / 2}</annotation></semantics></math>,
-or when the Z score is less than -1.96 or greater than 1.96. Recall that
-the Z score is <span class="math inline">${\bar x - \mu_0 \over {\sigma
-\over \sqrt n}}$</span>, which we can rearrange in terms of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>x</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar x</annotation></semantics></math>
-to see that we will reject the null when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>&lt;</mo><mn>14.65</mn></mrow><annotation encoding="application/x-tex">\bar x &lt; 14.65</annotation></semantics></math>
-or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>&gt;</mo><mn>15.35</mn></mrow><annotation encoding="application/x-tex">\bar x &gt; 15.35</annotation></semantics></math>.</p>
+diameter of <span class="math inline">\(\mu = 15\)</span> micrometers,
+and the standard deviation of diameters stays steady around 1.8
+micrometers. The company would like to have high power to detect mean
+thicknesses 0.2 micrometers away from 15. When <span class="math inline">\(n = 100\)</span>, what is the power of the test if
+the true <span class="math inline">\(\mu\)</span> is 15.2 micrometers.
+Assume the company is interested in controlling type I error at an <span class="math inline">\(\alpha = 0.05\)</span> level.</p>
+<p>We will reject the null when our Z score is less than <span class="math inline">\(z_{\alpha / 2}\)</span> or <span class="math inline">\(z_{1 - \alpha / 2}\)</span>, or when the Z score
+is less than -1.96 or greater than 1.96. Recall that the Z score is
+<span class="math inline">\({\bar x - \mu_0 \over {\sigma \over \sqrt
+n}}\)</span>, which we can rearrange in terms of <span class="math inline">\(\bar x\)</span> to see that we will reject the
+null when <span class="math inline">\(\bar x &lt; 14.65\)</span> or
+<span class="math inline">\(\bar x &gt; 15.35\)</span>.</p>
 <p>Now we are interested in the probability of being in this rejection
-region <em>when the alternative hypothesis
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>A</mi></msub><mo>=</mo><mn>15.2</mn></mrow><annotation encoding="application/x-tex">\mu_A = 15.2</annotation></semantics></math>
-is true</em>.</p>
+region <em>when the alternative hypothesis <span class="math inline">\(\mu_A = 15.2\)</span> is true</em>.</p>
 <!-- this is magical why are we interested in this -->
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>&gt;</mo><mn>15.35</mn><mo stretchy="false" form="prefix">|</mo><mi>μ</mi><mo>=</mo><mn>15.2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>&lt;</mo><mn>14.65</mn><mo stretchy="false" form="prefix">|</mo><mi>μ</mi><mo>=</mo><mn>15.2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
   P(\bar x &gt; 15.35 | \mu = 15.2) + P(\bar x &lt; 14.65 | \mu = 15.2)
-</annotation></semantics></math></p>
-<p>and we know that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>x</mi><mo accent="true">‾</mo></mover><mo>∼</mo><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>15.2</mn><mo>,</mo><mn>1.8</mn><mi>/</mi><msqrt><mn>100</mn></msqrt><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\bar x \sim \mathrm{Normal} \left(15.2, 1.8 / \sqrt{100}\right)</annotation></semantics></math>
-so this equals</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.001</mn><mo>+</mo><mn>0.198</mn><mo>≈</mo><mn>0.199</mn></mrow><annotation encoding="application/x-tex">
+\]</span></p>
+<p>and we know that <span class="math inline">\(\bar x \sim
+\mathrm{Normal} \left(15.2, 1.8 / \sqrt{100}\right)\)</span> so this
+equals</p>
+<p><span class="math display">\[
   0.001 + 0.198 \approx 0.199
-</annotation></semantics></math></p>
+\]</span></p>
 <p>So we have only a power of about 20 percent. This is quite low.</p>
 </div>
 </div>
@@ -328,7 +286,7 @@ so this equals</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
