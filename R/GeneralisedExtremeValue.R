@@ -149,7 +149,7 @@ variance.GEV <- function(x, ...) {
 
 #' @export
 skewness.GEV <- function(x, ...) {
-  rval <- ifelse(x$xi == 1,
+  rval <- ifelse(x$xi == 0,
     # no useful zeta fn without adding a dependency
     {
       zeta3 <- 1.202056903159594014596
