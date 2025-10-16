@@ -1,5 +1,8 @@
 # distributions3 (development version)
 
+- Fix incorrect moment calculations and documentation (reported by @vincenzocoia
+ in #114, fixed by @zeileis in #115)
+
 # distributions3 0.2.3
 
 - Updates to plotting functions for compatibility new version of `ggplot2` (#111)
