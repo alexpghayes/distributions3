@@ -26,7 +26,7 @@
 #'   **Mean**: \eqn{\lambda \Gamma(1+1/k)}, where \eqn{\Gamma} is
 #'   the gamma function.
 #'
-#'   **Variance**: \eqn{\lambda [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+ \frac{1}{k}))^2 ]}
+#'   **Variance**: \eqn{\lambda^2 [ \Gamma (1 + \frac{2}{k} ) - (\Gamma(1+ \frac{1}{k}))^2 ]}
 #'
 #'   **Probability density function (p.d.f)**:
 #'
@@ -75,7 +75,7 @@ mean.Weibull <- function(x, ...) {
 
 #' @export
 variance.Weibull <- function(x, ...) {
-  rval <- x$scale^2 * gamma(1 + 2 / x$shape) - unname(apply(as.matrix(x), 1, mean))^2
+  rval <- x$scale^2 * (gamma(1 + 2/x$shape) - gamma(1 + 1/x$shape)^2)
   setNames(rval, names(x))
 }
 
@@ -83,8 +83,8 @@ variance.Weibull <- function(x, ...) {
 skewness.Weibull <- function(x, ...) {
   mu <- mean(x)
   sigma <- sqrt(variance(x))
-  r <- mu / sigma
-  rval <- gamma(1 + 3 / x$shape) * (x$scale / sigma)^3 - 3 * r - 3^r
+  r <- mu/sigma
+  rval <- gamma(1 + 3/x$shape) * (x$scale / sigma)^3 - 3 * r - r^3
   setNames(rval, names(x))
 }
 
@@ -92,9 +92,9 @@ skewness.Weibull <- function(x, ...) {
 kurtosis.Weibull <- function(x, ...) {
   mu <- mean(x)
   sigma <- sqrt(variance(x))
-  gamma <- skewness(x)
-  r <- mu / sigma
-  rval <- (x$scale / sigma)^4 * gamma(1 + 4 / x$shape) - 4 * gamma * r - 6 * r^2 - r^4 - 3
+  gamma1 <- skewness(x)
+  r <- mu/sigma
+  rval <- (x$scale/sigma)^4 * gamma(1 + 4/x$shape) - 4 * gamma1 * r - 6 * r^2 - r^4 - 3
   setNames(rval, names(x))
 }
 

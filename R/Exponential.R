@@ -85,7 +85,7 @@ mean.Exponential <- function(x, ...) {
 
 #' @export
 variance.Exponential <- function(x, ...) {
-  rval <- x$rate^2
+  rval <- x$rate^-2
   setNames(rval, names(x))
 }
 
