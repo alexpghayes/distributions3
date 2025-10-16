@@ -142,7 +142,7 @@ skewness.NegativeBinomial <- function(x, ...) {
 kurtosis.NegativeBinomial <- function(x, ...) {
   rlang::check_dots_used()
   if("mu" %in% names(unclass(x))) x$p <- x$size/(x$size + x$mu)
-  rval <- 6 / x$size + x$p^2 / x$size * (1 - x$p)
+  rval <- 6/x$size + x$p^2 / (x$size * (1 - x$p))
   setNames(rval, names(x))
 }
 

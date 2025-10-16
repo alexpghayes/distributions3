@@ -73,7 +73,7 @@ Geometric <- function(p = 0.5) {
 #' @export
 mean.Geometric <- function(x, ...) {
   rlang::check_dots_used()
-  rval <- 1 / x$p
+  rval <- (1 - x$p) / x$p
   setNames(rval, names(x))
 }
 #' @export
