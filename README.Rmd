@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`distributions3`, inspired by the [eponynmous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions3` has two goals:
+`distributions3`, inspired by the [eponymous Julia package](https://github.com/JuliaStats/Distributions.jl), provides a generic function interface to probability distributions. `distributions3` has two goals:
 
 1. Replace the `rnorm()`, `pnorm()`, etc, family of functions with S3 methods for distribution objects
 

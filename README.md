@@ -12,7 +12,7 @@ coverage](https://codecov.io/gh/alexpghayes/distributions3/branch/main/graph/bad
 [![R-CMD-check](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/alexpghayes/distributions3/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`distributions3`, inspired by the [eponynmous Julia
+`distributions3`, inspired by the [eponymous Julia
 package](https://github.com/JuliaStats/Distributions.jl), provides a
 generic function interface to probability distributions.
 `distributions3` has two goals:
@@ -56,7 +56,7 @@ library("distributions3")
 X <- Bernoulli(0.1)
 
 random(X, 10)
-#>  [1] 0 0 0 0 0 0 0 0 0 0
+#>  [1] 1 0 0 0 0 0 0 0 0 0
 pdf(X, 1)
 #> [1] 0.1
 
