@@ -48,11 +48,11 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/zeileis/distributions3/blob/v0.3.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/zeileis/distributions3/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.0" id="distributions3-030">distributions3 0.3.0<a class="anchor" aria-label="anchor" href="#distributions3-030"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.3.0" id="distributions3-030">distributions3 0.3.0<a class="anchor" aria-label="anchor" href="#distributions3-030"></a></h2><p class="text-muted">CRAN release: 2026-08-20</p>
 <ul><li><p>New <code><a href="../reference/Empirical.html">Empirical()</a></code> distribution based on a random <code>sample</code>. This is particularly useful when forecasts are represented by samples rather than by parametric distributions (<a href="https://github.com/zeileis/distributions3/issues/98" class="external-link">#98</a> and <a href="https://github.com/zeileis/distributions3/issues/120" class="external-link">#120</a> by Reto Stauffer).</p></li>
 <li><p>New <code><a href="../reference/SinhArcsinh.html">SinhArcsinh()</a></code> distribution implementing the Sinh-Arcsinh distribution from <a href="https://doi.org/10.1093/biomet/asp053" class="external-link">Jones and Pewsey (2009, Biometrika)</a> (<a href="https://github.com/zeileis/distributions3/issues/128" class="external-link">#128</a> by Reto Stauffer).</p></li>
 <li><p>Fallback methods for all standard <code>distributions3</code> methods such as <code><a href="../reference/cdf.html">cdf()</a></code>, <code><a href="../reference/pdf.html">pdf()</a></code>, <code><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile()</a></code>, <code><a href="../reference/random.html">random()</a></code>, and moments such as <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="../reference/variance.html">variance()</a></code>, <code><a href="../reference/variance.html">skewness()</a></code>, and <code><a href="../reference/variance.html">kurtosis()</a></code>. These leverage those methods that are available but fill the gaps using numerical integration/differentiation (<a href="https://github.com/zeileis/distributions3/issues/120" class="external-link">#120</a> by Reto Stauffer).</p></li>

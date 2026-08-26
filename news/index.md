@@ -2,6 +2,8 @@
 
 ## distributions3 0.3.0
 
+CRAN release: 2026-08-20
+
 - New
   [`Empirical()`](https://zeileis.github.io/distributions3/reference/Empirical.md)
   distribution based on a random `sample`. This is particularly useful
