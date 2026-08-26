@@ -224,7 +224,8 @@ prodist.glm <- function(object, ..., dispersion = NULL) {
 }
 
 #' @export
-prodist.negbin <- function(object, ...) {
+prodist.negbin <- function(object, ..., dispersion = NULL) {
+  if (!is.null(dispersion)) warning("'dispersion' argument ignored, using estimated 'theta' instead")
   mu <- predict(object, type = "response", ...)
   NegativeBinomial(mu = mu, size = object$theta)
 }
