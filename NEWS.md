@@ -1,3 +1,9 @@
+# distributions3 0.3.0.99
+
+- Streamline dots `...` handling in `prodist` generic/methods (#140 and #141
+  by Achim Zeileis).
+
+
 # distributions3 0.3.0
 
 - New `Empirical()` distribution based on a random `sample`. This is particularly

@@ -143,10 +143,8 @@
 #' ## Compute median (= mean) forecast along with 80% and 95% interval
 #' quantile(p, c(0.5, 0.1, 0.9, 0.025, 0.975))
 #'
-#' @importFrom rlang check_dots_used
 #' @export
 prodist <- function(object, ...) {
-  check_dots_used()
   UseMethod("prodist")
 }
 
@@ -298,7 +296,17 @@ prodist.zerotrunc <- function(object, ...) {
 
 #' @rdname prodist
 #' @export
-prodist.distribution <- function(object, ...) object
+prodist.distribution <- function(object, ...) {
+  dots <- list(...)
+  if (!is.null(dots$newdata)) {
+    if (is.character(dots$na.action)) dots$na.action <- get(dots$na.action)
+    if (is.function(dots$na.action)) dots$newdata <- dots$na.action(dots$newdata)
+    if (length(object) != NROW(dots$newdata)) warning(sprintf(
+      "number of elements in 'object' (%s) and 'newdata' (%s) differ",
+      length(object), NROW(dots$newdata)))
+  }
+  return(object)
+}
 
 ## Further examples requiring other packages ---------------
 ## 
