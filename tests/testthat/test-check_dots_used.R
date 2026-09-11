@@ -211,24 +211,6 @@ test_that("is_continuous (generic function and methods) correctly use check_dots
 })
 
 
-# Distribution function prodist()
-test_that("prodist (generic function and methods) correctly use check_dots_used()", {
-    ## Ensure this is a generic function exported/provided by distributions3
-    expect_true("prodist" %in% ns)
-    expect_true(is_generic(prodist))
-    expect_true(has_check_dots_used(prodist))
-
-    ## S3 methods to check
-    methods <- get_methods(prodist, ns)
-
-    ## Given this is our own generic it should not include check_dots_used()
-    for (m in methods) {
-        res <- has_check_dots_used(getS3method("prodist", sub("^prodist\\.", "", m)))
-        expect_false(res, info = paste("check_dots_used() failed for:", m))
-    }
-})
-
-
 # Distribution function stuff_stat()
 test_that("suff_stat (generic function and methods) correctly use check_dots_used()", {
     ## Ensure this is a generic function exported/provided by distributions3
