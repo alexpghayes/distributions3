@@ -18,6 +18,9 @@
   : Compute the moments of a probability distribution
 - [`support()`](https://zeileis.github.io/distributions3/dev/reference/support.md)
   : Return the support of a distribution
+- [`score()`](https://zeileis.github.io/distributions3/dev/reference/score-hessian.md)
+  [`hessian()`](https://zeileis.github.io/distributions3/dev/reference/score-hessian.md)
+  : Generic functions and methods for computing score and Hessian
 - [`is_discrete()`](https://zeileis.github.io/distributions3/dev/reference/is_discrete.md)
   [`is_continuous()`](https://zeileis.github.io/distributions3/dev/reference/is_discrete.md)
   : Determine whether a distribution is discrete or continuous
@@ -610,6 +613,29 @@
   : Draw a random sample from an RevWeibull distribution
 - [`support(`*`<RevWeibull>`*`)`](https://zeileis.github.io/distributions3/dev/reference/support.RevWeibull.md)
   : Return the support of the RevWeibull distribution
+
+## Sinh-Arcsinh distribution
+
+- [`dsinharcsinh()`](https://zeileis.github.io/distributions3/dev/reference/dsinharcsinh.md)
+  [`psinharcsinh()`](https://zeileis.github.io/distributions3/dev/reference/dsinharcsinh.md)
+  [`qsinharcsinh()`](https://zeileis.github.io/distributions3/dev/reference/dsinharcsinh.md)
+  [`rsinharcsinh()`](https://zeileis.github.io/distributions3/dev/reference/dsinharcsinh.md)
+  : The Sinh-Arcsinh (SHASH) distribution
+- [`SinhArcsinh()`](https://zeileis.github.io/distributions3/dev/reference/SinhArcsinh.md)
+  : Create a Sinh-Arcsinh (SHASH) distribution
+- [`cdf(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/cdf.SinhArcsinh.md)
+  : Evaluate the cumulative distribution function of a Sinh-Arcsinh
+  distribution
+- [`pdf(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/pdf.SinhArcsinh.md)
+  [`log_pdf(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/pdf.SinhArcsinh.md)
+  : Evaluate the probability mass function of a Sinh-Arcsinh
+  distribution
+- [`quantile(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/quantile.SinhArcsinh.md)
+  : Determine quantiles of a Sinh-Arcsinh distribution
+- [`random(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/random.SinhArcsinh.md)
+  : Draw a random sample from a Sinh-Arcsinh distribution
+- [`support(`*`<SinhArcsinh>`*`)`](https://zeileis.github.io/distributions3/dev/reference/support.SinhArcsinh.md)
+  : Return the support of the Sinh-Arcsinh distribution
 
 ## Student’s T distribution
 

@@ -151,8 +151,6 @@ dedicated/analytical methods provided the better).
 ## ------------- custom Normal distribution (MyNormal1) ---------------
 ## -------------------------- using cdf -------------------------------
 
-library("scoringRules")
-
 ## Constructor function for new 'MyNormal1' distribution
 MyNormal1 <- function(mu, sigma) {
     d <- data.frame(mu = mu, sigma = sigma)
@@ -211,15 +209,13 @@ qn3    <- quantile(n3,  probs = probs2) ## Analytic solution
 range(qmn3 - qn3) ## Range of pairwise differences/precision
 #> [1] -3.692192e-09  3.669803e-09
 
-## Central moments and CRPS
+## Central moments
 cbind(mean     = mean(mn3),     variance = variance(mn3),
       skewness = skewness(mn3), kurtosis = kurtosis(mn3))
 #>      mean  variance      skewness      kurtosis
 #> [1,]    1  1.000463 -1.830206e-15 -2.568781e-07
 #> [2,]    2  6.250463  3.383851e-10 -8.880798e-09
 #> [3,]    3 24.926837 -1.034930e-12 -3.211273e-02
-crps(mn3, 3)
-#> [1] 1.4527894 0.7417397 1.1685145
 
 ## Visual comparison: density
 x    <- seq(-3, 5, by = 0.1)
@@ -316,9 +312,8 @@ cbind(mean     = mean(mn3),     variance = variance(mn3),
 #> A    1  1.002989 2.667538e-15 0.0349172
 #> B    2  6.268683 4.534914e-15 0.0349172
 #> C    3 25.074732 4.563209e-15 0.0349172
-crps(mn3, 0.5)
-#>         A         B         C 
-#> 0.3314112 0.9329087 1.6570561 
+
+# \donttest{
 
 ## ------------ custom Poisson distribution (MyPoisson1) --------------
 ## -------------------------- using pdf -------------------------------
@@ -382,15 +377,13 @@ qp3    <- quantile(p3,  probs = probs2) ## Analytic solution
 range(qmp3 - qp3) ## Range of pairwise differences/precision
 #> [1] 0 0
 
-## Central moments and CRPS
+## Central moments
 cbind(mean     = mean(mp3),     variance = variance(mp3),
       skewness = skewness(mp3), kurtosis = kurtosis(mp3))
 #>      mean variance  skewness kurtosis
 #> [1,]  1.0 1.000000 1.0000000 1.000000
 #> [2,]  2.5 2.500000 0.6324555 0.400000
 #> [3,]  5.0 4.999995 0.4472064 0.199942
-crps(mp3, 3)
-#> [1] 1.5228962 0.4576085 1.0981552
 
 ## Visual comparison: distribution function
 x    <- seq(-5, 20, by = 1)
@@ -483,7 +476,6 @@ cbind(mean     = mean(p3),     variance = variance(p3),
 #> [1,]  1.0      1.0 1.0000000      1.0
 #> [2,]  2.5      2.5 0.6324555      0.4
 #> [3,]  5.0      5.0 0.4472136      0.2
-crps(mp3, 3)
-#>         D         E         F 
-#> 1.5228962 0.4576085 1.0981552 
+
+# }
 ```

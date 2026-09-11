@@ -1,6 +1,15 @@
 # Changelog
 
-## distributions3 0.2.4.99
+## distributions3 0.3.0.99
+
+- Streamline dots `...` handling in `prodist` generic/methods
+  ([\#140](https://github.com/zeileis/distributions3/issues/140) and
+  [\#141](https://github.com/zeileis/distributions3/issues/141) by Achim
+  Zeileis).
+
+## distributions3 0.3.0
+
+CRAN release: 2026-08-20
 
 - New
   [`Empirical()`](https://zeileis.github.io/distributions3/dev/reference/Empirical.md)
@@ -9,6 +18,13 @@
   distributions
   ([\#98](https://github.com/zeileis/distributions3/issues/98) and
   [\#120](https://github.com/zeileis/distributions3/issues/120) by Reto
+  Stauffer).
+
+- New
+  [`SinhArcsinh()`](https://zeileis.github.io/distributions3/dev/reference/SinhArcsinh.md)
+  distribution implementing the Sinh-Arcsinh distribution from [Jones
+  and Pewsey (2009, Biometrika)](https://doi.org/10.1093/biomet/asp053)
+  ([\#128](https://github.com/zeileis/distributions3/issues/128) by Reto
   Stauffer).
 
 - Fallback methods for all standard `distributions3` methods such as
@@ -25,6 +41,24 @@
   using numerical integration/differentiation
   ([\#120](https://github.com/zeileis/distributions3/issues/120) by Reto
   Stauffer).
+
+- New generic functions
+  [`score()`](https://zeileis.github.io/distributions3/dev/reference/score-hessian.md)
+  and
+  [`hessian()`](https://zeileis.github.io/distributions3/dev/reference/score-hessian.md)
+  to compute the score (first derivative of the log-likelihood with
+  respect to the parameters) and Hessian (corresponding second
+  derivative). There are numeric fallback methods for general
+  distribution objects and analytic methods for a few distributions. The
+  [`hessian()`](https://zeileis.github.io/distributions3/dev/reference/score-hessian.md)
+  methods should typically have an argument `expected` which allows to
+  select whether the observed (`expected = FALSE`) or expected
+  (`expected = TRUE`) Hessian should be computed. Some methods may only
+  support one or the other specification and throw an error message
+  otherwise
+  ([\#124](https://github.com/zeileis/distributions3/issues/124) and
+  [\#128](https://github.com/zeileis/distributions3/issues/128) by Reto
+  Stauffer and Achim Zeileis).
 
 - All distribution constructor functions such as
   [`Poisson()`](https://zeileis.github.io/distributions3/dev/reference/Poisson.md)
@@ -127,8 +161,8 @@ CRAN release: 2024-09-16
   methods for various count regression objects now distinguish between
   computations for the classic
   [pscl](https://CRAN.R-project.org/package=pscl) package and the newer
-  [countreg](https://R-Forge.R-project.org/projects/countreg/) package
-  (currently on R-Forge, soon to be released to CRAN).
+  [countreg](https://codeberg.org/zeileis/countreg/) package (currently
+  on Codeberg, soon to be released to CRAN).
 - The [`simulate()`](https://rdrr.io/r/stats/simulate.html) method for
   `distribution` objects is now better aligned with `simulate.lm()` in
   base R: It now always returns a `data.frame` with `seed` attribute.

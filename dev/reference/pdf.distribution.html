@@ -19,7 +19,7 @@ for a certain distribution. See section 'Details' for more information."><meta n
 
     <a class="navbar-brand me-2" href="../index.html">distributions3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.4.99</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.3.0.99</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -198,8 +198,6 @@ methods provided the better).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## ------------- custom Normal distribution (MyNormal1) ---------------</span></span></span>
 <span class="r-in"><span><span class="co">## -------------------------- using cdf -------------------------------</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/FK83/scoringRules" class="external-link">"scoringRules"</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Constructor function for new 'MyNormal1' distribution</span></span></span>
 <span class="r-in"><span><span class="va">MyNormal1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mu</span>, <span class="va">sigma</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="va">mu</span>, sigma <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span></span></span>
@@ -258,15 +256,13 @@ methods provided the better).</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">qmn3</span> <span class="op">-</span> <span class="va">qn3</span><span class="op">)</span> <span class="co">## Range of pairwise differences/precision</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3.692192e-09  3.669803e-09</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Central moments and CRPS</span></span></span>
+<span class="r-in"><span><span class="co">## Central moments</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>mean     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mn3</span><span class="op">)</span>,     variance <span class="op">=</span> <span class="fu"><a href="variance.html">variance</a></span><span class="op">(</span><span class="va">mn3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      skewness <span class="op">=</span> <span class="fu"><a href="variance.html">skewness</a></span><span class="op">(</span><span class="va">mn3</span><span class="op">)</span>, kurtosis <span class="op">=</span> <span class="fu"><a href="variance.html">kurtosis</a></span><span class="op">(</span><span class="va">mn3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      mean  variance      skewness      kurtosis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    1  1.000463 -1.830206e-15 -2.568781e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    2  6.250463  3.383851e-10 -8.880798e-09</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    3 24.926837 -1.034930e-12 -3.211273e-02</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/scoringRules/man/scores.html" class="external-link">crps</a></span><span class="op">(</span><span class="va">mn3</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.4527894 0.7417397 1.1685145</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Visual comparison: density</span></span></span>
 <span class="r-in"><span><span class="va">x</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">5</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
@@ -363,9 +359,8 @@ methods provided the better).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A    1  1.002989 2.667538e-15 0.0349172</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B    2  6.268683 4.534914e-15 0.0349172</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> C    3 25.074732 4.563209e-15 0.0349172</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/scoringRules/man/scores.html" class="external-link">crps</a></span><span class="op">(</span><span class="va">mn3</span>, <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         A         B         C </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.3314112 0.9329087 1.6570561 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## ------------ custom Poisson distribution (MyPoisson1) --------------</span></span></span>
 <span class="r-in"><span><span class="co">## -------------------------- using pdf -------------------------------</span></span></span>
@@ -429,15 +424,13 @@ methods provided the better).</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">qmp3</span> <span class="op">-</span> <span class="va">qp3</span><span class="op">)</span> <span class="co">## Range of pairwise differences/precision</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Central moments and CRPS</span></span></span>
+<span class="r-in"><span><span class="co">## Central moments</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>mean     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mp3</span><span class="op">)</span>,     variance <span class="op">=</span> <span class="fu"><a href="variance.html">variance</a></span><span class="op">(</span><span class="va">mp3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      skewness <span class="op">=</span> <span class="fu"><a href="variance.html">skewness</a></span><span class="op">(</span><span class="va">mp3</span><span class="op">)</span>, kurtosis <span class="op">=</span> <span class="fu"><a href="variance.html">kurtosis</a></span><span class="op">(</span><span class="va">mp3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      mean variance  skewness kurtosis</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.0 1.000000 1.0000000 1.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  2.5 2.500000 0.6324555 0.400000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  5.0 4.999995 0.4472064 0.199942</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/scoringRules/man/scores.html" class="external-link">crps</a></span><span class="op">(</span><span class="va">mp3</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.5228962 0.4576085 1.0981552</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Visual comparison: distribution function</span></span></span>
 <span class="r-in"><span><span class="va">x</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">20</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
@@ -530,9 +523,8 @@ methods provided the better).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.0      1.0 1.0000000      1.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  2.5      2.5 0.6324555      0.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  5.0      5.0 0.4472136      0.2</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/scoringRules/man/scores.html" class="external-link">crps</a></span><span class="op">(</span><span class="va">mp3</span>, <span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         D         E         F </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.5228962 0.4576085 1.0981552 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

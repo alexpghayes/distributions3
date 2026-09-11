@@ -111,7 +111,7 @@ Joanes and Gill (1998).
 
 ## References
 
-Joanes DN and Gill CA (1998). “Comparing Measures of Sample Skewness and
+Joanes DN, Gill CA (1998). “Comparing Measures of Sample Skewness and
 Kurtosis.” *Journal of the Royal Statistical Society D*, **47**(1),
 183–189.
 [doi:10.1111/1467-9884.00122](https://doi.org/10.1111/1467-9884.00122)
