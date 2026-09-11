@@ -296,7 +296,17 @@ prodist.zerotrunc <- function(object, ...) {
 
 #' @rdname prodist
 #' @export
-prodist.distribution <- function(object, ...) object
+prodist.distribution <- function(object, ...) {
+  dots <- list(...)
+  if (!is.null(dots$newdata)) {
+    if (is.character(dots$na.action)) dots$na.action <- get(dots$na.action)
+    if (is.function(dots$na.action)) dots$newdata <- dots$na.action(dots$newdata)
+    if (length(object) != NROW(dots$newdata)) warning(sprintf(
+      "number of elements in 'object' (%s) and 'newdata' (%s) differ",
+      length(object), NROW(dots$newdata)))
+  }
+  return(object)
+}
 
 ## Further examples requiring other packages ---------------
 ## 
